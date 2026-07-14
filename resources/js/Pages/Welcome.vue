@@ -151,7 +151,7 @@
 </template>
 
 <script setup>
-import DashboardLayout from '../Layouts/DashboardLayout.vue';
+import DashboardLayout from '../layouts/DashboardLayout.vue';
 import { ref, computed } from 'vue';
 import { router, usePage, Head } from '@inertiajs/vue3';
 

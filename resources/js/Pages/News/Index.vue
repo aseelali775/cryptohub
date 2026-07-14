@@ -78,7 +78,7 @@
 
 <script setup>
 // إضافة نقطتين إضافيتين للصعود إلى المجلد الأب الصحيح
-import DashboardLayout from '../../Layouts/DashboardLayout.vue';
+import DashboardLayout from '../../layouts/DashboardLayout.vue';
 import { usePage, Head } from '@inertiajs/vue3';
 import { computed } from 'vue';
 
