@@ -75,7 +75,7 @@
 </template>
 
 <script setup>
-import DashboardLayout from '../../Layouts/DashboardLayout.vue';
+import DashboardLayout from '../../layouts/DashboardLayout.vue';
 import { router, usePage, Head } from '@inertiajs/vue3';
 import { computed } from 'vue';
 

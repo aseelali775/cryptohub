@@ -226,7 +226,7 @@
 </template>
 
 <script setup>
-import HomeLayout from '@/Layouts/HomeLayout.vue';
+import HomeLayout from '@/layouts/HomeLayout.vue';
 import { Link, usePage, Head } from '@inertiajs/vue3';
 import { computed } from 'vue';
 
