@@ -77,6 +77,7 @@
 </template>
 
 <script setup>
+// forced update to trigger git
 // إضافة نقطتين إضافيتين للصعود إلى المجلد الأب الصحيح
 import DashboardLayout from '../../layouts/DashboardLayout.vue';
 import { usePage, Head } from '@inertiajs/vue3';

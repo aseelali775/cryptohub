@@ -151,6 +151,7 @@
 </template>
 
 <script setup>
+// forced update to trigger git
 import DashboardLayout from '../layouts/DashboardLayout.vue';
 import { ref, computed } from 'vue';
 import { router, usePage, Head } from '@inertiajs/vue3';

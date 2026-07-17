@@ -226,6 +226,7 @@
 </template>
 
 <script setup>
+// forced update to trigger git
 import HomeLayout from '@/layouts/HomeLayout.vue';
 import { Link, usePage, Head } from '@inertiajs/vue3';
 import { computed } from 'vue';
