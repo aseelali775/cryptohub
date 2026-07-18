@@ -29,3 +29,11 @@ Route::get('/lang/{lang}', function ($lang) {
     }
     return redirect()->back();
 })->name('lang.switch');
+
+Route::get('/debug-db', function () {
+    return [
+        'env_DB_HOST' => env('DB_HOST'),
+        'config_DB_HOST' => config('database.connections.mysql.host'),
+        'database' => config('database.connections.mysql.database'),
+    ];
+});
