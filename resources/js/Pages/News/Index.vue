@@ -11,7 +11,7 @@
       <meta property="og:title" :content="locale === 'ar' ? 'أخبار الكريبتو الذكية | CryptoHub' : 'Crypto News Hub | CryptoHub'" />
     </Head>
 
-    <div class="w-full min-h-screen pb-20 bg-slate-50 dark:bg-[#0b1121] transition-colors duration-300">
+    <div class="w-full min-h-screen pb-24 bg-slate-50 dark:bg-[#0b1121] transition-colors duration-300">
       
       <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 space-y-8" :class="locale === 'ar' ? 'text-right' : 'text-left'">
         
@@ -31,7 +31,7 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           <div 
-            v-for="item in newsFeed" 
+            v-for="item in visibleNews" 
             :key="item.id" 
             class="bg-white dark:bg-[#151e32] border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-md hover:border-emerald-500/50 transition-all flex flex-col group"
           >
@@ -72,25 +72,42 @@
           </div>
         </div>
 
+        <div v-if="visibleCount < newsFeed.length" class="flex justify-center mt-12 pt-8">
+          <button 
+            @click="loadMore" 
+            class="px-8 py-3.5 rounded-xl bg-white dark:bg-[#151e32] border border-slate-200 dark:border-slate-800 text-sm font-bold text-slate-700 dark:text-slate-300 hover:border-emerald-500 hover:text-emerald-500 transition-all shadow-sm flex items-center gap-2 active:scale-95"
+          >
+            <span>{{ locale === 'ar' ? 'عرض المزيد من الأخبار' : 'Load More News' }}</span>
+            <span class="text-lg animate-bounce">↓</span>
+          </button>
+        </div>
+
       </div>
     </div>
   </HomeLayout>
 </template>
 
 <script setup>
-// 🟢 تأكدنا من استدعاء Layout بحرف صغير (layouts) لضمان التوافق مع Railway
 import HomeLayout from '@/layouts/HomeLayout.vue';
-import { Link, usePage, Head } from '@inertiajs/vue3'; // 🟢 تم استيراد Link
-import { computed } from 'vue';
+import { Link, usePage, Head } from '@inertiajs/vue3';
+import { computed, ref } from 'vue'; 
 
-defineProps({
+const props = defineProps({
   newsFeed: {
     type: Array,
     required: true
   }
 });
 
-// استخراج مفتاح اللغة النشطة من لارافل لتوحيد أداء السيو والتوافق البصري
 const page = usePage();
 const locale = computed(() => page.props.locale || 'ar');
+
+// 🟢 التحكم في عدد الأخبار المعروضة (نبدأ بـ 6 أخبار)
+const visibleCount = ref(6); 
+const visibleNews = computed(() => props.newsFeed.slice(0, visibleCount.value));
+
+// 🟢 دالة عرض المزيد (تضيف 6 أخبار أخرى كل مرة تضغط الزر)
+const loadMore = () => {
+  visibleCount.value += 6; 
+};
 </script>

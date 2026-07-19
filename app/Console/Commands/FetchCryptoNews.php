@@ -44,7 +44,7 @@ class FetchCryptoNews extends Command
                         // تنظيف الوصف من أي وسوم HTML واستخراج نص نقي
                         $rawDescription = strip_tags($item['description'] ?? $item['content']);
                         // تنظيف من الفراغات الزائدة وتحديد الطول
-                        $content_en = Str::limit(trim(preg_replace('/\s+/', ' ', $rawDescription)), 600);
+                        $content_en = Str::limit(trim(preg_replace('/\s+/', ' ', $rawDescription)), 5000);
                         
                         // الترجمة الآلية
                         $title_ar = $tr->translate($item['title']);
