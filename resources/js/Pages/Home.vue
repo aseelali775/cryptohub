@@ -114,29 +114,32 @@
                 <button class="w-7 h-7 rounded border border-slate-200 dark:border-slate-800 flex items-center justify-center hover:text-emerald-500">›</button>
               </div>
             </div>
-          <div class="bg-white dark:bg-[#151e32] border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm flex flex-col gap-4">
-  
-  <div v-if="mainNews" class="relative w-full h-56 sm:h-64 rounded-xl overflow-hidden bg-slate-900 group">
-    <img :src="mainNews.image_url" class="absolute inset-0 w-full h-full object-cover" />
-    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 to-transparent z-10"></div>
-    <div class="absolute bottom-0 inset-x-0 p-5 z-20">
-      <h4 class="text-xl sm:text-2xl font-bold text-white mb-2 leading-snug">{{ locale === 'ar' ? mainNews.title_ar : mainNews.title_en }}</h4>
-      <p class="text-xs text-slate-300 line-clamp-2 max-w-xl">{{ locale === 'ar' ? mainNews.content_ar : mainNews.content_en }}</p>
-    </div>
-  </div>
-
-  <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-    <div v-for="news in subNews" :key="news.id" class="bg-slate-50 dark:bg-[#0f172a] p-3.5 rounded-xl border border-slate-100 dark:border-slate-800 flex flex-col h-full">
-      <h5 class="text-sm font-bold text-slate-900 dark:text-white leading-tight mb-3 flex-1">
-        {{ locale === 'ar' ? news.title_ar : news.title_en }}
-      </h5>
-    </div>
-  </div>
-
-  <Link href="/news" class="w-full mt-2 h-10 rounded-xl border border-slate-200 dark:border-slate-800 text-sm font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-all flex items-center justify-center">
-    {{ t('viewAllNews') }}
-  </Link>
-</div>
+            <div class="bg-white dark:bg-[#151e32] border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm flex flex-col gap-4">
+              <div class="relative w-full h-56 sm:h-64 rounded-xl overflow-hidden bg-slate-900 group">
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 to-transparent z-10"></div>
+                <div class="absolute inset-0 bg-emerald-500/20 mix-blend-overlay z-0 group-hover:scale-105 transition-transform duration-700"></div>
+                <div class="absolute inset-0 flex items-center justify-center opacity-30 text-[150px] font-black text-amber-500">₿</div>
+                <div class="absolute bottom-0 inset-x-0 p-5 z-20">
+                  <span class="inline-block px-2.5 py-1 rounded bg-emerald-500 text-white text-[10px] font-bold mb-3">{{ t('mainNewsTag') }}</span>
+                  <h4 class="text-xl sm:text-2xl font-bold text-white mb-2 leading-snug">{{ dummyNews.main.title }}</h4>
+                  <p class="text-xs text-slate-300 line-clamp-2 max-w-xl">{{ dummyNews.main.desc }}</p>
+                  <div class="flex items-center gap-4 mt-3 text-[11px] text-slate-400">
+                    <span class="text-emerald-400 font-bold hover:underline cursor-pointer">{{ t('readMore') }}</span>
+                    <span>{{ dummyNews.main.time }}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div v-for="(news, idx) in dummyNews.sub" :key="idx" class="bg-slate-50 dark:bg-[#0f172a] p-3.5 rounded-xl border border-slate-100 dark:border-slate-800 hover:border-emerald-500/50 transition-colors cursor-pointer flex flex-col h-full">
+                  <span class="inline-block px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-[10px] font-bold mb-2 self-start">{{ news.tag }}</span>
+                  <h5 class="text-sm font-bold text-slate-900 dark:text-white leading-tight mb-3 flex-1">{{ news.title }}</h5>
+                  <div class="text-[10px] text-slate-500">{{ news.time }}</div>
+                </div>
+              </div>
+              <button class="w-full mt-2 h-10 rounded-xl border border-slate-200 dark:border-slate-800 text-sm font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-all">
+                {{ t('viewAllNews') }}
+              </button>
+            </div>
           </div>
 
           <!-- مؤشر الخوف والارتفاعات -->
@@ -228,18 +231,41 @@ import HomeLayout from '@/layouts/HomeLayout.vue';
 import { Link, usePage, Head } from '@inertiajs/vue3';
 import { computed } from 'vue';
 
+// استقبال بيانات العملات الحقيقية من الكنترولر
 const props = defineProps({
-  tickerCryptos: { type: Array, default: () => [] },
-  topGainers: { type: Array, default: () => [] },
-  news: { type: Array, default: () => [] } // استقبال الأخبار الحقيقية
+  tickerCryptos: {
+    type: Array,
+    default: () => []
+  },
+  topGainers: { type: Array, default: () => [] }
 });
 
 const page = usePage();
 const locale = computed(() => page.props.locale || 'ar');
 
-// الخبر الرئيسي هو أول عنصر، والفرعية هي العناصر الـ 3 التالية
-const mainNews = computed(() => props.news[0] || null);
-const subNews = computed(() => props.news.slice(1, 4));
+// ==========================================
+// البيانات الوهمية التفاعلية للأقسام الأخرى
+// ==========================================
+
+const marketStats = computed(() => [
+  { label: locale.value === 'ar' ? 'القيمة السوقية' : 'Market Cap', value: locale.value === 'ar' ? '$2.45 تريليون' : '$2.45T', change: '1.85', isUp: true },
+  { label: locale.value === 'ar' ? 'حجم التداول (24س)' : 'Volume (24h)', value: locale.value === 'ar' ? '$86.24 مليار' : '$86.24B', change: '6.24', isUp: true },
+  { label: locale.value === 'ar' ? 'هيمنة البيتكوين' : 'BTC Dominance', value: '53.63%', change: '0.35', isUp: true },
+  { label: locale.value === 'ar' ? 'عدد العملات' : 'Total Coins', value: '12,458', change: '0.45', isUp: true },
+]);
+
+const dummyNews = computed(() => ({
+  main: {
+    title: locale.value === 'ar' ? 'البيتكوين تتجاوز 68,000 دولار بدعم من تدفقات صناديق ETF' : 'Bitcoin Surges Past $68,000 Driven by ETF Inflows',
+    desc: locale.value === 'ar' ? 'ارتفع سعر البيتكوين متجاوزاً مستوى 68,000 دولار بدعم من تدفقات قياسية في صناديق الاستثمار المتداولة وتفاؤل الأسواق بخفض الفائدة.' : 'Bitcoin price rallied past the $68,000 mark supported by record inflows into ETFs and market optimism.',
+    time: locale.value === 'ar' ? 'منذ 25 دقيقة' : '25 mins ago'
+  },
+  sub: [
+    { tag: locale.value === 'ar' ? 'تحليل فني' : 'Technical', title: locale.value === 'ar' ? 'إيثيريوم تستعد لاختراق مستوى مقاومة مهم' : 'Ethereum preps for a major resistance breakout', time: locale.value === 'ar' ? 'منذ ساعتين' : '2 hours ago' },
+    { tag: locale.value === 'ar' ? 'تقرير يومي' : 'Daily Report', title: locale.value === 'ar' ? 'تقرير السوق اليومي 25 يوليو 2026' : 'Daily Market Report July 25, 2026', time: locale.value === 'ar' ? 'منذ 4 ساعات' : '4 hours ago' },
+    { tag: locale.value === 'ar' ? 'أخبار عالمية' : 'Global', title: locale.value === 'ar' ? 'بنك عالمي يطلق خدمة حفظ الأصول الرقمية' : 'Global bank launches digital asset custody', time: locale.value === 'ar' ? 'منذ 6 ساعات' : '6 hours ago' },
+  ]
+}));
 
 const dummyGainers = [
   { icon: 'R', name: 'Render', symbol: 'RNDR', change: '18.43' },

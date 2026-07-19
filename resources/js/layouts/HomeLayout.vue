@@ -27,9 +27,13 @@
             <Link href="/" class="h-full flex items-center text-sm font-bold text-emerald-600 dark:text-emerald-400 border-b-2 border-emerald-500">
               {{ t('navHome') }}
             </Link>
-            <Link href="#" class="h-full flex items-center text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">
-              {{ t('navNews') }}
-            </Link>
+           <Link 
+  href="/news" 
+  class="h-full flex items-center text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors"
+  :class="{'text-emerald-600 dark:text-emerald-400 border-b-2 border-emerald-500': $page.url === '/news'}"
+>
+  {{ t('navNews') }}
+</Link>
             <Link href="#" class="h-full flex items-center text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">
               {{ t('navAnalytics') }}
             </Link>
