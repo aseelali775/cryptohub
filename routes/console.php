@@ -10,3 +10,5 @@ Artisan::command('inspire', function () {
 
 
 Schedule::command('crypto:fetch')->everyMinute();
+
+Schedule::command('crypto:fetch-news')->hourly();
