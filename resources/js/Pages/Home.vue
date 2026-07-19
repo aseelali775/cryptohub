@@ -105,8 +105,7 @@
             </div>
           </div>
 
-          <!-- أبرز الأخبار -->
-          <div class="lg:col-span-6 flex flex-col">
+       <div class="lg:col-span-6 flex flex-col">
             <div class="flex items-center justify-between mb-4 px-2">
               <h3 class="text-lg font-bold text-slate-900 dark:text-white">{{ t('topNews') }}</h3>
               <div class="flex items-center gap-2 text-slate-400">
@@ -114,31 +113,44 @@
                 <button class="w-7 h-7 rounded border border-slate-200 dark:border-slate-800 flex items-center justify-center hover:text-emerald-500">›</button>
               </div>
             </div>
+            
             <div class="bg-white dark:bg-[#151e32] border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm flex flex-col gap-4">
-              <div class="relative w-full h-56 sm:h-64 rounded-xl overflow-hidden bg-slate-900 group">
-                <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 to-transparent z-10"></div>
-                <div class="absolute inset-0 bg-emerald-500/20 mix-blend-overlay z-0 group-hover:scale-105 transition-transform duration-700"></div>
-                <div class="absolute inset-0 flex items-center justify-center opacity-30 text-[150px] font-black text-amber-500">₿</div>
+              
+              <div v-if="mainNews" class="relative w-full h-56 sm:h-64 rounded-xl overflow-hidden bg-slate-900 group">
+                <img :src="mainNews.image_url" class="absolute inset-0 w-full h-full object-cover z-0 group-hover:scale-105 transition-transform duration-700" :alt="mainNews.title_en" />
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent z-10"></div>
+                <div class="absolute inset-0 bg-emerald-500/20 mix-blend-overlay z-10"></div>
+                
                 <div class="absolute bottom-0 inset-x-0 p-5 z-20">
                   <span class="inline-block px-2.5 py-1 rounded bg-emerald-500 text-white text-[10px] font-bold mb-3">{{ t('mainNewsTag') }}</span>
-                  <h4 class="text-xl sm:text-2xl font-bold text-white mb-2 leading-snug">{{ dummyNews.main.title }}</h4>
-                  <p class="text-xs text-slate-300 line-clamp-2 max-w-xl">{{ dummyNews.main.desc }}</p>
+                  <h4 class="text-xl sm:text-2xl font-bold text-white mb-2 leading-snug">
+                    {{ locale === 'ar' ? mainNews.title_ar : mainNews.title_en }}
+                  </h4>
+                  <p class="text-xs text-slate-300 line-clamp-2 max-w-xl">
+                    {{ locale === 'ar' ? mainNews.content_ar : mainNews.content_en }}
+                  </p>
                   <div class="flex items-center gap-4 mt-3 text-[11px] text-slate-400">
-                    <span class="text-emerald-400 font-bold hover:underline cursor-pointer">{{ t('readMore') }}</span>
-                    <span>{{ dummyNews.main.time }}</span>
+                    <Link :href="`/news/${mainNews.id}`" class="text-emerald-400 font-bold hover:underline cursor-pointer">
+                      {{ t('readMore') }}
+                    </Link>
+                    <span>{{ mainNews.source }}</span>
                   </div>
                 </div>
               </div>
-              <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                <div v-for="(news, idx) in dummyNews.sub" :key="idx" class="bg-slate-50 dark:bg-[#0f172a] p-3.5 rounded-xl border border-slate-100 dark:border-slate-800 hover:border-emerald-500/50 transition-colors cursor-pointer flex flex-col h-full">
-                  <span class="inline-block px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-[10px] font-bold mb-2 self-start">{{ news.tag }}</span>
-                  <h5 class="text-sm font-bold text-slate-900 dark:text-white leading-tight mb-3 flex-1">{{ news.title }}</h5>
-                  <div class="text-[10px] text-slate-500">{{ news.time }}</div>
-                </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-4" v-if="subNews && subNews.length">
+                <Link :href="`/news/${news.id}`" v-for="news in subNews" :key="news.id" class="bg-slate-50 dark:bg-[#0f172a] p-3.5 rounded-xl border border-slate-100 dark:border-slate-800 hover:border-emerald-500/50 transition-colors cursor-pointer flex flex-col h-full group">
+                  <span class="inline-block px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-[10px] font-bold mb-2 self-start">{{ news.source }}</span>
+                  <h5 class="text-sm font-bold text-slate-900 dark:text-white leading-tight mb-3 flex-1 group-hover:text-emerald-500 transition-colors">
+                    {{ locale === 'ar' ? news.title_ar : news.title_en }}
+                  </h5>
+                </Link>
               </div>
-              <button class="w-full mt-2 h-10 rounded-xl border border-slate-200 dark:border-slate-800 text-sm font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-all">
+
+              <Link href="/news" class="w-full mt-2 h-10 flex items-center justify-center rounded-xl border border-slate-200 dark:border-slate-800 text-sm font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-all">
                 {{ t('viewAllNews') }}
-              </button>
+              </Link>
+
             </div>
           </div>
 
@@ -231,22 +243,28 @@ import HomeLayout from '@/layouts/HomeLayout.vue';
 import { Link, usePage, Head } from '@inertiajs/vue3';
 import { computed } from 'vue';
 
-// استقبال بيانات العملات الحقيقية من الكنترولر
+// 1. استقبال البيانات الحقيقية من الكنترولر 
 const props = defineProps({
-  tickerCryptos: {
-    type: Array,
-    default: () => []
-  },
-  topGainers: { type: Array, default: () => [] }
+  tickerCryptos: { type: Array, default: () => [] },
+  topGainers: { type: Array, default: () => [] },
+  news: { type: Array, default: () => [] } // 🟢 تمت إضافة استقبال الأخبار الحقيقية هنا
 });
 
 const page = usePage();
 const locale = computed(() => page.props.locale || 'ar');
 
 // ==========================================
-// البيانات الوهمية التفاعلية للأقسام الأخرى
+// 🟢 تقسيم الأخبار الحقيقية (الدمج الذكي)
 // ==========================================
+// الخبر الأول سيكون هو الخبر الرئيسي الكبير
+const mainNews = computed(() => props.news[0] || null);
+// الأخبار الثلاثة التالية ستكون هي المربعات الفرعية الصغيرة
+const subNews = computed(() => props.news.slice(1, 4));
 
+
+// ==========================================
+// الإحصائيات (مؤقتاً حتى نربطها لاحقاً بـ API)
+// ==========================================
 const marketStats = computed(() => [
   { label: locale.value === 'ar' ? 'القيمة السوقية' : 'Market Cap', value: locale.value === 'ar' ? '$2.45 تريليون' : '$2.45T', change: '1.85', isUp: true },
   { label: locale.value === 'ar' ? 'حجم التداول (24س)' : 'Volume (24h)', value: locale.value === 'ar' ? '$86.24 مليار' : '$86.24B', change: '6.24', isUp: true },

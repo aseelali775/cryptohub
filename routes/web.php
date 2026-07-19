@@ -18,7 +18,12 @@ Route::get('/prices', [DashboardController::class, 'prices'])->name('crypto.pric
 Route::post('/refresh-prices', [DashboardController::class, 'refreshPrices'])->name('crypto.refresh');
 
 // 5. مسار صفحة الأخبار المشفرة والتلخيص الفوري
+// مسار صفحة الأخبار الشاملة القديم
 Route::get('/news', [NewsController::class, 'index'])->name('news.index');
+
+// 🟢 مسار صفحة عرض تفاصيل خبر منفرد (تم إضافته الآن)
+Route::get('/news/{id}', [NewsController::class, 'show'])->name('news.show');
+
 
 Route::get('/crypto/{symbol}', [DashboardController::class, 'show'])->name('crypto.show');
 
