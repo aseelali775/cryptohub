@@ -1,5 +1,5 @@
 <template>
-  <DashboardLayout>
+  <HomeLayout>
     
     <!-- 🌐 وسم الـ SEO الديناميكي لصفحة الأخبار الذكية -->
     <Head>
@@ -73,7 +73,7 @@
       </div>
 
     </div>
-  </DashboardLayout>
+  </HomeLayout>
 </template>
 
 <script setup>
