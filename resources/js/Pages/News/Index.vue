@@ -60,7 +60,6 @@
 
               <div class="pt-4 border-t border-slate-100 dark:border-slate-800/60 flex justify-between items-center gap-2">
                 <span class="text-[10px] px-2 py-1 rounded bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 font-mono font-bold">#Market</span>
-                
                 <Link 
                   :href="`/news/${item.id}`" 
                   class="text-xs font-bold text-emerald-500 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors flex items-center gap-1 cursor-pointer flex-shrink-0"
@@ -88,9 +87,10 @@
 </template>
 
 <script setup>
+// الانتباه لحساسية الأحرف في مسار المجلد (layouts)
 import HomeLayout from '@/layouts/HomeLayout.vue';
 import { Link, usePage, Head } from '@inertiajs/vue3';
-import { computed, ref } from 'vue'; 
+import { computed, ref } from 'vue';
 
 const props = defineProps({
   newsFeed: {
@@ -102,12 +102,14 @@ const props = defineProps({
 const page = usePage();
 const locale = computed(() => page.props.locale || 'ar');
 
-// 🟢 التحكم في عدد الأخبار المعروضة (نبدأ بـ 6 أخبار)
-const visibleCount = ref(6); 
-const visibleNews = computed(() => props.newsFeed.slice(0, visibleCount.value));
+// ==========================================
+// 🟢 نظام الـ Pagination الوهمي السريع
+// ==========================================
+const visibleCount = ref(6); // البدء بعرض 6 بطاقات فقط
+const visibleNews = computed(() => props.newsFeed.slice(0, visibleCount.value)); // قص المصفوفة ديناميكياً
 
-// 🟢 دالة عرض المزيد (تضيف 6 أخبار أخرى كل مرة تضغط الزر)
+// دالة زيادة عدد الأخبار عند النقر على الزر
 const loadMore = () => {
-  visibleCount.value += 6; 
+  visibleCount.value += 6; // إضافة 6 بطاقات أخرى
 };
 </script>
