@@ -8,7 +8,6 @@
       <meta 
         name="description" 
         :content="locale === 'ar' ? 'تغطية شاملة ومستمرة لأحداث سوق العملات الرقمية العالمية مع تلخيص ذكي فوري لأهم الأنباء.' : 'Comprehensive global coverage of crypto events with instant smart AI summarization.'" />
-      <meta property="og:title" :content="locale === 'ar' ? 'أخبار الكريبتو الذكية | CryptoHub' : 'Crypto News Hub | CryptoHub'" />
     </Head>
 
     <div class="w-full min-h-screen pb-24 bg-slate-50 dark:bg-[#0b1121] transition-colors duration-300">
@@ -87,10 +86,9 @@
 </template>
 
 <script setup>
-// الانتباه لحساسية الأحرف في مسار المجلد (layouts)
 import HomeLayout from '@/layouts/HomeLayout.vue';
 import { Link, usePage, Head } from '@inertiajs/vue3';
-import { computed, ref } from 'vue';
+import { computed, ref } from 'vue'; 
 
 const props = defineProps({
   newsFeed: {
@@ -102,14 +100,11 @@ const props = defineProps({
 const page = usePage();
 const locale = computed(() => page.props.locale || 'ar');
 
-// ==========================================
-// 🟢 نظام الـ Pagination الوهمي السريع
-// ==========================================
-const visibleCount = ref(6); // البدء بعرض 6 بطاقات فقط
-const visibleNews = computed(() => props.newsFeed.slice(0, visibleCount.value)); // قص المصفوفة ديناميكياً
+// 🟢 الـ Pagination الفعلي للتحكم في العرض
+const visibleCount = ref(6); 
+const visibleNews = computed(() => props.newsFeed.slice(0, visibleCount.value));
 
-// دالة زيادة عدد الأخبار عند النقر على الزر
 const loadMore = () => {
-  visibleCount.value += 6; // إضافة 6 بطاقات أخرى
+  visibleCount.value += 6; 
 };
 </script>
