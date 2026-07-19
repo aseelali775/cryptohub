@@ -65,7 +65,7 @@
 
 <script setup>
 // تأكد من صحة مسار الـ Layout (بحرف صغير أو كبير حسب ما تستخدمه في جهازك)
-import HomeLayout from '@/Layouts/HomeLayout.vue'; 
+import HomeLayout from '@/layouts/HomeLayout.vue'; 
 import { Head, Link, usePage } from '@inertiajs/vue3';
 import { computed } from 'vue';
 
