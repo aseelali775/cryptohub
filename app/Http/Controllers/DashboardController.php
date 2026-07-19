@@ -7,23 +7,24 @@ use Inertia\Inertia;
 use App\Models\Cryptocurrency;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Http;
-
+use App\Models\News; // إضافة موديل الأخبار
 class DashboardController extends Controller
 {
     // 1. الدالة التي كانت مفقودة وتسببت في الخطأ (تخدم الواجهة الخارجية الجديدة)
   public function home()
-{
-    // جلب 8 عملات للشريط العلوي
-    $tickerCryptos = Cryptocurrency::take(8)->get();
-    
-    // 🟢 جلب أكثر 3 عملات ارتفاعاً (العملات الرابحة)
-    $topGainers = Cryptocurrency::orderBy('change_24h', 'desc')->take(3)->get();
-    
-    return Inertia::render('Home', [
-        'tickerCryptos' => $tickerCryptos,
-        'topGainers' => $topGainers // إرسالهم للواجهة
-    ]);
-}
+    {
+        $tickerCryptos = Cryptocurrency::take(8)->get();
+        $topGainers = Cryptocurrency::orderBy('change_24h', 'desc')->take(3)->get();
+        
+        // جلب آخر 4 أخبار (الأول هو الرئيسي، والـ 3 التالية هي الفرعية)
+        $latestNews = News::latest()->take(4)->get();
+        
+        return Inertia::render('Home', [
+            'tickerCryptos' => $tickerCryptos,
+            'topGainers' => $topGainers,
+            'news' => $latestNews // إرسال الأخبار الحقيقية للواجهة
+        ]);
+    }
 
     // 2. دالة لوحة التحكم الرئيسية (تعرض 3 عملات فقط في الـ Dashboard)
     public function index()
