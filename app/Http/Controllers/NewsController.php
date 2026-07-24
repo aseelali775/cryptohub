@@ -4,31 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Models\News;
 use Inertia\Inertia;
-use Illuminate\Support\Facades\Artisan; // 🟢 استدعاء أداة الأوامر
 
 class NewsController extends Controller
 {
     public function index()
     {
-        // 🟢 نظام التحديث التلقائي الذكي (Auto-Fetch on Visit)
-        $latestNews = News::latest()->first();
-        // إذا لم يكن هناك أخبار، أو أن أحدث خبر مر عليه 60 دقيقة أو أكثر
-        if (!$latestNews || $latestNews->created_at->diffInMinutes(now()) >= 60) {
-            // تشغيل محرك سحب الأخبار بصمت في الخلفية
-            Artisan::call('crypto:fetch-news');
-        }
-
+        // الكنترولر الآن مسؤول فقط عن جلب البيانات وعرضها بأقصى سرعة
         $locale = app()->getLocale();
 
-        // جلب الأخبار وتجهيزها
         $newsFeed = News::latest()->get()->map(function($item) use ($locale) {
             return [
-                'id' => $item->id,
-                'title' => $locale === 'ar' ? $item->title_ar : $item->title_en,
-                'content' => $locale === 'ar' ? $item->content_ar : $item->content_en,
+                'id'        => $item->id,
+                'title'     => $locale === 'ar' ? $item->title_ar : $item->title_en,
+                'content'   => $locale === 'ar' ? $item->content_ar : $item->content_en,
                 'image_url' => $item->image_url,
-                'source' => $item->source,
-                'date' => $item->created_at ? $item->created_at->diffForHumans() : ''
+                'source'    => $item->source,
+                'date'      => $item->created_at ? $item->created_at->diffForHumans() : ''
             ];
         });
 
@@ -37,7 +28,6 @@ class NewsController extends Controller
         ]);
     }
 
-    // ... دالة show كما هي لا تغيرها ...
     public function show($id)
     {
         $item = News::findOrFail($id);
