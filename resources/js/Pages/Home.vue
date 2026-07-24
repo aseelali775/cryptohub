@@ -1,5 +1,6 @@
 <template>
   <HomeLayout>
+    
     <Head>
       <title>{{ t('seoTitle') }}</title>
       <meta name="description" :content="t('seoDesc')" />
@@ -139,7 +140,6 @@
             <div class="bg-white dark:bg-[#151e32] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm flex flex-col items-center hover:shadow-md transition-shadow relative overflow-hidden">
               <div class="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 blur-2xl rounded-full"></div>
               <h3 class="text-base font-bold text-slate-900 dark:text-white mb-6 relative z-10">{{ t('fearGreed') }}</h3>
-              
               <div class="relative w-48 h-24 mb-4 overflow-hidden flex justify-center z-10">
                 <svg viewBox="0 0 100 50" class="w-full h-full overflow-visible">
                   <path d="M 10 50 A 40 40 0 0 1 90 50" fill="none" class="stroke-slate-100 dark:stroke-slate-800" stroke-width="12" stroke-linecap="round"/>
@@ -296,14 +296,14 @@ const dynamicMarketStats = computed(() => [
   },
 ]);
 
-// 🟢 قاموس الترجمات بالنصوص المعتمدة بدقة 100%
+// 🟢 تم استبدال النصوص القديمة بالنص القوي الجديد الذي أرسله العميل
 const translations = {
   ar: {
     seoTitle: "CryptoHub | المنصة الرائدة لبيانات العملات الرقمية",
-    seoDesc: "مصدرك الموثوق لأحدث أخبار وتحليلات العملات الرقمية لحظياً.",
+    seoDesc: "منصة متكاملة تجمع نبض الأسواق العالمية، الأخبار المالية العاجلة، البيانات اللحظية، والتحليلات المتقدمة لتمنحك أفضلية معلوماتية تسبق حركة الأسواق",
     heroTitle1: "نبض السوق المشفر",
     heroTitleHighlight: "بين يديك",
-    heroSub: "شاشة واحدة تجمع لك الأسعار الحية، الأخبار المؤتمتة، وأدق تفاصيل السوق. اتخذ قراراتك بثقة وابق دائماً في المقدمة.",
+    heroSub: "منصة متكاملة تجمع نبض الأسواق العالمية، الأخبار المالية العاجلة، البيانات اللحظية، والتحليلات المتقدمة لتمنحك أفضلية معلوماتية تسبق حركة الأسواق",
     btnAnalytics: "استكشاف الأسواق",
     btnNews: "تصفح الأخبار",
     viewAllCoins: "عرض جميع العملات",
@@ -326,10 +326,10 @@ const translations = {
   },
   en: {
     seoTitle: "CryptoHub | The Leading Crypto Data Platform",
-    seoDesc: "Your trusted source for crypto news and real-time analytics.",
+    seoDesc: "One platform for global market intelligence—real-time data, breaking financial news, and in-depth analytics to help you stay ahead of every market move",
     heroTitle1: "The Crypto Market Pulse",
     heroTitleHighlight: "In Your Hands",
-    heroSub: "One screen bringing you live prices, automated news, and deep market details. Make confident decisions and stay ahead.",
+    heroSub: "One platform for global market intelligence—real-time data, breaking financial news, and in-depth analytics to help you stay ahead of every market move",
     btnAnalytics: "Explore Markets",
     btnNews: "Browse News",
     viewAllCoins: "View All Assets",
