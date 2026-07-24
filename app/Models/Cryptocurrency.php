@@ -13,11 +13,13 @@ class Cryptocurrency extends Model
      * الحقول المسموح بتعبئتها وتحديثها تلقائياً.
      */
     protected $fillable = [
+        'coingecko_id', // 🟢 المعرف الفريد الذي اقترحناه
         'name',
         'symbol',
+        'image_url',
         'current_price',
         'change_24h',
         'volume_24h',
-        'image_url',
+        'market_cap',   // 🟢 القيمة السوقية
     ];
 }

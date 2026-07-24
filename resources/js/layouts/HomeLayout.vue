@@ -22,33 +22,48 @@
             </span>
           </div>
 
-          <!-- القسم الثاني: روابط التنقل الرئيسية -->
-          <nav class="hidden lg:flex items-center gap-8 h-full">
-            <Link href="/" class="h-full flex items-center text-sm font-bold text-emerald-600 dark:text-emerald-400 border-b-2 border-emerald-500">
+       <nav class="hidden lg:flex items-center gap-8 h-full">
+            
+            <Link 
+              href="/" 
+              class="h-full flex items-center text-sm transition-colors border-b-2"
+              :class="$page.url === '/' ? 'font-bold text-emerald-600 dark:text-emerald-400 border-emerald-500' : 'font-medium text-slate-600 dark:text-slate-400 border-transparent hover:text-slate-900 dark:hover:text-white'"
+            >
               {{ t('navHome') }}
             </Link>
-           <Link 
-  href="/news" 
-  class="h-full flex items-center text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors"
-  :class="{'text-emerald-600 dark:text-emerald-400 border-b-2 border-emerald-500': $page.url === '/news'}"
->
-  {{ t('navNews') }}
-</Link>
-            <Link href="#" class="h-full flex items-center text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">
-              {{ t('navAnalytics') }}
+
+            <Link 
+              href="/news" 
+              class="h-full flex items-center text-sm transition-colors border-b-2"
+              :class="$page.url.startsWith('/news') ? 'font-bold text-emerald-600 dark:text-emerald-400 border-emerald-500' : 'font-medium text-slate-600 dark:text-slate-400 border-transparent hover:text-slate-900 dark:hover:text-white'"
+            >
+              {{ t('navNews') }}
             </Link>
-            <Link href="/prices" class="h-full flex items-center text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">
+
+            <Link 
+              href="/prices" 
+              class="h-full flex items-center text-sm transition-colors border-b-2"
+              :class="$page.url.startsWith('/prices') || $page.url.startsWith('/crypto') ? 'font-bold text-emerald-600 dark:text-emerald-400 border-emerald-500' : 'font-medium text-slate-600 dark:text-slate-400 border-transparent hover:text-slate-900 dark:hover:text-white'"
+            >
               {{ t('navPrices') }}
             </Link>
-            <Link href="#" class="h-full flex items-center text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">
+
+            <Link href="#" class="h-full flex items-center text-sm font-medium text-slate-600 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white transition-colors">
+              {{ t('navAnalytics') }}
+            </Link>
+
+            <Link href="#" class="h-full flex items-center text-sm font-medium text-slate-600 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white transition-colors">
               {{ t('navIndicators') }}
             </Link>
-            <Link href="#" class="h-full flex items-center text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">
+
+            <Link href="#" class="h-full flex items-center text-sm font-medium text-slate-600 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white transition-colors">
               {{ t('navTools') }}
             </Link>
-            <Link href="#" class="h-full flex items-center text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">
+
+            <Link href="#" class="h-full flex items-center text-sm font-medium text-slate-600 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white transition-colors">
               {{ t('navCalendar') }}
             </Link>
+            
           </nav>
 
           <!-- القسم الثالث: الأدوات والأزرار -->
