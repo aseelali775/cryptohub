@@ -11,21 +11,27 @@ class HomeController extends Controller
     /**
      * عرض الصفحة الرئيسية للمنصة (Home)
      */
-    public function index()
+   public function index()
     {
-        // 1. جلب عملات الشريط المتحرك العلوي (Ticker)
         $tickerCryptos = Cryptocurrency::take(8)->get();
-
-        // 2. جلب أعلى 3 عملات صاعدة في 24 ساعة
         $topGainers = Cryptocurrency::orderBy('change_24h', 'desc')->take(3)->get();
-
-        // 3. جلب أحدث 4 أخبار للرئيسية
         $latestNews = News::latest()->take(4)->get();
+
+        // 🟢 قراءة البيانات الحية من الكاش (مع قيم افتراضية في حال كانت فارغة)
+        $globalStats = \Illuminate\Support\Facades\Cache::get('market_global_stats', [
+            'market_cap' => 0, 'volume' => 0, 'btc_dominance' => 0, 'active_coins' => 0, 'market_cap_change' => 0
+        ]);
+        
+        $fearGreed = \Illuminate\Support\Facades\Cache::get('fear_greed_index', [
+            'value' => 50, 'classification' => 'Neutral'
+        ]);
 
         return Inertia::render('Home', [
             'tickerCryptos' => $tickerCryptos,
             'topGainers'    => $topGainers,
-            'news'          => $latestNews
+            'news'          => $latestNews,
+            'globalStats'   => $globalStats, // 🟢 تم التمرير
+            'fearGreed'     => $fearGreed    // 🟢 تم التمرير
         ]);
     }
 }

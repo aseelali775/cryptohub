@@ -79,11 +79,11 @@
             <div class="bg-white dark:bg-[#151e32] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm hover:shadow-md transition-shadow">
               <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-6 border-b border-slate-100 dark:border-slate-800 pb-3">{{ t('marketOverview') }}</h3>
               <div class="space-y-4">
-                <div v-for="(stat, index) in marketStats" :key="index" class="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50 dark:hover:bg-[#0f172a] transition-colors">
+                <div v-for="(stat, index) in dynamicMarketStats" :key="index" class="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50 dark:hover:bg-[#0f172a] transition-colors">
                   <span class="text-xs sm:text-sm font-bold text-slate-500 dark:text-slate-400">{{ stat.label }}</span>
                   <div class="text-end">
                     <div class="text-sm font-black text-slate-900 dark:text-white font-mono">{{ stat.value }}</div>
-                    <div :class="stat.isUp ? 'text-emerald-500' : 'text-rose-500'" class="text-[10px] font-bold mt-0.5">
+                    <div v-if="stat.change !== '—'" :class="stat.isUp ? 'text-emerald-500' : 'text-rose-500'" class="text-[10px] font-bold mt-0.5">
                       {{ stat.isUp ? '▲ +' : '▼ ' }}{{ stat.change }}%
                     </div>
                   </div>
@@ -139,10 +139,11 @@
             <div class="bg-white dark:bg-[#151e32] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm flex flex-col items-center hover:shadow-md transition-shadow relative overflow-hidden">
               <div class="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 blur-2xl rounded-full"></div>
               <h3 class="text-base font-bold text-slate-900 dark:text-white mb-6 relative z-10">{{ t('fearGreed') }}</h3>
+              
               <div class="relative w-48 h-24 mb-4 overflow-hidden flex justify-center z-10">
                 <svg viewBox="0 0 100 50" class="w-full h-full overflow-visible">
                   <path d="M 10 50 A 40 40 0 0 1 90 50" fill="none" class="stroke-slate-100 dark:stroke-slate-800" stroke-width="12" stroke-linecap="round"/>
-                  <path d="M 10 50 A 40 40 0 0 1 90 50" fill="none" stroke="url(#gradient)" stroke-width="12" stroke-dasharray="125.6" stroke-dashoffset="35" stroke-linecap="round" class="transition-all duration-1000 ease-out"/>
+                  <path d="M 10 50 A 40 40 0 0 1 90 50" fill="none" stroke="url(#gradient)" stroke-width="12" stroke-dasharray="125.6" :stroke-dashoffset="125.6 * (1 - ((props.fearGreed?.value || 50) / 100))" stroke-linecap="round" class="transition-all duration-1000 ease-out"/>
                   <defs>
                     <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
                       <stop offset="0%" stop-color="#ef4444" />
@@ -152,8 +153,10 @@
                   </defs>
                 </svg>
                 <div class="absolute bottom-0 text-center">
-                  <div class="text-4xl font-black text-slate-900 dark:text-emerald-400">72</div>
-                  <div class="text-[10px] font-black uppercase tracking-widest text-emerald-500">{{ t('greed') }}</div>
+                  <div class="text-4xl font-black text-slate-900 dark:text-emerald-400">{{ props.fearGreed?.value || 50 }}</div>
+                  <div class="text-[10px] font-black uppercase tracking-widest mt-1" :class="(props.fearGreed?.value || 50) >= 50 ? 'text-emerald-500' : 'text-rose-500'">
+                    {{ props.fearGreed?.classification ? translateFearGreed(props.fearGreed.classification) : t('greed') }}
+                  </div>
                 </div>
               </div>
               <p class="text-[11px] text-center text-slate-500 dark:text-slate-400 mt-2 relative z-10 font-medium" v-html="t('fearGreedDesc')"></p>
@@ -233,35 +236,67 @@ import HomeLayout from '@/layouts/HomeLayout.vue';
 import { Link, usePage, Head } from '@inertiajs/vue3';
 import { computed } from 'vue';
 
-// 1. استقبال البيانات الحقيقية من الكنترولر (HomeController)
 const props = defineProps({
   tickerCryptos: { type: Array, default: () => [] },
   topGainers: { type: Array, default: () => [] },
-  news: { type: Array, default: () => [] } 
+  news: { type: Array, default: () => [] },
+  globalStats: { type: Object, default: () => ({ market_cap: 0, volume: 0, btc_dominance: 0, active_coins: 0, market_cap_change: 0 }) },
+  fearGreed: { type: Object, default: () => ({ value: 50, classification: 'Neutral' }) }
 });
 
 const page = usePage();
 const locale = computed(() => page.props.locale || 'ar');
 
-// ==========================================
-// 🟢 تقسيم الأخبار الحقيقية بأمان
-// ==========================================
 const mainNews = computed(() => props.news && props.news.length > 0 ? props.news[0] : null);
 const subNews = computed(() => props.news && props.news.length > 1 ? props.news.slice(1, 4) : []);
 
-// ==========================================
-// الإحصائيات العامة للمنصة 
-// ==========================================
-const marketStats = computed(() => [
-  { label: locale.value === 'ar' ? 'القيمة السوقية' : 'Market Cap', value: locale.value === 'ar' ? '$2.45 تريليون' : '$2.45T', change: '1.85', isUp: true },
-  { label: locale.value === 'ar' ? 'حجم التداول (24س)' : 'Volume (24h)', value: locale.value === 'ar' ? '$86.24 مليار' : '$86.24B', change: '6.24', isUp: true },
-  { label: locale.value === 'ar' ? 'هيمنة البيتكوين' : 'BTC Dominance', value: '53.63%', change: '0.35', isUp: true },
-  { label: locale.value === 'ar' ? 'عدد العملات المدرجة' : 'Listed Coins', value: '20', change: '0.00', isUp: true },
+const formatCompact = (num) => {
+  if (!num) return '$0';
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency', currency: 'USD', notation: "compact", maximumFractionDigits: 2
+  }).format(num);
+};
+
+const translateFearGreed = (status) => {
+  if (!status) return '';
+  const dict = {
+    'Extreme Greed': locale.value === 'ar' ? 'طمع شديد' : 'Extreme Greed',
+    'Greed': locale.value === 'ar' ? 'طمع' : 'Greed',
+    'Neutral': locale.value === 'ar' ? 'محايد' : 'Neutral',
+    'Fear': locale.value === 'ar' ? 'خوف' : 'Fear',
+    'Extreme Fear': locale.value === 'ar' ? 'خوف شديد' : 'Extreme Fear',
+  };
+  return dict[status] || status;
+};
+
+const dynamicMarketStats = computed(() => [
+  { 
+    label: locale.value === 'ar' ? 'القيمة السوقية' : 'Market Cap', 
+    value: formatCompact(props.globalStats.market_cap), 
+    change: Number(props.globalStats.market_cap_change).toFixed(2), 
+    isUp: props.globalStats.market_cap_change >= 0 
+  },
+  { 
+    label: locale.value === 'ar' ? 'حجم التداول (24س)' : 'Volume (24h)', 
+    value: formatCompact(props.globalStats.volume), 
+    change: '—', 
+    isUp: true 
+  },
+  { 
+    label: locale.value === 'ar' ? 'هيمنة البيتكوين' : 'BTC Dominance', 
+    value: Number(props.globalStats.btc_dominance).toFixed(2) + '%', 
+    change: '—', 
+    isUp: true 
+  },
+  { 
+    label: locale.value === 'ar' ? 'عدد العملات المدرجة' : 'Listed Coins', 
+    value: '20', 
+    change: '0.00', 
+    isUp: true 
+  },
 ]);
 
-// ==========================================
-// قاموس الترجمة المحدث
-// ==========================================
+// 🟢 قاموس الترجمات بالنصوص المعتمدة بدقة 100%
 const translations = {
   ar: {
     seoTitle: "CryptoHub | المنصة الرائدة لبيانات العملات الرقمية",
@@ -321,7 +356,6 @@ const t = (key) => translations[locale.value][key] || key;
 </script>
 
 <style scoped>
-/* إخفاء شريط التمرير لشريط الأسعار المتحرك */
 .scrollbar-none::-webkit-scrollbar {
   display: none;
 }
