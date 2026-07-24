@@ -32,23 +32,38 @@
           <div 
             v-for="item in visibleNews" 
             :key="item.id" 
-            class="bg-white dark:bg-[#151e32] border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-md hover:border-emerald-500/50 transition-all flex flex-col group"
+            class="bg-white dark:bg-[#151e32] border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-md hover:border-emerald-500/50 transition-all flex flex-col group cursor-pointer"
           >
-            <div class="h-48 sm:h-52 overflow-hidden relative bg-slate-900 flex-shrink-0">
+            <div class="h-48 sm:h-52 overflow-hidden relative bg-slate-900 flex-shrink-0 flex items-center justify-center">
+              
               <img 
+                v-if="item.image_url && !brokenImages.has(item.id)" 
                 :src="item.image_url" 
-                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
-                alt="news image" 
+                @error="handleImageError(item.id)" 
+                class="w-full h-full transition-transform duration-500 group-hover:scale-105"
+                :class="item.image_url.match(/logo|icon|symbol/i) ? 'object-contain p-6 opacity-90' : 'object-cover absolute inset-0'" 
+                :alt="item.title" 
               />
-              <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-80"></div>
-              <span class="absolute bottom-3 right-3 bg-[#0f172a]/80 text-slate-200 text-[10px] px-2.5 py-1.5 rounded font-bold backdrop-blur-sm border border-white/10">
-                {{ item.source }}
+              
+              <div 
+                v-else 
+                class="absolute inset-0 w-full h-full bg-gradient-to-br from-slate-800 to-[#0b1121] flex items-center justify-center group-hover:scale-105 transition-transform duration-500"
+              >
+                <span class="text-6xl opacity-20 grayscale filter drop-shadow-md">📰</span>
+              </div>
+
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/20 to-transparent opacity-80 pointer-events-none"></div>
+              
+              <span class="absolute bottom-3 right-3 bg-[#0f172a]/80 text-slate-200 text-[10px] px-2.5 py-1.5 rounded font-bold backdrop-blur-sm border border-white/10 z-10 pointer-events-none">
+                {{ item.source || 'Crypto News' }}
               </span>
             </div>
 
             <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
               <div class="space-y-3 min-w-0">
-                <span class="text-[10px] sm:text-[11px] text-slate-500 dark:text-slate-400 font-mono font-semibold block">{{ item.date }}</span>
+                <span class="text-[10px] sm:text-[11px] text-slate-500 dark:text-slate-400 font-mono font-semibold block">
+                  {{ item.date || (locale === 'ar' ? 'منذ قليل' : 'Just now') }}
+                </span>
                 <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white group-hover:text-emerald-500 transition-colors leading-snug break-words line-clamp-2">
                   {{ item.title }}
                 </h3>
@@ -100,11 +115,17 @@ const props = defineProps({
 const page = usePage();
 const locale = computed(() => page.props.locale || 'ar');
 
-// 🟢 الـ Pagination الفعلي للتحكم في العرض
-const visibleCount = ref(6); 
+// 🟢 نظام صيد الصور المكسورة
+const brokenImages = ref(new Set());
+const handleImageError = (id) => {
+  brokenImages.value.add(id);
+};
+
+// 🟢 التحكم في العرض (تحميل 8 أخبار في كل مرة للحفاظ على تناسق الشبكة ذات الـ 4 أعمدة)
+const visibleCount = ref(8); 
 const visibleNews = computed(() => props.newsFeed.slice(0, visibleCount.value));
 
 const loadMore = () => {
-  visibleCount.value += 6; 
+  visibleCount.value += 8; 
 };
 </script>
