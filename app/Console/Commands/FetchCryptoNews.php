@@ -10,11 +10,11 @@ use Stichoza\GoogleTranslate\GoogleTranslate;
 class FetchCryptoNews extends Command
 {
     protected $signature = 'crypto:fetch-news';
-    protected $description = 'Fetch crypto news via RSS, try translating, and fallback gracefully.';
+    protected $description = 'Fetch crypto news via RSS, extract images dynamically, translate, and fallback gracefully.';
 
     public function handle()
     {
-        $this->info('Starting automated news fetcher (Production-Ready Mode)...');
+        $this->info('Starting automated news fetcher (Multi-Source Image Extractor Mode)...');
 
         try {
             $response = Http::timeout(15)->get('https://api.rss2json.com/v1/api.json', [
@@ -24,7 +24,7 @@ class FetchCryptoNews extends Command
             if ($response->successful() && $response->json()['status'] === 'ok') {
                 $newsItems = $response->json()['items'];
                 
-                // 🟢 الترتيب التصاعدي: ضمان أن أول عناصر المصفوفة هي الأحدث زمنياً
+                // 🟢 ضمان ترتيب الأخبار من الأحدث للأقدم
                 usort($newsItems, function($a, $b) {
                     return strtotime($b['pubDate'] ?? 'now') <=> strtotime($a['pubDate'] ?? 'now');
                 });
@@ -45,6 +45,9 @@ class FetchCryptoNews extends Command
                             $content_en = strip_tags($item['description'] ?? $item['content'] ?? '');
                             $safe_content_en = mb_substr($content_en, 0, 1500); 
                             
+                            // 🟢 استخراج الصورة باستخدام الدالة الذكية متعددة المصادر
+                            $imageUrl = $this->extractImage($item);
+
                             $tr = new GoogleTranslate('ar'); 
 
                             try {
@@ -61,7 +64,7 @@ class FetchCryptoNews extends Command
                                 'title_ar'   => $title_ar,
                                 'content_en' => $safe_content_en,
                                 'content_ar' => $content_ar,
-                                'image_url'  => !empty($item['thumbnail']) ? $item['thumbnail'] : 'https://cryptologos.cc/logos/bitcoin-btc-logo.png',
+                                'image_url'  => $imageUrl, // 👈 حفظ الرابط المستخرج بدقة
                                 'source'     => 'CoinTelegraph',
                             ]);
                             
@@ -75,12 +78,40 @@ class FetchCryptoNews extends Command
                     }
                 }
 
-                $this->info("Done! {$count} new articles processed successfully. ✅");
+                $this->info("Done! {$count} new articles processed with images successfully. ✅");
             } else {
                 $this->error('Failed to fetch RSS Feed. API Status was not OK.');
             }
         } catch (\Exception $e) {
             $this->error('Critical Error during fetching: ' . $e->getMessage());
         }
+    }
+
+    /**
+     * 🟢 دالة هندسية متقدمة لاستخراج صورة الخبر من عدة مصادر محتملة في الـ RSS
+     */
+    private function extractImage($item)
+    {
+        // 1. البحث في الحقل المباشر thumbnail
+        if (!empty($item['thumbnail'])) {
+            return $item['thumbnail'];
+        }
+
+        // 2. البحث في حقل الـ enclosure
+        if (!empty($item['enclosure']['link'])) {
+            return $item['enclosure']['link'];
+        }
+
+        // 3. استخراج أول رابط صورة من كود الـ HTML داخل الوصف أو المحتوى
+        $htmlContent = $item['description'] ?? $item['content'] ?? '';
+        if (!empty($htmlContent)) {
+            preg_match('/<img[^>]+src="([^">]+)"/', $htmlContent, $matches);
+            if (!empty($matches[1])) {
+                return $matches[1];
+            }
+        }
+
+        // 4. صورة افتراضية في حال لم يتم العثور على أي صورة نهائياً
+        return 'https://cryptologos.cc/logos/bitcoin-btc-logo.png';
     }
 }
