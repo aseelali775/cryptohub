@@ -12,5 +12,8 @@ Artisan::command('inspire', function () {
 // 🟢 تم التعديل: كل 10 دقائق لتجنب الحظر من مزودي واجهات الـ API
 Schedule::command('crypto:fetch-prices')->everyTenMinutes();
 
-// 🟢 أمر سحب الأخبار يعمل كل 30 دقيقة (كودك هنا ممتاز جداً)
+// 🟢 أمر سحب الأخبار يعمل كل 30 دقيقة
 Schedule::command('crypto:fetch-news')->everyThirtyMinutes();
+
+// 🟢 عامل النظافة: يعمل يومياً عند منتصف الليل لحذف الأخبار القديمة
+Schedule::command('model:prune')->daily();
