@@ -10,14 +10,13 @@ use Stichoza\GoogleTranslate\GoogleTranslate;
 class FetchCryptoNews extends Command
 {
     protected $signature = 'crypto:fetch-news';
-    protected $description = 'Fetch latest crypto news via RSS, translate them to Arabic, and store in database';
+    protected $description = 'Fetch crypto news via RSS, try translating, and fallback to English gracefully if translation fails.';
 
     public function handle()
     {
-        $this->info('Starting automated news fetcher (RSS Mode)...');
+        $this->info('Starting automated news fetcher (Fault-Tolerant Mode)...');
 
         try {
-            // نستخدم خدمة RSS-to-JSON المجانية تماماً لتحويل تغذية موقع CoinTelegraph العالمي
             $response = Http::timeout(15)->get('https://api.rss2json.com/v1/api.json', [
                 'rss_url' => 'https://cointelegraph.com/rss'
             ]);
@@ -26,52 +25,56 @@ class FetchCryptoNews extends Command
                 $newsItems = $response->json()['items'];
                 $count = 0;
                 
-                // تهيئة المترجم الآلي للغة العربية
                 $tr = new GoogleTranslate('ar'); 
 
                 foreach ($newsItems as $item) {
-                    // 🟢 تم التعديل: سحب 15 خبراً لتغذية زر "عرض المزيد" في الواجهة
-                    if ($count >= 15) break;
+                    // 🟢 1. الحد الأقصى للدفعة
+                    if ($count >= 5) break;
 
-                    // التحقق من عدم وجود الخبر مسبقاً
                     $exists = News::where('title_en', $item['title'])->exists();
 
                     if (!$exists) {
-                        $this->info("Fetching and translating: " . $item['title']);
+                        $this->info("Processing: " . $item['title']);
                         
-                        // تنظيف الوصف من أي وسوم HTML واستخراج نص نقي
-                        $rawDescription = strip_tags($item['description'] ?? $item['content']);
+                        $content_en = strip_tags($item['description'] ?? $item['content'] ?? '');
+                        $safe_content_en = mb_substr($content_en, 0, 4000); 
                         
-                        // 🟢 تم التعديل: إلغاء Str::limit تماماً لأخذ كامل النص المتاح من المصدر
-                        $content_en = trim(preg_replace('/\s+/', ' ', $rawDescription));
-                        
-                        // الترجمة الآلية
-                        $title_ar = $tr->translate($item['title']);
-                        $content_ar = $tr->translate($content_en);
+                        // 🟢 2. محاولة الترجمة مع معالجة الأخطاء (Graceful Degradation)
+                        try {
+                            $title_ar = $tr->translate($item['title']);
+                            $content_ar = $tr->translate($safe_content_en);
+                        } catch (\Exception $e) {
+                            $this->warn("⚠️ Translation failed (429 or other). Saving English version as fallback.");
+                            
+                            // نستخدم النص الإنجليزي كبديل مؤقت لحين معالجة الترجمة لاحقاً
+                            // هذا يمنع انهيار قاعدة البيانات إذا كانت الأعمدة لا تقبل null
+                            $title_ar = '[EN] ' . $item['title']; 
+                            $content_ar = $safe_content_en; 
+                        }
 
-                        // الحفظ في قاعدة البيانات
+                        // 🟢 3. الحفظ في قاعدة البيانات (سيستمر دائماً سواء نجحت الترجمة أم لا)
                         News::create([
                             'title_en'   => $item['title'],
                             'title_ar'   => $title_ar,
-                            'content_en' => $content_en,
+                            'content_en' => $safe_content_en,
                             'content_ar' => $content_ar,
                             'image_url'  => !empty($item['thumbnail']) ? $item['thumbnail'] : 'https://cryptologos.cc/logos/bitcoin-btc-logo.png',
                             'source'     => 'CoinTelegraph',
                         ]);
                         
                         $count++;
-                        // إيقاف مؤقت لمدة ثانية لتجنب حظر الـ IP الخاص بجوجل للترجمة
-                        sleep(1); 
+                        
+                        // 🟢 4. استراحة لتخفيف الضغط
+                        sleep(5); 
                     }
                 }
 
-                $this->info("Done! {$count} new articles automated successfully. ✅");
+                $this->info("Done! {$count} new articles processed successfully. ✅");
             } else {
                 $this->error('Failed to fetch RSS Feed. API Status was not OK.');
-                $this->error('Details: ' . $response->body());
             }
         } catch (\Exception $e) {
-            $this->error('Error during fetching/translating: ' . $e->getMessage());
+            $this->error('Critical Error during fetching: ' . $e->getMessage());
         }
     }
 }
