@@ -24,8 +24,12 @@ class FetchCryptoNews extends Command
             if ($response->successful() && $response->json()['status'] === 'ok') {
                 $newsItems = $response->json()['items'];
                 
-                // 🟢 3. سجل يوضح عدد الأخبار القادمة من المصدر
-                $this->info("RSS returned: " . count($newsItems) . " articles");
+                // 🟢 الترتيب التصاعدي: ضمان أن أول عناصر المصفوفة هي الأحدث زمنياً
+                usort($newsItems, function($a, $b) {
+                    return strtotime($b['pubDate'] ?? 'now') <=> strtotime($a['pubDate'] ?? 'now');
+                });
+
+                $this->info("RSS returned: " . count($newsItems) . " articles (Sorted by newest)");
                 
                 $count = 0;
 
@@ -38,11 +42,9 @@ class FetchCryptoNews extends Command
                         $this->info("Processing: " . $item['title']);
                         
                         try {
-                            // 🟢 4. تقليل حجم النص إلى 1500 حرف لتجنب الحظر
                             $content_en = strip_tags($item['description'] ?? $item['content'] ?? '');
                             $safe_content_en = mb_substr($content_en, 0, 1500); 
                             
-                            // 🟢 2. إنشاء كائن الترجمة داخل الحلقة لتجنب تتبع الجلسة
                             $tr = new GoogleTranslate('ar'); 
 
                             try {
@@ -68,7 +70,6 @@ class FetchCryptoNews extends Command
                         } catch (\Exception $e) {
                             $this->error("Failed to save article: " . $e->getMessage());
                         } finally {
-                            // 🟢 1. التأكد من تنفيذ الاستراحة دائماً، حتى لو فشل الحفظ في قاعدة البيانات
                             sleep(5);
                         }
                     }
