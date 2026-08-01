@@ -8,8 +8,9 @@ Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote')->hourly();
 
+// 🟢 تم التصحيح: اسم الأمر الآن يتطابق تماماً مع الملف
+// 🟢 تم التعديل: كل 10 دقائق لتجنب الحظر من مزودي واجهات الـ API
+Schedule::command('crypto:fetch-prices')->everyTenMinutes();
 
-Schedule::command('crypto:fetch')->everyMinute();
-
-// 🟢 أمر سحب الأخبار يعمل كل 30 دقيقة
+// 🟢 أمر سحب الأخبار يعمل كل 30 دقيقة (كودك هنا ممتاز جداً)
 Schedule::command('crypto:fetch-news')->everyThirtyMinutes();
