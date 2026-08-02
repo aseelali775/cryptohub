@@ -1,98 +1,86 @@
 <template>
   <HomeLayout>
-    
     <Head>
-      <title>
-        {{ locale === 'ar' ? 'آخر أخبار الكريبتو وتلخيصات الذكاء الاصطناعي | CryptoHub' : 'Latest Crypto News & AI Summaries | CryptoHub' }}
-      </title>
-      <meta 
-        name="description" 
-        :content="locale === 'ar' ? 'تغطية شاملة ومستمرة لأحداث سوق العملات الرقمية العالمية مع تلخيص ذكي فوري لأهم الأنباء.' : 'Comprehensive global coverage of crypto events with instant smart AI summarization.'" />
+      <title>{{ newsItem.title }} | CryptoHub</title>
+      <meta name="description" :content="newsItem.summary || newsItem.content_en" />
+      <meta property="og:image" :content="newsItem.image_url" />
     </Head>
 
     <div class="w-full min-h-screen pb-24 bg-slate-50 dark:bg-[#0b1121] transition-colors duration-300">
       
-      <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 space-y-8" :class="locale === 'ar' ? 'text-right' : 'text-left'">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16" :class="locale === 'ar' ? 'text-right' : 'text-left'">
         
-        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-white dark:bg-[#1e293b] p-5 sm:p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm gap-4">
+        <Link href="/news" class="inline-flex items-center gap-2 text-sm font-semibold text-slate-500 hover:text-emerald-500 transition-colors mb-8 group">
+          <span class="transition-transform duration-300" :class="locale === 'ar' ? 'group-hover:translate-x-1' : 'group-hover:-translate-x-1'">
+            {{ locale === 'ar' ? '←' : '←' }}
+          </span>
+          <span>{{ locale === 'ar' ? 'العودة لغرفة الأخبار' : 'Back to Newsroom' }}</span>
+        </Link>
+
+        <header class="space-y-6 mb-10">
+          
+          <div class="flex flex-wrap items-center gap-2 sm:gap-3 text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-mono">
+            <span class="px-3 py-1.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 font-bold tracking-wider">
+              {{ newsItem.source }}
+            </span>
+            <span>•</span>
+            <span>{{ newsItem.date }}</span>
+            
+            <span v-if="newsItem.sentiment === 'Bullish'" class="px-2 py-1.5 rounded-md bg-green-500/10 text-green-600 dark:text-green-400 border border-green-500/20 font-bold">🟢 {{ locale === 'ar' ? 'صعودي' : 'Bullish' }}</span>
+            <span v-else-if="newsItem.sentiment === 'Bearish'" class="px-2 py-1.5 rounded-md bg-red-500/10 text-red-600 dark:text-red-400 border border-red-500/20 font-bold">🔴 {{ locale === 'ar' ? 'هبوطي' : 'Bearish' }}</span>
+            <span v-else-if="newsItem.sentiment === 'Neutral'" class="px-2 py-1.5 rounded-md bg-slate-500/10 text-slate-600 dark:text-slate-400 border border-slate-500/20 font-bold">⚪ {{ locale === 'ar' ? 'محايد' : 'Neutral' }}</span>
+
+            <span class="px-2 py-1.5 rounded-md bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-bold">#{{ newsItem.category || 'Crypto' }}</span>
+            <span v-if="newsItem.impact_score" class="px-2 py-1.5 rounded-md bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20 font-bold" :title="locale === 'ar' ? 'تأثير الخبر على السوق' : 'Impact Score'">⚡ {{ newsItem.impact_score }}/10</span>
+          </div>
+
+          <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 dark:text-white leading-[1.4] tracking-tight">
+            {{ newsItem.title }}
+          </h1>
+        </header>
+
+        <figure class="w-full aspect-video sm:h-[450px] rounded-[2rem] overflow-hidden bg-slate-900 shadow-2xl mb-12 relative border border-slate-200 dark:border-slate-800">
+          <img :src="newsItem.image_url" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" :alt="newsItem.title" />
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent"></div>
+        </figure>
+
+        <div v-if="newsItem.ai_processed && newsItem.summary" class="mb-10 p-6 sm:p-8 bg-indigo-50/50 dark:bg-indigo-900/10 border border-indigo-100 dark:border-indigo-500/20 rounded-3xl shadow-sm relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-indigo-500/5 blur-2xl rounded-full pointer-events-none"></div>
+          <h3 class="text-lg font-bold text-indigo-900 dark:text-indigo-300 mb-4 flex items-center gap-2 relative z-10">
+            <span class="text-xl">🤖</span>
+            {{ locale === 'ar' ? 'الملخص الذكي' : 'AI Summary' }}
+          </h3>
+          <p class="text-base sm:text-lg text-slate-700 dark:text-slate-300 leading-relaxed font-medium relative z-10">
+            {{ newsItem.summary }}
+          </p>
+        </div>
+
+        <div class="mt-8">
+          <h3 v-if="newsItem.ai_processed" class="text-xs font-bold text-slate-400 mb-6 uppercase tracking-widest border-b border-slate-200 dark:border-slate-800 pb-3 flex items-center gap-2">
+            <span>📰</span> {{ locale === 'ar' ? 'النص الأصلي للمقال (Original Content)' : 'Original Article' }}
+          </h3>
+          <article class="max-w-none">
+            <p class="text-lg sm:text-xl text-slate-600 dark:text-slate-400 leading-relaxed sm:leading-loose whitespace-pre-line font-medium text-left" dir="ltr">
+              {{ newsItem.content_en }}
+            </p>
+          </article>
+        </div>
+
+        <div class="mt-16 p-5 sm:p-6 bg-slate-100 dark:bg-[#151e32] border border-slate-200 dark:border-slate-800 rounded-2xl flex flex-col sm:flex-row gap-5 items-start shadow-sm">
+          <div class="w-12 h-12 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 flex items-center justify-center text-xl flex-shrink-0">
+            ⚖️
+          </div>
           <div>
-            <h1 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">
-              {{ locale === 'ar' ? 'آخر أخبار الكريبتو' : 'Latest Crypto News' }}
-            </h1>
-            <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1.5 font-medium">
-              {{ locale === 'ar' ? 'تغطية شاملة ومستمرة لأحداث السوق العالمية' : 'Comprehensive global coverage of crypto events' }}
+            <h4 class="text-sm font-bold text-slate-900 dark:text-slate-200 mb-2">
+              {{ locale === 'ar' ? 'تنويه قانوني (Disclaimer)' : 'Disclaimer' }}
+            </h4>
+            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed font-mono">
+              {{ locale === 'ar' 
+                ? 'تم سحب هذا المحتوى وتلخيصه آلياً عبر محرك الأخبار الذكي الخاص بالمنصة لأغراض إخبارية وتعليمية فقط. هذا النص لا يمثل أي توجيه مالي أو نصيحة استثمارية.' 
+                : 'This content has been automatically aggregated and summarized by the platform AI news engine for informational purposes only, and does not constitute financial advice.' 
+              }}
             </p>
           </div>
-          <span class="px-3.5 py-1.5 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 text-[11px] sm:text-xs rounded-xl font-bold animate-pulse self-start sm:self-auto flex-shrink-0">
-            {{ locale === 'ar' ? 'تحديث تلقائي (Live Feed)' : 'Live Feed' }}
-          </span>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          <div 
-            v-for="item in visibleNews" 
-            :key="item.id" 
-            class="bg-white dark:bg-[#151e32] border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-md hover:border-emerald-500/50 transition-all flex flex-col group cursor-pointer"
-          >
-            <div class="h-48 sm:h-52 overflow-hidden relative bg-slate-900 flex-shrink-0 flex items-center justify-center">
-              
-              <img 
-                v-if="item.image_url && !brokenImages.has(item.id)" 
-                :src="item.image_url" 
-                @error="handleImageError(item.id)" 
-                class="w-full h-full transition-transform duration-500 group-hover:scale-105"
-                :class="item.image_url.match(/logo|icon|symbol/i) ? 'object-contain p-6 opacity-90' : 'object-cover absolute inset-0'" 
-                :alt="item.title" 
-              />
-              
-              <div 
-                v-else 
-                class="absolute inset-0 w-full h-full bg-gradient-to-br from-slate-800 to-[#0b1121] flex items-center justify-center group-hover:scale-105 transition-transform duration-500"
-              >
-                <span class="text-6xl opacity-20 grayscale filter drop-shadow-md">📰</span>
-              </div>
-
-              <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/20 to-transparent opacity-80 pointer-events-none"></div>
-              
-              <span class="absolute bottom-3 right-3 bg-[#0f172a]/80 text-slate-200 text-[10px] px-2.5 py-1.5 rounded font-bold backdrop-blur-sm border border-white/10 z-10 pointer-events-none">
-                {{ item.source || 'Crypto News' }}
-              </span>
-            </div>
-
-            <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
-              <div class="space-y-3 min-w-0">
-                <span class="text-[10px] sm:text-[11px] text-slate-500 dark:text-slate-400 font-mono font-semibold block">
-                  {{ item.date || (locale === 'ar' ? 'منذ قليل' : 'Just now') }}
-                </span>
-                <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white group-hover:text-emerald-500 transition-colors leading-snug break-words line-clamp-2">
-                  {{ item.title }}
-                </h3>
-                <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed line-clamp-3 break-words font-medium">
-                  {{ item.content }}
-                </p>
-              </div>
-
-              <div class="pt-4 border-t border-slate-100 dark:border-slate-800/60 flex justify-between items-center gap-2">
-                <span class="text-[10px] px-2 py-1 rounded bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 font-mono font-bold">#Market</span>
-                <Link 
-                  :href="`/news/${item.id}`" 
-                  class="text-xs font-bold text-emerald-500 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors flex items-center gap-1 cursor-pointer flex-shrink-0"
-                >
-                  <span>{{ locale === 'ar' ? 'اقرأ المزيد ←' : 'Read More →' }}</span>
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div v-if="visibleCount < newsFeed.length" class="flex justify-center mt-12 pt-8">
-          <button 
-            @click="loadMore" 
-            class="px-8 py-3.5 rounded-xl bg-white dark:bg-[#151e32] border border-slate-200 dark:border-slate-800 text-sm font-bold text-slate-700 dark:text-slate-300 hover:border-emerald-500 hover:text-emerald-500 transition-all shadow-sm flex items-center gap-2 active:scale-95"
-          >
-            <span>{{ locale === 'ar' ? 'عرض المزيد من الأخبار' : 'Load More News' }}</span>
-            <span class="text-lg animate-bounce">↓</span>
-          </button>
         </div>
 
       </div>
@@ -101,31 +89,17 @@
 </template>
 
 <script setup>
-import HomeLayout from '@/layouts/HomeLayout.vue';
-import { Link, usePage, Head } from '@inertiajs/vue3';
-import { computed, ref } from 'vue'; 
+import HomeLayout from '@/layouts/HomeLayout.vue'; 
+import { Head, Link, usePage } from '@inertiajs/vue3';
+import { computed } from 'vue';
 
-const props = defineProps({
-  newsFeed: {
-    type: Array,
+defineProps({
+  newsItem: {
+    type: Object,
     required: true
   }
 });
 
 const page = usePage();
 const locale = computed(() => page.props.locale || 'ar');
-
-// 🟢 نظام صيد الصور المكسورة
-const brokenImages = ref(new Set());
-const handleImageError = (id) => {
-  brokenImages.value.add(id);
-};
-
-// 🟢 التحكم في العرض (تحميل 8 أخبار في كل مرة للحفاظ على تناسق الشبكة ذات الـ 4 أعمدة)
-const visibleCount = ref(8); 
-const visibleNews = computed(() => props.newsFeed.slice(0, visibleCount.value));
-
-const loadMore = () => {
-  visibleCount.value += 8; 
-};
 </script>
