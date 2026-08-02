@@ -96,11 +96,12 @@ class FetchCryptoNews extends Command
                                 $totalFallback++;
                             }
 
-                            News::create([
+                           News::create([
                                 'title_en'   => $title,
                                 'content_en' => $safe_content_en,
-                                'title_ar'   => null,
-                                'content_ar' => null,
+                                // 🟢 وضع نص مؤقت بدلاً من null لحين مرور الذكاء الاصطناعي عليها
+                                'title_ar'   => '[ جاري الترجمة والتلخيص بالذكاء الاصطناعي 🤖 ] ' . $title,
+                                'content_ar' => '[ سيتم إضافة الملخص الذكي قريباً ]',
                                 'image_url'  => $imageUrl,
                                 'source'     => $sourceName,
                                 'url'        => $link,
