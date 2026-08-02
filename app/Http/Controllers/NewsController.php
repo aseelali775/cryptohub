@@ -9,17 +9,33 @@ class NewsController extends Controller
 {
     public function index()
     {
-        // الكنترولر الآن مسؤول فقط عن جلب البيانات وعرضها بأقصى سرعة
-        $locale = app()->getLocale();
+        $newsFeed = News::latest()->get()->map(function($item) {
+            $locale = app()->getLocale();
+            $isArabic = ($locale === 'ar');
 
-        $newsFeed = News::latest()->get()->map(function($item) use ($locale) {
+            // إذا تمت معالجة الخبر بالذكاء الاصطناعي واللغة عربية، نستخدم العنوان المترجم
+            $title = ($isArabic && $item->ai_processed && $item->title_ar) 
+                        ? $item->title_ar 
+                        : $item->title_en;
+
+            // في اللغة العربية نعتمد على الملخص الذكي summary_ar بدلاً من النص الخام
+            $summary = $isArabic 
+                        ? ($item->summary_ar ?? $item->content_ar) 
+                        : $item->content_en;
+
             return [
-                'id'        => $item->id,
-                'title'     => $locale === 'ar' ? $item->title_ar : $item->title_en,
-                'content'   => $locale === 'ar' ? $item->content_ar : $item->content_en,
-                'image_url' => $item->image_url,
-                'source'    => $item->source,
-                'date'      => $item->created_at ? $item->created_at->diffForHumans() : ''
+                'id'           => $item->id,
+                'title'        => $title,
+                'summary'      => $summary,
+                'content'      => $summary,
+                'image_url'    => $item->image_url,
+                'source'       => $item->source,
+                'url'          => $item->url,
+                'sentiment'    => $item->sentiment ?? 'Neutral',
+                'category'     => $item->category ?? 'General',
+                'impact_score' => $item->impact_score ?? 5,
+                'ai_processed' => (bool) $item->ai_processed,
+                'date'         => $item->created_at ? $item->created_at->diffForHumans() : ''
             ];
         });
 
@@ -32,14 +48,29 @@ class NewsController extends Controller
     {
         $item = News::findOrFail($id);
         $locale = app()->getLocale();
+        $isArabic = ($locale === 'ar');
+
+        $title = ($isArabic && $item->ai_processed && $item->title_ar) 
+                    ? $item->title_ar 
+                    : $item->title_en;
+
+        $summary = $isArabic 
+                    ? ($item->summary_ar ?? $item->content_ar) 
+                    : $item->content_en;
 
         $newsItem = [
-            'id'        => $item->id,
-            'title'     => $locale === 'ar' ? $item->title_ar : $item->title_en,
-            'content'   => $locale === 'ar' ? $item->content_ar : $item->content_en,
-            'image_url' => $item->image_url,
-            'source'    => $item->source,
-            'date'      => $item->created_at ? $item->created_at->diffForHumans() : ''
+            'id'           => $item->id,
+            'title'        => $title,
+            'summary'      => $summary,
+            'content_en'   => $item->content_en,
+            'image_url'    => $item->image_url,
+            'source'       => $item->source,
+            'url'          => $item->url,
+            'sentiment'    => $item->sentiment ?? 'Neutral',
+            'category'     => $item->category ?? 'General',
+            'impact_score' => $item->impact_score ?? 5,
+            'ai_processed' => (bool) $item->ai_processed,
+            'date'         => $item->created_at ? $item->created_at->diffForHumans() : ''
         ];
 
         return Inertia::render('News/Show', [

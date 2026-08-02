@@ -93,7 +93,7 @@ $url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-lat
         ];
 
         try {
-            $response = Http::timeout(30)->post($url, $payload);
+           $response = Http::timeout(60)->post($url, $payload);
 
             if ($response->successful()) {
                 $responseText = $response->json()['candidates'][0]['content']['parts'][0]['text'] ?? '';
