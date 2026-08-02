@@ -104,7 +104,7 @@
             <div class="bg-white dark:bg-[#151e32] border border-slate-200 dark:border-slate-800 rounded-3xl p-5 shadow-sm flex flex-col gap-4">
               
               <Link :href="mainNews ? `/news/${mainNews.id}` : '#'" v-if="mainNews" class="relative w-full h-72 rounded-2xl overflow-hidden bg-slate-900 group cursor-pointer block shadow-inner">
-                <img :src="mainNews.image_url" class="absolute inset-0 w-full h-full object-cover z-0 group-hover:scale-105 transition-transform duration-700 opacity-60" :alt="locale === 'ar' ? (mainNews.title_ar || mainNews.title_en) : mainNews.title_en" />
+                <img :src="mainNews.image_url" class="absolute inset-0 w-full h-full object-cover z-0 group-hover:scale-105 transition-transform duration-700 opacity-60" :alt="mainNews.title || mainNews.title_en" />
                 <div class="absolute inset-0 bg-gradient-to-t from-[#0b1121] via-[#0b1121]/70 to-transparent z-10"></div>
                 
                 <div class="absolute bottom-0 inset-x-0 p-5 z-20">
@@ -116,15 +116,15 @@
                     <span v-else-if="mainNews.sentiment === 'Neutral'" class="inline-block px-2.5 py-1 rounded bg-slate-500/80 backdrop-blur-sm text-white text-[10px] font-bold border border-slate-400/30">⚪ محايد</span>
                   </div>
 
-                  <h4 class="text-lg sm:text-xl font-bold text-white mb-2 leading-snug group-hover:text-emerald-400 transition-colors line-clamp-2">
-                    {{ locale === 'ar' ? (mainNews.title_ar || mainNews.title_en) : mainNews.title_en }}
+                  <h4 class="text-lg sm:text-xl font-bold text-white mb-2 leading-snug group-hover:text-emerald-400 transition-colors line-clamp-2 text-left" dir="ltr">
+                    {{ mainNews.title || mainNews.title_en }}
                   </h4>
                   
-                  <p v-if="locale === 'ar' && mainNews.summary_ar" class="text-xs sm:text-sm text-slate-300 line-clamp-2 mb-2 font-medium leading-relaxed">
-                    {{ mainNews.summary_ar }}
+                  <p v-if="mainNews.summary || mainNews.content_en" class="text-xs sm:text-sm text-slate-300 line-clamp-2 mb-2 font-medium leading-relaxed text-left" dir="ltr">
+                    {{ mainNews.summary || mainNews.content_en }}
                   </p>
 
-                  <div class="flex items-center gap-4 mt-2 text-xs font-bold text-slate-400">
+                  <div class="flex items-center gap-4 mt-2 text-xs font-bold text-slate-400" :dir="locale === 'ar' ? 'rtl' : 'ltr'">
                     <span class="text-emerald-500">{{ t('readMore') }}</span>
                     <span>• {{ mainNews.source }}</span>
                     <span v-if="mainNews.impact_score" class="flex items-center gap-1" title="تأثير الخبر على السوق">
@@ -137,15 +137,15 @@
               <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-2" v-if="subNews && subNews.length">
                 <Link :href="`/news/${news.id}`" v-for="news in subNews" :key="news.id" class="bg-slate-50 dark:bg-[#0f172a] p-4 rounded-2xl border border-slate-100 dark:border-slate-800 hover:border-emerald-500/30 transition-all cursor-pointer flex flex-col h-full group relative overflow-hidden">
                   
-                  <div class="flex justify-between items-start mb-3 relative z-10">
+                  <div class="flex justify-between items-start mb-3 relative z-10" :dir="locale === 'ar' ? 'rtl' : 'ltr'">
                     <span class="inline-block px-2 py-1 rounded bg-white dark:bg-slate-800 text-slate-500 dark:text-slate-400 text-[10px] font-bold border border-slate-200 dark:border-slate-700 shadow-sm">{{ news.source }}</span>
                     
                     <span v-if="news.sentiment === 'Bullish'" class="text-xs drop-shadow-md animate-pulse" title="خبر صعودي">🟢</span>
                     <span v-else-if="news.sentiment === 'Bearish'" class="text-xs drop-shadow-md animate-pulse" title="خبر هبوطي">🔴</span>
                   </div>
                   
-                  <h5 class="text-xs font-bold text-slate-900 dark:text-white leading-relaxed mb-2 flex-1 group-hover:text-emerald-500 transition-colors relative z-10 line-clamp-3">
-                    {{ locale === 'ar' ? (news.title_ar || news.title_en) : news.title_en }}
+                  <h5 class="text-xs font-bold text-slate-900 dark:text-white leading-relaxed mb-2 flex-1 group-hover:text-emerald-500 transition-colors relative z-10 line-clamp-3 text-left" dir="ltr">
+                    {{ news.title || news.title_en }}
                   </h5>
                 </Link>
               </div>

@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Log;
 class ProcessNewsWithAI extends Command
 {
     protected $signature = 'news:process-ai';
-    protected $description = 'Process un-translated crypto news using Gemini API (Summarize, Sentiment, Categorize).';
+    protected $description = 'Auto-Blogging: Rewrite crypto news using Gemini AI to generate 100% unique English SEO content.';
 
     public function handle()
     {
@@ -20,61 +20,70 @@ class ProcessNewsWithAI extends Command
             return;
         }
 
-        $this->info('Starting AI News Processor...');
+        $this->info('Starting CryptoHub AI Journalist...');
 
-        // 👈 3. تقليل العدد إلى 2 أخبار لضمان الاستقرار في البداية
+        // سحب الأخبار التي لم تعالج بعد
         $newsList = News::where('ai_processed', false)->limit(2)->get();
 
-        if ($newsList->isEmpty()) {$this->info('No new articles to process. Resting... ☕');
+        if ($newsList->isEmpty()) {$this->info('No new articles for the AI to rewrite. Resting... ☕');
             return;
         }
 
-        foreach ($newsList as $news) {$this->info("Processing AI for: {$news->title_en}");
+        foreach ($newsList as $news) {$this->info("AI is rewriting: {$news->title_en}");
             
-            // 👈 4. اقتطاع النص إلى 8000 حرف لحماية الـ Tokens
+            // اقتطاع النص الأصلي لحماية التوكنز
             $truncatedContent = mb_substr($news->content_en, 0, 8000);
 
             $result = $this->analyzeWithGemini($news->title_en, $truncatedContent,$apiKey);
 
-            if ($result && is_array($result)) {$news->update([
-                    'title_ar'     => $result['title_ar'] ?? $news->title_ar,
-                    'summary_ar'   => $result['summary_ar'] ?? null,
+            if ($result && is_array($result)) {
+                // تحديث الحقول الجديدة مع الاحتفاظ بالأصلية
+                $news->update([
+                    'ai_title'     => $result['ai_title'] ?? null,
+                    'ai_content'   => $result['ai_content'] ?? null,
+                    'ai_summary'   => $result['ai_summary'] ?? null,
                     'sentiment'    => $result['sentiment'] ?? 'Neutral',
                     'category'     => $result['category'] ?? 'General',
                     'impact_score' => $result['impact_score'] ?? 5,
                     'ai_processed' => true,
                 ]);
-                $this->info("✅ Successfully processed and updated: {$news->id}");
+                $this->info("✅ Successfully rewritten and saved: ID {$news->id}");
             } else {
                 $this->error("⚠️ Failed to parse AI response for ID: {$news->id}");
             }
 
-            sleep(3); // استراحة لتجنب Rate Limit
+            sleep(5); // حماية الحصة المجانية
         }
 
-        $this->info('AI Processing Cycle Completed. 🚀');
+        $this->info('AI Journalism Cycle Completed. 🚀');
     }
 
     private function analyzeWithGemini($title, $content,$apiKey)
     {
-$url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key={$apiKey}";
-        // 👈 1. تم إزالة طلب ترجمة المقال الكامل (content_ar) للحفاظ على الموارد
-        $prompt = "You are an expert financial crypto analyst and translator.
-        Analyze the following English crypto news article.
+        // استخدام الإصدار الثابت بناءً على توصيتك
+        $url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={$apiKey}";
+
+        // الـ Prompt العبقري الخاص بك
+        $prompt = "You are the lead crypto journalist for CryptoHub.
+        Rewrite the provided cryptocurrency news article into a professional English news article.
         
-        Tasks:
-        1. Translate the title accurately to Arabic.
-        2. Write a highly engaging, professional Arabic summary (max 3 sentences).
-        3. Determine the market sentiment (Bullish, Bearish, or Neutral).
-        4. Categorize it (e.g., Bitcoin, Ethereum, Regulation, DeFi, Mining, Exchange).
-        5. Assign an impact score from 1 to 10 (1=Low, 10=High impact on the market).
+        Rules:
+        - English language only.
+        - Do not translate word by word.
+        - Rewrite the entire article with a new structure and professional journalistic style.
+        - Preserve verified facts, names, numbers, dates and quotes.
+        - Do not invent information.
+        - Do not mention the original source in the rewritten content.
+        - Optimize the title for SEO.
+        - Make the article suitable for publication on a global crypto news website.
         
         CRITICAL INSTRUCTION: Return ONLY a valid JSON object. Do not wrap it in markdown blockquotes like ```json.
         
-        JSON Format required:
+        Generate:
         {
-          \"title_ar\": \"translated title here\",
-          \"summary_ar\": \"arabic summary here\",
+          \"ai_title\": \"SEO optimized title here\",
+          \"ai_content\": \"Full rewritten article (600-900 words when enough information exists) here\",
+          \"ai_summary\": \"Short, engaging summary here\",
           \"sentiment\": \"Bullish/Bearish/Neutral\",
           \"category\": \"category here\",
           \"impact_score\": integer
@@ -93,7 +102,7 @@ $url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-lat
         ];
 
         try {
-           $response = Http::timeout(60)->post($url, $payload);
+            $response = Http::timeout(60)->post($url, $payload);
 
             if ($response->successful()) {
                 $responseText = $response->json()['candidates'][0]['content']['parts'][0]['text'] ?? '';
@@ -101,14 +110,11 @@ $url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-lat
                 $cleanJson = preg_replace('/```json\s*(.*?)\s*```/s', '$1', $responseText);
                 $cleanJson = trim($cleanJson);
 
-                // 👈 2. حماية صارمة للـ JSON وإلتقاط أخطاء فك التشفير
                 $data = json_decode($cleanJson, true);
                 if (json_last_error() !== JSON_ERROR_NONE) {
                     Log::error('Invalid JSON from Gemini: ' . json_last_error_msg());
-                    Log::error('Raw Gemini Response: ' . $responseText);
                     return null;
                 }
-
                 return $data;
             }
             

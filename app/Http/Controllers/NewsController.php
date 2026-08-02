@@ -10,24 +10,12 @@ class NewsController extends Controller
     public function index()
     {
         $newsFeed = News::latest()->get()->map(function($item) {
-            $locale = app()->getLocale();
-            $isArabic = ($locale === 'ar');
-
-            // إذا تمت معالجة الخبر بالذكاء الاصطناعي واللغة عربية، نستخدم العنوان المترجم
-            $title = ($isArabic && $item->ai_processed && $item->title_ar) 
-                        ? $item->title_ar 
-                        : $item->title_en;
-
-            // في اللغة العربية نعتمد على الملخص الذكي summary_ar بدلاً من النص الخام
-            $summary = $isArabic 
-                        ? ($item->summary_ar ?? $item->content_ar) 
-                        : $item->content_en;
-
             return [
                 'id'           => $item->id,
-                'title'        => $title,
-                'summary'      => $summary,
-                'content'      => $summary,
+                // إذا تمت المعالجة نرسل العنوان الجديد، وإلا القديم
+                'title'        => $item->ai_processed ? $item->ai_title : $item->title_en,
+                'summary'      => $item->ai_processed ? $item->ai_summary : mb_substr($item->content_en, 0, 150) . '...',
+                'content'      => $item->ai_processed ? $item->ai_content : $item->content_en,
                 'image_url'    => $item->image_url,
                 'source'       => $item->source,
                 'url'          => $item->url,
@@ -47,22 +35,12 @@ class NewsController extends Controller
     public function show($id)
     {
         $item = News::findOrFail($id);
-        $locale = app()->getLocale();
-        $isArabic = ($locale === 'ar');
-
-        $title = ($isArabic && $item->ai_processed && $item->title_ar) 
-                    ? $item->title_ar 
-                    : $item->title_en;
-
-        $summary = $isArabic 
-                    ? ($item->summary_ar ?? $item->content_ar) 
-                    : $item->content_en;
 
         $newsItem = [
             'id'           => $item->id,
-            'title'        => $title,
-            'summary'      => $summary,
-            'content_en'   => $item->content_en,
+            'title'        => $item->ai_processed ? $item->ai_title : $item->title_en,
+            'summary'      => $item->ai_processed ? $item->ai_summary : null,
+            'content'      => $item->ai_processed ? $item->ai_content : $item->content_en,
             'image_url'    => $item->image_url,
             'source'       => $item->source,
             'url'          => $item->url,

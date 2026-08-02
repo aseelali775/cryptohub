@@ -2,7 +2,7 @@
   <HomeLayout>
     <Head>
       <title>{{ newsItem.title }} | CryptoHub</title>
-      <meta name="description" :content="newsItem.summary || newsItem.content_en" />
+      <meta name="description" :content="newsItem.summary || newsItem.content" />
       <meta property="og:image" :content="newsItem.image_url" />
     </Head>
 
@@ -19,7 +19,7 @@
 
         <header class="space-y-6 mb-10">
           
-          <div class="flex flex-wrap items-center gap-2 sm:gap-3 text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-mono">
+          <div class="flex flex-wrap items-center gap-2 sm:gap-3 text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-mono" :dir="locale === 'ar' ? 'rtl' : 'ltr'">
             <span class="px-3 py-1.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 font-bold tracking-wider">
               {{ newsItem.source }}
             </span>
@@ -34,7 +34,7 @@
             <span v-if="newsItem.impact_score" class="px-2 py-1.5 rounded-md bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20 font-bold" :title="locale === 'ar' ? 'تأثير الخبر على السوق' : 'Impact Score'">⚡ {{ newsItem.impact_score }}/10</span>
           </div>
 
-          <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 dark:text-white leading-[1.4] tracking-tight">
+          <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 dark:text-white leading-[1.4] tracking-tight text-left" dir="ltr">
             {{ newsItem.title }}
           </h1>
         </header>
@@ -46,27 +46,27 @@
 
         <div v-if="newsItem.ai_processed && newsItem.summary" class="mb-10 p-6 sm:p-8 bg-indigo-50/50 dark:bg-indigo-900/10 border border-indigo-100 dark:border-indigo-500/20 rounded-3xl shadow-sm relative overflow-hidden">
           <div class="absolute top-0 right-0 w-32 h-32 bg-indigo-500/5 blur-2xl rounded-full pointer-events-none"></div>
-          <h3 class="text-lg font-bold text-indigo-900 dark:text-indigo-300 mb-4 flex items-center gap-2 relative z-10">
+          <h3 class="text-lg font-bold text-indigo-900 dark:text-indigo-300 mb-4 flex items-center gap-2 relative z-10" :dir="locale === 'ar' ? 'rtl' : 'ltr'">
             <span class="text-xl">🤖</span>
             {{ locale === 'ar' ? 'الملخص الذكي' : 'AI Summary' }}
           </h3>
-          <p class="text-base sm:text-lg text-slate-700 dark:text-slate-300 leading-relaxed font-medium relative z-10">
+          <p class="text-base sm:text-lg text-slate-700 dark:text-slate-300 leading-relaxed font-medium relative z-10 text-left" dir="ltr">
             {{ newsItem.summary }}
           </p>
         </div>
 
         <div class="mt-8">
-          <h3 v-if="newsItem.ai_processed" class="text-xs font-bold text-slate-400 mb-6 uppercase tracking-widest border-b border-slate-200 dark:border-slate-800 pb-3 flex items-center gap-2">
-            <span>📰</span> {{ locale === 'ar' ? 'النص الأصلي للمقال (Original Content)' : 'Original Article' }}
+          <h3 v-if="newsItem.ai_processed" class="text-xs font-bold text-slate-400 mb-6 uppercase tracking-widest border-b border-slate-200 dark:border-slate-800 pb-3 flex items-center gap-2" :dir="locale === 'ar' ? 'rtl' : 'ltr'">
+            <span>📰</span> {{ locale === 'ar' ? 'المقال الكامل (Full Article)' : 'Full Article' }}
           </h3>
           <article class="max-w-none">
             <p class="text-lg sm:text-xl text-slate-600 dark:text-slate-400 leading-relaxed sm:leading-loose whitespace-pre-line font-medium text-left" dir="ltr">
-              {{ newsItem.content_en }}
+              {{ newsItem.content }}
             </p>
           </article>
         </div>
 
-        <div class="mt-16 p-5 sm:p-6 bg-slate-100 dark:bg-[#151e32] border border-slate-200 dark:border-slate-800 rounded-2xl flex flex-col sm:flex-row gap-5 items-start shadow-sm">
+        <div class="mt-16 p-5 sm:p-6 bg-slate-100 dark:bg-[#151e32] border border-slate-200 dark:border-slate-800 rounded-2xl flex flex-col sm:flex-row gap-5 items-start shadow-sm" :dir="locale === 'ar' ? 'rtl' : 'ltr'">
           <div class="w-12 h-12 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 flex items-center justify-center text-xl flex-shrink-0">
             ⚖️
           </div>
@@ -76,8 +76,8 @@
             </h4>
             <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed font-mono">
               {{ locale === 'ar' 
-                ? 'تم سحب هذا المحتوى وتلخيصه آلياً عبر محرك الأخبار الذكي الخاص بالمنصة لأغراض إخبارية وتعليمية فقط. هذا النص لا يمثل أي توجيه مالي أو نصيحة استثمارية.' 
-                : 'This content has been automatically aggregated and summarized by the platform AI news engine for informational purposes only, and does not constitute financial advice.' 
+                ? 'تم إنشاء هذا المحتوى آلياً عبر محرك الذكاء الاصطناعي الخاص بالمنصة لأغراض إخبارية وتعليمية فقط. هذا النص لا يمثل أي توجيه مالي أو نصيحة استثمارية.' 
+                : 'This content has been automatically generated by the platform AI engine for informational purposes only, and does not constitute financial advice.' 
               }}
             </p>
           </div>
