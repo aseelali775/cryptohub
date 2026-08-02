@@ -10,9 +10,9 @@ class News extends Model
 {
     use HasFactory, Prunable; // 👈 تفعيل الميزة
 
-    protected $fillable = [
-        'title_en', 'title_ar', 'content_en', 'content_ar', 'image_url', 'source',
-    ];
+   protected $fillable = [
+    'title_en', 'title_ar', 'content_en', 'content_ar', 'image_url', 'source', 'url',
+];
 
     /**
      * تحديد شرط الحذف التلقائي

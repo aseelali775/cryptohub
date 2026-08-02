@@ -4,114 +4,175 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str; // 👈 استدعاء مكتبة Str
 use App\Models\News;
-use Stichoza\GoogleTranslate\GoogleTranslate;
+use andreskrey\Readability\Readability;
+use andreskrey\Readability\Configuration;
+use andreskrey\Readability\ParseException;
 
 class FetchCryptoNews extends Command
 {
     protected $signature = 'crypto:fetch-news';
-    protected $description = 'Fetch crypto news via RSS, extract images dynamically, translate, and fallback gracefully.';
+    protected $description = 'Fetch crypto news from multiple sources, extract full articles, and display success rate.';
+
+    protected $headers = [
+        'User-Agent'      => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Accept'          => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+        'Accept-Language' => 'en-US,en;q=0.5',
+    ];
 
     public function handle()
     {
-        $this->info('Starting automated news fetcher (Multi-Source Image Extractor Mode)...');
+        $this->info('Starting automated news fetcher (Phase 2.2 - Enterprise Multi-Source Mode)...');
 
-        try {
-            $response = Http::timeout(15)->get('https://api.rss2json.com/v1/api.json', [
-                'rss_url' => 'https://cointelegraph.com/rss'
-            ]);
+        $sources = [
+            'CoinTelegraph'   => 'https://cointelegraph.com/rss',
+            'CoinDesk'        => 'https://www.coindesk.com/arc/outboundfeeds/rss/',
+            'Decrypt'         => 'https://decrypt.co/feed',
+            'BitcoinMagazine' => 'https://bitcoinmagazine.com/feed', // 👈 1. تصحيح الرابط
+        ];
 
-            if ($response->successful() && $response->json()['status'] === 'ok') {
-                $newsItems = $response->json()['items'];
+        $totalSuccess = 0;
+        $totalFallback = 0;
+
+        foreach ($sources as $sourceName => $rssUrl) {
+            $this->info("Fetching RSS from: {$sourceName}");
+
+            try {
+                $xmlString = Http::timeout(20)->get($rssUrl)->body();
+                $xml = @simplexml_load_string($xmlString, 'SimpleXMLElement', LIBXML_NOCDATA);
                 
-                // 🟢 ضمان ترتيب الأخبار من الأحدث للأقدم
-                usort($newsItems, function($a, $b) {
-                    return strtotime($b['pubDate'] ?? 'now') <=> strtotime($a['pubDate'] ?? 'now');
-                });
+                if ($xml && isset($xml->channel->item)) {
+                    $json = json_encode($xml->channel->item);
+                    $newsItems = json_decode($json, true);
+                    
+                    $count = 0;
 
-                $this->info("RSS returned: " . count($newsItems) . " articles (Sorted by newest)");
-                
-                $count = 0;
+                    if (isset($newsItems['title'])) {
+                        $newsItems = [$newsItems];
+                    }
 
-                foreach ($newsItems as $item) {
-                    if ($count >= 5) break;
+                    usort($newsItems, function($a, $b) {
+                        return strtotime($b['pubDate'] ?? 'now') <=> strtotime($a['pubDate'] ?? 'now');
+                    });
 
-                    $exists = News::where('title_en', $item['title'])->exists();
+                    foreach ($newsItems as $item) {
+                        if ($count >= 3) break; 
 
-                    if (!$exists) {
-                        $this->info("Processing: " . $item['title']);
-                        
-                        try {
-                            $content_en = strip_tags($item['description'] ?? $item['content'] ?? '');
-                            $safe_content_en = mb_substr($content_en, 0, 1500); 
+                        $title = is_array($item['title']) ? ($item['title'][0] ?? '') : $item['title'];
+                        $link = is_array($item['link']) ? ($item['link'][0] ?? '') : $item['link'];
+
+                        if (empty($title) || empty($link)) continue;
+
+                        $exists = News::where('url', $link)->orWhere('title_en', $title)->exists();
+
+                        if (!$exists) {
+                            $this->info("Processing: " . $title);
                             
-                            // 🟢 استخراج الصورة باستخدام الدالة الذكية متعددة المصادر
                             $imageUrl = $this->extractImage($item);
+                            $fullContent = $this->extractFullArticle($link);
+                            $isSuccess = $fullContent ? true : false;
 
-                            $tr = new GoogleTranslate('ar'); 
+                            if (!$isSuccess) {
+                                $fullContent = strip_tags(is_array($item['description'] ?? '') ? ($item['description'][0] ?? '') : ($item['description'] ?? ''));
+                            }
 
-                            try {
-                                $title_ar = $tr->translate($item['title']);
-                                $content_ar = $tr->translate($safe_content_en);
-                            } catch (\Exception $e) {
-                                $this->warn("⚠️ Translation failed. Saving English version as fallback.");
-                                $title_ar = '[EN] ' . $item['title']; 
-                                $content_ar = $safe_content_en; 
+                            // 👈 3. الحد الأقصى للنص 15000 حرف لتجنب أخطاء قاعدة البيانات
+                            $safe_content_en = Str::limit(trim(preg_replace('/\s+/', ' ', $fullContent)), 15000, '');
+
+                            // 👈 2. فلترة المقالات الفارغة والقصيرة جداً
+                            if (strlen($safe_content_en) < 100) {
+                                Log::warning("Skipped (Too Short): {$sourceName} - {$link}");
+                                continue; 
+                            }
+
+                            // تسجيل الإحصائية فقط إذا اجتاز الخبر فلتر الطول
+                            if ($isSuccess) {
+                                Log::info("Extraction Success: {$sourceName} - {$link}");
+                                $totalSuccess++;
+                            } else {
+                                Log::warning("Extraction Fallback: {$sourceName} - {$link}");
+                                $totalFallback++;
                             }
 
                             News::create([
-                                'title_en'   => $item['title'],
-                                'title_ar'   => $title_ar,
+                                'title_en'   => $title,
                                 'content_en' => $safe_content_en,
-                                'content_ar' => $content_ar,
-                                'image_url'  => $imageUrl, // 👈 حفظ الرابط المستخرج بدقة
-                                'source'     => 'CoinTelegraph',
+                                'title_ar'   => null,
+                                'content_ar' => null,
+                                'image_url'  => $imageUrl,
+                                'source'     => $sourceName,
+                                'url'        => $link,
                             ]);
                             
                             $count++;
-                            
-                        } catch (\Exception $e) {
-                            $this->error("Failed to save article: " . $e->getMessage());
-                        } finally {
-                            sleep(5);
+                            usleep(500000); 
                         }
                     }
                 }
-
-                $this->info("Done! {$count} new articles processed with images successfully. ✅");
-            } else {
-                $this->error('Failed to fetch RSS Feed. API Status was not OK.');
+            } catch (\Exception $e) {
+                $this->error("Failed to process source {$sourceName}: " . $e->getMessage());
+                Log::error("Scraper Error ({$sourceName}): " . $e->getMessage());
             }
-        } catch (\Exception $e) {
-            $this->error('Critical Error during fetching: ' . $e->getMessage());
         }
+
+        // 👈 4. حساب وعرض نسبة النجاح المئوية
+        $total = $totalSuccess + $totalFallback;
+        $rate = $total > 0 ? round(($totalSuccess / $total) * 100, 2) : 0;
+
+        $this->info("====================================");
+        $this->info("Extraction Success : {$totalSuccess} ✅");
+        $this->warn("Extraction Fallback: {$totalFallback} ⚠️");
+        $this->info("Success Rate       : {$rate}% 📊");
+        $this->info("====================================");
     }
 
-    /**
-     * 🟢 دالة هندسية متقدمة لاستخراج صورة الخبر من عدة مصادر محتملة في الـ RSS
-     */
     private function extractImage($item)
     {
-        // 1. البحث في الحقل المباشر thumbnail
-        if (!empty($item['thumbnail'])) {
-            return $item['thumbnail'];
+        if (isset($item['enclosure']['@attributes']['url'])) {
+            return $item['enclosure']['@attributes']['url'];
         }
-
-        // 2. البحث في حقل الـ enclosure
-        if (!empty($item['enclosure']['link'])) {
-            return $item['enclosure']['link'];
-        }
-
-        // 3. استخراج أول رابط صورة من كود الـ HTML داخل الوصف أو المحتوى
-        $htmlContent = $item['description'] ?? $item['content'] ?? '';
+        $htmlContent = is_array($item['description'] ?? '') ? ($item['description'][0] ?? '') : ($item['description'] ?? '');
         if (!empty($htmlContent)) {
             preg_match('/<img[^>]+src="([^">]+)"/', $htmlContent, $matches);
-            if (!empty($matches[1])) {
-                return $matches[1];
-            }
+            if (!empty($matches[1])) return $matches[1];
         }
-
-        // 4. صورة افتراضية في حال لم يتم العثور على أي صورة نهائياً
         return 'https://cryptologos.cc/logos/bitcoin-btc-logo.png';
+    }
+
+    private function extractFullArticle($url)
+    {
+        try {
+            $response = Http::withHeaders($this->headers)->timeout(20)->get($url);
+            $html = $response->body();
+            
+            if (
+                str_contains($html, 'Cloudflare') ||
+                str_contains($html, 'Access Denied') ||
+                str_contains($html, 'verify you are human') ||
+                str_contains($html, 'Just a moment...')
+            ) {
+                return null;
+            }
+            
+            $configuration = new Configuration();
+            $configuration->setFixRelativeURLs(true);
+            $configuration->setOriginalURL($url);
+
+            $readability = new Readability($configuration);
+            
+            if (!$readability->parse($html)) {
+                return null;
+            }
+            
+            $content = trim(strip_tags($readability->getContent()));
+            return strlen($content) > 200 ? $content : null;
+            
+        } catch (ParseException $e) {
+            return null; 
+        } catch (\Exception $e) {
+            return null; 
+        }
     }
 }
