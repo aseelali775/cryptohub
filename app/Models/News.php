@@ -14,6 +14,7 @@ class News extends Model
     'title_en', 'title_ar', 'content_en', 'content_ar', 'image_url', 'source', 'url',
 ];
 
+
     /**
      * تحديد شرط الحذف التلقائي
      */
