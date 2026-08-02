@@ -11,8 +11,9 @@ class News extends Model
     use HasFactory, Prunable; // 👈 تفعيل الميزة
 
    protected $fillable = [
-    'title_en', 'title_ar', 'content_en', 'content_ar', 'image_url', 'source', 'url',
-];
+        'title_en', 'title_ar', 'content_en', 'content_ar', 'image_url', 
+        'source', 'url', 'summary_ar', 'sentiment', 'category', 'impact_score', 'ai_processed'
+    ];
 
 
     /**
