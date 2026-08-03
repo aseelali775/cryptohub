@@ -8,16 +8,14 @@ Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote')->hourly();
 
-// 🟢 تم التصحيح: اسم الأمر الآن يتطابق تماماً مع الملف
-// 🟢 تم التعديل: كل 10 دقائق لتجنب الحظر من مزودي واجهات الـ API
-Schedule::command('crypto:fetch-prices')->everyTenMinutes();
+// سحب الأسعار كل 10 دقائق (محمي من التداخل)
+Schedule::command('crypto:fetch-prices')->everyTenMinutes()->withoutOverlapping();
 
-// 🟢 أمر سحب الأخبار يعمل كل 30 دقيقة
-Schedule::command('crypto:fetch-news')->everyThirtyMinutes();
+// سحب الأخبار من المصادر كل 30 دقيقة (محمي من التداخل)
+Schedule::command('crypto:fetch-news')->everyThirtyMinutes()->withoutOverlapping();
 
-/// معالجة الأخبار بالذكاء الاصطناعي كل 10 دقائق 
-// (لكي يعالج أي خبر جديد يتم سحبه بسرعة وبدون أن يتراكم)
-Schedule::command('news:process-ai')->everyTenMinutes();
+// معالجة الأخبار بالذكاء الاصطناعي كل 10 دقائق (ضروري جداً حمايته من التداخل)
+Schedule::command('news:process-ai')->everyTenMinutes()->withoutOverlapping();
 
 // عامل النظافة اليومي
 Schedule::command('model:prune')->daily();
