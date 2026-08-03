@@ -55,7 +55,7 @@ class ProcessNewsWithAI extends Command
 
     private function analyzeWithGemini($title, $content,$apiKey)
     {
-        $url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={$apiKey}";
+        $url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key={$apiKey}";
 
         $prompt = "Analyze the provided cryptocurrency news article.
         Generate a professional Arabic journalistic rewrite and market analysis.
