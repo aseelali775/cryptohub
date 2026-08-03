@@ -4,24 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Prunable; // 👈 استدعاء ميزة التنظيف
+use Illuminate\Database\Eloquent\Prunable;
 
 class News extends Model
 {
-    use HasFactory, Prunable; // 👈 تفعيل الميزة
+    use HasFactory, Prunable;
 
-   protected $fillable = [
+    protected $fillable = [
         'title_en', 'title_ar', 'content_en', 'content_ar', 'image_url', 
-        'source', 'url', 'summary_ar', 'sentiment', 'category', 'impact_score', 'ai_processed'
+        'source', 'url', 'summary_ar', 'why_it_matters_ar', 'sentiment', 'category', 'impact_score', 'ai_processed'
     ];
 
-
-    /**
-     * تحديد شرط الحذف التلقائي
-     */
     public function prunable()
     {
-        // 🟢 تنظيف الأخبار التي مضى على إنشائها أكثر من 30 يوماً
         return static::where('created_at', '<', now()->subDays(30));
     }
 }

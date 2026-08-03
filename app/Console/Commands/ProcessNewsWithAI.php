@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Log;
 class ProcessNewsWithAI extends Command
 {
     protected $signature = 'news:process-ai';
-    protected $description = 'Auto-Blogging: Rewrite crypto news using Gemini AI to generate 100% unique English SEO content.';
+    protected $description = 'Analyze crypto news to generate Arabic rewrites and market analysis using Gemini AI.';
 
     public function handle()
     {
@@ -20,39 +20,34 @@ class ProcessNewsWithAI extends Command
             return;
         }
 
-        $this->info('Starting CryptoHub AI Journalist...');
+        $this->info('Starting CryptoHub AI Arabic Journalist...');
 
-        // سحب الأخبار التي لم تعالج بعد
-        $newsList = News::where('ai_processed', false)->limit(2)->get();
+        $newsList = News::where('ai_processed', false)->limit(5)->get();
 
         if ($newsList->isEmpty()) {$this->info('No new articles for the AI to rewrite. Resting... ☕');
             return;
         }
 
-        foreach ($newsList as $news) {$this->info("AI is rewriting: {$news->title_en}");
+        foreach ($newsList as $news) {$this->info("AI is processing: {$news->title_en}");
             
-            // اقتطاع النص الأصلي لحماية التوكنز
-            $truncatedContent = mb_substr($news->content_en, 0, 8000);
+            $truncatedContent = mb_substr($news->content_en, 0, 8000);$result = $this->analyzeWithGemini($news->title_en, $truncatedContent,$apiKey);
 
-            $result = $this->analyzeWithGemini($news->title_en, $truncatedContent,$apiKey);
-
-            if ($result && is_array($result)) {
-                // تحديث الحقول الجديدة مع الاحتفاظ بالأصلية
-                $news->update([
-                    'ai_title'     => $result['ai_title'] ?? null,
-                    'ai_content'   => $result['ai_content'] ?? null,
-                    'ai_summary'   => $result['ai_summary'] ?? null,
-                    'sentiment'    => $result['sentiment'] ?? 'Neutral',
-                    'category'     => $result['category'] ?? 'General',
-                    'impact_score' => $result['impact_score'] ?? 5,
-                    'ai_processed' => true,
+            if ($result && is_array($result)) {$news->update([
+                    'title_ar'          => $result['title_ar'] ?? null,
+                    'content_ar'        => $result['content_ar'] ?? null,
+                    'summary_ar'        => $result['summary_ar'] ?? null,
+                    'why_it_matters_ar' => $result['why_it_matters_ar'] ?? null,
+                    'sentiment'         => $result['sentiment'] ?? 'Neutral',
+                    'category'          => $result['category'] ?? 'General',
+                    'impact_score'      => $result['impact_score'] ?? 5,
+                    'ai_processed'      => true,
                 ]);
-                $this->info("✅ Successfully rewritten and saved: ID {$news->id}");
+                $this->info("✅ Successfully analyzed and saved: ID {$news->id}");
             } else {
                 $this->error("⚠️ Failed to parse AI response for ID: {$news->id}");
             }
 
-            sleep(5); // حماية الحصة المجانية
+            sleep(5);
         }
 
         $this->info('AI Journalism Cycle Completed. 🚀');
@@ -60,69 +55,50 @@ class ProcessNewsWithAI extends Command
 
     private function analyzeWithGemini($title, $content,$apiKey)
     {
-        // استخدام الإصدار الثابت بناءً على توصيتك
-       $url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key={$apiKey}";
+        $url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={$apiKey}";
 
-        // الـ Prompt العبقري الخاص بك
-        $prompt = "You are the lead crypto journalist for CryptoHub.
-        Rewrite the provided cryptocurrency news article into a professional English news article.
+        $prompt = "Analyze the provided cryptocurrency news article.
+        Generate a professional Arabic journalistic rewrite and market analysis.
+        Keep the original English article unchanged (do not output English text).
         
         Rules:
-        - English language only.
-        - Do not translate word by word.
-        - Rewrite the entire article with a new structure and professional journalistic style.
+        - Do not translate word by word. Write a fluent, professional Arabic news article.
         - Preserve verified facts, names, numbers, dates and quotes.
-        - Do not invent information.
-        - Do not mention the original source in the rewritten content.
-        - Optimize the title for SEO.
-        - Make the article suitable for publication on a global crypto news website.
+        - Write a complete article. Expand the content only when sufficient information is available. Do not invent facts.
         
-        CRITICAL INSTRUCTION: Return ONLY a valid JSON object. Do not wrap it in markdown blockquotes like ```json.
-        
-        Generate:
+        Generate a valid JSON object exactly like this:
         {
-          \"ai_title\": \"SEO optimized title here\",
-          \"ai_content\": \"Full rewritten article (600-900 words when enough information exists) here\",
-          \"ai_summary\": \"Short, engaging summary here\",
-          \"sentiment\": \"Bullish/Bearish/Neutral\",
-          \"category\": \"category here\",
-          \"impact_score\": integer
+          \"title_ar\": \"SEO optimized title in Arabic\",
+          \"content_ar\": \"Full professional article rewritten in Arabic\",
+          \"summary_ar\": \"Short engaging summary in Arabic\",
+          \"why_it_matters_ar\": \"One short Arabic paragraph explaining why this news matters to crypto investors\",
+          \"sentiment\": \"Bullish\", \"Bearish\", or \"Neutral\",
+          \"category\": \"Main category (e.g., Bitcoin, Ethereum, Regulation, DeFi)\",
+          \"impact_score\": Integer from 1 to 10
         }
+        
+        CRITICAL: Return ONLY valid JSON. Do not use markdown wrappers like ```json.
         
         ARTICLE TITLE: {$title}
         ARTICLE CONTENT: {$content}";
 
         $payload = [
-            "contents" => [
-                ["parts" => [["text" => $prompt]]]
-            ],
-            "generationConfig" => [
-                "response_mime_type" => "application/json",
-            ]
+            "contents" => [["parts" => [["text" => $prompt]]]],
+            "generationConfig" => ["response_mime_type" => "application/json"]
         ];
 
         try {
             $response = Http::timeout(60)->post($url, $payload);
-
             if ($response->successful()) {
                 $responseText = $response->json()['candidates'][0]['content']['parts'][0]['text'] ?? '';
-                
-                $cleanJson = preg_replace('/```json\s*(.*?)\s*```/s', '$1', $responseText);
-                $cleanJson = trim($cleanJson);
-
+                $cleanJson = trim(preg_replace('/```json\s*(.*?)\s*```/s', '$1', $responseText));
                 $data = json_decode($cleanJson, true);
-                if (json_last_error() !== JSON_ERROR_NONE) {
-                    Log::error('Invalid JSON from Gemini: ' . json_last_error_msg());
-                    return null;
+                if (json_last_error() === JSON_ERROR_NONE) {
+                    return $data;
                 }
-                return $data;
             }
-            
-            Log::error("Gemini API Error: " . $response->body());
             return null;
-
         } catch (\Exception $e) {
-            Log::error("Gemini Connection Error: " . $e->getMessage());
             return null;
         }
     }

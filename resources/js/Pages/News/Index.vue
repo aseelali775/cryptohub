@@ -1,26 +1,24 @@
 <template>
   <HomeLayout>
-    
     <Head>
       <title>
         {{ locale === 'ar' ? 'آخر أخبار الكريبتو وتلخيصات الذكاء الاصطناعي | CryptoHub' : 'Latest Crypto News & AI Summaries | CryptoHub' }}
       </title>
       <meta 
         name="description" 
-        :content="locale === 'ar' ? 'تغطية شاملة ومستمرة لأحداث سوق العملات الرقمية العالمية مع تلخيص ذكي فوري لأهم الأنباء.' : 'Comprehensive global coverage of crypto events with instant smart AI summarization.'" />
+        :content="locale === 'ar' ? 'تغطية شاملة ومستمرة لأحداث سوق العملات الرقمية العالمية مع تحليل ذكي لأهم الأنباء.' : 'Comprehensive global coverage of crypto events with smart AI analysis.'" />
     </Head>
 
     <div class="w-full min-h-screen pb-24 bg-slate-50 dark:bg-[#0b1121] transition-colors duration-300">
-      
       <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 space-y-8" :class="locale === 'ar' ? 'text-right' : 'text-left'">
         
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-white dark:bg-[#1e293b] p-5 sm:p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm gap-4">
           <div>
             <h1 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">
-              {{ locale === 'ar' ? 'آخر أخبار الكريبتو' : 'Latest Crypto News' }}
+              {{ locale === 'ar' ? 'آخر أخبار السوق' : 'Latest Market News' }}
             </h1>
             <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1.5 font-medium">
-              {{ locale === 'ar' ? 'تغطية شاملة ومستمرة لأحداث السوق العالمية' : 'Comprehensive global coverage of crypto events' }}
+              {{ locale === 'ar' ? 'تغطية شاملة لأحداث السوق العالمية مع تحليلات ذكية' : 'Comprehensive coverage of global market events with smart analysis' }}
             </p>
           </div>
           <span class="px-3.5 py-1.5 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 text-[11px] sm:text-xs rounded-xl font-bold animate-pulse self-start sm:self-auto flex-shrink-0">
@@ -35,23 +33,16 @@
             class="bg-white dark:bg-[#151e32] border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-md hover:border-emerald-500/50 transition-all flex flex-col group cursor-pointer"
           >
             <div class="h-48 sm:h-52 overflow-hidden relative bg-slate-900 flex-shrink-0 flex items-center justify-center">
-              
               <img 
                 v-if="item.image_url && !brokenImages.has(item.id)" 
                 :src="item.image_url" 
                 @error="handleImageError(item.id)" 
-                class="w-full h-full transition-transform duration-500 group-hover:scale-105"
-                :class="item.image_url.match(/logo|icon|symbol/i) ? 'object-contain p-6 opacity-90' : 'object-cover absolute inset-0'" 
-                :alt="item.title" 
+                class="w-full h-full transition-transform duration-500 group-hover:scale-105 object-cover absolute inset-0"
+                :alt="item.translations[locale === 'ar' ? 'ar' : 'en'].title" 
               />
-              
-              <div 
-                v-else 
-                class="absolute inset-0 w-full h-full bg-gradient-to-br from-slate-800 to-[#0b1121] flex items-center justify-center group-hover:scale-105 transition-transform duration-500"
-              >
+              <div v-else class="absolute inset-0 w-full h-full bg-gradient-to-br from-slate-800 to-[#0b1121] flex items-center justify-center group-hover:scale-105 transition-transform duration-500">
                 <span class="text-6xl opacity-20 grayscale filter drop-shadow-md">📰</span>
               </div>
-
               <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/20 to-transparent opacity-80 pointer-events-none"></div>
               
               <span v-if="item.sentiment === 'Bullish'" class="absolute top-3 left-3 bg-green-500/90 text-white text-[10px] px-2 py-1 rounded font-bold backdrop-blur-sm z-10">🟢 {{ locale === 'ar' ? 'صعودي' : 'Bullish' }}</span>
@@ -59,33 +50,32 @@
               <span v-else-if="item.sentiment === 'Neutral'" class="absolute top-3 left-3 bg-slate-500/90 text-white text-[10px] px-2 py-1 rounded font-bold backdrop-blur-sm z-10">⚪ {{ locale === 'ar' ? 'محايد' : 'Neutral' }}</span>
 
               <span class="absolute bottom-3 right-3 bg-[#0f172a]/80 text-slate-200 text-[10px] px-2.5 py-1.5 rounded font-bold backdrop-blur-sm border border-white/10 z-10 pointer-events-none">
-                {{ item.source || 'Crypto News' }}
+                {{ item.source || 'CryptoHub' }}
               </span>
             </div>
 
             <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
               <div class="space-y-3 min-w-0">
-                <span class="text-[10px] sm:text-[11px] text-slate-500 dark:text-slate-400 font-mono font-semibold block">
+                <span class="text-[10px] sm:text-[11px] text-slate-500 dark:text-slate-400 font-mono font-semibold block" :dir="locale === 'ar' ? 'rtl' : 'ltr'">
                   {{ item.date || (locale === 'ar' ? 'منذ قليل' : 'Just now') }}
                 </span>
-                <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white group-hover:text-emerald-500 transition-colors leading-snug break-words line-clamp-2">
-                  {{ item.title }}
+                
+                <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white group-hover:text-emerald-500 transition-colors leading-snug break-words line-clamp-2" :dir="locale === 'ar' ? 'rtl' : 'ltr'">
+                  {{ item?.translations?.[locale === 'ar' ? 'ar' : 'en']?.title }}
                 </h3>
-                <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed line-clamp-3 break-words font-medium">
-                  {{ item.summary || item.content }}
+                
+                <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed line-clamp-3 break-words font-medium" :dir="locale === 'ar' ? 'rtl' : 'ltr'">
+                  {{ locale === 'ar' && item.ai_processed ? item.translations.ar.summary : item.translations[locale === 'ar' ? 'ar' : 'en'].content }}
                 </p>
               </div>
 
-              <div class="pt-4 border-t border-slate-100 dark:border-slate-800/60 flex justify-between items-center gap-2">
+              <div class="pt-4 border-t border-slate-100 dark:border-slate-800/60 flex justify-between items-center gap-2" :dir="locale === 'ar' ? 'rtl' : 'ltr'">
                 <div class="flex items-center gap-1.5 overflow-hidden">
                   <span class="text-[10px] px-2 py-1 rounded bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 font-mono font-bold whitespace-nowrap">#{{ item.category || 'Crypto' }}</span>
                   <span v-if="item.impact_score" class="text-[10px] px-1.5 py-1 rounded bg-amber-50 dark:bg-amber-500/10 text-amber-600 dark:text-amber-400 font-mono font-bold whitespace-nowrap" :title="locale === 'ar' ? 'درجة التأثير' : 'Impact Score'">⚡ {{ item.impact_score }}/10</span>
                 </div>
-                <Link 
-                  :href="`/news/${item.id}`" 
-                  class="text-xs font-bold text-emerald-500 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors flex items-center gap-1 cursor-pointer flex-shrink-0"
-                >
-                  <span>{{ locale === 'ar' ? 'اقرأ المزيد ←' : 'Read More →' }}</span>
+                <Link :href="`/news/${item.id}`" class="text-xs font-bold text-emerald-500 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors flex items-center gap-1 cursor-pointer flex-shrink-0">
+                  <span>{{ locale === 'ar' ? 'التفاصيل ←' : 'Read More →' }}</span>
                 </Link>
               </div>
             </div>
@@ -93,10 +83,7 @@
         </div>
 
         <div v-if="visibleCount < newsFeed.length" class="flex justify-center mt-12 pt-8">
-          <button 
-            @click="loadMore" 
-            class="px-8 py-3.5 rounded-xl bg-white dark:bg-[#151e32] border border-slate-200 dark:border-slate-800 text-sm font-bold text-slate-700 dark:text-slate-300 hover:border-emerald-500 hover:text-emerald-500 transition-all shadow-sm flex items-center gap-2 active:scale-95"
-          >
+          <button @click="loadMore" class="px-8 py-3.5 rounded-xl bg-white dark:bg-[#151e32] border border-slate-200 dark:border-slate-800 text-sm font-bold text-slate-700 dark:text-slate-300 hover:border-emerald-500 hover:text-emerald-500 transition-all shadow-sm flex items-center gap-2 active:scale-95">
             <span>{{ locale === 'ar' ? 'عرض المزيد من الأخبار' : 'Load More News' }}</span>
             <span class="text-lg animate-bounce">↓</span>
           </button>
