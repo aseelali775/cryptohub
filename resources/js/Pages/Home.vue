@@ -73,7 +73,7 @@
         </div>
       </section>
 
-<section class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+    <section class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
           
           <div class="lg:col-span-3 flex flex-col gap-6">
@@ -104,48 +104,48 @@
             <div class="bg-white dark:bg-[#151e32] border border-slate-200 dark:border-slate-800 rounded-3xl p-5 shadow-sm flex flex-col gap-4">
               
               <Link :href="mainNews ? `/news/${mainNews.id}` : '#'" v-if="mainNews" class="relative w-full h-72 rounded-2xl overflow-hidden bg-slate-900 group cursor-pointer block shadow-inner">
-                <img :src="mainNews?.image_url" class="absolute inset-0 w-full h-full object-cover z-0 group-hover:scale-105 transition-transform duration-700 opacity-60" :alt="mainNews?.title" />
+                <img :src="mainNews.image_url" class="absolute inset-0 w-full h-full object-cover z-0 group-hover:scale-105 transition-transform duration-700 opacity-60" :alt="mainNews.title || mainNews.title_en" />
                 <div class="absolute inset-0 bg-gradient-to-t from-[#0b1121] via-[#0b1121]/70 to-transparent z-10"></div>
                 
                 <div class="absolute bottom-0 inset-x-0 p-5 z-20">
                   
                   <div class="flex flex-wrap items-center gap-2 mb-3">
                     <span class="inline-block px-2.5 py-1 rounded bg-emerald-500 text-white text-[10px] font-bold uppercase tracking-wider">{{ t('mainNewsTag') }}</span>
-                    <span v-if="mainNews?.sentiment === 'Bullish'" class="inline-block px-2.5 py-1 rounded bg-green-500/80 backdrop-blur-sm text-white text-[10px] font-bold border border-green-400/30">🟢 صعودي</span>
-                    <span v-else-if="mainNews?.sentiment === 'Bearish'" class="inline-block px-2.5 py-1 rounded bg-red-500/80 backdrop-blur-sm text-white text-[10px] font-bold border border-red-400/30">🔴 هبوطي</span>
-                    <span v-else-if="mainNews?.sentiment === 'Neutral'" class="inline-block px-2.5 py-1 rounded bg-slate-500/80 backdrop-blur-sm text-white text-[10px] font-bold border border-slate-400/30">⚪ محايد</span>
+                    <span v-if="mainNews.sentiment === 'Bullish'" class="inline-block px-2.5 py-1 rounded bg-green-500/80 backdrop-blur-sm text-white text-[10px] font-bold border border-green-400/30">🟢 صعودي</span>
+                    <span v-else-if="mainNews.sentiment === 'Bearish'" class="inline-block px-2.5 py-1 rounded bg-red-500/80 backdrop-blur-sm text-white text-[10px] font-bold border border-red-400/30">🔴 هبوطي</span>
+                    <span v-else-if="mainNews.sentiment === 'Neutral'" class="inline-block px-2.5 py-1 rounded bg-slate-500/80 backdrop-blur-sm text-white text-[10px] font-bold border border-slate-400/30">⚪ محايد</span>
                   </div>
 
                   <h4 class="text-lg sm:text-xl font-bold text-white mb-2 leading-snug group-hover:text-emerald-400 transition-colors line-clamp-2 text-left" dir="ltr">
-                    {{ mainNews?.title }}
+                    {{ mainNews.title || mainNews.title_en }}
                   </h4>
                   
-                  <p v-if="mainNews?.summary || mainNews?.content" class="text-xs sm:text-sm text-slate-300 line-clamp-2 mb-2 font-medium leading-relaxed text-left" dir="ltr">
-                    {{ mainNews?.summary || mainNews?.content }}
+                  <p v-if="mainNews.summary || mainNews.content_en" class="text-xs sm:text-sm text-slate-300 line-clamp-2 mb-2 font-medium leading-relaxed text-left" dir="ltr">
+                    {{ mainNews.summary || mainNews.content_en }}
                   </p>
 
                   <div class="flex items-center gap-4 mt-2 text-xs font-bold text-slate-400" :dir="locale === 'ar' ? 'rtl' : 'ltr'">
                     <span class="text-emerald-500">{{ t('readMore') }}</span>
-                    <span>• {{ mainNews?.source || 'CryptoHub' }}</span>
-                    <span v-if="mainNews?.impact_score" class="flex items-center gap-1" title="تأثير الخبر على السوق">
-                      <span class="text-amber-400 text-sm">⚡</span> {{ mainNews?.impact_score }}/10
+                    <span>• {{ mainNews.source }}</span>
+                    <span v-if="mainNews.impact_score" class="flex items-center gap-1" title="تأثير الخبر على السوق">
+                      <span class="text-amber-400 text-sm">⚡</span> {{ mainNews.impact_score }}/10
                     </span>
                   </div>
                 </div>
               </Link>
 
               <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-2" v-if="subNews && subNews.length">
-                <Link :href="`/news/${news?.id}`" v-for="news in subNews" :key="news?.id" class="bg-slate-50 dark:bg-[#0f172a] p-4 rounded-2xl border border-slate-100 dark:border-slate-800 hover:border-emerald-500/30 transition-all cursor-pointer flex flex-col h-full group relative overflow-hidden">
+                <Link :href="`/news/${news.id}`" v-for="news in subNews" :key="news.id" class="bg-slate-50 dark:bg-[#0f172a] p-4 rounded-2xl border border-slate-100 dark:border-slate-800 hover:border-emerald-500/30 transition-all cursor-pointer flex flex-col h-full group relative overflow-hidden">
                   
                   <div class="flex justify-between items-start mb-3 relative z-10" :dir="locale === 'ar' ? 'rtl' : 'ltr'">
-                    <span class="inline-block px-2 py-1 rounded bg-white dark:bg-slate-800 text-slate-500 dark:text-slate-400 text-[10px] font-bold border border-slate-200 dark:border-slate-700 shadow-sm">{{ news?.source || 'News' }}</span>
+                    <span class="inline-block px-2 py-1 rounded bg-white dark:bg-slate-800 text-slate-500 dark:text-slate-400 text-[10px] font-bold border border-slate-200 dark:border-slate-700 shadow-sm">{{ news.source }}</span>
                     
-                    <span v-if="news?.sentiment === 'Bullish'" class="text-xs drop-shadow-md animate-pulse" title="خبر صعودي">🟢</span>
-                    <span v-else-if="news?.sentiment === 'Bearish'" class="text-xs drop-shadow-md animate-pulse" title="خبر هبوطي">🔴</span>
+                    <span v-if="news.sentiment === 'Bullish'" class="text-xs drop-shadow-md animate-pulse" title="خبر صعودي">🟢</span>
+                    <span v-else-if="news.sentiment === 'Bearish'" class="text-xs drop-shadow-md animate-pulse" title="خبر هبوطي">🔴</span>
                   </div>
                   
                   <h5 class="text-xs font-bold text-slate-900 dark:text-white leading-relaxed mb-2 flex-1 group-hover:text-emerald-500 transition-colors relative z-10 line-clamp-3 text-left" dir="ltr">
-                    {{ news?.title }}
+                    {{ news.title || news.title_en }}
                   </h5>
                 </Link>
               </div>
@@ -192,24 +192,24 @@
               
               <div class="space-y-3">
                 <Link 
-                  :href="`/crypto/${coin?.symbol?.toLowerCase()}`" 
+                  :href="`/crypto/${coin.symbol.toLowerCase()}`" 
                   v-for="coin in props.topGainers" 
-                  :key="coin?.id" 
+                  :key="coin.id" 
                   class="flex items-center justify-between p-2.5 rounded-xl hover:bg-slate-50 dark:hover:bg-[#0f172a] border border-transparent hover:border-slate-100 dark:hover:border-slate-800 transition-all cursor-pointer group"
                 >
                   <div class="flex items-center gap-3">
-                    <img v-if="coin?.image_url" :src="coin.image_url" :alt="coin?.name" class="w-7 h-7 rounded-full object-contain bg-slate-100 dark:bg-slate-800 p-1 shadow-sm" />
+                    <img v-if="coin.image_url" :src="coin.image_url" :alt="coin.name" class="w-7 h-7 rounded-full object-contain bg-slate-100 dark:bg-slate-800 p-1 shadow-sm" />
                     <div class="flex flex-col">
-                      <span class="text-xs font-bold text-slate-900 dark:text-white group-hover:text-emerald-500 transition-colors">{{ coin?.name }}</span>
-                      <span class="text-[10px] font-mono text-slate-400">{{ coin?.symbol?.toUpperCase() }}</span>
+                      <span class="text-xs font-bold text-slate-900 dark:text-white group-hover:text-emerald-500 transition-colors">{{ coin.name }}</span>
+                      <span class="text-[10px] font-mono text-slate-400">{{ coin.symbol.toUpperCase() }}</span>
                     </div>
                   </div>
                   <div class="flex flex-col items-end">
                     <span class="text-[11px] font-mono font-bold text-slate-700 dark:text-slate-300">
-                      ${{ Number(coin?.current_price || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 4 }) }}
+                      ${{ Number(coin.current_price).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 4 }) }}
                     </span>
                     <span class="text-[10px] font-black text-emerald-500 mt-0.5 bg-emerald-50 dark:bg-emerald-500/10 px-1.5 rounded">
-                      +{{ coin?.change_24h || 0 }}%
+                      +{{ coin.change_24h }}%
                     </span>
                   </div>
                 </Link>
