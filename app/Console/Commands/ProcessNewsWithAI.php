@@ -22,8 +22,7 @@ class ProcessNewsWithAI extends Command
 
         $this->info('Starting CryptoHub AI Arabic Journalist...');
 
-        $newsList = News::where('ai_processed', false)->limit(5)->get();
-
+        $newsList = News::where('ai_processed', false)->latest()->limit(5)->get();
         if ($newsList->isEmpty()) {$this->info('No new articles for the AI to rewrite. Resting... ☕');
             return;
         }
