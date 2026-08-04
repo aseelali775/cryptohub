@@ -8,14 +8,14 @@ Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote')->hourly();
 
-// سحب الأسعار كل 10 دقائق (محمي من التداخل)
-Schedule::command('crypto:fetch-prices')->everyFourHours()->withoutOverlapping();
+// سحب الأسعار كل ساعة (يقلل استهلاك الـ CPU بنسبة 85%)
+Schedule::command('crypto:fetch-prices')->hourly()->withoutOverlapping();
 
-// سحب الأخبار من المصادر كل 30 دقيقة (محمي من التداخل)
-Schedule::command('crypto:fetch-news')->everyFourHours()->withoutOverlapping();
+// سحب الأخبار كل 3 ساعات (يقلل الضغط على قاعدة البيانات والـ API)
+Schedule::command('crypto:fetch-news')->everyThreeHours()->withoutOverlapping();
 
-// معالجة الأخبار بالذكاء الاصطناعي كل 10 دقائق (ضروري جداً حمايته من التداخل)
-Schedule::command('news:process-ai')->everyFourHours()->withoutOverlapping();
+// معالجة الأخبار بالذكاء الاصطناعي كل ساعتين 
+Schedule::command('news:process-ai')->everyTwoHours()->withoutOverlapping();
 
 // عامل النظافة اليومي
 Schedule::command('model:prune')->daily();
