@@ -22,7 +22,6 @@
       <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 space-y-6" :class="locale === 'ar' ? 'text-right' : 'text-left'">
         
         <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 bg-white dark:bg-[#1e293b] p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm">
-          
           <div class="flex items-center gap-5">
             <img :src="crypto.image_url" class="w-14 h-14 sm:w-16 sm:h-16 rounded-full shadow-md object-contain bg-slate-100 dark:bg-slate-800 p-2" :alt="crypto.name" />
             <div>
@@ -34,7 +33,7 @@
                   {{ crypto.symbol }}
                 </span>
                 <span class="px-2.5 py-1 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-[10px] font-black rounded-lg border border-emerald-500/20">
-                  Rank #{{ chartData.market_cap_rank }}
+                  Rank #{{ chartData?.market_cap_rank || '-' }}
                 </span>
               </div>
               <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-medium">{{ t('sub_title') }}</p>
@@ -103,14 +102,11 @@
             
             <div class="p-5 sm:p-6 bg-gradient-to-br from-indigo-50 to-white dark:from-[#151e32] dark:to-[#1e293b] border border-indigo-100 dark:border-indigo-500/20 rounded-3xl shadow-sm relative overflow-hidden">
               <div class="absolute top-0 right-0 w-64 h-64 bg-indigo-500/5 dark:bg-indigo-500/10 blur-3xl rounded-full translate-x-1/2 -translate-y-1/2"></div>
-              
               <h3 class="text-sm sm:text-base font-bold text-indigo-900 dark:text-indigo-300 mb-4 flex items-center gap-2 relative z-10">
                 <span class="text-xl">🤖</span> {{ t('ai_title') }}
               </h3>
-              
               <div class="relative z-10 p-5 bg-white/60 dark:bg-[#0f172a]/60 backdrop-blur-sm rounded-2xl border border-indigo-100 dark:border-indigo-500/10 text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-medium">
                 <p class="mb-4">{{ t('ai_placeholder') }}</p>
-                
                 <div class="pt-3 border-t border-indigo-100 dark:border-indigo-500/20 text-xs text-indigo-600/70 dark:text-indigo-400/70 font-mono">
                   {{ t('ai_footer_note') }}
                 </div>
@@ -124,27 +120,23 @@
               <h3 class="text-sm font-bold text-slate-900 dark:text-white border-b border-slate-100 dark:border-slate-800 pb-4 mb-4">
                 {{ t('market_data') }}
               </h3>
-              
               <div class="space-y-4">
                 <div class="flex justify-between items-center p-2 rounded-lg hover:bg-slate-50 dark:hover:bg-[#0f172a] transition-colors">
                   <span class="text-xs font-bold text-slate-500">{{ t('current_price') }}</span>
                   <span class="font-mono text-slate-900 dark:text-white font-black text-sm">${{ Number(crypto.current_price).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 4 }) }}</span>
                 </div>
-                
                 <div class="flex justify-between items-center p-2 rounded-lg hover:bg-slate-50 dark:hover:bg-[#0f172a] transition-colors">
                   <span class="text-xs font-bold text-slate-500">{{ t('change_24h') }}</span>
                   <span class="font-mono text-sm font-black" :class="crypto.change_24h >= 0 ? 'text-emerald-500' : 'text-rose-500'">
                     {{ crypto.change_24h >= 0 ? '▲ +' : '▼ ' }} {{ Math.abs(crypto.change_24h) }}%
                   </span>
                 </div>
-
                 <div class="flex justify-between items-center p-2 rounded-lg hover:bg-slate-50 dark:hover:bg-[#0f172a] transition-colors">
                   <span class="text-xs font-bold text-slate-500">{{ t('volume_24h') }}</span>
                   <span class="font-mono text-sm font-bold text-slate-700 dark:text-slate-300 truncate max-w-[150px]">
                     ${{ Number(crypto.volume_24h).toLocaleString('en-US') }}
                   </span>
                 </div>
-                
                 <div class="flex justify-between items-center p-2 rounded-lg hover:bg-slate-50 dark:hover:bg-[#0f172a] transition-colors">
                   <span class="text-xs font-bold text-slate-500">{{ locale === 'ar' ? 'القيمة السوقية' : 'Market Cap' }}</span>
                   <span class="font-mono text-sm font-bold text-slate-700 dark:text-slate-300 truncate max-w-[150px]">
@@ -159,28 +151,71 @@
                 {{ locale === 'ar' ? 'النطاق التاريخي' : 'Historical Range' }}
               </h3>
               <div class="space-y-4 text-xs">
-                
                 <div class="flex justify-between items-center">
                   <span class="text-slate-500 font-bold">{{ locale === 'ar' ? 'أعلى قمة (ATH)' : 'All Time High' }}</span>
-                  <span class="text-emerald-500 font-black font-mono">${{ Number(chartData.ath).toLocaleString('en-US', { maximumFractionDigits: 4 }) }}</span>
+                  <span class="text-emerald-500 font-black font-mono">${{ Number(chartData?.ath || 0).toLocaleString('en-US', { maximumFractionDigits: 4 }) }}</span>
                 </div>
-                
                 <div class="w-full bg-slate-100 dark:bg-slate-800 h-1.5 rounded-full overflow-hidden">
                   <div class="bg-gradient-to-r from-emerald-500 to-emerald-300 h-full w-[100%]"></div>
                 </div>
-
                 <div class="flex justify-between items-center mt-4">
                   <span class="text-slate-500 font-bold">{{ locale === 'ar' ? 'أدنى قاع (ATL)' : 'All Time Low' }}</span>
-                  <span class="text-rose-500 font-black font-mono">${{ Number(chartData.atl).toLocaleString('en-US', { maximumFractionDigits: 4 }) }}</span>
+                  <span class="text-rose-500 font-black font-mono">${{ Number(chartData?.atl || 0).toLocaleString('en-US', { maximumFractionDigits: 4 }) }}</span>
                 </div>
-
                 <div class="w-full bg-slate-100 dark:bg-slate-800 h-1.5 rounded-full overflow-hidden">
                   <div class="bg-gradient-to-r from-rose-500 to-rose-300 h-full w-[15%]"></div>
                 </div>
-                
               </div>
             </div>
 
+          </div>
+        </div>
+
+        <div v-if="coinNews && coinNews.length > 0" class="mt-12 bg-white dark:bg-[#151e32] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 shadow-sm">
+          <div class="flex items-center justify-between mb-8 border-b border-slate-100 dark:border-slate-800 pb-4" :dir="locale === 'ar' ? 'rtl' : 'ltr'">
+            <h3 class="text-xl sm:text-2xl font-black text-slate-900 dark:text-white flex items-center gap-2">
+              <span class="text-emerald-500">📰</span>
+              {{ locale === 'ar' ? `أحدث أخبار ${crypto.name}` : `Latest ${crypto.name} News` }}
+            </h3>
+            <Link href="/news" class="text-xs sm:text-sm font-bold text-emerald-500 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">
+              {{ locale === 'ar' ? 'كل الأخبار ←' : 'All News →' }}
+            </Link>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <Link 
+              :href="`/news/${news.id}-${news.slug}`" 
+              v-for="news in coinNews" 
+              :key="news.id" 
+              class="bg-slate-50 dark:bg-[#0b1121] rounded-2xl border border-slate-200 dark:border-slate-700/50 hover:border-emerald-500/50 transition-all flex flex-col group cursor-pointer overflow-hidden shadow-sm hover:shadow-md"
+            >
+              <div class="p-4 pb-0 flex justify-between items-start" :dir="locale === 'ar' ? 'rtl' : 'ltr'">
+                <span class="text-[10px] sm:text-xs font-mono font-bold text-slate-500 dark:text-slate-400 bg-white dark:bg-slate-800 px-2.5 py-1 rounded-md border border-slate-200 dark:border-slate-700">
+                  {{ news.source }}
+                </span>
+                <div class="flex items-center gap-1.5">
+                  <span v-if="news.impact_score" class="text-[10px] px-1.5 py-1 rounded bg-amber-50 dark:bg-amber-500/10 text-amber-600 dark:text-amber-400 font-mono font-bold whitespace-nowrap" :title="locale === 'ar' ? 'درجة التأثير' : 'Impact Score'">
+                    ⚡ {{ news.impact_score }}/10
+                  </span>
+                  <span v-if="news.sentiment === 'Bullish'" class="text-[10px] px-2 py-1 rounded bg-green-100 dark:bg-green-500/20 text-green-700 dark:text-green-400 font-bold whitespace-nowrap">🟢 {{ locale === 'ar' ? 'صعودي' : 'Bullish' }}</span>
+                  <span v-else-if="news.sentiment === 'Bearish'" class="text-[10px] px-2 py-1 rounded bg-red-100 dark:bg-red-500/20 text-red-700 dark:text-red-400 font-bold whitespace-nowrap">🔴 {{ locale === 'ar' ? 'هبوطي' : 'Bearish' }}</span>
+                </div>
+              </div>
+
+              <div class="p-4 flex-1 flex flex-col justify-between">
+                <div>
+                  <h4 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white mb-2 leading-snug group-hover:text-emerald-500 transition-colors line-clamp-2" :class="locale === 'ar' ? 'text-right' : 'text-left'" :dir="locale === 'ar' ? 'rtl' : 'ltr'">
+                    {{ news.translations[locale === 'ar' ? 'ar' : 'en']?.title }}
+                  </h4>
+                  <p class="text-xs text-slate-600 dark:text-slate-400 font-medium line-clamp-3 leading-relaxed" :class="locale === 'ar' ? 'text-right' : 'text-left'" :dir="locale === 'ar' ? 'rtl' : 'ltr'">
+                     {{ locale === 'ar' && news.ai_processed ? news.translations.ar?.summary : news.translations[locale === 'ar' ? 'ar' : 'en']?.content }}
+                  </p>
+                </div>
+                <div class="mt-4 text-[10px] sm:text-xs text-slate-400 font-semibold" :dir="locale === 'ar' ? 'rtl' : 'ltr'">
+                  {{ news.date }}
+                </div>
+              </div>
+            </Link>
           </div>
         </div>
 
@@ -193,7 +228,7 @@
 import HomeLayout from '@/layouts/HomeLayout.vue';
 import { computed } from 'vue';
 import { Link, usePage, Head } from '@inertiajs/vue3';
-import VueApexCharts from "vue3-apexcharts"; // 🟢 استدعاء مكتبة الرسم البياني
+import VueApexCharts from "vue3-apexcharts"; 
 
 const props = defineProps({
   crypto: {
@@ -203,20 +238,23 @@ const props = defineProps({
   chartData: {
     type: Object,
     required: true
+  },
+  // 🟢 استقبال مصفوفة أخبار العملة من الكنترولر
+  coinNews: {
+    type: Array,
+    default: () => []
   }
 });
 
 const page = usePage();
 const locale = computed(() => page.props.locale || 'ar');
 
-// ==========================================
-// 🟢 إعدادات الرسم البياني (ApexCharts)
-// ==========================================
+// إعدادات الرسم البياني (ApexCharts)
 const isPositive = computed(() => props.crypto.change_24h >= 0);
 
 const chartSeries = computed(() => [{
   name: locale.value === 'ar' ? 'السعر' : 'Price',
-  data: props.chartData.sparkline || []
+  data: props.chartData?.sparkline || []
 }]);
 
 const chartOptions = computed(() => ({
@@ -227,39 +265,24 @@ const chartOptions = computed(() => ({
     zoom: { enabled: false },
     background: 'transparent'
   },
-  // تغيير لون الخط بناءً على حالة السوق (أخضر صعود / أحمر هبوط)
   colors: [isPositive.value ? '#10b981' : '#f43f5e'], 
   fill: {
     type: 'gradient',
-    gradient: {
-      shadeIntensity: 1,
-      opacityFrom: 0.4,
-      opacityTo: 0.05,
-      stops: [0, 100]
-    }
+    gradient: { shadeIntensity: 1, opacityFrom: 0.4, opacityTo: 0.05, stops: [0, 100] }
   },
   dataLabels: { enabled: false },
   stroke: { curve: 'smooth', width: 2.5 },
-  xaxis: {
-    labels: { show: false },
-    axisBorder: { show: false },
-    axisTicks: { show: false },
-    tooltip: { enabled: false }
-  },
+  xaxis: { labels: { show: false }, axisBorder: { show: false }, axisTicks: { show: false }, tooltip: { enabled: false } },
   yaxis: { show: false },
   grid: { show: false, padding: { left: 0, right: 0, top: 0, bottom: 0 } },
   theme: { mode: 'dark' },
   tooltip: {
     theme: 'dark',
-    y: {
-      formatter: (val) => `$${Number(val).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 6 })}`
-    }
+    y: { formatter: (val) => `$${Number(val).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 6 })}` }
   }
 }));
 
-// ==========================================
 // قاموس الترجمة الأصلي
-// ==========================================
 const translations = {
   ar: {
     sub_title: 'شاشة معالجة البيانات المتقدمة والمحاكاة الفنية للأسواق',
