@@ -18,6 +18,7 @@ Route::get('/crypto/{symbol}', [CryptoController::class, 'show'])->name('crypto.
 // 4. مسارات قسم الأخبار وتفاصيل الخبر المنفرد (مربوطة بـ NewsController)
 Route::get('/news', [NewsController::class, 'index'])->name('news.index');
 Route::get('/news/{id}', [NewsController::class, 'show'])->name('news.show');
+Route::get('/news/{id}-{slug?}', [NewsController::class, 'show'])->name('news.show');
 
 // 5. المحرك العالمي للتبديل الفوري بين اللغتين (العربية والإنجليزية)
 Route::get('/lang/{lang}', function ($lang) {

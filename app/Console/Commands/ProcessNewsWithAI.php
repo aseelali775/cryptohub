@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use App\Models\News;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 class ProcessNewsWithAI extends Command
 {
@@ -31,7 +32,13 @@ class ProcessNewsWithAI extends Command
             
             $truncatedContent = mb_substr($news->content_en, 0, 8000);$result = $this->analyzeWithGemini($news->title_en, $truncatedContent,$apiKey);
 
-            if ($result && is_array($result)) {$news->update([
+            if ($result && is_array($result)) {
+                // 🟢 البرمجة الدفاعية في توليد الـ Slug
+                $safeSlug = Str::slug($news->title_en ?: 'news-'.$news->id);
+                
+                $news->update([
+                    'slug'              => $safeSlug,
+                    'keywords'          => $result['keywords'] ?? [],
                     'title_ar'          => $result['title_ar'] ?? null,
                     'content_ar'        => $result['content_ar'] ?? null,
                     'summary_ar'        => $result['summary_ar'] ?? null,
@@ -64,6 +71,7 @@ class ProcessNewsWithAI extends Command
         - Do not translate word by word. Write a fluent, professional Arabic news article.
         - Preserve verified facts, names, numbers, dates and quotes.
         - Write a complete article. Expand the content only when sufficient information is available. Do not invent facts.
+        - Generate 3-5 SEO keywords. Use English keywords only. Return them as a JSON array.
         
         Generate a valid JSON object exactly like this:
         {
@@ -73,7 +81,8 @@ class ProcessNewsWithAI extends Command
           \"why_it_matters_ar\": \"One short Arabic paragraph explaining why this news matters to crypto investors\",
           \"sentiment\": \"Bullish\", \"Bearish\", or \"Neutral\",
           \"category\": \"Main category (e.g., Bitcoin, Ethereum, Regulation, DeFi)\",
-          \"impact_score\": Integer from 1 to 10
+          \"impact_score\": Integer from 1 to 10,
+          \"keywords\": [\"Keyword1\", \"Keyword2\", \"Keyword3\"]
         }
         
         CRITICAL: Return ONLY valid JSON. Do not use markdown wrappers like ```json.

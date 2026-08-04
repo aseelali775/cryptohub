@@ -9,13 +9,13 @@ Artisan::command('inspire', function () {
 })->purpose('Display an inspiring quote')->hourly();
 
 // سحب الأسعار كل 10 دقائق (محمي من التداخل)
-Schedule::command('crypto:fetch-prices')->everyFiveHours()->withoutOverlapping();
+Schedule::command('crypto:fetch-prices')->everyFourHours()->withoutOverlapping();
 
 // سحب الأخبار من المصادر كل 30 دقيقة (محمي من التداخل)
-Schedule::command('crypto:fetch-news')->everySixHours()->withoutOverlapping();
+Schedule::command('crypto:fetch-news')->everyFourHours()->withoutOverlapping();
 
 // معالجة الأخبار بالذكاء الاصطناعي كل 10 دقائق (ضروري جداً حمايته من التداخل)
-Schedule::command('news:process-ai')->everySixHours()->withoutOverlapping();
+Schedule::command('news:process-ai')->everyFourHours()->withoutOverlapping();
 
 // عامل النظافة اليومي
 Schedule::command('model:prune')->daily();

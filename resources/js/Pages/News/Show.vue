@@ -11,7 +11,7 @@
           : newsItem?.translations?.en?.content
         " 
       />
-      
+      <link rel="canonical" :href="`https://cryptohub.com/news/${newsItem.id}-${newsItem.slug}`" />
       <meta property="og:image" :content="newsItem?.image_url" />
     </Head>
 
@@ -52,7 +52,7 @@
           <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent"></div>
         </figure>
 
-        <div v-if="locale === 'ar' && newsItem?.ai_processed && newsItem?.translations.ar.why_it_matters" class="mb-10 p-6 sm:p-8 bg-amber-50/50 dark:bg-amber-900/10 border border-amber-100 dark:border-amber-500/20 rounded-3xl shadow-sm relative overflow-hidden">
+       <div v-if="locale === 'ar' && newsItem?.ai_processed && newsItem?.translations.ar.why_it_matters" class="mb-10 p-6 sm:p-8 bg-amber-50/50 dark:bg-amber-900/10 border border-amber-100 dark:border-amber-500/20 rounded-3xl shadow-sm relative overflow-hidden">
           <div class="absolute top-0 right-0 w-32 h-32 bg-amber-500/5 blur-2xl rounded-full pointer-events-none"></div>
           <h3 class="text-lg font-bold text-amber-900 dark:text-amber-300 mb-4 flex items-center gap-2 relative z-10" dir="rtl">
             <span class="text-xl">💡</span>
@@ -71,25 +71,40 @@
           </article>
         </div>
 
+        <div v-if="newsItem?.keywords && newsItem.keywords.length > 0" class="mt-10 pt-8 border-t border-slate-200 dark:border-slate-800">
+          <div class="flex flex-wrap gap-2" :dir="locale === 'ar' ? 'rtl' : 'ltr'">
+            <span 
+              v-for="keyword in newsItem.keywords" 
+              :key="keyword" 
+              class="px-3.5 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-xs font-bold font-mono transition-colors hover:bg-emerald-50 dark:hover:bg-emerald-500/10 hover:text-emerald-600 dark:hover:text-emerald-400 cursor-default"
+            >
+              #{{ keyword }}
+            </span>
+          </div>
+        </div>
         <div class="mt-16 flex flex-col gap-6" v-if="newsItem">
           
           <div 
-  v-if="newsItem?.url"
-  class="flex justify-start" 
-  :dir="locale === 'ar' ? 'rtl' : 'ltr'"
->
-  <a 
-    :href="newsItem.url" 
-    target="_blank" 
-    rel="noopener noreferrer" 
-    class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-sm hover:scale-105 transition-transform shadow-md"
-  >
-    <span>
-      {{ locale === 'ar' ? 'قراءة المصدر الأصلي' : 'Read Original Source' }}
-    </span>
-    <span>↗</span>
-  </a>
-</div>
+            v-if="newsItem?.url"
+            class="flex justify-start" 
+            :dir="locale === 'ar' ? 'rtl' : 'ltr'"
+          >
+            <a 
+              :href="newsItem.url" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-sm hover:scale-105 transition-transform shadow-md"
+            >
+              <span>
+                {{ locale === 'ar' ? 'قراءة المصدر الأصلي' : 'Read Original Source' }}
+              </span>
+              <span>↗</span>
+            </a>
+          </div>
+
+          ```
+
+استبدل هذا الجزء، وسيظهر شكل الوسوم أنيقاً جداً أسفل المقال ليفصل بين المحتوى الأصلي وبين زر المصدر الخارجي! 🚀
 
           <div class="p-5 sm:p-6 bg-slate-100 dark:bg-[#151e32] border border-slate-200 dark:border-slate-800 rounded-2xl flex flex-col sm:flex-row gap-5 items-start shadow-sm" :dir="locale === 'ar' ? 'rtl' : 'ltr'">
             <div class="w-12 h-12 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 flex items-center justify-center text-xl flex-shrink-0">

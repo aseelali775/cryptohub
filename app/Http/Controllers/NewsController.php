@@ -11,6 +11,8 @@ class NewsController extends Controller
     {
         return [
             'id'           => $item->id,
+            'slug'         => $item->slug,
+            'keywords'     => $item->keywords ?? [],
             'image_url'    => $item->image_url,
             'source'       => $item->source,
             'url'          => $item->url,
