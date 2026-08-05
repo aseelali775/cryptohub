@@ -64,13 +64,6 @@
               {{ t('navIndicators') }}
             </Link>
 
-            <Link href="#" class="h-full flex items-center text-sm font-medium text-slate-600 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white transition-colors">
-              {{ t('navTools') }}
-            </Link>
-
-            <Link href="#" class="h-full flex items-center text-sm font-medium text-slate-600 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white transition-colors">
-              {{ t('navCalendar') }}
-            </Link>
             
           </nav>
 
