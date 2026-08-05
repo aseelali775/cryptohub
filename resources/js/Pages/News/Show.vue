@@ -102,9 +102,7 @@
             </a>
           </div>
 
-          ```
-
-استبدل هذا الجزء، وسيظهر شكل الوسوم أنيقاً جداً أسفل المقال ليفصل بين المحتوى الأصلي وبين زر المصدر الخارجي! 🚀
+         
 
           <div class="p-5 sm:p-6 bg-slate-100 dark:bg-[#151e32] border border-slate-200 dark:border-slate-800 rounded-2xl flex flex-col sm:flex-row gap-5 items-start shadow-sm" :dir="locale === 'ar' ? 'rtl' : 'ltr'">
             <div class="w-12 h-12 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 flex items-center justify-center text-xl flex-shrink-0">
