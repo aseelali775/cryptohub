@@ -23,6 +23,11 @@ class Cryptocurrency extends Model
         'market_cap',   // 🟢 القيمة السوقية
     ];
 
+    protected $casts = [
+    'sparkline_in_7d' => 'array',
+    'sparkline'       => 'array',
+];
+
    public function aliases() { return $this->hasMany(CryptoAlias::class); }
    public function aiReports()
     {

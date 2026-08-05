@@ -22,7 +22,7 @@ class GenerateCryptoAiReports extends Command
             $this->error('GEMINI_API_KEY is missing.'); return;
         }
 
-        // 🟢 الإصلاح هنا: جلب أعلى 50 عملة من حيث القيمة السوقية (market_cap) بدلاً من market_cap_rank
+        // جلب أعلى 50 عملة من حيث القيمة السوقية
         $cryptos = Cryptocurrency::with('aliases')
             ->orderBy('market_cap', 'desc')
             ->limit(50)
@@ -67,11 +67,13 @@ class GenerateCryptoAiReports extends Command
                 
                 Cache::forget("coin_ai_report_{$crypto->symbol}");
             } else {
-                $this->error("❌ Failed to parse response for {$crypto->name}");
+                // 🟢 تعديل رسالة الخطأ لتوجيهك للسجل
+                $this->error("❌ Failed to parse response for {$crypto->name} (Check laravel.log)");
             }
 
             sleep(2);
         }
+        
         $this->info('🚀 All AI Reports Generated Successfully!');
     }
 
@@ -85,7 +87,7 @@ class GenerateCryptoAiReports extends Command
         Recent News Context:
         {$newsContext}
         
-        CRITICAL: RETURN ONLY A VALID JSON OBJECT EXACTLY LIKE THIS FORMAT:
+        CRITICAL: RETURN ONLY A VALID JSON OBJECT EXACTLY LIKE THIS FORMAT. DO NOT ADD ANY MARKDOWN OR TEXT OUTSIDE THE JSON:
         {
           \"trend\": \"Bullish\", \"Bearish\", or \"Neutral\",
           \"confidence\": Integer between 0 and 100,
@@ -104,15 +106,33 @@ class GenerateCryptoAiReports extends Command
             $response = Http::timeout(60)->post($url, $payload);
             if ($response->successful()) {
                 $text = $response->json()['candidates'][0]['content']['parts'][0]['text'] ?? '';
-                $start = strpos($text, '{');
-                $end = strrpos($text, '}');
+                
+                // 🟢 1. تنظيف الـ Markdown المزعج
+                $cleanJson = trim(preg_replace('/```json\s*(.*?)\s*```/s', '$1', $text));
+                $cleanJson = trim(preg_replace('/```\s*(.*?)\s*```/s', '$1', $cleanJson));
+                
+                // 🟢 2. الاستخراج الجراحي للأقواس
+                $start = strpos($cleanJson, '{');
+                $end = strrpos($cleanJson, '}');
+                
                 if ($start !== false && $end !== false) {
-                    $cleanJson = substr($text, $start, $end - $start + 1);
-                    return json_decode($cleanJson, true);
+                    $cleanJson = substr($cleanJson, $start, $end - $start + 1);
+                    $data = json_decode($cleanJson, true);
+                    
+                    if (json_last_error() === JSON_ERROR_NONE) {
+                        return $data;
+                    } else {
+                        // 🟢 تسجيل سبب الفشل بدقة في ملف الـ Log
+                        Log::error("Gemini JSON Parse Error for {$crypto->name}: " . json_last_error_msg() . " | Raw: " . $cleanJson);
+                    }
+                } else {
+                    Log::error("Gemini no JSON found for {$crypto->name} | Raw: " . $text);
                 }
+            } else {
+                Log::error("Gemini API Error for {$crypto->name}", ['status' => $response->status(), 'body' => $response->body()]);
             }
         } catch (\Exception $e) {
-            Log::error("AI Report Error: " . $e->getMessage());
+            Log::error("AI Report Error for {$crypto->name}: " . $e->getMessage());
         }
         return null;
     }
