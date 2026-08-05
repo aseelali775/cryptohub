@@ -22,16 +22,15 @@ class GenerateCryptoAiReports extends Command
             $this->error('GEMINI_API_KEY is missing.'); return;
         }
 
-        // 🟢 جلب أول 50 عملة فقط لتجنب استنزاف الـ Quota
+        // 🟢 الإصلاح هنا: جلب أعلى 50 عملة من حيث القيمة السوقية (market_cap) بدلاً من market_cap_rank
         $cryptos = Cryptocurrency::with('aliases')
-            ->where('market_cap_rank', '<=', 50)
-            ->orderBy('market_cap_rank')
+            ->orderBy('market_cap', 'desc')
+            ->limit(50)
             ->get();
 
         foreach ($cryptos as $crypto) {
             $this->info("🤖 Analyzing: {$crypto->name}...");
 
-            // 🟢 استخدام نظام الـ Aliases لجلب أدق سياق إخباري
             $searchTerms = array_unique(array_merge(
                 [$crypto->name, $crypto->symbol],
                 $crypto->aliases->pluck('alias')->toArray()
@@ -45,7 +44,6 @@ class GenerateCryptoAiReports extends Command
                     }
                 })->latest()->take(6)->get();
 
-            // إذا لم يكن هناك أخبار، نتجاهل العملة
             if ($recentNews->isEmpty()) {
                 $this->warn("⚠️ No recent news for {$crypto->name}. Skipping.");
                 continue;
@@ -67,13 +65,12 @@ class GenerateCryptoAiReports extends Command
                 ]);
                 $this->info("✅ Report saved for {$crypto->name}");
                 
-                // مسح كاش التقرير ليظهر فوراً في صفحة العملة
                 Cache::forget("coin_ai_report_{$crypto->symbol}");
             } else {
                 $this->error("❌ Failed to parse response for {$crypto->name}");
             }
 
-            sleep(2); // 🟢 2 ثانية كما اقترحت (سريع وآمن)
+            sleep(2);
         }
         $this->info('🚀 All AI Reports Generated Successfully!');
     }
@@ -107,7 +104,6 @@ class GenerateCryptoAiReports extends Command
             $response = Http::timeout(60)->post($url, $payload);
             if ($response->successful()) {
                 $text = $response->json()['candidates'][0]['content']['parts'][0]['text'] ?? '';
-                // التنظيف الجراحي الآمن
                 $start = strpos($text, '{');
                 $end = strrpos($text, '}');
                 if ($start !== false && $end !== false) {
