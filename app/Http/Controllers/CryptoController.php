@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cryptocurrency;
 use App\Models\News;
-use App\Services\NewsFormatterService; // 🟢 استدعاء السيرفيس
+use App\Services\NewsFormatterService;
 use Illuminate\Support\Facades\Cache;
 use Inertia\Inertia;
 
@@ -12,32 +12,44 @@ class CryptoController extends Controller
 {
     public function show($symbol)
     {
-        // 1. جلب بيانات العملة
-        $crypto = Cryptocurrency::where('symbol', strtoupper($symbol))->firstOrFail();
+        // 1. جلب العملة مع الأسماء البديلة
+        $crypto = Cryptocurrency::with('aliases')->where('symbol', strtoupper($symbol))->firstOrFail();
 
-        // 2. جلب الأخبار الذكية الخاصة بالعملة (مع كاش لمدة 30 دقيقة)
+        // 2. تجميع كل الكلمات التي تدل على هذه العملة
+        $searchTerms = array_unique(array_merge(
+            [$crypto->name, $crypto->symbol],
+            $crypto->aliases->pluck('alias')->toArray()
+        ));
+
+        // 3. جلب الأخبار المرتبطة بأي كلمة من هذه الكلمات
         $coinNews = Cache::remember(
             'coin_news_' . $crypto->symbol,
-            1800, // 30 دقيقة
-            function () use ($crypto) {
+            1800, // نصف ساعة
+            function () use ($searchTerms) {
                 return News::where('ai_processed', true)
-                    ->where(function($query) use ($crypto) {
-                        $query->whereJsonContains('keywords', $crypto->name)
-                              ->orWhereJsonContains('keywords', $crypto->symbol);
+                    ->where(function($query) use ($searchTerms) {
+                        foreach ($searchTerms as $term) {
+
+    $query->orWhereJsonContains('keywords', $term)
+
+          ->orWhere('title_en', 'LIKE', "%{$term}%")
+
+          ->orWhere('content_en', 'LIKE', "%{$term}%");
+
+}
                     })
                     ->latest()
-                    ->take(5)
+                    ->take(6)
                     ->get()
                     ->map(function($item) {
-                        return NewsFormatterService::format($item); // 🟢 استخدام السيرفيس النظيف
+                        return NewsFormatterService::format($item);
                     });
             }
         );
 
-        // 3. إرسال البيانات للواجهة
         return Inertia::render('Crypto/Show', [
             'crypto'   => $crypto,
-            'coinNews' => $coinNews // 🟢 إرسال الأخبار للواجهة
+            'coinNews' => $coinNews,
         ]);
     }
 }
