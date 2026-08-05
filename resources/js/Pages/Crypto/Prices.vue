@@ -60,7 +60,7 @@
           </div>
 
           <Link 
-            :href="`/crypto/${crypto.symbol.toLowerCase()}`" 
+            :href="`/crypto/${crypto.symbol?.toLowerCase() || ''}`" 
             v-for="(crypto, index) in filteredCryptos" 
             :key="crypto.id" 
             class="flex items-center justify-between p-3 sm:p-4 bg-white dark:bg-[#151e32] rounded-2xl border border-slate-100 dark:border-slate-800/80 shadow-sm hover:shadow-md hover:border-emerald-500/50 dark:hover:bg-[#1e293b]/50 transition-all group"
@@ -90,13 +90,13 @@
 
               <div class="flex flex-col items-end w-20 sm:w-24">
                 <span class="font-mono font-bold text-slate-900 dark:text-white text-sm sm:text-base tracking-tight">
-                  ${{ Number(crypto.current_price).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 6 }) }}
+                  ${{ Number(crypto.current_price || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 6 }) }}
                 </span>
                 <span 
                   class="text-[10px] sm:text-xs font-black px-1.5 py-0.5 rounded mt-1 font-mono"
                   :class="crypto.change_24h >= 0 ? 'bg-emerald-50 dark:bg-emerald-500/10 text-emerald-500' : 'bg-rose-50 dark:bg-rose-500/10 text-rose-500'"
                 >
-                  {{ crypto.change_24h >= 0 ? '▲ +' : '▼ ' }}{{ Math.abs(crypto.change_24h) }}%
+                  {{ crypto.change_24h >= 0 ? '▲ +' : '▼ ' }}{{ Math.abs(crypto.change_24h || 0) }}%
                 </span>
               </div>
             </div>
@@ -121,41 +121,42 @@ import { Link, usePage, Head } from '@inertiajs/vue3';
 import { computed, ref } from 'vue';
 
 const props = defineProps({
-  cryptos: { type: Array, default: () => [] }
+  // 🟢 تعديل الـ Type ليقبل Object (بسبب paginate) أو Array
+  cryptos: { type: [Array, Object], default: () => [] }
 });
 
 const page = usePage();
 const locale = computed(() => page.props.locale || 'ar');
 
-// 🟢 أنظمة البحث والفلترة الفورية (Client-Side)
 const searchQuery = ref('');
 const activeFilter = ref('all');
 
 const filteredCryptos = computed(() => {
-  let result = props.cryptos;
+  // 🟢 استخراج البيانات سواء كانت من get() أو من paginate()
+  let result = Array.isArray(props.cryptos) ? props.cryptos : (props.cryptos.data || []);
 
-  // 1. تطبيق الفلتر الأفقي
   if (activeFilter.value === 'gainers') {
     result = result.filter(c => c.change_24h > 0).sort((a, b) => b.change_24h - a.change_24h);
   } else if (activeFilter.value === 'losers') {
     result = result.filter(c => c.change_24h < 0).sort((a, b) => a.change_24h - b.change_24h);
   } else if (activeFilter.value === 'mega') {
-    result = result.filter(c => ['BTC', 'ETH', 'SOL', 'BNB'].includes(c.symbol.toUpperCase()));
+    // 🟢 حماية دالة toUpperCase 
+    result = result.filter(c => c.symbol && ['BTC', 'ETH', 'SOL', 'BNB'].includes(c.symbol.toUpperCase()));
   }
 
-  // 2. تطبيق البحث النصي
   if (searchQuery.value) {
     const q = searchQuery.value.toLowerCase();
-    result = result.filter(c => 
-      c.name.toLowerCase().includes(q) || 
-      c.symbol.toLowerCase().includes(q)
-    );
+    result = result.filter(c => {
+      // 🟢 حماية دالة toLowerCase باستخدام Optional Chaining
+      const nameLower = c.name?.toLowerCase() || '';
+      const symbolLower = c.symbol?.toLowerCase() || '';
+      return nameLower.includes(q) || symbolLower.includes(q);
+    });
   }
 
   return result;
 });
 
-// 🟢 الترجمات
 const translations = {
   ar: {
     title: 'الأسواق',
