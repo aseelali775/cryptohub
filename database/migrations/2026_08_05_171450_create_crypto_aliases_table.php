@@ -9,15 +9,19 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-   public function up() {
-    Schema::create('crypto_aliases', function (Blueprint $table) {
-        $table->id();
-        $table->foreignId('cryptocurrency_id')->constrained('cryptocurrencies')->cascadeOnDelete();
-        $table->string('alias'); 
-        $table->timestamps();
-        $table->index(['cryptocurrency_id', 'alias']); 
-    });
-}
+ public function up() {
+        // 🟢 هذا السطر سيجبر Railway على حذف الجدول المعلق قبل محاولة إنشائه
+        Schema::dropIfExists('crypto_aliases'); 
+
+        Schema::create('crypto_aliases', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('cryptocurrency_id')->constrained('cryptocurrencies')->cascadeOnDelete();
+            $table->string('alias'); 
+            $table->timestamps();
+            
+            $table->index(['cryptocurrency_id', 'alias']); 
+        });
+    }
 
     /**
      * Reverse the migrations.
