@@ -23,8 +23,9 @@ class Cryptocurrency extends Model
         'market_cap',   // 🟢 القيمة السوقية
     ];
 
-    public function aliases()
+   public function aliases() { return $this->hasMany(CryptoAlias::class); }
+   public function aiReports()
     {
-        return $this->hasMany(CryptoAlias::class);
+        return $this->hasMany(CryptoAiReport::class);
     }
 }

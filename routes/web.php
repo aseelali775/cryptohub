@@ -5,6 +5,7 @@ use App\Http\Controllers\CryptoController;
 use App\Http\Controllers\NewsController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
+use App\Http\Controllers\AiMarketController;
 
 // 1. مسار الصفحة الرئيسية العامة للموقع (مربوط بـ HomeController)
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -19,6 +20,10 @@ Route::get('/crypto/{symbol}', [CryptoController::class, 'show'])->name('crypto.
 Route::get('/news', [NewsController::class, 'index'])->name('news.index');
 
 Route::get('/news/{id}-{slug?}', [NewsController::class, 'show'])->name('news.show');
+// ... (باقي الروابط)
+Route::get('/ai-market', [AiMarketController::class, 'index'])->name('ai-market');
+
+
 
 // 5. المحرك العالمي للتبديل الفوري بين اللغتين (العربية والإنجليزية)
 Route::get('/lang/{lang}', function ($lang) {

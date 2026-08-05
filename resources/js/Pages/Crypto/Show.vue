@@ -36,8 +36,9 @@
             📰 {{ locale === 'ar' ? 'الأخبار' : 'News' }}
             <span class="bg-emerald-100 text-emerald-600 dark:bg-emerald-500/20 px-1.5 py-0.5 rounded text-[10px]">{{ coinNews.length }}</span>
           </button>
-          <button @click="activeTab = 'ai'" :class="activeTab === 'ai' ? 'border-amber-500 text-amber-600 dark:text-amber-400' : 'border-transparent text-slate-500 hover:text-slate-700 dark:hover:text-slate-300'" class="whitespace-nowrap pb-4 px-2 border-b-2 font-bold transition-colors flex items-center gap-2">
+          <button @click="activeTab = 'ai'" :class="activeTab === 'ai' ? 'border-amber-500 text-amber-600 dark:text-amber-400' : 'border-transparent text-slate-500 hover:text-slate-700 dark:hover:text-slate-300'" class="whitespace-nowrap pb-4 px-2 border-b-2 font-bold transition-colors flex items-center gap-2 relative">
             🤖 {{ locale === 'ar' ? 'تحليل الذكاء الاصطناعي' : 'AI Analysis' }}
+            <span v-if="!aiReport" class="absolute top-0 right-0 -translate-y-1/2 translate-x-full flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span></span>
           </button>
         </div>
 
@@ -83,14 +84,74 @@
         </div>
 
         <div v-show="activeTab === 'ai'" class="animate-fade-in">
-          <div class="text-center py-24 bg-gradient-to-br from-indigo-50 to-white dark:from-[#151e32] dark:to-[#0f172a] border border-indigo-100 dark:border-indigo-500/20 rounded-3xl shadow-sm relative overflow-hidden">
-             <div class="absolute top-0 right-0 w-64 h-64 bg-indigo-500/10 blur-3xl rounded-full translate-x-1/2 -translate-y-1/2"></div>
-             <span class="text-6xl block mb-6 animate-pulse">🤖</span>
-             <h3 class="text-2xl font-black text-slate-900 dark:text-white mb-3">{{ locale === 'ar' ? 'تقرير الذكاء الاصطناعي قادم قريباً' : 'AI Report Coming Soon' }}</h3>
-             <p class="text-slate-500 dark:text-slate-400 max-w-md mx-auto leading-relaxed">
-               {{ locale === 'ar' ? 'يتم حالياً تجهيز نموذج الذكاء الاصطناعي الخاص بـ CryptoHub لتوليد تقارير شاملة بشكل آلي لهذه العملة.' : 'CryptoHub AI model is currently being integrated to generate automated market intelligence reports.' }}
-             </p>
+          
+          <div v-if="aiReport" class="bg-white dark:bg-[#151e32] p-6 sm:p-8 border border-slate-200 dark:border-slate-800 rounded-3xl shadow-sm relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-64 h-64 bg-indigo-500/5 blur-3xl rounded-full translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
+            
+            <div class="relative z-10 flex flex-col lg:flex-row gap-8">
+              
+              <div class="lg:w-1/3 space-y-6">
+                <div class="p-6 rounded-2xl border" :class="aiReport.trend === 'Bullish' ? 'bg-emerald-50 border-emerald-200 dark:bg-emerald-500/10 dark:border-emerald-500/20' : (aiReport.trend === 'Bearish' ? 'bg-rose-50 border-rose-200 dark:bg-rose-500/10 dark:border-rose-500/20' : 'bg-slate-50 border-slate-200 dark:bg-slate-800/50 dark:border-slate-700')">
+                  <span class="block text-sm font-bold text-slate-500 dark:text-slate-400 mb-2">{{ locale === 'ar' ? 'الاتجاه الحالي (Trend)' : 'Current Trend' }}</span>
+                  <span class="text-3xl font-black flex items-center gap-2" :class="aiReport.trend === 'Bullish' ? 'text-emerald-600 dark:text-emerald-400' : (aiReport.trend === 'Bearish' ? 'text-rose-600 dark:text-rose-400' : 'text-slate-700 dark:text-slate-300')">
+                    {{ aiReport.trend === 'Bullish' ? (locale === 'ar' ? 'صعودي 🚀' : 'Bullish 🚀') : (aiReport.trend === 'Bearish' ? (locale === 'ar' ? 'هبوطي 📉' : 'Bearish 📉') : (locale === 'ar' ? 'محايد ⚖️' : 'Neutral ⚖️')) }}
+                  </span>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                  <div class="p-5 rounded-2xl bg-indigo-50 border border-indigo-100 dark:bg-indigo-500/10 dark:border-indigo-500/20 text-center">
+                    <span class="block text-xs font-bold text-indigo-500 mb-1">{{ locale === 'ar' ? 'الثقة' : 'Confidence' }}</span>
+                    <span class="text-2xl font-black text-indigo-700 dark:text-indigo-400 font-mono">{{ aiReport.confidence }}%</span>
+                  </div>
+                  <div class="p-5 rounded-2xl bg-amber-50 border border-amber-100 dark:bg-amber-500/10 dark:border-amber-500/20 text-center">
+                    <span class="block text-xs font-bold text-amber-500 mb-1">{{ locale === 'ar' ? 'قوة التأثير' : 'Strength' }}</span>
+                    <span class="text-2xl font-black text-amber-700 dark:text-amber-400 font-mono">{{ aiReport.strength_score }}/10</span>
+                  </div>
+                </div>
+                
+                <div class="text-[10px] text-slate-400 text-center font-mono">
+                  {{ locale === 'ar' ? 'تم التوليد:' : 'Generated:' }} {{ new Date(aiReport.generated_at).toLocaleString() }}
+                </div>
+              </div>
+
+              <div class="lg:w-2/3 space-y-8">
+                <div>
+                  <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3 border-b border-slate-100 dark:border-slate-800 pb-2 flex items-center gap-2">
+                    🤖 {{ locale === 'ar' ? 'خلاصة الذكاء الاصطناعي' : 'AI Summary' }}
+                  </h3>
+                  <p class="text-slate-600 dark:text-slate-300 leading-relaxed sm:leading-loose font-medium">{{ aiReport.summary }}</p>
+                </div>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <div class="bg-emerald-50/50 dark:bg-emerald-500/5 border border-emerald-100 dark:border-emerald-500/20 p-5 rounded-2xl">
+                    <h4 class="font-bold text-emerald-800 dark:text-emerald-400 mb-4 flex items-center gap-2">🟢 {{ locale === 'ar' ? 'الدوافع الإيجابية' : 'Positive Drivers' }}</h4>
+                    <ul class="space-y-3">
+                      <li v-for="(factor, idx) in aiReport.bullish_factors" :key="idx" class="text-sm text-emerald-700 dark:text-emerald-300/80 flex items-start gap-2 font-medium">
+                        <span class="text-emerald-500">✓</span> <span>{{ factor }}</span>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div class="bg-rose-50/50 dark:bg-rose-500/5 border border-rose-100 dark:border-rose-500/20 p-5 rounded-2xl">
+                    <h4 class="font-bold text-rose-800 dark:text-rose-400 mb-4 flex items-center gap-2">🔴 {{ locale === 'ar' ? 'المخاطر المحتملة' : 'Risks' }}</h4>
+                    <ul class="space-y-3">
+                      <li v-for="(risk, idx) in aiReport.risk_factors" :key="idx" class="text-sm text-rose-700 dark:text-rose-300/80 flex items-start gap-2 font-medium">
+                        <span class="text-rose-500">⚠</span> <span>{{ risk }}</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+            </div>
           </div>
+          
+          <div v-else class="text-center py-20 bg-white dark:bg-[#151e32] border border-slate-200 dark:border-slate-800 rounded-3xl shadow-sm">
+            <span class="text-5xl block mb-4 opacity-50">⏳</span>
+            <h3 class="font-bold text-slate-900 dark:text-white mb-2">{{ locale === 'ar' ? 'لا يوجد تقرير كافٍ' : 'Report Not Available' }}</h3>
+            <p class="text-sm text-slate-500 max-w-md mx-auto">{{ locale === 'ar' ? 'نموذج الذكاء الاصطناعي يحتاج لمزيد من الأخبار والبيانات عن هذه العملة لتوليد تقرير دقيق.' : 'The AI model requires more news data about this coin to generate an accurate report.' }}</p>
+          </div>
+
         </div>
 
       </div>
@@ -107,7 +168,9 @@ import VueApexCharts from "vue3-apexcharts";
 const props = defineProps({
   crypto: { type: Object, required: true },
   chartData: { type: Object, required: true },
-  coinNews: { type: Array, default: () => [] }
+  coinNews: { type: Array, default: () => [] },
+  // 🟢 إضافة التقرير كـ Prop
+  aiReport: { type: Object, default: () => null }
 });
 
 const page = usePage();
