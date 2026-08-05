@@ -22,7 +22,7 @@
             </span>
           </div>
 
-       <nav class="hidden lg:flex items-center gap-8 h-full">
+      <nav class="hidden lg:flex items-center gap-8 h-full">
             
             <Link 
               href="/" 
@@ -30,6 +30,14 @@
               :class="$page.url === '/' ? 'font-bold text-emerald-600 dark:text-emerald-400 border-emerald-500' : 'font-medium text-slate-600 dark:text-slate-400 border-transparent hover:text-slate-900 dark:hover:text-white'"
             >
               {{ t('navHome') }}
+            </Link>
+
+            <Link 
+              href="/prices" 
+              class="h-full flex items-center text-sm transition-colors border-b-2"
+              :class="$page.url.startsWith('/prices') || $page.url.startsWith('/crypto') ? 'font-bold text-emerald-600 dark:text-emerald-400 border-emerald-500' : 'font-medium text-slate-600 dark:text-slate-400 border-transparent hover:text-slate-900 dark:hover:text-white'"
+            >
+              {{ t('navPrices') }}
             </Link>
 
             <Link 
@@ -41,11 +49,11 @@
             </Link>
 
             <Link 
-              href="/prices" 
-              class="h-full flex items-center text-sm transition-colors border-b-2"
-              :class="$page.url.startsWith('/prices') || $page.url.startsWith('/crypto') ? 'font-bold text-emerald-600 dark:text-emerald-400 border-emerald-500' : 'font-medium text-slate-600 dark:text-slate-400 border-transparent hover:text-slate-900 dark:hover:text-white'"
+              href="/ai-market" 
+              class="h-full flex items-center gap-1.5 text-sm transition-colors border-b-2"
+              :class="$page.url.startsWith('/ai-market') ? 'font-bold text-indigo-600 dark:text-indigo-400 border-indigo-500' : 'font-medium text-slate-600 dark:text-slate-400 border-transparent hover:text-indigo-600 dark:hover:text-indigo-400'"
             >
-              {{ t('navPrices') }}
+              <span>🤖</span> {{ locale === 'ar' ? 'الذكاء الاصطناعي' : 'AI Market' }}
             </Link>
 
             <Link href="#" class="h-full flex items-center text-sm font-medium text-slate-600 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-900 dark:hover:text-white transition-colors">
