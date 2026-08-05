@@ -11,17 +11,18 @@ use Inertia\Inertia;
 class CryptoController extends Controller
 {
 
-    public function index()
+   public function index()
     {
-        // جلب العملات لصفحة الأسواق/الأسعار مع التقسيم (Pagination) أو جلبها كاملة
-        $cryptos = Cryptocurrency::orderBy('market_cap_rank', 'asc')->paginate(50);
+        // 🟢 استخدام market_cap بدلاً من market_cap_rank
+        // الترتيب التنازلي للقيمة السوقية يعطينا نفس نتيجة الترتيب (البيتكوين أولاً ثم الإيثريوم...الخ)
+        $cryptos = Cryptocurrency::orderBy('market_cap', 'desc')->paginate(50);
 
         return Inertia::render('Crypto/Prices', [
             'cryptos' => $cryptos
         ]);
-    }   
+    }  
 
-    
+
     public function show($symbol)
     {
         // 1. جلب العملة مع الأسماء البديلة (الـ Aliases)
