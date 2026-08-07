@@ -63,8 +63,15 @@
         </div>
       </header>
 
-      <Teleport defer to="body">
-        <transition enter-active-class="transition-opacity duration-300" enter-from-class="opacity-0" enter-to-class="opacity-100" leave-active-class="transition-opacity duration-300" leave-from-class="opacity-100" leave-to-class="opacity-0">
+      <Teleport to="body">
+        <transition 
+          enter-active-class="transition-opacity duration-300" 
+          enter-from-class="opacity-0" 
+          enter-to-class="opacity-100" 
+          leave-active-class="transition-opacity duration-300" 
+          leave-from-class="opacity-100" 
+          leave-to-class="opacity-0"
+        >
           <div v-if="mobileMenuOpen" @click="mobileMenuOpen = false" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 lg:hidden"></div>
         </transition>
 
@@ -76,11 +83,12 @@
           leave-from-class="translate-x-0" 
           :leave-to-class="locale === 'ar' ? 'translate-x-full' : '-translate-x-full'"
         >
-          <div v-if="mobileMenuOpen" 
-               class="fixed top-0 bottom-0 z-[60] w-[280px] bg-white dark:bg-[#0b1121] shadow-2xl flex flex-col lg:hidden"
-               :class="locale === 'ar' ? 'right-0 border-l border-slate-200 dark:border-slate-800/80' : 'left-0 border-r border-slate-200 dark:border-slate-800/80'"
-               :dir="locale === 'ar' ? 'rtl' : 'ltr'">
-            
+          <div 
+            v-if="mobileMenuOpen" 
+            class="fixed top-0 bottom-0 z-[60] w-[280px] bg-white dark:bg-[#0b1121] shadow-2xl flex flex-col lg:hidden"
+            :class="locale === 'ar' ? 'right-0 left-auto border-l border-slate-200 dark:border-slate-800/80' : 'left-0 right-auto border-r border-slate-200 dark:border-slate-800/80'"
+            :dir="locale === 'ar' ? 'rtl' : 'ltr'"
+          >
             <div class="h-20 px-6 flex items-center justify-between border-b border-slate-100 dark:border-slate-800/80 shrink-0">
               <div class="flex items-center gap-2">
                 <div class="w-6 h-6 rounded bg-emerald-500 flex items-center justify-center transform rotate-45">
@@ -186,14 +194,13 @@
 import { Link, usePage } from '@inertiajs/vue3';
 import { computed, ref, onMounted } from 'vue';
 
-// 1. جلب بيانات الصفحة للتعرف على اللغة
 const page = usePage();
 const locale = computed(() => page.props.locale || 'ar');
 
-// 🟢 2. حالة القائمة الجانبية للهاتف (Sidebar)
+// حالة القائمة الجانبية للهاتف
 const mobileMenuOpen = ref(false);
 
-// 3. إدارة حالة الوضع المظلم/المضيء عالمياً
+// إدارة حالة الوضع المظلم/المضيء
 const isDarkMode = ref(true);
 
 const updateHtmlClass = () => {
@@ -218,7 +225,7 @@ onMounted(() => {
   updateHtmlClass();
 });
 
-// 4. القاموس الموحد للمصطلحات
+// الترجمات الموحدة
 const translations = {
   ar: {
     navHome: "الرئيسية",
