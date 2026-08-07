@@ -2,66 +2,49 @@
   <div :dir="locale === 'ar' ? 'rtl' : 'ltr'">
     <div class="min-h-screen bg-slate-50 dark:bg-[#0b1121] text-slate-800 dark:text-slate-100 flex flex-col antialiased font-sans transition-colors duration-300 selection:bg-emerald-500 selection:text-white">
       
-      <header class="w-full bg-white dark:bg-[#0b1121] border-b border-gray-200 dark:border-slate-800/80 sticky top-0 z-50 transition-colors duration-300">
+      <header class="w-full bg-white dark:bg-[#0b1121] border-b border-gray-200 dark:border-slate-800/80 sticky top-0 z-40 transition-colors duration-300">
         <div class="max-w-[1440px] mx-auto h-20 px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
           
-          <div class="flex items-center gap-2 flex-shrink-0">
-            <div class="w-8 h-8 rounded bg-emerald-500 flex items-center justify-center transform rotate-45">
+          <Link href="/" class="flex items-center gap-2 flex-shrink-0 cursor-pointer group">
+            <div class="w-8 h-8 rounded bg-emerald-500 flex items-center justify-center transform rotate-45 group-hover:scale-105 transition-transform">
               <div class="w-3 h-3 bg-white rounded-full"></div>
             </div>
-            <span class="text-xl font-black tracking-tight text-slate-900 dark:text-white font-mono ms-1">
+            <span class="text-xl font-black tracking-tight text-slate-900 dark:text-white font-mono ms-1 group-hover:text-emerald-500 transition-colors">
               CryptoHub
             </span>
-          </div>
+          </Link>
 
           <nav class="hidden lg:flex items-center gap-8 h-full">
-            
-            <Link 
-              href="/" 
-              class="h-full flex items-center text-sm transition-colors border-b-2"
-              :class="$page.url === '/' ? 'font-bold text-emerald-600 dark:text-emerald-400 border-emerald-500' : 'font-medium text-slate-600 dark:text-slate-400 border-transparent hover:text-slate-900 dark:hover:text-white'"
-            >
+            <Link href="/" class="h-full flex items-center text-sm transition-colors border-b-2" :class="$page.url === '/' ? 'font-bold text-emerald-600 dark:text-emerald-400 border-emerald-500' : 'font-medium text-slate-600 dark:text-slate-400 border-transparent hover:text-slate-900 dark:hover:text-white'">
               {{ t('navHome') }}
             </Link>
 
-            <Link 
-              href="/prices" 
-              class="h-full flex items-center text-sm transition-colors border-b-2"
-              :class="$page.url.startsWith('/prices') || $page.url.startsWith('/crypto') ? 'font-bold text-emerald-600 dark:text-emerald-400 border-emerald-500' : 'font-medium text-slate-600 dark:text-slate-400 border-transparent hover:text-slate-900 dark:hover:text-white'"
-            >
+            <Link href="/prices" class="h-full flex items-center text-sm transition-colors border-b-2" :class="$page.url.startsWith('/prices') || $page.url.startsWith('/crypto') ? 'font-bold text-emerald-600 dark:text-emerald-400 border-emerald-500' : 'font-medium text-slate-600 dark:text-slate-400 border-transparent hover:text-slate-900 dark:hover:text-white'">
               {{ t('navPrices') }}
             </Link>
 
-            <Link 
-              href="/news" 
-              class="h-full flex items-center text-sm transition-colors border-b-2"
-              :class="$page.url.startsWith('/news') ? 'font-bold text-emerald-600 dark:text-emerald-400 border-emerald-500' : 'font-medium text-slate-600 dark:text-slate-400 border-transparent hover:text-slate-900 dark:hover:text-white'"
-            >
+            <Link href="/news" class="h-full flex items-center text-sm transition-colors border-b-2" :class="$page.url.startsWith('/news') ? 'font-bold text-emerald-600 dark:text-emerald-400 border-emerald-500' : 'font-medium text-slate-600 dark:text-slate-400 border-transparent hover:text-slate-900 dark:hover:text-white'">
               {{ t('navNews') }}
             </Link>
 
-            <Link 
-              href="/ai-market" 
-              class="h-full flex items-center gap-2 text-sm transition-colors border-b-2 group"
-              :class="$page.url.startsWith('/ai-market') ? 'font-bold text-indigo-600 dark:text-indigo-400 border-indigo-500' : 'font-medium text-slate-600 dark:text-slate-400 border-transparent hover:text-indigo-600 dark:hover:text-indigo-400'"
-            >
+            <Link href="/ai-market" class="h-full flex items-center gap-2 text-sm transition-colors border-b-2 group" :class="$page.url.startsWith('/ai-market') ? 'font-bold text-indigo-600 dark:text-indigo-400 border-indigo-500' : 'font-medium text-slate-600 dark:text-slate-400 border-transparent hover:text-indigo-600 dark:hover:text-indigo-400'">
               <span>{{ t('navAiMarket') }}</span>
               <span class="bg-gradient-to-r from-indigo-500 to-purple-500 text-white text-[10px] font-black font-mono px-1.5 py-0.5 rounded-md uppercase tracking-wider shadow-sm group-hover:animate-pulse">
                 AI
               </span>
             </Link>
-
           </nav>
 
           <div class="flex items-center gap-3 sm:gap-5 flex-shrink-0">
             
+            <button @click="mobileMenuOpen = true" class="lg:hidden w-10 h-10 flex items-center justify-center rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+              </svg>
+            </button>
+
             <div class="hidden md:flex relative group opacity-60 cursor-not-allowed">
-              <input 
-                type="text" 
-                :placeholder="t('searchPlaceholder')" 
-                disabled
-                class="h-10 w-48 lg:w-64 bg-slate-100 dark:bg-[#151e32] border border-transparent dark:border-slate-800 rounded-full px-4 text-sm text-slate-700 dark:text-slate-200 cursor-not-allowed placeholder-slate-500"
-              >
+              <input type="text" :placeholder="t('searchPlaceholder')" disabled class="h-10 w-48 lg:w-64 bg-slate-100 dark:bg-[#151e32] border border-transparent dark:border-slate-800 rounded-full px-4 text-sm text-slate-700 dark:text-slate-200 cursor-not-allowed placeholder-slate-500">
               <div class="absolute inset-y-0 end-3 flex items-center pointer-events-none text-slate-400">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
               </div>
@@ -75,19 +58,76 @@
               <svg v-if="!isDarkMode" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
               <svg v-else xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
             </button>
-
-            <div class="hidden sm:flex items-center gap-3">
-              <Link href="/login" class="h-10 px-4 flex items-center justify-center rounded-xl border border-slate-200 dark:border-slate-700 text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all">
-                {{ t('btnLogin') }}
-              </Link>
-              <Link href="/register" class="h-10 px-5 flex items-center justify-center rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-semibold transition-all shadow-lg shadow-emerald-500/20">
-                {{ t('btnSignup') }}
-              </Link>
-            </div>
             
           </div>
         </div>
       </header>
+
+      <Teleport defer to="body">
+        <transition enter-active-class="transition-opacity duration-300" enter-from-class="opacity-0" enter-to-class="opacity-100" leave-active-class="transition-opacity duration-300" leave-from-class="opacity-100" leave-to-class="opacity-0">
+          <div v-if="mobileMenuOpen" @click="mobileMenuOpen = false" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 lg:hidden"></div>
+        </transition>
+
+        <transition 
+          enter-active-class="transition-transform duration-300 ease-out" 
+          :enter-from-class="locale === 'ar' ? 'translate-x-full' : '-translate-x-full'" 
+          enter-to-class="translate-x-0" 
+          leave-active-class="transition-transform duration-300 ease-in" 
+          leave-from-class="translate-x-0" 
+          :leave-to-class="locale === 'ar' ? 'translate-x-full' : '-translate-x-full'"
+        >
+          <div v-if="mobileMenuOpen" 
+               class="fixed top-0 bottom-0 z-[60] w-[280px] bg-white dark:bg-[#0b1121] shadow-2xl flex flex-col lg:hidden"
+               :class="locale === 'ar' ? 'right-0 border-l border-slate-200 dark:border-slate-800/80' : 'left-0 border-r border-slate-200 dark:border-slate-800/80'"
+               :dir="locale === 'ar' ? 'rtl' : 'ltr'">
+            
+            <div class="h-20 px-6 flex items-center justify-between border-b border-slate-100 dark:border-slate-800/80 shrink-0">
+              <div class="flex items-center gap-2">
+                <div class="w-6 h-6 rounded bg-emerald-500 flex items-center justify-center transform rotate-45">
+                  <div class="w-2 h-2 bg-white rounded-full"></div>
+                </div>
+                <span class="text-lg font-black tracking-tight text-slate-900 dark:text-white font-mono ms-1">
+                  CryptoHub
+                </span>
+              </div>
+              <button @click="mobileMenuOpen = false" class="p-2 -me-2 text-slate-400 hover:text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-500/10 rounded-lg transition-colors">
+                <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
+            <div class="flex-1 overflow-y-auto py-6 px-4 space-y-2">
+              <Link href="/" @click="mobileMenuOpen = false" class="block px-4 py-3 rounded-xl text-base font-bold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" :class="{ 'bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400': $page.url === '/' }">
+                {{ t('navHome') }}
+              </Link>
+              
+              <Link href="/prices" @click="mobileMenuOpen = false" class="block px-4 py-3 rounded-xl text-base font-bold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" :class="{ 'bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400': $page.url.startsWith('/prices') || $page.url.startsWith('/crypto') }">
+                {{ t('navPrices') }}
+              </Link>
+              
+              <Link href="/news" @click="mobileMenuOpen = false" class="block px-4 py-3 rounded-xl text-base font-bold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" :class="{ 'bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400': $page.url.startsWith('/news') }">
+                {{ t('navNews') }}
+              </Link>
+              
+              <Link href="/ai-market" @click="mobileMenuOpen = false" class="flex items-center justify-between px-4 py-3 rounded-xl text-base font-bold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" :class="{ 'bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400': $page.url.startsWith('/ai-market') }">
+                <span class="flex items-center gap-2">
+                  <span>{{ t('navAiMarket') }}</span>
+                </span>
+                <span class="bg-indigo-500 text-white text-[10px] px-2 py-0.5 rounded uppercase tracking-wider font-mono shadow-sm">
+                  AI
+                </span>
+              </Link>
+            </div>
+            
+            <div class="p-6 border-t border-slate-100 dark:border-slate-800/80 shrink-0">
+              <p class="text-xs text-center text-slate-400 font-medium uppercase tracking-widest font-mono">
+                CryptoHub v1.0
+              </p>
+            </div>
+          </div>
+        </transition>
+      </Teleport>
 
       <main class="flex-1 min-w-0 w-full relative">
         <slot />
@@ -97,7 +137,6 @@
         <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
           
           <div class="grid grid-cols-1 md:grid-cols-12 gap-10 items-center mb-12">
-            
             <div class="md:col-span-3 flex items-center gap-3">
               <a href="#" class="w-10 h-10 rounded-full bg-slate-100 dark:bg-[#151e32] flex items-center justify-center text-slate-600 dark:text-slate-400 hover:bg-emerald-500 hover:text-white transition-all">𝕏</a>
               <a href="#" class="w-10 h-10 rounded-full bg-slate-100 dark:bg-[#151e32] flex items-center justify-center text-slate-600 dark:text-slate-400 hover:bg-emerald-500 hover:text-white transition-all">✈️</a>
@@ -105,13 +144,9 @@
             </div>
 
             <div class="md:col-span-6 flex flex-col md:flex-row items-center justify-center gap-4 w-full">
-              <div class="flex w-full max-w-md relative">
-                <input 
-                  type="email" 
-                  :placeholder="t('newsletterPlaceholder')" 
-                  class="w-full h-12 bg-slate-50 dark:bg-[#151e32] border border-slate-200 dark:border-slate-800 rounded-full px-6 text-sm text-slate-700 dark:text-slate-200 focus:outline-none focus:border-emerald-500/50 transition-all pe-32"
-                >
-                <button class="absolute inset-y-1 end-1 h-10 px-6 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-semibold transition-all">
+              <div class="flex w-full max-w-md relative opacity-60">
+                <input type="email" disabled :placeholder="t('newsletterPlaceholder')" class="w-full h-12 bg-slate-50 dark:bg-[#151e32] border border-slate-200 dark:border-slate-800 rounded-full px-6 text-sm text-slate-700 dark:text-slate-200 cursor-not-allowed pe-32">
+                <button disabled class="absolute inset-y-1 end-1 h-10 px-6 rounded-full bg-emerald-500 text-white text-sm font-semibold cursor-not-allowed">
                   {{ t('btnSubscribe') }}
                 </button>
               </div>
@@ -120,7 +155,6 @@
                 <p class="text-xs text-slate-500 dark:text-slate-400">{{ t('newsletterDesc') }}</p>
               </div>
             </div>
-
           </div>
 
           <div class="w-full h-px bg-slate-200 dark:bg-slate-800/80 mb-8"></div>
@@ -132,7 +166,6 @@
               <a href="#" class="hover:text-emerald-500 transition-colors">{{ t('footerContact') }}</a>
               <a href="#" class="hover:text-emerald-500 transition-colors">{{ t('footerTerms') }}</a>
             </div>
-            
             <div class="text-xs text-slate-500 font-medium">
               {{ t('copyright') }}
             </div>
@@ -157,7 +190,10 @@ import { computed, ref, onMounted } from 'vue';
 const page = usePage();
 const locale = computed(() => page.props.locale || 'ar');
 
-// 2. إدارة حالة الوضع المظلم/المضيء عالمياً
+// 🟢 2. حالة القائمة الجانبية للهاتف (Sidebar)
+const mobileMenuOpen = ref(false);
+
+// 3. إدارة حالة الوضع المظلم/المضيء عالمياً
 const isDarkMode = ref(true);
 
 const updateHtmlClass = () => {
@@ -182,20 +218,18 @@ onMounted(() => {
   updateHtmlClass();
 });
 
-// 3. القاموس الموحد للمصطلحات 🟢
+// 4. القاموس الموحد للمصطلحات
 const translations = {
   ar: {
     navHome: "الرئيسية",
     navPrices: "الأسعار",
     navNews: "الأخبار",
-    navAiMarket: "ذكاء السوق", // الاسم الموحد
-    searchPlaceholder: "البحث العالمي (قريباً...)", // توضيح للمستخدم
-    btnLogin: "تسجيل الدخول",
-    btnSignup: "إنشاء حساب",
+    navAiMarket: "ذكاء السوق",
+    searchPlaceholder: "البحث العالمي (قريباً...)",
     newsletterPlaceholder: "أدخل بريدك الإلكتروني",
-    btnSubscribe: "اشترك الآن",
-    newsletterTitle: "اشترك في نشرتنا البريدية",
-    newsletterDesc: "احصل على أهم الأخبار والتحليلات مباشرة في بريدك",
+    btnSubscribe: "قريباً",
+    newsletterTitle: "النشرة البريدية (قريباً)",
+    newsletterDesc: "سيتم تفعيل الاشتراك قريباً لتقديم أهم التحليلات.",
     footerAbout: "من نحن",
     footerDisclaimer: "إخلاء مسؤولية",
     footerContact: "اتصل بنا",
@@ -207,14 +241,12 @@ const translations = {
     navHome: "Home",
     navPrices: "Prices",
     navNews: "News",
-    navAiMarket: "AI Market", // Official Standard
-    searchPlaceholder: "Global Search (Coming Soon...)", // توضيح للمستخدم
-    btnLogin: "Log In",
-    btnSignup: "Sign Up",
+    navAiMarket: "AI Market",
+    searchPlaceholder: "Global Search (Coming Soon...)",
     newsletterPlaceholder: "Enter your email",
-    btnSubscribe: "Subscribe",
-    newsletterTitle: "Subscribe to our Newsletter",
-    newsletterDesc: "Get the latest news and analytics straight to your inbox",
+    btnSubscribe: "Soon",
+    newsletterTitle: "Newsletter (Soon)",
+    newsletterDesc: "Subscription will be activated soon for top analytics.",
     footerAbout: "About Us",
     footerDisclaimer: "Disclaimer",
     footerContact: "Contact Us",
@@ -228,7 +260,6 @@ const t = (key) => translations[locale.value][key] || key;
 </script>
 
 <style>
-/* تنعيم انتقال الألوان عالمياً عند تبديل الوضع */
 html, body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
