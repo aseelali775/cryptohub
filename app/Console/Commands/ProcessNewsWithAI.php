@@ -30,7 +30,7 @@ class ProcessNewsWithAI extends Command
         }
 
 
-        $this->info('Starting CryptoHub AI Arabic Journalist...');
+        $this->info('Starting Aql Crypto AI Arabic Journalist...');
 
 
         $newsList = News::where('ai_processed', false)

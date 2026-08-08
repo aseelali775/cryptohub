@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>CryptoHub</title>
+    <title>Aql Crypto</title>
 
     <!-- حقن ملفات Vite بشكل منفصل وصريح لضمان تحميل التنسيقات والـ JS بشكل صحيح -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])

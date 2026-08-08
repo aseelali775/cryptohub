@@ -1,7 +1,7 @@
 <template>
   <HomeLayout>
    <Head>
-      <title>{{ newsItem?.translations[locale === 'ar' ? 'ar' : 'en']?.title }} | CryptoHub</title>
+      <title>{{ newsItem?.translations[locale === 'ar' ? 'ar' : 'en']?.title }} | Aql Crypto</title>
       
       <meta 
         name="description" 
@@ -11,7 +11,7 @@
           : newsItem?.translations?.en?.content
         " 
       />
-      <link rel="canonical" :href="`https://cryptohub.com/news/${newsItem.id}-${newsItem.slug}`" />
+      <link rel="canonical" :href="`https://aqlcrypto.com/news/${newsItem.id}-${newsItem.slug}`" />
       <meta property="og:image" :content="newsItem?.image_url" />
     </Head>
 
@@ -32,7 +32,7 @@
 
           <div class="flex flex-wrap items-center gap-2 sm:gap-3 text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-mono" :dir="locale === 'ar' ? 'rtl' : 'ltr'">
             <span class="px-3 py-1.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 font-bold tracking-wider">
-              {{ newsItem?.source || 'CryptoHub' }}
+              {{ newsItem?.source || 'Aql Crypto' }}
             </span>
             <span>•</span>
             <span>{{ newsItem?.date }}</span>

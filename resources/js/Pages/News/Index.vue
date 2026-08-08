@@ -2,7 +2,7 @@
   <HomeLayout>
     <Head>
       <title>
-        {{ locale === 'ar' ? 'آخر أخبار الكريبتو وتلخيصات الذكاء الاصطناعي | CryptoHub' : 'Latest Crypto News & AI Summaries | CryptoHub' }}
+        {{ locale === 'ar' ? 'آخر أخبار الكريبتو وتلخيصات الذكاء الاصطناعي | Aql Crypto' : 'Latest Crypto News & AI Summaries | Aql Crypto' }}
       </title>
       <meta 
         name="description" 
@@ -50,7 +50,7 @@
               <span v-else-if="item.sentiment === 'Neutral'" class="absolute top-3 left-3 bg-slate-500/90 text-white text-[10px] px-2 py-1 rounded font-bold backdrop-blur-sm z-10">⚪ {{ locale === 'ar' ? 'محايد' : 'Neutral' }}</span>
 
               <span class="absolute bottom-3 right-3 bg-[#0f172a]/80 text-slate-200 text-[10px] px-2.5 py-1.5 rounded font-bold backdrop-blur-sm border border-white/10 z-10 pointer-events-none">
-                {{ item.source || 'CryptoHub' }}
+                {{ item.source || 'Aql Crypto' }}
               </span>
             </div>
 

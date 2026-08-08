@@ -1,7 +1,7 @@
 <template>
   <HomeLayout>
     <Head>
-      <title>{{ locale === 'ar' ? `تحليل ${crypto.name} | CryptoHub` : `${crypto.name} Analysis | CryptoHub` }}</title>
+      <title>{{ locale === 'ar' ? `تحليل ${crypto.name} | Aql Crypto` : `${crypto.name} Analysis | Aql Crypto` }}</title>
     </Head>
 
     <div class="w-full min-h-screen pb-24 bg-slate-50 dark:bg-[#0b1121] transition-colors">

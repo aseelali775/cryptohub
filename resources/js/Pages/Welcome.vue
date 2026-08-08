@@ -185,7 +185,7 @@ const refreshPrices = () => {
 // قاموس الترجمة المركزي ومفاتيح التحذيرات القانونية والسيو المحدثة
 const translations = {
   ar: {
-    seo_title: 'لوحة التحكم - معالجة ومحاكاة الأسواق الحية | CryptoHub',
+    seo_title: 'لوحة التحكم - معالجة ومحاكاة الأسواق الحية | Aql Crypto',
     seo_desc: 'تابع تفاصيل ومؤشرات إجمالي القيمة السوقية للعملات الرقمية وحجم التداول على مدار الساعة مع وصول فوري لجداول البيانات والتحليلات.',
     market_cap: 'إجمالي القيمة السوقية',
     since_yesterday: 'منذ أمس',
@@ -208,7 +208,7 @@ const translations = {
     notice_body: 'البيانات والمؤشرات المعروضة يتم إنشاؤها بناءً على نماذج البيانات التاريخية والمؤشرات الإحصائية المفتوحة. هذه محاكاة تحليلية بحتة وليست توقعات مالية أو نصائح استثمارية. استخدم هذه البيانات كلياً كمورد تعليمي لفهم حركة واتجاهات السوق.'
   },
   en: {
-    seo_title: 'Dashboard - Market Metrics & Simulations | CryptoHub',
+    seo_title: 'Dashboard - Market Metrics & Simulations | Aql Crypto',
     seo_desc: 'Track total cryptocurrency market cap, 24h trading volume, and real-time data feeds with advanced analytics tools.',
     market_cap: 'Total Market Cap',
     since_yesterday: 'since yesterday',

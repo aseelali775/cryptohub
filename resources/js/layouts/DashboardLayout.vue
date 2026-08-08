@@ -15,7 +15,7 @@
         <!-- شعار المنصة -->
         <div class="flex items-center gap-3 px-2 py-4 mb-6 border-b border-slate-800">
           <span class="h-3 w-3 rounded-full bg-emerald-400 animate-pulse"></span>
-          <h2 class="text-xl font-bold text-white tracking-wide font-mono">CryptoHub</h2>
+          <h2 class="text-xl font-bold text-white tracking-wide font-mono">Aql Crypto</h2>
         </div>
 
         <!-- قوائم التنقل المترجمة ديناميكياً والمربوطة بـ Inertia Link -->
@@ -89,7 +89,7 @@
           <div class="flex items-center justify-between px-2 py-4 mb-6 border-b border-slate-800">
             <div class="flex items-center gap-3">
               <span class="h-3 w-3 rounded-full bg-emerald-400 animate-pulse"></span>
-              <h2 class="text-xl font-bold text-white tracking-wide font-mono">CryptoHub</h2>
+              <h2 class="text-xl font-bold text-white tracking-wide font-mono">Aql Crypto</h2>
             </div>
             <button @click="isMobileMenuOpen = false" class="text-slate-400 hover:text-white p-1 text-lg cursor-pointer">
               ✕

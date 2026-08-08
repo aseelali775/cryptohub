@@ -10,7 +10,7 @@
               <div class="w-3 h-3 bg-white rounded-full"></div>
             </div>
             <span class="text-xl font-black tracking-tight text-slate-900 dark:text-white font-mono ms-1 group-hover:text-emerald-500 transition-colors">
-              CryptoHub
+              AQL CRYPTO
             </span>
           </Link>
 
@@ -95,7 +95,7 @@
                   <div class="w-2 h-2 bg-white rounded-full"></div>
                 </div>
                 <span class="text-lg font-black tracking-tight text-slate-900 dark:text-white font-mono ms-1">
-                  CryptoHub
+                  Aql Crypto
                 </span>
               </div>
               <button @click="mobileMenuOpen = false" class="p-2 -me-2 text-slate-400 hover:text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-500/10 rounded-lg transition-colors">
@@ -130,7 +130,7 @@
             
             <div class="p-6 border-t border-slate-100 dark:border-slate-800/80 shrink-0">
               <p class="text-xs text-center text-slate-400 font-medium uppercase tracking-widest font-mono">
-                CryptoHub v1.0
+                Aql Crypto v1.0
               </p>
             </div>
           </div>
@@ -241,7 +241,7 @@ const translations = {
     footerDisclaimer: "إخلاء مسؤولية",
     footerContact: "اتصل بنا",
     footerTerms: "شروط الاستخدام",
-    copyright: "جميع الحقوق محفوظة © 2026 CryptoHub.",
+    copyright: "جميع الحقوق محفوظة © 2026 Aql Crypto.",
     legalText: "تنويه قانوني: هذه المنصة مخصصة للأغراض التعليمية والتحليلية فقط لمحاكاة اتجاهات السوق، ولا تقدم أي نصائح استثمارية أو مالية. تداول العملات الرقمية ينطوي على مخاطر عالية."
   },
   en: {
@@ -258,7 +258,7 @@ const translations = {
     footerDisclaimer: "Disclaimer",
     footerContact: "Contact Us",
     footerTerms: "Terms of Use",
-    copyright: "All rights reserved © 2026 CryptoHub.",
+    copyright: "All rights reserved © 2026 Aql Crypto.",
     legalText: "Disclaimer: This platform is for educational and analytical purposes only, simulating market trends. It does not constitute financial advice. Crypto trading involves high risk."
   }
 };

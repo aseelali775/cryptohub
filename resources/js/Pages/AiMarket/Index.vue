@@ -1,7 +1,7 @@
 <template>
   <HomeLayout>
     <Head>
-      <title>{{ locale === 'ar' ? 'مرصد ذكاء السوق | CryptoHub' : 'AI Market Intelligence | CryptoHub' }}</title>
+      <title>{{ locale === 'ar' ? 'مرصد ذكاء السوق | Aql Crypto' : 'AI Market Intelligence | Aql Crypto' }}</title>
       <meta name="description" :content="locale === 'ar' ? 'لوحة ذكاء اصطناعي ترصد اتجاهات السوق والمشاعر والأصول الأكثر تداولاً.' : 'Interactive AI dashboard tracking market sentiment and trending coins.'" />
     </Head>
 

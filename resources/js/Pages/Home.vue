@@ -94,7 +94,7 @@
 
                   <div class="flex items-center gap-4 mt-2 text-xs font-bold text-slate-400" :dir="locale === 'ar' ? 'rtl' : 'ltr'">
                     <span class="text-emerald-500">{{ t('readMore') }}</span>
-                    <span>• {{ mainNews?.source || 'CryptoHub' }}</span>
+                    <span>• {{ mainNews?.source || 'Aql Crypto' }}</span>
                     <span v-if="mainNews?.impact_score" class="flex items-center gap-1" :title="locale === 'ar' ? 'درجة التأثير' : 'Impact Score'">
                       <span class="text-amber-400 text-sm">⚡</span> {{ mainNews?.impact_score }}/10
                     </span>
@@ -288,7 +288,7 @@ const dynamicMarketStats = computed(() => [
 // 🟢 تم استبدال النصوص القديمة بالنص القوي الجديد الذي أرسله العميل
 const translations = {
   ar: {
-    seoTitle: "CryptoHub | المنصة الرائدة لبيانات العملات الرقمية",
+    seoTitle: "Aql Crypto | المنصة الرائدة لبيانات العملات الرقمية",
     seoDesc: "منصة متكاملة تجمع نبض الأسواق العالمية، الأخبار المالية العاجلة، البيانات اللحظية، والتحليلات المتقدمة لتمنحك أفضلية معلوماتية تسبق حركة الأسواق",
     heroTitle1: "نبض السوق المشفر",
     heroTitleHighlight: "بين يديك",
@@ -314,7 +314,7 @@ const translations = {
     feat4Desc: "نعرض البيانات دون أي توجيه استثماري",
   },
   en: {
-    seoTitle: "CryptoHub | The Leading Crypto Data Platform",
+    seoTitle: "Aql Crypto | The Leading Crypto Data Platform",
     seoDesc: "One platform for global market intelligence—real-time data, breaking financial news, and in-depth analytics to help you stay ahead of every market move",
     heroTitle1: "The Crypto Market Pulse",
     heroTitleHighlight: "In Your Hands",
