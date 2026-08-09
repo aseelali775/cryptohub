@@ -25,9 +25,11 @@
                                 <div class="w-12 h-12 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 rounded-full flex items-center justify-center shrink-0">
                                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
                                 </div>
-                                <div>
-                                    <p class="text-sm text-slate-500 dark:text-slate-400">{{ content.email_label }}</p>
-                                    <a href="mailto:support@aqlcrypto.com" class="text-slate-900 dark:text-white font-semibold hover:text-emerald-500 transition">support@aqlcrypto.com</a>
+                                <div class="min-w-0 flex-1">
+                                    <p class="text-sm text-slate-500 dark:text-slate-400 mb-1">{{ content.email_label }}</p>
+                                    <a href="mailto:support@aqlcrypto.com" class="text-slate-900 dark:text-white font-semibold hover:text-emerald-500 transition break-all break-words text-sm sm:text-base">
+                                        support@aqlcrypto.com
+                                    </a>
                                 </div>
                             </div>
                         </div>
