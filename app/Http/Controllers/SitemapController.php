@@ -65,20 +65,22 @@ class SitemapController extends Controller
             }
 
             // 3. جلب جميع الأخبار (باستخدام Select لتوفير استهلاك الذاكرة RAM)
+          // 3. جلب جميع الأخبار (باستخدام Select لتوفير استهلاك الذاكرة RAM)
             $newsUrls = [];
-            // نتأكد من وجود بيانات في الجدول
             $articles = News::select('id', 'slug', 'updated_at')->latest()->get();
+            
             foreach ($articles as $article) {
-                // بناء الرابط ليطابق مسارك: /news/{id}-{slug}
-                $newsSlug = $article->slug ? '-' . $article->slug : '';
+                // تنظيف الـ Slug بإزالة الـ ID المكرر من نهايته (إذا كان موجوداً)
+                $cleanSlug = $article->slug ? preg_replace('/-' . $article->id . '$/', '', $article->slug) : '';
+                
+                // بناء الرابط النظيف ليطابق مسارك: /news/{id}-{slug}
                 $newsUrls[] = [
-                    'url' => $baseUrl . '/news/' . $article->id . $newsSlug,
+                    'url' => $baseUrl . '/news/' . $article->id . ($cleanSlug ? '-' . $cleanSlug : ''),
                     'lastmod' => $article->updated_at ? $article->updated_at->toAtomString() : now()->toAtomString(),
                     'changefreq' => 'weekly',
                     'priority' => '0.7',
                 ];
             }
-
             // 4. جلب تفاصيل العملات (باستخدام Select)
             $coinUrls = [];
             $coins = Cryptocurrency::select('symbol', 'updated_at')->get();
