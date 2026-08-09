@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\AiMarketController;
 use App\Http\Controllers\LegalPagesController;
+use App\Http\Controllers\SitemapController;
 
 
 // 1. مسار الصفحة الرئيسية العامة للموقع (مربوط بـ HomeController)
@@ -38,7 +39,8 @@ Route::get('/privacy-policy', [LegalPagesController::class, 'privacyPolicy'])->n
 Route::get('/terms-of-use', [LegalPagesController::class, 'termsOfUse'])->name('terms.use');
 Route::get('/disclaimer', [LegalPagesController::class, 'disclaimer'])->name('disclaimer');
 Route::get('/editorial-policy', [LegalPagesController::class, 'editorialPolicy'])->name('editorial.policy');
-
+// مسار خريطة الموقع لمحركات البحث
+Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
 
 
 // 5. المحرك العالمي للتبديل الفوري بين اللغتين (العربية والإنجليزية)
