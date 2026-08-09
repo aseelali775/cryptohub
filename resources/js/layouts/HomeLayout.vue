@@ -165,27 +165,53 @@
             </div>
           </div>
 
+          <div class="w-full h-px bg-slate-200 dark:bg-slate-800/80 mb-10"></div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-10 mb-10" :dir="locale === 'ar' ? 'rtl' : 'ltr'">
+            
+            <div class="flex flex-col items-center sm:items-start text-center sm:text-start">
+              <h4 class="text-base font-bold text-slate-900 dark:text-white mb-5">{{ t('footerPlatform') }}</h4>
+              <div class="flex flex-col gap-3 text-sm font-medium text-slate-600 dark:text-slate-400">
+                <Link href="/" class="hover:text-emerald-500 transition-colors">{{ t('navHome') }}</Link>
+                <Link href="/prices" class="hover:text-emerald-500 transition-colors">{{ t('navPrices') }}</Link>
+                <Link href="/news" class="hover:text-emerald-500 transition-colors">{{ t('navNews') }}</Link>
+                <Link href="/ai-market" class="hover:text-emerald-500 transition-colors">{{ t('navAiMarket') }}</Link>
+              </div>
+            </div>
+
+            <div class="flex flex-col items-center sm:items-start text-center sm:text-start">
+              <h4 class="text-base font-bold text-slate-900 dark:text-white mb-5">{{ t('footerCompany') }}</h4>
+              <div class="flex flex-col gap-3 text-sm font-medium text-slate-600 dark:text-slate-400">
+                <Link href="/about" class="hover:text-emerald-500 transition-colors">{{ t('footerAbout') }}</Link>
+                <Link href="/contact" class="hover:text-emerald-500 transition-colors">{{ t('footerContact') }}</Link>
+              </div>
+            </div>
+
+            <div class="flex flex-col items-center sm:items-start text-center sm:text-start">
+              <h4 class="text-base font-bold text-slate-900 dark:text-white mb-5">{{ t('footerLegal') }}</h4>
+              <div class="flex flex-col gap-3 text-sm font-medium text-slate-600 dark:text-slate-400">
+                <Link href="/privacy-policy" class="hover:text-emerald-500 transition-colors">{{ t('footerPrivacy') }}</Link>
+                <Link href="/terms-of-use" class="hover:text-emerald-500 transition-colors">{{ t('footerTerms') }}</Link>
+                <Link href="/disclaimer" class="hover:text-emerald-500 transition-colors">{{ t('footerDisclaimer') }}</Link>
+                <Link href="/editorial-policy" class="hover:text-emerald-500 transition-colors">{{ t('footerEditorial') }}</Link>
+              </div>
+            </div>
+
+          </div>
+
           <div class="w-full h-px bg-slate-200 dark:bg-slate-800/80 mb-8"></div>
 
-          <div class="flex flex-col lg:flex-row items-center justify-between gap-6">
-            <div class="flex flex-wrap justify-center items-center gap-6 text-sm font-medium text-slate-600 dark:text-slate-400">
-              <a href="#" class="hover:text-emerald-500 transition-colors">{{ t('footerAbout') }}</a>
-              <a href="#" class="hover:text-emerald-500 transition-colors">{{ t('footerDisclaimer') }}</a>
-              <a href="#" class="hover:text-emerald-500 transition-colors">{{ t('footerContact') }}</a>
-              <a href="#" class="hover:text-emerald-500 transition-colors">{{ t('footerTerms') }}</a>
-            </div>
-            <div class="text-xs text-slate-500 font-medium">
+          <div class="flex flex-col items-center justify-center gap-6">
+            <div class="text-sm text-slate-600 dark:text-slate-400 font-semibold tracking-wide">
               {{ t('copyright') }}
             </div>
-          </div>
-          
-          <div class="mt-6 text-[10px] text-slate-400 dark:text-slate-600 text-center max-w-4xl mx-auto leading-relaxed">
-            {{ t('legalText') }}
+            <div class="text-[11px] text-slate-400 dark:text-slate-500 text-center max-w-4xl mx-auto leading-relaxed border border-slate-200 dark:border-slate-800/60 p-4 rounded-xl bg-slate-50 dark:bg-[#121927]">
+              {{ t('legalText') }}
+            </div>
           </div>
 
         </div>
       </footer>
-
     </div>
   </div>
 </template>
@@ -225,7 +251,7 @@ onMounted(() => {
   updateHtmlClass();
 });
 
-// الترجمات الموحدة
+// الترجمات الموحدة والمحدثة
 const translations = {
   ar: {
     navHome: "الرئيسية",
@@ -237,12 +263,20 @@ const translations = {
     btnSubscribe: "قريباً",
     newsletterTitle: "النشرة البريدية (قريباً)",
     newsletterDesc: "سيتم تفعيل الاشتراك قريباً لتقديم أهم التحليلات.",
+    // عناوين أعمدة الفوتر الجديدة
+    footerPlatform: "المنصة",
+    footerCompany: "الشركة",
+    footerLegal: "الشؤون القانونية",
+    // روابط الفوتر
     footerAbout: "من نحن",
-    footerDisclaimer: "إخلاء مسؤولية",
     footerContact: "اتصل بنا",
+    footerPrivacy: "سياسة الخصوصية",
     footerTerms: "شروط الاستخدام",
-    copyright: "جميع الحقوق محفوظة © 2026 Aql Crypto.",
-    legalText: "تنويه قانوني: هذه المنصة مخصصة للأغراض التعليمية والتحليلية فقط لمحاكاة اتجاهات السوق، ولا تقدم أي نصائح استثمارية أو مالية. تداول العملات الرقمية ينطوي على مخاطر عالية."
+    footerDisclaimer: "إخلاء مسؤولية",
+    footerEditorial: "سياسة التحرير",
+    
+    copyright: "جميع الحقوق محفوظة © 2026 AQL CRYPTO.",
+    legalText: "تنويه قانوني: هذه المنصة مخصصة للأغراض التعليمية والتحليلية فقط. لا تقدم AQL Crypto أي نصائح مالية أو استثمارية أو قانونية. المعلومات والأسعار تُقدم 'كما هي' وقد تتأخر أو تحتوي على أخطاء. تداول العملات الرقمية ينطوي على مخاطر عالية جداً وقد يؤدي إلى خسارة رأس المال."
   },
   en: {
     navHome: "Home",
@@ -254,12 +288,20 @@ const translations = {
     btnSubscribe: "Soon",
     newsletterTitle: "Newsletter (Soon)",
     newsletterDesc: "Subscription will be activated soon for top analytics.",
+    // New Footer Columns
+    footerPlatform: "Platform",
+    footerCompany: "Company",
+    footerLegal: "Legal",
+    // Footer Links
     footerAbout: "About Us",
-    footerDisclaimer: "Disclaimer",
     footerContact: "Contact Us",
+    footerPrivacy: "Privacy Policy",
     footerTerms: "Terms of Use",
-    copyright: "All rights reserved © 2026 Aql Crypto.",
-    legalText: "Disclaimer: This platform is for educational and analytical purposes only, simulating market trends. It does not constitute financial advice. Crypto trading involves high risk."
+    footerDisclaimer: "Disclaimer",
+    footerEditorial: "Editorial Policy",
+    
+    copyright: "All rights reserved © 2026 AQL CRYPTO.",
+    legalText: "Legal Notice: This platform is for educational and analytical purposes only. AQL Crypto does not provide financial, investment, or legal advice. Information and prices are provided 'AS IS' and may be delayed or contain errors. Cryptocurrency trading involves extremely high risk and can lead to loss of capital."
   }
 };
 

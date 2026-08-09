@@ -6,6 +6,8 @@ use App\Http\Controllers\NewsController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\AiMarketController;
+use App\Http\Controllers\LegalPagesController;
+
 
 // 1. مسار الصفحة الرئيسية العامة للموقع (مربوط بـ HomeController)
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -22,6 +24,20 @@ Route::get('/news', [NewsController::class, 'index'])->name('news.index');
 Route::get('/news/{id}-{slug?}', [NewsController::class, 'show'])->name('news.show');
 // ... (باقي الروابط)
 Route::get('/ai-market', [AiMarketController::class, 'index'])->name('ai-market');
+
+
+// ==========================================
+// AQL Crypto Legal & Company Pages
+// ==========================================
+Route::get('/about', [LegalPagesController::class, 'about'])->name('about');
+
+Route::get('/contact', [LegalPagesController::class, 'contact'])->name('contact');
+Route::post('/contact', [LegalPagesController::class, 'submitContact'])->name('contact.submit');
+
+Route::get('/privacy-policy', [LegalPagesController::class, 'privacyPolicy'])->name('privacy.policy');
+Route::get('/terms-of-use', [LegalPagesController::class, 'termsOfUse'])->name('terms.use');
+Route::get('/disclaimer', [LegalPagesController::class, 'disclaimer'])->name('disclaimer');
+Route::get('/editorial-policy', [LegalPagesController::class, 'editorialPolicy'])->name('editorial.policy');
 
 
 
