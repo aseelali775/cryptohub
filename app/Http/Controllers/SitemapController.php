@@ -11,41 +11,53 @@ class SitemapController extends Controller
 {
     public function index(): Response
     {
-        // استخدام الكاش لمدة ساعة (3600 ثانية) لتخفيف الضغط على السيرفر (Railway)
+        // استخدام الكاش لمدة ساعة (3600 ثانية) لتخفيف الضغط على السيرفر
         $xmlContent = Cache::remember('sitemap_xml', 3600, function () {
             
-            // قراءة الرابط الأساسي للموقع
-            $baseUrl = url('/');
+            // قراءة النطاق الأساسي من ملف الإعدادات (config/app.php -> APP_URL)
+            $baseUrl = rtrim(config('app.url', url('/')), '/');
 
-            // 1. الصفحات الرئيسية والأساسية
+            // --- جلب تواريخ آخر تحديثات حقيقية من قاعدة البيانات ---
+            $latestNewsUpdated = News::latest('updated_at')->value('updated_at');
+            $latestNewsDate = $latestNewsUpdated 
+                ? $latestNewsUpdated->toAtomString() 
+                : now()->toAtomString();
+
+            $latestCryptoUpdated = Cryptocurrency::latest('updated_at')->value('updated_at');
+            $latestCryptoDate = $latestCryptoUpdated 
+                ? $latestCryptoUpdated->toAtomString() 
+                : now()->toAtomString();
+            // ----------------------------------------------------
+
+            // 1. الصفحات الرئيسية والأساسية (ربط lastmod بالتاريخ الفعلي للبيانات)
             $staticUrls = [
                 [
                     'url' => $baseUrl,
-                    'lastmod' => now()->toAtomString(),
+                    'lastmod' => $latestNewsDate, // تاريخ آخر خبر
                     'changefreq' => 'daily',
                     'priority' => '1.0',
                 ],
                 [
                     'url' => $baseUrl . '/prices',
-                    'lastmod' => now()->toAtomString(),
+                    'lastmod' => $latestCryptoDate, // تاريخ آخر تحديث للأسعار
                     'changefreq' => 'hourly',
                     'priority' => '0.9',
                 ],
                 [
                     'url' => $baseUrl . '/news',
-                    'lastmod' => now()->toAtomString(),
+                    'lastmod' => $latestNewsDate, // تاريخ آخر خبر
                     'changefreq' => 'hourly',
                     'priority' => '0.9',
                 ],
                 [
                     'url' => $baseUrl . '/ai-market',
-                    'lastmod' => now()->toAtomString(),
+                    'lastmod' => $latestNewsDate,
                     'changefreq' => 'daily',
                     'priority' => '0.8',
                 ],
             ];
 
-            // 2. الصفحات القانونية والمعلوماتية (تتحدث شهرياً فقط)
+            // 2. الصفحات القانونية والمعلوماتية (تتحدث شهرياً/ثابتة)
             $legalPages = [
                 '/about',
                 '/contact',
@@ -58,43 +70,41 @@ class SitemapController extends Controller
             foreach ($legalPages as $page) {
                 $staticUrls[] = [
                     'url' => $baseUrl . $page,
-                    'lastmod' => now()->startOfMonth()->toAtomString(), // نستخدم بداية الشهر لأنها ثابتة
+                    'lastmod' => now()->startOfMonth()->toAtomString(),
                     'changefreq' => 'monthly',
                     'priority' => '0.5',
                 ];
             }
 
-            // 3. جلب جميع الأخبار (باستخدام Select لتوفير استهلاك الذاكرة RAM)
-          // 3. جلب جميع الأخبار (باستخدام Select لتوفير استهلاك الذاكرة RAM)
+            // 3. جلب جميع الأخبار (روابط نظيفة مع تاريخ updated_at الفعلي للخبر)
             $newsUrls = [];
             $articles = News::select('id', 'slug', 'updated_at')->latest()->get();
             
             foreach ($articles as $article) {
-                // تنظيف الـ Slug بإزالة الـ ID المكرر من نهايته (إذا كان موجوداً)
+                // تنظيف الـ Slug وإزالة الـ ID المكرر من نهايته إن وجد
                 $cleanSlug = $article->slug ? preg_replace('/-' . $article->id . '$/', '', $article->slug) : '';
                 
-                // بناء الرابط النظيف ليطابق مسارك: /news/{id}-{slug}
                 $newsUrls[] = [
                     'url' => $baseUrl . '/news/' . $article->id . ($cleanSlug ? '-' . $cleanSlug : ''),
-                    'lastmod' => $article->updated_at ? $article->updated_at->toAtomString() : now()->toAtomString(),
+                    'lastmod' => $article->updated_at ? $article->updated_at->toAtomString() : $latestNewsDate,
                     'changefreq' => 'weekly',
                     'priority' => '0.7',
                 ];
             }
-            // 4. جلب تفاصيل العملات (باستخدام Select)
+
+            // 4. جلب تفاصيل العملات
             $coinUrls = [];
             $coins = Cryptocurrency::select('symbol', 'updated_at')->get();
             foreach ($coins as $coin) {
-                // بناء الرابط ليطابق مسارك: /crypto/{symbol}
                 $coinUrls[] = [
                     'url' => $baseUrl . '/crypto/' . strtolower($coin->symbol),
-                    'lastmod' => $coin->updated_at ? $coin->updated_at->toAtomString() : now()->toAtomString(),
+                    'lastmod' => $coin->updated_at ? $coin->updated_at->toAtomString() : $latestCryptoDate,
                     'changefreq' => 'daily',
                     'priority' => '0.8',
                 ];
             }
 
-            // دمج كافة الروابط في مصفوفة واحدة
+            // دمج كافة الروابط
             $urls = array_merge($staticUrls, $newsUrls, $coinUrls);
 
             // بناء محتوى ملف XML
@@ -103,7 +113,6 @@ class SitemapController extends Controller
 
             foreach ($urls as $item) {
                 $xml .= '<url>';
-                // نستخدم htmlspecialchars لحماية الروابط التي قد تحتوي على رموز خاصة
                 $xml .= '<loc>' . htmlspecialchars($item['url']) . '</loc>';
                 $xml .= '<lastmod>' . $item['lastmod'] . '</lastmod>';
                 $xml .= '<changefreq>' . $item['changefreq'] . '</changefreq>';
@@ -116,7 +125,6 @@ class SitemapController extends Controller
             return $xml;
         });
 
-        // إرجاع الاستجابة بنوع XML صريح ليفهمه Google
         return response($xmlContent, 200, [
             'Content-Type' => 'application/xml',
         ]);
