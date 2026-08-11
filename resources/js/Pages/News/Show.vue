@@ -65,7 +65,6 @@
               <span class="text-xs text-slate-500 font-mono">{{ displayDate }}</span>
             </div>
           </div>
-
         </header>
 
         <figure v-if="newsItem?.image_url" class="w-full aspect-video sm:h-[450px] rounded-[2rem] overflow-hidden bg-slate-900 shadow-2xl mb-12 relative border border-slate-200 dark:border-slate-800">
@@ -73,18 +72,56 @@
           <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent"></div>
         </figure>
 
-        <div v-if="locale === 'ar' && newsItem?.ai_processed && newsItem?.translations.ar.why_it_matters" class="mb-10 p-6 sm:p-8 bg-amber-50/50 dark:bg-amber-900/10 border border-amber-100 dark:border-amber-500/20 rounded-3xl shadow-sm relative overflow-hidden">
-          <div class="absolute top-0 right-0 w-32 h-32 bg-amber-500/5 blur-2xl rounded-full pointer-events-none"></div>
-          <h3 class="text-lg font-bold text-amber-900 dark:text-amber-300 mb-4 flex items-center gap-2 relative z-10" dir="rtl">
-            <span class="text-xl">💡</span>
-            لماذا يهم هذا الخبر؟
-          </h3>
-          <p class="text-base sm:text-lg text-slate-700 dark:text-slate-300 leading-relaxed font-medium relative z-10" dir="rtl">
-            {{ newsItem.translations.ar.why_it_matters }}
-          </p>
+        <div v-if="locale === 'ar' && newsItem?.ai_processed" class="mt-8 space-y-8" dir="rtl">
+          
+          <article class="max-w-none">
+            <p class="text-lg sm:text-xl text-slate-700 dark:text-slate-300 leading-relaxed sm:leading-loose font-medium">
+              {{ newsItem.translations.ar.content }}
+            </p>
+          </article>
+
+          <div v-if="newsItem.translations.ar.context" class="p-6 bg-slate-100 dark:bg-slate-800/50 rounded-2xl border-r-4 border-indigo-500 shadow-sm">
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3 flex items-center gap-2">
+              <span class="text-xl">🌐</span> السياق (Context)
+            </h3>
+            <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed">{{ newsItem.translations.ar.context }}</p>
+          </div>
+
+          <div v-if="newsItem.translations.ar.analysis" class="p-6 sm:p-8 bg-indigo-50 dark:bg-indigo-900/10 rounded-3xl border border-indigo-100 dark:border-indigo-500/20 shadow-sm relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-40 h-40 bg-indigo-500/5 blur-3xl rounded-full pointer-events-none"></div>
+            <h3 class="text-xl font-black text-indigo-900 dark:text-indigo-300 mb-4 flex items-center gap-2 relative z-10">
+              <span class="text-2xl">🧠</span> تحليل Aql Crypto
+            </h3>
+            <p class="text-base sm:text-lg text-slate-700 dark:text-slate-300 leading-relaxed font-medium relative z-10">
+              {{ newsItem.translations.ar.analysis }}
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div v-if="newsItem.translations.ar.why_it_matters" class="p-6 bg-amber-50 dark:bg-amber-900/10 rounded-2xl border border-amber-100 dark:border-amber-500/20 shadow-sm">
+              <h3 class="text-lg font-bold text-amber-900 dark:text-amber-300 mb-3 flex items-center gap-2">
+                <span class="text-xl">💡</span> لماذا يهم هذا الخبر؟
+              </h3>
+              <p class="text-sm sm:text-base text-slate-700 dark:text-slate-300 leading-relaxed">{{ newsItem.translations.ar.why_it_matters }}</p>
+            </div>
+
+            <div v-if="newsItem.translations.ar.what_to_watch" class="p-6 bg-emerald-50 dark:bg-emerald-900/10 rounded-2xl border border-emerald-100 dark:border-emerald-500/20 shadow-sm">
+              <h3 class="text-lg font-bold text-emerald-900 dark:text-emerald-300 mb-3 flex items-center gap-2">
+                <span class="text-xl">👀</span> ما الذي يجب مراقبته؟
+              </h3>
+              <p class="text-sm sm:text-base text-slate-700 dark:text-slate-300 leading-relaxed">{{ newsItem.translations.ar.what_to_watch }}</p>
+            </div>
+          </div>
+
+          <div v-if="newsItem.translations.ar.limitations" class="p-5 bg-slate-50 dark:bg-[#0f172a] rounded-xl border border-slate-200 dark:border-slate-800">
+            <h4 class="text-sm font-bold text-slate-600 dark:text-slate-400 mb-2 flex items-center gap-2">
+              <span class="text-base">⚠️</span> حدود التحليل
+            </h4>
+            <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-500 leading-relaxed">{{ newsItem.translations.ar.limitations }}</p>
+          </div>
         </div>
 
-        <div class="mt-8" v-if="newsItem">
+        <div v-else class="mt-8">
           <article class="max-w-none">
             <p class="text-lg sm:text-xl text-slate-600 dark:text-slate-400 leading-relaxed sm:leading-loose whitespace-pre-line font-medium" :class="locale === 'ar' ? 'text-right' : 'text-left'" :dir="locale === 'ar' ? 'rtl' : 'ltr'">
               {{ newsItem?.translations[locale === 'ar' ? 'ar' : 'en'].content }}
@@ -152,7 +189,7 @@
               </h4>
               <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed font-mono">
                 {{ locale === 'ar' 
-                  ? 'تم إعداد هذا المحتوى اعتماداً على مصادر أخبار العملات الرقمية وتحليل آلي للمعلومات. هذا النص لا يمثل أي توجيه مالي أو نصيحة استثمارية.' 
+                  ? 'تم إعداد هذا المحتوى اعتماداً على مصادر أخبار العملات الرقمية والتحليل الآلي للمعلومات. هذا النص لا يمثل أي توجيه مالي أو نصيحة استثمارية.' 
                   : 'This content was prepared based on cryptocurrency news sources and automated data analysis. It does not constitute financial advice.' 
                 }}
               </p>
@@ -172,7 +209,7 @@ import { computed } from 'vue';
 
 const props = defineProps({
   newsItem: { type: Object, required: true },
-  relatedNews: { type: Array, default: () => [] } // استقبال الأخبار ذات الصلة
+  relatedNews: { type: Array, default: () => [] } 
 });
 
 const page = usePage();

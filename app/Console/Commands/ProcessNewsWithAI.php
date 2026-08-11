@@ -13,281 +13,476 @@ class ProcessNewsWithAI extends Command
 {
     protected $signature = 'news:process-ai';
 
-    protected $description = 'Analyze crypto news to generate Arabic rewrites and market analysis using Gemini AI.';
-
+    protected $description = 'Analyze crypto news and generate original Arabic editorial analysis using Gemini AI.';
 
     public function handle()
     {
         $apiKey = config('services.gemini.key');
 
         if (empty($apiKey)) {
-
             $this->error('GEMINI_API_KEY is missing.');
-
             Log::error('Gemini API Key missing.');
-
-            return;
+            return Command::FAILURE;
         }
 
-
-        $this->info('Starting Aql Crypto AI Arabic Journalist...');
-
+        $this->info('Starting Aql Crypto AI Editorial Analysis...');
 
         $newsList = News::where('ai_processed', false)
+            ->whereNotNull('content_en')
+            ->where('content_en', '!=', '')
             ->latest()
             ->limit(3)
             ->get();
 
-
-
         if ($newsList->isEmpty()) {
-
             $this->info('No new articles.');
-
-            return;
+            return Command::SUCCESS;
         }
 
-
-
         foreach ($newsList as $news) {
+            $this->info("Processing ID {$news->id}: {$news->title_en}");
 
+            try {
+                /*
+                |--------------------------------------------------------------------------
+                | Prepare source material
+                |--------------------------------------------------------------------------
+                */
 
-            $this->info("Processing: {$news->title_en}");
+                $title = trim((string) $news->title_en);
 
+                $content = trim(
+                    mb_substr(
+                        (string) $news->content_en,
+                        0,
+                        12000
+                    )
+                );
 
+                if (mb_strlen($content) < 200) {
+                    $this->warn(
+                        "⚠️ Article {$news->id} is too short. Skipping."
+                    );
 
-            $content = mb_substr($news->content_en, 0, 8000);
+                    Log::warning(
+                        'AI skipped short article',
+                        ['news_id' => $news->id]
+                    );
 
+                    continue;
+                }
 
+                /*
+                |--------------------------------------------------------------------------
+                | Analyze with Gemini
+                |--------------------------------------------------------------------------
+                */
 
-            $result = $this->analyzeWithGemini(
-                $news->title_en,
-                $content,
-                $apiKey
-            );
+                $result = $this->analyzeWithGemini(
+                    $news,
+                    $title,
+                    $content,
+                    $apiKey
+                );
 
+                /*
+                |--------------------------------------------------------------------------
+                | Validate AI result
+                |--------------------------------------------------------------------------
+                */
 
+                if (!$this->isValidResult($result)) {
+                    $this->error(
+                        "❌ AI result failed validation for ID {$news->id}"
+                    );
 
-            if ($result && is_array($result)) {
+                    Log::warning(
+                        'AI result failed validation',
+                        [
+                            'news_id' => $news->id,
+                            'result' => $result,
+                        ]
+                    );
 
+                    continue;
+                }
 
-                $slug = Str::slug($news->title_en)
-                    . '-' . $news->id;
+                /*
+                |--------------------------------------------------------------------------
+                | Build slug
+                |--------------------------------------------------------------------------
+                */
 
+                $slug = Str::slug($title) . '-' . $news->id;
 
+                /*
+                |--------------------------------------------------------------------------
+                | Keywords
+                |--------------------------------------------------------------------------
+                */
 
-                $keywords = is_array($result['keywords'] ?? null)
-                    ? array_slice($result['keywords'],0,5)
-                    : [];
+                $keywords = [];
 
+                if (isset($result['keywords']) && is_array($result['keywords'])) {
+                    $keywords = collect($result['keywords'])
+                        ->map(fn ($keyword) => trim((string) $keyword))
+                        ->filter()
+                        ->unique()
+                        ->take(5)
+                        ->values()
+                        ->toArray();
+                }
 
+                /*
+                |--------------------------------------------------------------------------
+                | Normalize sentiment
+                |--------------------------------------------------------------------------
+                */
+
+                $sentiment = $result['sentiment'] ?? 'Neutral';
+
+                if (!in_array($sentiment, [
+                    'Bullish',
+                    'Bearish',
+                    'Neutral'
+                ], true)) {
+                    $sentiment = 'Neutral';
+                }
+
+                /*
+                |--------------------------------------------------------------------------
+                | Normalize impact score
+                |--------------------------------------------------------------------------
+                */
+
+                $impactScore = (int) ($result['impact_score'] ?? 5);
+
+                $impactScore = max(
+                    1,
+                    min(10, $impactScore)
+                );
+
+                /*
+                |--------------------------------------------------------------------------
+                | Save
+                |--------------------------------------------------------------------------
+                */
 
                 $news->update([
-
-
                     'slug' => $slug,
 
-
                     'title_ar' =>
-                        $result['title_ar'] ?? null,
-
+                        trim($result['title_ar']),
 
                     'content_ar' =>
-                        $result['content_ar'] ?? null,
-
+                        trim($result['content_ar']),
 
                     'summary_ar' =>
-                        $result['meta_description_ar']
-                        ?? $result['summary_ar']
-                        ?? null,
-
+                        trim(
+                            $result['meta_description_ar']
+                            ?? $result['summary_ar']
+                        ),
 
                     'why_it_matters_ar' =>
-                        $result['why_it_matters_ar'] ?? null,
-
+                        trim($result['why_it_matters_ar']),
 
                     'keywords' =>
                         $keywords,
 
-
                     'sentiment' =>
-                        $result['sentiment'] ?? 'Neutral',
-
+                        $sentiment,
 
                     'category' =>
                         $result['category'] ?? 'Market',
 
-
                     'impact_score' =>
-                        (int)($result['impact_score'] ?? 5),
+                        $impactScore,
 
-
-                    'ai_processed' => true,
-
-
+                    'ai_processed' =>
+                        true,
                 ]);
 
-
-
                 $this->info(
-                    "✅ Saved AI analysis ID {$news->id}"
+                    "✅ AI editorial analysis saved for ID {$news->id}"
                 );
 
-            } else {
-
+            } catch (\Throwable $e) {
 
                 $this->error(
-                    "AI failed for ID {$news->id}"
+                    "❌ Processing failed for ID {$news->id}: {$e->getMessage()}"
                 );
 
+                Log::error(
+                    'AI News Processing Exception',
+                    [
+                        'news_id' => $news->id,
+                        'message' => $e->getMessage(),
+                        'trace' => $e->getTraceAsString(),
+                    ]
+                );
             }
 
-
+            /*
+            |--------------------------------------------------------------------------
+            | Rate limiting
+            |--------------------------------------------------------------------------
+            */
 
             sleep(5);
-
         }
 
-
+        /*
+        |--------------------------------------------------------------------------
+        | Clear AI Market cache
+        |--------------------------------------------------------------------------
+        */
 
         Cache::forget('ai_market_dashboard_stats');
         Cache::forget('ai_market_impact_news');
 
+        $this->info('🧹 AI Market cache cleared.');
+        $this->info('🚀 Aql Crypto AI Editorial Cycle Completed.');
 
-        $this->info(
-            '🧹 AI Market cache cleared.'
-        );
-
-
-        $this->info(
-            '🚀 AI Journalism Cycle Completed.'
-        );
-
+        return Command::SUCCESS;
     }
 
 
-
-
-
-    private function analyzeWithGemini($title,$content,$apiKey)
-    {
-
+    /**
+     * Send article to Gemini for editorial analysis.
+     */
+    private function analyzeWithGemini(
+        News $news,
+        string $title,
+        string $content,
+        string $apiKey
+    ): ?array {
 
         $url =
-        "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key={$apiKey}";
+            "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key={$apiKey}";
 
-
+        /*
+        |--------------------------------------------------------------------------
+        | Editorial Prompt
+        |--------------------------------------------------------------------------
+        */
 
         $prompt = <<<PROMPT
+You are the senior editorial analyst for Aql Crypto, an Arabic cryptocurrency news and market-analysis platform.
 
-You are a senior cryptocurrency financial journalist and SEO content specialist for an Arabic crypto news platform.
+Your task is NOT to translate or mechanically rewrite the supplied article.
 
-Analyze the cryptocurrency news article and rewrite it into professional Arabic journalistic content.
+Your task is to transform the supplied factual source material into an ORIGINAL Arabic editorial article that provides additional context and useful analysis while remaining strictly faithful to the available facts.
 
+==================================================
+EDITORIAL PRINCIPLES
+==================================================
 
-RULES:
+1. ORIGINALITY
 
+Do not copy sentences from the source.
 
-1. Writing Style:
+Do not perform literal translation.
 
-- Do NOT translate literally.
-- Rewrite naturally in professional Arabic.
-- Use crypto financial terminology:
+Do not simply replace English words with Arabic words.
 
-سيولة، زخم، تصحيح سعري، حيتان، تدفقات، قيمة سوقية، معنويات السوق.
+Write naturally in professional Modern Standard Arabic.
 
+The article must read like an independently written Arabic news analysis.
 
+==================================================
+2. FACTUAL ACCURACY
+==================================================
 
-2. Accuracy:
+The supplied article is the factual source.
 
-Preserve:
+Never invent:
 
-- Names
-- Numbers
-- Dates
-- Prices
-- Percentages
-- Quotes
-- Cryptocurrency terms
+- people
+- companies
+- partnerships
+- prices
+- dates
+- percentages
+- statistics
+- investments
+- quotes
+- blockchain data
+- market movements
+- regulatory decisions
+- technical developments
 
+If the source does not provide a fact, do not state it as fact.
 
-Never invent facts.
+If something cannot be determined from the source, clearly indicate that it is uncertain.
 
+Do not fabricate citations.
 
+==================================================
+3. ARTICLE STRUCTURE
+==================================================
 
-3. Article:
+Write the Arabic article using a useful journalistic structure.
 
-Generate:
+The article should contain:
 
-- SEO Arabic title
-- Complete Arabic article
-- Short Arabic summary
-- Why this matters for investors
+A. What happened?
 
+Clearly explain the main event.
 
-Separate paragraphs using:
+B. Important details
 
-\n\n
+Explain the important numbers, people, companies, proposals, technologies or developments mentioned in the source.
 
+C. Context
 
+Explain why the event matters within the cryptocurrency/blockchain ecosystem.
 
-4. SEO Keywords:
+The context must be based only on information that can reasonably be derived from the supplied material.
 
-Generate exactly 3-5 English keywords.
+D. Aql Crypto Analysis
 
-Use:
+Provide an independent analytical interpretation.
 
-Title Case words.
+Do NOT make guaranteed price predictions.
 
-UPPERCASE symbols.
+Do NOT tell readers to buy or sell anything.
 
+Do NOT invent market data.
 
-If specific coin exists:
+Use cautious language such as:
 
-Include:
+- قد يشير ذلك إلى
+- من المحتمل أن
+- قد يؤدي إلى
+- يعتمد التأثير على
+- لا يمكن الجزم بأن
 
-Bitcoin + BTC
+when appropriate.
 
-Ethereum + ETH
+E. Why it matters
 
-Solana + SOL
+Explain clearly why a cryptocurrency investor, developer, company or ordinary reader should care about this development.
 
+F. What to watch
 
+Identify realistic developments or indicators that readers should monitor next.
 
-5. Meta Description:
+Only mention things logically connected to the supplied facts.
 
-Arabic SEO description.
+G. Limitations
 
-Maximum 160 characters.
+If important information is missing or uncertain, explain the limitation.
 
+==================================================
+4. VALUE-ADDED REQUIREMENT
+==================================================
 
+The final article must provide value beyond the source.
 
-6. Market Analysis:
+Do not make the article longer simply by adding filler.
 
-Analyze crypto market impact only.
+Value should come from:
 
+- explaining implications
+- connecting facts
+- clarifying technical concepts
+- explaining market relevance
+- identifying uncertainty
+- identifying what readers should monitor
 
-sentiment:
+==================================================
+5. FINANCIAL SAFETY
+==================================================
 
-Only:
+This is journalism and analysis, NOT financial advice.
+
+Never:
+
+- recommend buying
+- recommend selling
+- guarantee profits
+- guarantee price increases
+- predict an exact future price
+- claim an asset will definitely rise or fall
+
+==================================================
+6. TITLE
+==================================================
+
+Create a concise Arabic SEO title.
+
+Do not exaggerate.
+
+Do not use clickbait.
+
+==================================================
+7. SUMMARY
+==================================================
+
+Create a concise Arabic summary describing the most important fact.
+
+==================================================
+8. META DESCRIPTION
+==================================================
+
+Create an Arabic SEO meta description.
+
+Maximum approximately 160 characters.
+
+==================================================
+9. KEYWORDS
+==================================================
+
+Generate exactly 3 to 5 English keywords.
+
+Use Title Case for normal words.
+
+Use uppercase ticker symbols.
+
+If a specific cryptocurrency is central to the article, include its name and ticker when appropriate.
+
+Examples:
+
+Bitcoin
+BTC
+Ethereum
+ETH
+Solana
+SOL
+
+Do not add irrelevant keywords.
+
+==================================================
+10. SENTIMENT
+==================================================
+
+Choose exactly one:
 
 Bullish
-
 Bearish
-
 Neutral
 
+Sentiment must describe the likely market tone of the specific event.
 
+If the information is insufficient to determine a direction, use Neutral.
 
-impact_score:
+==================================================
+11. IMPACT SCORE
+==================================================
 
-Integer 1-10.
+Choose an integer from 1 to 10.
 
+1 = very limited potential market relevance
 
+10 = potentially major cryptocurrency market significance
 
-7. Category:
+Do not assign a high score merely because the article sounds important.
 
-Choose one:
+==================================================
+12. CATEGORY
+==================================================
+
+Choose exactly one:
 
 Bitcoin
 Ethereum
@@ -299,187 +494,376 @@ Market
 Security
 Blockchain
 
+==================================================
+13. LANGUAGE
+==================================================
 
+All Arabic fields must be written in professional Modern Standard Arabic.
 
-8. JSON ONLY:
+Do not use machine-translation style.
+
+Do not overuse English terminology.
+
+Use established Arabic cryptocurrency terminology when appropriate.
+
+==================================================
+14. JSON
+==================================================
 
 Return ONLY valid JSON.
 
-No markdown.
+No Markdown.
 
-No explanations.
+No explanations outside JSON.
 
-
-
-JSON STRUCTURE:
-
+Use exactly this structure:
 
 {
-"title_ar":"",
-"content_ar":"",
-"summary_ar":"",
-"meta_description_ar":"",
-"why_it_matters_ar":"",
-"sentiment":"Neutral",
-"category":"Market",
-"impact_score":5,
-"keywords":["Bitcoin","BTC","Crypto"]
+    "title_ar": "",
+    "content_ar": "",
+    "summary_ar": "",
+    "meta_description_ar": "",
+    "why_it_matters_ar": "",
+    "analysis_ar": "",
+    "context_ar": "",
+    "what_to_watch_ar": "",
+    "limitations_ar": "",
+    "sentiment": "Neutral",
+    "category": "Market",
+    "impact_score": 5,
+    "keywords": []
 }
 
+==================================================
+SOURCE INFORMATION
+==================================================
 
-ARTICLE TITLE:
+Source:
+{$news->source}
 
-$title
+Original URL:
+{$news->url}
 
+Original publication date:
+{$news->created_at}
 
-ARTICLE CONTENT:
+==================================================
+ARTICLE TITLE
+==================================================
 
-$content
+{$title}
 
+==================================================
+ARTICLE CONTENT
+==================================================
 
+{$content}
+
+==================================================
+FINAL INSTRUCTION
+==================================================
+
+Produce an original Arabic editorial analysis based strictly on the supplied material.
+
+Do not copy the source.
+
+Do not invent facts.
+
+Do not provide investment advice.
+
+Do not make unsupported predictions.
+
+Return JSON only.
 PROMPT;
 
-
-
-
         $payload = [
-
-
-            "contents" => [
-
+            'contents' => [
                 [
-
-                    "parts" => [
-
+                    'parts' => [
                         [
-
-                            "text" => $prompt
-
+                            'text' => $prompt
                         ]
-
                     ]
-
                 ]
-
             ],
-
-
-            "generationConfig" => [
-
-                "response_mime_type" => "application/json",
-
-                "temperature" => 0.3
-
-            ]
-
+            'generationConfig' => [
+                'response_mime_type' => 'application/json',
+            ],
         ];
-
-
-
-
 
         try {
 
+            $response = Http::timeout(90)
+                ->post($url, $payload);
 
-            $response = Http::timeout(60)
-                ->post($url,$payload);
-
-
-
-            if(!$response->successful()){
-
+            if (!$response->successful()) {
 
                 Log::error(
                     'Gemini API Error',
                     [
-                        'status'=>$response->status(),
-                        'body'=>$response->body()
+                        'news_id' => $news->id,
+                        'status' => $response->status(),
+                        'body' => $response->body(),
                     ]
                 );
 
-
                 return null;
-
             }
 
-
-
-
             $text =
-            $response->json()['candidates'][0]['content']['parts'][0]['text']
-            ?? '';
+                $response->json()['candidates'][0]['content']['parts'][0]['text']
+                ?? '';
 
+            $text = trim($text);
 
+            /*
+            |--------------------------------------------------------------------------
+            | Remove accidental Markdown fences
+            |--------------------------------------------------------------------------
+            */
 
-
-            $text = trim(
-                preg_replace(
-                    '/```json|```/',
-                    '',
-                    $text
-                )
+            $text = preg_replace(
+                '/^```json\s*/i',
+                '',
+                $text
             );
 
+            $text = preg_replace(
+                '/^```\s*/',
+                '',
+                $text
+            );
 
+            $text = preg_replace(
+                '/\s*```$/',
+                '',
+                $text
+            );
 
+            $text = trim($text);
 
-            $start = strpos($text,'{');
+            /*
+            |--------------------------------------------------------------------------
+            | Extract JSON object if Gemini added extra characters
+            |--------------------------------------------------------------------------
+            */
 
-            $end = strrpos($text,'}');
+            $start = strpos($text, '{');
+            $end = strrpos($text, '}');
 
-
-
-            if($start !== false && $end !== false){
+            if ($start !== false && $end !== false) {
 
                 $text = substr(
                     $text,
                     $start,
-                    $end-$start+1
+                    $end - $start + 1
+                );
+            }
+
+            $data = json_decode(
+                $text,
+                true
+            );
+
+            if (json_last_error() !== JSON_ERROR_NONE) {
+
+                Log::error(
+                    'Gemini JSON Error',
+                    [
+                        'news_id' => $news->id,
+                        'error' => json_last_error_msg(),
+                        'response' => $text,
+                    ]
                 );
 
+                return null;
             }
 
+            return $data;
 
-
-
-            $data = json_decode($text,true);
-
-
-
-            if(json_last_error() === JSON_ERROR_NONE){
-
-                return $data;
-
-            }
-
-
-
+        } catch (\Throwable $e) {
 
             Log::error(
-                'Gemini JSON Error: '
-                .json_last_error_msg()
+                'Gemini Connection Error',
+                [
+                    'news_id' => $news->id,
+                    'message' => $e->getMessage(),
+                ]
             );
 
-
             return null;
-
-
-
-
-        } catch(\Exception $e){
-
-
-            Log::error(
-                'Gemini Connection Error: '
-                .$e->getMessage()
-            );
-
-
-            return null;
-
         }
-
-
     }
 
+
+    /**
+     * Validate AI output before saving.
+     */
+    private function isValidResult(?array $result): bool
+    {
+        if (!is_array($result)) {
+            return false;
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Required fields
+        |--------------------------------------------------------------------------
+        */
+
+        $required = [
+            'title_ar',
+            'content_ar',
+            'summary_ar',
+            'why_it_matters_ar',
+            'analysis_ar',
+            'context_ar',
+            'what_to_watch_ar',
+            'limitations_ar',
+        ];
+
+        foreach ($required as $field) {
+
+            if (
+                !isset($result[$field]) ||
+                !is_string($result[$field]) ||
+                trim($result[$field]) === ''
+            ) {
+                return false;
+            }
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Minimum article length
+        |--------------------------------------------------------------------------
+        */
+
+        $contentLength = mb_strlen(
+            trim($result['content_ar'])
+        );
+
+        if ($contentLength < 800) {
+            return false;
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Minimum analytical value
+        |--------------------------------------------------------------------------
+        */
+
+        if (
+            mb_strlen(trim($result['analysis_ar'])) < 150
+        ) {
+            return false;
+        }
+
+        if (
+            mb_strlen(trim($result['why_it_matters_ar'])) < 80
+        ) {
+            return false;
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Sentiment validation
+        |--------------------------------------------------------------------------
+        */
+
+        if (
+            !isset($result['sentiment']) ||
+            !in_array(
+                $result['sentiment'],
+                ['Bullish', 'Bearish', 'Neutral'],
+                true
+            )
+        ) {
+            return false;
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Category validation
+        |--------------------------------------------------------------------------
+        */
+
+        $allowedCategories = [
+            'Bitcoin',
+            'Ethereum',
+            'Regulation',
+            'DeFi',
+            'NFT',
+            'Mining',
+            'Market',
+            'Security',
+            'Blockchain',
+        ];
+
+        if (
+            !isset($result['category']) ||
+            !in_array(
+                $result['category'],
+                $allowedCategories,
+                true
+            )
+        ) {
+            return false;
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Impact score validation
+        |--------------------------------------------------------------------------
+        */
+
+        $impactScore = filter_var(
+            $result['impact_score'] ?? null,
+            FILTER_VALIDATE_INT
+        );
+
+        if (
+            $impactScore === false ||
+            $impactScore < 1 ||
+            $impactScore > 10
+        ) {
+            return false;
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Keywords validation
+        |--------------------------------------------------------------------------
+        */
+
+        if (
+            !isset($result['keywords']) ||
+            !is_array($result['keywords'])
+        ) {
+            return false;
+        }
+
+        if (
+            count($result['keywords']) < 3 ||
+            count($result['keywords']) > 5
+        ) {
+            return false;
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Meta description length
+        |--------------------------------------------------------------------------
+        */
+
+        if (
+            mb_strlen(
+                trim($result['meta_description_ar'] ?? '')
+            ) > 180
+        ) {
+            return false;
+        }
+
+        return true;
+    }
 }

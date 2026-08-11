@@ -43,6 +43,12 @@ class NewsController extends Controller
                     'content'        => $item->content_ar ?? $item->content_en,
                     'summary'        => $item->summary_ar ?? mb_substr($item->content_en ?? '', 0, 150) . '...',
                     'why_it_matters' => $item->why_it_matters_ar,
+                    
+                    // 🔴 الحقول التحليلية الجديدة (مربوطة بقاعدة البيانات)
+                    'analysis'       => $item->analysis_ar,
+                    'context'        => $item->context_ar,
+                    'what_to_watch'  => $item->what_to_watch_ar,
+                    'limitations'    => $item->limitations_ar,
                 ],
                 'en' => [
                     'title'   => $item->title_en,
