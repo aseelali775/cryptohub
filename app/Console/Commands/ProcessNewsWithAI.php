@@ -169,41 +169,47 @@ class ProcessNewsWithAI extends Command
                 */
 
                 $news->update([
-                    'slug' => $slug,
+    'slug' => $slug,
 
-                    'title_ar' =>
-                        trim($result['title_ar']),
+    'title_ar' => trim($result['title_ar']),
 
-                    'content_ar' =>
-                        trim($result['content_ar']),
+    'content_ar' => trim($result['content_ar']),
 
-                    'summary_ar' =>
-                        trim(
-                            $result['meta_description_ar']
-                            ?? $result['summary_ar']
-                        ),
+    'summary_ar' => trim(
+        $result['meta_description_ar']
+        ?? $result['summary_ar']
+    ),
 
-                    'why_it_matters_ar' => trim($result['why_it_matters_ar']),
+    'why_it_matters_ar' => trim(
+        $result['why_it_matters_ar']
+    ),
 
-'analysis_ar' => trim($result['analysis_ar']),
-'context_ar' => trim($result['context_ar']),
-'what_to_watch_ar' => trim($result['what_to_watch_ar']),
-'limitations_ar' => trim($result['limitations_ar']),
+    'analysis_ar' => trim(
+        $result['analysis_ar']
+    ),
 
-'keywords' => $keywords,
+    'context_ar' => trim(
+        $result['context_ar']
+    ),
 
-                    'sentiment' =>
-                        $sentiment,
+    'what_to_watch_ar' => trim(
+        $result['what_to_watch_ar']
+    ),
 
-                    'category' =>
-                        $result['category'] ?? 'Market',
+    'limitations_ar' => trim(
+        $result['limitations_ar']
+    ),
 
-                    'impact_score' =>
-                        $impactScore,
+    'keywords' => $keywords,
 
-                    'ai_processed' =>
-                        true,
-                ]);
+    'sentiment' => $sentiment,
+
+    'category' => $result['category'] ?? 'Market',
+
+    'impact_score' => $impactScore,
+
+    'ai_processed' => true,
+]);
 
                 $this->info(
                     "✅ AI editorial analysis saved for ID {$news->id}"
