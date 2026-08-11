@@ -183,11 +183,14 @@ class ProcessNewsWithAI extends Command
                             ?? $result['summary_ar']
                         ),
 
-                    'why_it_matters_ar' =>
-                        trim($result['why_it_matters_ar']),
+                    'why_it_matters_ar' => trim($result['why_it_matters_ar']),
 
-                    'keywords' =>
-                        $keywords,
+'analysis_ar' => trim($result['analysis_ar']),
+'context_ar' => trim($result['context_ar']),
+'what_to_watch_ar' => trim($result['what_to_watch_ar']),
+'limitations_ar' => trim($result['limitations_ar']),
+
+'keywords' => $keywords,
 
                     'sentiment' =>
                         $sentiment,
