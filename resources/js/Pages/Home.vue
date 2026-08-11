@@ -2,8 +2,24 @@
   <HomeLayout>
     
     <Head>
-      <title>{{ t('seoTitle') }}</title>
-      <meta name="description" :content="t('seoDesc')" />
+      <title head-key="title">{{ t('seoTitle') }}</title>
+
+      <link head-key="canonical" rel="canonical" :href="canonicalUrl" />
+
+      <meta head-key="description" name="description" :content="t('seoDesc')" />
+      <meta head-key="keywords" name="keywords" :content="seoKeywords" />
+
+      <meta head-key="og:type" property="og:type" content="website" />
+      <meta head-key="og:title" property="og:title" :content="t('seoTitle')" />
+      <meta head-key="og:description" property="og:description" :content="t('seoDesc')" />
+      <meta head-key="og:url" property="og:url" :content="canonicalUrl" />
+      <meta head-key="og:image" property="og:image" content="https://aqlcrypto.com/images/default-og.jpg" />
+
+      <meta head-key="twitter:card" name="twitter:card" content="summary_large_image" />
+      <meta head-key="twitter:title" name="twitter:title" :content="t('seoTitle')" />
+      <meta head-key="twitter:description" name="twitter:description" :content="t('seoDesc')" />
+      <meta head-key="twitter:image" name="twitter:image" content="https://aqlcrypto.com/images/default-og.jpg" />
+      <meta head-key="twitter:url" name="twitter:url" :content="canonicalUrl" />
     </Head>
 
     <div class="w-full pb-20 bg-slate-50 dark:bg-[#0b1121] transition-colors duration-300">
@@ -38,7 +54,7 @@
         </div>
       </section>
 
-    <section class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+      <section class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
           
           <div class="lg:col-span-3 flex flex-col gap-6">
@@ -236,6 +252,27 @@ const props = defineProps({
 const page = usePage();
 const locale = computed(() => page.props.locale || 'ar');
 
+// ======================================================
+// SEO + Canonical
+// ======================================================
+
+const canonicalUrl = computed(() => {
+    const cleanPath = page.url.split('?')[0];
+    return cleanPath === '/'
+        ? 'https://aqlcrypto.com'
+        : 'https://aqlcrypto.com' + cleanPath;
+});
+
+const seoKeywords = computed(() => {
+    return locale.value === 'ar'
+        ? 'العملات الرقمية, بيتكوين, ايثريوم, اسعار الكريبتو, اخبار الكريبتو, تحليل السوق, Aql Crypto'
+        : 'crypto, cryptocurrency, bitcoin, ethereum, crypto prices, crypto news, Aql Crypto';
+});
+
+// ======================================================
+// Data Processing
+// ======================================================
+
 const mainNews = computed(() => props.news && props.news.length > 0 ? props.news[0] : null);
 const subNews = computed(() => props.news && props.news.length > 1 ? props.news.slice(1, 4) : []);
 
@@ -285,7 +322,6 @@ const dynamicMarketStats = computed(() => [
   },
 ]);
 
-// 🟢 تم استبدال النصوص القديمة بالنص القوي الجديد الذي أرسله العميل
 const translations = {
   ar: {
     seoTitle: "Aql Crypto | المنصة الرائدة لبيانات العملات الرقمية",

@@ -1,7 +1,24 @@
 <template>
   <HomeLayout>
     <Head>
-      <title>{{ locale === 'ar' ? `تحليل ${crypto.name} | Aql Crypto` : `${crypto.name} Analysis | Aql Crypto` }}</title>
+      <title head-key="title">{{ seoTitle }}</title>
+
+      <link head-key="canonical" rel="canonical" :href="canonicalUrl" />
+
+      <meta head-key="description" name="description" :content="seoDescription" />
+      <meta head-key="keywords" name="keywords" :content="seoKeywords" />
+
+      <meta head-key="og:type" property="og:type" content="website" />
+      <meta head-key="og:title" property="og:title" :content="seoTitle" />
+      <meta head-key="og:description" property="og:description" :content="seoDescription" />
+      <meta head-key="og:url" property="og:url" :content="canonicalUrl" />
+      <meta head-key="og:image" property="og:image" :content="crypto.image_url" />
+
+      <meta head-key="twitter:card" name="twitter:card" content="summary_large_image" />
+      <meta head-key="twitter:title" name="twitter:title" :content="seoTitle" />
+      <meta head-key="twitter:description" name="twitter:description" :content="seoDescription" />
+      <meta head-key="twitter:image" name="twitter:image" :content="crypto.image_url" />
+      <meta head-key="twitter:url" name="twitter:url" :content="canonicalUrl" />
     </Head>
 
     <div class="w-full min-h-screen pb-24 bg-slate-50 dark:bg-[#0b1121] transition-colors">
@@ -84,7 +101,6 @@
         </div>
 
         <div v-show="activeTab === 'ai'" class="animate-fade-in">
-          
           <div v-if="aiReport" class="bg-white dark:bg-[#151e32] p-6 sm:p-8 border border-slate-200 dark:border-slate-800 rounded-3xl shadow-sm relative overflow-hidden">
             <div class="absolute top-0 right-0 w-64 h-64 bg-indigo-500/5 blur-3xl rounded-full translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
             
@@ -163,31 +179,135 @@
 import HomeLayout from '@/layouts/HomeLayout.vue';
 import { ref, computed } from 'vue';
 import { Link, usePage, Head } from '@inertiajs/vue3';
-import VueApexCharts from "vue3-apexcharts"; 
+import VueApexCharts from 'vue3-apexcharts';
 
 const props = defineProps({
   crypto: { type: Object, required: true },
   chartData: { type: Object, required: true },
   coinNews: { type: Array, default: () => [] },
-  // 🟢 إضافة التقرير كـ Prop
   aiReport: { type: Object, default: () => null }
 });
 
 const page = usePage();
 const locale = computed(() => page.props.locale || 'ar');
 
+// ======================================================
+// SEO + Canonical
+// ======================================================
+
+const seoTitle = computed(() =>
+    locale.value === 'ar'
+        ? `تحليل ${props.crypto.name} | Aql Crypto`
+        : `${props.crypto.name} Analysis | Aql Crypto`
+);
+
+const seoDescription = computed(() =>
+    locale.value === 'ar'
+        ? `تحليل سعر ${props.crypto.name} (${props.crypto.symbol})، القيمة السوقية، حجم التداول، والأخبار المرتبطة بالعملة.`
+        : `Analysis of ${props.crypto.name} (${props.crypto.symbol}) including price, market cap, trading volume and related news.`
+);
+
+const seoKeywords = computed(() => {
+    const name = props.crypto.name || '';
+    const symbol = props.crypto.symbol || '';
+
+    return locale.value === 'ar'
+        ? `${name}, ${symbol}, تحليل ${name}, سعر ${name}, أخبار ${name}, العملات الرقمية, Aql Crypto`
+        : `${name}, ${symbol}, ${name} analysis, ${name} price, ${name} news, cryptocurrency, Aql Crypto`;
+});
+
+// Canonical URL
+const canonicalUrl = computed(() => {
+    const cleanPath = page.url.split('?')[0];
+
+    return cleanPath === '/'
+        ? 'https://aqlcrypto.com'
+        : `https://aqlcrypto.com${cleanPath}`;
+});
+
+// ======================================================
+// Page State
+// ======================================================
+
 const activeTab = ref('overview');
 
-const isPositive = computed(() => props.crypto.change_24h >= 0);
-const chartSeries = computed(() => [{ name: 'Price', data: props.chartData?.sparkline || [] }]);
+const isPositive = computed(() =>
+    props.crypto.change_24h >= 0
+);
+
+// ======================================================
+// Chart
+// ======================================================
+
+const chartSeries = computed(() => [
+    {
+        name: 'Price',
+        data: props.chartData?.sparkline || []
+    }
+]);
+
 const chartOptions = computed(() => ({
-  chart: { type: 'area', toolbar: { show: false }, background: 'transparent' },
-  colors: [isPositive.value ? '#10b981' : '#f43f5e'], 
-  fill: { type: 'gradient', gradient: { shadeIntensity: 1, opacityFrom: 0.4, opacityTo: 0.05 } },
-  dataLabels: { enabled: false }, stroke: { curve: 'smooth', width: 2.5 },
-  xaxis: { labels: { show: false }, axisBorder: { show: false }, axisTicks: { show: false } },
-  yaxis: { show: false }, grid: { show: false, padding: { left: 0, right: 0, top: 0, bottom: 0 } },
-  theme: { mode: 'dark' }
+    chart: {
+        type: 'area',
+        toolbar: {
+            show: false
+        },
+        background: 'transparent'
+    },
+
+    colors: [
+        isPositive.value
+            ? '#10b981'
+            : '#f43f5e'
+    ],
+
+    fill: {
+        type: 'gradient',
+        gradient: {
+            shadeIntensity: 1,
+            opacityFrom: 0.4,
+            opacityTo: 0.05
+        }
+    },
+
+    dataLabels: {
+        enabled: false
+    },
+
+    stroke: {
+        curve: 'smooth',
+        width: 2.5
+    },
+
+    xaxis: {
+        labels: {
+            show: false
+        },
+        axisBorder: {
+            show: false
+        },
+        axisTicks: {
+            show: false
+        }
+    },
+
+    yaxis: {
+        show: false
+    },
+
+    grid: {
+        show: false,
+        padding: {
+            left: 0,
+            right: 0,
+            top: 0,
+            bottom: 0
+        }
+    },
+
+    theme: {
+        mode: 'dark'
+    }
 }));
 </script>
 

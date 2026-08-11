@@ -1,8 +1,24 @@
 <template>
   <HomeLayout>
     <Head>
-      <title>{{ locale === 'ar' ? 'مرصد ذكاء السوق | Aql Crypto' : 'AI Market Intelligence | Aql Crypto' }}</title>
-      <meta name="description" :content="locale === 'ar' ? 'لوحة ذكاء اصطناعي ترصد اتجاهات السوق والمشاعر والأصول الأكثر تداولاً.' : 'Interactive AI dashboard tracking market sentiment and trending coins.'" />
+      <title head-key="title">{{ seoTitle }}</title>
+
+      <link head-key="canonical" rel="canonical" :href="canonicalUrl" />
+
+      <meta head-key="description" name="description" :content="seoDescription" />
+      <meta head-key="keywords" name="keywords" :content="seoKeywords" />
+
+      <meta head-key="og:type" property="og:type" content="website" />
+      <meta head-key="og:title" property="og:title" :content="seoTitle" />
+      <meta head-key="og:description" property="og:description" :content="seoDescription" />
+      <meta head-key="og:url" property="og:url" :content="canonicalUrl" />
+      <meta head-key="og:image" property="og:image" content="https://aqlcrypto.com/images/default-og.jpg" />
+
+      <meta head-key="twitter:card" name="twitter:card" content="summary_large_image" />
+      <meta head-key="twitter:title" name="twitter:title" :content="seoTitle" />
+      <meta head-key="twitter:description" name="twitter:description" :content="seoDescription" />
+      <meta head-key="twitter:image" name="twitter:image" content="https://aqlcrypto.com/images/default-og.jpg" />
+      <meta head-key="twitter:url" name="twitter:url" :content="canonicalUrl" />
     </Head>
 
     <div class="w-full min-h-screen pb-24 bg-slate-50 dark:bg-[#0b1121] transition-colors">
@@ -169,7 +185,7 @@
           </div>
           
           <div v-if="impactfulNews.length" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-            <Link :href="`/news/${news.id}-${news.slug}`" v-for="news in impactfulNews" :key="news.id" class="bg-white dark:bg-[#151e32] rounded-3xl border border-slate-200 dark:border-slate-800 p-6 hover:border-indigo-500 transition-colors shadow-sm hover:shadow-md group flex flex-col justify-between">
+            <Link :href="`/news/${news.id}${news.slug ? '-' + news.slug.replace(new RegExp('-' + news.id + '$'), '') : ''}`" v-for="news in impactfulNews" :key="news.id" class="bg-white dark:bg-[#151e32] rounded-3xl border border-slate-200 dark:border-slate-800 p-6 hover:border-indigo-500 transition-colors shadow-sm hover:shadow-md group flex flex-col justify-between">
               
               <div>
                 <div class="flex justify-between items-center mb-4">
@@ -222,4 +238,35 @@ const props = defineProps({
 
 const page = usePage();
 const locale = computed(() => page.props.locale || 'ar');
+
+// ======================================================
+// SEO + Canonical
+// ======================================================
+
+const seoTitle = computed(() =>
+    locale.value === 'ar'
+        ? 'مرصد ذكاء السوق | Aql Crypto'
+        : 'AI Market Intelligence | Aql Crypto'
+);
+
+const seoDescription = computed(() =>
+    locale.value === 'ar'
+        ? 'لوحة ذكاء اصطناعي تفاعلية ترصد اتجاهات السوق، وتحلل المشاعر، وتكتشف الأصول الأكثر تداولاً.'
+        : 'Interactive AI dashboard tracking market sentiment, trends, and the most mentioned coins.'
+);
+
+const seoKeywords = computed(() => {
+    return locale.value === 'ar'
+        ? 'ذكاء السوق, الذكاء الاصطناعي للعملات, مشاعر السوق, تحليل الكريبتو, اتجاه السوق, Aql Crypto'
+        : 'AI Market Intelligence, Crypto AI, Market Sentiment, Crypto Trends, Aql Crypto';
+});
+
+// بناء الرابط المعتمد للصفحة
+const canonicalUrl = computed(() => {
+    const cleanPath = page.url.split('?')[0];
+
+    return cleanPath === '/'
+        ? 'https://aqlcrypto.com'
+        : 'https://aqlcrypto.com' + cleanPath;
+});
 </script>

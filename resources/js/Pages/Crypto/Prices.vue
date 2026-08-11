@@ -1,8 +1,22 @@
 <template>
   <HomeLayout>
     <Head>
-      <title>{{ t('title') }}</title>
-      <meta name="description" :content="t('desc')" />
+       <title head-key="title">{{ t('title') }} | Aql Crypto</title>
+      
+       <link
+    head-key="canonical"
+    rel="canonical"
+    :href="canonicalUrl"
+  />
+
+      <meta head-key="description" name="description" :content="t('desc')" />
+      <meta head-key="og:title" property="og:title" :content="t('title') + ' | Aql Crypto'" />
+      <meta head-key="og:description" property="og:description" :content="t('desc')" />
+      <meta head-key="og:url" property="og:url" :content="canonicalUrl" />
+      
+      <meta head-key="twitter:title" name="twitter:title" :content="t('title') + ' | Aql Crypto'" />
+      <meta head-key="twitter:description" name="twitter:description" :content="t('desc')" />
+      <meta head-key="twitter:url" name="twitter:url" :content="canonicalUrl" />
     </Head>
 
     <div class="w-full min-h-screen pb-24 bg-slate-50 dark:bg-[#0b1121] transition-colors duration-300">
@@ -60,7 +74,7 @@
           </div>
 
           <Link 
-            :href="`/crypto/${crypto.symbol?.toLowerCase() || ''}`" 
+            :href="'/crypto/' + (crypto.symbol?.toLowerCase() || '')" 
             v-for="(crypto, index) in filteredCryptos" 
             :key="crypto.id" 
             class="flex items-center justify-between p-3 sm:p-4 bg-white dark:bg-[#151e32] rounded-2xl border border-slate-100 dark:border-slate-800/80 shadow-sm hover:shadow-md hover:border-emerald-500/50 dark:hover:bg-[#1e293b]/50 transition-all group"
@@ -121,18 +135,25 @@ import { Link, usePage, Head } from '@inertiajs/vue3';
 import { computed, ref } from 'vue';
 
 const props = defineProps({
-  // 🟢 تعديل الـ Type ليقبل Object (بسبب paginate) أو Array
   cryptos: { type: [Array, Object], default: () => [] }
 });
 
 const page = usePage();
 const locale = computed(() => page.props.locale || 'ar');
 
+// بناء الرابط المعتمد بطريقة تجميع النصوص الآمنة
+const canonicalUrl = computed(() => {
+    const cleanPath = page.url.split('?')[0];
+
+    return cleanPath === '/'
+        ? 'https://aqlcrypto.com'
+        : `https://aqlcrypto.com${cleanPath}`;
+});
+
 const searchQuery = ref('');
 const activeFilter = ref('all');
 
 const filteredCryptos = computed(() => {
-  // 🟢 استخراج البيانات سواء كانت من get() أو من paginate()
   let result = Array.isArray(props.cryptos) ? props.cryptos : (props.cryptos.data || []);
 
   if (activeFilter.value === 'gainers') {
@@ -140,14 +161,12 @@ const filteredCryptos = computed(() => {
   } else if (activeFilter.value === 'losers') {
     result = result.filter(c => c.change_24h < 0).sort((a, b) => a.change_24h - b.change_24h);
   } else if (activeFilter.value === 'mega') {
-    // 🟢 حماية دالة toUpperCase 
     result = result.filter(c => c.symbol && ['BTC', 'ETH', 'SOL', 'BNB'].includes(c.symbol.toUpperCase()));
   }
 
   if (searchQuery.value) {
     const q = searchQuery.value.toLowerCase();
     result = result.filter(c => {
-      // 🟢 حماية دالة toLowerCase باستخدام Optional Chaining
       const nameLower = c.name?.toLowerCase() || '';
       const symbolLower = c.symbol?.toLowerCase() || '';
       return nameLower.includes(q) || symbolLower.includes(q);
