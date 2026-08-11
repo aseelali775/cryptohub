@@ -1,4 +1,24 @@
 <template>
+  <Head>
+    <link rel="canonical" :href="canonicalUrl" />
+
+    <meta head-key="description" name="description" :content="t('seoDescription')" />
+    <meta head-key="keywords" name="keywords" content="crypto, bitcoin, ethereum, اخبار العملات الرقمية, اسعار الكريبتو, Aql Crypto, ذكاء السوق" />
+
+    <meta head-key="og:type" property="og:type" content="website" />
+    <meta head-key="og:url" property="og:url" :content="canonicalUrl" />
+    <meta head-key="og:title" property="og:title" :content="'Aql Crypto | ' + t('navHome')" />
+    <meta head-key="og:description" property="og:description" :content="t('seoDescription')" />
+    <meta head-key="og:image" property="og:image" content="https://aqlcrypto.com/images/default-og.jpg" />
+    <meta property="og:site_name" content="Aql Crypto" />
+
+    <meta head-key="twitter:card" name="twitter:card" content="summary_large_image" />
+    <meta head-key="twitter:url" name="twitter:url" :content="canonicalUrl" />
+    <meta head-key="twitter:title" name="twitter:title" :content="'Aql Crypto | ' + t('navHome')" />
+    <meta head-key="twitter:description" name="twitter:description" :content="t('seoDescription')" />
+    <meta head-key="twitter:image" name="twitter:image" content="https://aqlcrypto.com/images/default-og.jpg" />
+  </Head>
+
   <div :dir="locale === 'ar' ? 'rtl' : 'ltr'">
     <div class="min-h-screen bg-slate-50 dark:bg-[#0b1121] text-slate-800 dark:text-slate-100 flex flex-col antialiased font-sans transition-colors duration-300 selection:bg-emerald-500 selection:text-white">
       
@@ -217,16 +237,25 @@
 </template>
 
 <script setup>
-import { Link, usePage } from '@inertiajs/vue3';
+import { Head, Link, usePage } from '@inertiajs/vue3';
 import { computed, ref, onMounted } from 'vue';
 
 const page = usePage();
 const locale = computed(() => page.props.locale || 'ar');
 
+// الرابط المعتمد النظيف باستخدام الـ Ternary Operator
+const canonicalUrl = computed(() => {
+    const cleanPath = page.url.split('?')[0];
+
+    return cleanPath === '/'
+        ? 'https://aqlcrypto.com'
+        : `https://aqlcrypto.com${cleanPath}`;
+});
+
 // حالة القائمة الجانبية للهاتف
 const mobileMenuOpen = ref(false);
 
-// إدارة حالة الوضع المظلم/المضيء
+// حالة الوضع المظلم
 const isDarkMode = ref(true);
 
 const updateHtmlClass = () => {
@@ -251,7 +280,7 @@ onMounted(() => {
   updateHtmlClass();
 });
 
-// الترجمات الموحدة والمحدثة
+// الترجمات الموحدة
 const translations = {
   ar: {
     navHome: "الرئيسية",
@@ -263,19 +292,17 @@ const translations = {
     btnSubscribe: "قريباً",
     newsletterTitle: "النشرة البريدية (قريباً)",
     newsletterDesc: "سيتم تفعيل الاشتراك قريباً لتقديم أهم التحليلات.",
-    // عناوين أعمدة الفوتر الجديدة
     footerPlatform: "المنصة",
     footerCompany: "الشركة",
     footerLegal: "الشؤون القانونية",
-    // روابط الفوتر
     footerAbout: "من نحن",
     footerContact: "اتصل بنا",
     footerPrivacy: "سياسة الخصوصية",
     footerTerms: "شروط الاستخدام",
     footerDisclaimer: "إخلاء مسؤولية",
     footerEditorial: "سياسة التحرير",
-    
     copyright: "جميع الحقوق محفوظة © 2026 AQL CRYPTO.",
+    seoDescription: "منصة AQL Crypto: المركز الرائد لمعلومات العملات الرقمية، الأسعار اللحظية، التحليلات، والأخبار المباشرة.",
     legalText: "تنويه قانوني: هذه المنصة مخصصة للأغراض التعليمية والتحليلية فقط. لا تقدم AQL Crypto أي نصائح مالية أو استثمارية أو قانونية. المعلومات والأسعار تُقدم 'كما هي' وقد تتأخر أو تحتوي على أخطاء. تداول العملات الرقمية ينطوي على مخاطر عالية جداً وقد يؤدي إلى خسارة رأس المال."
   },
   en: {
@@ -288,19 +315,17 @@ const translations = {
     btnSubscribe: "Soon",
     newsletterTitle: "Newsletter (Soon)",
     newsletterDesc: "Subscription will be activated soon for top analytics.",
-    // New Footer Columns
     footerPlatform: "Platform",
     footerCompany: "Company",
     footerLegal: "Legal",
-    // Footer Links
     footerAbout: "About Us",
     footerContact: "Contact Us",
     footerPrivacy: "Privacy Policy",
     footerTerms: "Terms of Use",
     footerDisclaimer: "Disclaimer",
     footerEditorial: "Editorial Policy",
-    
     copyright: "All rights reserved © 2026 AQL CRYPTO.",
+    seoDescription: "AQL Crypto Platform: The leading hub for cryptocurrency information, live prices, analytics, and breaking news.",
     legalText: "Legal Notice: This platform is for educational and analytical purposes only. AQL Crypto does not provide financial, investment, or legal advice. Information and prices are provided 'AS IS' and may be delayed or contain errors. Cryptocurrency trading involves extremely high risk and can lead to loss of capital."
   }
 };

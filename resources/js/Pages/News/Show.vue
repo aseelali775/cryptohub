@@ -1,18 +1,23 @@
 <template>
   <HomeLayout>
-   <Head>
-      <title>{{ newsItem?.translations[locale === 'ar' ? 'ar' : 'en']?.title }} | Aql Crypto</title>
+    <Head>
+      <title head-key="title">{{ seoTitle }} | Aql Crypto</title>
+
+      <link rel="canonical" :href="canonicalUrl" />
+
+      <meta head-key="description" name="description" :content="seoDescription" />
+      <meta head-key="keywords" name="keywords" :content="seoKeywords" />
+
+      <meta head-key="og:url" property="og:url" :content="canonicalUrl" />
+      <meta head-key="og:title" property="og:title" :content="seoTitle" />
+      <meta head-key="og:description" property="og:description" :content="seoDescription" />
+      <meta head-key="og:image" property="og:image" :content="newsItem?.image_url" />
       
-      <meta 
-        name="description" 
-        :content="
-          locale === 'ar' 
-          ? (newsItem?.translations?.ar?.summary || newsItem?.translations?.ar?.content) 
-          : newsItem?.translations?.en?.content
-        " 
-      />
-      <link rel="canonical" :href="`https://aqlcrypto.com/news/${newsItem.id}-${newsItem.slug}`" />
-      <meta property="og:image" :content="newsItem?.image_url" />
+      <meta head-key="twitter:card" name="twitter:card" content="summary_large_image" />
+      <meta head-key="twitter:url" name="twitter:url" :content="canonicalUrl" />
+      <meta head-key="twitter:title" name="twitter:title" :content="seoTitle" />
+      <meta head-key="twitter:description" name="twitter:description" :content="seoDescription" />
+      <meta head-key="twitter:image" name="twitter:image" :content="newsItem?.image_url" />
     </Head>
 
     <div class="w-full min-h-screen pb-24 bg-slate-50 dark:bg-[#0b1121] transition-colors duration-300">
@@ -27,7 +32,7 @@
 
         <header class="space-y-6 mb-10" v-if="newsItem">
           <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 dark:text-white leading-[1.4] tracking-tight" :dir="locale === 'ar' ? 'rtl' : 'ltr'">
-            {{ newsItem?.translations?.[locale === 'ar' ? 'ar' : 'en']?.title}}
+            {{ seoTitle }}
           </h1>
 
           <div class="flex flex-wrap items-center gap-2 sm:gap-3 text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-mono" :dir="locale === 'ar' ? 'rtl' : 'ltr'">
@@ -102,8 +107,6 @@
             </a>
           </div>
 
-         
-
           <div class="p-5 sm:p-6 bg-slate-100 dark:bg-[#151e32] border border-slate-200 dark:border-slate-800 rounded-2xl flex flex-col sm:flex-row gap-5 items-start shadow-sm" :dir="locale === 'ar' ? 'rtl' : 'ltr'">
             <div class="w-12 h-12 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 flex items-center justify-center text-xl flex-shrink-0">
               ⚖️
@@ -132,7 +135,7 @@ import HomeLayout from '@/layouts/HomeLayout.vue';
 import { Head, Link, usePage } from '@inertiajs/vue3';
 import { computed } from 'vue';
 
-defineProps({
+const props = defineProps({
   newsItem: {
     type: Object,
     required: true
@@ -141,4 +144,34 @@ defineProps({
 
 const page = usePage();
 const locale = computed(() => page.props.locale || 'ar');
+
+// معالجة البيانات للـ SEO لتكون نظيفة
+const seoTitle = computed(() => props.newsItem?.translations?.[locale.value === 'ar' ? 'ar' : 'en']?.title || '');
+
+const seoDescription = computed(() => {
+    if (locale.value === 'ar') {
+        return props.newsItem?.translations?.ar?.summary || props.newsItem?.translations?.ar?.content || '';
+    }
+    return props.newsItem?.translations?.en?.content || '';
+});
+
+const seoKeywords = computed(() => {
+    return props.newsItem?.keywords ? props.newsItem.keywords.join(', ') : 'crypto, news';
+});
+
+// بناء الرابط النظيف للصفحة (Canonical URL) بشكل ذكي
+const canonicalUrl = computed(() => {
+    const id = props.newsItem.id;
+    let slug = props.newsItem.slug || '';
+
+    // التحقق: إذا كان الـ slug موجوداً وينتهي بالـ ID (مثل: bitcoin-price-123) نقوم بقصه
+    if (slug && slug.endsWith(`-${id}`)) {
+        slug = slug.replace(new RegExp(`-${id}$`), '');
+    }
+
+    // إذا لم يكن هناك slug أصلاً، نكتفي بالـ ID
+    return slug 
+        ? `https://aqlcrypto.com/news/${id}-${slug}`
+        : `https://aqlcrypto.com/news/${id}`;
+});
 </script>
