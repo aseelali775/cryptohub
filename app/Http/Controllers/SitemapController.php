@@ -18,7 +18,10 @@ class SitemapController extends Controller
             $baseUrl = rtrim(config('app.url', url('/')), '/');
 
             // --- جلب تواريخ آخر تحديثات حقيقية من قاعدة البيانات ---
-            $latestNewsUpdated = News::latest('updated_at')->value('updated_at');
+           $latestNewsUpdated = News::query()
+    ->where('ai_processed', true)
+    ->latest('updated_at')
+    ->value('updated_at');
             $latestNewsDate = $latestNewsUpdated 
                 ? $latestNewsUpdated->toAtomString() 
                 : now()->toAtomString();
@@ -78,7 +81,11 @@ class SitemapController extends Controller
 
             // 3. جلب جميع الأخبار (روابط نظيفة مع تاريخ updated_at الفعلي للخبر)
             $newsUrls = [];
-            $articles = News::select('id', 'slug', 'updated_at')->latest()->get();
+           $articles = News::query()
+    ->where('ai_processed', true)
+    ->select('id', 'slug', 'updated_at')
+    ->latest()
+    ->get();
             
             foreach ($articles as $article) {
                 // تنظيف الـ Slug وإزالة الـ ID المكرر من نهايته إن وجد
