@@ -17,7 +17,7 @@ Schedule::command('crypto:fetch-news')
     ->withoutOverlapping();
 
 Schedule::command('news:process-ai')
-    ->cron('15 */2 * * *')
+    ->cron('15 */10 * * *')
     ->withoutOverlapping();
 
 Schedule::command('crypto:generate-ai-reports')

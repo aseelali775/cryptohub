@@ -16,36 +16,85 @@ class RepairNewsWithAI extends Command
     protected $description =
         'Repair previously processed news articles with missing AI editorial fields.';
 
+    /*
+    |--------------------------------------------------------------------------
+    | Gemini Configuration
+    |--------------------------------------------------------------------------
+    */
+
     private const GEMINI_MODEL = 'gemini-3.6-flash';
+
+    /*
+    |--------------------------------------------------------------------------
+    | Number of articles processed in one command execution
+    |--------------------------------------------------------------------------
+    */
 
     private const BATCH_LIMIT = 3;
 
+    /*
+    |--------------------------------------------------------------------------
+    | Delay between successful requests
+    |--------------------------------------------------------------------------
+    */
+
     private const RATE_LIMIT_SECONDS = 20;
 
+    /*
+    |--------------------------------------------------------------------------
+    | Maximum source content sent to Gemini
+    |--------------------------------------------------------------------------
+    */
+
     private const MAX_SOURCE_LENGTH = 12000;
+
+    /*
+    |--------------------------------------------------------------------------
+    | Temporary API retry configuration
+    |--------------------------------------------------------------------------
+    */
+
+    private const MAX_API_RETRIES = 2;
+
+    private const RETRY_BASE_SECONDS = 5;
+
+    /*
+    |--------------------------------------------------------------------------
+    | Main handler
+    |--------------------------------------------------------------------------
+    */
 
     public function handle(): int
     {
         $apiKey = config('services.gemini.key');
 
         if (empty($apiKey)) {
-            $this->error('GEMINI_API_KEY is missing.');
+
+            $this->error('❌ GEMINI_API_KEY is missing.');
+
+            Log::error(
+                'AI News Repair aborted: Gemini API key missing.'
+            );
 
             return self::FAILURE;
         }
 
         $this->info('🔧 Starting Aql Crypto AI Repair Cycle...');
-        $this->info('Model: ' . self::GEMINI_MODEL);
+
+        $this->info(
+            'Model: ' . self::GEMINI_MODEL
+        );
 
         /*
         |--------------------------------------------------------------------------
-        | Find ONLY previously processed but incomplete articles
+        | Find incomplete processed articles
         |--------------------------------------------------------------------------
         */
 
         $newsList = News::query()
             ->where('ai_processed', true)
             ->where(function ($q) {
+
                 $q->whereNull('title_ar')
                     ->orWhere('title_ar', '')
                     ->orWhereNull('content_ar')
@@ -61,14 +110,25 @@ class RepairNewsWithAI extends Command
                     ->orWhereNull('what_to_watch_ar')
                     ->orWhere('what_to_watch_ar', '')
                     ->orWhereNull('limitations_ar')
-                    ->orWhere('limitations_ar', '');
+                    ->orWhere('limitations_ar', '')
+                    ->orWhereNull('meta_description_ar')
+                    ->orWhere('meta_description_ar', '');
             })
             ->oldest()
             ->limit(self::BATCH_LIMIT)
             ->get();
 
+        /*
+        |--------------------------------------------------------------------------
+        | Nothing to repair
+        |--------------------------------------------------------------------------
+        */
+
         if ($newsList->isEmpty()) {
-            $this->info('✅ No incomplete processed articles found.');
+
+            $this->info(
+                '✅ No incomplete processed articles found.'
+            );
 
             return self::SUCCESS;
         }
@@ -80,6 +140,12 @@ class RepairNewsWithAI extends Command
         $repaired = 0;
         $failed = 0;
         $skipped = 0;
+
+        /*
+        |--------------------------------------------------------------------------
+        | Process articles
+        |--------------------------------------------------------------------------
+        */
 
         foreach ($newsList as $news) {
 
@@ -93,11 +159,36 @@ class RepairNewsWithAI extends Command
 
                 /*
                 |--------------------------------------------------------------------------
-                | Existing information
+                | Determine exactly which fields are missing
                 |--------------------------------------------------------------------------
                 */
 
-                $titleEn = trim((string) $news->title_en);
+                $missingFields = $this->getMissingFields($news);
+
+                if (empty($missingFields)) {
+
+                    $this->info(
+                        "ℹ️ Article {$news->id} has no repairable missing fields."
+                    );
+
+                    $skipped++;
+
+                    continue;
+                }
+
+                $this->line(
+                    'Missing fields: ' . implode(', ', $missingFields)
+                );
+
+                /*
+                |--------------------------------------------------------------------------
+                | Existing article information
+                |--------------------------------------------------------------------------
+                */
+
+                $titleEn = trim(
+                    (string) $news->title_en
+                );
 
                 $contentEn = trim(
                     mb_substr(
@@ -107,37 +198,47 @@ class RepairNewsWithAI extends Command
                     )
                 );
 
-                $titleAr = trim((string) $news->title_ar);
-                $contentAr = trim((string) $news->content_ar);
-                $summaryAr = trim((string) $news->summary_ar);
+                $titleAr = trim(
+                    (string) $news->title_ar
+                );
+
+                $contentAr = trim(
+                    (string) $news->content_ar
+                );
+
+                $summaryAr = trim(
+                    (string) $news->summary_ar
+                );
 
                 /*
                 |--------------------------------------------------------------------------
-                | Source material
-                |--------------------------------------------------------------------------
-                |
-                | Repair can use already existing Arabic fields as part of the
-                | factual material. This is important for old articles where
-                | content_en was stored as a very short RSS description.
+                | Build source material
                 |--------------------------------------------------------------------------
                 */
 
-                $sourceMaterial = implode("\n\n", array_filter([
-                    'English title: ' . $titleEn,
-                    'English source content: ' . $contentEn,
-                    'Existing Arabic title: ' . $titleAr,
-                    'Existing Arabic content: ' . $contentAr,
-                    'Existing Arabic summary: ' . $summaryAr,
-                    'Source: ' . ($news->source ?? ''),
-                ]));
+                $sourceMaterial = implode(
+                    "\n\n",
+                    array_filter([
+                        'English title: ' . $titleEn,
+                        'English source content: ' . $contentEn,
+                        'Existing Arabic title: ' . $titleAr,
+                        'Existing Arabic content: ' . $contentAr,
+                        'Existing Arabic summary: ' . $summaryAr,
+                        'Source: ' . ($news->source ?? ''),
+                    ])
+                );
 
                 /*
                 |--------------------------------------------------------------------------
-                | Minimum available material
+                | Minimum factual material check
                 |--------------------------------------------------------------------------
                 */
 
-                if (mb_strlen(trim($sourceMaterial)) < 200) {
+                if (
+                    mb_strlen(
+                        trim($sourceMaterial)
+                    ) < 200
+                ) {
 
                     $this->warn(
                         "⚠️ Article {$news->id} does not contain enough factual material for safe repair."
@@ -148,29 +249,94 @@ class RepairNewsWithAI extends Command
                         [
                             'news_id' => $news->id,
                             'source_length' => mb_strlen($sourceMaterial),
+                            'missing_fields' => $missingFields,
                         ]
                     );
 
                     $skipped++;
-
-                    sleep(self::RATE_LIMIT_SECONDS);
 
                     continue;
                 }
 
                 /*
                 |--------------------------------------------------------------------------
-                | Ask Gemini to repair ONLY missing fields
+                | Ask Gemini to repair only missing fields
                 |--------------------------------------------------------------------------
                 */
 
                 $result = $this->repairWithGemini(
                     $news,
                     $sourceMaterial,
+                    $missingFields,
                     $apiKey
                 );
 
-                if (!$this->isValidResult($result)) {
+                /*
+                |--------------------------------------------------------------------------
+                | Gemini quota exceeded
+                |--------------------------------------------------------------------------
+                */
+
+                if (
+                    is_array($result) &&
+                    ($result['__quota_exceeded'] ?? false)
+                ) {
+
+                    $this->error(
+                        '🛑 Gemini quota exhausted.'
+                    );
+
+                    $this->warn(
+                        'Repair cycle stopped to avoid wasting further requests.'
+                    );
+
+                    Log::warning(
+                        'AI repair cycle stopped because Gemini quota was exhausted',
+                        [
+                            'news_id' => $news->id,
+                            'model' => self::GEMINI_MODEL,
+                            'message' => $result['__message'] ?? null,
+                            'retry_seconds' => $result['__retry_seconds'] ?? null,
+                        ]
+                    );
+
+                    $failed++;
+
+                    break;
+                }
+
+                /*
+                |--------------------------------------------------------------------------
+                | API temporary failure
+                |--------------------------------------------------------------------------
+                */
+
+                if (
+                    is_array($result) &&
+                    ($result['__temporary_failure'] ?? false)
+                ) {
+
+                    $this->error(
+                        "❌ Temporary Gemini API failure for ID {$news->id}"
+                    );
+
+                    $failed++;
+
+                    continue;
+                }
+
+                /*
+                |--------------------------------------------------------------------------
+                | Validation
+                |--------------------------------------------------------------------------
+                */
+
+                if (
+                    !$this->isValidResult(
+                        $result,
+                        $missingFields
+                    )
+                ) {
 
                     $this->error(
                         "❌ Repair result failed validation for ID {$news->id}"
@@ -180,54 +346,52 @@ class RepairNewsWithAI extends Command
                         'AI repair result failed validation',
                         [
                             'news_id' => $news->id,
+                            'missing_fields' => $missingFields,
                             'result' => $result,
                         ]
                     );
 
                     $failed++;
 
-                    sleep(self::RATE_LIMIT_SECONDS);
-
                     continue;
                 }
 
                 /*
                 |--------------------------------------------------------------------------
-                | Preserve existing fields
+                | Build safe update array
                 |--------------------------------------------------------------------------
-                |
-                | VERY IMPORTANT:
-                | Existing valid content is NOT overwritten.
-                |
                 */
 
                 $updates = [];
 
-                $fields = [
-                    'title_ar',
-                    'content_ar',
-                    'summary_ar',
-                    'why_it_matters_ar',
-                    'analysis_ar',
-                    'context_ar',
-                    'what_to_watch_ar',
-                    'limitations_ar',
-                    'meta_description_ar',
-                ];
+                foreach ($missingFields as $field) {
 
-                foreach ($fields as $field) {
+                    $existing = trim(
+                        (string) $news->{$field}
+                    );
 
-                    $existing = trim((string) $news->{$field});
-                    $generated = trim((string) ($result[$field] ?? ''));
+                    $generated = trim(
+                        (string) ($result[$field] ?? '')
+                    );
 
-                    if ($existing === '' && $generated !== '') {
+                    /*
+                    |--------------------------------------------------------------------------
+                    | NEVER overwrite existing content
+                    |--------------------------------------------------------------------------
+                    */
+
+                    if (
+                        $existing === '' &&
+                        $generated !== ''
+                    ) {
+
                         $updates[$field] = $generated;
                     }
                 }
 
                 /*
                 |--------------------------------------------------------------------------
-                | Other AI fields
+                | Optional AI fields
                 |--------------------------------------------------------------------------
                 */
 
@@ -235,20 +399,25 @@ class RepairNewsWithAI extends Command
                     empty($news->sentiment) &&
                     !empty($result['sentiment'])
                 ) {
-                    $updates['sentiment'] = $result['sentiment'];
+
+                    $updates['sentiment'] =
+                        $result['sentiment'];
                 }
 
                 if (
                     empty($news->category) &&
                     !empty($result['category'])
                 ) {
-                    $updates['category'] = $result['category'];
+
+                    $updates['category'] =
+                        $result['category'];
                 }
 
                 if (
                     empty($news->impact_score) &&
                     isset($result['impact_score'])
                 ) {
+
                     $updates['impact_score'] =
                         (int) $result['impact_score'];
                 }
@@ -257,6 +426,7 @@ class RepairNewsWithAI extends Command
                     empty($news->keywords) &&
                     !empty($result['keywords'])
                 ) {
+
                     $updates['keywords'] =
                         $result['keywords'];
                 }
@@ -269,7 +439,9 @@ class RepairNewsWithAI extends Command
 
                 if (empty($news->slug)) {
 
-                    $slug = Str::slug($titleEn);
+                    $slug = Str::slug(
+                        $titleEn
+                    );
 
                     if ($slug === '') {
                         $slug = 'news';
@@ -281,7 +453,7 @@ class RepairNewsWithAI extends Command
 
                 /*
                 |--------------------------------------------------------------------------
-                | Make sure meaningful fields were actually repaired
+                | Nothing generated
                 |--------------------------------------------------------------------------
                 */
 
@@ -293,8 +465,6 @@ class RepairNewsWithAI extends Command
 
                     $skipped++;
 
-                    sleep(self::RATE_LIMIT_SECONDS);
-
                     continue;
                 }
 
@@ -304,12 +474,22 @@ class RepairNewsWithAI extends Command
                 |--------------------------------------------------------------------------
                 */
 
-                $news->update($updates);
+                $news->update(
+                    $updates
+                );
 
                 $repaired++;
 
                 $this->info(
                     "✅ AI repair saved for ID {$news->id}"
+                );
+
+                $this->line(
+                    'Updated fields: ' .
+                    implode(
+                        ', ',
+                        array_keys($updates)
+                    )
                 );
 
             } catch (\Throwable $e) {
@@ -330,7 +510,15 @@ class RepairNewsWithAI extends Command
                 );
             }
 
-            sleep(self::RATE_LIMIT_SECONDS);
+            /*
+            |--------------------------------------------------------------------------
+            | Delay between successful article requests
+            |--------------------------------------------------------------------------
+            */
+
+            sleep(
+                self::RATE_LIMIT_SECONDS
+            );
         }
 
         /*
@@ -339,12 +527,19 @@ class RepairNewsWithAI extends Command
         |--------------------------------------------------------------------------
         */
 
-        Cache::forget('ai_market_dashboard_stats');
-        Cache::forget('ai_market_impact_news');
+        Cache::forget(
+            'ai_market_dashboard_stats'
+        );
+
+        Cache::forget(
+            'ai_market_impact_news'
+        );
 
         $this->newLine();
 
-        $this->info('🧹 AI Market cache cleared.');
+        $this->info(
+            '🧹 AI Market cache cleared.'
+        );
 
         $this->info(
             "📊 Repaired: {$repaired} | Failed: {$failed} | Skipped: {$skipped}"
@@ -354,14 +549,66 @@ class RepairNewsWithAI extends Command
             '🚀 Aql Crypto AI Repair Cycle Completed.'
         );
 
+        /*
+        |--------------------------------------------------------------------------
+        | Exit status
+        |--------------------------------------------------------------------------
+        */
+
         return $failed > 0 && $repaired === 0
             ? self::FAILURE
             : self::SUCCESS;
     }
 
+    /*
+    |--------------------------------------------------------------------------
+    | Determine missing fields
+    |--------------------------------------------------------------------------
+    */
+
+    private function getMissingFields(
+        News $news
+    ): array {
+
+        $fields = [
+            'title_ar',
+            'content_ar',
+            'summary_ar',
+            'meta_description_ar',
+            'why_it_matters_ar',
+            'analysis_ar',
+            'context_ar',
+            'what_to_watch_ar',
+            'limitations_ar',
+        ];
+
+        $missing = [];
+
+        foreach ($fields as $field) {
+
+            if (
+                trim(
+                    (string) $news->{$field}
+                ) === ''
+            ) {
+
+                $missing[] = $field;
+            }
+        }
+
+        return $missing;
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Gemini repair request
+    |--------------------------------------------------------------------------
+    */
+
     private function repairWithGemini(
         News $news,
         string $sourceMaterial,
+        array $missingFields,
         string $apiKey
     ): ?array {
 
@@ -371,14 +618,32 @@ class RepairNewsWithAI extends Command
             $apiKey
         );
 
+        /*
+        |--------------------------------------------------------------------------
+        | Create list of requested fields
+        |--------------------------------------------------------------------------
+        */
+
+        $fieldList = implode(
+            "\n",
+            array_map(
+                fn ($field) => "- {$field}",
+                $missingFields
+            )
+        );
+
+        /*
+        |--------------------------------------------------------------------------
+        | Prompt
+        |--------------------------------------------------------------------------
+        */
+
         $prompt = <<<PROMPT
 You are repairing an existing Arabic cryptocurrency news article for Aql Crypto.
 
 This is NOT a new article.
 
-Some Arabic editorial fields already exist and some are missing.
-
-Your task is to generate ONLY information that can be safely supported by the supplied material.
+Your task is to generate ONLY the missing fields listed below.
 
 IMPORTANT RULES:
 
@@ -390,23 +655,31 @@ IMPORTANT RULES:
 
 4. Do not add statistics that are not supplied.
 
-5. Do not add people, companies, dates, quotes, regulations or events that are not present in the material.
+5. Do not add people, companies, dates, quotes, regulations or events that are not present in the supplied material.
 
-6. Existing Arabic content is part of the supplied factual material.
+6. Existing Arabic content is part of the factual material.
 
-7. Preserve existing meaning.
+7. Preserve the meaning of existing content.
 
-8. If the source is insufficient to support a field, write a cautious limitation rather than inventing information.
+8. If the supplied material is insufficient for a field, write a cautious limitation instead of inventing information.
 
 9. The article is journalism, not financial advice.
 
-10. Do not recommend buying or selling assets.
+10. Never recommend buying or selling assets.
 
 11. Use professional Modern Standard Arabic.
 
 12. Return ONLY valid JSON.
 
-The goal is to complete missing editorial fields safely.
+13. Generate ONLY the fields listed in MISSING FIELDS.
+
+14. Do not generate fields that are not listed.
+
+==================================================
+MISSING FIELDS
+==================================================
+
+{$fieldList}
 
 ==================================================
 AVAILABLE MATERIAL
@@ -415,102 +688,70 @@ AVAILABLE MATERIAL
 {$sourceMaterial}
 
 ==================================================
+FIELD GUIDANCE
+==================================================
+
+title_ar:
+A concise and accurate Arabic headline.
+
+content_ar:
+A factual Arabic version of the supplied article material. Do not invent information.
+
+summary_ar:
+A short factual summary.
+
+meta_description_ar:
+A concise SEO-friendly Arabic description based only on supplied facts.
+
+why_it_matters_ar:
+Explain why the reported event may matter, using only supplied facts. Do not make unsupported market predictions.
+
+analysis_ar:
+Provide careful editorial analysis based only on supplied facts. Clearly distinguish facts from interpretation.
+
+context_ar:
+Explain context only when that context is explicitly supported by the supplied material.
+
+what_to_watch_ar:
+Mention developments readers could reasonably monitor based only on the supplied facts. Do not make investment recommendations.
+
+limitations_ar:
+Clearly state relevant limitations when the source material does not provide enough information.
+
+==================================================
 OUTPUT
 ==================================================
 
-{
-    "title_ar": "",
-    "content_ar": "",
-    "summary_ar": "",
-    "meta_description_ar": "",
-    "why_it_matters_ar": "",
-    "analysis_ar": "",
-    "context_ar": "",
-    "what_to_watch_ar": "",
-    "limitations_ar": "",
-    "sentiment": "Neutral",
-    "category": "Market",
-    "impact_score": 5,
-    "keywords": []
-}
-
-IMPORTANT:
-
-If an existing Arabic title, article or summary already exists, do not rewrite it unless necessary.
-
-For missing analytical fields, use only the supplied facts.
-
-If there is not enough information for a detailed analysis, explicitly state the limitation instead of inventing context.
+Return a JSON object containing ONLY the requested missing fields.
 
 PROMPT;
 
+        /*
+        |--------------------------------------------------------------------------
+        | Dynamic schema
+        |--------------------------------------------------------------------------
+        */
+
+        $properties = [];
+
+        foreach ($missingFields as $field) {
+
+            $properties[$field] = [
+                'type' => 'string',
+            ];
+        }
+
         $schema = [
             'type' => 'object',
-
-            'properties' => [
-
-                'title_ar' => ['type' => 'string'],
-                'content_ar' => ['type' => 'string'],
-                'summary_ar' => ['type' => 'string'],
-                'meta_description_ar' => ['type' => 'string'],
-                'why_it_matters_ar' => ['type' => 'string'],
-                'analysis_ar' => ['type' => 'string'],
-                'context_ar' => ['type' => 'string'],
-                'what_to_watch_ar' => ['type' => 'string'],
-                'limitations_ar' => ['type' => 'string'],
-
-                'sentiment' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Bullish',
-                        'Bearish',
-                        'Neutral',
-                    ],
-                ],
-
-                'category' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Bitcoin',
-                        'Ethereum',
-                        'Regulation',
-                        'DeFi',
-                        'NFT',
-                        'Mining',
-                        'Market',
-                        'Security',
-                        'Blockchain',
-                    ],
-                ],
-
-                'impact_score' => [
-                    'type' => 'integer',
-                ],
-
-                'keywords' => [
-                    'type' => 'array',
-                    'items' => [
-                        'type' => 'string',
-                    ],
-                ],
-            ],
-
-            'required' => [
-                'title_ar',
-                'content_ar',
-                'summary_ar',
-                'meta_description_ar',
-                'why_it_matters_ar',
-                'analysis_ar',
-                'context_ar',
-                'what_to_watch_ar',
-                'limitations_ar',
-                'sentiment',
-                'category',
-                'impact_score',
-                'keywords',
-            ],
+            'properties' => $properties,
+            'required' => $missingFields,
         ];
+
+        /*
+        |--------------------------------------------------------------------------
+        | Payload
+        |--------------------------------------------------------------------------
+        */
 
         $payload = [
             'contents' => [
@@ -530,177 +771,400 @@ PROMPT;
             ],
         ];
 
-        try {
+        /*
+        |--------------------------------------------------------------------------
+        | API request with limited retry
+        |--------------------------------------------------------------------------
+        */
 
-            $response = Http::timeout(90)
-                ->acceptJson()
-                ->asJson()
-                ->post($url, $payload);
+        for (
+            $attempt = 1;
+            $attempt <= self::MAX_API_RETRIES + 1;
+            $attempt++
+        ) {
 
-            if (!$response->successful()) {
+            try {
+
+                $response = Http::timeout(90)
+                    ->acceptJson()
+                    ->asJson()
+                    ->post(
+                        $url,
+                        $payload
+                    );
+
+                /*
+                |--------------------------------------------------------------------------
+                | Successful response
+                |--------------------------------------------------------------------------
+                */
+
+                if ($response->successful()) {
+
+                    $text = data_get(
+                        $response->json(),
+                        'candidates.0.content.parts.0.text'
+                    );
+
+                    if (
+                        !is_string($text) ||
+                        trim($text) === ''
+                    ) {
+
+                        Log::error(
+                            'Gemini Repair returned empty response',
+                            [
+                                'news_id' => $news->id,
+                                'attempt' => $attempt,
+                            ]
+                        );
+
+                        return null;
+                    }
+
+                    $text = trim($text);
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Remove Markdown JSON fences if returned unexpectedly
+                    |--------------------------------------------------------------------------
+                    */
+
+                    $text = preg_replace(
+                        '/^```(?:json)?\s*/i',
+                        '',
+                        $text
+                    );
+
+                    $text = preg_replace(
+                        '/\s*```$/',
+                        '',
+                        $text
+                    );
+
+                    $text = trim($text);
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Decode JSON
+                    |--------------------------------------------------------------------------
+                    */
+
+                    $data = json_decode(
+                        $text,
+                        true
+                    );
+
+                    if (
+                        json_last_error() !== JSON_ERROR_NONE
+                    ) {
+
+                        Log::error(
+                            'Gemini Repair JSON Error',
+                            [
+                                'news_id' => $news->id,
+                                'attempt' => $attempt,
+                                'error' => json_last_error_msg(),
+                                'response' => $text,
+                            ]
+                        );
+
+                        return null;
+                    }
+
+                    return is_array($data)
+                        ? $data
+                        : null;
+                }
+
+                /*
+                |--------------------------------------------------------------------------
+                | 429 - Quota / Rate Limit
+                |--------------------------------------------------------------------------
+                */
+
+                if (
+                    $response->status() === 429
+                ) {
+
+                    $body = $response->json();
+
+                    $message = data_get(
+                        $body,
+                        'error.message',
+                        'Gemini API quota exceeded.'
+                    );
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Extract RetryInfo
+                    |--------------------------------------------------------------------------
+                    */
+
+                    $retrySeconds = null;
+
+                    $details = data_get(
+                        $body,
+                        'error.details',
+                        []
+                    );
+
+                    if (is_array($details)) {
+
+                        foreach ($details as $detail) {
+
+                            if (
+                                isset($detail['@type']) &&
+                                $detail['@type'] ===
+                                'type.googleapis.com/google.rpc.RetryInfo'
+                            ) {
+
+                                $retryDelay =
+                                    $detail['retryDelay'] ?? null;
+
+                                if (
+                                    is_string($retryDelay)
+                                ) {
+
+                                    preg_match(
+                                        '/(\d+(?:\.\d+)?)s/',
+                                        $retryDelay,
+                                        $matches
+                                    );
+
+                                    if (
+                                        isset($matches[1])
+                                    ) {
+
+                                        $retrySeconds =
+                                            (int) ceil(
+                                                (float) $matches[1]
+                                            );
+                                    }
+                                }
+
+                                break;
+                            }
+                        }
+                    }
+
+                    Log::warning(
+                        'Gemini Repair Quota Exceeded',
+                        [
+                            'news_id' => $news->id,
+                            'model' => self::GEMINI_MODEL,
+                            'attempt' => $attempt,
+                            'retry_seconds' => $retrySeconds,
+                            'message' => $message,
+                            'body' => $response->body(),
+                        ]
+                    );
+
+                    $this->error(
+                        '🚫 Gemini API returned HTTP 429.'
+                    );
+
+                    $this->warn(
+                        'Message: ' . $message
+                    );
+
+                    if ($retrySeconds !== null) {
+
+                        $this->warn(
+                            "Suggested retry delay: {$retrySeconds} seconds."
+                        );
+                    }
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | IMPORTANT:
+                    |
+                    | Do NOT retry automatically when quota is exhausted.
+                    |
+                    |--------------------------------------------------------------------------
+                    */
+
+                    return [
+                        '__quota_exceeded' => true,
+                        '__message' => $message,
+                        '__retry_seconds' => $retrySeconds,
+                    ];
+                }
+
+                /*
+                |--------------------------------------------------------------------------
+                | Temporary server errors
+                |--------------------------------------------------------------------------
+                */
+
+                if (
+                    in_array(
+                        $response->status(),
+                        [
+                            500,
+                            502,
+                            503,
+                            504,
+                        ],
+                        true
+                    )
+                ) {
+
+                    Log::warning(
+                        'Temporary Gemini API error',
+                        [
+                            'news_id' => $news->id,
+                            'status' => $response->status(),
+                            'attempt' => $attempt,
+                            'body' => $response->body(),
+                        ]
+                    );
+
+                    if (
+                        $attempt <= self::MAX_API_RETRIES
+                    ) {
+
+                        $delay =
+                            self::RETRY_BASE_SECONDS *
+                            $attempt;
+
+                        $this->warn(
+                            "⚠️ Temporary API error. Retrying in {$delay}s..."
+                        );
+
+                        sleep($delay);
+
+                        continue;
+                    }
+
+                    return [
+                        '__temporary_failure' => true,
+                    ];
+                }
+
+                /*
+                |--------------------------------------------------------------------------
+                | Other API errors
+                |--------------------------------------------------------------------------
+                */
 
                 Log::error(
                     'Gemini Repair API Error',
                     [
                         'news_id' => $news->id,
                         'status' => $response->status(),
+                        'attempt' => $attempt,
                         'body' => $response->body(),
                     ]
                 );
 
                 return null;
-            }
 
-            $text = data_get(
-                $response->json(),
-                'candidates.0.content.parts.0.text'
-            );
-
-            if (!is_string($text) || trim($text) === '') {
+            } catch (\Throwable $e) {
 
                 Log::error(
-                    'Gemini Repair returned empty response',
+                    'Gemini Repair Connection Error',
                     [
                         'news_id' => $news->id,
+                        'attempt' => $attempt,
+                        'message' => $e->getMessage(),
                     ]
                 );
 
-                return null;
+                /*
+                |--------------------------------------------------------------------------
+                | Retry connection failures
+                |--------------------------------------------------------------------------
+                */
+
+                if (
+                    $attempt <= self::MAX_API_RETRIES
+                ) {
+
+                    $delay =
+                        self::RETRY_BASE_SECONDS *
+                        $attempt;
+
+                    $this->warn(
+                        "⚠️ Connection error. Retrying in {$delay}s..."
+                    );
+
+                    sleep($delay);
+
+                    continue;
+                }
+
+                return [
+                    '__temporary_failure' => true,
+                ];
             }
-
-            $text = trim($text);
-
-            $text = preg_replace(
-                '/^```(?:json)?\s*/i',
-                '',
-                $text
-            );
-
-            $text = preg_replace(
-                '/\s*```$/',
-                '',
-                $text
-            );
-
-            $data = json_decode(
-                trim($text),
-                true
-            );
-
-            if (json_last_error() !== JSON_ERROR_NONE) {
-
-                Log::error(
-                    'Gemini Repair JSON Error',
-                    [
-                        'news_id' => $news->id,
-                        'error' => json_last_error_msg(),
-                        'response' => $text,
-                    ]
-                );
-
-                return null;
-            }
-
-            return is_array($data)
-                ? $data
-                : null;
-
-        } catch (\Throwable $e) {
-
-            Log::error(
-                'Gemini Repair Connection Error',
-                [
-                    'news_id' => $news->id,
-                    'message' => $e->getMessage(),
-                ]
-            );
-
-            return null;
         }
+
+        return null;
     }
 
-    private function isValidResult(?array $result): bool
-    {
+    /*
+    |--------------------------------------------------------------------------
+    | Validate Gemini result
+    |--------------------------------------------------------------------------
+    */
+
+    private function isValidResult(
+        ?array $result,
+        array $missingFields
+    ): bool {
+
         if (!is_array($result)) {
             return false;
         }
 
-        $required = [
-            'title_ar',
-            'content_ar',
-            'summary_ar',
-            'meta_description_ar',
-            'why_it_matters_ar',
-            'analysis_ar',
-            'context_ar',
-            'what_to_watch_ar',
-            'limitations_ar',
-            'sentiment',
-            'category',
-            'impact_score',
-            'keywords',
-        ];
+        /*
+        |--------------------------------------------------------------------------
+        | Internal control fields are not valid AI results
+        |--------------------------------------------------------------------------
+        */
 
-        foreach ($required as $field) {
-            if (!array_key_exists($field, $result)) {
+        if (
+            isset($result['__quota_exceeded']) ||
+            isset($result['__temporary_failure'])
+        ) {
+
+            return false;
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Make sure all requested fields exist
+        |--------------------------------------------------------------------------
+        */
+
+        foreach ($missingFields as $field) {
+
+            if (
+                !array_key_exists(
+                    $field,
+                    $result
+                )
+            ) {
+
                 return false;
             }
-        }
 
-        if (
-            !in_array(
-                $result['sentiment'],
-                ['Bullish', 'Bearish', 'Neutral'],
-                true
-            )
-        ) {
-            return false;
-        }
-
-        if (
-            !in_array(
-                $result['category'],
-                [
-                    'Bitcoin',
-                    'Ethereum',
-                    'Regulation',
-                    'DeFi',
-                    'NFT',
-                    'Mining',
-                    'Market',
-                    'Security',
-                    'Blockchain',
-                ],
-                true
-            )
-        ) {
-            return false;
-        }
-
-        if (
-            !is_numeric($result['impact_score']) ||
-            (int) $result['impact_score'] < 1 ||
-            (int) $result['impact_score'] > 10
-        ) {
-            return false;
-        }
-
-        if (!is_array($result['keywords'])) {
-            return false;
-        }
-
-        if (
-            count($result['keywords']) < 3 ||
-            count($result['keywords']) > 5
-        ) {
-            return false;
-        }
-
-        foreach ($result['keywords'] as $keyword) {
             if (
-                !is_string($keyword) ||
-                trim($keyword) === ''
+                !is_string(
+                    $result[$field]
+                )
             ) {
+
+                return false;
+            }
+
+            if (
+                trim(
+                    $result[$field]
+                ) === ''
+            ) {
+
                 return false;
             }
         }
