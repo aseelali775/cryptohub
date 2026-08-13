@@ -11,7 +11,7 @@ use Illuminate\Support\Str;
 
 class ProcessNewsWithAI extends Command
 {
-    protected $signature = 'news:process-ai {--repair : Repair previously processed articles with missing AI fields}';
+    protected $signature = 'news:process-ai';
 
     protected $description = 'Analyze crypto news and generate original Arabic editorial analysis using Gemini AI.';
 
@@ -50,11 +50,7 @@ class ProcessNewsWithAI extends Command
             return Command::FAILURE;
         }
 
-        if ($this->option('repair')) {
-    $this->info('🔧 Starting Aql Crypto AI Repair Cycle...');
-} else {
-    $this->info('🚀 Starting Aql Crypto AI Editorial Analysis...');
-}
+        $this->info('Starting Aql Crypto AI Editorial Analysis...');
         $this->info('Model: ' . self::GEMINI_MODEL);
 
         /*
@@ -63,50 +59,13 @@ class ProcessNewsWithAI extends Command
         |--------------------------------------------------------------------------
         */
 
-       if ($this->option('repair')) {
-
-    $newsList = News::query()
-        ->where('ai_processed', true)
-        ->where(function ($q) {
-            $q->whereNull('title_ar')
-                ->orWhere('title_ar', '')
-                ->orWhereNull('content_ar')
-                ->orWhere('content_ar', '')
-                ->orWhereNull('summary_ar')
-                ->orWhere('summary_ar', '')
-                ->orWhereNull('why_it_matters_ar')
-                ->orWhere('why_it_matters_ar', '')
-                ->orWhereNull('analysis_ar')
-                ->orWhere('analysis_ar', '')
-                ->orWhereNull('context_ar')
-                ->orWhere('context_ar', '')
-                ->orWhereNull('what_to_watch_ar')
-                ->orWhere('what_to_watch_ar', '')
-                ->orWhereNull('limitations_ar')
-                ->orWhere('limitations_ar', '');
-        })
-        ->whereNotNull('content_en')
-        ->where('content_en', '!=', '')
-        ->oldest()
-        ->limit(self::BATCH_LIMIT)
-        ->get();
-
-} else {
-
-    $newsList = News::query()
-        ->where('ai_processed', false)
-        ->whereNotNull('content_en')
-        ->where('content_en', '!=', '')
-        ->latest()
-        ->limit(self::BATCH_LIMIT)
-        ->get();
-}
-
-$this->info(
-    $this->option('repair')
-        ? "🔧 Repair mode: {$newsList->count()} incomplete articles selected."
-        : "📰 New articles mode: {$newsList->count()} articles selected."
-);
+        $newsList = News::query()
+            ->where('ai_processed', false)
+            ->whereNotNull('content_en')
+            ->where('content_en', '!=', '')
+            ->latest()
+            ->limit(self::BATCH_LIMIT)
+            ->get();
 
         if ($newsList->isEmpty()) {
             $this->info('No new articles.');
