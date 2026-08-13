@@ -31,7 +31,7 @@ class ProcessNewsWithAI extends Command
     /**
      * Seconds between requests.
      */
-    private const RATE_LIMIT_SECONDS = 5;
+    private const RATE_LIMIT_SECONDS = 20;
 
     /**
      * Maximum source content sent to Gemini.
@@ -1330,7 +1330,7 @@ PROMPT;
             trim($result['content_ar'])
         );
 
-        if ($contentLength < 800) {
+        if ($contentLength < 600) {
             return false;
         }
 
