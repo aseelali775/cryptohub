@@ -110,9 +110,7 @@ class RepairNewsWithAI extends Command
                     ->orWhereNull('what_to_watch_ar')
                     ->orWhere('what_to_watch_ar', '')
                     ->orWhereNull('limitations_ar')
-                    ->orWhere('limitations_ar', '')
-                    ->orWhereNull('meta_description_ar')
-                    ->orWhere('meta_description_ar', '');
+                    ->orWhere('limitations_ar', '');
             })
             ->oldest()
             ->limit(self::BATCH_LIMIT)
@@ -574,7 +572,7 @@ class RepairNewsWithAI extends Command
             'title_ar',
             'content_ar',
             'summary_ar',
-            'meta_description_ar',
+            
             'why_it_matters_ar',
             'analysis_ar',
             'context_ar',
@@ -700,8 +698,6 @@ A factual Arabic version of the supplied article material. Do not invent informa
 summary_ar:
 A short factual summary.
 
-meta_description_ar:
-A concise SEO-friendly Arabic description based only on supplied facts.
 
 why_it_matters_ar:
 Explain why the reported event may matter, using only supplied facts. Do not make unsupported market predictions.
