@@ -30,7 +30,7 @@ class RepairNewsWithAI extends Command
     |--------------------------------------------------------------------------
     */
 
-    private const BATCH_LIMIT = 3;
+    private const BATCH_LIMIT = 10;
 
     /*
     |--------------------------------------------------------------------------
