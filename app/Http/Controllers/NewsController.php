@@ -7,9 +7,6 @@ use Inertia\Inertia;
 
 class NewsController extends Controller
 {
-    /**
-     * تجهيز الخبر لإرساله إلى الواجهة.
-     */
     private function mapNewsItem($item)
     {
         return [
@@ -19,60 +16,32 @@ class NewsController extends Controller
             'image_url'     => $item->image_url,
             'source'        => $item->source,
             'url'           => $item->url,
-
             'sentiment'     => $item->sentiment ?? 'Neutral',
             'category'      => $item->category ?? 'General',
             'impact_score'  => $item->impact_score ?? 5,
-
-            // حالة معالجة الذكاء الاصطناعي
             'ai_processed'  => (bool) $item->ai_processed,
-
-            // التواريخ
-            'date' => $item->created_at
-                ? $item->created_at->diffForHumans()
-                : '',
-
-            'published_at' => $item->created_at
-                ? $item->created_at->toIso8601String()
-                : null,
-
-            'updated_at' => $item->updated_at
-                ? $item->updated_at->toIso8601String()
-                : null,
-
-            // المؤلف والناشر
-            'author' => [
+            'date'          => $item->created_at ? $item->created_at->diffForHumans() : '',
+            'published_at'  => $item->created_at ? $item->created_at->toIso8601String() : null,
+            'updated_at'    => $item->updated_at ? $item->updated_at->toIso8601String() : null,
+            'author'        => [
                 'name' => 'Aql Crypto Editorial Team',
                 'url'  => 'https://aqlcrypto.com/about',
             ],
-
-            'publisher' => [
+            'publisher'     => [
                 'name' => 'Aql Crypto',
                 'logo' => 'https://aqlcrypto.com/images/default-og.jpg',
             ],
-
-            // الترجمات والمحتوى
-            'translations' => [
+            'translations'  => [
                 'ar' => [
-                    'title' => $item->title_ar ?? $item->title_en,
-
-                    'content' => $item->content_ar
-                        ?? $item->content_en,
-
-                    'summary' => $item->summary_ar
-                        ?? mb_substr($item->content_en ?? '', 0, 150) . '...',
-
+                    'title'          => $item->title_ar ?? $item->title_en,
+                    'content'        => $item->content_ar ?? $item->content_en,
+                    'summary'        => $item->summary_ar ?? mb_substr($item->content_en ?? '', 0, 150) . '...',
                     'why_it_matters' => $item->why_it_matters_ar,
-
-                    'analysis' => $item->analysis_ar,
-
-                    'context' => $item->context_ar,
-
-                    'what_to_watch' => $item->what_to_watch_ar,
-
-                    'limitations' => $item->limitations_ar,
+                    'analysis'       => $item->analysis_ar,
+                    'context'        => $item->context_ar,
+                    'what_to_watch'  => $item->what_to_watch_ar,
+                    'limitations'    => $item->limitations_ar,
                 ],
-
                 'en' => [
                     'title'   => $item->title_en,
                     'content' => $item->content_en,
@@ -81,24 +50,11 @@ class NewsController extends Controller
         ];
     }
 
-    /**
-     * قائمة الأخبار العامة مع الفلاتر والترقيم (Pagination).
-     *
-     * مهم:
-     * لا نعرض أي خبر لم تتم معالجته بالذكاء الاصطناعي.
-     */
-    /**
-     * قائمة الأخبار العامة مع الفلاتر والترقيم (Pagination).
-     *
-     * مهم:
-     * لا نعرض أي خبر لم تتم معالجته بالذكاء الاصطناعي.
-     */
     public function index()
     {
-        // 1. نبدأ الاستعلام للأخبار المعالجة فقط
         $query = News::query()->where('ai_processed', true);
 
-        // 2. فلتر البحث النصي
+        // 1. فلتر البحث النصي
         if (request()->filled('search')) {
             $searchTerm = request('search');
             $query->where(function ($q) use ($searchTerm) {
@@ -109,36 +65,34 @@ class NewsController extends Controller
             });
         }
 
-        // 3. فلتر التصنيف
+        // 2. فلتر التصنيف
         if (request()->filled('category')) {
             $query->where('category', request('category'));
         }
 
-        // 4. فلتر المشاعر
+        // 3. فلتر المشاعر
         if (request()->filled('sentiment')) {
             $query->where('sentiment', request('sentiment'));
         }
 
-        // 5. فلتر التاريخ (يوم محدد)
+        // 4. فلتر التاريخ
         if (request()->filled('date')) {
             $query->whereDate('created_at', request('date'));
         }
 
-        // 6. الترقيم (Pagination) مع التمرير الذكي (through)
+        // 5. الترقيم والتمرير الصحيح عبر through()
         $newsFeed = $query->latest()
-            ->paginate(12) // جلب 12 خبر فقط من قاعدة البيانات
-            ->withQueryString() // الاحتفاظ بالفلاتر عند التنقل بين الصفحات
-            ->through(function ($item) {
-                return $this->mapNewsItem($item); // تمرير الـ 12 خبر فقط لتجهيزها
-            });
+            ->paginate(12)
+            ->withQueryString()
+            ->through(fn ($item) => $this->mapNewsItem($item));
 
         return Inertia::render('News/Index', [
             'newsFeed' => $newsFeed,
-            // إرسال الفلاتر الحالية للواجهة لكي تظل التحديدات ظاهرة للمستخدم
-            'filters'  => request()->only(['search', 'category', 'sentiment', 'date']) 
+            'filters'  => request()->only(['search', 'category', 'sentiment', 'date']),
         ]);
     }
 
+  
     /**
      * عرض خبر واحد.
      *

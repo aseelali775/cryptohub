@@ -66,12 +66,12 @@
           </button>
         </div>
 
-        <div v-if="newsFeed.data.length === 0" class="py-20 text-center bg-white dark:bg-[#1e293b] rounded-3xl border border-slate-200 dark:border-slate-800">
+        <div v-if="!newsFeed?.data || newsFeed.data.length === 0" class="py-20 text-center bg-white dark:bg-[#1e293b] rounded-3xl border border-slate-200 dark:border-slate-800">
           <div class="text-6xl mb-4">📭</div>
           <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">{{ locale === 'ar' ? 'لا توجد أخبار تطابق بحثك' : 'No news found' }}</h3>
-          <p class="text-slate-500 dark:text-slate-400">{{ locale === 'ar' ? 'حاول تغيير كلمات البحث أو مسح الفلاتر.' : 'Try changing your search terms or clearing filters.' }}</p>
+          <p class="text-slate-500 dark:text-slate-400">{{ locale === 'ar' ? 'حاول تغيير كلمات البحث أو مسح الفلاتر لعرض كل الأخبار.' : 'Try changing your search terms or clearing filters.' }}</p>
           <button @click="clearFilters" class="mt-6 px-6 py-2 rounded-lg bg-emerald-500 text-white font-bold hover:bg-emerald-600 transition-colors">
-             {{ locale === 'ar' ? 'مسح الفلاتر' : 'Clear Filters' }}
+             {{ locale === 'ar' ? 'عرض جميع الأخبار' : 'Show All News' }}
           </button>
         </div>
 
@@ -123,7 +123,7 @@
                   <span class="text-[10px] px-2 py-1 rounded bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 font-mono font-bold whitespace-nowrap">#{{ item.category || 'Crypto' }}</span>
                   <span v-if="item.impact_score" class="text-[10px] px-1.5 py-1 rounded bg-amber-50 dark:bg-amber-500/10 text-amber-600 dark:text-amber-400 font-mono font-bold whitespace-nowrap" :title="locale === 'ar' ? 'درجة التأثير' : 'Impact Score'">⚡ {{ item.impact_score }}/10</span>
                 </div>
-                <Link :href="`/news/${item.id}-${item.slug}`" class="text-xs font-bold text-emerald-500 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors flex items-center gap-1 cursor-pointer flex-shrink-0">
+                <Link :href="buildNewsUrl(item)" class="text-xs font-bold text-emerald-500 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors flex items-center gap-1 cursor-pointer flex-shrink-0">
                   <span>{{ locale === 'ar' ? 'التفاصيل ←' : 'Read More →' }}</span>
                 </Link>
               </div>
@@ -131,9 +131,9 @@
           </div>
         </div>
 
-        <div v-if="newsFeed.links && newsFeed.links.length > 3" class="flex flex-wrap justify-center items-center gap-2 mt-12 pt-8 border-t border-slate-200 dark:border-slate-800" :dir="locale === 'ar' ? 'rtl' : 'ltr'">
-          <Component
-            :is="link.url ? 'Link' : 'span'"
+        <div v-if="newsFeed?.links && newsFeed.links.length > 3" class="flex flex-wrap justify-center items-center gap-2 mt-12 pt-8 border-t border-slate-200 dark:border-slate-800" :dir="locale === 'ar' ? 'rtl' : 'ltr'">
+          <component
+            :is="link.url ? Link : 'span'"
             v-for="(link, index) in newsFeed.links"
             :key="index"
             :href="link.url"
@@ -158,12 +158,21 @@ import { Link, usePage, Head, router } from '@inertiajs/vue3';
 import { computed, ref, reactive, watch } from 'vue'; 
 
 const props = defineProps({
-  newsFeed: { type: Object, required: true }, // تغيرت لـ Object بسبب الـ Pagination
-  filters: { type: Object, default: () => ({}) } // استقبال الفلاتر الحالية
+  newsFeed: { type: Object, required: true },
+  filters: { type: Object, default: () => ({}) }
 });
 
 const page = usePage();
 const locale = computed(() => page.props.locale || 'ar');
+
+// دالة حساب تاريخ اليوم بتوقيت الجهاز المحتسب (YYYY-MM-DD)
+const getTodayDate = () => {
+  const d = new Date();
+  const year = d.getFullYear();
+  const month = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
 
 // معالجة الصور المكسورة
 const brokenImages = ref(new Set());
@@ -171,30 +180,38 @@ const handleImageError = (id) => {
   brokenImages.value.add(id);
 };
 
-// التصنيفات المتاحة في قاعدة البيانات
+// التصنيفات المتاحة
 const categories = ['Bitcoin', 'Ethereum', 'Regulation', 'DeFi', 'NFT', 'Mining', 'Market', 'Security', 'Blockchain'];
 
-// حالة الفلاتر (مربوطة بالـ URL)
+// حالة الفلاتر (تلقائياً تأخذ التاريخ المحدد أو تاريخ اليوم الافتراضي)
 const form = reactive({
   search: props.filters.search || '',
   category: props.filters.category || '',
   sentiment: props.filters.sentiment || '',
-  date: props.filters.date || '',
+  date: props.filters.date || getTodayDate(), // 🟢 هنا يتم عرض تاريخ اليوم تلقائياً
 });
 
-// التحقق من وجود فلاتر نشطة لإظهار زر "مسح الفلاتر"
+// التحقق من وجود فلاتر نَشِطة
 const hasFilters = computed(() => {
   return form.search !== '' || form.category !== '' || form.sentiment !== '' || form.date !== '';
 });
 
-// استدعاء الباك إند تلقائياً عند تغيير أي فلتر (مع تأخير زمني بسيط للبحث)
+// بناء رابط الخبر بشكل سليم مع الـ Slug
+const buildNewsUrl = (item) => {
+  let cleanSlug = item.slug || '';
+  if (cleanSlug && cleanSlug.endsWith(`-${item.id}`)) {
+    cleanSlug = cleanSlug.replace(new RegExp(`-${item.id}$`), '');
+  }
+  return cleanSlug ? `/news/${item.id}-${cleanSlug}` : `/news/${item.id}`;
+};
+
+// الاستماع للتغييرات وإرسال الطلب تلقائياً
 let timeout = null;
 watch(form, (newVal) => {
   clearTimeout(timeout);
   timeout = setTimeout(() => {
-    // إرسال الطلب مع الاحتفاظ بمكان التمرير وحالة الصفحة
     router.get('/news', newVal, { preserveState: true, preserveScroll: true });
-  }, 400); // ينتظر 400 ملي ثانية بعد توقف المستخدم عن الكتابة
+  }, 400);
 }, { deep: true });
 
 // دالة مسح الفلاتر
