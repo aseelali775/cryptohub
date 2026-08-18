@@ -57,7 +57,9 @@
             <input 
               v-model="form.date" 
               type="date" 
-              class="w-full bg-slate-50 dark:bg-[#0f172a] border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white text-sm rounded-xl px-4 py-3 focus:outline-none focus:border-emerald-500 cursor-pointer"
+              lang="en"
+              dir="ltr"
+              class="w-full bg-slate-50 dark:bg-[#0f172a] border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white text-sm rounded-xl px-4 py-3 focus:outline-none focus:border-emerald-500 cursor-pointer text-left font-mono"
             >
           </div>
 
@@ -132,19 +134,25 @@
         </div>
 
         <div v-if="newsFeed?.links && newsFeed.links.length > 3" class="flex flex-wrap justify-center items-center gap-2 mt-12 pt-8 border-t border-slate-200 dark:border-slate-800" :dir="locale === 'ar' ? 'rtl' : 'ltr'">
-          <component
-            :is="link.url ? Link : 'span'"
-            v-for="(link, index) in newsFeed.links"
-            :key="index"
-            :href="link.url"
-            v-html="link.label"
-            class="px-4 py-2 rounded-xl text-sm font-bold transition-all border"
-            :class="{
-              'bg-emerald-500 text-white border-emerald-500 shadow-md': link.active,
-              'bg-white dark:bg-[#151e32] text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:border-emerald-500 hover:text-emerald-500 cursor-pointer': link.url && !link.active,
-              'bg-slate-50 dark:bg-slate-800/50 text-slate-400 dark:text-slate-600 border-transparent cursor-not-allowed': !link.url
-            }"
-          />
+          <template v-for="(link, index) in newsFeed.links" :key="index">
+            <Link
+              v-if="link.url"
+              :href="link.url"
+              v-html="link.label"
+              preserve-scroll
+              preserve-state
+              class="px-4 py-2 rounded-xl text-sm font-bold transition-all border"
+              :class="{
+                'bg-emerald-500 text-white border-emerald-500 shadow-md': link.active,
+                'bg-white dark:bg-[#151e32] text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:border-emerald-500 hover:text-emerald-500 cursor-pointer': !link.active
+              }"
+            />
+            <span
+              v-else
+              v-html="link.label"
+              class="px-4 py-2 rounded-xl text-sm font-bold transition-all border bg-slate-50 dark:bg-slate-800/50 text-slate-400 dark:text-slate-600 border-transparent cursor-not-allowed"
+            />
+          </template>
         </div>
 
       </div>
@@ -165,15 +173,6 @@ const props = defineProps({
 const page = usePage();
 const locale = computed(() => page.props.locale || 'ar');
 
-// دالة حساب تاريخ اليوم بتوقيت الجهاز المحتسب (YYYY-MM-DD)
-const getTodayDate = () => {
-  const d = new Date();
-  const year = d.getFullYear();
-  const month = String(d.getMonth() + 1).padStart(2, '0');
-  const day = String(d.getDate()).padStart(2, '0');
-  return `${year}-${month}-${day}`;
-};
-
 // معالجة الصور المكسورة
 const brokenImages = ref(new Set());
 const handleImageError = (id) => {
@@ -183,12 +182,12 @@ const handleImageError = (id) => {
 // التصنيفات المتاحة
 const categories = ['Bitcoin', 'Ethereum', 'Regulation', 'DeFi', 'NFT', 'Mining', 'Market', 'Security', 'Blockchain'];
 
-// حالة الفلاتر (تلقائياً تأخذ التاريخ المحدد أو تاريخ اليوم الافتراضي)
+// حالة الفلاتر
 const form = reactive({
   search: props.filters.search || '',
   category: props.filters.category || '',
   sentiment: props.filters.sentiment || '',
-  date: props.filters.date || getTodayDate(), // 🟢 هنا يتم عرض تاريخ اليوم تلقائياً
+  date: props.filters.date || '',
 });
 
 // التحقق من وجود فلاتر نَشِطة
