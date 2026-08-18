@@ -7,14 +7,17 @@ use Illuminate\Console\Command;
 
 class AuditNews extends Command
 {
-    protected $signature = 'news:audit
-                            {--limit=0 : Number of news to audit, 0 = all}
-                            {--show-ready : Show READY news}
-                            {--show-repair : Show REPAIR news}
-                            {--show-review : Show REVIEW news}
-                            {--show-delete : Show DELETE candidates}
-                            {--show-duplicates : Show duplicate groups}
-                            {--show-all : Show every audited article}';
+protected $signature = 'news:audit
+                        {--limit=0 : Number of news to audit, 0 = all}
+                        {--show-ready : Show READY news}
+                        {--show-repair : Show REPAIR news}
+                        {--show-review : Show REVIEW news}
+                        {--show-delete : Show DELETE candidates}
+                        {--show-refetch : Show news that need content refetch}
+                        {--show-ai : Show news that need AI only}
+                        {--show-manual : Show news requiring manual review}
+                        {--show-duplicates : Show duplicate/similar groups}
+                        {--show-weak : Show news with quality score below 60}';
 
     protected $description =
         'Professional read-only audit for news quality, completeness, AI readiness, duplicates and publication readiness';
