@@ -7,7 +7,10 @@ use Inertia\Inertia;
 
 class NewsController extends Controller
 {
-    private function mapNewsItem($item)
+    /**
+     * تجهيز بيانات الخبر لإرسالها إلى Vue.
+     */
+    private function mapNewsItem($item): array
     {
         return [
             'id'            => $item->id,
@@ -20,28 +23,55 @@ class NewsController extends Controller
             'category'      => $item->category ?? 'General',
             'impact_score'  => $item->impact_score ?? 5,
             'ai_processed'  => (bool) $item->ai_processed,
-            'date'          => $item->created_at ? $item->created_at->diffForHumans() : '',
-            'published_at'  => $item->created_at ? $item->created_at->toIso8601String() : null,
-            'updated_at'    => $item->updated_at ? $item->updated_at->toIso8601String() : null,
-            'author'        => [
+
+            'date' => $item->created_at
+                ? $item->created_at->diffForHumans()
+                : '',
+
+            'published_at' => $item->created_at
+                ? $item->created_at->toIso8601String()
+                : null,
+
+            'updated_at' => $item->updated_at
+                ? $item->updated_at->toIso8601String()
+                : null,
+
+            'author' => [
                 'name' => 'Aql Crypto Editorial Team',
                 'url'  => 'https://aqlcrypto.com/about',
             ],
-            'publisher'     => [
+
+            'publisher' => [
                 'name' => 'Aql Crypto',
                 'logo' => 'https://aqlcrypto.com/images/default-og.jpg',
             ],
-            'translations'  => [
+
+            'translations' => [
                 'ar' => [
-                    'title'          => $item->title_ar ?? $item->title_en,
-                    'content'        => $item->content_ar ?? $item->content_en,
-                    'summary'        => $item->summary_ar ?? mb_substr($item->content_en ?? '', 0, 150) . '...',
+                    'title' => $item->title_ar
+                        ?: $item->title_en,
+
+                    'content' => $item->content_ar
+                        ?: $item->content_en,
+
+                    'summary' => $item->summary_ar
+                        ?: mb_substr(
+                            $item->content_en ?? '',
+                            0,
+                            150
+                        ) . '...',
+
                     'why_it_matters' => $item->why_it_matters_ar,
-                    'analysis'       => $item->analysis_ar,
-                    'context'        => $item->context_ar,
-                    'what_to_watch'  => $item->what_to_watch_ar,
-                    'limitations'    => $item->limitations_ar,
+
+                    'analysis' => $item->analysis_ar,
+
+                    'context' => $item->context_ar,
+
+                    'what_to_watch' => $item->what_to_watch_ar,
+
+                    'limitations' => $item->limitations_ar,
                 ],
+
                 'en' => [
                     'title'   => $item->title_en,
                     'content' => $item->content_en,
@@ -50,45 +80,118 @@ class NewsController extends Controller
         ];
     }
 
+    /**
+     * قائمة الأخبار.
+     *
+     * يدعم:
+     * - البحث
+     * - التصنيف
+     * - المشاعر
+     * - التاريخ
+     * - Pagination
+     *
+     * الأخبار غير المعالجة بالـ AI لا تظهر للعامة.
+     */
     public function index()
     {
-        $query = News::query()->where('ai_processed', true);
+        /*
+         * نبدأ بالأخبار المعالجة فقط.
+         */
+        $query = News::query()
+            ->where('ai_processed', true);
 
-        // 1. فلتر البحث النصي
-        if (request()->filled('search')) {
-            $searchTerm = request('search');
-            $query->where(function ($q) use ($searchTerm) {
-                $q->where('title_ar', 'like', "%{$searchTerm}%")
-                  ->orWhere('title_en', 'like', "%{$searchTerm}%")
-                  ->orWhere('content_ar', 'like', "%{$searchTerm}%")
-                  ->orWhere('content_en', 'like', "%{$searchTerm}%");
+        /*
+         * -----------------------------------------
+         * 1. البحث
+         * -----------------------------------------
+         */
+        $search = request('search');
+
+        if ($search !== null && trim($search) !== '') {
+            $search = trim($search);
+
+            $query->where(function ($q) use ($search) {
+                $q->where('title_ar', 'like', "%{$search}%")
+                    ->orWhere('title_en', 'like', "%{$search}%")
+                    ->orWhere('content_ar', 'like', "%{$search}%")
+                    ->orWhere('content_en', 'like', "%{$search}%")
+                    ->orWhere('summary_ar', 'like', "%{$search}%")
+                    ->orWhere('analysis_ar', 'like', "%{$search}%");
             });
         }
 
-        // 2. فلتر التصنيف
-        if (request()->filled('category')) {
-            $query->where('category', request('category'));
+        /*
+         * -----------------------------------------
+         * 2. فلتر التصنيف
+         * -----------------------------------------
+         */
+        $category = request('category');
+
+        if ($category !== null && trim($category) !== '') {
+            $query->where('category', trim($category));
         }
 
-        // 3. فلتر المشاعر
-        if (request()->filled('sentiment')) {
-            $query->where('sentiment', request('sentiment'));
+        /*
+         * -----------------------------------------
+         * 3. فلتر المشاعر
+         * -----------------------------------------
+         */
+        $sentiment = request('sentiment');
+
+        if ($sentiment !== null && trim($sentiment) !== '') {
+            $query->where('sentiment', trim($sentiment));
         }
 
-        // 4. فلتر التاريخ
-        if (request()->filled('date')) {
-            $query->whereDate('created_at', request('date'));
+        /*
+         * -----------------------------------------
+         * 4. فلتر التاريخ
+         * -----------------------------------------
+         */
+        $date = request('date');
+
+        if ($date !== null && trim($date) !== '') {
+            $query->whereDate('created_at', trim($date));
         }
 
-        // 5. الترقيم والتمرير الصحيح عبر through()
-        $newsFeed = $query->latest()
+        /*
+         * -----------------------------------------
+         * 5. الترتيب + Pagination
+         * -----------------------------------------
+         *
+         * paginate(12):
+         * يجلب 12 خبرًا فقط في كل صفحة.
+         *
+         * withQueryString():
+         * يحافظ على الفلاتر عند الانتقال:
+         *
+         * /news?page=2&search=bitcoin
+         *
+         * بدل أن تصبح:
+         *
+         * /news?page=2
+         */
+        $newsFeed = $query
+            ->latest('created_at')
             ->paginate(12)
             ->withQueryString()
-            ->through(fn ($item) => $this->mapNewsItem($item));
+            ->through(function ($item) {
+                return $this->mapNewsItem($item);
+            });
 
+        /*
+         * -----------------------------------------
+         * إرسال البيانات إلى Inertia
+         * -----------------------------------------
+         */
         return Inertia::render('News/Index', [
             'newsFeed' => $newsFeed,
-            'filters'  => request()->only(['search', 'category', 'sentiment', 'date']),
+
+            'filters' => [
+                'search'    => request('search', ''),
+                'category'  => request('category', ''),
+                'sentiment' => request('sentiment', ''),
+                'date'      => request('date', ''),
+            ],
         ]);
     }
 
