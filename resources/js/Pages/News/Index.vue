@@ -1,5 +1,6 @@
 <template>
   <HomeLayout>
+
     <Head>
       <title>
         {{
@@ -22,19 +23,22 @@
     <div
       class="w-full min-h-screen pb-24 bg-slate-50 dark:bg-[#0b1121] transition-colors duration-300"
     >
+
       <div
         class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 space-y-8"
         :class="locale === 'ar' ? 'text-right' : 'text-left'"
       >
 
-        <!-- ========================================= -->
+        <!-- ============================= -->
         <!-- Header -->
-        <!-- ========================================= -->
+        <!-- ============================= -->
 
         <div
           class="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-white dark:bg-[#1e293b] p-5 sm:p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm gap-4"
         >
+
           <div>
+
             <h1
               class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white"
             >
@@ -54,6 +58,7 @@
                   : 'Comprehensive coverage of global market events with smart analysis'
               }}
             </p>
+
           </div>
 
           <span
@@ -65,11 +70,13 @@
                 : 'Live AI Feed'
             }}
           </span>
+
         </div>
 
-        <!-- ========================================= -->
+
+        <!-- ============================= -->
         <!-- Filters -->
-        <!-- ========================================= -->
+        <!-- ============================= -->
 
         <div
           class="bg-white dark:bg-[#1e293b] p-4 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col md:flex-row gap-4"
@@ -79,6 +86,7 @@
           <!-- Search -->
 
           <div class="flex-1">
+
             <input
               v-model="form.search"
               type="text"
@@ -89,15 +97,19 @@
               "
               class="w-full bg-slate-50 dark:bg-[#0f172a] border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white text-sm rounded-xl px-4 py-3 focus:outline-none focus:border-emerald-500 transition-colors"
             />
+
           </div>
+
 
           <!-- Category -->
 
           <div class="w-full md:w-48">
+
             <select
               v-model="form.category"
               class="w-full bg-slate-50 dark:bg-[#0f172a] border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white text-sm rounded-xl px-4 py-3 focus:outline-none focus:border-emerald-500 appearance-none cursor-pointer"
             >
+
               <option value="">
                 {{
                   locale === 'ar'
@@ -113,16 +125,21 @@
               >
                 {{ cat }}
               </option>
+
             </select>
+
           </div>
+
 
           <!-- Sentiment -->
 
           <div class="w-full md:w-40">
+
             <select
               v-model="form.sentiment"
               class="w-full bg-slate-50 dark:bg-[#0f172a] border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white text-sm rounded-xl px-4 py-3 focus:outline-none focus:border-emerald-500 appearance-none cursor-pointer"
             >
+
               <option value="">
                 {{
                   locale === 'ar'
@@ -133,52 +150,56 @@
 
               <option value="Bullish">
                 🟢
-                {{
-                  locale === 'ar'
-                    ? 'صعودي'
-                    : 'Bullish'
-                }}
+                {{ locale === 'ar' ? 'صعودي' : 'Bullish' }}
               </option>
 
               <option value="Bearish">
                 🔴
-                {{
-                  locale === 'ar'
-                    ? 'هبوطي'
-                    : 'Bearish'
-                }}
+                {{ locale === 'ar' ? 'هبوطي' : 'Bearish' }}
               </option>
 
               <option value="Neutral">
                 ⚪
-                {{
-                  locale === 'ar'
-                    ? 'محايد'
-                    : 'Neutral'
-                }}
+                {{ locale === 'ar' ? 'محايد' : 'Neutral' }}
               </option>
+
             </select>
+
           </div>
+
 
           <!-- Date -->
 
           <div class="w-full md:w-48">
+
+            <label
+              class="block text-[11px] font-bold text-slate-500 dark:text-slate-400 mb-1.5"
+            >
+              {{
+                locale === 'ar'
+                  ? 'تاريخ الخبر'
+                  : 'News date'
+              }}
+            </label>
+
             <input
               v-model="form.date"
               type="date"
               lang="en-GB"
-              :max="today"
+              :dir="locale === 'ar' ? 'ltr' : 'ltr'"
               class="w-full bg-slate-50 dark:bg-[#0f172a] border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white text-sm rounded-xl px-4 py-3 focus:outline-none focus:border-emerald-500 cursor-pointer"
             />
+
           </div>
+
 
           <!-- Clear -->
 
           <button
             v-if="hasFilters"
-            type="button"
             @click="clearFilters"
-            class="px-4 py-3 rounded-xl bg-red-500/10 text-red-600 dark:text-red-400 font-bold text-sm hover:bg-red-500/20 transition-colors whitespace-nowrap"
+            type="button"
+            class="px-4 py-3 rounded-xl bg-red-500/10 text-red-600 dark:text-red-400 font-bold text-sm hover:bg-red-500/20 transition-colors whitespace-nowrap self-end md:self-auto"
           >
             {{
               locale === 'ar'
@@ -186,16 +207,19 @@
                 : 'Clear ✖'
             }}
           </button>
+
         </div>
 
-        <!-- ========================================= -->
+
+        <!-- ============================= -->
         <!-- Empty -->
-        <!-- ========================================= -->
+        <!-- ============================= -->
 
         <div
           v-if="newsFeed.data.length === 0"
           class="py-20 text-center bg-white dark:bg-[#1e293b] rounded-3xl border border-slate-200 dark:border-slate-800"
         >
+
           <div class="text-6xl mb-4">
             📭
           </div>
@@ -221,8 +245,8 @@
           </p>
 
           <button
-            type="button"
             @click="clearFilters"
+            type="button"
             class="mt-6 px-6 py-2 rounded-lg bg-emerald-500 text-white font-bold hover:bg-emerald-600 transition-colors"
           >
             {{
@@ -231,11 +255,13 @@
                 : 'Clear Filters'
             }}
           </button>
+
         </div>
 
-        <!-- ========================================= -->
+
+        <!-- ============================= -->
         <!-- News Grid -->
-        <!-- ========================================= -->
+        <!-- ============================= -->
 
         <div
           v-else
@@ -263,9 +289,9 @@
                 @error="handleImageError(item.id)"
                 class="w-full h-full transition-transform duration-500 group-hover:scale-105 object-cover absolute inset-0"
                 :alt="
-                  item?.translations?.[
+                  item.translations[
                     locale === 'ar' ? 'ar' : 'en'
-                  ]?.title || 'Aql Crypto News'
+                  ].title
                 "
               />
 
@@ -284,6 +310,7 @@
                 class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/20 to-transparent opacity-80 pointer-events-none"
               ></div>
 
+
               <!-- Sentiment -->
 
               <span
@@ -291,11 +318,7 @@
                 class="absolute top-3 left-3 bg-green-500/90 text-white text-[10px] px-2 py-1 rounded font-bold backdrop-blur-sm z-10"
               >
                 🟢
-                {{
-                  locale === 'ar'
-                    ? 'صعودي'
-                    : 'Bullish'
-                }}
+                {{ locale === 'ar' ? 'صعودي' : 'Bullish' }}
               </span>
 
               <span
@@ -303,11 +326,7 @@
                 class="absolute top-3 left-3 bg-red-500/90 text-white text-[10px] px-2 py-1 rounded font-bold backdrop-blur-sm z-10"
               >
                 🔴
-                {{
-                  locale === 'ar'
-                    ? 'هبوطي'
-                    : 'Bearish'
-                }}
+                {{ locale === 'ar' ? 'هبوطي' : 'Bearish' }}
               </span>
 
               <span
@@ -315,12 +334,9 @@
                 class="absolute top-3 left-3 bg-slate-500/90 text-white text-[10px] px-2 py-1 rounded font-bold backdrop-blur-sm z-10"
               >
                 ⚪
-                {{
-                  locale === 'ar'
-                    ? 'محايد'
-                    : 'Neutral'
-                }}
+                {{ locale === 'ar' ? 'محايد' : 'Neutral' }}
               </span>
+
 
               <!-- Source -->
 
@@ -329,7 +345,9 @@
               >
                 {{ item.source || 'Aql Crypto' }}
               </span>
+
             </div>
+
 
             <!-- Content -->
 
@@ -345,11 +363,14 @@
                 >
                   {{
                     item.date ||
-                    (locale === 'ar'
-                      ? 'منذ قليل'
-                      : 'Just now')
+                    (
+                      locale === 'ar'
+                        ? 'منذ قليل'
+                        : 'Just now'
+                    )
                   }}
                 </span>
+
 
                 <h3
                   class="text-sm sm:text-base font-bold text-slate-900 dark:text-white group-hover:text-emerald-500 transition-colors leading-snug break-words line-clamp-2"
@@ -362,19 +383,22 @@
                   }}
                 </h3>
 
+
                 <p
                   class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed line-clamp-3 break-words font-medium"
                   :dir="locale === 'ar' ? 'rtl' : 'ltr'"
                 >
                   {{
                     locale === 'ar' && item.ai_processed
-                      ? item?.translations?.ar?.summary
-                      : item?.translations?.[
+                      ? item.translations.ar.summary
+                      : item.translations[
                           locale === 'ar' ? 'ar' : 'en'
-                        ]?.content
+                        ].content
                   }}
                 </p>
+
               </div>
+
 
               <!-- Footer -->
 
@@ -386,6 +410,7 @@
                 <div
                   class="flex items-center gap-1.5 overflow-hidden"
                 >
+
                   <span
                     class="text-[10px] px-2 py-1 rounded bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 font-mono font-bold whitespace-nowrap"
                   >
@@ -404,7 +429,11 @@
                     ⚡
                     {{ item.impact_score }}/10
                   </span>
+
                 </div>
+
+
+                <!-- Read More -->
 
                 <Link
                   :href="`/news/${item.id}-${item.slug}`"
@@ -418,64 +447,59 @@
                     }}
                   </span>
                 </Link>
+
               </div>
+
             </div>
+
           </div>
+
         </div>
 
-        <!-- ========================================= -->
+
+        <!-- ============================= -->
         <!-- Pagination -->
-        <!-- ========================================= -->
+        <!-- ============================= -->
 
         <div
-          v-if="
-            newsFeed.links &&
-            newsFeed.links.length > 3
-          "
+          v-if="newsFeed.links && newsFeed.links.length > 3"
           class="flex flex-wrap justify-center items-center gap-2 mt-12 pt-8 border-t border-slate-200 dark:border-slate-800"
           :dir="locale === 'ar' ? 'rtl' : 'ltr'"
         >
 
-          <template
+          <Link
             v-for="(link, index) in newsFeed.links"
             :key="index"
-          >
+            :href="secureUrl(link.url)"
+            v-html="link.label"
+            preserve-scroll
+            preserve-state
+            class="px-4 py-2 rounded-xl text-sm font-bold transition-all border"
+            :class="{
+              'bg-emerald-500 text-white border-emerald-500 shadow-md':
+                link.active,
 
-            <!-- Active / URL -->
+              'bg-white dark:bg-[#151e32] text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:border-emerald-500 hover:text-emerald-500 cursor-pointer':
+                link.url && !link.active,
 
-            <Link
-              v-if="link.url"
-              :href="link.url"
-              preserve-scroll
-              preserve-state
-              v-html="link.label"
-              class="px-4 py-2 rounded-xl text-sm font-bold transition-all border"
-              :class="{
-                'bg-emerald-500 text-white border-emerald-500 shadow-md':
-                  link.active,
+              'bg-slate-50 dark:bg-slate-800/50 text-slate-400 dark:text-slate-600 border-transparent cursor-not-allowed':
+                !link.url
+            }"
+            :as="link.url ? 'a' : 'span'"
+          />
 
-                'bg-white dark:bg-[#151e32] text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:border-emerald-500 hover:text-emerald-500 cursor-pointer':
-                  !link.active
-              }"
-            />
-
-            <!-- Disabled -->
-
-            <span
-              v-else
-              v-html="link.label"
-              class="px-4 py-2 rounded-xl text-sm font-bold bg-slate-50 dark:bg-slate-800/50 text-slate-400 dark:text-slate-600 border border-transparent cursor-not-allowed"
-            ></span>
-
-          </template>
         </div>
 
       </div>
+
     </div>
+
   </HomeLayout>
 </template>
 
+
 <script setup>
+
 import HomeLayout from '@/layouts/HomeLayout.vue';
 
 import {
@@ -501,6 +525,7 @@ import {
 */
 
 const props = defineProps({
+
   newsFeed: {
     type: Object,
     required: true
@@ -508,72 +533,42 @@ const props = defineProps({
 
   filters: {
     type: Object,
-    default: () => ({
-      search: '',
-      category: '',
-      sentiment: '',
-      date: ''
-    })
+    default: () => ({})
   }
+
 });
 
 
 /*
 |--------------------------------------------------------------------------
-| Page / Locale
+| Page
 |--------------------------------------------------------------------------
 */
 
 const page = usePage();
 
-const locale = computed(() => {
-  return page.props.locale || 'ar';
-});
+const locale = computed(
+  () => page.props.locale || 'ar'
+);
 
 
 /*
 |--------------------------------------------------------------------------
-| Today's date
-|--------------------------------------------------------------------------
-|
-| نستخدمها فقط كحد أقصى للتاريخ.
-| لا نضعها كقيمة افتراضية.
-|--------------------------------------------------------------------------
-*/
-
-const today = computed(() => {
-  const date = new Date();
-
-  const year = date.getFullYear();
-
-  const month = String(
-    date.getMonth() + 1
-  ).padStart(2, '0');
-
-  const day = String(
-    date.getDate()
-  ).padStart(2, '0');
-
-  return `${year}-${month}-${day}`;
-});
-
-
-/*
-|--------------------------------------------------------------------------
-| Broken Images
+| Broken images
 |--------------------------------------------------------------------------
 */
 
 const brokenImages = ref(new Set());
 
 const handleImageError = (id) => {
-  const updated = new Set(
+
+  const next = new Set(
     brokenImages.value
   );
 
-  updated.add(id);
+  next.add(id);
 
-  brokenImages.value = updated;
+  brokenImages.value = next;
 };
 
 
@@ -600,114 +595,135 @@ const categories = [
 |--------------------------------------------------------------------------
 | Filters
 |--------------------------------------------------------------------------
-|
-| يتم تحميل الفلاتر من URL / Backend.
-| لا يوجد تاريخ افتراضي.
-|--------------------------------------------------------------------------
 */
 
 const form = reactive({
-  search: props.filters?.search || '',
-  category: props.filters?.category || '',
-  sentiment: props.filters?.sentiment || '',
-  date: props.filters?.date || ''
+
+  search:
+    props.filters.search || '',
+
+  category:
+    props.filters.category || '',
+
+  sentiment:
+    props.filters.sentiment || '',
+
+  date:
+    props.filters.date || ''
+
 });
 
 
 /*
 |--------------------------------------------------------------------------
-| Active Filters
+| Active filters
 |--------------------------------------------------------------------------
 */
 
 const hasFilters = computed(() => {
+
   return (
     form.search !== '' ||
     form.category !== '' ||
     form.sentiment !== '' ||
     form.date !== ''
   );
+
 });
 
 
 /*
 |--------------------------------------------------------------------------
-| Filter Request
+| Secure URL
 |--------------------------------------------------------------------------
+|
+| منع Mixed Content حتى لو قام Laravel
+| بإرجاع رابط HTTP.
+|
 */
 
-let timeout = null;
+const secureUrl = (url) => {
 
-
-/*
-|--------------------------------------------------------------------------
-| إرسال الفلاتر
-|--------------------------------------------------------------------------
-*/
-
-const applyFilters = () => {
-  const params = {};
-
-  /*
-   * لا نرسل القيم الفارغة.
-   * هذا يجعل URL نظيفًا.
-   */
-
-  if (form.search.trim() !== '') {
-    params.search = form.search.trim();
+  if (!url) {
+    return '#';
   }
 
-  if (form.category !== '') {
-    params.category = form.category;
-  }
+  try {
 
-  if (form.sentiment !== '') {
-    params.sentiment = form.sentiment;
-  }
+    const parsed = new URL(
+      url,
+      window.location.origin
+    );
 
-  if (form.date !== '') {
-    params.date = form.date;
-  }
+    /*
+     * إجبار الرابط على HTTPS
+     */
 
-  /*
-   * مهم:
-   *
-   * لا نرسل page هنا.
-   *
-   * لأن تغيير الفلتر يجب أن يعود تلقائيًا
-   * إلى الصفحة الأولى.
-   */
-
-  router.get(
-    '/news',
-    params,
-    {
-      preserveState: true,
-      preserveScroll: true,
-      replace: true
+    if (
+      window.location.protocol === 'https:'
+    ) {
+      parsed.protocol = 'https:';
     }
-  );
+
+    return parsed.toString();
+
+  } catch (error) {
+
+    /*
+     * في حالة الرابط النسبي
+     */
+
+    if (url.startsWith('/')) {
+
+      return url;
+
+    }
+
+    return '#';
+  }
 };
 
 
 /*
 |--------------------------------------------------------------------------
-| مراقبة الفلاتر
-|--------------------------------------------------------------------------
-|
-| البحث ينتظر 400ms.
-| ثم يرسل الطلب.
+| Filter watcher
 |--------------------------------------------------------------------------
 */
 
+let timeout = null;
+
 watch(
   form,
-  () => {
+  (newVal) => {
+
     clearTimeout(timeout);
 
     timeout = setTimeout(() => {
-      applyFilters();
+
+      router.get(
+        '/news',
+        {
+          search:
+            newVal.search || undefined,
+
+          category:
+            newVal.category || undefined,
+
+          sentiment:
+            newVal.sentiment || undefined,
+
+          date:
+            newVal.date || undefined
+        },
+        {
+          preserveState: true,
+          preserveScroll: true,
+          replace: true
+        }
+      );
+
     }, 400);
+
   },
   {
     deep: true
@@ -717,43 +733,19 @@ watch(
 
 /*
 |--------------------------------------------------------------------------
-| Clear Filters
+| Clear filters
 |--------------------------------------------------------------------------
 */
 
 const clearFilters = () => {
 
-  /*
-   * إلغاء أي طلب مؤجل للبحث.
-   */
-
   clearTimeout(timeout);
-
-  /*
-   * إعادة القيم محليًا.
-   */
 
   form.search = '';
   form.category = '';
   form.sentiment = '';
   form.date = '';
 
-  /*
-   * إزالة Query String بالكامل.
-   *
-   * replace = true
-   * حتى لا نضيف سجلًا جديدًا في المتصفح.
-   */
-
-  router.get(
-    '/news',
-    {},
-    {
-      preserveState: false,
-      preserveScroll: false,
-      replace: true
-    }
-  );
 };
 
 
@@ -764,6 +756,9 @@ const clearFilters = () => {
 */
 
 onBeforeUnmount(() => {
+
   clearTimeout(timeout);
+
 });
+
 </script>

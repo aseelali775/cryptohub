@@ -3,26 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Models\News;
+use Illuminate\Support\Facades\URL;
 use Inertia\Inertia;
 
 class NewsController extends Controller
 {
-    /**
-     * تجهيز بيانات الخبر لإرسالها إلى Vue.
-     */
-    private function mapNewsItem($item): array
+    private function mapNewsItem($item)
     {
         return [
-            'id'            => $item->id,
-            'slug'          => $item->slug,
-            'keywords'      => $item->keywords ?? [],
-            'image_url'     => $item->image_url,
-            'source'        => $item->source,
-            'url'           => $item->url,
-            'sentiment'     => $item->sentiment ?? 'Neutral',
-            'category'      => $item->category ?? 'General',
-            'impact_score'  => $item->impact_score ?? 5,
-            'ai_processed'  => (bool) $item->ai_processed,
+            'id'           => $item->id,
+            'slug'         => $item->slug,
+            'keywords'     => $item->keywords ?? [],
+            'image_url'    => $item->image_url,
+            'source'       => $item->source,
+            'url'          => $item->url,
+            'sentiment'    => $item->sentiment ?? 'Neutral',
+            'category'     => $item->category ?? 'General',
+            'impact_score' => $item->impact_score ?? 5,
+            'ai_processed' => (bool) $item->ai_processed,
 
             'date' => $item->created_at
                 ? $item->created_at->diffForHumans()
@@ -48,28 +46,18 @@ class NewsController extends Controller
 
             'translations' => [
                 'ar' => [
-                    'title' => $item->title_ar
-                        ?: $item->title_en,
+                    'title' => $item->title_ar ?? $item->title_en,
 
-                    'content' => $item->content_ar
-                        ?: $item->content_en,
+                    'content' => $item->content_ar ?? $item->content_en,
 
                     'summary' => $item->summary_ar
-                        ?: mb_substr(
-                            $item->content_en ?? '',
-                            0,
-                            150
-                        ) . '...',
+                        ?? mb_substr($item->content_en ?? '', 0, 150) . '...',
 
                     'why_it_matters' => $item->why_it_matters_ar,
-
-                    'analysis' => $item->analysis_ar,
-
-                    'context' => $item->context_ar,
-
-                    'what_to_watch' => $item->what_to_watch_ar,
-
-                    'limitations' => $item->limitations_ar,
+                    'analysis'       => $item->analysis_ar,
+                    'context'        => $item->context_ar,
+                    'what_to_watch'  => $item->what_to_watch_ar,
+                    'limitations'    => $item->limitations_ar,
                 ],
 
                 'en' => [
@@ -81,109 +69,132 @@ class NewsController extends Controller
     }
 
     /**
-     * قائمة الأخبار.
+     * عرض قائمة الأخبار
      *
-     * يدعم:
      * - البحث
      * - التصنيف
      * - المشاعر
      * - التاريخ
      * - Pagination
-     *
-     * الأخبار غير المعالجة بالـ AI لا تظهر للعامة.
+     * - HTTPS
      */
     public function index()
     {
         /*
-         * نبدأ بالأخبار المعالجة فقط.
+         * مهم جداً:
+         * إجبار Laravel على إنشاء روابط Pagination باستخدام HTTPS.
          */
+        URL::forceScheme('https');
+
         $query = News::query()
             ->where('ai_processed', true);
 
         /*
-         * -----------------------------------------
+         * ============================
          * 1. البحث
-         * -----------------------------------------
+         * ============================
          */
-        $search = request('search');
+        if (request()->filled('search')) {
 
-        if ($search !== null && trim($search) !== '') {
-            $search = trim($search);
+            $searchTerm = trim(request('search'));
 
-            $query->where(function ($q) use ($search) {
-                $q->where('title_ar', 'like', "%{$search}%")
-                    ->orWhere('title_en', 'like', "%{$search}%")
-                    ->orWhere('content_ar', 'like', "%{$search}%")
-                    ->orWhere('content_en', 'like', "%{$search}%")
-                    ->orWhere('summary_ar', 'like', "%{$search}%")
-                    ->orWhere('analysis_ar', 'like', "%{$search}%");
+            $query->where(function ($q) use ($searchTerm) {
+
+                $q->where('title_ar', 'like', "%{$searchTerm}%")
+                    ->orWhere('title_en', 'like', "%{$searchTerm}%")
+                    ->orWhere('content_ar', 'like', "%{$searchTerm}%")
+                    ->orWhere('content_en', 'like', "%{$searchTerm}%")
+                    ->orWhere('summary_ar', 'like', "%{$searchTerm}%");
             });
         }
 
         /*
-         * -----------------------------------------
-         * 2. فلتر التصنيف
-         * -----------------------------------------
+         * ============================
+         * 2. التصنيف
+         * ============================
          */
-        $category = request('category');
+        if (request()->filled('category')) {
 
-        if ($category !== null && trim($category) !== '') {
-            $query->where('category', trim($category));
+            $query->where(
+                'category',
+                request('category')
+            );
         }
 
         /*
-         * -----------------------------------------
-         * 3. فلتر المشاعر
-         * -----------------------------------------
+         * ============================
+         * 3. المشاعر
+         * ============================
          */
-        $sentiment = request('sentiment');
+        if (request()->filled('sentiment')) {
 
-        if ($sentiment !== null && trim($sentiment) !== '') {
-            $query->where('sentiment', trim($sentiment));
+            $query->where(
+                'sentiment',
+                request('sentiment')
+            );
         }
 
         /*
-         * -----------------------------------------
-         * 4. فلتر التاريخ
-         * -----------------------------------------
-         */
-        $date = request('date');
-
-        if ($date !== null && trim($date) !== '') {
-            $query->whereDate('created_at', trim($date));
-        }
-
-        /*
-         * -----------------------------------------
-         * 5. الترتيب + Pagination
-         * -----------------------------------------
+         * ============================
+         * 4. التاريخ
+         * ============================
          *
-         * paginate(12):
-         * يجلب 12 خبرًا فقط في كل صفحة.
+         * التاريخ القادم من input[type=date]
+         * يكون بالشكل:
          *
-         * withQueryString():
+         * YYYY-MM-DD
+         */
+        if (request()->filled('date')) {
+
+            $date = request('date');
+
+            /*
+             * نتأكد أن التاريخ صالح قبل استخدامه.
+             */
+            if (
+                preg_match(
+                    '/^\d{4}-\d{2}-\d{2}$/',
+                    $date
+                )
+            ) {
+                $query->whereDate(
+                    'created_at',
+                    $date
+                );
+            }
+        }
+
+        /*
+         * ============================
+         * 5. Pagination
+         * ============================
+         *
+         * 12 خبر فقط في كل صفحة.
+         *
+         * withQueryString()
          * يحافظ على الفلاتر عند الانتقال:
          *
-         * /news?page=2&search=bitcoin
+         * ?search=bitcoin&page=2
          *
-         * بدل أن تصبح:
+         * وليس:
          *
-         * /news?page=2
+         * ?page=2
          */
         $newsFeed = $query
             ->latest('created_at')
             ->paginate(12)
             ->withQueryString()
-            ->through(function ($item) {
-                return $this->mapNewsItem($item);
-            });
+            ->through(
+                fn ($item) => $this->mapNewsItem($item)
+            );
 
         /*
-         * -----------------------------------------
-         * إرسال البيانات إلى Inertia
-         * -----------------------------------------
+         * ============================
+         * 6. إرسال البيانات إلى Vue
+         * ============================
          */
         return Inertia::render('News/Index', [
+
             'newsFeed' => $newsFeed,
 
             'filters' => [
@@ -194,6 +205,7 @@ class NewsController extends Controller
             ],
         ]);
     }
+
 
   
     /**
