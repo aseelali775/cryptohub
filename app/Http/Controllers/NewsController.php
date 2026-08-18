@@ -235,4 +235,5 @@ class NewsController extends Controller
             'relatedNews' => $relatedNews,
         ]);
     }
+    
 }
