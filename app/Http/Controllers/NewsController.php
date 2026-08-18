@@ -82,23 +82,54 @@ class NewsController extends Controller
     }
 
     /**
-     * قائمة الأخبار العامة.
+     * قائمة الأخبار العامة مع الفلاتر والترقيم (Pagination).
      *
      * مهم:
      * لا نعرض أي خبر لم تتم معالجته بالذكاء الاصطناعي.
      */
     public function index()
     {
-        $newsFeed = News::query()
-            ->where('ai_processed', true)
-            ->latest()
-            ->get()
-            ->map(function ($item) {
+        // 1. نبدأ الاستعلام للأخبار المعالجة فقط
+        $query = News::query()->where('ai_processed', true);
+
+        // 2. فلتر البحث النصي
+        if (request()->filled('search')) {
+            $searchTerm = request('search');
+            $query->where(function ($q) use ($searchTerm) {
+                $q->where('title_ar', 'like', "%{$searchTerm}%")
+                  ->orWhere('title_en', 'like', "%{$searchTerm}%")
+                  ->orWhere('content_ar', 'like', "%{$searchTerm}%")
+                  ->orWhere('content_en', 'like', "%{$searchTerm}%");
+            });
+        }
+
+        // 3. فلتر التصنيف
+        if (request()->filled('category')) {
+            $query->where('category', request('category'));
+        }
+
+        // 4. فلتر المشاعر
+        if (request()->filled('sentiment')) {
+            $query->where('sentiment', request('sentiment'));
+        }
+
+        // 5. فلتر التاريخ (يوم محدد)
+        if (request()->filled('date')) {
+            $query->whereDate('created_at', request('date'));
+        }
+
+        // 6. الترقيم (Pagination) وتطبيق الهيكلة
+        $newsFeed = $query->latest()
+            ->paginate(12) // نعرض 12 خبراً في كل صفحة
+            ->withQueryString() // للاحتفاظ بالفلاتر عند الانتقال للصفحة الثانية
+            ->through(function ($item) {
                 return $this->mapNewsItem($item);
             });
 
         return Inertia::render('News/Index', [
             'newsFeed' => $newsFeed,
+            // نرسل الفلاتر الحالية للواجهة لتبقى محددة في الـ Select/Input
+            'filters'  => request()->only(['search', 'category', 'sentiment', 'date']),
         ]);
     }
 
@@ -201,7 +232,6 @@ class NewsController extends Controller
          */
         return Inertia::render('News/Show', [
             'newsItem' => $this->mapNewsItem($item),
-
             'relatedNews' => $relatedNews,
         ]);
     }
