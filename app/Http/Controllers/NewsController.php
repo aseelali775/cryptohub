@@ -87,6 +87,12 @@ class NewsController extends Controller
      * مهم:
      * لا نعرض أي خبر لم تتم معالجته بالذكاء الاصطناعي.
      */
+    /**
+     * قائمة الأخبار العامة مع الفلاتر والترقيم (Pagination).
+     *
+     * مهم:
+     * لا نعرض أي خبر لم تتم معالجته بالذكاء الاصطناعي.
+     */
     public function index()
     {
         // 1. نبدأ الاستعلام للأخبار المعالجة فقط
@@ -118,18 +124,18 @@ class NewsController extends Controller
             $query->whereDate('created_at', request('date'));
         }
 
-        // 6. الترقيم (Pagination) وتطبيق الهيكلة
+        // 6. الترقيم (Pagination) مع التمرير الذكي (through)
         $newsFeed = $query->latest()
-            ->paginate(12) // نعرض 12 خبراً في كل صفحة
-            ->withQueryString() // للاحتفاظ بالفلاتر عند الانتقال للصفحة الثانية
+            ->paginate(12) // جلب 12 خبر فقط من قاعدة البيانات
+            ->withQueryString() // الاحتفاظ بالفلاتر عند التنقل بين الصفحات
             ->through(function ($item) {
-                return $this->mapNewsItem($item);
+                return $this->mapNewsItem($item); // تمرير الـ 12 خبر فقط لتجهيزها
             });
 
         return Inertia::render('News/Index', [
             'newsFeed' => $newsFeed,
-            // نرسل الفلاتر الحالية للواجهة لتبقى محددة في الـ Select/Input
-            'filters'  => request()->only(['search', 'category', 'sentiment', 'date']),
+            // إرسال الفلاتر الحالية للواجهة لكي تظل التحديدات ظاهرة للمستخدم
+            'filters'  => request()->only(['search', 'category', 'sentiment', 'date']) 
         ]);
     }
 
@@ -235,5 +241,5 @@ class NewsController extends Controller
             'relatedNews' => $relatedNews,
         ]);
     }
-    
+
 }
