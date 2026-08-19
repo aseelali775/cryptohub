@@ -1262,261 +1262,428 @@ PROMPT;
     /**
      * Validate AI output before saving.
      */
-    private function isValidResult(?array $result): bool
-    {
-        if (!is_array($result)) {
-            return false;
-        }
+   private function isValidResult(?array $result): bool
+{
+    /*
+    |--------------------------------------------------------------------------
+    | Basic validation
+    |--------------------------------------------------------------------------
+    */
 
-        /*
-        |--------------------------------------------------------------------------
-        | Required fields
-        |--------------------------------------------------------------------------
-        */
+    if (!is_array($result)) {
+        Log::warning('AI validation failed', [
+            'reason' => 'result is not an array',
+        ]);
 
-        $required = [
-            'title_ar',
-            'content_ar',
-            'summary_ar',
-            'meta_description_ar',
-            'why_it_matters_ar',
-            'analysis_ar',
-            'context_ar',
-            'what_to_watch_ar',
-            'limitations_ar',
-            'sentiment',
-            'category',
-            'impact_score',
-            'keywords',
-        ];
-
-        foreach ($required as $field) {
-
-            if (!array_key_exists($field, $result)) {
-                return false;
-            }
-        }
-
-        /*
-        |--------------------------------------------------------------------------
-        | String fields
-        |--------------------------------------------------------------------------
-        */
-
-        $stringFields = [
-            'title_ar',
-            'content_ar',
-            'summary_ar',
-            'meta_description_ar',
-            'why_it_matters_ar',
-            'analysis_ar',
-            'context_ar',
-            'what_to_watch_ar',
-            'limitations_ar',
-        ];
-
-        foreach ($stringFields as $field) {
-
-            if (
-                !is_string($result[$field]) ||
-                trim($result[$field]) === ''
-            ) {
-                return false;
-            }
-        }
-
-        /*
-        |--------------------------------------------------------------------------
-        | Minimum article length
-        |--------------------------------------------------------------------------
-        */
-
-        $contentLength = mb_strlen(
-            trim($result['content_ar'])
-        );
-
-        if ($contentLength < 500) {
-            return false;
-        }
-
-        /*
-        |--------------------------------------------------------------------------
-        | Maximum article length
-        |--------------------------------------------------------------------------
-        |
-        | Prevent accidental extremely long output.
-        |
-        */
-
-        if ($contentLength > 12000) {
-            return false;
-        }
-
-        /*
-        |--------------------------------------------------------------------------
-        | Analytical value
-        |--------------------------------------------------------------------------
-        */
-
-        if (
-            mb_strlen(
-                trim($result['analysis_ar'])
-            ) < 180
-        ) {
-            return false;
-        }
-
-        if (
-            mb_strlen(
-                trim($result['why_it_matters_ar'])
-            ) < 100
-        ) {
-            return false;
-        }
-
-        if (
-            mb_strlen(
-                trim($result['context_ar'])
-            ) < 100
-        ) {
-            return false;
-        }
-
-        if (
-            mb_strlen(
-                trim($result['what_to_watch_ar'])
-            ) < 80
-        ) {
-            return false;
-        }
-
-        if (
-            mb_strlen(
-                trim($result['limitations_ar'])
-            ) < 50
-        ) {
-            return false;
-        }
-
-        /*
-        |--------------------------------------------------------------------------
-        | Meta description
-        |--------------------------------------------------------------------------
-        */
-
-        $metaLength = mb_strlen(
-            trim($result['meta_description_ar'])
-        );
-
-        if ($metaLength < 50 || $metaLength > 180) {
-            return false;
-        }
-
-        /*
-        |--------------------------------------------------------------------------
-        | Sentiment
-        |--------------------------------------------------------------------------
-        */
-
-        if (
-            !in_array(
-                $result['sentiment'],
-                [
-                    'Bullish',
-                    'Bearish',
-                    'Neutral',
-                ],
-                true
-            )
-        ) {
-            return false;
-        }
-
-        /*
-        |--------------------------------------------------------------------------
-        | Category
-        |--------------------------------------------------------------------------
-        */
-
-        $allowedCategories = [
-            'Bitcoin',
-            'Ethereum',
-            'Regulation',
-            'DeFi',
-            'NFT',
-            'Mining',
-            'Market',
-            'Security',
-            'Blockchain',
-        ];
-
-        if (
-            !in_array(
-                $result['category'],
-                $allowedCategories,
-                true
-            )
-        ) {
-            return false;
-        }
-
-        /*
-        |--------------------------------------------------------------------------
-        | Impact score
-        |--------------------------------------------------------------------------
-        */
-
-        if (
-            !is_int($result['impact_score']) &&
-            !is_numeric($result['impact_score'])
-        ) {
-            return false;
-        }
-
-        $impactScore = (int) $result['impact_score'];
-
-        if (
-            $impactScore < 1 ||
-            $impactScore > 10
-        ) {
-            return false;
-        }
-
-        /*
-        |--------------------------------------------------------------------------
-        | Keywords
-        |--------------------------------------------------------------------------
-        */
-
-        if (
-            !is_array($result['keywords'])
-        ) {
-            return false;
-        }
-
-        $keywordCount = count(
-            $result['keywords']
-        );
-
-        if (
-            $keywordCount < 3 ||
-            $keywordCount > 5
-        ) {
-            return false;
-        }
-
-        foreach ($result['keywords'] as $keyword) {
-
-            if (
-                !is_string($keyword) ||
-                trim($keyword) === ''
-            ) {
-                return false;
-            }
-        }
-
-        return true;
+        return false;
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Required fields
+    |--------------------------------------------------------------------------
+    */
+
+    $required = [
+        'title_ar',
+        'content_ar',
+        'summary_ar',
+        'meta_description_ar',
+        'why_it_matters_ar',
+        'analysis_ar',
+        'context_ar',
+        'what_to_watch_ar',
+        'limitations_ar',
+        'sentiment',
+        'category',
+        'impact_score',
+        'keywords',
+    ];
+
+    foreach ($required as $field) {
+
+        if (!array_key_exists($field, $result)) {
+
+            Log::warning('AI validation failed', [
+                'reason' => 'missing required field',
+                'field' => $field,
+            ]);
+
+            return false;
+        }
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | String fields
+    |--------------------------------------------------------------------------
+    */
+
+    $stringFields = [
+        'title_ar',
+        'content_ar',
+        'summary_ar',
+        'meta_description_ar',
+        'why_it_matters_ar',
+        'analysis_ar',
+        'context_ar',
+        'what_to_watch_ar',
+        'limitations_ar',
+    ];
+
+    foreach ($stringFields as $field) {
+
+        if (!is_string($result[$field])) {
+
+            Log::warning('AI validation failed', [
+                'reason' => 'field is not string',
+                'field' => $field,
+                'type' => gettype($result[$field]),
+            ]);
+
+            return false;
+        }
+
+        if (trim($result[$field]) === '') {
+
+            Log::warning('AI validation failed', [
+                'reason' => 'empty string field',
+                'field' => $field,
+            ]);
+
+            return false;
+        }
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Calculate lengths
+    |--------------------------------------------------------------------------
+    */
+
+    $lengths = [
+        'title_ar' =>
+            mb_strlen(trim($result['title_ar'])),
+
+        'content_ar' =>
+            mb_strlen(trim($result['content_ar'])),
+
+        'summary_ar' =>
+            mb_strlen(trim($result['summary_ar'])),
+
+        'meta_description_ar' =>
+            mb_strlen(trim($result['meta_description_ar'])),
+
+        'why_it_matters_ar' =>
+            mb_strlen(trim($result['why_it_matters_ar'])),
+
+        'analysis_ar' =>
+            mb_strlen(trim($result['analysis_ar'])),
+
+        'context_ar' =>
+            mb_strlen(trim($result['context_ar'])),
+
+        'what_to_watch_ar' =>
+            mb_strlen(trim($result['what_to_watch_ar'])),
+
+        'limitations_ar' =>
+            mb_strlen(trim($result['limitations_ar'])),
+    ];
+
+    /*
+    |--------------------------------------------------------------------------
+    | Log lengths for diagnostics
+    |--------------------------------------------------------------------------
+    */
+
+    Log::info('AI validation field lengths', [
+        'lengths' => $lengths,
+    ]);
+
+    /*
+    |--------------------------------------------------------------------------
+    | Minimum article length
+    |--------------------------------------------------------------------------
+    */
+
+    if ($lengths['content_ar'] < 500) {
+
+        Log::warning('AI validation failed', [
+            'reason' => 'content_ar too short',
+            'required_minimum' => 500,
+            'actual_length' => $lengths['content_ar'],
+        ]);
+
+        return false;
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Maximum article length
+    |--------------------------------------------------------------------------
+    */
+
+    if ($lengths['content_ar'] > 12000) {
+
+        Log::warning('AI validation failed', [
+            'reason' => 'content_ar too long',
+            'maximum' => 12000,
+            'actual_length' => $lengths['content_ar'],
+        ]);
+
+        return false;
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Analytical value
+    |--------------------------------------------------------------------------
+    */
+
+    if ($lengths['analysis_ar'] < 180) {
+
+        Log::warning('AI validation failed', [
+            'reason' => 'analysis_ar too short',
+            'required_minimum' => 180,
+            'actual_length' => $lengths['analysis_ar'],
+        ]);
+
+        return false;
+    }
+
+    if ($lengths['why_it_matters_ar'] < 100) {
+
+        Log::warning('AI validation failed', [
+            'reason' => 'why_it_matters_ar too short',
+            'required_minimum' => 100,
+            'actual_length' => $lengths['why_it_matters_ar'],
+        ]);
+
+        return false;
+    }
+
+    if ($lengths['context_ar'] < 100) {
+
+        Log::warning('AI validation failed', [
+            'reason' => 'context_ar too short',
+            'required_minimum' => 100,
+            'actual_length' => $lengths['context_ar'],
+        ]);
+
+        return false;
+    }
+
+    if ($lengths['what_to_watch_ar'] < 80) {
+
+        Log::warning('AI validation failed', [
+            'reason' => 'what_to_watch_ar too short',
+            'required_minimum' => 80,
+            'actual_length' => $lengths['what_to_watch_ar'],
+        ]);
+
+        return false;
+    }
+
+    if ($lengths['limitations_ar'] < 50) {
+
+        Log::warning('AI validation failed', [
+            'reason' => 'limitations_ar too short',
+            'required_minimum' => 50,
+            'actual_length' => $lengths['limitations_ar'],
+        ]);
+
+        return false;
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Meta description
+    |--------------------------------------------------------------------------
+    */
+
+    if (
+        $lengths['meta_description_ar'] < 50 ||
+        $lengths['meta_description_ar'] > 180
+    ) {
+
+        Log::warning('AI validation failed', [
+            'reason' => 'invalid meta_description_ar length',
+            'minimum' => 50,
+            'maximum' => 180,
+            'actual_length' => $lengths['meta_description_ar'],
+        ]);
+
+        return false;
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Sentiment
+    |--------------------------------------------------------------------------
+    */
+
+    $allowedSentiments = [
+        'Bullish',
+        'Bearish',
+        'Neutral',
+    ];
+
+    if (
+        !in_array(
+            $result['sentiment'],
+            $allowedSentiments,
+            true
+        )
+    ) {
+
+        Log::warning('AI validation failed', [
+            'reason' => 'invalid sentiment',
+            'value' => $result['sentiment'],
+            'allowed' => $allowedSentiments,
+        ]);
+
+        return false;
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Category
+    |--------------------------------------------------------------------------
+    */
+
+    $allowedCategories = [
+        'Bitcoin',
+        'Ethereum',
+        'Regulation',
+        'DeFi',
+        'NFT',
+        'Mining',
+        'Market',
+        'Security',
+        'Blockchain',
+    ];
+
+    if (
+        !in_array(
+            $result['category'],
+            $allowedCategories,
+            true
+        )
+    ) {
+
+        Log::warning('AI validation failed', [
+            'reason' => 'invalid category',
+            'value' => $result['category'],
+            'allowed' => $allowedCategories,
+        ]);
+
+        return false;
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Impact score
+    |--------------------------------------------------------------------------
+    */
+
+    if (
+        !is_int($result['impact_score']) &&
+        !is_numeric($result['impact_score'])
+    ) {
+
+        Log::warning('AI validation failed', [
+            'reason' => 'impact_score is not numeric',
+            'value' => $result['impact_score'],
+            'type' => gettype($result['impact_score']),
+        ]);
+
+        return false;
+    }
+
+    $impactScore = (int) $result['impact_score'];
+
+    if (
+        $impactScore < 1 ||
+        $impactScore > 10
+    ) {
+
+        Log::warning('AI validation failed', [
+            'reason' => 'impact_score outside allowed range',
+            'value' => $impactScore,
+            'minimum' => 1,
+            'maximum' => 10,
+        ]);
+
+        return false;
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Keywords
+    |--------------------------------------------------------------------------
+    */
+
+    if (!is_array($result['keywords'])) {
+
+        Log::warning('AI validation failed', [
+            'reason' => 'keywords is not an array',
+            'type' => gettype($result['keywords']),
+        ]);
+
+        return false;
+    }
+
+    $keywordCount = count($result['keywords']);
+
+    if (
+        $keywordCount < 3 ||
+        $keywordCount > 5
+    ) {
+
+        Log::warning('AI validation failed', [
+            'reason' => 'invalid keyword count',
+            'minimum' => 3,
+            'maximum' => 5,
+            'actual' => $keywordCount,
+            'keywords' => $result['keywords'],
+        ]);
+
+        return false;
+    }
+
+    foreach ($result['keywords'] as $index => $keyword) {
+
+        if (
+            !is_string($keyword) ||
+            trim($keyword) === ''
+        ) {
+
+            Log::warning('AI validation failed', [
+                'reason' => 'invalid keyword',
+                'index' => $index,
+                'value' => $keyword,
+            ]);
+
+            return false;
+        }
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | SUCCESS
+    |--------------------------------------------------------------------------
+    */
+
+    Log::info('AI validation passed', [
+        'lengths' => $lengths,
+        'sentiment' => $result['sentiment'],
+        'category' => $result['category'],
+        'impact_score' => $impactScore,
+        'keyword_count' => $keywordCount,
+    ]);
+
+    return true;
+}
 
 
     /**
