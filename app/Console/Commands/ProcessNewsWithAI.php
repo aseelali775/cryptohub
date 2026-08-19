@@ -12,11 +12,10 @@ use Illuminate\Support\Str;
 class ProcessNewsWithAI extends Command
 {
     protected $signature = 'news:process-ai
-                            {--limit=3 : Number of unprocessed news to process}';
+                            {--limit=3 : Number of articles to process}';
 
     protected $description =
-        'Analyze new crypto news and generate original Arabic editorial analysis using Gemini AI.';
-
+        'Analyze unprocessed crypto news and generate original Arabic editorial analysis using Gemini AI.';
 
     /*
     |--------------------------------------------------------------------------
@@ -26,64 +25,57 @@ class ProcessNewsWithAI extends Command
 
     private const GEMINI_MODEL = 'gemini-3.6-flash';
 
-
     /*
     |--------------------------------------------------------------------------
-    | Default Batch Limit
+    | Processing Configuration
     |--------------------------------------------------------------------------
     */
 
     private const DEFAULT_BATCH_LIMIT = 3;
 
+    /*
+    |--------------------------------------------------------------------------
+    | Minimum source content required before sending to AI
+    |--------------------------------------------------------------------------
+    |
+    | Articles with less than 400 characters are considered too weak
+    | for safe editorial generation and will be skipped.
+    |
+    */
+
+    private const MIN_SOURCE_LENGTH = 400;
 
     /*
     |--------------------------------------------------------------------------
-    | Delay Between Requests
+    | Minimum generated Arabic article length
     |--------------------------------------------------------------------------
     */
 
-    private const RATE_LIMIT_SECONDS = 20;
-
+    private const MIN_ARTICLE_LENGTH = 400;
 
     /*
     |--------------------------------------------------------------------------
-    | Maximum Source Length
+    | Maximum generated Arabic article length
+    |--------------------------------------------------------------------------
+    */
+
+    private const MAX_ARTICLE_LENGTH = 12000;
+
+    /*
+    |--------------------------------------------------------------------------
+    | Maximum source content sent to Gemini
     |--------------------------------------------------------------------------
     */
 
     private const MAX_SOURCE_LENGTH = 12000;
 
-
     /*
     |--------------------------------------------------------------------------
-    | Minimum Source Length
-    |--------------------------------------------------------------------------
-    |
-    | News below 300 characters should be refetched instead of
-    | being sent to AI.
-    |
-    */
-
-    private const MIN_SOURCE_LENGTH = 300;
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | Minimum Generated Arabic Article Length
+    | API Rate Limiting
     |--------------------------------------------------------------------------
     */
 
-    private const MIN_CONTENT_AR_LENGTH = 400;
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | Maximum Generated Arabic Article Length
-    |--------------------------------------------------------------------------
-    */
-
-    private const MAX_CONTENT_AR_LENGTH = 12000;
-
+    private const RATE_LIMIT_SECONDS = 20;
 
     /*
     |--------------------------------------------------------------------------
@@ -95,10 +87,9 @@ class ProcessNewsWithAI extends Command
 
     private const RETRY_BASE_SECONDS = 5;
 
-
     /*
     |--------------------------------------------------------------------------
-    | Main Handler
+    | Handle
     |--------------------------------------------------------------------------
     */
 
@@ -119,21 +110,17 @@ class ProcessNewsWithAI extends Command
             return self::FAILURE;
         }
 
-
         /*
         |--------------------------------------------------------------------------
-        | Determine batch limit
+        | Resolve limit
         |--------------------------------------------------------------------------
         */
 
         $limit = (int) $this->option('limit');
 
-        if ($limit <= 0) {
-
-            $limit =
-                self::DEFAULT_BATCH_LIMIT;
+        if ($limit < 1) {
+            $limit = self::DEFAULT_BATCH_LIMIT;
         }
-
 
         /*
         |--------------------------------------------------------------------------
@@ -163,63 +150,37 @@ class ProcessNewsWithAI extends Command
             'Batch limit: ' . $limit
         );
 
-        $this->newLine();
+        $this->info(
+            'Minimum source: ' . self::MIN_SOURCE_LENGTH . ' chars'
+        );
 
+        $this->info(
+            'Minimum article: ' . self::MIN_ARTICLE_LENGTH . ' chars'
+        );
 
         /*
         |--------------------------------------------------------------------------
-        | Get only unprocessed news
+        | Get unprocessed news
         |--------------------------------------------------------------------------
-        |
-        | IMPORTANT:
-        |
-        | This command is for NEW articles.
-        |
-        | Already processed articles are handled by:
-        |
-        | news:repair-ai
-        |
         */
 
         $newsList = News::query()
-            ->where(
-                'ai_processed',
-                false
-            )
-            ->whereNotNull(
-                'title_en'
-            )
-            ->where(
-                'title_en',
-                '!=',
-                ''
-            )
-            ->whereNotNull(
-                'content_en'
-            )
-            ->where(
-                'content_en',
-                '!=',
-                ''
-            )
-            ->orderByDesc(
-                'created_at'
-            )
-            ->limit(
-                $limit
-            )
+            ->where('ai_processed', false)
+            ->whereNotNull('content_en')
+            ->where('content_en', '!=', '')
+            ->latest()
+            ->limit($limit)
             ->get();
-
 
         /*
         |--------------------------------------------------------------------------
-        | No articles
+        | Nothing to process
         |--------------------------------------------------------------------------
         */
 
-        if (
-            $newsList->isEmpty()
-        ) {
+        if ($newsList->isEmpty()) {
+
+            $this->newLine();
 
             $this->info(
                 '✅ No unprocessed articles found.'
@@ -228,11 +189,11 @@ class ProcessNewsWithAI extends Command
             return self::SUCCESS;
         }
 
+        $this->newLine();
 
         $this->info(
             "Found {$newsList->count()} unprocessed articles."
         );
-
 
         /*
         |--------------------------------------------------------------------------
@@ -241,27 +202,18 @@ class ProcessNewsWithAI extends Command
         */
 
         $processed = 0;
-
         $failed = 0;
-
         $skipped = 0;
-
         $validationFailed = 0;
-
         $apiFailed = 0;
-
-        $quotaExceeded = false;
-
 
         /*
         |--------------------------------------------------------------------------
-        | Process Articles
+        | Process articles
         |--------------------------------------------------------------------------
         */
 
-        foreach (
-            $newsList as $index => $news
-        ) {
+        foreach ($newsList as $news) {
 
             $this->newLine();
 
@@ -269,19 +221,17 @@ class ProcessNewsWithAI extends Command
                 "Processing ID {$news->id}: {$news->title_en}"
             );
 
-
             try {
 
                 /*
                 |--------------------------------------------------------------------------
-                | Prepare Source
+                | Prepare source material
                 |--------------------------------------------------------------------------
                 */
 
                 $title = trim(
                     (string) $news->title_en
                 );
-
 
                 $content = trim(
                     mb_substr(
@@ -291,102 +241,90 @@ class ProcessNewsWithAI extends Command
                     )
                 );
 
+                $contentLength = mb_strlen(
+                    $content
+                );
 
                 /*
                 |--------------------------------------------------------------------------
-                | Validate Title
+                | Validate title
                 |--------------------------------------------------------------------------
                 */
 
-                if (
-                    mb_strlen($title) < 5
-                ) {
+                if (mb_strlen($title) < 5) {
 
                     $this->warn(
-                        "⚠️ Article {$news->id} has an invalid title. Skipping."
+                        "⚠️ Article {$news->id} has an invalid title."
                     );
-
 
                     Log::warning(
-                        'AI skipped article with invalid title',
+                        'AI skipped article because title is too short',
                         [
                             'news_id' => $news->id,
+                            'title_length' => mb_strlen($title),
                         ]
                     );
-
 
                     $skipped++;
 
                     continue;
                 }
 
-
                 /*
                 |--------------------------------------------------------------------------
-                | Validate Original Source Length
+                | Validate source content
                 |--------------------------------------------------------------------------
-                |
-                | Very short original articles should be refetched.
-                |
                 */
 
-                $sourceLength =
-                    mb_strlen($content);
-
-
-                if (
-                    $sourceLength <
-                    self::MIN_SOURCE_LENGTH
-                ) {
+                if ($contentLength < self::MIN_SOURCE_LENGTH) {
 
                     $this->warn(
                         "⚠️ Article {$news->id} source content is too short for AI."
                     );
 
-                    $this->warn(
-                        "Content length: {$sourceLength}"
+                    $this->line(
+                        "Content length: {$contentLength}"
                     );
 
-                    $this->warn(
+                    $this->line(
+                        'Minimum required: ' .
+                        self::MIN_SOURCE_LENGTH
+                    );
+
+                    $this->line(
                         'Recommended action: REFETCH CONTENT.'
                     );
-
 
                     Log::warning(
                         'AI skipped article because original content is too short',
                         [
                             'news_id' => $news->id,
-                            'content_length' => $sourceLength,
-                            'minimum_required' =>
-                                self::MIN_SOURCE_LENGTH,
+                            'content_length' => $contentLength,
+                            'minimum_required' => self::MIN_SOURCE_LENGTH,
                         ]
                     );
-
 
                     $skipped++;
 
                     continue;
                 }
 
-
                 /*
                 |--------------------------------------------------------------------------
-                | Analyze With Gemini
+                | Analyze with Gemini
                 |--------------------------------------------------------------------------
                 */
 
-                $result =
-                    $this->analyzeWithGemini(
-                        $news,
-                        $title,
-                        $content,
-                        $apiKey
-                    );
-
+                $result = $this->analyzeWithGemini(
+                    $news,
+                    $title,
+                    $content,
+                    $apiKey
+                );
 
                 /*
                 |--------------------------------------------------------------------------
-                | Quota Exhausted
+                | API quota failure
                 |--------------------------------------------------------------------------
                 */
 
@@ -395,42 +333,46 @@ class ProcessNewsWithAI extends Command
                     ($result['__quota_exceeded'] ?? false)
                 ) {
 
-                    $quotaExceeded =
-                        true;
-
-
-                    $failed++;
-
                     $this->error(
-                        '🚫 Gemini quota has been exhausted.'
+                        '🛑 Gemini API quota/rate limit reached.'
                     );
 
                     $this->warn(
-                        '🛑 Stopping AI processing cycle.'
+                        'Processing cycle stopped.'
                     );
 
+                    if (
+                        !empty(
+                            $result['__retry_seconds']
+                        )
+                    ) {
+
+                        $this->line(
+                            'Suggested retry delay: ' .
+                            $result['__retry_seconds'] .
+                            ' seconds.'
+                        );
+                    }
 
                     Log::warning(
-                        'AI processing cycle stopped because Gemini quota was exhausted',
+                        'AI processing stopped because Gemini quota was exceeded',
                         [
                             'news_id' => $news->id,
-                            'model' =>
-                                self::GEMINI_MODEL,
-                            'message' =>
-                                $result['__message'] ?? null,
+                            'model' => self::GEMINI_MODEL,
+                            'message' => $result['__message'] ?? null,
                             'retry_seconds' =>
                                 $result['__retry_seconds'] ?? null,
                         ]
                     );
 
+                    $apiFailed++;
 
                     break;
                 }
 
-
                 /*
                 |--------------------------------------------------------------------------
-                | Temporary API Failure
+                | Temporary API failure
                 |--------------------------------------------------------------------------
                 */
 
@@ -439,77 +381,18 @@ class ProcessNewsWithAI extends Command
                     ($result['__temporary_failure'] ?? false)
                 ) {
 
-                    $apiFailed++;
-
-                    $failed++;
-
                     $this->error(
-                        "❌ Temporary Gemini API failure for ID {$news->id}."
+                        "❌ Temporary Gemini API failure for ID {$news->id}"
                     );
 
+                    $apiFailed++;
 
                     continue;
                 }
 
-
                 /*
                 |--------------------------------------------------------------------------
-                | Generic API Failure
-                |--------------------------------------------------------------------------
-                */
-
-                if (
-                    is_array($result) &&
-                    ($result['__api_failure'] ?? false)
-                ) {
-
-                    $apiFailed++;
-
-                    $failed++;
-
-                    $this->error(
-                        "❌ Gemini API failure for ID {$news->id}."
-                    );
-
-
-                    continue;
-                }
-
-
-                /*
-                |--------------------------------------------------------------------------
-                | Null Response
-                |--------------------------------------------------------------------------
-                */
-
-                if (
-                    $result === null
-                ) {
-
-                    $apiFailed++;
-
-                    $failed++;
-
-                    $this->error(
-                        "❌ Gemini returned no usable result for ID {$news->id}."
-                    );
-
-
-                    Log::warning(
-                        'Gemini returned null result',
-                        [
-                            'news_id' => $news->id,
-                        ]
-                    );
-
-
-                    continue;
-                }
-
-
-                /*
-                |--------------------------------------------------------------------------
-                | Validate AI Result
+                | Validate AI result structure
                 |--------------------------------------------------------------------------
                 */
 
@@ -519,66 +402,52 @@ class ProcessNewsWithAI extends Command
                     )
                 ) {
 
-                    $validationFailed++;
-
-                    $failed++;
-
                     $this->error(
-                        "❌ AI result failed validation for ID {$news->id}."
+                        "❌ AI result validation failed for ID {$news->id}"
                     );
-
 
                     Log::warning(
                         'AI result failed validation',
                         [
                             'news_id' => $news->id,
-                            'title' =>
-                                $news->title_en,
+                            'result' => $result,
                         ]
                     );
 
+                    $validationFailed++;
 
                     continue;
                 }
 
-
                 /*
                 |--------------------------------------------------------------------------
-                | Build Slug
+                | Build slug
                 |--------------------------------------------------------------------------
                 */
 
-                $slug =
-                    $this->buildSlug(
-                        $title,
-                        $news->id
-                    );
-
+                $slug = $this->buildSlug(
+                    $title,
+                    $news->id
+                );
 
                 /*
                 |--------------------------------------------------------------------------
-                | Normalize Keywords
+                | Normalize keywords
                 |--------------------------------------------------------------------------
                 */
 
-                $keywords =
-                    $this->normalizeKeywords(
-                        $result['keywords']
-                    );
-
+                $keywords = $this->normalizeKeywords(
+                    $result['keywords']
+                );
 
                 if (
-                    count($keywords) < 3
+                    count($keywords) < 3 ||
+                    count($keywords) > 5
                 ) {
 
-                    $validationFailed++;
-
-                    $failed++;
-
                     $this->error(
-                        "❌ Invalid keywords for ID {$news->id}."
+                        "❌ Invalid keywords for ID {$news->id}"
                     );
-
 
                     Log::warning(
                         'AI keywords validation failed',
@@ -589,122 +458,86 @@ class ProcessNewsWithAI extends Command
                         ]
                     );
 
+                    $validationFailed++;
 
                     continue;
                 }
 
-
                 /*
                 |--------------------------------------------------------------------------
-                | Normalize Sentiment
+                | Normalize sentiment
                 |--------------------------------------------------------------------------
                 */
 
-                $sentiment =
-                    $this->normalizeSentiment(
-                        $result['sentiment'] ?? null
-                    );
-
+                $sentiment = $this->normalizeSentiment(
+                    $result['sentiment'] ?? null
+                );
 
                 /*
                 |--------------------------------------------------------------------------
-                | Normalize Category
+                | Normalize category
                 |--------------------------------------------------------------------------
                 */
 
-                $category =
-                    $this->normalizeCategory(
-                        $result['category'] ?? null
-                    );
-
+                $category = $this->normalizeCategory(
+                    $result['category'] ?? null
+                );
 
                 /*
                 |--------------------------------------------------------------------------
-                | Normalize Impact Score
+                | Normalize impact score
                 |--------------------------------------------------------------------------
                 */
 
-                $impactScore =
-                    $this->normalizeImpactScore(
-                        $result['impact_score'] ?? null
-                    );
-
+                $impactScore = $this->normalizeImpactScore(
+                    $result['impact_score'] ?? null
+                );
 
                 /*
                 |--------------------------------------------------------------------------
-                | Prepare Arabic Fields
+                | Prepare Arabic fields
                 |--------------------------------------------------------------------------
                 */
 
-                $titleAr =
-                    trim(
-                        (string)
-                        $result['title_ar']
-                    );
+                $titleAr = trim(
+                    (string) $result['title_ar']
+                );
 
+                $contentAr = trim(
+                    (string) $result['content_ar']
+                );
 
-                $contentAr =
-                    trim(
-                        (string)
-                        $result['content_ar']
-                    );
+                $summaryAr = trim(
+                    (string) $result['summary_ar']
+                );
 
+                $metaDescriptionAr = trim(
+                    (string) $result['meta_description_ar']
+                );
 
-                $summaryAr =
-                    trim(
-                        (string)
-                        $result['summary_ar']
-                    );
+                $whyItMattersAr = trim(
+                    (string) $result['why_it_matters_ar']
+                );
 
+                $analysisAr = trim(
+                    (string) $result['analysis_ar']
+                );
 
-                $metaDescriptionAr =
-                    trim(
-                        (string)
-                        (
-                            $result['meta_description_ar']
-                            ?? ''
-                        )
-                    );
+                $contextAr = trim(
+                    (string) $result['context_ar']
+                );
 
+                $whatToWatchAr = trim(
+                    (string) $result['what_to_watch_ar']
+                );
 
-                $whyItMattersAr =
-                    trim(
-                        (string)
-                        $result['why_it_matters_ar']
-                    );
-
-
-                $analysisAr =
-                    trim(
-                        (string)
-                        $result['analysis_ar']
-                    );
-
-
-                $contextAr =
-                    trim(
-                        (string)
-                        $result['context_ar']
-                    );
-
-
-                $whatToWatchAr =
-                    trim(
-                        (string)
-                        $result['what_to_watch_ar']
-                    );
-
-
-                $limitationsAr =
-                    trim(
-                        (string)
-                        $result['limitations_ar']
-                    );
-
+                $limitationsAr = trim(
+                    (string) $result['limitations_ar']
+                );
 
                 /*
                 |--------------------------------------------------------------------------
-                | Final Validation
+                | Final content validation
                 |--------------------------------------------------------------------------
                 */
 
@@ -722,14 +555,9 @@ class ProcessNewsWithAI extends Command
                     )
                 ) {
 
-                    $validationFailed++;
-
-                    $failed++;
-
                     $this->error(
-                        "❌ Final content validation failed for ID {$news->id}."
+                        "❌ Final content validation failed for ID {$news->id}"
                     );
-
 
                     Log::warning(
                         'AI final content validation failed',
@@ -738,160 +566,138 @@ class ProcessNewsWithAI extends Command
 
                             'lengths' => [
                                 'title_ar' =>
-                                    mb_strlen(
-                                        $titleAr
-                                    ),
+                                    mb_strlen($titleAr),
 
                                 'content_ar' =>
-                                    mb_strlen(
-                                        $contentAr
-                                    ),
+                                    mb_strlen($contentAr),
 
                                 'summary_ar' =>
-                                    mb_strlen(
-                                        $summaryAr
-                                    ),
+                                    mb_strlen($summaryAr),
 
                                 'why_it_matters_ar' =>
-                                    mb_strlen(
-                                        $whyItMattersAr
-                                    ),
+                                    mb_strlen($whyItMattersAr),
 
                                 'analysis_ar' =>
-                                    mb_strlen(
-                                        $analysisAr
-                                    ),
+                                    mb_strlen($analysisAr),
 
                                 'context_ar' =>
-                                    mb_strlen(
-                                        $contextAr
-                                    ),
+                                    mb_strlen($contextAr),
 
                                 'what_to_watch_ar' =>
-                                    mb_strlen(
-                                        $whatToWatchAr
-                                    ),
+                                    mb_strlen($whatToWatchAr),
 
                                 'limitations_ar' =>
-                                    mb_strlen(
-                                        $limitationsAr
-                                    ),
+                                    mb_strlen($limitationsAr),
 
                                 'meta_description_ar' =>
-                                    mb_strlen(
-                                        $metaDescriptionAr
-                                    ),
+                                    mb_strlen($metaDescriptionAr),
                             ],
                         ]
                     );
 
+                    $validationFailed++;
 
                     continue;
                 }
 
-
                 /*
                 |--------------------------------------------------------------------------
-                | Save
+                | Save article
                 |--------------------------------------------------------------------------
+                |
+                | ai_processed becomes TRUE only after all validations pass.
+                |
                 */
 
-                $news->update(
-                    [
+                $news->update([
 
-                        'slug' =>
-                            $slug,
+                    'slug' =>
+                        $slug,
 
-                        'title_ar' =>
-                            $titleAr,
+                    'title_ar' =>
+                        $titleAr,
 
-                        'content_ar' =>
-                            $contentAr,
+                    'content_ar' =>
+                        $contentAr,
 
-                        'summary_ar' =>
-                            $summaryAr,
+                    'summary_ar' =>
+                        $summaryAr,
 
-                        'why_it_matters_ar' =>
-                            $whyItMattersAr,
+                    'why_it_matters_ar' =>
+                        $whyItMattersAr,
 
-                        'analysis_ar' =>
-                            $analysisAr,
+                    'analysis_ar' =>
+                        $analysisAr,
 
-                        'context_ar' =>
-                            $contextAr,
+                    'context_ar' =>
+                        $contextAr,
 
-                        'what_to_watch_ar' =>
-                            $whatToWatchAr,
+                    'what_to_watch_ar' =>
+                        $whatToWatchAr,
 
-                        'limitations_ar' =>
-                            $limitationsAr,
+                    'limitations_ar' =>
+                        $limitationsAr,
 
-                        'keywords' =>
-                            $keywords,
+                    'meta_description_ar' =>
+                        $metaDescriptionAr,
 
-                        'sentiment' =>
-                            $sentiment,
+                    'keywords' =>
+                        $keywords,
 
-                        'category' =>
-                            $category,
+                    'sentiment' =>
+                        $sentiment,
 
-                        'impact_score' =>
-                            $impactScore,
+                    'category' =>
+                        $category,
 
-                        /*
-                        |------------------------------------------------------
-                        | Important:
-                        |
-                        | Mark processed ONLY after successful validation
-                        | and database update.
-                        |------------------------------------------------------
-                        */
+                    'impact_score' =>
+                        $impactScore,
 
-                        'ai_processed' =>
-                            true,
-                    ]
-                );
-
+                    'ai_processed' =>
+                        true,
+                ]);
 
                 $processed++;
 
+                /*
+                |--------------------------------------------------------------------------
+                | Success output
+                |--------------------------------------------------------------------------
+                */
 
                 $this->info(
-                    "✅ AI editorial analysis saved for ID {$news->id}."
+                    "✅ AI editorial analysis saved for ID {$news->id}"
                 );
 
-
                 $this->line(
-                    "Content AR: " .
+                    'Arabic article length: ' .
                     mb_strlen($contentAr) .
-                    " chars"
+                    ' chars'
                 );
-
 
                 $this->line(
-                    "Category: {$category}"
+                    'Category: ' .
+                    $category
                 );
-
 
                 $this->line(
-                    "Sentiment: {$sentiment}"
+                    'Sentiment: ' .
+                    $sentiment
                 );
-
 
                 $this->line(
-                    "Impact: {$impactScore}/10"
+                    'Impact score: ' .
+                    $impactScore .
+                    '/10'
                 );
-
 
             } catch (\Throwable $e) {
 
                 $failed++;
 
-
                 $this->error(
                     "❌ Processing failed for ID {$news->id}: {$e->getMessage()}"
                 );
-
 
                 Log::error(
                     'AI News Processing Exception',
@@ -908,21 +714,14 @@ class ProcessNewsWithAI extends Command
                 );
             }
 
-
             /*
             |--------------------------------------------------------------------------
-            | Delay Between Requests
+            | Rate limiting
             |--------------------------------------------------------------------------
             */
 
-            $isLastArticle =
-                $index ===
-                $newsList->count() - 1;
-
-
             if (
-                !$isLastArticle &&
-                !$quotaExceeded
+                $news->id !== $newsList->last()->id
             ) {
 
                 sleep(
@@ -931,10 +730,9 @@ class ProcessNewsWithAI extends Command
             }
         }
 
-
         /*
         |--------------------------------------------------------------------------
-        | Clear AI Caches
+        | Clear AI caches
         |--------------------------------------------------------------------------
         */
 
@@ -946,88 +744,59 @@ class ProcessNewsWithAI extends Command
             'ai_market_impact_news'
         );
 
-
         /*
         |--------------------------------------------------------------------------
-        | Final Report
+        | Final report
         |--------------------------------------------------------------------------
         */
 
         $this->newLine();
 
-
         $this->info(
             '🧹 AI Market cache cleared.'
         );
 
+        $this->newLine();
 
         $this->info(
             "📊 Processed: {$processed}"
         );
 
-
         $this->info(
             "❌ Failed: {$failed}"
         );
-
 
         $this->info(
             "⏭️ Skipped: {$skipped}"
         );
 
-
         $this->info(
             "⚠️ Validation Failed: {$validationFailed}"
         );
-
 
         $this->info(
             "🌐 API Failed: {$apiFailed}"
         );
 
-
-        if (
-            $quotaExceeded
-        ) {
-
-            $this->warn(
-                '🚫 Gemini quota was exhausted. Processing stopped safely.'
-            );
-        }
-
+        $this->newLine();
 
         $this->info(
             '🚀 Aql Crypto AI Editorial Cycle Completed.'
         );
 
-
         /*
         |--------------------------------------------------------------------------
-        | Exit Status
+        | Exit status
         |--------------------------------------------------------------------------
         */
 
-        if (
-            $quotaExceeded &&
-            $processed === 0
-        ) {
-
-            return self::FAILURE;
-        }
-
-
-        if (
+        return (
             $failed > 0 &&
             $processed === 0
-        ) {
-
-            return self::FAILURE;
-        }
-
-
-        return self::SUCCESS;
+        )
+            ? self::FAILURE
+            : self::SUCCESS;
     }
-
 
     /*
     |--------------------------------------------------------------------------
@@ -1048,51 +817,47 @@ class ProcessNewsWithAI extends Command
             $apiKey
         );
 
-
         /*
         |--------------------------------------------------------------------------
         | Editorial Prompt
         |--------------------------------------------------------------------------
         */
 
-        $prompt = <<<PROMPT
-You are the senior editorial analyst for Aql Crypto.
+        $prompt = <<<'PROMPT'
+You are the senior editorial analyst for Aql Crypto, an Arabic cryptocurrency news and market-analysis platform.
 
-Your task is to create an ORIGINAL Arabic cryptocurrency news article
-based ONLY on the supplied source material.
+Your task is to transform the supplied factual source material into an ORIGINAL Arabic editorial news analysis.
 
-This is journalism and editorial analysis.
+This is NOT a literal translation.
 
-It is NOT financial advice.
+This is NOT a sentence-by-sentence rewrite.
 
-Do NOT provide investment recommendations.
+The final article must provide genuine editorial value by explaining:
 
-Do NOT invent facts.
-
-Do NOT use outside information.
-
-Do NOT introduce facts from your general knowledge.
+- what happened
+- important details
+- relevant context
+- why the event matters
+- reasonable implications
+- what readers should monitor
+- limitations and uncertainty
 
 ==================================================
 SOURCE FIDELITY
 ==================================================
 
-Use only information explicitly contained in the supplied source.
+The supplied source material is the factual foundation.
 
-Preserve accurately:
+Use ONLY information contained in the supplied material.
 
-- names
-- companies
-- organizations
-- dates
-- numbers
-- percentages
-- cryptocurrency names
-- ticker symbols
-- technical terms
-- events
-- claims
-- quotations
+Do NOT use:
+
+- general knowledge
+- training knowledge
+- current market knowledge
+- outside websites
+- outside statistics
+- outside events
 
 Never invent:
 
@@ -1101,122 +866,116 @@ Never invent:
 - partnerships
 - investments
 - statistics
-- market prices
+- prices
+- trading volumes
 - market capitalization
-- trading volume
 - blockchain data
-- regulatory decisions
+- regulations
+- quotes
 - dates
-- quotations
 - sources
 - citations
-- events
 
-If something is not contained in the source,
-do not present it as a fact.
+If a fact is not present in the source, do not present it as fact.
 
 ==================================================
 ORIGINALITY
 ==================================================
 
-Do NOT translate sentence by sentence.
+Write independently in professional Modern Standard Arabic.
 
-Do NOT copy the source.
+Do not copy sentences.
 
-Do NOT preserve the source paragraph structure.
+Do not preserve the source paragraph structure.
 
-Write an independently structured Arabic article.
+Do not mechanically translate.
 
-Explain the significance of the facts using cautious editorial reasoning.
+Reorganize information naturally.
 
-Use expressions such as:
-
-"قد يشير ذلك إلى"
-
-"قد يعكس"
-
-"من المحتمل أن"
-
-"يمكن أن يعني"
-
-"قد يؤدي إلى"
-
-"لا يمكن الجزم بأن"
-
-when discussing interpretation.
-
-Never present an inference as a confirmed fact.
+Explain why the facts matter.
 
 ==================================================
-ARTICLE REQUIREMENTS
+FACT VS ANALYSIS
 ==================================================
 
-The content_ar field is the main published article.
+Clearly distinguish facts from editorial interpretation.
 
-It MUST NOT be a short summary.
+When making an inference, use cautious language such as:
 
-It MUST NOT be only a translation.
+قد يشير ذلك إلى
 
-It MUST contain at least 400 Arabic characters.
+قد يعكس
 
-Prefer approximately 700-1200 Arabic characters when the supplied source
-contains enough information to support that level of detail.
+من المحتمل أن
 
-The article should naturally contain:
+يمكن أن يعني
 
-1. What happened.
+قد يؤدي إلى
 
-2. Important factual details.
+يعتمد التأثير على
 
-3. Relevant context supported by the source.
+لا يمكن الجزم بأن
 
-4. Aql Crypto analysis.
-
-5. Why the development matters.
-
-6. What remains uncertain.
-
-7. What readers should watch.
-
-Do not add filler merely to increase length.
+Never present speculation as confirmed fact.
 
 ==================================================
-ANALYSIS
+ARTICLE STRUCTURE
 ==================================================
 
-The analysis must be based only on facts supplied in the source.
+The article should naturally explain:
+
+1. WHAT HAPPENED?
+
+Explain the central event immediately.
+
+2. IMPORTANT DETAILS
+
+Explain important facts, numbers, organizations and technical details.
+
+3. CONTEXT
+
+Explain only context supported by the supplied material.
+
+4. AQL CRYPTO ANALYSIS
+
+Provide genuine editorial analysis based ONLY on supplied facts.
 
 Explain:
 
-- why the development matters
+- why the event matters
 - what mechanism is important
-- what implications may reasonably follow
+- possible implications
 - what remains uncertain
 
-Do not add external facts.
+Do not invent market data.
 
-Do not provide price predictions.
+Do not make guaranteed predictions.
 
 Do not recommend buying or selling.
 
-==================================================
-WHAT TO WATCH
-==================================================
+5. WHAT TO WATCH
 
-Mention realistic developments or indicators directly connected to the story.
+Identify realistic developments or indicators directly connected to the story.
 
-Only use information that can reasonably be inferred from the supplied source.
+6. LIMITATIONS
 
-Do not invent future events.
+Explain missing information or uncertainty.
 
 ==================================================
-LIMITATIONS
+FINANCIAL SAFETY
 ==================================================
 
-Explain important limitations in the supplied source.
+This is journalism, not financial advice.
 
-If the source is incomplete,
-say so clearly.
+Never:
+
+- recommend buying
+- recommend selling
+- guarantee profit
+- guarantee loss
+- predict exact future prices
+- claim an asset will definitely rise
+- claim an asset will definitely fall
 
 ==================================================
 TITLE
@@ -1224,9 +983,7 @@ TITLE
 
 Create a concise Arabic SEO title.
 
-Avoid clickbait.
-
-Do not exaggerate.
+Avoid clickbait and exaggeration.
 
 ==================================================
 SUMMARY
@@ -1238,10 +995,11 @@ Create a concise factual Arabic summary.
 META DESCRIPTION
 ==================================================
 
-Create an Arabic meta description.
+Create an Arabic SEO meta description.
 
-Target length:
-50-160 Arabic characters.
+Target approximately 120-160 Arabic characters.
+
+Maximum 180 characters.
 
 ==================================================
 KEYWORDS
@@ -1249,9 +1007,11 @@ KEYWORDS
 
 Generate exactly 3 to 5 English keywords.
 
-Use only keywords genuinely related to the article.
+Use Title Case for normal words.
 
-Use uppercase ticker symbols where appropriate.
+Use uppercase ticker symbols.
+
+Only use keywords genuinely related to the article.
 
 ==================================================
 SENTIMENT
@@ -1263,7 +1023,7 @@ Bullish
 Bearish
 Neutral
 
-Use Neutral when the source does not establish a clear directional tone.
+Use Neutral when the supplied information does not support a clear direction.
 
 ==================================================
 IMPACT SCORE
@@ -1271,11 +1031,11 @@ IMPACT SCORE
 
 Choose an integer from 1 to 10.
 
-1 = limited crypto significance.
+1 = very limited crypto relevance.
 
 10 = potentially major crypto ecosystem significance.
 
-Do not assign a high score simply because the headline is dramatic.
+Do not assign a high score simply because the headline sounds dramatic.
 
 ==================================================
 CATEGORY
@@ -1301,18 +1061,42 @@ All Arabic fields must use professional Modern Standard Arabic.
 
 Avoid machine-translation style.
 
-Avoid unnecessary English words.
-
 ==================================================
 PARAGRAPHS
 ==================================================
 
-Use clear paragraphs separated by blank lines.
+Use clear paragraphs.
+
+Separate paragraphs using two newline characters.
 
 Do not use Markdown headings inside content_ar.
 
 ==================================================
-OUTPUT
+LENGTH REQUIREMENTS
+==================================================
+
+content_ar MUST contain at least 400 Arabic characters.
+
+content_ar MUST NOT exceed 12000 characters.
+
+summary_ar MUST contain at least 50 characters.
+
+why_it_matters_ar MUST contain at least 100 characters.
+
+analysis_ar MUST contain at least 180 characters.
+
+context_ar MUST contain at least 100 characters.
+
+what_to_watch_ar MUST contain at least 80 characters.
+
+limitations_ar MUST contain at least 50 characters.
+
+meta_description_ar MUST contain between 50 and 180 characters.
+
+Do not fill the article with repetitive sentences merely to reach the minimum length.
+
+==================================================
+JSON OUTPUT
 ==================================================
 
 Return ONLY valid JSON.
@@ -1336,52 +1120,91 @@ Use exactly these fields:
 }
 
 ==================================================
-SOURCE
+SOURCE INFORMATION
 ==================================================
 
 Source:
-{$news->source}
+{{SOURCE}}
 
 Original URL:
-{$news->url}
+{{URL}}
 
 Original publication timestamp:
-{$news->created_at}
+{{DATE}}
 
 ==================================================
 ARTICLE TITLE
 ==================================================
 
-{$title}
+{{TITLE}}
 
 ==================================================
 ARTICLE CONTENT
 ==================================================
 
-{$content}
+{{CONTENT}}
 
 ==================================================
 FINAL INSTRUCTION
 ==================================================
 
-Produce an original Arabic editorial article.
+Produce an original Arabic editorial analysis based strictly on the supplied material.
 
-Minimum content_ar length:
-400 characters.
+Do not copy.
+
+Do not perform literal translation.
 
 Do not invent facts.
 
-Do not use outside knowledge.
+Do not fabricate citations.
 
 Do not provide financial advice.
+
+Do not make unsupported predictions.
 
 Return JSON only.
 PROMPT;
 
+        /*
+        |--------------------------------------------------------------------------
+        | Replace variables
+        |--------------------------------------------------------------------------
+        */
+
+        $prompt = str_replace(
+            [
+                '{{SOURCE}}',
+                '{{URL}}',
+                '{{DATE}}',
+                '{{TITLE}}',
+                '{{CONTENT}}',
+            ],
+            [
+                (string) (
+                    $news->source ??
+                    'Unknown'
+                ),
+
+                (string) (
+                    $news->url ??
+                    ''
+                ),
+
+                (string) (
+                    $news->created_at ??
+                    ''
+                ),
+
+                $title,
+
+                $content,
+            ],
+            $prompt
+        );
 
         /*
         |--------------------------------------------------------------------------
-        | JSON Schema
+        | Structured JSON Schema
         |--------------------------------------------------------------------------
         */
 
@@ -1393,55 +1216,43 @@ PROMPT;
             'properties' => [
 
                 'title_ar' => [
-                    'type' =>
-                        'string',
+                    'type' => 'string',
                 ],
 
                 'content_ar' => [
-                    'type' =>
-                        'string',
+                    'type' => 'string',
                 ],
 
                 'summary_ar' => [
-                    'type' =>
-                        'string',
+                    'type' => 'string',
                 ],
 
                 'meta_description_ar' => [
-                    'type' =>
-                        'string',
+                    'type' => 'string',
                 ],
 
                 'why_it_matters_ar' => [
-                    'type' =>
-                        'string',
+                    'type' => 'string',
                 ],
 
                 'analysis_ar' => [
-                    'type' =>
-                        'string',
+                    'type' => 'string',
                 ],
 
                 'context_ar' => [
-                    'type' =>
-                        'string',
+                    'type' => 'string',
                 ],
 
                 'what_to_watch_ar' => [
-                    'type' =>
-                        'string',
+                    'type' => 'string',
                 ],
 
                 'limitations_ar' => [
-                    'type' =>
-                        'string',
+                    'type' => 'string',
                 ],
 
                 'sentiment' => [
-
-                    'type' =>
-                        'string',
-
+                    'type' => 'string',
                     'enum' => [
                         'Bullish',
                         'Bearish',
@@ -1450,12 +1261,8 @@ PROMPT;
                 ],
 
                 'category' => [
-
-                    'type' =>
-                        'string',
-
+                    'type' => 'string',
                     'enum' => [
-
                         'Bitcoin',
                         'Ethereum',
                         'Regulation',
@@ -1469,18 +1276,14 @@ PROMPT;
                 ],
 
                 'impact_score' => [
-                    'type' =>
-                        'integer',
+                    'type' => 'integer',
                 ],
 
                 'keywords' => [
-
-                    'type' =>
-                        'array',
+                    'type' => 'array',
 
                     'items' => [
-                        'type' =>
-                            'string',
+                        'type' => 'string',
                     ],
                 ],
             ],
@@ -1488,25 +1291,36 @@ PROMPT;
             'required' => [
 
                 'title_ar',
+
                 'content_ar',
+
                 'summary_ar',
+
                 'meta_description_ar',
+
                 'why_it_matters_ar',
+
                 'analysis_ar',
+
                 'context_ar',
+
                 'what_to_watch_ar',
+
                 'limitations_ar',
+
                 'sentiment',
+
                 'category',
+
                 'impact_score',
+
                 'keywords',
             ],
         ];
 
-
         /*
         |--------------------------------------------------------------------------
-        | Payload
+        | Gemini Payload
         |--------------------------------------------------------------------------
         */
 
@@ -1522,9 +1336,13 @@ PROMPT;
 
                             'text' =>
                                 $prompt,
+
                         ],
+
                     ],
+
                 ],
+
             ],
 
             'generationConfig' => [
@@ -1540,7 +1358,6 @@ PROMPT;
             ],
         ];
 
-
         /*
         |--------------------------------------------------------------------------
         | API Request
@@ -1549,26 +1366,23 @@ PROMPT;
 
         for (
             $attempt = 1;
-            $attempt <=
-            self::MAX_API_RETRIES + 1;
+            $attempt <= self::MAX_API_RETRIES + 1;
             $attempt++
         ) {
 
             try {
 
-                $response =
-                    Http::timeout(90)
-                        ->acceptJson()
-                        ->asJson()
-                        ->post(
-                            $url,
-                            $payload
-                        );
-
+                $response = Http::timeout(90)
+                    ->acceptJson()
+                    ->asJson()
+                    ->post(
+                        $url,
+                        $payload
+                    );
 
                 /*
                 |--------------------------------------------------------------------------
-                | Successful Response
+                | Successful response
                 |--------------------------------------------------------------------------
                 */
 
@@ -1576,12 +1390,10 @@ PROMPT;
                     $response->successful()
                 ) {
 
-                    $text =
-                        data_get(
-                            $response->json(),
-                            'candidates.0.content.parts.0.text'
-                        );
-
+                    $text = data_get(
+                        $response->json(),
+                        'candidates.0.content.parts.0.text'
+                    );
 
                     if (
                         !is_string($text) ||
@@ -1593,48 +1405,39 @@ PROMPT;
                             [
                                 'news_id' =>
                                     $news->id,
-
                                 'attempt' =>
                                     $attempt,
                             ]
                         );
 
-
                         return null;
                     }
 
-
-                    $text =
-                        trim($text);
-
+                    $text = trim(
+                        $text
+                    );
 
                     /*
                     |--------------------------------------------------------------------------
-                    | Remove Markdown Fences
+                    | Remove Markdown fences
                     |--------------------------------------------------------------------------
                     */
 
-                    $text =
-                        preg_replace(
-                            '/^```(?:json)?\s*/i',
-                            '',
-                            $text
-                        );
+                    $text = preg_replace(
+                        '/^```(?:json)?\s*/i',
+                        '',
+                        $text
+                    );
 
+                    $text = preg_replace(
+                        '/\s*```$/',
+                        '',
+                        $text
+                    );
 
-                    $text =
-                        preg_replace(
-                            '/\s*```$/',
-                            '',
-                            $text
-                        );
-
-
-                    $text =
-                        trim(
-                            $text
-                        );
-
+                    $text = trim(
+                        $text
+                    );
 
                     /*
                     |--------------------------------------------------------------------------
@@ -1642,12 +1445,10 @@ PROMPT;
                     |--------------------------------------------------------------------------
                     */
 
-                    $data =
-                        json_decode(
-                            $text,
-                            true
-                        );
-
+                    $data = json_decode(
+                        $text,
+                        true
+                    );
 
                     if (
                         json_last_error() !==
@@ -1665,38 +1466,23 @@ PROMPT;
 
                                 'error' =>
                                     json_last_error_msg(),
+
+                                'response' =>
+                                    $text,
                             ]
                         );
-
 
                         return null;
                     }
 
-
-                    if (
-                        !is_array($data)
-                    ) {
-
-                        Log::error(
-                            'Gemini JSON is not an array',
-                            [
-                                'news_id' =>
-                                    $news->id,
-                            ]
-                        );
-
-
-                        return null;
-                    }
-
-
-                    return $data;
+                    return is_array($data)
+                        ? $data
+                        : null;
                 }
-
 
                 /*
                 |--------------------------------------------------------------------------
-                | 429 - Quota Exhausted
+                | 429 Quota / Rate Limit
                 |--------------------------------------------------------------------------
                 */
 
@@ -1707,20 +1493,69 @@ PROMPT;
                     $body =
                         $response->json();
 
+                    $message = data_get(
+                        $body,
+                        'error.message',
+                        'Gemini API quota exceeded.'
+                    );
 
-                    $message =
-                        data_get(
-                            $body,
-                            'error.message',
-                            'Gemini API quota exceeded.'
-                        );
+                    $retrySeconds = null;
 
+                    $details = data_get(
+                        $body,
+                        'error.details',
+                        []
+                    );
 
-                    $retrySeconds =
-                        $this->extractRetrySeconds(
-                            $body
-                        );
+                    if (
+                        is_array($details)
+                    ) {
 
+                        foreach (
+                            $details as $detail
+                        ) {
+
+                            if (
+                                isset(
+                                    $detail['@type']
+                                ) &&
+                                $detail['@type'] ===
+                                'type.googleapis.com/google.rpc.RetryInfo'
+                            ) {
+
+                                $retryDelay =
+                                    $detail['retryDelay'] ??
+                                    null;
+
+                                if (
+                                    is_string(
+                                        $retryDelay
+                                    )
+                                ) {
+
+                                    preg_match(
+                                        '/(\d+(?:\.\d+)?)s/',
+                                        $retryDelay,
+                                        $matches
+                                    );
+
+                                    if (
+                                        isset(
+                                            $matches[1]
+                                        )
+                                    ) {
+
+                                        $retrySeconds =
+                                            (int) ceil(
+                                                (float) $matches[1]
+                                            );
+                                    }
+                                }
+
+                                break;
+                            }
+                        }
+                    }
 
                     Log::warning(
                         'Gemini API quota exceeded',
@@ -1739,41 +1574,20 @@ PROMPT;
 
                             'message' =>
                                 $message,
+
+                            'body' =>
+                                $response->body(),
                         ]
                     );
-
 
                     $this->error(
                         '🚫 Gemini API returned HTTP 429.'
                     );
 
-
                     $this->warn(
                         'Message: ' .
                         $message
                     );
-
-
-                    if (
-                        $retrySeconds !== null
-                    ) {
-
-                        $this->warn(
-                            "Suggested retry delay: {$retrySeconds} seconds."
-                        );
-                    }
-
-
-                    /*
-                    |--------------------------------------------------------------------------
-                    | Do not retry automatically here.
-                    |--------------------------------------------------------------------------
-                    |
-                    | Especially for:
-                    |
-                    | GenerateRequestsPerDayPerModel-FreeTier
-                    |
-                    */
 
                     return [
 
@@ -1788,10 +1602,9 @@ PROMPT;
                     ];
                 }
 
-
                 /*
                 |--------------------------------------------------------------------------
-                | Temporary Server Errors
+                | Temporary server errors
                 |--------------------------------------------------------------------------
                 */
 
@@ -1825,7 +1638,6 @@ PROMPT;
                         ]
                     );
 
-
                     if (
                         $attempt <=
                         self::MAX_API_RETRIES
@@ -1835,32 +1647,26 @@ PROMPT;
                             self::RETRY_BASE_SECONDS *
                             $attempt;
 
-
                         $this->warn(
                             "⚠️ Temporary API error. Retrying in {$delay}s..."
                         );
-
 
                         sleep(
                             $delay
                         );
 
-
                         continue;
                     }
 
-
                     return [
-
                         '__temporary_failure' =>
                             true,
                     ];
                 }
 
-
                 /*
                 |--------------------------------------------------------------------------
-                | Other HTTP Errors
+                | Other API errors
                 |--------------------------------------------------------------------------
                 */
 
@@ -1881,13 +1687,7 @@ PROMPT;
                     ]
                 );
 
-
-                return [
-
-                    '__api_failure' =>
-                        true,
-                ];
-
+                return null;
 
             } catch (\Throwable $e) {
 
@@ -1905,7 +1705,6 @@ PROMPT;
                     ]
                 );
 
-
                 if (
                     $attempt <=
                     self::MAX_API_RETRIES
@@ -1915,122 +1714,26 @@ PROMPT;
                         self::RETRY_BASE_SECONDS *
                         $attempt;
 
-
                     $this->warn(
                         "⚠️ Connection error. Retrying in {$delay}s..."
                     );
-
 
                     sleep(
                         $delay
                     );
 
-
                     continue;
                 }
 
-
                 return [
-
                     '__temporary_failure' =>
                         true,
                 ];
             }
         }
 
-
         return null;
     }
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | Extract Retry Seconds
-    |--------------------------------------------------------------------------
-    */
-
-    private function extractRetrySeconds(
-        array $body
-    ): ?int {
-
-        $details =
-            data_get(
-                $body,
-                'error.details',
-                []
-            );
-
-
-        if (
-            !is_array($details)
-        ) {
-
-            return null;
-        }
-
-
-        foreach (
-            $details as $detail
-        ) {
-
-            if (
-                !is_array($detail)
-            ) {
-
-                continue;
-            }
-
-
-            $type =
-                $detail['@type']
-                ?? null;
-
-
-            if (
-                $type !==
-                'type.googleapis.com/google.rpc.RetryInfo'
-            ) {
-
-                continue;
-            }
-
-
-            $retryDelay =
-                $detail['retryDelay']
-                ?? null;
-
-
-            if (
-                !is_string($retryDelay)
-            ) {
-
-                return null;
-            }
-
-
-            preg_match(
-                '/(\d+(?:\.\d+)?)s/',
-                $retryDelay,
-                $matches
-            );
-
-
-            if (
-                isset(
-                    $matches[1]
-                )
-            ) {
-
-                return (int) ceil(
-                    (float) $matches[1]
-                );
-            }
-        }
-
-
-        return null;
-    }
-
 
     /*
     |--------------------------------------------------------------------------
@@ -2046,51 +1749,61 @@ PROMPT;
             !is_array($result)
         ) {
 
+            Log::warning(
+                'AI validation failed: result is not an array.'
+            );
+
             return false;
         }
 
+        /*
+        |--------------------------------------------------------------------------
+        | Internal control responses
+        |--------------------------------------------------------------------------
+        */
 
         if (
-            isset(
-                $result['__quota_exceeded']
-            )
-            ||
-            isset(
-                $result['__temporary_failure']
-            )
-            ||
-            isset(
-                $result['__api_failure']
-            )
+            isset($result['__quota_exceeded']) ||
+            isset($result['__temporary_failure'])
         ) {
 
             return false;
         }
 
-
         /*
         |--------------------------------------------------------------------------
-        | Required Fields
+        | Required fields
         |--------------------------------------------------------------------------
         */
 
         $required = [
 
             'title_ar',
+
             'content_ar',
+
             'summary_ar',
+
             'meta_description_ar',
+
             'why_it_matters_ar',
+
             'analysis_ar',
+
             'context_ar',
+
             'what_to_watch_ar',
+
             'limitations_ar',
+
             'sentiment',
+
             'category',
+
             'impact_score',
+
             'keywords',
         ];
-
 
         foreach (
             $required as $field
@@ -2104,45 +1817,46 @@ PROMPT;
             ) {
 
                 Log::warning(
-                    'AI validation failed',
+                    'AI validation failed: missing field',
                     [
-                        'reason' =>
-                            'missing required field',
-
                         'field' =>
                             $field,
                     ]
                 );
 
-
                 return false;
             }
         }
 
-
         /*
         |--------------------------------------------------------------------------
-        | String Fields
+        | String fields
         |--------------------------------------------------------------------------
         */
 
         $stringFields = [
 
             'title_ar',
+
             'content_ar',
+
             'summary_ar',
+
             'meta_description_ar',
+
             'why_it_matters_ar',
+
             'analysis_ar',
+
             'context_ar',
+
             'what_to_watch_ar',
+
             'limitations_ar',
         ];
 
-
         foreach (
-            $stringFields
-            as $field
+            $stringFields as $field
         ) {
 
             if (
@@ -2151,26 +1865,8 @@ PROMPT;
                 )
             ) {
 
-                Log::warning(
-                    'AI validation failed',
-                    [
-                        'reason' =>
-                            'field is not string',
-
-                        'field' =>
-                            $field,
-
-                        'type' =>
-                            gettype(
-                                $result[$field]
-                            ),
-                    ]
-                );
-
-
                 return false;
             }
-
 
             if (
                 trim(
@@ -2178,26 +1874,13 @@ PROMPT;
                 ) === ''
             ) {
 
-                Log::warning(
-                    'AI validation failed',
-                    [
-                        'reason' =>
-                            'empty string field',
-
-                        'field' =>
-                            $field,
-                    ]
-                );
-
-
                 return false;
             }
         }
 
-
         /*
         |--------------------------------------------------------------------------
-        | Calculate Lengths
+        | Length validation
         |--------------------------------------------------------------------------
         */
 
@@ -2267,7 +1950,6 @@ PROMPT;
                 ),
         ];
 
-
         Log::info(
             'AI validation field lengths',
             [
@@ -2275,7 +1957,6 @@ PROMPT;
                     $lengths,
             ]
         );
-
 
         /*
         |--------------------------------------------------------------------------
@@ -2289,74 +1970,59 @@ PROMPT;
         ) {
 
             Log::warning(
-                'AI validation failed',
+                'AI validation failed: invalid title length',
                 [
-                    'reason' =>
-                        'invalid title_ar length',
-
-                    'actual' =>
+                    'length' =>
                         $lengths['title_ar'],
                 ]
             );
 
-
             return false;
         }
 
-
         /*
         |--------------------------------------------------------------------------
-        | Content
+        | Main article
         |--------------------------------------------------------------------------
         */
 
         if (
             $lengths['content_ar'] <
-            self::MIN_CONTENT_AR_LENGTH
+            self::MIN_ARTICLE_LENGTH
         ) {
 
             Log::warning(
-                'AI validation failed',
+                'AI validation failed: content_ar too short',
                 [
-                    'reason' =>
-                        'content_ar too short',
+                    'minimum' =>
+                        self::MIN_ARTICLE_LENGTH,
 
-                    'required_minimum' =>
-                        self::MIN_CONTENT_AR_LENGTH,
-
-                    'actual_length' =>
+                    'actual' =>
                         $lengths['content_ar'],
                 ]
             );
 
-
             return false;
         }
-
 
         if (
             $lengths['content_ar'] >
-            self::MAX_CONTENT_AR_LENGTH
+            self::MAX_ARTICLE_LENGTH
         ) {
 
             Log::warning(
-                'AI validation failed',
+                'AI validation failed: content_ar too long',
                 [
-                    'reason' =>
-                        'content_ar too long',
-
                     'maximum' =>
-                        self::MAX_CONTENT_AR_LENGTH,
+                        self::MAX_ARTICLE_LENGTH,
 
-                    'actual_length' =>
+                    'actual' =>
                         $lengths['content_ar'],
                 ]
             );
 
-
             return false;
         }
-
 
         /*
         |--------------------------------------------------------------------------
@@ -2368,28 +2034,12 @@ PROMPT;
             $lengths['summary_ar'] < 50
         ) {
 
-            Log::warning(
-                'AI validation failed',
-                [
-                    'reason' =>
-                        'summary_ar too short',
-
-                    'required_minimum' =>
-                        50,
-
-                    'actual_length' =>
-                        $lengths['summary_ar'],
-                ]
-            );
-
-
             return false;
         }
 
-
         /*
         |--------------------------------------------------------------------------
-        | Why It Matters
+        | Why it matters
         |--------------------------------------------------------------------------
         */
 
@@ -2397,24 +2047,8 @@ PROMPT;
             $lengths['why_it_matters_ar'] < 100
         ) {
 
-            Log::warning(
-                'AI validation failed',
-                [
-                    'reason' =>
-                        'why_it_matters_ar too short',
-
-                    'required_minimum' =>
-                        100,
-
-                    'actual_length' =>
-                        $lengths['why_it_matters_ar'],
-                ]
-            );
-
-
             return false;
         }
-
 
         /*
         |--------------------------------------------------------------------------
@@ -2426,24 +2060,8 @@ PROMPT;
             $lengths['analysis_ar'] < 180
         ) {
 
-            Log::warning(
-                'AI validation failed',
-                [
-                    'reason' =>
-                        'analysis_ar too short',
-
-                    'required_minimum' =>
-                        180,
-
-                    'actual_length' =>
-                        $lengths['analysis_ar'],
-                ]
-            );
-
-
             return false;
         }
-
 
         /*
         |--------------------------------------------------------------------------
@@ -2455,28 +2073,12 @@ PROMPT;
             $lengths['context_ar'] < 100
         ) {
 
-            Log::warning(
-                'AI validation failed',
-                [
-                    'reason' =>
-                        'context_ar too short',
-
-                    'required_minimum' =>
-                        100,
-
-                    'actual_length' =>
-                        $lengths['context_ar'],
-                ]
-            );
-
-
             return false;
         }
 
-
         /*
         |--------------------------------------------------------------------------
-        | What To Watch
+        | What to watch
         |--------------------------------------------------------------------------
         */
 
@@ -2484,24 +2086,8 @@ PROMPT;
             $lengths['what_to_watch_ar'] < 80
         ) {
 
-            Log::warning(
-                'AI validation failed',
-                [
-                    'reason' =>
-                        'what_to_watch_ar too short',
-
-                    'required_minimum' =>
-                        80,
-
-                    'actual_length' =>
-                        $lengths['what_to_watch_ar'],
-                ]
-            );
-
-
             return false;
         }
-
 
         /*
         |--------------------------------------------------------------------------
@@ -2513,58 +2099,22 @@ PROMPT;
             $lengths['limitations_ar'] < 50
         ) {
 
-            Log::warning(
-                'AI validation failed',
-                [
-                    'reason' =>
-                        'limitations_ar too short',
-
-                    'required_minimum' =>
-                        50,
-
-                    'actual_length' =>
-                        $lengths['limitations_ar'],
-                ]
-            );
-
-
             return false;
         }
 
-
         /*
         |--------------------------------------------------------------------------
-        | Meta Description
+        | Meta description
         |--------------------------------------------------------------------------
         */
 
         if (
-            $lengths['meta_description_ar'] < 50
-            ||
+            $lengths['meta_description_ar'] < 50 ||
             $lengths['meta_description_ar'] > 180
         ) {
 
-            Log::warning(
-                'AI validation failed',
-                [
-                    'reason' =>
-                        'invalid meta_description_ar length',
-
-                    'minimum' =>
-                        50,
-
-                    'maximum' =>
-                        180,
-
-                    'actual_length' =>
-                        $lengths['meta_description_ar'],
-                ]
-            );
-
-
             return false;
         }
-
 
         /*
         |--------------------------------------------------------------------------
@@ -2575,10 +2125,11 @@ PROMPT;
         $allowedSentiments = [
 
             'Bullish',
+
             'Bearish',
+
             'Neutral',
         ];
-
 
         if (
             !in_array(
@@ -2588,21 +2139,8 @@ PROMPT;
             )
         ) {
 
-            Log::warning(
-                'AI validation failed',
-                [
-                    'reason' =>
-                        'invalid sentiment',
-
-                    'value' =>
-                        $result['sentiment'],
-                ]
-            );
-
-
             return false;
         }
-
 
         /*
         |--------------------------------------------------------------------------
@@ -2613,16 +2151,23 @@ PROMPT;
         $allowedCategories = [
 
             'Bitcoin',
+
             'Ethereum',
+
             'Regulation',
+
             'DeFi',
+
             'NFT',
+
             'Mining',
+
             'Market',
+
             'Security',
+
             'Blockchain',
         ];
-
 
         if (
             !in_array(
@@ -2632,79 +2177,37 @@ PROMPT;
             )
         ) {
 
-            Log::warning(
-                'AI validation failed',
-                [
-                    'reason' =>
-                        'invalid category',
-
-                    'value' =>
-                        $result['category'],
-                ]
-            );
-
-
             return false;
         }
 
-
         /*
         |--------------------------------------------------------------------------
-        | Impact Score
+        | Impact score
         |--------------------------------------------------------------------------
         */
 
         if (
             !is_int(
                 $result['impact_score']
-            )
-            &&
+            ) &&
             !is_numeric(
                 $result['impact_score']
             )
         ) {
 
-            Log::warning(
-                'AI validation failed',
-                [
-                    'reason' =>
-                        'impact_score is not numeric',
-
-                    'value' =>
-                        $result['impact_score'],
-                ]
-            );
-
-
             return false;
         }
 
-
         $impactScore =
-            (int)
-            $result['impact_score'];
-
+            (int) $result['impact_score'];
 
         if (
             $impactScore < 1 ||
             $impactScore > 10
         ) {
 
-            Log::warning(
-                'AI validation failed',
-                [
-                    'reason' =>
-                        'impact_score outside allowed range',
-
-                    'value' =>
-                        $impactScore,
-                ]
-            );
-
-
             return false;
         }
-
 
         /*
         |--------------------------------------------------------------------------
@@ -2718,78 +2221,42 @@ PROMPT;
             )
         ) {
 
-            Log::warning(
-                'AI validation failed',
-                [
-                    'reason' =>
-                        'keywords is not an array',
-                ]
-            );
-
-
             return false;
         }
-
 
         $keywordCount =
             count(
                 $result['keywords']
             );
 
-
         if (
             $keywordCount < 3 ||
             $keywordCount > 5
         ) {
 
-            Log::warning(
-                'AI validation failed',
-                [
-                    'reason' =>
-                        'invalid keyword count',
-
-                    'actual' =>
-                        $keywordCount,
-                ]
-            );
-
-
             return false;
         }
 
-
         foreach (
-            $result['keywords']
-            as $keyword
+            $result['keywords'] as $keyword
         ) {
 
             if (
                 !is_string(
                     $keyword
-                )
-                ||
+                ) ||
                 trim(
                     $keyword
                 ) === ''
             ) {
 
-                Log::warning(
-                    'AI validation failed',
-                    [
-                        'reason' =>
-                            'invalid keyword',
-                    ]
-                );
-
-
                 return false;
             }
         }
 
-
         /*
         |--------------------------------------------------------------------------
-        | Validation Passed
+        | Success
         |--------------------------------------------------------------------------
         */
 
@@ -2813,10 +2280,8 @@ PROMPT;
             ]
         );
 
-
         return true;
     }
-
 
     /*
     |--------------------------------------------------------------------------
@@ -2837,136 +2302,85 @@ PROMPT;
     ): bool {
 
         if (
-            mb_strlen(
-                trim($titleAr)
-            ) < 15
+            mb_strlen($titleAr) < 15 ||
+            mb_strlen($titleAr) > 180
         ) {
 
             return false;
         }
-
 
         if (
-            mb_strlen(
-                trim($titleAr)
-            ) > 180
+            mb_strlen($contentAr) <
+            self::MIN_ARTICLE_LENGTH
         ) {
 
             return false;
         }
-
-
-        /*
-        |--------------------------------------------------------------------------
-        | IMPORTANT:
-        |
-        | Same 400 character rule used everywhere.
-        |
-        */
 
         if (
-            mb_strlen(
-                trim($contentAr)
-            ) <
-            self::MIN_CONTENT_AR_LENGTH
+            mb_strlen($contentAr) >
+            self::MAX_ARTICLE_LENGTH
         ) {
 
             return false;
         }
-
 
         if (
-            mb_strlen(
-                trim($contentAr)
-            ) >
-            self::MAX_CONTENT_AR_LENGTH
+            mb_strlen($summaryAr) < 50
         ) {
 
             return false;
         }
-
 
         if (
-            mb_strlen(
-                trim($summaryAr)
-            ) < 50
+            mb_strlen($whyItMattersAr) < 100
         ) {
 
             return false;
         }
-
 
         if (
-            mb_strlen(
-                trim($whyItMattersAr)
-            ) < 100
+            mb_strlen($analysisAr) < 180
         ) {
 
             return false;
         }
-
 
         if (
-            mb_strlen(
-                trim($analysisAr)
-            ) < 180
+            mb_strlen($contextAr) < 100
         ) {
 
             return false;
         }
-
 
         if (
-            mb_strlen(
-                trim($contextAr)
-            ) < 100
+            mb_strlen($whatToWatchAr) < 80
         ) {
 
             return false;
         }
-
 
         if (
-            mb_strlen(
-                trim($whatToWatchAr)
-            ) < 80
+            mb_strlen($limitationsAr) < 50
         ) {
 
             return false;
         }
-
 
         if (
-            mb_strlen(
-                trim($limitationsAr)
-            ) < 50
+            mb_strlen($metaDescriptionAr) < 50 ||
+            mb_strlen($metaDescriptionAr) > 180
         ) {
 
             return false;
         }
-
-
-        if (
-            mb_strlen(
-                trim($metaDescriptionAr)
-            ) < 50
-            ||
-            mb_strlen(
-                trim($metaDescriptionAr)
-            ) > 180
-        ) {
-
-            return false;
-        }
-
 
         return true;
     }
 
-
     /*
     |--------------------------------------------------------------------------
-    | Build Slug
+    | Build Stable Slug
     |--------------------------------------------------------------------------
     */
 
@@ -2980,7 +2394,6 @@ PROMPT;
                 $title
             );
 
-
         if (
             $slug === ''
         ) {
@@ -2989,13 +2402,11 @@ PROMPT;
                 'news';
         }
 
-
         return
             $slug .
             '-' .
             $id;
     }
-
 
     /*
     |--------------------------------------------------------------------------
@@ -3036,7 +2447,6 @@ PROMPT;
             ->toArray();
     }
 
-
     /*
     |--------------------------------------------------------------------------
     | Normalize Sentiment
@@ -3047,29 +2457,18 @@ PROMPT;
         mixed $sentiment
     ): string {
 
-        $allowed = [
-
-            'Bullish',
-            'Bearish',
-            'Neutral',
-        ];
-
-
-        if (
-            in_array(
-                $sentiment,
-                $allowed,
-                true
-            )
-        ) {
-
-            return $sentiment;
-        }
-
-
-        return 'Neutral';
+        return in_array(
+            $sentiment,
+            [
+                'Bullish',
+                'Bearish',
+                'Neutral',
+            ],
+            true
+        )
+            ? $sentiment
+            : 'Neutral';
     }
-
 
     /*
     |--------------------------------------------------------------------------
@@ -3081,35 +2480,35 @@ PROMPT;
         mixed $category
     ): string {
 
-        $allowed = [
+        $allowedCategories = [
 
             'Bitcoin',
+
             'Ethereum',
+
             'Regulation',
+
             'DeFi',
+
             'NFT',
+
             'Mining',
+
             'Market',
+
             'Security',
+
             'Blockchain',
         ];
 
-
-        if (
-            in_array(
-                $category,
-                $allowed,
-                true
-            )
-        ) {
-
-            return $category;
-        }
-
-
-        return 'Market';
+        return in_array(
+            $category,
+            $allowedCategories,
+            true
+        )
+            ? $category
+            : 'Market';
     }
-
 
     /*
     |--------------------------------------------------------------------------
@@ -3129,7 +2528,6 @@ PROMPT;
 
             return 5;
         }
-
 
         return max(
             1,
