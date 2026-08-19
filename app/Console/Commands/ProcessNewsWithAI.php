@@ -1335,7 +1335,7 @@ PROMPT;
             trim($result['content_ar'])
         );
 
-        if ($contentLength < 600) {
+        if ($contentLength < 500) {
             return false;
         }
 
