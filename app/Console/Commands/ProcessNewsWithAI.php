@@ -131,7 +131,7 @@ class ProcessNewsWithAI extends Command
                     continue;
                 }
 
-                if (mb_strlen($content) < 200) {
+                if (mb_strlen($content) < 100) {
                     $this->warn(
                         "⚠️ Article {$news->id} is too short. Skipping."
                     );

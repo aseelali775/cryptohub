@@ -1,3 +1,4 @@
+```php
 <?php
 
 namespace App\Console\Commands;
@@ -7,17 +8,18 @@ use Illuminate\Console\Command;
 
 class AuditNews extends Command
 {
-protected $signature = 'news:audit
-                        {--limit=0 : Number of news to audit, 0 = all}
-                        {--show-ready : Show READY news}
-                        {--show-repair : Show REPAIR news}
-                        {--show-review : Show REVIEW news}
-                        {--show-delete : Show DELETE candidates}
-                        {--show-refetch : Show news that need content refetch}
-                        {--show-ai : Show news that need AI only}
-                        {--show-manual : Show news requiring manual review}
-                        {--show-duplicates : Show duplicate/similar groups}
-                        {--show-weak : Show news with quality score below 60}';
+    protected $signature = 'news:audit
+                            {--limit=0 : Number of news to audit, 0 = all}
+                            {--show-all : Show all detailed audit results}
+                            {--show-ready : Show READY news}
+                            {--show-repair : Show REPAIR news}
+                            {--show-review : Show REVIEW news}
+                            {--show-delete : Show DELETE candidates}
+                            {--show-refetch : Show news that need content refetch}
+                            {--show-ai : Show news that need AI only}
+                            {--show-manual : Show news requiring manual review}
+                            {--show-duplicates : Show duplicate/similar groups}
+                            {--show-weak : Show news with quality score below 60}';
 
     protected $description =
         'Professional read-only audit for news quality, completeness, AI readiness, duplicates and publication readiness';
@@ -39,7 +41,7 @@ protected $signature = 'news:audit
 
     /*
     |--------------------------------------------------------------------------
-    | Thresholds
+    | Content Thresholds
     |--------------------------------------------------------------------------
     */
 
@@ -49,14 +51,25 @@ protected $signature = 'news:audit
 
     private int $acceptableContent = 1500;
 
+    /*
+    |--------------------------------------------------------------------------
+    | Duplicate Thresholds
+    |--------------------------------------------------------------------------
+    */
+
+    private float $similarTitleThreshold = 85.0;
+
+    private float $highlySimilarTitleThreshold = 92.0;
+
+    /*
+    |--------------------------------------------------------------------------
+    | Main Handler
+    |--------------------------------------------------------------------------
+    */
+
     public function handle(): int
     {
-        $this->newLine();
-
-        $this->info('==============================================');
-        $this->info('        AQL CRYPTO NEWS QUALITY AUDIT');
-        $this->info('==============================================');
-        $this->newLine();
+        $this->printHeader();
 
         /*
          * =========================================================
@@ -114,11 +127,15 @@ protected $signature = 'news:audit
 
         /*
          * =========================================================
-         * General statistics
+         * Statistics
          * =========================================================
          */
 
         $total = $resultsCollection->count();
+
+        /*
+         * Status
+         */
 
         $ready = $resultsCollection
             ->where('status', 'READY')
@@ -133,114 +150,60 @@ protected $signature = 'news:audit
             ->count();
 
         $delete = $resultsCollection
-            ->where('status', 'DELETE')
+            ->where('status', 'DELETE_CANDIDATE')
             ->count();
 
         /*
-         * =========================================================
-         * Recommendation statistics
-         * =========================================================
+         * Recommendations
          */
 
-        $aiOnly = $resultsCollection
-            ->where('recommendation', 'AI_ONLY')
-            ->count();
+        $recommendationStats = [];
 
-        $refetch = $resultsCollection
-            ->where('recommendation', 'REFETCH')
-            ->count();
+        foreach ([
+            'AI_ONLY',
+            'REFETCH',
+            'REFETCH_OR_AI',
+            'MANUAL_REVIEW',
+            'METADATA_REPAIR',
+            'DELETE_OR_REFETCH',
+            'NONE',
+        ] as $recommendation) {
+            $recommendationStats[$recommendation] =
+                $resultsCollection
+                    ->where('recommendation', $recommendation)
+                    ->count();
+        }
 
-        $manualReview = $resultsCollection
-            ->where('recommendation', 'MANUAL_REVIEW')
-            ->count();
+        /*
+         * Duplicate statistics
+         */
 
-        $duplicateCount = $resultsCollection
+        $duplicateArticles = $resultsCollection
             ->filter(fn ($item) => $item['duplicate'])
             ->count();
 
+        $duplicateGroups = $this->countDuplicateGroups(
+            $duplicateMap
+        );
+
         /*
-         * =========================================================
          * AI statistics
-         * =========================================================
          */
 
         $aiProcessed = $news
-            ->where('ai_processed', true)
+            ->filter(fn ($item) => (bool) $item->ai_processed)
             ->count();
 
         $aiNotProcessed = $news
-            ->where('ai_processed', false)
+            ->filter(fn ($item) => !(bool) $item->ai_processed)
             ->count();
 
         /*
-         * =========================================================
-         * Missing fields
-         * =========================================================
-         */
-
-        $missing = [
-            'title_ar'          => 0,
-            'title_en'          => 0,
-            'content_ar'        => 0,
-            'content_en'        => 0,
-            'summary_ar'        => 0,
-            'why_it_matters_ar' => 0,
-            'analysis_ar'       => 0,
-            'context_ar'        => 0,
-            'what_to_watch_ar' => 0,
-            'limitations_ar'   => 0,
-            'source'            => 0,
-            'url'               => 0,
-            'image_url'         => 0,
-            'category'          => 0,
-        ];
-
-        foreach ($news as $item) {
-            foreach ($missing as $field => $count) {
-                if ($this->isEmpty($item->{$field})) {
-                    $missing[$field]++;
-                }
-            }
-        }
-
-        /*
-         * =========================================================
-         * Content statistics
-         * =========================================================
-         */
-
-        $contentStats = [
-            'empty'       => 0,
-            'very_short'  => 0,
-            'short'       => 0,
-            'acceptable'  => 0,
-            'strong'      => 0,
-        ];
-
-        foreach ($news as $item) {
-            $length = $this->originalContentLength($item);
-
-            if ($length === 0) {
-                $contentStats['empty']++;
-            } elseif ($length < $this->veryShortContent) {
-                $contentStats['very_short']++;
-            } elseif ($length < $this->shortContent) {
-                $contentStats['short']++;
-            } elseif ($length < $this->acceptableContent) {
-                $contentStats['acceptable']++;
-            } else {
-                $contentStats['strong']++;
-            }
-        }
-
-        /*
-         * =========================================================
          * Quality statistics
-         * =========================================================
          */
 
         $averageScore = round(
-            $resultsCollection->avg('quality_score'),
+            (float) $resultsCollection->avg('quality_score'),
             1
         );
 
@@ -272,231 +235,139 @@ protected $signature = 'news:audit
             ->count();
 
         /*
+         * Missing fields
+         */
+
+        $missing = $this->calculateMissingFields($news);
+
+        /*
+         * Content statistics
+         */
+
+        $contentStats = $this->calculateContentStatistics($news);
+
+        /*
          * =========================================================
          * Report
          * =========================================================
          */
 
-        $this->info('----------------------------------------------');
-        $this->info('GENERAL STATISTICS');
-        $this->info('----------------------------------------------');
-
-        $this->line(
-            "Total news:              {$total}"
+        $this->displayGeneralStatistics(
+            $total,
+            $aiProcessed,
+            $aiNotProcessed,
+            $averageScore
         );
 
-        $this->line(
-            "AI processed:            {$aiProcessed}"
+        $this->displayClassificationStatistics(
+            $ready,
+            $repair,
+            $review,
+            $delete
         );
 
-        $this->line(
-            "AI not processed:        {$aiNotProcessed}"
+        $this->displayQualityStatistics(
+            $excellent,
+            $good,
+            $medium,
+            $weak
         );
 
-        $this->line(
-            "Average quality score:   {$averageScore}/100"
+        $this->displayRecommendationStatistics(
+            $recommendationStats,
+            $duplicateArticles
         );
 
-        $this->newLine();
+        $this->displayMissingFields(
+            $missing
+        );
+
+        $this->displayContentStatistics(
+            $contentStats
+        );
+
+        $this->displayDuplicateStatistics(
+            $duplicateGroups,
+            $duplicateArticles
+        );
 
         /*
          * =========================================================
-         * Classification
+         * Detailed Results
          * =========================================================
          */
 
-        $this->info('QUALITY CLASSIFICATION');
-
-        $this->line(
-            "🟢 READY:                 {$ready}"
-        );
-
-        $this->line(
-            "🟡 REPAIR:                {$repair}"
-        );
-
-        $this->line(
-            "🟠 REVIEW:                {$review}"
-        );
-
-        $this->line(
-            "🔴 DELETE CANDIDATE:      {$delete}"
-        );
-
-        $this->newLine();
-
-        /*
-         * =========================================================
-         * Quality score
-         * =========================================================
-         */
-
-        $this->info('QUALITY SCORE');
-
-        $this->line(
-            "🟢 Excellent (90-100):    {$excellent}"
-        );
-
-        $this->line(
-            "🟢 Good (75-89):          {$good}"
-        );
-
-        $this->line(
-            "🟡 Medium (60-74):        {$medium}"
-        );
-
-        $this->line(
-            "🔴 Weak (<60):            {$weak}"
-        );
-
-        $this->newLine();
-
-        /*
-         * =========================================================
-         * Action recommendations
-         * =========================================================
-         */
-
-        $this->info('RECOMMENDED ACTIONS');
-
-        $this->line(
-            "🤖 AI ONLY:               {$aiOnly}"
-        );
-
-        $this->line(
-            "🔄 REFETCH CONTENT:       {$refetch}"
-        );
-
-        $this->line(
-            "👁 MANUAL REVIEW:         {$manualReview}"
-        );
-
-        $this->line(
-            "🔁 DUPLICATE/SIMILAR:     {$duplicateCount}"
-        );
-
-        $this->newLine();
-
-        /*
-         * =========================================================
-         * Missing fields
-         * =========================================================
-         */
-
-        $this->info('----------------------------------------------');
-        $this->info('MISSING FIELDS');
-        $this->info('----------------------------------------------');
-
-        foreach ($missing as $field => $count) {
-            $this->line(
-                str_pad($field, 24) . ': ' . $count
-            );
-        }
-
-        $this->newLine();
-
-        /*
-         * =========================================================
-         * Original content
-         * =========================================================
-         */
-
-        $this->info('----------------------------------------------');
-        $this->info('ORIGINAL CONTENT LENGTH');
-        $this->info('----------------------------------------------');
-
-        $this->line(
-            "Empty:                   {$contentStats['empty']}"
-        );
-
-        $this->line(
-            "Very short (<300):       {$contentStats['very_short']}"
-        );
-
-        $this->line(
-            "Short (300-699):         {$contentStats['short']}"
-        );
-
-        $this->line(
-            "Acceptable (700-1499):   {$contentStats['acceptable']}"
-        );
-
-        $this->line(
-            "Strong (1500+):          {$contentStats['strong']}"
-        );
-
-        $this->newLine();
-
-        /*
-         * =========================================================
-         * Duplicate statistics
-         * =========================================================
-         */
-
-        $this->info('----------------------------------------------');
-        $this->info('DUPLICATE ANALYSIS');
-        $this->info('----------------------------------------------');
-
-        $duplicateGroups = collect($duplicateMap)
-            ->filter(
-                fn ($ids) => count($ids) > 1
-            )
-            ->count();
-
-        $this->line(
-            "Duplicate/similar groups: {$duplicateGroups}"
-        );
-
-        $this->line(
-            "Articles affected:        {$duplicateCount}"
-        );
-
-        $this->newLine();
-
-        /*
-         * =========================================================
-         * Detailed lists
-         * =========================================================
-         */
+        $showAll = (bool) $this->option('show-all');
 
         $this->displayResults(
             $results,
             'READY',
             '🟢 READY',
-            $this->option('show-ready') || $this->option('show-all')
+            $showAll || $this->option('show-ready')
         );
 
         $this->displayResults(
             $results,
             'REPAIR',
             '🟡 REPAIR',
-            $this->option('show-repair') || $this->option('show-all')
+            $showAll || $this->option('show-repair')
         );
 
         $this->displayResults(
             $results,
             'REVIEW',
             '🟠 REVIEW',
-            $this->option('show-review') || $this->option('show-all')
+            $showAll || $this->option('show-review')
         );
 
         $this->displayResults(
             $results,
-            'DELETE',
+            'DELETE_CANDIDATE',
             '🔴 DELETE CANDIDATE',
-            $this->option('show-delete') || $this->option('show-all')
+            $showAll || $this->option('show-delete')
         );
 
         /*
          * =========================================================
-         * Duplicate groups
+         * Recommendation Details
          * =========================================================
          */
 
-        if (
-            $this->option('show-duplicates') ||
-            $this->option('show-all')
-        ) {
+        if ($showAll || $this->option('show-ai')) {
+            $this->displayRecommendationResults(
+                $results,
+                'AI_ONLY',
+                '🤖 AI ONLY'
+            );
+        }
+
+        if ($showAll || $this->option('show-refetch')) {
+            $this->displayRefetchResults(
+                $results
+            );
+        }
+
+        if ($showAll || $this->option('show-manual')) {
+            $this->displayRecommendationResults(
+                $results,
+                'MANUAL_REVIEW',
+                '👁 MANUAL REVIEW'
+            );
+        }
+
+        if ($showAll || $this->option('show-weak')) {
+            $this->displayWeakResults(
+                $results
+            );
+        }
+
+        /*
+         * =========================================================
+         * Duplicate Groups
+         * =========================================================
+         */
+
+        if ($showAll || $this->option('show-duplicates')) {
             $this->displayDuplicateGroups(
                 $news,
                 $duplicateMap
@@ -505,48 +376,54 @@ protected $signature = 'news:audit
 
         /*
          * =========================================================
-         * Final summary
+         * Final Summary
          * =========================================================
          */
 
-        $this->info('==============================================');
-        $this->info('AUDIT COMPLETED');
-        $this->info('==============================================');
-
-        $this->line(
-            "Total:       {$total}"
+        $this->displayFinalSummary(
+            $total,
+            $ready,
+            $repair,
+            $review,
+            $delete,
+            $averageScore
         );
-
-        $this->line(
-            "🟢 Ready:    {$ready}"
-        );
-
-        $this->line(
-            "🟡 Repair:   {$repair}"
-        );
-
-        $this->line(
-            "🟠 Review:   {$review}"
-        );
-
-        $this->line(
-            "🔴 Delete:   {$delete}"
-        );
-
-        $this->newLine();
-
-        $this->comment(
-            'No database records were modified or deleted.'
-        );
-
-        $this->newLine();
 
         return self::SUCCESS;
     }
 
     /*
     |--------------------------------------------------------------------------
-    | Audit one article
+    | Header
+    |--------------------------------------------------------------------------
+    */
+
+    private function printHeader(): void
+    {
+        $this->newLine();
+
+        $this->info(
+            '=============================================='
+        );
+
+        $this->info(
+            '        AQL CRYPTO NEWS QUALITY AUDIT'
+        );
+
+        $this->info(
+            '=============================================='
+        );
+
+        $this->comment(
+            'READ ONLY - No database records will be modified.'
+        );
+
+        $this->newLine();
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Audit One Article
     |--------------------------------------------------------------------------
     */
 
@@ -554,7 +431,6 @@ protected $signature = 'news:audit
         News $item,
         array $duplicateMap
     ): array {
-
         $issues = [];
 
         /*
@@ -563,8 +439,13 @@ protected $signature = 'news:audit
          * =========================================================
          */
 
-        $titleEnMissing = $this->isEmpty($item->title_en);
-        $titleArMissing = $this->isEmpty($item->title_ar);
+        $titleEnMissing = $this->isEmpty(
+            $item->title_en
+        );
+
+        $titleArMissing = $this->isEmpty(
+            $item->title_ar
+        );
 
         if ($titleEnMissing) {
             $issues[] = 'missing title_en';
@@ -576,7 +457,7 @@ protected $signature = 'news:audit
 
         /*
          * =========================================================
-         * Original content
+         * Original Content
          * =========================================================
          */
 
@@ -588,12 +469,12 @@ protected $signature = 'news:audit
             trim((string) $item->content_ar)
         );
 
-        $originalContentLength = $contentEnLength;
-
         /*
-         * إذا لم يوجد الإنجليزي،
-         * نستخدم العربي كبديل لحساب المحتوى.
+         * English is treated as the preferred original source.
+         * Arabic is only a fallback for length assessment.
          */
+
+        $originalContentLength = $contentEnLength;
 
         if ($originalContentLength === 0) {
             $originalContentLength = $contentArLength;
@@ -608,26 +489,24 @@ protected $signature = 'news:audit
         }
 
         /*
-         * المحتوى الأصلي قصير
+         * Content quality
          */
 
         if (
             $originalContentLength > 0 &&
             $originalContentLength < $this->veryShortContent
         ) {
-            $issues[] =
-                'original content very short';
+            $issues[] = 'original content very short';
         } elseif (
             $originalContentLength > 0 &&
             $originalContentLength < $this->shortContent
         ) {
-            $issues[] =
-                'original content short';
+            $issues[] = 'original content short';
         }
 
         /*
          * =========================================================
-         * AI fields
+         * AI Fields
          * =========================================================
          */
 
@@ -645,18 +524,31 @@ protected $signature = 'news:audit
                 implode(', ', $missingAiFields);
         }
 
-        if (!$item->ai_processed) {
+        if (!(bool) $item->ai_processed) {
             $issues[] = 'ai not processed';
         }
 
         /*
          * =========================================================
-         * Source
+         * Metadata
          * =========================================================
          */
 
-        $missingUrl = $this->isEmpty($item->url);
-        $missingSource = $this->isEmpty($item->source);
+        $missingUrl = $this->isEmpty(
+            $item->url
+        );
+
+        $missingSource = $this->isEmpty(
+            $item->source
+        );
+
+        $missingCategory = $this->isEmpty(
+            $item->category
+        );
+
+        $missingImage = $this->isEmpty(
+            $item->image_url
+        );
 
         if ($missingSource) {
             $issues[] = 'missing source';
@@ -666,53 +558,12 @@ protected $signature = 'news:audit
             $issues[] = 'missing source URL';
         }
 
-        /*
-         * =========================================================
-         * Category
-         * =========================================================
-         */
-
-        $missingCategory = $this->isEmpty(
-            $item->category
-        );
-
         if ($missingCategory) {
             $issues[] = 'missing category';
         }
 
-        /*
-         * =========================================================
-         * Image
-         * =========================================================
-         */
-
-        $missingImage = $this->isEmpty(
-            $item->image_url
-        );
-
         if ($missingImage) {
             $issues[] = 'missing image';
-        }
-
-        /*
-         * =========================================================
-         * AI + weak original content
-         * =========================================================
-         */
-
-        $aiPresent = (bool) $item->ai_processed;
-
-        $originalWeak =
-            $originalContentLength > 0 &&
-            $originalContentLength < $this->veryShortContent;
-
-        $originalShort =
-            $originalContentLength >= $this->veryShortContent &&
-            $originalContentLength < $this->shortContent;
-
-        if ($aiPresent && $originalWeak) {
-            $issues[] =
-                'AI exists but original source material is weak';
         }
 
         /*
@@ -724,34 +575,41 @@ protected $signature = 'news:audit
         $duplicate = false;
         $duplicateOf = [];
 
-        foreach ($duplicateMap as $group) {
+        if (
+            isset($duplicateMap[$item->id]) &&
+            count($duplicateMap[$item->id]) > 1
+        ) {
+            $duplicate = true;
 
-            if (
-                count($group) > 1 &&
-                in_array($item->id, $group, true)
-            ) {
+            $duplicateOf = array_values(
+                array_filter(
+                    $duplicateMap[$item->id],
+                    fn ($id) => $id !== $item->id
+                )
+            );
 
-                $duplicate = true;
-
-                $duplicateOf = array_values(
-                    array_filter(
-                        $group,
-                        fn ($id) => $id !== $item->id
-                    )
-                );
-
-                break;
-            }
-        }
-
-        if ($duplicate) {
             $issues[] =
                 'possible duplicate or very similar article';
         }
 
         /*
          * =========================================================
-         * Quality score
+         * AI + Weak Content
+         * =========================================================
+         */
+
+        if (
+            (bool) $item->ai_processed &&
+            $originalContentLength > 0 &&
+            $originalContentLength < $this->veryShortContent
+        ) {
+            $issues[] =
+                'AI exists but original source material is weak';
+        }
+
+        /*
+         * =========================================================
+         * Quality Score
          * =========================================================
          */
 
@@ -768,13 +626,12 @@ protected $signature = 'news:audit
          * =========================================================
          */
 
-        $recommendation =
-            $this->determineRecommendation(
-                $item,
-                $originalContentLength,
-                $missingAiFields,
-                $duplicate
-            );
+        $recommendation = $this->determineRecommendation(
+            $item,
+            $originalContentLength,
+            $missingAiFields,
+            $duplicate
+        );
 
         /*
          * =========================================================
@@ -782,19 +639,18 @@ protected $signature = 'news:audit
          * =========================================================
          */
 
-        $status =
-            $this->determineStatus(
-                $item,
-                $originalContentLength,
-                $missingAiFields,
-                $duplicate,
-                $score,
-                $recommendation
-            );
+        $status = $this->determineStatus(
+            $item,
+            $originalContentLength,
+            $missingAiFields,
+            $duplicate,
+            $score,
+            $recommendation
+        );
 
         /*
          * =========================================================
-         * Detailed diagnosis
+         * Diagnosis
          * =========================================================
          */
 
@@ -804,7 +660,8 @@ protected $signature = 'news:audit
             $missingAiFields,
             $duplicate,
             $missingUrl,
-            $missingCategory
+            $missingCategory,
+            $missingSource
         );
 
         return [
@@ -837,7 +694,7 @@ protected $signature = 'news:audit
                 $contentEnLength,
 
             'ai_processed' =>
-                $aiPresent,
+                (bool) $item->ai_processed,
 
             'source' =>
                 $item->source,
@@ -858,8 +715,20 @@ protected $signature = 'news:audit
 
     /*
     |--------------------------------------------------------------------------
-    | Quality score
+    | Quality Score
     |--------------------------------------------------------------------------
+    |
+    | Score is intentionally based on several independent dimensions.
+    |
+    | Content          30
+    | Arabic           10
+    | Metadata         15
+    | AI               20
+    | Source integrity 15
+    | Duplicate risk   10
+    | --------------------
+    | Total            100
+    |
     */
 
     private function calculateQualityScore(
@@ -868,94 +737,112 @@ protected $signature = 'news:audit
         array $missingAiFields,
         bool $duplicate
     ): int {
-
-        $score = 100;
+        $score = 0;
 
         /*
-         * Original content
+         * =========================================================
+         * Original Content - 30 points
+         * =========================================================
          */
 
-        if ($contentLength === 0) {
-            $score -= 40;
-        } elseif ($contentLength < 300) {
-            $score -= 30;
-        } elseif ($contentLength < 700) {
-            $score -= 18;
-        } elseif ($contentLength < 1500) {
-            $score -= 5;
+        if ($contentLength >= $this->acceptableContent) {
+            $score += 30;
+        } elseif ($contentLength >= $this->shortContent) {
+            $score += 24;
+        } elseif ($contentLength >= $this->veryShortContent) {
+            $score += 15;
+        } elseif ($contentLength > 0) {
+            $score += 5;
         }
 
         /*
-         * Arabic content
+         * =========================================================
+         * Arabic Localization - 10 points
+         * =========================================================
          */
 
-        if ($this->isEmpty($item->content_ar)) {
-            $score -= 10;
+        if (!$this->isEmpty($item->content_ar)) {
+            $score += 5;
+        }
+
+        if (!$this->isEmpty($item->title_ar)) {
+            $score += 5;
         }
 
         /*
-         * Arabic title
+         * =========================================================
+         * Metadata - 15 points
+         * =========================================================
          */
 
-        if ($this->isEmpty($item->title_ar)) {
-            $score -= 5;
+        if (!$this->isEmpty($item->url)) {
+            $score += 4;
+        }
+
+        if (!$this->isEmpty($item->category)) {
+            $score += 4;
+        }
+
+        if (!$this->isEmpty($item->source)) {
+            $score += 4;
+        }
+
+        if (!$this->isEmpty($item->image_url)) {
+            $score += 3;
         }
 
         /*
-         * AI
+         * =========================================================
+         * AI Processing - 20 points
+         * =========================================================
          */
 
-        if (!$item->ai_processed) {
-            $score -= 10;
+        if ((bool) $item->ai_processed) {
+            $score += 8;
+        }
+
+        $totalAiFields = count($this->aiFields);
+
+        $completedAiFields =
+            $totalAiFields -
+            count($missingAiFields);
+
+        if ($totalAiFields > 0) {
+            $score += (int) round(
+                ($completedAiFields / $totalAiFields) * 12
+            );
         }
 
         /*
-         * Missing AI fields
+         * =========================================================
+         * Source Integrity - 15 points
+         * =========================================================
          */
 
-        $score -= min(
-            count($missingAiFields) * 4,
-            24
-        );
+        if (!$this->isEmpty($item->title_en)) {
+            $score += 3;
+        }
 
-        /*
-         * Source URL
-         */
+        if (!$this->isEmpty($item->content_en)) {
+            $score += 5;
+        }
 
-        if ($this->isEmpty($item->url)) {
-            $score -= 5;
+        if (!$this->isEmpty($item->source)) {
+            $score += 3;
+        }
+
+        if (!$this->isEmpty($item->url)) {
+            $score += 4;
         }
 
         /*
-         * Category
+         * =========================================================
+         * Duplicate Risk - 10 points
+         * =========================================================
          */
 
-        if ($this->isEmpty($item->category)) {
-            $score -= 4;
-        }
-
-        /*
-         * Source
-         */
-
-        if ($this->isEmpty($item->source)) {
-            $score -= 3;
-        }
-
-        /*
-         * Image
-         */
-
-        if ($this->isEmpty($item->image_url)) {
-            $score -= 3;
-        }
-
-        /*
-         * Duplicate
-         */
-
-        if ($duplicate) {
-            $score -= 20;
+        if (!$duplicate) {
+            $score += 10;
         }
 
         return max(
@@ -976,9 +863,11 @@ protected $signature = 'news:audit
         array $missingAiFields,
         bool $duplicate
     ): string {
-
         /*
-         * لا محتوى أصلي
+         * No usable content.
+         *
+         * Do NOT immediately delete.
+         * First attempt a refetch.
          */
 
         if ($contentLength === 0) {
@@ -986,7 +875,9 @@ protected $signature = 'news:audit
         }
 
         /*
-         * تكرار محتمل
+         * Possible duplicate.
+         *
+         * Never automatically delete.
          */
 
         if ($duplicate) {
@@ -994,36 +885,35 @@ protected $signature = 'news:audit
         }
 
         /*
-         * محتوى ضعيف جداً
+         * Very weak original source.
          *
-         * هنا AI وحده لا يكفي.
-         * الأفضل إعادة جلب المصدر.
+         * AI cannot reliably reconstruct a missing article.
          */
 
-        if ($contentLength < 300) {
+        if ($contentLength < $this->veryShortContent) {
             return 'REFETCH';
         }
 
         /*
-         * محتوى قصير
+         * Short article.
          *
-         * قد يكون خبراً قصيراً حقيقياً.
-         * نحتاج مراجعة قبل الحذف.
+         * Could be a legitimate short breaking-news article.
          */
 
-        if ($contentLength < 700) {
-
+        if ($contentLength < $this->shortContent) {
             if (!empty($missingAiFields)) {
                 return 'REFETCH_OR_AI';
+            }
+
+            if (!(bool) $item->ai_processed) {
+                return 'AI_ONLY';
             }
 
             return 'MANUAL_REVIEW';
         }
 
         /*
-         * محتوى جيد + AI ناقص
-         *
-         * المشكلة في AI فقط.
+         * Good original content + missing AI.
          */
 
         if (!empty($missingAiFields)) {
@@ -1031,15 +921,15 @@ protected $signature = 'news:audit
         }
 
         /*
-         * AI غير منفذ
+         * AI flag is false.
          */
 
-        if (!$item->ai_processed) {
+        if (!(bool) $item->ai_processed) {
             return 'AI_ONLY';
         }
 
         /*
-         * مشاكل metadata
+         * Metadata repair.
          */
 
         if (
@@ -1067,25 +957,25 @@ protected $signature = 'news:audit
         int $score,
         string $recommendation
     ): string {
-
         /*
-         * لا يوجد أي محتوى.
+         * Completely empty article:
+         * mark as DELETE CANDIDATE, not DELETE.
          */
 
         if ($contentLength === 0) {
-            return 'DELETE';
+            return 'DELETE_CANDIDATE';
         }
 
         /*
-         * محتوى ضعيف جداً.
+         * Very short source.
          */
 
-        if ($contentLength < 300) {
+        if ($contentLength < $this->veryShortContent) {
             return 'REVIEW';
         }
 
         /*
-         * Duplicate
+         * Duplicate.
          */
 
         if ($duplicate) {
@@ -1093,7 +983,7 @@ protected $signature = 'news:audit
         }
 
         /*
-         * Score ضعيف.
+         * Weak score.
          */
 
         if ($score < 50) {
@@ -1101,20 +991,20 @@ protected $signature = 'news:audit
         }
 
         /*
-         * محتوى قصير.
+         * Short content.
          */
 
-        if ($contentLength < 700) {
+        if ($contentLength < $this->shortContent) {
             return 'REVIEW';
         }
 
         /*
-         * أي نقص قابل للإصلاح.
+         * Anything that can be repaired.
          */
 
         if (
             !empty($missingAiFields) ||
-            !$item->ai_processed ||
+            !(bool) $item->ai_processed ||
             $this->isEmpty($item->title_ar) ||
             $this->isEmpty($item->category) ||
             $this->isEmpty($item->url)
@@ -1123,7 +1013,7 @@ protected $signature = 'news:audit
         }
 
         /*
-         * Score جيد
+         * High-quality article.
          */
 
         if ($score >= 75) {
@@ -1145,23 +1035,23 @@ protected $signature = 'news:audit
         array $missingAiFields,
         bool $duplicate,
         bool $missingUrl,
-        bool $missingCategory
+        bool $missingCategory,
+        bool $missingSource
     ): string {
-
         if ($contentLength === 0) {
-            return 'No usable original article content.';
+            return 'No usable original article content. Refetch should be attempted before deletion.';
         }
 
         if ($duplicate) {
-            return 'Possible duplicate or highly similar article.';
+            return 'Possible duplicate or highly similar article. Manual review is required.';
         }
 
-        if ($contentLength < 300) {
-            return 'Original source material is too short; refetch is recommended.';
+        if ($contentLength < $this->veryShortContent) {
+            return 'Original source material is too short; content refetch is recommended.';
         }
 
         if (
-            $contentLength < 700 &&
+            $contentLength < $this->shortContent &&
             !empty($missingAiFields)
         ) {
             return 'Original article is short and AI fields are incomplete.';
@@ -1171,7 +1061,7 @@ protected $signature = 'news:audit
             return 'Original article is usable; AI enrichment is incomplete.';
         }
 
-        if (!$item->ai_processed) {
+        if (!(bool) $item->ai_processed) {
             return 'Article content is usable but AI processing is missing.';
         }
 
@@ -1183,23 +1073,32 @@ protected $signature = 'news:audit
             return 'Article is usable but category is missing.';
         }
 
+        if ($missingSource) {
+            return 'Article is usable but source metadata is missing.';
+        }
+
         return 'Article appears complete.';
     }
 
     /*
     |--------------------------------------------------------------------------
-    | Duplicate detection
+    | Duplicate Detection
     |--------------------------------------------------------------------------
     */
 
     private function detectDuplicates($news): array
     {
-        $groups = [];
+        /*
+         * The returned structure is:
+         *
+         * [
+         *     articleId => [articleId, relatedId, relatedId]
+         * ]
+         */
 
         $normalizedTitles = [];
 
         foreach ($news as $item) {
-
             $title =
                 $item->title_en
                 ?: $item->title_ar
@@ -1211,112 +1110,171 @@ protected $signature = 'news:audit
 
         /*
          * =========================================================
-         * Exact normalized title
+         * Exact normalized titles
          * =========================================================
          */
 
-        foreach ($normalizedTitles as $id => $title) {
+        $exactGroups = [];
 
+        foreach ($normalizedTitles as $id => $title) {
             if ($title === '') {
                 continue;
             }
 
-            $groups[$title][] = $id;
+            $exactGroups[$title][] = $id;
         }
 
         /*
          * =========================================================
-         * Similar titles
+         * Candidate buckets
          * =========================================================
+         *
+         * Instead of comparing every article with every article,
+         * we create buckets from significant words.
+         *
+         * This dramatically reduces comparisons for large datasets.
          */
 
-        $ids = array_keys($normalizedTitles);
+        $buckets = [];
 
-        $similarGroups = [];
-
-        $count = count($ids);
-
-        for ($i = 0; $i < $count; $i++) {
-
-            $idA = $ids[$i];
-
-            $titleA =
-                $normalizedTitles[$idA];
-
-            if ($titleA === '') {
+        foreach ($normalizedTitles as $id => $title) {
+            if ($title === '') {
                 continue;
             }
 
-            for ($j = $i + 1; $j < $count; $j++) {
+            $words = $this->significantWords($title);
 
-                $idB = $ids[$j];
+            /*
+             * If there are not enough words, skip similarity matching.
+             */
 
-                $titleB =
-                    $normalizedTitles[$idB];
-
-                if ($titleB === '') {
-                    continue;
-                }
-
-                /*
-                 * إذا كان أحد العنوانين قصيراً جداً
-                 * لا نعتمد التشابه وحده.
-                 */
-
-                if (
-                    mb_strlen($titleA) < 20 ||
-                    mb_strlen($titleB) < 20
-                ) {
-                    continue;
-                }
-
-                similar_text(
-                    $titleA,
-                    $titleB,
-                    $percent
-                );
-
-                /*
-                 * 85% أو أكثر = شبه مكرر
-                 */
-
-                if ($percent >= 85) {
-
-                    $similarGroups[] = [
-                        $idA,
-                        $idB,
-                    ];
-                }
+            if (count($words) < 2) {
+                continue;
             }
+
+            /*
+             * Use the first two significant words as a candidate key.
+             */
+
+            $key = implode(
+                '|',
+                array_slice($words, 0, 2)
+            );
+
+            $buckets[$key][] = $id;
         }
 
         /*
          * =========================================================
-         * Merge groups
+         * Similar title groups
          * =========================================================
          */
 
-        $allGroups = [];
+        $similarPairs = [];
 
-        foreach ($groups as $group) {
+        foreach ($buckets as $candidateIds) {
+            $count = count($candidateIds);
 
-            if (count($group) > 1) {
-                $allGroups[] = $group;
+            if ($count < 2) {
+                continue;
+            }
+
+            for ($i = 0; $i < $count; $i++) {
+                $idA = $candidateIds[$i];
+
+                $titleA = $normalizedTitles[$idA];
+
+                if ($titleA === '') {
+                    continue;
+                }
+
+                for ($j = $i + 1; $j < $count; $j++) {
+                    $idB = $candidateIds[$j];
+
+                    $titleB =
+                        $normalizedTitles[$idB];
+
+                    if ($titleB === '') {
+                        continue;
+                    }
+
+                    /*
+                     * Avoid duplicate comparison.
+                     */
+
+                    if ($titleA === $titleB) {
+                        continue;
+                    }
+
+                    /*
+                     * Very short titles are unreliable.
+                     */
+
+                    if (
+                        mb_strlen($titleA) < 20 ||
+                        mb_strlen($titleB) < 20
+                    ) {
+                        continue;
+                    }
+
+                    similar_text(
+                        $titleA,
+                        $titleB,
+                        $percent
+                    );
+
+                    if (
+                        $percent >=
+                        $this->similarTitleThreshold
+                    ) {
+                        $similarPairs[] = [
+                            $idA,
+                            $idB,
+                            $percent,
+                        ];
+                    }
+                }
             }
         }
 
-        foreach ($similarGroups as $pair) {
-            $allGroups[] = $pair;
+        /*
+         * =========================================================
+         * Build raw groups
+         * =========================================================
+         */
+
+        $rawGroups = [];
+
+        /*
+         * Exact groups.
+         */
+
+        foreach ($exactGroups as $group) {
+            if (count($group) > 1) {
+                $rawGroups[] = $group;
+            }
         }
 
         /*
-         * دمج المجموعات المتداخلة
+         * Similar groups.
+         */
+
+        foreach ($similarPairs as $pair) {
+            $rawGroups[] = [
+                $pair[0],
+                $pair[1],
+            ];
+        }
+
+        /*
+         * =========================================================
+         * Merge overlapping groups
+         * =========================================================
          */
 
         $merged = [];
 
-        foreach ($allGroups as $group) {
-
+        foreach ($rawGroups as $group) {
             $group = array_values(
                 array_unique($group)
             );
@@ -1324,7 +1282,6 @@ protected $signature = 'news:audit
             $mergedIntoExisting = false;
 
             foreach ($merged as &$existing) {
-
                 if (
                     count(
                         array_intersect(
@@ -1333,7 +1290,6 @@ protected $signature = 'news:audit
                         )
                     ) > 0
                 ) {
-
                     $existing = array_values(
                         array_unique(
                             array_merge(
@@ -1358,20 +1314,21 @@ protected $signature = 'news:audit
 
         /*
          * =========================================================
-         * Return map
+         * Build article => group map
          * =========================================================
          */
 
         $map = [];
 
         foreach ($merged as $group) {
-
             if (count($group) < 2) {
                 continue;
             }
 
+            sort($group);
+
             foreach ($group as $id) {
-                $map[] = $group;
+                $map[$id] = $group;
             }
         }
 
@@ -1380,7 +1337,86 @@ protected $signature = 'news:audit
 
     /*
     |--------------------------------------------------------------------------
-    | Normalize text
+    | Significant Words
+    |--------------------------------------------------------------------------
+    */
+
+    private function significantWords(string $text): array
+    {
+        $words = preg_split(
+            '/\s+/u',
+            trim($text)
+        );
+
+        $stopWords = [
+            'the',
+            'a',
+            'an',
+            'and',
+            'or',
+            'of',
+            'to',
+            'in',
+            'on',
+            'for',
+            'with',
+            'after',
+            'before',
+            'from',
+            'by',
+            'is',
+            'are',
+            'was',
+            'were',
+
+            'من',
+            'في',
+            'من',
+            'إلى',
+            'الى',
+            'على',
+            'عن',
+            'مع',
+            'بعد',
+            'قبل',
+            'هذا',
+            'هذه',
+            'ذلك',
+            'تلك',
+            'و',
+            'أو',
+            'او',
+        ];
+
+        $words = array_filter(
+            $words,
+            function ($word) use ($stopWords) {
+                $word = trim($word);
+
+                if ($word === '') {
+                    return false;
+                }
+
+                if (mb_strlen($word) < 3) {
+                    return false;
+                }
+
+                return !in_array(
+                    $word,
+                    $stopWords,
+                    true
+                );
+            }
+        );
+
+        return array_values(
+            array_unique($words)
+        );
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Normalize Text
     |--------------------------------------------------------------------------
     */
 
@@ -1393,7 +1429,38 @@ protected $signature = 'news:audit
         $text = mb_strtolower($text);
 
         /*
-         * إزالة علامات الترقيم
+         * Arabic normalization.
+         */
+
+        $text = str_replace(
+            [
+                'أ',
+                'إ',
+                'آ',
+                'ٱ',
+            ],
+            'ا',
+            $text
+        );
+
+        $text = str_replace(
+            [
+                'ى',
+            ],
+            'ي',
+            $text
+        );
+
+        $text = str_replace(
+            [
+                'ة',
+            ],
+            'ه',
+            $text
+        );
+
+        /*
+         * Remove punctuation.
          */
 
         $text = preg_replace(
@@ -1403,7 +1470,7 @@ protected $signature = 'news:audit
         );
 
         /*
-         * توحيد المسافات
+         * Normalize whitespace.
          */
 
         $text = preg_replace(
@@ -1417,7 +1484,100 @@ protected $signature = 'news:audit
 
     /*
     |--------------------------------------------------------------------------
-    | Empty check
+    | Missing Fields
+    |--------------------------------------------------------------------------
+    */
+
+    private function calculateMissingFields($news): array
+    {
+        $missing = [
+            'title_ar'          => 0,
+            'title_en'          => 0,
+            'content_ar'        => 0,
+            'content_en'        => 0,
+            'summary_ar'        => 0,
+            'why_it_matters_ar' => 0,
+            'analysis_ar'       => 0,
+            'context_ar'        => 0,
+            'what_to_watch_ar'  => 0,
+            'limitations_ar'    => 0,
+            'source'            => 0,
+            'url'               => 0,
+            'image_url'         => 0,
+            'category'          => 0,
+        ];
+
+        foreach ($news as $item) {
+            foreach ($missing as $field => $count) {
+                if ($this->isEmpty($item->{$field})) {
+                    $missing[$field]++;
+                }
+            }
+        }
+
+        return $missing;
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Content Statistics
+    |--------------------------------------------------------------------------
+    */
+
+    private function calculateContentStatistics($news): array
+    {
+        $stats = [
+            'empty'       => 0,
+            'very_short'  => 0,
+            'short'       => 0,
+            'acceptable'  => 0,
+            'strong'      => 0,
+        ];
+
+        foreach ($news as $item) {
+            $length = $this->originalContentLength($item);
+
+            if ($length === 0) {
+                $stats['empty']++;
+            } elseif ($length < $this->veryShortContent) {
+                $stats['very_short']++;
+            } elseif ($length < $this->shortContent) {
+                $stats['short']++;
+            } elseif ($length < $this->acceptableContent) {
+                $stats['acceptable']++;
+            } else {
+                $stats['strong']++;
+            }
+        }
+
+        return $stats;
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Original Content Length
+    |--------------------------------------------------------------------------
+    */
+
+    private function originalContentLength(
+        News $item
+    ): int {
+        $en = mb_strlen(
+            trim((string) $item->content_en)
+        );
+
+        if ($en > 0) {
+            return $en;
+        }
+
+        return mb_strlen(
+            trim((string) $item->content_ar)
+        );
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Empty Check
     |--------------------------------------------------------------------------
     */
 
@@ -1440,38 +1600,278 @@ protected $signature = 'news:audit
 
     /*
     |--------------------------------------------------------------------------
-    | Original content length
+    | Display General Statistics
     |--------------------------------------------------------------------------
     */
 
-    private function originalContentLength(
-        News $item
-    ): int {
-
-        $en = mb_strlen(
-            trim((string) $item->content_en)
+    private function displayGeneralStatistics(
+        int $total,
+        int $aiProcessed,
+        int $aiNotProcessed,
+        float $averageScore
+    ): void {
+        $this->info(
+            '----------------------------------------------'
         );
 
-        /*
-         * المحتوى الإنجليزي هو المصدر الأصلي.
-         */
-
-        if ($en > 0) {
-            return $en;
-        }
-
-        /*
-         * fallback للعربي
-         */
-
-        return mb_strlen(
-            trim((string) $item->content_ar)
+        $this->info(
+            'GENERAL STATISTICS'
         );
+
+        $this->info(
+            '----------------------------------------------'
+        );
+
+        $this->line(
+            "Total news:              {$total}"
+        );
+
+        $this->line(
+            "AI processed:            {$aiProcessed}"
+        );
+
+        $this->line(
+            "AI not processed:        {$aiNotProcessed}"
+        );
+
+        $this->line(
+            "Average quality score:   {$averageScore}/100"
+        );
+
+        $this->newLine();
     }
 
     /*
     |--------------------------------------------------------------------------
-    | Display results
+    | Display Classification
+    |--------------------------------------------------------------------------
+    */
+
+    private function displayClassificationStatistics(
+        int $ready,
+        int $repair,
+        int $review,
+        int $delete
+    ): void {
+        $this->info(
+            'QUALITY CLASSIFICATION'
+        );
+
+        $this->line(
+            "🟢 READY:                 {$ready}"
+        );
+
+        $this->line(
+            "🟡 REPAIR:                {$repair}"
+        );
+
+        $this->line(
+            "🟠 REVIEW:                {$review}"
+        );
+
+        $this->line(
+            "🔴 DELETE CANDIDATE:      {$delete}"
+        );
+
+        $this->newLine();
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Display Quality Statistics
+    |--------------------------------------------------------------------------
+    */
+
+    private function displayQualityStatistics(
+        int $excellent,
+        int $good,
+        int $medium,
+        int $weak
+    ): void {
+        $this->info(
+            'QUALITY SCORE'
+        );
+
+        $this->line(
+            "🟢 Excellent (90-100):    {$excellent}"
+        );
+
+        $this->line(
+            "🟢 Good (75-89):          {$good}"
+        );
+
+        $this->line(
+            "🟡 Medium (60-74):        {$medium}"
+        );
+
+        $this->line(
+            "🔴 Weak (<60):            {$weak}"
+        );
+
+        $this->newLine();
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Display Recommendation Statistics
+    |--------------------------------------------------------------------------
+    */
+
+    private function displayRecommendationStatistics(
+        array $stats,
+        int $duplicateArticles
+    ): void {
+        $this->info(
+            'RECOMMENDED ACTIONS'
+        );
+
+        $this->line(
+            "🤖 AI ONLY:               {$stats['AI_ONLY']}"
+        );
+
+        $this->line(
+            "🔄 REFETCH:               {$stats['REFETCH']}"
+        );
+
+        $this->line(
+            "🔄 REFETCH OR AI:         {$stats['REFETCH_OR_AI']}"
+        );
+
+        $this->line(
+            "👁 MANUAL REVIEW:         {$stats['MANUAL_REVIEW']}"
+        );
+
+        $this->line(
+            "🔧 METADATA REPAIR:       {$stats['METADATA_REPAIR']}"
+        );
+
+        $this->line(
+            "🗑 DELETE OR REFETCH:     {$stats['DELETE_OR_REFETCH']}"
+        );
+
+        $this->line(
+            "✅ NONE:                  {$stats['NONE']}"
+        );
+
+        $this->line(
+            "🔁 DUPLICATE/SIMILAR:     {$duplicateArticles}"
+        );
+
+        $this->newLine();
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Display Missing Fields
+    |--------------------------------------------------------------------------
+    */
+
+    private function displayMissingFields(
+        array $missing
+    ): void {
+        $this->info(
+            '----------------------------------------------'
+        );
+
+        $this->info(
+            'MISSING FIELDS'
+        );
+
+        $this->info(
+            '----------------------------------------------'
+        );
+
+        foreach ($missing as $field => $count) {
+            $this->line(
+                str_pad($field, 24) .
+                ': ' .
+                $count
+            );
+        }
+
+        $this->newLine();
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Display Content Statistics
+    |--------------------------------------------------------------------------
+    */
+
+    private function displayContentStatistics(
+        array $stats
+    ): void {
+        $this->info(
+            '----------------------------------------------'
+        );
+
+        $this->info(
+            'ORIGINAL CONTENT LENGTH'
+        );
+
+        $this->info(
+            '----------------------------------------------'
+        );
+
+        $this->line(
+            "Empty:                   {$stats['empty']}"
+        );
+
+        $this->line(
+            "Very short (<300):       {$stats['very_short']}"
+        );
+
+        $this->line(
+            "Short (300-699):         {$stats['short']}"
+        );
+
+        $this->line(
+            "Acceptable (700-1499):   {$stats['acceptable']}"
+        );
+
+        $this->line(
+            "Strong (1500+):          {$stats['strong']}"
+        );
+
+        $this->newLine();
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Display Duplicate Statistics
+    |--------------------------------------------------------------------------
+    */
+
+    private function displayDuplicateStatistics(
+        int $groups,
+        int $articles
+    ): void {
+        $this->info(
+            '----------------------------------------------'
+        );
+
+        $this->info(
+            'DUPLICATE ANALYSIS'
+        );
+
+        $this->info(
+            '----------------------------------------------'
+        );
+
+        $this->line(
+            "Duplicate/similar groups: {$groups}"
+        );
+
+        $this->line(
+            "Articles affected:        {$articles}"
+        );
+
+        $this->newLine();
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Display Status Results
     |--------------------------------------------------------------------------
     */
 
@@ -1481,7 +1881,6 @@ protected $signature = 'news:audit
         string $label,
         bool $show
     ): void {
-
         if (!$show) {
             return;
         }
@@ -1497,7 +1896,10 @@ protected $signature = 'news:audit
         );
 
         $this->info(
-            $label . ' (' . $items->count() . ')'
+            $label .
+            ' (' .
+            $items->count() .
+            ')'
         );
 
         $this->info(
@@ -1506,102 +1908,310 @@ protected $signature = 'news:audit
 
         if ($items->isEmpty()) {
             $this->line('None.');
+
             return;
         }
 
         foreach ($items as $item) {
-
-            $this->line(
-                "ID {$item['id']} | " .
-                $item['title']
+            $this->displaySingleResult(
+                $item
             );
-
-            $this->line(
-                "Quality Score: {$item['quality_score']}/100"
-            );
-
-            $this->line(
-                "Content: {$item['content_length']} chars"
-            );
-
-            $this->line(
-                "AI: " .
-                ($item['ai_processed']
-                    ? 'YES'
-                    : 'NO')
-            );
-
-            $this->line(
-                "Recommendation: " .
-                $item['recommendation']
-            );
-
-            if (!empty($item['diagnosis'])) {
-
-                $this->line(
-                    "Diagnosis: " .
-                    $item['diagnosis']
-                );
-            }
-
-            if ($item['source']) {
-
-                $this->line(
-                    "Source: " .
-                    $item['source']
-                );
-            }
-
-            if ($item['url']) {
-
-                $this->line(
-                    "URL: " .
-                    $item['url']
-                );
-            }
-
-            if ($item['category']) {
-
-                $this->line(
-                    "Category: " .
-                    $item['category']
-                );
-            }
-
-            if ($item['duplicate']) {
-
-                $duplicateIds =
-                    implode(
-                        ', ',
-                        $item['duplicate_of']
-                    );
-
-                $this->line(
-                    "Duplicate of: {$duplicateIds}"
-                );
-            }
-
-            if (!empty($item['issues'])) {
-
-                $this->line(
-                    'Issues:'
-                );
-
-                foreach ($item['issues'] as $issue) {
-
-                    $this->line(
-                        "  - {$issue}"
-                    );
-                }
-            }
-
-            $this->newLine();
         }
     }
 
     /*
     |--------------------------------------------------------------------------
-    | Display duplicate groups
+    | Display Recommendation Results
+    |--------------------------------------------------------------------------
+    */
+
+    private function displayRecommendationResults(
+        array $results,
+        string $recommendation,
+        string $label
+    ): void {
+        $items = collect($results)
+            ->where(
+                'recommendation',
+                $recommendation
+            )
+            ->values();
+
+        $this->newLine();
+
+        $this->info(
+            '=============================================='
+        );
+
+        $this->info(
+            $label .
+            ' (' .
+            $items->count() .
+            ')'
+        );
+
+        $this->info(
+            '=============================================='
+        );
+
+        if ($items->isEmpty()) {
+            $this->line('None.');
+
+            return;
+        }
+
+        foreach ($items as $item) {
+            $this->displaySingleResult(
+                $item
+            );
+        }
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Display Refetch Results
+    |--------------------------------------------------------------------------
+    */
+
+    private function displayRefetchResults(
+        array $results
+    ): void {
+        $items = collect($results)
+            ->filter(
+                fn ($item) =>
+                    in_array(
+                        $item['recommendation'],
+                        [
+                            'REFETCH',
+                            'REFETCH_OR_AI',
+                            'DELETE_OR_REFETCH',
+                        ],
+                        true
+                    )
+            )
+            ->values();
+
+        $this->newLine();
+
+        $this->info(
+            '=============================================='
+        );
+
+        $this->info(
+            '🔄 CONTENT REFETCH REQUIRED (' .
+            $items->count() .
+            ')'
+        );
+
+        $this->info(
+            '=============================================='
+        );
+
+        if ($items->isEmpty()) {
+            $this->line('None.');
+
+            return;
+        }
+
+        foreach ($items as $item) {
+            $this->displaySingleResult(
+                $item
+            );
+        }
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Display Weak Results
+    |--------------------------------------------------------------------------
+    */
+
+    private function displayWeakResults(
+        array $results
+    ): void {
+        $items = collect($results)
+            ->filter(
+                fn ($item) =>
+                    $item['quality_score'] < 60
+            )
+            ->sortBy(
+                'quality_score'
+            )
+            ->values();
+
+        $this->newLine();
+
+        $this->info(
+            '=============================================='
+        );
+
+        $this->info(
+            '🔴 WEAK NEWS (<60) (' .
+            $items->count() .
+            ')'
+        );
+
+        $this->info(
+            '=============================================='
+        );
+
+        if ($items->isEmpty()) {
+            $this->line('None.');
+
+            return;
+        }
+
+        foreach ($items as $item) {
+            $this->displaySingleResult(
+                $item
+            );
+        }
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Display Single Result
+    |--------------------------------------------------------------------------
+    */
+
+    private function displaySingleResult(
+        array $item
+    ): void {
+        $this->line(
+            "ID {$item['id']} | " .
+            $item['title']
+        );
+
+        $this->line(
+            "Quality Score: " .
+            $item['quality_score'] .
+            "/100"
+        );
+
+        $this->line(
+            "Status: " .
+            $item['status']
+        );
+
+        $this->line(
+            "Content: " .
+            $item['content_length'] .
+            " chars"
+        );
+
+        $this->line(
+            "Content EN: " .
+            $item['content_en_length'] .
+            " chars"
+        );
+
+        $this->line(
+            "Content AR: " .
+            $item['content_ar_length'] .
+            " chars"
+        );
+
+        $this->line(
+            "AI: " .
+            ($item['ai_processed']
+                ? 'YES'
+                : 'NO')
+        );
+
+        $this->line(
+            "Recommendation: " .
+            $item['recommendation']
+        );
+
+        if (!empty($item['diagnosis'])) {
+            $this->line(
+                "Diagnosis: " .
+                $item['diagnosis']
+            );
+        }
+
+        if ($item['source']) {
+            $this->line(
+                "Source: " .
+                $item['source']
+            );
+        }
+
+        if ($item['url']) {
+            $this->line(
+                "URL: " .
+                $item['url']
+            );
+        }
+
+        if ($item['category']) {
+            $this->line(
+                "Category: " .
+                $item['category']
+            );
+        }
+
+        if ($item['duplicate']) {
+            $duplicateIds =
+                implode(
+                    ', ',
+                    $item['duplicate_of']
+                );
+
+            $this->line(
+                "Duplicate of: " .
+                $duplicateIds
+            );
+        }
+
+        if (!empty($item['issues'])) {
+            $this->line(
+                'Issues:'
+            );
+
+            foreach ($item['issues'] as $issue) {
+                $this->line(
+                    "  - " .
+                    $issue
+                );
+            }
+        }
+
+        $this->newLine();
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Count Duplicate Groups
+    |--------------------------------------------------------------------------
+    */
+
+    private function countDuplicateGroups(
+        array $duplicateMap
+    ): int {
+        $groups = [];
+
+        foreach ($duplicateMap as $group) {
+            $group = array_values(
+                array_unique($group)
+            );
+
+            sort($group);
+
+            $key = implode(
+                '-',
+                $group
+            );
+
+            $groups[$key] = true;
+        }
+
+        return count($groups);
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Display Duplicate Groups
     |--------------------------------------------------------------------------
     */
 
@@ -1609,10 +2219,14 @@ protected $signature = 'news:audit
         $news,
         array $duplicateMap
     ): void {
-
         $groups = [];
 
         foreach ($duplicateMap as $group) {
+            $group = array_values(
+                array_unique($group)
+            );
+
+            sort($group);
 
             $key = implode(
                 '-',
@@ -1622,7 +2236,9 @@ protected $signature = 'news:audit
             $groups[$key] = $group;
         }
 
-        $groups = array_values($groups);
+        $groups = array_values(
+            $groups
+        );
 
         $this->newLine();
 
@@ -1641,7 +2257,6 @@ protected $signature = 'news:audit
         );
 
         if (empty($groups)) {
-
             $this->line(
                 'No duplicate or highly similar groups detected.'
             );
@@ -1650,13 +2265,12 @@ protected $signature = 'news:audit
         }
 
         foreach ($groups as $index => $group) {
-
             $this->line(
-                'Group #' . ($index + 1)
+                'Group #' .
+                ($index + 1)
             );
 
             foreach ($group as $id) {
-
                 $item = $news->firstWhere(
                     'id',
                     $id
@@ -1679,4 +2293,70 @@ protected $signature = 'news:audit
             $this->newLine();
         }
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Final Summary
+    |--------------------------------------------------------------------------
+    */
+
+    private function displayFinalSummary(
+        int $total,
+        int $ready,
+        int $repair,
+        int $review,
+        int $delete,
+        float $averageScore
+    ): void {
+        $this->newLine();
+
+        $this->info(
+            '=============================================='
+        );
+
+        $this->info(
+            'AUDIT COMPLETED'
+        );
+
+        $this->info(
+            '=============================================='
+        );
+
+        $this->line(
+            "Total:                 {$total}"
+        );
+
+        $this->line(
+            "Average score:         {$averageScore}/100"
+        );
+
+        $this->line(
+            "🟢 Ready:              {$ready}"
+        );
+
+        $this->line(
+            "🟡 Repair:             {$repair}"
+        );
+
+        $this->line(
+            "🟠 Review:             {$review}"
+        );
+
+        $this->line(
+            "🔴 Delete candidate:   {$delete}"
+        );
+
+        $this->newLine();
+
+        $this->comment(
+            'No database records were modified, repaired or deleted.'
+        );
+
+        $this->comment(
+            'This command is strictly READ ONLY.'
+        );
+
+        $this->newLine();
+    }
 }
+```
