@@ -1406,11 +1406,11 @@ PROMPT;
     |--------------------------------------------------------------------------
     */
 
-    if ($lengths['content_ar'] < 500) {
+    if ($lengths['content_ar'] < 400) {
 
         Log::warning('AI validation failed', [
             'reason' => 'content_ar too short',
-            'required_minimum' => 500,
+            'required_minimum' => 400,
             'actual_length' => $lengths['content_ar'],
         ]);
 
