@@ -1,4 +1,3 @@
-```php
 <?php
 
 namespace App\Console\Commands;
@@ -9,20 +8,21 @@ use Illuminate\Console\Command;
 class AuditNews extends Command
 {
     protected $signature = 'news:audit
-                            {--limit=0 : Number of news to audit, 0 = all}
-                            {--show-all : Show all detailed audit results}
-                            {--show-ready : Show READY news}
-                            {--show-repair : Show REPAIR news}
-                            {--show-review : Show REVIEW news}
-                            {--show-delete : Show DELETE candidates}
-                            {--show-refetch : Show news that need content refetch}
-                            {--show-ai : Show news that need AI only}
-                            {--show-manual : Show news requiring manual review}
-                            {--show-duplicates : Show duplicate/similar groups}
-                            {--show-weak : Show news with quality score below 60}';
+        {--limit=0 : Number of news to audit, 0 = all}
+        {--show-all : Show all detailed audit results}
+        {--show-ready : Show READY news}
+        {--show-repair : Show REPAIR news}
+        {--show-review : Show REVIEW news}
+        {--show-delete : Show DELETE candidates}
+        {--show-refetch : Show news that need content refetch}
+        {--show-ai : Show news that need AI only}
+        {--show-manual : Show news requiring manual review}
+        {--show-duplicates : Show duplicate/similar groups}
+        {--show-weak : Show news with quality score below 60}';
 
     protected $description =
         'Professional read-only audit for news quality, completeness, AI readiness, duplicates and publication readiness';
+
 
     /*
     |--------------------------------------------------------------------------
@@ -39,6 +39,7 @@ class AuditNews extends Command
         'limitations_ar',
     ];
 
+
     /*
     |--------------------------------------------------------------------------
     | Content Thresholds
@@ -51,6 +52,7 @@ class AuditNews extends Command
 
     private int $acceptableContent = 1500;
 
+
     /*
     |--------------------------------------------------------------------------
     | Duplicate Thresholds
@@ -61,6 +63,7 @@ class AuditNews extends Command
 
     private float $highlySimilarTitleThreshold = 92.0;
 
+
     /*
     |--------------------------------------------------------------------------
     | Main Handler
@@ -70,12 +73,6 @@ class AuditNews extends Command
     public function handle(): int
     {
         $this->printHeader();
-
-        /*
-         * =========================================================
-         * Load news
-         * =========================================================
-         */
 
         $query = News::query()
             ->orderBy('id');
@@ -100,19 +97,9 @@ class AuditNews extends Command
 
         $this->newLine();
 
-        /*
-         * =========================================================
-         * Duplicate detection
-         * =========================================================
-         */
-
-        $duplicateMap = $this->detectDuplicates($news);
-
-        /*
-         * =========================================================
-         * Audit every article
-         * =========================================================
-         */
+        $duplicateMap = $this->detectDuplicates(
+            $news
+        );
 
         $results = [];
 
@@ -123,43 +110,50 @@ class AuditNews extends Command
             );
         }
 
-        $resultsCollection = collect($results);
-
-        /*
-         * =========================================================
-         * Statistics
-         * =========================================================
-         */
+        $resultsCollection = collect(
+            $results
+        );
 
         $total = $resultsCollection->count();
 
-        /*
-         * Status
-         */
-
         $ready = $resultsCollection
-            ->where('status', 'READY')
+            ->where(
+                'status',
+                'READY'
+            )
             ->count();
 
         $repair = $resultsCollection
-            ->where('status', 'REPAIR')
+            ->where(
+                'status',
+                'REPAIR'
+            )
             ->count();
 
         $review = $resultsCollection
-            ->where('status', 'REVIEW')
+            ->where(
+                'status',
+                'REVIEW'
+            )
             ->count();
 
         $delete = $resultsCollection
-            ->where('status', 'DELETE_CANDIDATE')
+            ->where(
+                'status',
+                'DELETE_CANDIDATE'
+            )
             ->count();
 
+
         /*
-         * Recommendations
-         */
+        |--------------------------------------------------------------------------
+        | Recommendation Statistics
+        |--------------------------------------------------------------------------
+        */
 
         $recommendationStats = [];
 
-        foreach ([
+        $recommendations = [
             'AI_ONLY',
             'REFETCH',
             'REFETCH_OR_AI',
@@ -167,90 +161,141 @@ class AuditNews extends Command
             'METADATA_REPAIR',
             'DELETE_OR_REFETCH',
             'NONE',
-        ] as $recommendation) {
+        ];
+
+        foreach ($recommendations as $recommendation) {
             $recommendationStats[$recommendation] =
                 $resultsCollection
-                    ->where('recommendation', $recommendation)
+                    ->where(
+                        'recommendation',
+                        $recommendation
+                    )
                     ->count();
         }
 
-        /*
-         * Duplicate statistics
-         */
-
-        $duplicateArticles = $resultsCollection
-            ->filter(fn ($item) => $item['duplicate'])
-            ->count();
-
-        $duplicateGroups = $this->countDuplicateGroups(
-            $duplicateMap
-        );
 
         /*
-         * AI statistics
-         */
+        |--------------------------------------------------------------------------
+        | Duplicate Statistics
+        |--------------------------------------------------------------------------
+        */
 
-        $aiProcessed = $news
-            ->filter(fn ($item) => (bool) $item->ai_processed)
-            ->count();
+        $duplicateArticles =
+            $resultsCollection
+                ->filter(
+                    fn ($item) =>
+                        $item['duplicate']
+                )
+                ->count();
 
-        $aiNotProcessed = $news
-            ->filter(fn ($item) => !(bool) $item->ai_processed)
-            ->count();
+        $duplicateGroups =
+            $this->countDuplicateGroups(
+                $duplicateMap
+            );
+
 
         /*
-         * Quality statistics
-         */
+        |--------------------------------------------------------------------------
+        | AI Statistics
+        |--------------------------------------------------------------------------
+        */
+
+        $aiProcessed =
+            $news
+                ->filter(
+                    fn ($item) =>
+                        (bool) $item->ai_processed
+                )
+                ->count();
+
+        $aiNotProcessed =
+            $news
+                ->filter(
+                    fn ($item) =>
+                        !(bool) $item->ai_processed
+                )
+                ->count();
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Quality Statistics
+        |--------------------------------------------------------------------------
+        */
 
         $averageScore = round(
-            (float) $resultsCollection->avg('quality_score'),
+            (float) $resultsCollection
+                ->avg(
+                    'quality_score'
+                ),
             1
         );
 
-        $excellent = $resultsCollection
-            ->where('quality_score', '>=', 90)
-            ->count();
+        $excellent =
+            $resultsCollection
+                ->where(
+                    'quality_score',
+                    '>=',
+                    90
+                )
+                ->count();
 
-        $good = $resultsCollection
-            ->filter(
-                fn ($item) =>
-                    $item['quality_score'] >= 75 &&
-                    $item['quality_score'] < 90
-            )
-            ->count();
+        $good =
+            $resultsCollection
+                ->filter(
+                    fn ($item) =>
+                        $item['quality_score'] >= 75 &&
+                        $item['quality_score'] < 90
+                )
+                ->count();
 
-        $medium = $resultsCollection
-            ->filter(
-                fn ($item) =>
-                    $item['quality_score'] >= 60 &&
-                    $item['quality_score'] < 75
-            )
-            ->count();
+        $medium =
+            $resultsCollection
+                ->filter(
+                    fn ($item) =>
+                        $item['quality_score'] >= 60 &&
+                        $item['quality_score'] < 75
+                )
+                ->count();
 
-        $weak = $resultsCollection
-            ->filter(
-                fn ($item) =>
-                    $item['quality_score'] < 60
-            )
-            ->count();
+        $weak =
+            $resultsCollection
+                ->filter(
+                    fn ($item) =>
+                        $item['quality_score'] < 60
+                )
+                ->count();
 
-        /*
-         * Missing fields
-         */
-
-        $missing = $this->calculateMissingFields($news);
-
-        /*
-         * Content statistics
-         */
-
-        $contentStats = $this->calculateContentStatistics($news);
 
         /*
-         * =========================================================
-         * Report
-         * =========================================================
-         */
+        |--------------------------------------------------------------------------
+        | Missing Fields
+        |--------------------------------------------------------------------------
+        */
+
+        $missing =
+            $this->calculateMissingFields(
+                $news
+            );
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Content Statistics
+        |--------------------------------------------------------------------------
+        */
+
+        $contentStats =
+            $this->calculateContentStatistics(
+                $news
+            );
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Display Report
+        |--------------------------------------------------------------------------
+        */
 
         $this->displayGeneralStatistics(
             $total,
@@ -291,49 +336,72 @@ class AuditNews extends Command
             $duplicateArticles
         );
 
-        /*
-         * =========================================================
-         * Detailed Results
-         * =========================================================
-         */
 
-        $showAll = (bool) $this->option('show-all');
+        /*
+        |--------------------------------------------------------------------------
+        | Detailed Results
+        |--------------------------------------------------------------------------
+        */
+
+        $showAll =
+            (bool) $this->option(
+                'show-all'
+            );
+
 
         $this->displayResults(
             $results,
             'READY',
             '🟢 READY',
-            $showAll || $this->option('show-ready')
+            $showAll ||
+            $this->option(
+                'show-ready'
+            )
         );
 
         $this->displayResults(
             $results,
             'REPAIR',
             '🟡 REPAIR',
-            $showAll || $this->option('show-repair')
+            $showAll ||
+            $this->option(
+                'show-repair'
+            )
         );
 
         $this->displayResults(
             $results,
             'REVIEW',
             '🟠 REVIEW',
-            $showAll || $this->option('show-review')
+            $showAll ||
+            $this->option(
+                'show-review'
+            )
         );
 
         $this->displayResults(
             $results,
             'DELETE_CANDIDATE',
             '🔴 DELETE CANDIDATE',
-            $showAll || $this->option('show-delete')
+            $showAll ||
+            $this->option(
+                'show-delete'
+            )
         );
 
-        /*
-         * =========================================================
-         * Recommendation Details
-         * =========================================================
-         */
 
-        if ($showAll || $this->option('show-ai')) {
+        /*
+        |--------------------------------------------------------------------------
+        | AI Results
+        |--------------------------------------------------------------------------
+        */
+
+        if (
+            $showAll ||
+            $this->option(
+                'show-ai'
+            )
+        ) {
             $this->displayRecommendationResults(
                 $results,
                 'AI_ONLY',
@@ -341,13 +409,37 @@ class AuditNews extends Command
             );
         }
 
-        if ($showAll || $this->option('show-refetch')) {
+
+        /*
+        |--------------------------------------------------------------------------
+        | Refetch Results
+        |--------------------------------------------------------------------------
+        */
+
+        if (
+            $showAll ||
+            $this->option(
+                'show-refetch'
+            )
+        ) {
             $this->displayRefetchResults(
                 $results
             );
         }
 
-        if ($showAll || $this->option('show-manual')) {
+
+        /*
+        |--------------------------------------------------------------------------
+        | Manual Review
+        |--------------------------------------------------------------------------
+        */
+
+        if (
+            $showAll ||
+            $this->option(
+                'show-manual'
+            )
+        ) {
             $this->displayRecommendationResults(
                 $results,
                 'MANUAL_REVIEW',
@@ -355,30 +447,49 @@ class AuditNews extends Command
             );
         }
 
-        if ($showAll || $this->option('show-weak')) {
+
+        /*
+        |--------------------------------------------------------------------------
+        | Weak News
+        |--------------------------------------------------------------------------
+        */
+
+        if (
+            $showAll ||
+            $this->option(
+                'show-weak'
+            )
+        ) {
             $this->displayWeakResults(
                 $results
             );
         }
 
-        /*
-         * =========================================================
-         * Duplicate Groups
-         * =========================================================
-         */
 
-        if ($showAll || $this->option('show-duplicates')) {
+        /*
+        |--------------------------------------------------------------------------
+        | Duplicate Groups
+        |--------------------------------------------------------------------------
+        */
+
+        if (
+            $showAll ||
+            $this->option(
+                'show-duplicates'
+            )
+        ) {
             $this->displayDuplicateGroups(
                 $news,
                 $duplicateMap
             );
         }
 
+
         /*
-         * =========================================================
-         * Final Summary
-         * =========================================================
-         */
+        |--------------------------------------------------------------------------
+        | Final Summary
+        |--------------------------------------------------------------------------
+        */
 
         $this->displayFinalSummary(
             $total,
@@ -391,6 +502,7 @@ class AuditNews extends Command
 
         return self::SUCCESS;
     }
+
 
     /*
     |--------------------------------------------------------------------------
@@ -421,6 +533,7 @@ class AuditNews extends Command
         $this->newLine();
     }
 
+
     /*
     |--------------------------------------------------------------------------
     | Audit One Article
@@ -431,258 +544,372 @@ class AuditNews extends Command
         News $item,
         array $duplicateMap
     ): array {
+
         $issues = [];
 
+
         /*
-         * =========================================================
-         * Titles
-         * =========================================================
-         */
+        |--------------------------------------------------------------------------
+        | Titles
+        |--------------------------------------------------------------------------
+        */
 
-        $titleEnMissing = $this->isEmpty(
-            $item->title_en
-        );
+        $titleEnMissing =
+            $this->isEmpty(
+                $item->title_en
+            );
 
-        $titleArMissing = $this->isEmpty(
-            $item->title_ar
-        );
+        $titleArMissing =
+            $this->isEmpty(
+                $item->title_ar
+            );
+
 
         if ($titleEnMissing) {
-            $issues[] = 'missing title_en';
+            $issues[] =
+                'missing title_en';
         }
+
 
         if ($titleArMissing) {
-            $issues[] = 'missing title_ar';
-        }
-
-        /*
-         * =========================================================
-         * Original Content
-         * =========================================================
-         */
-
-        $contentEnLength = mb_strlen(
-            trim((string) $item->content_en)
-        );
-
-        $contentArLength = mb_strlen(
-            trim((string) $item->content_ar)
-        );
-
-        /*
-         * English is treated as the preferred original source.
-         * Arabic is only a fallback for length assessment.
-         */
-
-        $originalContentLength = $contentEnLength;
-
-        if ($originalContentLength === 0) {
-            $originalContentLength = $contentArLength;
-        }
-
-        if ($contentEnLength === 0) {
-            $issues[] = 'missing original content_en';
-        }
-
-        if ($contentArLength === 0) {
-            $issues[] = 'missing Arabic content_ar';
-        }
-
-        /*
-         * Content quality
-         */
-
-        if (
-            $originalContentLength > 0 &&
-            $originalContentLength < $this->veryShortContent
-        ) {
-            $issues[] = 'original content very short';
-        } elseif (
-            $originalContentLength > 0 &&
-            $originalContentLength < $this->shortContent
-        ) {
-            $issues[] = 'original content short';
-        }
-
-        /*
-         * =========================================================
-         * AI Fields
-         * =========================================================
-         */
-
-        $missingAiFields = [];
-
-        foreach ($this->aiFields as $field) {
-            if ($this->isEmpty($item->{$field})) {
-                $missingAiFields[] = $field;
-            }
-        }
-
-        if (!empty($missingAiFields)) {
             $issues[] =
-                'missing AI fields: ' .
-                implode(', ', $missingAiFields);
+                'missing title_ar';
         }
 
-        if (!(bool) $item->ai_processed) {
-            $issues[] = 'ai not processed';
-        }
 
         /*
-         * =========================================================
-         * Metadata
-         * =========================================================
-         */
+        |--------------------------------------------------------------------------
+        | Original Content
+        |--------------------------------------------------------------------------
+        */
 
-        $missingUrl = $this->isEmpty(
-            $item->url
-        );
-
-        $missingSource = $this->isEmpty(
-            $item->source
-        );
-
-        $missingCategory = $this->isEmpty(
-            $item->category
-        );
-
-        $missingImage = $this->isEmpty(
-            $item->image_url
-        );
-
-        if ($missingSource) {
-            $issues[] = 'missing source';
-        }
-
-        if ($missingUrl) {
-            $issues[] = 'missing source URL';
-        }
-
-        if ($missingCategory) {
-            $issues[] = 'missing category';
-        }
-
-        if ($missingImage) {
-            $issues[] = 'missing image';
-        }
-
-        /*
-         * =========================================================
-         * Duplicate
-         * =========================================================
-         */
-
-        $duplicate = false;
-        $duplicateOf = [];
-
-        if (
-            isset($duplicateMap[$item->id]) &&
-            count($duplicateMap[$item->id]) > 1
-        ) {
-            $duplicate = true;
-
-            $duplicateOf = array_values(
-                array_filter(
-                    $duplicateMap[$item->id],
-                    fn ($id) => $id !== $item->id
+        $contentEnLength =
+            mb_strlen(
+                trim(
+                    (string) $item->content_en
                 )
             );
 
-            $issues[] =
-                'possible duplicate or very similar article';
+        $contentArLength =
+            mb_strlen(
+                trim(
+                    (string) $item->content_ar
+                )
+            );
+
+
+        $originalContentLength =
+            $contentEnLength;
+
+
+        if (
+            $originalContentLength === 0
+        ) {
+            $originalContentLength =
+                $contentArLength;
         }
 
+
+        if (
+            $contentEnLength === 0
+        ) {
+            $issues[] =
+                'missing original content_en';
+        }
+
+
+        if (
+            $contentArLength === 0
+        ) {
+            $issues[] =
+                'missing Arabic content_ar';
+        }
+
+
         /*
-         * =========================================================
-         * AI + Weak Content
-         * =========================================================
-         */
+        |--------------------------------------------------------------------------
+        | Content Quality
+        |--------------------------------------------------------------------------
+        */
+
+        if (
+            $originalContentLength > 0 &&
+            $originalContentLength <
+            $this->veryShortContent
+        ) {
+            $issues[] =
+                'original content very short';
+        }
+        elseif (
+            $originalContentLength > 0 &&
+            $originalContentLength <
+            $this->shortContent
+        ) {
+            $issues[] =
+                'original content short';
+        }
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | AI Fields
+        |--------------------------------------------------------------------------
+        */
+
+        $missingAiFields = [];
+
+
+        foreach (
+            $this->aiFields
+            as $field
+        ) {
+
+            if (
+                $this->isEmpty(
+                    $item->{$field}
+                )
+            ) {
+
+                $missingAiFields[] =
+                    $field;
+            }
+        }
+
+
+        if (
+            !empty(
+                $missingAiFields
+            )
+        ) {
+
+            $issues[] =
+                'missing AI fields: ' .
+                implode(
+                    ', ',
+                    $missingAiFields
+                );
+        }
+
+
+        if (
+            !(bool) $item->ai_processed
+        ) {
+
+            $issues[] =
+                'ai not processed';
+        }
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Metadata
+        |--------------------------------------------------------------------------
+        */
+
+        $missingUrl =
+            $this->isEmpty(
+                $item->url
+            );
+
+        $missingSource =
+            $this->isEmpty(
+                $item->source
+            );
+
+        $missingCategory =
+            $this->isEmpty(
+                $item->category
+            );
+
+        $missingImage =
+            $this->isEmpty(
+                $item->image_url
+            );
+
+
+        if ($missingSource) {
+            $issues[] =
+                'missing source';
+        }
+
+
+        if ($missingUrl) {
+            $issues[] =
+                'missing source URL';
+        }
+
+
+        if ($missingCategory) {
+            $issues[] =
+                'missing category';
+        }
+
+
+        if ($missingImage) {
+            $issues[] =
+                'missing image';
+        }
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Duplicate
+        |--------------------------------------------------------------------------
+        */
+
+        $duplicate = false;
+
+        $duplicateOf = [];
+
+
+        if (
+            isset(
+                $duplicateMap[$item->id]
+            )
+        ) {
+
+            $group =
+                $duplicateMap[$item->id];
+
+
+            if (
+                count($group) > 1
+            ) {
+
+                $duplicate =
+                    true;
+
+
+                $duplicateOf =
+                    array_values(
+                        array_filter(
+                            $group,
+                            fn ($id) =>
+                                $id !==
+                                $item->id
+                        )
+                    );
+
+
+                $issues[] =
+                    'possible duplicate or very similar article';
+            }
+        }
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Weak Original Content
+        |--------------------------------------------------------------------------
+        */
 
         if (
             (bool) $item->ai_processed &&
             $originalContentLength > 0 &&
-            $originalContentLength < $this->veryShortContent
+            $originalContentLength <
+            $this->veryShortContent
         ) {
+
             $issues[] =
                 'AI exists but original source material is weak';
         }
 
-        /*
-         * =========================================================
-         * Quality Score
-         * =========================================================
-         */
-
-        $score = $this->calculateQualityScore(
-            $item,
-            $originalContentLength,
-            $missingAiFields,
-            $duplicate
-        );
 
         /*
-         * =========================================================
-         * Recommendation
-         * =========================================================
-         */
+        |--------------------------------------------------------------------------
+        | Quality Score
+        |--------------------------------------------------------------------------
+        */
 
-        $recommendation = $this->determineRecommendation(
-            $item,
-            $originalContentLength,
-            $missingAiFields,
-            $duplicate
-        );
+        $score =
+            $this->calculateQualityScore(
+                $item,
+                $originalContentLength,
+                $missingAiFields,
+                $duplicate
+            );
 
-        /*
-         * =========================================================
-         * Status
-         * =========================================================
-         */
-
-        $status = $this->determineStatus(
-            $item,
-            $originalContentLength,
-            $missingAiFields,
-            $duplicate,
-            $score,
-            $recommendation
-        );
 
         /*
-         * =========================================================
-         * Diagnosis
-         * =========================================================
-         */
+        |--------------------------------------------------------------------------
+        | Recommendation
+        |--------------------------------------------------------------------------
+        */
 
-        $diagnosis = $this->buildDiagnosis(
-            $item,
-            $originalContentLength,
-            $missingAiFields,
-            $duplicate,
-            $missingUrl,
-            $missingCategory,
-            $missingSource
-        );
+        $recommendation =
+            $this->determineRecommendation(
+                $item,
+                $originalContentLength,
+                $missingAiFields,
+                $duplicate
+            );
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Status
+        |--------------------------------------------------------------------------
+        */
+
+        $status =
+            $this->determineStatus(
+                $item,
+                $originalContentLength,
+                $missingAiFields,
+                $duplicate,
+                $score,
+                $recommendation
+            );
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Diagnosis
+        |--------------------------------------------------------------------------
+        */
+
+        $diagnosis =
+            $this->buildDiagnosis(
+                $item,
+                $originalContentLength,
+                $missingAiFields,
+                $duplicate,
+                $missingUrl,
+                $missingCategory,
+                $missingSource
+            );
+
 
         return [
-            'id' => $item->id,
+
+            'id' =>
+                $item->id,
 
             'title' =>
                 $item->title_en
-                ?: $item->title_ar
-                ?: 'Untitled',
+                ?:
+                $item->title_ar
+                ?:
+                'Untitled',
 
-            'status' => $status,
+            'status' =>
+                $status,
 
-            'quality_score' => $score,
+            'quality_score' =>
+                $score,
 
-            'recommendation' => $recommendation,
+            'recommendation' =>
+                $recommendation,
 
-            'diagnosis' => $diagnosis,
+            'diagnosis' =>
+                $diagnosis,
 
-            'issues' => array_values(
-                array_unique($issues)
-            ),
+            'issues' =>
+                array_values(
+                    array_unique(
+                        $issues
+                    )
+                ),
 
             'content_length' =>
                 $originalContentLength,
@@ -713,22 +940,11 @@ class AuditNews extends Command
         ];
     }
 
+
     /*
     |--------------------------------------------------------------------------
     | Quality Score
     |--------------------------------------------------------------------------
-    |
-    | Score is intentionally based on several independent dimensions.
-    |
-    | Content          30
-    | Arabic           10
-    | Metadata         15
-    | AI               20
-    | Source integrity 15
-    | Duplicate risk   10
-    | --------------------
-    | Total            100
-    |
     */
 
     private function calculateQualityScore(
@@ -737,119 +953,227 @@ class AuditNews extends Command
         array $missingAiFields,
         bool $duplicate
     ): int {
+
         $score = 0;
 
-        /*
-         * =========================================================
-         * Original Content - 30 points
-         * =========================================================
-         */
 
-        if ($contentLength >= $this->acceptableContent) {
+        /*
+        |--------------------------------------------------------------------------
+        | Original Content - 30
+        |--------------------------------------------------------------------------
+        */
+
+        if (
+            $contentLength >=
+            $this->acceptableContent
+        ) {
+
             $score += 30;
-        } elseif ($contentLength >= $this->shortContent) {
+        }
+        elseif (
+            $contentLength >=
+            $this->shortContent
+        ) {
+
             $score += 24;
-        } elseif ($contentLength >= $this->veryShortContent) {
+        }
+        elseif (
+            $contentLength >=
+            $this->veryShortContent
+        ) {
+
             $score += 15;
-        } elseif ($contentLength > 0) {
+        }
+        elseif (
+            $contentLength > 0
+        ) {
+
             $score += 5;
         }
+
 
         /*
-         * =========================================================
-         * Arabic Localization - 10 points
-         * =========================================================
-         */
+        |--------------------------------------------------------------------------
+        | Arabic - 10
+        |--------------------------------------------------------------------------
+        */
 
-        if (!$this->isEmpty($item->content_ar)) {
+        if (
+            !$this->isEmpty(
+                $item->content_ar
+            )
+        ) {
+
             $score += 5;
         }
 
-        if (!$this->isEmpty($item->title_ar)) {
+
+        if (
+            !$this->isEmpty(
+                $item->title_ar
+            )
+        ) {
+
             $score += 5;
         }
+
 
         /*
-         * =========================================================
-         * Metadata - 15 points
-         * =========================================================
-         */
+        |--------------------------------------------------------------------------
+        | Metadata - 15
+        |--------------------------------------------------------------------------
+        */
 
-        if (!$this->isEmpty($item->url)) {
+        if (
+            !$this->isEmpty(
+                $item->url
+            )
+        ) {
+
             $score += 4;
         }
 
-        if (!$this->isEmpty($item->category)) {
+
+        if (
+            !$this->isEmpty(
+                $item->category
+            )
+        ) {
+
             $score += 4;
         }
 
-        if (!$this->isEmpty($item->source)) {
+
+        if (
+            !$this->isEmpty(
+                $item->source
+            )
+        ) {
+
             $score += 4;
         }
 
-        if (!$this->isEmpty($item->image_url)) {
+
+        if (
+            !$this->isEmpty(
+                $item->image_url
+            )
+        ) {
+
             $score += 3;
         }
 
-        /*
-         * =========================================================
-         * AI Processing - 20 points
-         * =========================================================
-         */
 
-        if ((bool) $item->ai_processed) {
+        /*
+        |--------------------------------------------------------------------------
+        | AI - 20
+        |--------------------------------------------------------------------------
+        */
+
+        if (
+            (bool) $item->ai_processed
+        ) {
+
             $score += 8;
         }
 
-        $totalAiFields = count($this->aiFields);
+
+        $totalAiFields =
+            count(
+                $this->aiFields
+            );
+
 
         $completedAiFields =
             $totalAiFields -
-            count($missingAiFields);
-
-        if ($totalAiFields > 0) {
-            $score += (int) round(
-                ($completedAiFields / $totalAiFields) * 12
+            count(
+                $missingAiFields
             );
+
+
+        if (
+            $totalAiFields > 0
+        ) {
+
+            $score +=
+                (int) round(
+                    (
+                        $completedAiFields /
+                        $totalAiFields
+                    ) * 12
+                );
         }
 
-        /*
-         * =========================================================
-         * Source Integrity - 15 points
-         * =========================================================
-         */
 
-        if (!$this->isEmpty($item->title_en)) {
+        /*
+        |--------------------------------------------------------------------------
+        | Source Integrity - 15
+        |--------------------------------------------------------------------------
+        */
+
+        if (
+            !$this->isEmpty(
+                $item->title_en
+            )
+        ) {
+
             $score += 3;
         }
 
-        if (!$this->isEmpty($item->content_en)) {
+
+        if (
+            !$this->isEmpty(
+                $item->content_en
+            )
+        ) {
+
             $score += 5;
         }
 
-        if (!$this->isEmpty($item->source)) {
+
+        if (
+            !$this->isEmpty(
+                $item->source
+            )
+        ) {
+
             $score += 3;
         }
 
-        if (!$this->isEmpty($item->url)) {
+
+        if (
+            !$this->isEmpty(
+                $item->url
+            )
+        ) {
+
             $score += 4;
         }
 
-        /*
-         * =========================================================
-         * Duplicate Risk - 10 points
-         * =========================================================
-         */
 
-        if (!$duplicate) {
+        /*
+        |--------------------------------------------------------------------------
+        | Duplicate Risk - 10
+        |--------------------------------------------------------------------------
+        */
+
+        if (
+            !$duplicate
+        ) {
+
             $score += 10;
         }
 
+
         return max(
             0,
-            min(100, $score)
+            min(
+                100,
+                $score
+            )
         );
     }
+
 
     /*
     |--------------------------------------------------------------------------
@@ -863,85 +1187,98 @@ class AuditNews extends Command
         array $missingAiFields,
         bool $duplicate
     ): string {
-        /*
-         * No usable content.
-         *
-         * Do NOT immediately delete.
-         * First attempt a refetch.
-         */
 
-        if ($contentLength === 0) {
+        if (
+            $contentLength === 0
+        ) {
+
             return 'DELETE_OR_REFETCH';
         }
 
-        /*
-         * Possible duplicate.
-         *
-         * Never automatically delete.
-         */
 
-        if ($duplicate) {
+        if (
+            $duplicate
+        ) {
+
             return 'MANUAL_REVIEW';
         }
 
-        /*
-         * Very weak original source.
-         *
-         * AI cannot reliably reconstruct a missing article.
-         */
 
-        if ($contentLength < $this->veryShortContent) {
+        if (
+            $contentLength <
+            $this->veryShortContent
+        ) {
+
             return 'REFETCH';
         }
 
-        /*
-         * Short article.
-         *
-         * Could be a legitimate short breaking-news article.
-         */
 
-        if ($contentLength < $this->shortContent) {
-            if (!empty($missingAiFields)) {
+        if (
+            $contentLength <
+            $this->shortContent
+        ) {
+
+            if (
+                !empty(
+                    $missingAiFields
+                )
+            ) {
+
                 return 'REFETCH_OR_AI';
             }
 
-            if (!(bool) $item->ai_processed) {
+
+            if (
+                !(bool) $item->ai_processed
+            ) {
+
                 return 'AI_ONLY';
             }
+
 
             return 'MANUAL_REVIEW';
         }
 
-        /*
-         * Good original content + missing AI.
-         */
-
-        if (!empty($missingAiFields)) {
-            return 'AI_ONLY';
-        }
-
-        /*
-         * AI flag is false.
-         */
-
-        if (!(bool) $item->ai_processed) {
-            return 'AI_ONLY';
-        }
-
-        /*
-         * Metadata repair.
-         */
 
         if (
-            $this->isEmpty($item->url) ||
-            $this->isEmpty($item->category) ||
-            $this->isEmpty($item->title_ar)
+            !empty(
+                $missingAiFields
+            )
         ) {
+
+            return 'AI_ONLY';
+        }
+
+
+        if (
+            !(bool) $item->ai_processed
+        ) {
+
+            return 'AI_ONLY';
+        }
+
+
+        if (
+            $this->isEmpty(
+                $item->url
+            )
+            ||
+            $this->isEmpty(
+                $item->category
+            )
+            ||
+            $this->isEmpty(
+                $item->title_ar
+            )
+        ) {
+
             return 'METADATA_REPAIR';
         }
 
+
         return 'NONE';
     }
+
 
     /*
     |--------------------------------------------------------------------------
@@ -957,71 +1294,84 @@ class AuditNews extends Command
         int $score,
         string $recommendation
     ): string {
-        /*
-         * Completely empty article:
-         * mark as DELETE CANDIDATE, not DELETE.
-         */
 
-        if ($contentLength === 0) {
+        if (
+            $contentLength === 0
+        ) {
+
             return 'DELETE_CANDIDATE';
         }
 
-        /*
-         * Very short source.
-         */
-
-        if ($contentLength < $this->veryShortContent) {
-            return 'REVIEW';
-        }
-
-        /*
-         * Duplicate.
-         */
-
-        if ($duplicate) {
-            return 'REVIEW';
-        }
-
-        /*
-         * Weak score.
-         */
-
-        if ($score < 50) {
-            return 'REVIEW';
-        }
-
-        /*
-         * Short content.
-         */
-
-        if ($contentLength < $this->shortContent) {
-            return 'REVIEW';
-        }
-
-        /*
-         * Anything that can be repaired.
-         */
 
         if (
-            !empty($missingAiFields) ||
-            !(bool) $item->ai_processed ||
-            $this->isEmpty($item->title_ar) ||
-            $this->isEmpty($item->category) ||
-            $this->isEmpty($item->url)
+            $contentLength <
+            $this->veryShortContent
         ) {
+
+            return 'REVIEW';
+        }
+
+
+        if (
+            $duplicate
+        ) {
+
+            return 'REVIEW';
+        }
+
+
+        if (
+            $score < 50
+        ) {
+
+            return 'REVIEW';
+        }
+
+
+        if (
+            $contentLength <
+            $this->shortContent
+        ) {
+
+            return 'REVIEW';
+        }
+
+
+        if (
+            !empty(
+                $missingAiFields
+            )
+            ||
+            !(bool) $item->ai_processed
+            ||
+            $this->isEmpty(
+                $item->title_ar
+            )
+            ||
+            $this->isEmpty(
+                $item->category
+            )
+            ||
+            $this->isEmpty(
+                $item->url
+            )
+        ) {
+
             return 'REPAIR';
         }
 
-        /*
-         * High-quality article.
-         */
 
-        if ($score >= 75) {
+        if (
+            $score >= 75
+        ) {
+
             return 'READY';
         }
 
+
         return 'REPAIR';
     }
+
 
     /*
     |--------------------------------------------------------------------------
@@ -1038,47 +1388,100 @@ class AuditNews extends Command
         bool $missingCategory,
         bool $missingSource
     ): string {
-        if ($contentLength === 0) {
-            return 'No usable original article content. Refetch should be attempted before deletion.';
-        }
-
-        if ($duplicate) {
-            return 'Possible duplicate or highly similar article. Manual review is required.';
-        }
-
-        if ($contentLength < $this->veryShortContent) {
-            return 'Original source material is too short; content refetch is recommended.';
-        }
 
         if (
-            $contentLength < $this->shortContent &&
-            !empty($missingAiFields)
+            $contentLength === 0
         ) {
-            return 'Original article is short and AI fields are incomplete.';
+
+            return
+                'No usable original article content. Refetch should be attempted before deletion.';
         }
 
-        if (!empty($missingAiFields)) {
-            return 'Original article is usable; AI enrichment is incomplete.';
+
+        if (
+            $duplicate
+        ) {
+
+            return
+                'Possible duplicate or highly similar article. Manual review is required.';
         }
 
-        if (!(bool) $item->ai_processed) {
-            return 'Article content is usable but AI processing is missing.';
+
+        if (
+            $contentLength <
+            $this->veryShortContent
+        ) {
+
+            return
+                'Original source material is too short; content refetch is recommended.';
         }
 
-        if ($missingUrl) {
-            return 'Article is usable but source URL is missing.';
+
+        if (
+            $contentLength <
+            $this->shortContent
+            &&
+            !empty(
+                $missingAiFields
+            )
+        ) {
+
+            return
+                'Original article is short and AI fields are incomplete.';
         }
 
-        if ($missingCategory) {
-            return 'Article is usable but category is missing.';
+
+        if (
+            !empty(
+                $missingAiFields
+            )
+        ) {
+
+            return
+                'Original article is usable; AI enrichment is incomplete.';
         }
 
-        if ($missingSource) {
-            return 'Article is usable but source metadata is missing.';
+
+        if (
+            !(bool) $item->ai_processed
+        ) {
+
+            return
+                'Article content is usable but AI processing is missing.';
         }
 
-        return 'Article appears complete.';
+
+        if (
+            $missingUrl
+        ) {
+
+            return
+                'Article is usable but source URL is missing.';
+        }
+
+
+        if (
+            $missingCategory
+        ) {
+
+            return
+                'Article is usable but category is missing.';
+        }
+
+
+        if (
+            $missingSource
+        ) {
+
+            return
+                'Article is usable but source metadata is missing.';
+        }
+
+
+        return
+            'Article appears complete.';
     }
+
 
     /*
     |--------------------------------------------------------------------------
@@ -1086,136 +1489,215 @@ class AuditNews extends Command
     |--------------------------------------------------------------------------
     */
 
-    private function detectDuplicates($news): array
-    {
-        /*
-         * The returned structure is:
-         *
-         * [
-         *     articleId => [articleId, relatedId, relatedId]
-         * ]
-         */
+    private function detectDuplicates(
+        $news
+    ): array {
 
         $normalizedTitles = [];
 
-        foreach ($news as $item) {
+
+        foreach (
+            $news as $item
+        ) {
+
             $title =
                 $item->title_en
-                ?: $item->title_ar
-                ?: '';
+                ?:
+                $item->title_ar
+                ?:
+                '';
 
-            $normalizedTitles[$item->id] =
-                $this->normalizeText($title);
+
+            $normalizedTitles[
+                $item->id
+            ] =
+                $this->normalizeText(
+                    $title
+                );
         }
 
+
         /*
-         * =========================================================
-         * Exact normalized titles
-         * =========================================================
-         */
+        |--------------------------------------------------------------------------
+        | Exact Titles
+        |--------------------------------------------------------------------------
+        */
 
         $exactGroups = [];
 
-        foreach ($normalizedTitles as $id => $title) {
-            if ($title === '') {
+
+        foreach (
+            $normalizedTitles
+            as $id => $title
+        ) {
+
+            if (
+                $title === ''
+            ) {
+
                 continue;
             }
 
-            $exactGroups[$title][] = $id;
+
+            $exactGroups[
+                $title
+            ][] =
+                $id;
         }
 
+
         /*
-         * =========================================================
-         * Candidate buckets
-         * =========================================================
-         *
-         * Instead of comparing every article with every article,
-         * we create buckets from significant words.
-         *
-         * This dramatically reduces comparisons for large datasets.
-         */
+        |--------------------------------------------------------------------------
+        | Candidate Buckets
+        |--------------------------------------------------------------------------
+        */
 
         $buckets = [];
 
-        foreach ($normalizedTitles as $id => $title) {
-            if ($title === '') {
+
+        foreach (
+            $normalizedTitles
+            as $id => $title
+        ) {
+
+            if (
+                $title === ''
+            ) {
+
                 continue;
             }
 
-            $words = $this->significantWords($title);
 
-            /*
-             * If there are not enough words, skip similarity matching.
-             */
+            $words =
+                $this->significantWords(
+                    $title
+                );
 
-            if (count($words) < 2) {
+
+            if (
+                count($words) < 2
+            ) {
+
                 continue;
             }
 
-            /*
-             * Use the first two significant words as a candidate key.
-             */
 
-            $key = implode(
-                '|',
-                array_slice($words, 0, 2)
-            );
+            $key =
+                implode(
+                    '|',
+                    array_slice(
+                        $words,
+                        0,
+                        2
+                    )
+                );
 
-            $buckets[$key][] = $id;
+
+            $buckets[
+                $key
+            ][] =
+                $id;
         }
 
+
         /*
-         * =========================================================
-         * Similar title groups
-         * =========================================================
-         */
+        |--------------------------------------------------------------------------
+        | Similar Titles
+        |--------------------------------------------------------------------------
+        */
 
         $similarPairs = [];
 
-        foreach ($buckets as $candidateIds) {
-            $count = count($candidateIds);
 
-            if ($count < 2) {
+        foreach (
+            $buckets
+            as $candidateIds
+        ) {
+
+            $count =
+                count(
+                    $candidateIds
+                );
+
+
+            if (
+                $count < 2
+            ) {
+
                 continue;
             }
 
-            for ($i = 0; $i < $count; $i++) {
-                $idA = $candidateIds[$i];
 
-                $titleA = $normalizedTitles[$idA];
+            for (
+                $i = 0;
+                $i < $count;
+                $i++
+            ) {
 
-                if ($titleA === '') {
+                $idA =
+                    $candidateIds[$i];
+
+
+                $titleA =
+                    $normalizedTitles[
+                        $idA
+                    ];
+
+
+                if (
+                    $titleA === ''
+                ) {
+
                     continue;
                 }
 
-                for ($j = $i + 1; $j < $count; $j++) {
-                    $idB = $candidateIds[$j];
+
+                for (
+                    $j = $i + 1;
+                    $j < $count;
+                    $j++
+                ) {
+
+                    $idB =
+                        $candidateIds[$j];
+
 
                     $titleB =
-                        $normalizedTitles[$idB];
+                        $normalizedTitles[
+                            $idB
+                        ];
 
-                    if ($titleB === '') {
-                        continue;
-                    }
-
-                    /*
-                     * Avoid duplicate comparison.
-                     */
-
-                    if ($titleA === $titleB) {
-                        continue;
-                    }
-
-                    /*
-                     * Very short titles are unreliable.
-                     */
 
                     if (
-                        mb_strlen($titleA) < 20 ||
-                        mb_strlen($titleB) < 20
+                        $titleB === ''
                     ) {
+
                         continue;
                     }
+
+
+                    if (
+                        $titleA ===
+                        $titleB
+                    ) {
+
+                        continue;
+                    }
+
+
+                    if (
+                        mb_strlen(
+                            $titleA
+                        ) < 20
+                        ||
+                        mb_strlen(
+                            $titleB
+                        ) < 20
+                    ) {
+
+                        continue;
+                    }
+
 
                     similar_text(
                         $titleA,
@@ -1223,65 +1705,92 @@ class AuditNews extends Command
                         $percent
                     );
 
+
                     if (
                         $percent >=
                         $this->similarTitleThreshold
                     ) {
-                        $similarPairs[] = [
-                            $idA,
-                            $idB,
-                            $percent,
-                        ];
+
+                        $similarPairs[] =
+                            [
+                                $idA,
+                                $idB,
+                                $percent,
+                            ];
                     }
                 }
             }
         }
 
+
         /*
-         * =========================================================
-         * Build raw groups
-         * =========================================================
-         */
+        |--------------------------------------------------------------------------
+        | Raw Groups
+        |--------------------------------------------------------------------------
+        */
 
         $rawGroups = [];
 
-        /*
-         * Exact groups.
-         */
 
-        foreach ($exactGroups as $group) {
-            if (count($group) > 1) {
-                $rawGroups[] = $group;
+        foreach (
+            $exactGroups
+            as $group
+        ) {
+
+            if (
+                count($group) > 1
+            ) {
+
+                $rawGroups[] =
+                    $group;
             }
         }
 
-        /*
-         * Similar groups.
-         */
 
-        foreach ($similarPairs as $pair) {
-            $rawGroups[] = [
-                $pair[0],
-                $pair[1],
-            ];
+        foreach (
+            $similarPairs
+            as $pair
+        ) {
+
+            $rawGroups[] =
+                [
+                    $pair[0],
+                    $pair[1],
+                ];
         }
 
+
         /*
-         * =========================================================
-         * Merge overlapping groups
-         * =========================================================
-         */
+        |--------------------------------------------------------------------------
+        | Merge Groups
+        |--------------------------------------------------------------------------
+        */
 
         $merged = [];
 
-        foreach ($rawGroups as $group) {
-            $group = array_values(
-                array_unique($group)
-            );
 
-            $mergedIntoExisting = false;
+        foreach (
+            $rawGroups
+            as $group
+        ) {
 
-            foreach ($merged as &$existing) {
+            $group =
+                array_values(
+                    array_unique(
+                        $group
+                    )
+                );
+
+
+            $mergedIntoExisting =
+                false;
+
+
+            foreach (
+                $merged
+                as &$existing
+            ) {
+
                 if (
                     count(
                         array_intersect(
@@ -1290,50 +1799,83 @@ class AuditNews extends Command
                         )
                     ) > 0
                 ) {
-                    $existing = array_values(
-                        array_unique(
-                            array_merge(
-                                $existing,
-                                $group
-                            )
-                        )
-                    );
 
-                    $mergedIntoExisting = true;
+                    $existing =
+                        array_values(
+                            array_unique(
+                                array_merge(
+                                    $existing,
+                                    $group
+                                )
+                            )
+                        );
+
+
+                    $mergedIntoExisting =
+                        true;
+
 
                     break;
                 }
             }
 
-            unset($existing);
 
-            if (!$mergedIntoExisting) {
-                $merged[] = $group;
+            unset(
+                $existing
+            );
+
+
+            if (
+                !$mergedIntoExisting
+            ) {
+
+                $merged[] =
+                    $group;
             }
         }
 
+
         /*
-         * =========================================================
-         * Build article => group map
-         * =========================================================
-         */
+        |--------------------------------------------------------------------------
+        | Article Map
+        |--------------------------------------------------------------------------
+        */
 
         $map = [];
 
-        foreach ($merged as $group) {
-            if (count($group) < 2) {
+
+        foreach (
+            $merged
+            as $group
+        ) {
+
+            if (
+                count($group) < 2
+            ) {
+
                 continue;
             }
 
-            sort($group);
 
-            foreach ($group as $id) {
-                $map[$id] = $group;
+            sort(
+                $group
+            );
+
+
+            foreach (
+                $group
+                as $id
+            ) {
+
+                $map[$id] =
+                    $group;
             }
         }
 
+
         return $map;
     }
+
 
     /*
     |--------------------------------------------------------------------------
@@ -1341,14 +1883,19 @@ class AuditNews extends Command
     |--------------------------------------------------------------------------
     */
 
-    private function significantWords(string $text): array
-    {
-        $words = preg_split(
-            '/\s+/u',
-            trim($text)
-        );
+    private function significantWords(
+        string $text
+    ): array {
+
+        $words =
+            preg_split(
+                '/\s+/u',
+                trim($text)
+            );
+
 
         $stopWords = [
+
             'the',
             'a',
             'an',
@@ -1371,7 +1918,6 @@ class AuditNews extends Command
 
             'من',
             'في',
-            'من',
             'إلى',
             'الى',
             'على',
@@ -1388,31 +1934,58 @@ class AuditNews extends Command
             'او',
         ];
 
-        $words = array_filter(
-            $words,
-            function ($word) use ($stopWords) {
-                $word = trim($word);
 
-                if ($word === '') {
-                    return false;
+        $words =
+            array_filter(
+                $words,
+                function (
+                    $word
+                ) use (
+                    $stopWords
+                ) {
+
+                    $word =
+                        trim(
+                            $word
+                        );
+
+
+                    if (
+                        $word === ''
+                    ) {
+
+                        return false;
+                    }
+
+
+                    if (
+                        mb_strlen(
+                            $word
+                        ) < 3
+                    ) {
+
+                        return false;
+                    }
+
+
+                    return
+                        !in_array(
+                            $word,
+                            $stopWords,
+                            true
+                        );
                 }
+            );
 
-                if (mb_strlen($word) < 3) {
-                    return false;
-                }
 
-                return !in_array(
-                    $word,
-                    $stopWords,
-                    true
-                );
-            }
-        );
-
-        return array_values(
-            array_unique($words)
-        );
+        return
+            array_values(
+                array_unique(
+                    $words
+                )
+            );
     }
+
 
     /*
     |--------------------------------------------------------------------------
@@ -1420,67 +1993,96 @@ class AuditNews extends Command
     |--------------------------------------------------------------------------
     */
 
-    private function normalizeText(?string $text): string
-    {
-        if (!$text) {
+    private function normalizeText(
+        ?string $text
+    ): string {
+
+        if (
+            !$text
+        ) {
+
             return '';
         }
 
-        $text = mb_strtolower($text);
+
+        $text =
+            mb_strtolower(
+                $text
+            );
+
 
         /*
-         * Arabic normalization.
-         */
+        |--------------------------------------------------------------------------
+        | Arabic Normalization
+        |--------------------------------------------------------------------------
+        */
 
-        $text = str_replace(
-            [
-                'أ',
-                'إ',
-                'آ',
-                'ٱ',
-            ],
-            'ا',
-            $text
-        );
+        $text =
+            str_replace(
+                [
+                    'أ',
+                    'إ',
+                    'آ',
+                    'ٱ',
+                ],
+                'ا',
+                $text
+            );
 
-        $text = str_replace(
-            [
-                'ى',
-            ],
-            'ي',
-            $text
-        );
 
-        $text = str_replace(
-            [
-                'ة',
-            ],
-            'ه',
-            $text
-        );
+        $text =
+            str_replace(
+                [
+                    'ى',
+                ],
+                'ي',
+                $text
+            );
 
-        /*
-         * Remove punctuation.
-         */
 
-        $text = preg_replace(
-            '/[^\p{L}\p{N}\s]/u',
-            ' ',
-            $text
-        );
+        $text =
+            str_replace(
+                [
+                    'ة',
+                ],
+                'ه',
+                $text
+            );
+
 
         /*
-         * Normalize whitespace.
-         */
+        |--------------------------------------------------------------------------
+        | Remove Punctuation
+        |--------------------------------------------------------------------------
+        */
 
-        $text = preg_replace(
-            '/\s+/u',
-            ' ',
+        $text =
+            preg_replace(
+                '/[^\p{L}\p{N}\s]/u',
+                ' ',
+                $text
+            );
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Normalize Whitespace
+        |--------------------------------------------------------------------------
+        */
+
+        $text =
+            preg_replace(
+                '/\s+/u',
+                ' ',
+                $text
+            );
+
+
+        return trim(
             $text
         );
-
-        return trim($text);
     }
+
 
     /*
     |--------------------------------------------------------------------------
@@ -1488,35 +2090,80 @@ class AuditNews extends Command
     |--------------------------------------------------------------------------
     */
 
-    private function calculateMissingFields($news): array
-    {
+    private function calculateMissingFields(
+        $news
+    ): array {
+
         $missing = [
-            'title_ar'          => 0,
-            'title_en'          => 0,
-            'content_ar'        => 0,
-            'content_en'        => 0,
-            'summary_ar'        => 0,
-            'why_it_matters_ar' => 0,
-            'analysis_ar'       => 0,
-            'context_ar'        => 0,
-            'what_to_watch_ar'  => 0,
-            'limitations_ar'    => 0,
-            'source'            => 0,
-            'url'               => 0,
-            'image_url'         => 0,
-            'category'          => 0,
+
+            'title_ar' =>
+                0,
+
+            'title_en' =>
+                0,
+
+            'content_ar' =>
+                0,
+
+            'content_en' =>
+                0,
+
+            'summary_ar' =>
+                0,
+
+            'why_it_matters_ar' =>
+                0,
+
+            'analysis_ar' =>
+                0,
+
+            'context_ar' =>
+                0,
+
+            'what_to_watch_ar' =>
+                0,
+
+            'limitations_ar' =>
+                0,
+
+            'source' =>
+                0,
+
+            'url' =>
+                0,
+
+            'image_url' =>
+                0,
+
+            'category' =>
+                0,
         ];
 
-        foreach ($news as $item) {
-            foreach ($missing as $field => $count) {
-                if ($this->isEmpty($item->{$field})) {
+
+        foreach (
+            $news as $item
+        ) {
+
+            foreach (
+                $missing
+                as $field => $count
+            ) {
+
+                if (
+                    $this->isEmpty(
+                        $item->{$field}
+                    )
+                ) {
+
                     $missing[$field]++;
                 }
             }
         }
 
+
         return $missing;
     }
+
 
     /*
     |--------------------------------------------------------------------------
@@ -1524,34 +2171,76 @@ class AuditNews extends Command
     |--------------------------------------------------------------------------
     */
 
-    private function calculateContentStatistics($news): array
-    {
+    private function calculateContentStatistics(
+        $news
+    ): array {
+
         $stats = [
-            'empty'       => 0,
-            'very_short'  => 0,
-            'short'       => 0,
-            'acceptable'  => 0,
-            'strong'      => 0,
+
+            'empty' =>
+                0,
+
+            'very_short' =>
+                0,
+
+            'short' =>
+                0,
+
+            'acceptable' =>
+                0,
+
+            'strong' =>
+                0,
         ];
 
-        foreach ($news as $item) {
-            $length = $this->originalContentLength($item);
 
-            if ($length === 0) {
+        foreach (
+            $news as $item
+        ) {
+
+            $length =
+                $this->originalContentLength(
+                    $item
+                );
+
+
+            if (
+                $length === 0
+            ) {
+
                 $stats['empty']++;
-            } elseif ($length < $this->veryShortContent) {
+            }
+            elseif (
+                $length <
+                $this->veryShortContent
+            ) {
+
                 $stats['very_short']++;
-            } elseif ($length < $this->shortContent) {
+            }
+            elseif (
+                $length <
+                $this->shortContent
+            ) {
+
                 $stats['short']++;
-            } elseif ($length < $this->acceptableContent) {
+            }
+            elseif (
+                $length <
+                $this->acceptableContent
+            ) {
+
                 $stats['acceptable']++;
-            } else {
+            }
+            else {
+
                 $stats['strong']++;
             }
         }
 
+
         return $stats;
     }
+
 
     /*
     |--------------------------------------------------------------------------
@@ -1562,18 +2251,31 @@ class AuditNews extends Command
     private function originalContentLength(
         News $item
     ): int {
-        $en = mb_strlen(
-            trim((string) $item->content_en)
-        );
 
-        if ($en > 0) {
+        $en =
+            mb_strlen(
+                trim(
+                    (string) $item->content_en
+                )
+            );
+
+
+        if (
+            $en > 0
+        ) {
+
             return $en;
         }
 
-        return mb_strlen(
-            trim((string) $item->content_ar)
-        );
+
+        return
+            mb_strlen(
+                trim(
+                    (string) $item->content_ar
+                )
+            );
     }
+
 
     /*
     |--------------------------------------------------------------------------
@@ -1581,22 +2283,46 @@ class AuditNews extends Command
     |--------------------------------------------------------------------------
     */
 
-    private function isEmpty($value): bool
-    {
-        if ($value === null) {
+    private function isEmpty(
+        $value
+    ): bool {
+
+        if (
+            $value === null
+        ) {
+
             return true;
         }
 
-        if (is_string($value)) {
-            return trim($value) === '';
+
+        if (
+            is_string(
+                $value
+            )
+        ) {
+
+            return
+                trim(
+                    $value
+                ) === '';
         }
 
-        if (is_array($value)) {
-            return empty($value);
+
+        if (
+            is_array(
+                $value
+            )
+        ) {
+
+            return empty(
+                $value
+            );
         }
+
 
         return false;
     }
+
 
     /*
     |--------------------------------------------------------------------------
@@ -1610,6 +2336,7 @@ class AuditNews extends Command
         int $aiNotProcessed,
         float $averageScore
     ): void {
+
         $this->info(
             '----------------------------------------------'
         );
@@ -1641,6 +2368,7 @@ class AuditNews extends Command
         $this->newLine();
     }
 
+
     /*
     |--------------------------------------------------------------------------
     | Display Classification
@@ -1653,6 +2381,7 @@ class AuditNews extends Command
         int $review,
         int $delete
     ): void {
+
         $this->info(
             'QUALITY CLASSIFICATION'
         );
@@ -1676,9 +2405,10 @@ class AuditNews extends Command
         $this->newLine();
     }
 
+
     /*
     |--------------------------------------------------------------------------
-    | Display Quality Statistics
+    | Display Quality
     |--------------------------------------------------------------------------
     */
 
@@ -1688,6 +2418,7 @@ class AuditNews extends Command
         int $medium,
         int $weak
     ): void {
+
         $this->info(
             'QUALITY SCORE'
         );
@@ -1711,9 +2442,10 @@ class AuditNews extends Command
         $this->newLine();
     }
 
+
     /*
     |--------------------------------------------------------------------------
-    | Display Recommendation Statistics
+    | Display Recommendations
     |--------------------------------------------------------------------------
     */
 
@@ -1721,6 +2453,7 @@ class AuditNews extends Command
         array $stats,
         int $duplicateArticles
     ): void {
+
         $this->info(
             'RECOMMENDED ACTIONS'
         );
@@ -1760,6 +2493,7 @@ class AuditNews extends Command
         $this->newLine();
     }
 
+
     /*
     |--------------------------------------------------------------------------
     | Display Missing Fields
@@ -1769,6 +2503,7 @@ class AuditNews extends Command
     private function displayMissingFields(
         array $missing
     ): void {
+
         $this->info(
             '----------------------------------------------'
         );
@@ -1781,16 +2516,25 @@ class AuditNews extends Command
             '----------------------------------------------'
         );
 
-        foreach ($missing as $field => $count) {
+
+        foreach (
+            $missing as $field => $count
+        ) {
+
             $this->line(
-                str_pad($field, 24) .
+                str_pad(
+                    $field,
+                    24
+                ) .
                 ': ' .
                 $count
             );
         }
 
+
         $this->newLine();
     }
+
 
     /*
     |--------------------------------------------------------------------------
@@ -1801,6 +2545,7 @@ class AuditNews extends Command
     private function displayContentStatistics(
         array $stats
     ): void {
+
         $this->info(
             '----------------------------------------------'
         );
@@ -1836,6 +2581,7 @@ class AuditNews extends Command
         $this->newLine();
     }
 
+
     /*
     |--------------------------------------------------------------------------
     | Display Duplicate Statistics
@@ -1846,6 +2592,7 @@ class AuditNews extends Command
         int $groups,
         int $articles
     ): void {
+
         $this->info(
             '----------------------------------------------'
         );
@@ -1869,9 +2616,10 @@ class AuditNews extends Command
         $this->newLine();
     }
 
+
     /*
     |--------------------------------------------------------------------------
-    | Display Status Results
+    | Display Results
     |--------------------------------------------------------------------------
     */
 
@@ -1881,13 +2629,25 @@ class AuditNews extends Command
         string $label,
         bool $show
     ): void {
-        if (!$show) {
+
+        if (
+            !$show
+        ) {
+
             return;
         }
 
-        $items = collect($results)
-            ->where('status', $status)
+
+        $items =
+            collect(
+                $results
+            )
+            ->where(
+                'status',
+                $status
+            )
             ->values();
+
 
         $this->newLine();
 
@@ -1906,22 +2666,33 @@ class AuditNews extends Command
             '=============================================='
         );
 
-        if ($items->isEmpty()) {
-            $this->line('None.');
+
+        if (
+            $items->isEmpty()
+        ) {
+
+            $this->line(
+                'None.'
+            );
 
             return;
         }
 
-        foreach ($items as $item) {
+
+        foreach (
+            $items as $item
+        ) {
+
             $this->displaySingleResult(
                 $item
             );
         }
     }
 
+
     /*
     |--------------------------------------------------------------------------
-    | Display Recommendation Results
+    | Recommendation Results
     |--------------------------------------------------------------------------
     */
 
@@ -1930,12 +2701,17 @@ class AuditNews extends Command
         string $recommendation,
         string $label
     ): void {
-        $items = collect($results)
+
+        $items =
+            collect(
+                $results
+            )
             ->where(
                 'recommendation',
                 $recommendation
             )
             ->values();
+
 
         $this->newLine();
 
@@ -1954,29 +2730,44 @@ class AuditNews extends Command
             '=============================================='
         );
 
-        if ($items->isEmpty()) {
-            $this->line('None.');
+
+        if (
+            $items->isEmpty()
+        ) {
+
+            $this->line(
+                'None.'
+            );
 
             return;
         }
 
-        foreach ($items as $item) {
+
+        foreach (
+            $items as $item
+        ) {
+
             $this->displaySingleResult(
                 $item
             );
         }
     }
 
+
     /*
     |--------------------------------------------------------------------------
-    | Display Refetch Results
+    | Refetch Results
     |--------------------------------------------------------------------------
     */
 
     private function displayRefetchResults(
         array $results
     ): void {
-        $items = collect($results)
+
+        $items =
+            collect(
+                $results
+            )
             ->filter(
                 fn ($item) =>
                     in_array(
@@ -1990,6 +2781,7 @@ class AuditNews extends Command
                     )
             )
             ->values();
+
 
         $this->newLine();
 
@@ -2007,29 +2799,44 @@ class AuditNews extends Command
             '=============================================='
         );
 
-        if ($items->isEmpty()) {
-            $this->line('None.');
+
+        if (
+            $items->isEmpty()
+        ) {
+
+            $this->line(
+                'None.'
+            );
 
             return;
         }
 
-        foreach ($items as $item) {
+
+        foreach (
+            $items as $item
+        ) {
+
             $this->displaySingleResult(
                 $item
             );
         }
     }
 
+
     /*
     |--------------------------------------------------------------------------
-    | Display Weak Results
+    | Weak Results
     |--------------------------------------------------------------------------
     */
 
     private function displayWeakResults(
         array $results
     ): void {
-        $items = collect($results)
+
+        $items =
+            collect(
+                $results
+            )
             ->filter(
                 fn ($item) =>
                     $item['quality_score'] < 60
@@ -2038,6 +2845,7 @@ class AuditNews extends Command
                 'quality_score'
             )
             ->values();
+
 
         $this->newLine();
 
@@ -2055,18 +2863,29 @@ class AuditNews extends Command
             '=============================================='
         );
 
-        if ($items->isEmpty()) {
-            $this->line('None.');
+
+        if (
+            $items->isEmpty()
+        ) {
+
+            $this->line(
+                'None.'
+            );
 
             return;
         }
 
-        foreach ($items as $item) {
+
+        foreach (
+            $items as $item
+        ) {
+
             $this->displaySingleResult(
                 $item
             );
         }
     }
+
 
     /*
     |--------------------------------------------------------------------------
@@ -2077,108 +2896,136 @@ class AuditNews extends Command
     private function displaySingleResult(
         array $item
     ): void {
+
         $this->line(
-            "ID {$item['id']} | " .
-            $item['title']
+            "ID {$item['id']} | {$item['title']}"
         );
 
         $this->line(
-            "Quality Score: " .
-            $item['quality_score'] .
-            "/100"
+            "Quality Score: {$item['quality_score']}/100"
         );
 
         $this->line(
-            "Status: " .
-            $item['status']
+            "Status: {$item['status']}"
         );
 
         $this->line(
-            "Content: " .
-            $item['content_length'] .
-            " chars"
+            "Content: {$item['content_length']} chars"
         );
 
         $this->line(
-            "Content EN: " .
-            $item['content_en_length'] .
-            " chars"
+            "Content EN: {$item['content_en_length']} chars"
         );
 
         $this->line(
-            "Content AR: " .
-            $item['content_ar_length'] .
-            " chars"
+            "Content AR: {$item['content_ar_length']} chars"
         );
 
         $this->line(
             "AI: " .
-            ($item['ai_processed']
+            (
+                $item['ai_processed']
                 ? 'YES'
-                : 'NO')
+                : 'NO'
+            )
         );
 
         $this->line(
-            "Recommendation: " .
-            $item['recommendation']
+            "Recommendation: {$item['recommendation']}"
         );
 
-        if (!empty($item['diagnosis'])) {
-            $this->line(
-                "Diagnosis: " .
+
+        if (
+            !empty(
                 $item['diagnosis']
+            )
+        ) {
+
+            $this->line(
+                "Diagnosis: {$item['diagnosis']}"
             );
         }
 
-        if ($item['source']) {
-            $this->line(
-                "Source: " .
+
+        if (
+            !empty(
                 $item['source']
+            )
+        ) {
+
+            $this->line(
+                "Source: {$item['source']}"
             );
         }
 
-        if ($item['url']) {
-            $this->line(
-                "URL: " .
+
+        if (
+            !empty(
                 $item['url']
-            );
-        }
+            )
+        ) {
 
-        if ($item['category']) {
             $this->line(
-                "Category: " .
-                $item['category']
+                "URL: {$item['url']}"
             );
         }
 
-        if ($item['duplicate']) {
+
+        if (
+            !empty(
+                $item['category']
+            )
+        ) {
+
+            $this->line(
+                "Category: {$item['category']}"
+            );
+        }
+
+
+        if (
+            $item['duplicate']
+        ) {
+
             $duplicateIds =
                 implode(
                     ', ',
                     $item['duplicate_of']
                 );
 
+
             $this->line(
-                "Duplicate of: " .
-                $duplicateIds
+                "Duplicate of: {$duplicateIds}"
             );
         }
 
-        if (!empty($item['issues'])) {
+
+        if (
+            !empty(
+                $item['issues']
+            )
+        ) {
+
             $this->line(
                 'Issues:'
             );
 
-            foreach ($item['issues'] as $issue) {
+
+            foreach (
+                $item['issues']
+                as $issue
+            ) {
+
                 $this->line(
-                    "  - " .
-                    $issue
+                    "  - {$issue}"
                 );
             }
         }
 
+
         $this->newLine();
     }
+
 
     /*
     |--------------------------------------------------------------------------
@@ -2189,25 +3036,45 @@ class AuditNews extends Command
     private function countDuplicateGroups(
         array $duplicateMap
     ): int {
+
         $groups = [];
 
-        foreach ($duplicateMap as $group) {
-            $group = array_values(
-                array_unique($group)
-            );
 
-            sort($group);
+        foreach (
+            $duplicateMap
+            as $group
+        ) {
 
-            $key = implode(
-                '-',
+            $group =
+                array_values(
+                    array_unique(
+                        $group
+                    )
+                );
+
+
+            sort(
                 $group
             );
 
-            $groups[$key] = true;
+
+            $key =
+                implode(
+                    '-',
+                    $group
+                );
+
+
+            $groups[$key] =
+                true;
         }
 
-        return count($groups);
+
+        return count(
+            $groups
+        );
     }
+
 
     /*
     |--------------------------------------------------------------------------
@@ -2219,26 +3086,45 @@ class AuditNews extends Command
         $news,
         array $duplicateMap
     ): void {
+
         $groups = [];
 
-        foreach ($duplicateMap as $group) {
-            $group = array_values(
-                array_unique($group)
-            );
 
-            sort($group);
+        foreach (
+            $duplicateMap
+            as $group
+        ) {
 
-            $key = implode(
-                '-',
+            $group =
+                array_values(
+                    array_unique(
+                        $group
+                    )
+                );
+
+
+            sort(
                 $group
             );
 
-            $groups[$key] = $group;
+
+            $key =
+                implode(
+                    '-',
+                    $group
+                );
+
+
+            $groups[$key] =
+                $group;
         }
 
-        $groups = array_values(
-            $groups
-        );
+
+        $groups =
+            array_values(
+                $groups
+            );
+
 
         $this->newLine();
 
@@ -2256,7 +3142,13 @@ class AuditNews extends Command
             '=============================================='
         );
 
-        if (empty($groups)) {
+
+        if (
+            empty(
+                $groups
+            )
+        ) {
+
             $this->line(
                 'No duplicate or highly similar groups detected.'
             );
@@ -2264,35 +3156,56 @@ class AuditNews extends Command
             return;
         }
 
-        foreach ($groups as $index => $group) {
+
+        foreach (
+            $groups
+            as $index => $group
+        ) {
+
             $this->line(
                 'Group #' .
                 ($index + 1)
             );
 
-            foreach ($group as $id) {
-                $item = $news->firstWhere(
-                    'id',
-                    $id
-                );
 
-                if (!$item) {
+            foreach (
+                $group
+                as $id
+            ) {
+
+                $item =
+                    $news->firstWhere(
+                        'id',
+                        $id
+                    );
+
+
+                if (
+                    !$item
+                ) {
+
                     continue;
                 }
 
+
                 $title =
                     $item->title_en
-                    ?: $item->title_ar
-                    ?: 'Untitled';
+                    ?:
+                    $item->title_ar
+                    ?:
+                    'Untitled';
+
 
                 $this->line(
                     "  ID {$item->id} | {$title}"
                 );
             }
 
+
             $this->newLine();
         }
     }
+
 
     /*
     |--------------------------------------------------------------------------
@@ -2308,6 +3221,7 @@ class AuditNews extends Command
         int $delete,
         float $averageScore
     ): void {
+
         $this->newLine();
 
         $this->info(
@@ -2359,4 +3273,3 @@ class AuditNews extends Command
         $this->newLine();
     }
 }
-```
