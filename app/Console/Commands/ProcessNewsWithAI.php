@@ -51,7 +51,7 @@ class ProcessNewsWithAI extends Command
     |--------------------------------------------------------------------------
     */
 
-    private const MIN_ARTICLE_LENGTH = 140;
+    private const MIN_ARTICLE_LENGTH = 300;
 
     /*
     |--------------------------------------------------------------------------
