@@ -47,7 +47,7 @@ class FetchCryptoNews extends Command
     |
     */
 
-    private const MIN_SOURCE_LENGTH = 400;
+    private const MIN_SOURCE_LENGTH = 250;
 
 
     /*
@@ -58,11 +58,9 @@ class FetchCryptoNews extends Command
 
     private const DUPLICATE_SIMILARITY = 85;
 
-    private const DUPLICATE_CHECK_LIMIT = 300;
-
-
+    private const DUPLICATE_CHECK_LIMIT = 200;
     /*
-    |--------------------------------------------------------------------------
+    |------------------------------------------20--------------------------------
     | Fetching
     |--------------------------------------------------------------------------
     */
