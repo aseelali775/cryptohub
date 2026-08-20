@@ -14,19 +14,13 @@ use andreskrey\Readability\ParseException;
 class FetchCryptoNews extends Command
 {
     protected $signature = 'crypto:fetch-news';
+    
     protected $description = 'Fetch crypto news from multiple sources, extract full articles, detect duplicates, and store new articles.';
     
-    // 🟢 1. تحديث الـ Headers لتصبح متطابقة تماماً مع متصفح حقيقي لتخطي بعض الحمايات
     protected $headers = [
-        'User-Agent'      => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36',
-        'Accept'          => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8',
-        'Accept-Language' => 'en-US,en;q=0.9',
-        'Connection'      => 'keep-alive',
-        'Upgrade-Insecure-Requests' => '1',
-        'Sec-Fetch-Dest'  => 'document',
-        'Sec-Fetch-Mode'  => 'navigate',
-        'Sec-Fetch-Site'  => 'none',
-        'Sec-Fetch-User'  => '?1',
+        'User-Agent'      => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Accept'          => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+        'Accept-Language' => 'en-US,en;q=0.5',
     ];
 
     /**
@@ -39,14 +33,9 @@ class FetchCryptoNews extends Command
      */
     private const DUPLICATE_CHECK_LIMIT = 200;
 
-    /**
-     * 🟢 2. زيادة عدد الأخبار المسحوبة من كل مصدر (كانت 3 وأصبحت 15)
-     */
-    private const MAX_ARTICLES_PER_SOURCE = 15;
-
     public function handle()
     {
-        $this->info('Starting automated tireless news fetcher...');
+        $this->info('Starting automated news fetcher...');
         $this->info('Duplicate detection: ENABLED');
         $this->info('AI processing will happen separately.');
 
@@ -70,122 +59,356 @@ class FetchCryptoNews extends Command
 
             try {
                 $response = Http::timeout(20)->get($rssUrl);
-
+                
                 if (!$response->successful()) {
-                    $this->error("RSS request failed for {$sourceName}: HTTP {$response->status()}");
-                    Log::error('RSS request failed', [
-                        'source' => $sourceName,
-                        'status' => $response->status(),
-                    ]);
+                    $this->error(
+                        "RSS request failed for {$sourceName}: HTTP {$response->status()}"
+                    );
+                    Log::error(
+                        'RSS request failed',
+                        [
+                            'source' => $sourceName,
+                            'status' => $response->status(),
+                        ]
+                    );
                     continue;
                 }
 
                 $xmlString = $response->body();
-                $xml = @simplexml_load_string($xmlString, 'SimpleXMLElement', LIBXML_NOCDATA);
+                $xml = @simplexml_load_string(
+                    $xmlString,
+                    'SimpleXMLElement',
+                    LIBXML_NOCDATA
+                );
 
                 if (!$xml || !isset($xml->channel->item)) {
-                    $this->warn("No RSS items found for {$sourceName}");
+                    $this->warn(
+                        "No RSS items found for {$sourceName}"
+                    );
                     continue;
                 }
 
-                $json = json_encode($xml->channel->item);
-                $newsItems = json_decode($json, true);
+                $json = json_encode(
+                    $xml->channel->item
+                );
+                
+                $newsItems = json_decode(
+                    $json,
+                    true
+                );
 
                 if (!is_array($newsItems)) {
                     continue;
                 }
 
+                /*
+                |--------------------------------------------------------------------------
+                | Normalize single item
+                |--------------------------------------------------------------------------
+                */
                 if (isset($newsItems['title'])) {
                     $newsItems = [$newsItems];
                 }
 
-                // Sort newest first
-                usort($newsItems, function ($a, $b) {
-                    return strtotime($b['pubDate'] ?? 'now') <=> strtotime($a['pubDate'] ?? 'now');
-                });
+                /*
+                |--------------------------------------------------------------------------
+                | Sort newest first
+                |--------------------------------------------------------------------------
+                */
+                usort(
+                    $newsItems,
+                    function ($a, $b) {
+                        return strtotime(
+                            $b['pubDate'] ?? 'now'
+                        ) <=> strtotime(
+                            $a['pubDate'] ?? 'now'
+                        );
+                    }
+                );
 
                 $count = 0;
 
+                /*
+                |--------------------------------------------------------------------------
+                | Process RSS items
+                |--------------------------------------------------------------------------
+                */
                 foreach ($newsItems as $item) {
-                    // الحد الأقصى للمقالات من كل مصدر
-                    if ($count >= self::MAX_ARTICLES_PER_SOURCE) {
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Maximum 3 articles from each source per run
+                    |--------------------------------------------------------------------------
+                    */
+                    if ($count >= 3) {
                         break;
                     }
 
-                    $title = is_array($item['title'] ?? null) ? ($item['title'][0] ?? '') : ($item['title'] ?? '');
-                    $link = is_array($item['link'] ?? null) ? ($item['link'][0] ?? '') : ($item['link'] ?? '');
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Extract title
+                    |--------------------------------------------------------------------------
+                    */
+                    $title = is_array($item['title'] ?? null)
+                        ? ($item['title'][0] ?? '')
+                        : ($item['title'] ?? '');
 
-                    $title = trim(html_entity_decode(strip_tags($title), ENT_QUOTES | ENT_HTML5, 'UTF-8'));
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Extract URL
+                    |--------------------------------------------------------------------------
+                    */
+                    $link = is_array($item['link'] ?? null)
+                        ? ($item['link'][0] ?? '')
+                        : ($item['link'] ?? '');
+
+                    $title = trim(
+                        html_entity_decode(
+                            strip_tags($title),
+                            ENT_QUOTES | ENT_HTML5,
+                            'UTF-8'
+                        )
+                    );
+
                     $link = trim($link);
 
-                    if (empty($title) || empty($link)) {
+                    if (
+                        empty($title) ||
+                        empty($link)
+                    ) {
                         continue;
                     }
 
-                    // 1. Exact URL duplicate check
-                    if (News::where('url', $link)->exists()) {
-                        $this->warn("⏭ Duplicate URL: {$title}");
+                    /*
+                    |--------------------------------------------------------------------------
+                    | 1. Exact URL duplicate check
+                    |--------------------------------------------------------------------------
+                    */
+                    $existsByUrl = News::where(
+                        'url',
+                        $link
+                    )->exists();
+
+                    if ($existsByUrl) {
+                        $this->warn(
+                            "⏭ Duplicate URL: {$title}"
+                        );
                         $totalDuplicates++;
+                        Log::info(
+                            'Duplicate news skipped by URL',
+                            [
+                                'source' => $sourceName,
+                                'title' => $title,
+                                'url' => $link,
+                            ]
+                        );
                         continue;
                     }
 
-                    // 2. Exact normalized title check
-                    $normalizedTitle = $this->normalizeTitle($title);
-                    $existsByTitle = News::whereNotNull('title_en')
+                    /*
+                    |--------------------------------------------------------------------------
+                    | 2. Exact normalized title check
+                    |--------------------------------------------------------------------------
+                    */
+                    $normalizedTitle = $this->normalizeTitle(
+                        $title
+                    );
+
+                    $existsByTitle = News::whereNotNull(
+                        'title_en'
+                    )
                         ->get(['id', 'title_en'])
                         ->contains(function ($news) use ($normalizedTitle) {
-                            return $this->normalizeTitle($news->title_en) === $normalizedTitle;
+                            return $this->normalizeTitle(
+                                $news->title_en
+                            ) === $normalizedTitle;
                         });
 
                     if ($existsByTitle) {
-                        $this->warn("⏭ Duplicate title: {$title}");
+                        $this->warn(
+                            "⏭ Duplicate title: {$title}"
+                        );
                         $totalDuplicates++;
+                        Log::info(
+                            'Duplicate news skipped by normalized title',
+                            [
+                                'source' => $sourceName,
+                                'title' => $title,
+                            ]
+                        );
                         continue;
                     }
 
-                    // 3. Similar article detection
-                    $similarNews = $this->findSimilarNews($title);
+                    /*
+                    |--------------------------------------------------------------------------
+                    | 3. Similar article detection
+                    |--------------------------------------------------------------------------
+                    */
+                    $similarNews = $this->findSimilarNews(
+                        $title
+                    );
+
                     if ($similarNews) {
-                        $this->warn("⏭ Similar article detected: Similarity {$similarNews['similarity']}%");
+                        $this->warn(
+                            "⏭ Similar article detected:"
+                        );
+                        $this->warn(
+                            "New: {$title}"
+                        );
+                        $this->warn(
+                            "Existing: {$similarNews['title']}"
+                        );
+                        $this->warn(
+                            "Similarity: {$similarNews['similarity']}%"
+                        );
                         $totalDuplicates++;
+                        Log::info(
+                            'Similar crypto news skipped',
+                            [
+                                'source' => $sourceName,
+                                'new_title' => $title,
+                                'existing_title' => $similarNews['title'],
+                                'existing_id' => $similarNews['id'],
+                                'similarity' => $similarNews['similarity'],
+                            ]
+                        );
                         continue;
                     }
 
-                    $this->info("🆕 New article: {$title}");
+                    /*
+                    |--------------------------------------------------------------------------
+                    | New article
+                    |--------------------------------------------------------------------------
+                    */
+                    $this->info(
+                        "🆕 New article: {$title}"
+                    );
 
-                    $imageUrl = $this->extractImage($item);
-                    
-                    // محاولة سحب المقال الكامل
-                    $fullContent = $this->extractFullArticle($link);
-                    $isSuccess = !empty($fullContent);
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Extract image
+                    |--------------------------------------------------------------------------
+                    */
+                    $imageUrl = $this->extractImage(
+                        $item
+                    );
 
-                    // 🟢 RSS Fallback (إذا فشل السحب بسبب Cloudflare، نستخدم الوصف من RSS)
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Extract full article
+                    |--------------------------------------------------------------------------
+                    */
+                    $fullContent = $this->extractFullArticle(
+                        $link
+                    );
+
+                    $isSuccess = !empty(
+                        $fullContent
+                    );
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | RSS fallback
+                    |--------------------------------------------------------------------------
+                    */
                     if (!$isSuccess) {
-                        $description = is_array($item['description'] ?? null) ? ($item['description'][0] ?? '') : ($item['description'] ?? '');
-                        $fullContent = strip_tags($description);
+                        $description = is_array(
+                            $item['description'] ?? null
+                        )
+                            ? ($item['description'][0] ?? '')
+                            : ($item['description'] ?? '');
+
+                        $fullContent = strip_tags(
+                            $description
+                        );
                     }
 
-                    // تنظيف المحتوى
-                    $safeContentEn = Str::limit(trim(preg_replace('/\s+/', ' ', $fullContent)), 15000, '');
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Clean content
+                    |--------------------------------------------------------------------------
+                    */
+                    $safeContentEn = Str::limit(
+                        trim(
+                            preg_replace(
+                                '/\s+/',
+                                ' ',
+                                $fullContent
+                            )
+                        ),
+                        15000,
+                        ''
+                    );
 
-                    // 🟢 تجاهل الأخبار القصيرة جداً (أقل من 100 حرف)
-                    if (mb_strlen($safeContentEn) < 100) {
-                        $this->warn("⚠️ Skipped because article is too short.");
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Ignore very short articles
+                    |--------------------------------------------------------------------------
+                    */
+                    if (
+                        mb_strlen(
+                            $safeContentEn
+                        ) < 100
+                    ) {
+                        $this->warn(
+                            "⚠️ Skipped because article is too short."
+                        );
+                        Log::warning(
+                            'Skipped short crypto article',
+                            [
+                                'source' => $sourceName,
+                                'url' => $link,
+                            ]
+                        );
                         $totalSkipped++;
                         continue;
                     }
 
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Extraction statistics
+                    |--------------------------------------------------------------------------
+                    */
                     if ($isSuccess) {
+                        Log::info(
+                            "Extraction Success",
+                            [
+                                'source' => $sourceName,
+                                'url' => $link,
+                            ]
+                        );
                         $totalSuccess++;
                     } else {
-                        Log::warning("Extraction Fallback", ['source' => $sourceName, 'url' => $link]);
+                        Log::warning(
+                            "Extraction Fallback",
+                            [
+                                'source' => $sourceName,
+                                'url' => $link,
+                            ]
+                        );
                         $totalFallback++;
                     }
 
-                    // حفظ الخبر
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Create article
+                    |--------------------------------------------------------------------------
+                    |
+                    | IMPORTANT:
+                    |
+                    | ai_processed = false
+                    |
+                    | This means the article will NOT be shown publicly
+                    | until Gemini successfully processes it.
+                    |
+                    */
                     $news = News::create([
                         'title_en' => $title,
                         'content_en' => $safeContentEn,
+                        /*
+                        |--------------------------------------------------------------------------
+                        | Arabic fields remain empty until AI processing.
+                        |--------------------------------------------------------------------------
+                        */
                         'title_ar' => null,
                         'content_ar' => null,
                         'summary_ar' => null,
@@ -197,161 +420,516 @@ class FetchCryptoNews extends Command
                         'image_url' => $imageUrl,
                         'source' => $sourceName,
                         'url' => $link,
+                        /*
+                        |--------------------------------------------------------------------------
+                        | AI has not processed this article yet.
+                        |--------------------------------------------------------------------------
+                        */
                         'ai_processed' => false,
+                        /*
+                        |--------------------------------------------------------------------------
+                        | Initial defaults
+                        |--------------------------------------------------------------------------
+                        */
                         'sentiment' => 'Neutral',
                         'category' => 'Market',
                         'impact_score' => 5,
                         'keywords' => [],
                     ]);
 
-                    $this->info("✅ Saved News ID {$news->id}");
+                    $this->info(
+                        "✅ Saved News ID {$news->id}"
+                    );
+
                     $totalNew++;
                     $count++;
 
-                    usleep(500000); // نصف ثانية استراحة
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Small delay between articles
+                    |--------------------------------------------------------------------------
+                    */
+                    usleep(500000);
                 }
             } catch (\Throwable $e) {
-                $this->error("Failed to process source {$sourceName}: {$e->getMessage()}");
-                Log::error('Scraper Error', [
-                    'source' => $sourceName,
-                    'message' => $e->getMessage(),
-                ]);
+                $this->error(
+                    "Failed to process source {$sourceName}: {$e->getMessage()}"
+                );
+                Log::error(
+                    'Scraper Error',
+                    [
+                        'source' => $sourceName,
+                        'message' => $e->getMessage(),
+                        'trace' => $e->getTraceAsString(),
+                    ]
+                );
             }
         }
 
-        $totalExtracted = $totalSuccess + $totalFallback;
-        $rate = $totalExtracted > 0 ? round(($totalSuccess / $totalExtracted) * 100, 2) : 0;
+        /*
+        |--------------------------------------------------------------------------
+        | Extraction success rate
+        |--------------------------------------------------------------------------
+        */
+        $totalExtracted =
+            $totalSuccess +
+            $totalFallback;
 
+        $rate = $totalExtracted > 0
+            ? round(
+                ($totalSuccess / $totalExtracted) * 100,
+                2
+            )
+            : 0;
+
+        /*
+        |--------------------------------------------------------------------------
+        | Final statistics
+        |--------------------------------------------------------------------------
+        */
         $this->info('');
         $this->info('====================================');
         $this->info('NEWS FETCH COMPLETED');
         $this->info('====================================');
-        $this->info("New Articles      : {$totalNew} 🆕");
-        $this->warn("Duplicates Skipped: {$totalDuplicates} ⏭");
-        $this->warn("Too Short Skipped : {$totalSkipped} ⚠️");
-        $this->info("Extraction Success: {$totalSuccess} ✅");
-        $this->warn("Extraction Fallback: {$totalFallback} ⚠️");
-        $this->info("Success Rate       : {$rate}% 📊");
+
+        $this->info(
+            "New Articles      : {$totalNew} 🆕"
+        );
+        $this->warn(
+            "Duplicates Skipped: {$totalDuplicates} ⏭"
+        );
+        $this->warn(
+            "Too Short Skipped : {$totalSkipped} ⚠️"
+        );
+        $this->info(
+            "Extraction Success : {$totalSuccess} ✅"
+        );
+        $this->warn(
+            "Extraction Fallback: {$totalFallback} ⚠️"
+        );
+        $this->info(
+            "Success Rate       : {$rate}% 📊"
+        );
         $this->info('====================================');
 
         return self::SUCCESS;
     }
 
-    private function normalizeTitle(string $title): string {
-        $title = html_entity_decode($title, ENT_QUOTES | ENT_HTML5, 'UTF-8');
-        $title = Str::lower($title);
-        $title = preg_replace('/https?:\/\/\S+/i', '', $title);
-        $title = preg_replace('/[^a-z0-9\s]/u', ' ', $title);
-        $title = preg_replace('/\s+/', ' ', $title);
-        return trim($title);
+    /*
+    |--------------------------------------------------------------------------
+    | Normalize title
+    |--------------------------------------------------------------------------
+    |
+    | Makes titles comparable even when punctuation/capitalization differs.
+    |
+    */
+    private function normalizeTitle(
+        string $title
+    ): string {
+        $title = html_entity_decode(
+            $title,
+            ENT_QUOTES | ENT_HTML5,
+            'UTF-8'
+        );
+
+        $title = Str::lower(
+            $title
+        );
+
+        /*
+        |--------------------------------------------------------------------------
+        | Remove URLs
+        |--------------------------------------------------------------------------
+        */
+        $title = preg_replace(
+            '/https?:\/\/\S+/i',
+            '',
+            $title
+        );
+
+        /*
+        |--------------------------------------------------------------------------
+        | Replace punctuation with spaces
+        |--------------------------------------------------------------------------
+        */
+        $title = preg_replace(
+            '/[^a-z0-9\s]/u',
+            ' ',
+            $title
+        );
+
+        /*
+        |--------------------------------------------------------------------------
+        | Normalize whitespace
+        |--------------------------------------------------------------------------
+        */
+        $title = preg_replace(
+            '/\s+/',
+            ' ',
+            $title
+        );
+
+        return trim(
+            $title
+        );
     }
 
-    private function findSimilarNews(string $newTitle): ?array {
-        $normalizedNew = $this->normalizeTitle($newTitle);
-        if (mb_strlen($normalizedNew) < 15) return null;
+    /*
+    |--------------------------------------------------------------------------
+    | Find similar existing article
+    |--------------------------------------------------------------------------
+    */
+    private function findSimilarNews(
+        string $newTitle
+    ): ?array {
+        $normalizedNew = $this->normalizeTitle(
+            $newTitle
+        );
 
+        if (
+            mb_strlen(
+                $normalizedNew
+            ) < 15
+        ) {
+            return null;
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Get recent articles only.
+        |--------------------------------------------------------------------------
+        |
+        | We do not need to compare against thousands of articles.
+        |
+        */
         $existingNews = News::query()
             ->whereNotNull('title_en')
             ->latest('id')
-            ->limit(self::DUPLICATE_CHECK_LIMIT)
-            ->get(['id', 'title_en', 'source']);
+            ->limit(
+                self::DUPLICATE_CHECK_LIMIT
+            )
+            ->get([
+                'id',
+                'title_en',
+                'source',
+            ]);
 
         $bestMatch = null;
 
         foreach ($existingNews as $existing) {
-            $existingTitle = trim((string) $existing->title_en);
-            if ($existingTitle === '') continue;
+            $existingTitle = trim(
+                (string) $existing->title_en
+            );
 
-            $normalizedExisting = $this->normalizeTitle($existingTitle);
-            if ($normalizedExisting === '') continue;
+            if (
+                $existingTitle === ''
+            ) {
+                continue;
+            }
 
-            similar_text($normalizedNew, $normalizedExisting, $percentage);
-            $tokenSimilarity = $this->calculateTokenSimilarity($normalizedNew, $normalizedExisting);
+            $normalizedExisting =
+                $this->normalizeTitle(
+                    $existingTitle
+                );
 
-            $score = max($percentage, $tokenSimilarity);
+            if (
+                $normalizedExisting === ''
+            ) {
+                continue;
+            }
 
-            if ($score >= self::DUPLICATE_SIMILARITY) {
-                if ($bestMatch === null || $score > $bestMatch['similarity']) {
+            /*
+            |--------------------------------------------------------------------------
+            | Similar text percentage
+            |--------------------------------------------------------------------------
+            */
+            similar_text(
+                $normalizedNew,
+                $normalizedExisting,
+                $percentage
+            );
+
+            /*
+            |--------------------------------------------------------------------------
+            | Token similarity
+            |--------------------------------------------------------------------------
+            |
+            | This helps detect titles that use different wording
+            | but contain the same important terms.
+            |
+            */
+            $tokenSimilarity =
+                $this->calculateTokenSimilarity(
+                    $normalizedNew,
+                    $normalizedExisting
+                );
+
+            /*
+            |--------------------------------------------------------------------------
+            | Use the stronger signal
+            |--------------------------------------------------------------------------
+            */
+            $score = max(
+                $percentage,
+                $tokenSimilarity
+            );
+
+            if (
+                $score >= self::DUPLICATE_SIMILARITY
+            ) {
+                if (
+                    $bestMatch === null ||
+                    $score > $bestMatch['similarity']
+                ) {
                     $bestMatch = [
                         'id' => $existing->id,
                         'title' => $existingTitle,
                         'source' => $existing->source,
-                        'similarity' => round($score, 2),
+                        'similarity' => round(
+                            $score,
+                            2
+                        ),
                     ];
                 }
             }
         }
+
         return $bestMatch;
     }
 
-    private function calculateTokenSimilarity(string $titleA, string $titleB): float {
-        $stopWords = ['the','a','an','and','or','of','to','in','on','for','with','as','at','by','from','is','are','was','were','has','have','had','this','that','after','before','over','into','its','their','how','why','what','new'];
-        
-        $getTokens = function($title) use ($stopWords) {
-            return collect(preg_split('/\s+/', $title))
-                ->filter()
-                ->reject(fn ($word) => in_array($word, $stopWords, true))
-                ->unique()
-                ->values()
-                ->toArray();
-        };
+    /*
+    |--------------------------------------------------------------------------
+    | Calculate token similarity
+    |--------------------------------------------------------------------------
+    */
+    private function calculateTokenSimilarity(
+        string $titleA,
+        string $titleB
+    ): float {
+        $stopWords = [
+            'the', 'a', 'an', 'and', 'or', 'of', 'to', 'in', 'on', 'for', 'with', 'as', 'at', 'by', 'from', 'is', 'are', 'was', 'were', 'has', 'have', 'had', 'this', 'that', 'after', 'before', 'over', 'into', 'its', 'their', 'how', 'why', 'what', 'new',
+        ];
 
-        $tokensA = $getTokens($titleA);
-        $tokensB = $getTokens($titleB);
+        $tokensA = collect(
+            preg_split(
+                '/\s+/',
+                $titleA
+            )
+        )
+            ->filter()
+            ->reject(
+                fn ($word) =>
+                    in_array(
+                        $word,
+                        $stopWords,
+                        true
+                    )
+            )
+            ->unique()
+            ->values()
+            ->toArray();
 
-        if (count($tokensA) < 3 || count($tokensB) < 3) return 0;
+        $tokensB = collect(
+            preg_split(
+                '/\s+/',
+                $titleB
+            )
+        )
+            ->filter()
+            ->reject(
+                fn ($word) =>
+                    in_array(
+                        $word,
+                        $stopWords,
+                        true
+                    )
+            )
+            ->unique()
+            ->values()
+            ->toArray();
 
-        $intersection = count(array_intersect($tokensA, $tokensB));
-        $union = count(array_unique(array_merge($tokensA, $tokensB)));
+        /*
+        |--------------------------------------------------------------------------
+        | Not enough meaningful words
+        |--------------------------------------------------------------------------
+        */
+        if (
+            count($tokensA) < 3 ||
+            count($tokensB) < 3
+        ) {
+            return 0;
+        }
 
-        if ($union === 0) return 0;
-        return ($intersection / $union) * 100;
+        $intersection = count(
+            array_intersect(
+                $tokensA,
+                $tokensB
+            )
+        );
+
+        $union = count(
+            array_unique(
+                array_merge(
+                    $tokensA,
+                    $tokensB
+                )
+            )
+        );
+
+        if ($union === 0) {
+            return 0;
+        }
+
+        return (
+            $intersection /
+            $union
+        ) * 100;
     }
 
-    private function extractImage($item) {
-        if (isset($item['enclosure']['@attributes']['url'])) {
+    /*
+    |--------------------------------------------------------------------------
+    | Extract image
+    |--------------------------------------------------------------------------
+    */
+    private function extractImage(
+        $item
+    ) {
+        if (
+            isset(
+                $item['enclosure']['@attributes']['url']
+            )
+        ) {
             return $item['enclosure']['@attributes']['url'];
         }
-        
-        $htmlContent = is_array($item['description'] ?? null) ? ($item['description'][0] ?? '') : ($item['description'] ?? '');
-        if (!empty($htmlContent)) {
-            preg_match('/<img[^>]+src="([^">]+)"/i', $htmlContent, $matches);
-            if (!empty($matches[1])) return $matches[1];
+
+        $htmlContent = is_array(
+            $item['description'] ?? null
+        )
+            ? ($item['description'][0] ?? '')
+            : ($item['description'] ?? '');
+
+        if (
+            !empty($htmlContent)
+        ) {
+            preg_match(
+                '/<img[^>]+src="([^">]+)"/i',
+                $htmlContent,
+                $matches
+            );
+
+            if (
+                !empty($matches[1])
+            ) {
+                return $matches[1];
+            }
         }
+
         return 'https://cryptologos.cc/logos/bitcoin-btc-logo.png';
     }
 
-    private function extractFullArticle($url) {
+    /*
+    |--------------------------------------------------------------------------
+    | Extract full article
+    |--------------------------------------------------------------------------
+    */
+    private function extractFullArticle(
+        $url
+    ) {
         try {
-            $response = Http::withHeaders($this->headers)->timeout(20)->get($url);
+            $response = Http::withHeaders(
+                $this->headers
+            )
+                ->timeout(20)
+                ->get($url);
 
-            if (!$response->successful()) return null;
-
-            $html = $response->body();
-
-            // التعرف على الحمايات للهروب منها فوراً واستخدام Fallback
             if (
-                str_contains($html, 'Cloudflare') || 
-                str_contains($html, 'Access Denied') || 
-                str_contains($html, 'verify you are human') || 
-                str_contains($html, 'Just a moment...') ||
-                str_contains($html, 'challenge-platform')
+                !$response->successful()
             ) {
                 return null;
             }
 
-            $configuration = new Configuration();
-            $configuration->setFixRelativeURLs(true);
-            $configuration->setOriginalURL($url);
-            $readability = new Readability($configuration);
+            $html = $response->body();
 
-            if (!$readability->parse($html)) return null;
+            /*
+            |--------------------------------------------------------------------------
+            | Cloudflare / protection detection
+            |--------------------------------------------------------------------------
+            */
+            if (
+                str_contains(
+                    $html,
+                    'Cloudflare'
+                ) ||
+                str_contains(
+                    $html,
+                    'Access Denied'
+                ) ||
+                str_contains(
+                    $html,
+                    'verify you are human'
+                ) ||
+                str_contains(
+                    $html,
+                    'Just a moment...'
+                )
+            ) {
+                return null;
+            }
 
-            $content = trim(strip_tags($readability->getContent()));
-            
-            return mb_strlen($content) > 200 ? $content : null;
+            /*
+            |--------------------------------------------------------------------------
+            | Readability
+            |--------------------------------------------------------------------------
+            */
+            $configuration =
+                new Configuration();
+            $configuration->setFixRelativeURLs(
+                true
+            );
+            $configuration->setOriginalURL(
+                $url
+            );
+            $readability =
+                new Readability(
+                    $configuration
+                );
 
-        } catch (\Throwable $e) {
+            if (
+                !$readability->parse(
+                    $html
+                )
+            ) {
+                return null;
+            }
+
+            $content = trim(
+                strip_tags(
+                    $readability->getContent()
+                )
+            );
+
+            return mb_strlen(
+                $content
+            ) > 200
+                ? $content
+                : null;
+
+        } catch (
+            ParseException $e
+        ) {
+            return null;
+
+        } catch (
+            \Throwable $e
+        ) {
+            Log::warning(
+                'Article extraction exception',
+                [
+                    'url' => $url,
+                    'message' => $e->getMessage(),
+                ]
+            );
+
             return null;
         }
     }
