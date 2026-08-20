@@ -34,7 +34,7 @@ class RepairNewsWithAI extends Command
     |--------------------------------------------------------------------------
     */
 
-    private const DEFAULT_BATCH_LIMIT = 3;
+    private const DEFAULT_BATCH_LIMIT = 20;
 
     /*
     |--------------------------------------------------------------------------
