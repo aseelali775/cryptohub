@@ -41,7 +41,6 @@ class FetchCryptoNews extends Command
 
         $sources = [
             'CoinTelegraph' => 'https://cointelegraph.com/rss',
-            'CoinDesk' => 'https://www.coindesk.com/arc/outboundfeeds/rss/',
             'Decrypt' => 'https://decrypt.co/feed',
             'BitcoinMagazine' => 'https://bitcoinmagazine.com/feed',
         ];
