@@ -9,22 +9,23 @@ class AdsenseNewsAudit extends Command
 {
     protected $signature = 'adsense:audit-news
         {--limit=0 : Number of news articles to audit, 0 = all}
-        {--min-score=70 : Minimum score considered publishable}
+        {--min-score=85 : Minimum score considered publishable}
         {--show-all : Show all detailed results}
         {--show-ready : Show ADSENSE READY articles}
         {--show-review : Show articles requiring review}
         {--show-risk : Show high-risk articles}
         {--show-weak : Show articles with low content value}
         {--show-duplicates : Show duplicate/similar groups}
+        {--show-clusters : Show topic/event clusters}
         {--show-ai-risk : Show AI/template repetition risks}
         {--json : Output machine-readable JSON report}';
 
     protected $description =
-        'Read-only AdSense-oriented content quality and originality audit for News';
+        'Read-only AdSense-oriented content quality, originality, topic clustering and editorial readiness audit for News';
 
     /*
     |--------------------------------------------------------------------------
-    | Internal thresholds
+    | Internal Quality Thresholds
     |--------------------------------------------------------------------------
     |
     | IMPORTANT:
@@ -40,6 +41,8 @@ class AdsenseNewsAudit extends Command
 
     private int $strongContentLength = 1800;
 
+    private int $veryShortContentLength = 350;
+
     private int $minimumArabicLength = 500;
 
     private int $minimumAnalysisLength = 250;
@@ -50,9 +53,37 @@ class AdsenseNewsAudit extends Command
 
     private int $minimumWhatToWatchLength = 150;
 
+    /*
+    |--------------------------------------------------------------------------
+    | Similarity Thresholds
+    |--------------------------------------------------------------------------
+    */
+
     private float $highSimilarity = 85.0;
 
     private float $veryHighSimilarity = 92.0;
+
+    /*
+    |--------------------------------------------------------------------------
+    | Topic/Event clustering threshold
+    |--------------------------------------------------------------------------
+    |
+    | Lower than duplicate threshold deliberately.
+    |
+    | Example:
+    |
+    | Article A:
+    | Bitcoin rises after ETF inflows
+    |
+    | Article B:
+    | Bitcoin gains as institutional demand increases
+    |
+    | These may belong to the same EVENT/TOPIC cluster,
+    | but they are not necessarily duplicates.
+    |
+    */
+
+    private float $topicSimilarity = 58.0;
 
     /*
     |--------------------------------------------------------------------------
@@ -104,7 +135,7 @@ class AdsenseNewsAudit extends Command
 
         /*
         |--------------------------------------------------------------------------
-        | Duplicate analysis
+        | Duplicate Detection
         |--------------------------------------------------------------------------
         */
 
@@ -112,7 +143,19 @@ class AdsenseNewsAudit extends Command
 
         /*
         |--------------------------------------------------------------------------
-        | Article audit
+        | Topic/Event Clustering
+        |--------------------------------------------------------------------------
+        */
+
+        $topicClusters = $this->detectTopicClusters($news);
+
+        $topicMap = $this->buildTopicMap(
+            $topicClusters
+        );
+
+        /*
+        |--------------------------------------------------------------------------
+        | Article Audit
         |--------------------------------------------------------------------------
         */
 
@@ -121,7 +164,8 @@ class AdsenseNewsAudit extends Command
         foreach ($news as $item) {
             $results[] = $this->auditArticle(
                 $item,
-                $duplicateMap
+                $duplicateMap,
+                $topicMap
             );
         }
 
@@ -158,7 +202,7 @@ class AdsenseNewsAudit extends Command
 
         /*
         |--------------------------------------------------------------------------
-        | Category statistics
+        | Quality Statistics
         |--------------------------------------------------------------------------
         */
 
@@ -178,12 +222,47 @@ class AdsenseNewsAudit extends Command
             ->where('checks.structure.status', 'PASS')
             ->count();
 
+        /*
+        |--------------------------------------------------------------------------
+        | AI Risk
+        |--------------------------------------------------------------------------
+        |
+        | IMPORTANT:
+        |
+        | AI risk is informational/editorial.
+        | It does NOT automatically mean AdSense risk.
+        |
+        */
+
         $aiRiskCount = $collection
             ->where('checks.ai_risk.status', 'RISK')
             ->count();
 
+        $aiReviewCount = $collection
+            ->where('checks.ai_risk.status', 'REVIEW')
+            ->count();
+
+        /*
+        |--------------------------------------------------------------------------
+        | Duplicate Statistics
+        |--------------------------------------------------------------------------
+        */
+
         $duplicateCount = $collection
             ->where('checks.duplicates.status', 'RISK')
+            ->count();
+
+        /*
+        |--------------------------------------------------------------------------
+        | Topic Statistics
+        |--------------------------------------------------------------------------
+        */
+
+        $clusteredArticles = $collection
+            ->filter(
+                fn ($item) =>
+                    !empty($item['topic_cluster'])
+            )
             ->count();
 
         /*
@@ -196,7 +275,8 @@ class AdsenseNewsAudit extends Command
             $this->outputJson(
                 $results,
                 $total,
-                $averageScore
+                $averageScore,
+                $topicClusters
             );
 
             return self::SUCCESS;
@@ -204,7 +284,7 @@ class AdsenseNewsAudit extends Command
 
         /*
         |--------------------------------------------------------------------------
-        | Display report
+        | Display Report
         |--------------------------------------------------------------------------
         */
 
@@ -230,13 +310,18 @@ class AdsenseNewsAudit extends Command
             $total
         );
 
+        $this->displayTopicStatistics(
+            count($topicClusters),
+            $clusteredArticles
+        );
+
         $this->displayRecommendations(
             $results
         );
 
         /*
         |--------------------------------------------------------------------------
-        | Detailed sections
+        | Detailed Sections
         |--------------------------------------------------------------------------
         */
 
@@ -305,6 +390,16 @@ class AdsenseNewsAudit extends Command
             );
         }
 
+        if (
+            $showAll ||
+            $this->option('show-clusters')
+        ) {
+            $this->displayTopicClusters(
+                $news,
+                $topicClusters
+            );
+        }
+
         /*
         |--------------------------------------------------------------------------
         | Final
@@ -317,7 +412,10 @@ class AdsenseNewsAudit extends Command
             $review,
             $risk,
             $weak,
-            $averageScore
+            $averageScore,
+            $aiRiskCount,
+            $duplicateCount,
+            count($topicClusters)
         );
 
         return self::SUCCESS;
@@ -353,6 +451,10 @@ class AdsenseNewsAudit extends Command
             'Scores are internal quality indicators, not official Google thresholds.'
         );
 
+        $this->comment(
+            'AI/template warnings are editorial signals, not automatic AdSense rejection signals.'
+        );
+
         $this->newLine();
     }
 
@@ -364,14 +466,9 @@ class AdsenseNewsAudit extends Command
 
     private function auditArticle(
         News $item,
-        array $duplicateMap
+        array $duplicateMap,
+        array $topicMap
     ): array {
-
-        /*
-        |--------------------------------------------------------------------------
-        | Basic fields
-        |--------------------------------------------------------------------------
-        */
 
         $titleEn = trim((string) $item->title_en);
         $titleAr = trim((string) $item->title_ar);
@@ -390,49 +487,32 @@ class AdsenseNewsAudit extends Command
         */
 
         $contentEnLength = mb_strlen($contentEn);
+
         $contentArLength = mb_strlen($contentAr);
 
-        $summaryLength =
-            mb_strlen(
-                trim(
-                    (string) $item->summary_ar
-                )
-            );
+        $summaryLength = mb_strlen(
+            trim((string) $item->summary_ar)
+        );
 
-        $analysisLength =
-            mb_strlen(
-                trim(
-                    (string) $item->analysis_ar
-                )
-            );
+        $analysisLength = mb_strlen(
+            trim((string) $item->analysis_ar)
+        );
 
-        $contextLength =
-            mb_strlen(
-                trim(
-                    (string) $item->context_ar
-                )
-            );
+        $contextLength = mb_strlen(
+            trim((string) $item->context_ar)
+        );
 
-        $whyLength =
-            mb_strlen(
-                trim(
-                    (string) $item->why_it_matters_ar
-                )
-            );
+        $whyLength = mb_strlen(
+            trim((string) $item->why_it_matters_ar)
+        );
 
-        $watchLength =
-            mb_strlen(
-                trim(
-                    (string) $item->what_to_watch_ar
-                )
-            );
+        $watchLength = mb_strlen(
+            trim((string) $item->what_to_watch_ar)
+        );
 
-        $limitationsLength =
-            mb_strlen(
-                trim(
-                    (string) $item->limitations_ar
-                )
-            );
+        $limitationsLength = mb_strlen(
+            trim((string) $item->limitations_ar)
+        );
 
         /*
         |--------------------------------------------------------------------------
@@ -447,15 +527,22 @@ class AdsenseNewsAudit extends Command
         $duplicateIds = [];
 
         if ($duplicate) {
-            $duplicateIds =
-                array_values(
-                    array_filter(
-                        $duplicateMap[$item->id],
-                        fn ($id) =>
-                            $id !== $item->id
-                    )
-                );
+            $duplicateIds = array_values(
+                array_filter(
+                    $duplicateMap[$item->id],
+                    fn ($id) =>
+                        $id !== $item->id
+                )
+            );
         }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Topic/Event Cluster
+        |--------------------------------------------------------------------------
+        */
+
+        $topicCluster = $topicMap[$item->id] ?? null;
 
         /*
         |--------------------------------------------------------------------------
@@ -487,6 +574,13 @@ class AdsenseNewsAudit extends Command
 
             'structure' =>
                 $this->checkStructure(
+                    $item,
+                    $contentEn,
+                    $contentAr
+                ),
+
+            'content_depth' =>
+                $this->checkContentDepth(
                     $item,
                     $contentEn,
                     $contentAr
@@ -537,13 +631,29 @@ class AdsenseNewsAudit extends Command
 
         /*
         |--------------------------------------------------------------------------
+        | Core Issues
+        |--------------------------------------------------------------------------
+        */
+
+        $coreIssues =
+            $this->collectCoreIssues(
+                $checks,
+                $contentEnLength,
+                $contentArLength
+            );
+
+        /*
+        |--------------------------------------------------------------------------
         | Status
         |--------------------------------------------------------------------------
         */
 
         $status = $this->determineStatus(
             $score,
-            $checks
+            $checks,
+            $coreIssues,
+            $contentEnLength,
+            $contentArLength
         );
 
         /*
@@ -555,7 +665,8 @@ class AdsenseNewsAudit extends Command
         $recommendation =
             $this->buildRecommendation(
                 $status,
-                $checks
+                $checks,
+                $coreIssues
             );
 
         /*
@@ -580,12 +691,6 @@ class AdsenseNewsAudit extends Command
             ?: $titleEn
             ?: 'Untitled';
 
-        /*
-        |--------------------------------------------------------------------------
-        | Return
-        |--------------------------------------------------------------------------
-        */
-
         return [
 
             'id' =>
@@ -608,6 +713,9 @@ class AdsenseNewsAudit extends Command
 
             'recommendation' =>
                 $recommendation,
+
+            'core_issues' =>
+                $coreIssues,
 
             'content_en_length' =>
                 $contentEnLength,
@@ -648,6 +756,9 @@ class AdsenseNewsAudit extends Command
             'duplicate_of' =>
                 $duplicateIds,
 
+            'topic_cluster' =>
+                $topicCluster,
+
             'checks' =>
                 $checks,
 
@@ -672,26 +783,14 @@ class AdsenseNewsAudit extends Command
 
         $score = 0;
 
-        /*
-        |--------------------------------------------------------------------------
-        | Original source content exists
-        |--------------------------------------------------------------------------
-        */
-
         if ($contentEn !== '') {
             $score += 20;
         } elseif ($contentAr !== '') {
             $score += 10;
         } else {
             $issues[] =
-                'No original source content exists.';
+                'No article content exists.';
         }
-
-        /*
-        |--------------------------------------------------------------------------
-        | Arabic content
-        |--------------------------------------------------------------------------
-        */
 
         if (
             mb_strlen($contentAr) >=
@@ -707,12 +806,6 @@ class AdsenseNewsAudit extends Command
             $issues[] =
                 'Arabic article content is missing.';
         }
-
-        /*
-        |--------------------------------------------------------------------------
-        | AI enrichment
-        |--------------------------------------------------------------------------
-        */
 
         $enrichmentCount = 0;
 
@@ -740,12 +833,6 @@ class AdsenseNewsAudit extends Command
                 'No meaningful content enrichment detected.';
         }
 
-        /*
-        |--------------------------------------------------------------------------
-        | Analysis
-        |--------------------------------------------------------------------------
-        */
-
         $analysis =
             trim(
                 (string) $item->analysis_ar
@@ -766,12 +853,6 @@ class AdsenseNewsAudit extends Command
                 'Analysis is missing.';
         }
 
-        /*
-        |--------------------------------------------------------------------------
-        | Why it matters
-        |--------------------------------------------------------------------------
-        */
-
         $why =
             trim(
                 (string) $item->why_it_matters_ar
@@ -789,17 +870,7 @@ class AdsenseNewsAudit extends Command
                 'Why-it-matters section is missing.';
         }
 
-        /*
-        |--------------------------------------------------------------------------
-        | Final
-        |--------------------------------------------------------------------------
-        */
-
-        $score =
-            min(
-                100,
-                $score
-            );
+        $score = min(100, $score);
 
         $status =
             $score >= 75
@@ -832,12 +903,6 @@ class AdsenseNewsAudit extends Command
 
         $issues = [];
 
-        /*
-        |--------------------------------------------------------------------------
-        | Summary
-        |--------------------------------------------------------------------------
-        */
-
         $summary =
             trim(
                 (string) $item->summary_ar
@@ -857,12 +922,6 @@ class AdsenseNewsAudit extends Command
                 'Summary is missing.';
         }
 
-        /*
-        |--------------------------------------------------------------------------
-        | Analysis
-        |--------------------------------------------------------------------------
-        */
-
         $analysis =
             trim(
                 (string) $item->analysis_ar
@@ -875,16 +934,13 @@ class AdsenseNewsAudit extends Command
             $score += 25;
         } elseif ($analysis !== '') {
             $score += 10;
+
+            $issues[] =
+                'Analysis provides limited depth.';
         } else {
             $issues[] =
                 'No meaningful analysis.';
         }
-
-        /*
-        |--------------------------------------------------------------------------
-        | Context
-        |--------------------------------------------------------------------------
-        */
 
         $context =
             trim(
@@ -898,16 +954,13 @@ class AdsenseNewsAudit extends Command
             $score += 15;
         } elseif ($context !== '') {
             $score += 7;
+
+            $issues[] =
+                'Context is short.';
         } else {
             $issues[] =
                 'Context is missing.';
         }
-
-        /*
-        |--------------------------------------------------------------------------
-        | Why it matters
-        |--------------------------------------------------------------------------
-        */
 
         $why =
             trim(
@@ -926,12 +979,6 @@ class AdsenseNewsAudit extends Command
                 'Why-it-matters is missing.';
         }
 
-        /*
-        |--------------------------------------------------------------------------
-        | What to watch
-        |--------------------------------------------------------------------------
-        */
-
         $watch =
             trim(
                 (string) $item->what_to_watch_ar
@@ -949,12 +996,6 @@ class AdsenseNewsAudit extends Command
                 'What-to-watch section is missing.';
         }
 
-        /*
-        |--------------------------------------------------------------------------
-        | Limitations
-        |--------------------------------------------------------------------------
-        */
-
         $limitations =
             trim(
                 (string) $item->limitations_ar
@@ -967,12 +1008,6 @@ class AdsenseNewsAudit extends Command
         } elseif ($limitations !== '') {
             $score += 5;
         }
-
-        /*
-        |--------------------------------------------------------------------------
-        | Original article
-        |--------------------------------------------------------------------------
-        */
 
         if (
             mb_strlen($contentAr) >=
@@ -1027,6 +1062,7 @@ class AdsenseNewsAudit extends Command
         }
 
         if ($url !== '') {
+
             $score += 40;
 
             if (
@@ -1040,7 +1076,9 @@ class AdsenseNewsAudit extends Command
 
                 $score -= 20;
             }
+
         } else {
+
             $issues[] =
                 'Source URL is missing.';
         }
@@ -1093,12 +1131,6 @@ class AdsenseNewsAudit extends Command
 
         $issues = [];
 
-        /*
-        |--------------------------------------------------------------------------
-        | Titles
-        |--------------------------------------------------------------------------
-        */
-
         if (
             !$this->isEmpty(
                 $item->title_ar
@@ -1121,12 +1153,6 @@ class AdsenseNewsAudit extends Command
                 'English title missing.';
         }
 
-        /*
-        |--------------------------------------------------------------------------
-        | Content
-        |--------------------------------------------------------------------------
-        */
-
         $length =
             max(
                 mb_strlen($contentEn),
@@ -1148,7 +1174,9 @@ class AdsenseNewsAudit extends Command
             $this->minimumContentLength
         ) {
             $score += 18;
-        } elseif ($length > 0) {
+        } elseif (
+            $length > 0
+        ) {
             $score += 8;
 
             $issues[] =
@@ -1157,12 +1185,6 @@ class AdsenseNewsAudit extends Command
             $issues[] =
                 'Article has no usable content.';
         }
-
-        /*
-        |--------------------------------------------------------------------------
-        | Paragraph structure
-        |--------------------------------------------------------------------------
-        */
 
         $paragraphs =
             $this->countParagraphs(
@@ -1182,12 +1204,6 @@ class AdsenseNewsAudit extends Command
                 'Article has weak paragraph structure.';
         }
 
-        /*
-        |--------------------------------------------------------------------------
-        | Category
-        |--------------------------------------------------------------------------
-        */
-
         if (
             !$this->isEmpty(
                 $item->category
@@ -1198,12 +1214,6 @@ class AdsenseNewsAudit extends Command
             $issues[] =
                 'Category missing.';
         }
-
-        /*
-        |--------------------------------------------------------------------------
-        | Image
-        |--------------------------------------------------------------------------
-        */
 
         if (
             !$this->isEmpty(
@@ -1240,46 +1250,144 @@ class AdsenseNewsAudit extends Command
 
     /*
     |--------------------------------------------------------------------------
+    | Content Depth
+    |--------------------------------------------------------------------------
+    |
+    | Specifically identifies very short articles.
+    |
+    | This is deliberately separate from AI risk.
+    |
+    */
+
+    private function checkContentDepth(
+        News $item,
+        string $contentEn,
+        string $contentAr
+    ): array {
+
+        $length =
+            max(
+                mb_strlen($contentEn),
+                mb_strlen($contentAr)
+            );
+
+        $issues = [];
+
+        if ($length === 0) {
+
+            return [
+                'score' => 0,
+                'status' => 'FAIL',
+                'issues' => [
+                    'Article contains no usable body content.'
+                ],
+                'length' => 0,
+            ];
+        }
+
+        if (
+            $length <
+            $this->veryShortContentLength
+        ) {
+
+            $issues[] =
+                "Article is extremely short ({$length} characters).";
+
+            return [
+                'score' => 15,
+                'status' => 'FAIL',
+                'issues' => $issues,
+                'length' => $length,
+            ];
+        }
+
+        if (
+            $length <
+            $this->minimumContentLength
+        ) {
+
+            $issues[] =
+                "Article is below the internal minimum content length ({$length} characters).";
+
+            return [
+                'score' => 45,
+                'status' => 'REVIEW',
+                'issues' => $issues,
+                'length' => $length,
+            ];
+        }
+
+        if (
+            $length >=
+            $this->strongContentLength
+        ) {
+
+            return [
+                'score' => 100,
+                'status' => 'PASS',
+                'issues' => [],
+                'length' => $length,
+            ];
+        }
+
+        if (
+            $length >=
+            $this->goodContentLength
+        ) {
+
+            return [
+                'score' => 90,
+                'status' => 'PASS',
+                'issues' => [],
+                'length' => $length,
+            ];
+        }
+
+        return [
+            'score' => 75,
+            'status' => 'PASS',
+            'issues' => [],
+            'length' => $length,
+        ];
+    }
+
+    /*
+    |--------------------------------------------------------------------------
     | AI Risk
     |--------------------------------------------------------------------------
+    |
+    | IMPORTANT:
+    |
+    | AI usage itself is NOT considered a rejection condition.
+    |
+    | This check only attempts to identify:
+    |
+    | - excessive templating
+    | - repetitive enrichment
+    | - generic language
+    |
+    | It is an editorial warning.
+    |
     */
 
     private function checkAiRisk(
         News $item
     ): array {
 
-        $score = 0;
+        $score = 70;
 
         $issues = [];
-
-        /*
-        |--------------------------------------------------------------------------
-        | AI processed
-        |--------------------------------------------------------------------------
-        |
-        | AI itself is NOT treated as a violation.
-        | We are checking whether content appears
-        | excessively automated or templated.
-        |
-        */
 
         if (
             (bool) $item->ai_processed
         ) {
-            $score += 20;
-        } else {
             $score += 10;
         }
-
-        /*
-        |--------------------------------------------------------------------------
-        | Enrichment variety
-        |--------------------------------------------------------------------------
-        */
 
         $filled = 0;
 
         foreach ($this->aiFields as $field) {
+
             if (
                 !$this->isEmpty(
                     $item->{$field}
@@ -1290,22 +1398,25 @@ class AdsenseNewsAudit extends Command
         }
 
         if ($filled >= 5) {
-            $score += 20;
-        } elseif ($filled >= 3) {
-            $score += 12;
-        } elseif ($filled >= 1) {
-            $score += 5;
-        }
 
-        /*
-        |--------------------------------------------------------------------------
-        | Detect repeated template phrases
-        |--------------------------------------------------------------------------
-        */
+            $score += 15;
+
+        } elseif ($filled >= 3) {
+
+            $score += 8;
+
+        } elseif ($filled === 0) {
+
+            $score -= 20;
+
+            $issues[] =
+                'No enrichment fields detected.';
+        }
 
         $texts = [];
 
         foreach ($this->aiFields as $field) {
+
             $value =
                 trim(
                     (string) $item->{$field}
@@ -1324,9 +1435,9 @@ class AdsenseNewsAudit extends Command
         if ($repetition >= 0.70) {
 
             $issues[] =
-                'AI enrichment contains highly repetitive phrases.';
+                'AI enrichment contains highly repetitive language.';
 
-            $score -= 35;
+            $score -= 30;
 
         } elseif ($repetition >= 0.45) {
 
@@ -1335,12 +1446,6 @@ class AdsenseNewsAudit extends Command
 
             $score -= 15;
         }
-
-        /*
-        |--------------------------------------------------------------------------
-        | Generic template phrases
-        |--------------------------------------------------------------------------
-        */
 
         $templateHits =
             $this->detectTemplateLanguage(
@@ -1371,17 +1476,16 @@ class AdsenseNewsAudit extends Command
                 )
             );
 
-        /*
-        |--------------------------------------------------------------------------
-        | Status
-        |--------------------------------------------------------------------------
-        */
-
         if ($score >= 70) {
+
             $status = 'PASS';
+
         } elseif ($score >= 45) {
+
             $status = 'REVIEW';
+
         } else {
+
             $status = 'RISK';
         }
 
@@ -1391,6 +1495,17 @@ class AdsenseNewsAudit extends Command
             'issues' => $issues,
             'template_hits' => $templateHits,
             'internal_repetition' => $repetition,
+
+            /*
+            |--------------------------------------------------------------------------
+            | Explicit semantic meaning
+            |--------------------------------------------------------------------------
+            */
+
+            'ad_sense_blocking' => false,
+
+            'meaning' =>
+                'Editorial warning only. AI usage or template similarity is not treated as automatic AdSense rejection.',
         ];
     }
 
@@ -1405,6 +1520,7 @@ class AdsenseNewsAudit extends Command
     ): array {
 
         if ($duplicate) {
+
             return [
                 'score' => 0,
                 'status' => 'RISK',
@@ -1500,6 +1616,7 @@ class AdsenseNewsAudit extends Command
 
         return [
             'score' => $score,
+
             'status' =>
                 $score >= 80
                 ? 'PASS'
@@ -1508,6 +1625,7 @@ class AdsenseNewsAudit extends Command
                     ? 'REVIEW'
                     : 'FAIL'
                 ),
+
             'issues' => $issues,
         ];
     }
@@ -1571,7 +1689,8 @@ class AdsenseNewsAudit extends Command
 
             if ($length >= $minimum) {
 
-                $score += 100 / count($fields);
+                $score +=
+                    100 / count($fields);
 
             } elseif ($length > 0) {
 
@@ -1589,12 +1708,12 @@ class AdsenseNewsAudit extends Command
         }
 
         $score =
-            (int) round(
-                $score
-            );
+            (int) round($score);
 
         return [
+
             'score' => $score,
+
             'status' =>
                 $score >= 75
                 ? 'PASS'
@@ -1603,13 +1722,14 @@ class AdsenseNewsAudit extends Command
                     ? 'REVIEW'
                     : 'FAIL'
                 ),
+
             'issues' => $issues,
         ];
     }
 
     /*
     |--------------------------------------------------------------------------
-    | Calculate Overall Score
+    | Overall Score
     |--------------------------------------------------------------------------
     */
 
@@ -1631,15 +1751,17 @@ class AdsenseNewsAudit extends Command
 
         $weights = [
 
-            'originality' => 25,
+            'originality' => 22,
 
             'user_value' => 25,
 
             'source' => 10,
 
-            'structure' => 10,
+            'structure' => 8,
 
-            'ai_risk' => 10,
+            'content_depth' => 10,
+
+            'ai_risk' => 5,
 
             'duplicates' => 10,
 
@@ -1661,27 +1783,38 @@ class AdsenseNewsAudit extends Command
 
         /*
         |--------------------------------------------------------------------------
-        | Content length modifier
+        | Very short content penalty
         |--------------------------------------------------------------------------
         */
 
-        if (
-            $contentEnLength === 0 &&
-            $contentArLength === 0
-        ) {
-            $score -= 25;
-        } elseif (
+        $contentLength =
             max(
                 $contentEnLength,
                 $contentArLength
-            ) < $this->minimumContentLength
+            );
+
+        if ($contentLength === 0) {
+
+            $score -= 30;
+
+        } elseif (
+            $contentLength <
+            $this->veryShortContentLength
         ) {
+
+            $score -= 25;
+
+        } elseif (
+            $contentLength <
+            $this->minimumContentLength
+        ) {
+
             $score -= 10;
         }
 
         /*
         |--------------------------------------------------------------------------
-        | Analysis modifier
+        | Analysis
         |--------------------------------------------------------------------------
         */
 
@@ -1689,12 +1822,12 @@ class AdsenseNewsAudit extends Command
             $analysisLength <
             $this->minimumAnalysisLength
         ) {
-            $score -= 5;
+            $score -= 4;
         }
 
         /*
         |--------------------------------------------------------------------------
-        | Context modifier
+        | Context
         |--------------------------------------------------------------------------
         */
 
@@ -1702,12 +1835,12 @@ class AdsenseNewsAudit extends Command
             $contextLength <
             $this->minimumContextLength
         ) {
-            $score -= 3;
+            $score -= 2;
         }
 
         /*
         |--------------------------------------------------------------------------
-        | Why matters modifier
+        | Why matters
         |--------------------------------------------------------------------------
         */
 
@@ -1715,12 +1848,12 @@ class AdsenseNewsAudit extends Command
             $whyLength <
             $this->minimumWhyMattersLength
         ) {
-            $score -= 3;
+            $score -= 2;
         }
 
         /*
         |--------------------------------------------------------------------------
-        | What to watch modifier
+        | What to watch
         |--------------------------------------------------------------------------
         */
 
@@ -1728,7 +1861,7 @@ class AdsenseNewsAudit extends Command
             $watchLength <
             $this->minimumWhatToWatchLength
         ) {
-            $score -= 3;
+            $score -= 2;
         }
 
         return max(
@@ -1742,18 +1875,116 @@ class AdsenseNewsAudit extends Command
 
     /*
     |--------------------------------------------------------------------------
+    | Core Issues
+    |--------------------------------------------------------------------------
+    |
+    | These are the issues that can actually affect classification.
+    |
+    | AI warnings deliberately do NOT appear here.
+    |
+    */
+
+    private function collectCoreIssues(
+        array $checks,
+        int $contentEnLength,
+        int $contentArLength
+    ): array {
+
+        $issues = [];
+
+        $contentLength =
+            max(
+                $contentEnLength,
+                $contentArLength
+            );
+
+        if ($contentLength === 0) {
+
+            $issues[] =
+                'NO_CONTENT';
+
+        } elseif (
+            $contentLength <
+            $this->veryShortContentLength
+        ) {
+
+            $issues[] =
+                'VERY_SHORT_CONTENT';
+        }
+
+        if (
+            $checks['duplicates']['status'] === 'RISK'
+        ) {
+            $issues[] =
+                'DUPLICATE_CONTENT';
+        }
+
+        if (
+            $checks['originality']['status'] === 'FAIL'
+        ) {
+            $issues[] =
+                'LOW_ORIGINAL_VALUE';
+        }
+
+        if (
+            $checks['user_value']['status'] === 'FAIL'
+        ) {
+            $issues[] =
+                'LOW_USER_VALUE';
+        }
+
+        if (
+            $checks['source']['status'] === 'FAIL'
+        ) {
+            $issues[] =
+                'SOURCE_PROBLEM';
+        }
+
+        return array_values(
+            array_unique($issues)
+        );
+    }
+
+    /*
+    |--------------------------------------------------------------------------
     | Determine Status
     |--------------------------------------------------------------------------
     */
 
     private function determineStatus(
         int $score,
-        array $checks
+        array $checks,
+        array $coreIssues,
+        int $contentEnLength,
+        int $contentArLength
     ): string {
 
         /*
         |--------------------------------------------------------------------------
-        | Hard risk conditions
+        | CONTENT WEAK
+        |--------------------------------------------------------------------------
+        |
+        | Extremely short articles are weak content,
+        | not automatically AdSense risk.
+        |
+        */
+
+        $contentLength =
+            max(
+                $contentEnLength,
+                $contentArLength
+            );
+
+        if (
+            $contentLength <
+            $this->veryShortContentLength
+        ) {
+            return 'CONTENT_WEAK';
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | True hard problems
         |--------------------------------------------------------------------------
         */
 
@@ -1775,14 +2006,14 @@ class AdsenseNewsAudit extends Command
             return 'CONTENT_WEAK';
         }
 
-        if (
-            $checks['source']['status'] === 'FAIL'
-        ) {
-            return 'ADSENSE_REVIEW';
-        }
+        /*
+        |--------------------------------------------------------------------------
+        | Source problem
+        |--------------------------------------------------------------------------
+        */
 
         if (
-            $checks['ai_risk']['status'] === 'RISK'
+            $checks['source']['status'] === 'FAIL'
         ) {
             return 'ADSENSE_REVIEW';
         }
@@ -1791,6 +2022,13 @@ class AdsenseNewsAudit extends Command
         |--------------------------------------------------------------------------
         | Score
         |--------------------------------------------------------------------------
+        |
+        | IMPORTANT:
+        |
+        | 85+ is publishable if there is no core problem.
+        |
+        | AI risk does NOT block readiness.
+        |
         */
 
         $minimum =
@@ -1798,23 +2036,23 @@ class AdsenseNewsAudit extends Command
                 'min-score'
             );
 
-        if ($score >= $minimum) {
+        if (
+            $score >= $minimum &&
+            empty($coreIssues)
+        ) {
 
-            if (
-                $checks['ai_risk']['status'] !== 'RISK' &&
-                $checks['duplicates']['status'] !== 'RISK'
-            ) {
-                return 'ADSENSE_READY';
-            }
+            return 'ADSENSE_READY';
         }
 
         /*
         |--------------------------------------------------------------------------
-        | Weak
+        | Very weak overall score
         |--------------------------------------------------------------------------
         */
 
-        if ($score < 50) {
+        if (
+            $score < 50
+        ) {
             return 'CONTENT_WEAK';
         }
 
@@ -1829,53 +2067,124 @@ class AdsenseNewsAudit extends Command
 
     private function buildRecommendation(
         string $status,
-        array $checks
+        array $checks,
+        array $coreIssues
     ): string {
 
+        /*
+        |--------------------------------------------------------------------------
+        | Real problems first
+        |--------------------------------------------------------------------------
+        */
+
         if (
-            $status === 'ADSENSE_READY'
+            in_array(
+                'DUPLICATE_CONTENT',
+                $coreIssues,
+                true
+            )
         ) {
             return
-                'Suitable for publication from this internal content-quality audit.';
+                'REMOVE_DUPLICATE';
         }
 
         if (
-            $checks['duplicates']['status'] === 'RISK'
+            in_array(
+                'NO_CONTENT',
+                $coreIssues,
+                true
+            )
         ) {
             return
-                'Manual review required. Keep only the strongest distinct article.';
+                'ADD_ARTICLE_CONTENT';
         }
 
         if (
-            $checks['originality']['status'] === 'FAIL'
+            in_array(
+                'VERY_SHORT_CONTENT',
+                $coreIssues,
+                true
+            )
         ) {
             return
-                'Do not publish until meaningful original value is added.';
+                'EXPAND_ARTICLE';
         }
+
+        if (
+            in_array(
+                'LOW_ORIGINAL_VALUE',
+                $coreIssues,
+                true
+            )
+        ) {
+            return
+                'ADD_ORIGINAL_VALUE';
+        }
+
+        if (
+            in_array(
+                'LOW_USER_VALUE',
+                $coreIssues,
+                true
+            )
+        ) {
+            return
+                'IMPROVE_ANALYSIS';
+        }
+
+        if (
+            in_array(
+                'SOURCE_PROBLEM',
+                $coreIssues,
+                true
+            )
+        ) {
+            return
+                'REPAIR_SOURCE';
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Non-core editorial issues
+        |--------------------------------------------------------------------------
+        */
 
         if (
             $checks['ai_risk']['status'] === 'RISK'
         ) {
             return
-                'Manual editorial review required. Check for repetitive or templated AI output.';
+                'EDITORIAL_REVIEW_AI_PATTERN';
         }
 
         if (
-            $checks['user_value']['status'] === 'FAIL'
+            $checks['ai_risk']['status'] === 'REVIEW'
         ) {
             return
-                'Improve analysis, context, significance and reader value.';
+                'REVIEW_TEMPLATE_LANGUAGE';
         }
 
         if (
-            $checks['source']['status'] === 'FAIL'
+            $checks['user_value']['status'] !== 'PASS'
         ) {
             return
-                'Repair source attribution and source URL.';
+                'IMPROVE_ANALYSIS';
         }
 
-        return
-            'Improve the flagged areas before publication.';
+        if (
+            $checks['enrichment']['status'] !== 'PASS'
+        ) {
+            return
+                'COMPLETE_ENRICHMENT';
+        }
+
+        if (
+            $status === 'ADSENSE_REVIEW'
+        ) {
+            return
+                'MANUAL_REVIEW';
+        }
+
+        return 'NONE';
     }
 
     /*
@@ -1898,9 +2207,7 @@ class AdsenseNewsAudit extends Command
             ) {
 
                 $issues[] =
-                    strtoupper(
-                        $checkName
-                    ) .
+                    strtoupper($checkName) .
                     ': ' .
                     $issue;
             }
@@ -1938,6 +2245,7 @@ class AdsenseNewsAudit extends Command
                 );
 
             if ($normalized !== '') {
+
                 $titles[$item->id] =
                     $normalized;
             }
@@ -1972,9 +2280,11 @@ class AdsenseNewsAudit extends Command
         |--------------------------------------------------------------------------
         */
 
-        $ids = array_keys($titles);
+        $ids =
+            array_keys($titles);
 
-        $count = count($ids);
+        $count =
+            count($ids);
 
         for (
             $i = 0;
@@ -1982,7 +2292,8 @@ class AdsenseNewsAudit extends Command
             $i++
         ) {
 
-            $idA = $ids[$i];
+            $idA =
+                $ids[$i];
 
             $titleA =
                 $titles[$idA];
@@ -1999,7 +2310,8 @@ class AdsenseNewsAudit extends Command
                 $j++
             ) {
 
-                $idB = $ids[$j];
+                $idB =
+                    $ids[$j];
 
                 $titleB =
                     $titles[$idB];
@@ -2029,11 +2341,387 @@ class AdsenseNewsAudit extends Command
             }
         }
 
+        return $this->mergeGroups(
+            $rawGroups
+        );
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Topic/Event Clustering
+    |--------------------------------------------------------------------------
+    |
+    | This is NOT duplicate detection.
+    |
+    | It groups articles that appear to discuss
+    | the same event/topic.
+    |
+    */
+
+    private function detectTopicClusters(
+        $news
+    ): array {
+
+        $documents = [];
+
+        foreach ($news as $item) {
+
+            $title =
+                trim(
+                    (string) (
+                        $item->title_ar
+                        ?: $item->title_en
+                    )
+                );
+
+            $content =
+                trim(
+                    (string) (
+                        $item->content_ar
+                        ?: $item->content_en
+                    )
+                );
+
+            if ($title === '') {
+                continue;
+            }
+
+            $document =
+                $this->normalizeText(
+                    $title . ' ' .
+                    mb_substr(
+                        $content,
+                        0,
+                        1200
+                    )
+                );
+
+            $tokens =
+                $this->extractTopicTokens(
+                    $document
+                );
+
+            if (
+                count($tokens) < 3
+            ) {
+                continue;
+            }
+
+            $documents[$item->id] = [
+                'title' => $title,
+                'tokens' => $tokens,
+            ];
+        }
+
+        $rawGroups = [];
+
+        $ids =
+            array_keys($documents);
+
+        $count =
+            count($ids);
+
+        for (
+            $i = 0;
+            $i < $count;
+            $i++
+        ) {
+
+            $idA =
+                $ids[$i];
+
+            for (
+                $j = $i + 1;
+                $j < $count;
+                $j++
+            ) {
+
+                $idB =
+                    $ids[$j];
+
+                $tokensA =
+                    $documents[$idA]['tokens'];
+
+                $tokensB =
+                    $documents[$idB]['tokens'];
+
+                $similarity =
+                    $this->tokenSimilarity(
+                        $tokensA,
+                        $tokensB
+                    );
+
+                similar_text(
+                    $this->normalizeText(
+                        $documents[$idA]['title']
+                    ),
+                    $this->normalizeText(
+                        $documents[$idB]['title']
+                    ),
+                    $titlePercent
+                );
+
+                /*
+                |--------------------------------------------------------------------------
+                | Topic cluster
+                |--------------------------------------------------------------------------
+                |
+                | Either:
+                |
+                | - strong token overlap
+                | - moderate token overlap + title similarity
+                |
+                */
+
+                if (
+                    $similarity >=
+                    $this->topicSimilarity
+                    ||
+                    (
+                        $similarity >= 45 &&
+                        $titlePercent >= 55
+                    )
+                ) {
+
+                    $rawGroups[] = [
+                        $idA,
+                        $idB,
+                    ];
+                }
+            }
+        }
+
+        $groups =
+            $this->mergeGroups(
+                $rawGroups
+            );
+
         /*
         |--------------------------------------------------------------------------
-        | Merge groups
+        | Only meaningful clusters
         |--------------------------------------------------------------------------
         */
+
+        return array_values(
+            array_filter(
+                $groups,
+                fn ($group) =>
+                    count($group) >= 2
+            )
+        );
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Topic Map
+    |--------------------------------------------------------------------------
+    */
+
+    private function buildTopicMap(
+        array $clusters
+    ): array {
+
+        $map = [];
+
+        foreach (
+            $clusters as $index => $cluster
+        ) {
+
+            $clusterId =
+                'TOPIC-' .
+                str_pad(
+                    (string) ($index + 1),
+                    4,
+                    '0',
+                    STR_PAD_LEFT
+                );
+
+            foreach ($cluster as $id) {
+
+                $map[$id] = [
+                    'id' =>
+                        $clusterId,
+
+                    'size' =>
+                        count($cluster),
+
+                    'articles' =>
+                        $cluster,
+                ];
+            }
+        }
+
+        return $map;
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Extract Topic Tokens
+    |--------------------------------------------------------------------------
+    */
+
+    private function extractTopicTokens(
+        string $text
+    ): array {
+
+        $stopWords = [
+
+            'من',
+            'في',
+            'على',
+            'الى',
+            'إلى',
+            'عن',
+            'مع',
+            'هذا',
+            'هذه',
+            'ذلك',
+            'تلك',
+            'التي',
+            'الذي',
+            'الذين',
+            'بعد',
+            'قبل',
+            'خلال',
+            'بين',
+            'حول',
+            'أمام',
+            'ضمن',
+            'قد',
+            'تم',
+            'يتم',
+            'كان',
+            'كانت',
+            'هو',
+            'هي',
+            'هم',
+            'و',
+            'او',
+            'أو',
+            'ثم',
+            'كما',
+            'لكن',
+            'لكنها',
+            'بسبب',
+            'بشكل',
+            'اليوم',
+            'أمس',
+            'غدا',
+
+            'the',
+            'a',
+            'an',
+            'of',
+            'to',
+            'in',
+            'on',
+            'for',
+            'and',
+            'or',
+            'with',
+            'from',
+            'after',
+            'before',
+            'this',
+            'that',
+            'is',
+            'are',
+        ];
+
+        $words =
+            preg_split(
+                '/\s+/u',
+                trim($text)
+            );
+
+        $tokens = [];
+
+        foreach ($words as $word) {
+
+            $word =
+                trim($word);
+
+            if ($word === '') {
+                continue;
+            }
+
+            if (
+                mb_strlen($word) < 3
+            ) {
+                continue;
+            }
+
+            if (
+                in_array(
+                    $word,
+                    $stopWords,
+                    true
+                )
+            ) {
+                continue;
+            }
+
+            $tokens[$word] = true;
+        }
+
+        return array_keys($tokens);
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Token Similarity
+    |--------------------------------------------------------------------------
+    */
+
+    private function tokenSimilarity(
+        array $a,
+        array $b
+    ): float {
+
+        if (
+            empty($a) ||
+            empty($b)
+        ) {
+            return 0.0;
+        }
+
+        $intersection =
+            count(
+                array_intersect(
+                    $a,
+                    $b
+                )
+            );
+
+        $union =
+            count(
+                array_unique(
+                    array_merge(
+                        $a,
+                        $b
+                    )
+                )
+            );
+
+        if ($union === 0) {
+            return 0.0;
+        }
+
+        return round(
+            ($intersection / $union) * 100,
+            2
+        );
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Merge Groups
+    |--------------------------------------------------------------------------
+    */
+
+    private function mergeGroups(
+        array $rawGroups
+    ): array {
 
         $merged = [];
 
@@ -2045,6 +2733,12 @@ class AdsenseNewsAudit extends Command
                         $group
                     )
                 );
+
+            if (
+                count($group) < 2
+            ) {
+                continue;
+            }
 
             $mergedIntoExisting = false;
 
@@ -2077,40 +2771,25 @@ class AdsenseNewsAudit extends Command
 
             unset($existing);
 
-            if (!$mergedIntoExisting) {
+            if (
+                !$mergedIntoExisting
+            ) {
                 $merged[] = $group;
             }
         }
 
-        /*
-        |--------------------------------------------------------------------------
-        | Article map
-        |--------------------------------------------------------------------------
-        */
-
-        $map = [];
-
-        foreach ($merged as $group) {
-
-            if (
-                count($group) < 2
-            ) {
-                continue;
-            }
-
+        foreach ($merged as &$group) {
             sort($group);
-
-            foreach ($group as $id) {
-                $map[$id] = $group;
-            }
         }
 
-        return $map;
+        unset($group);
+
+        return $merged;
     }
 
     /*
     |--------------------------------------------------------------------------
-    | Internal repetition
+    | Internal Repetition
     |--------------------------------------------------------------------------
     */
 
@@ -2126,7 +2805,8 @@ class AdsenseNewsAudit extends Command
 
         $similarities = [];
 
-        $count = count($texts);
+        $count =
+            count($texts);
 
         for (
             $i = 0;
@@ -2183,7 +2863,7 @@ class AdsenseNewsAudit extends Command
 
     /*
     |--------------------------------------------------------------------------
-    | Template language
+    | Template Language
     |--------------------------------------------------------------------------
     */
 
@@ -2194,43 +2874,25 @@ class AdsenseNewsAudit extends Command
         $templates = [
 
             'في هذا التقرير',
-
             'في هذا المقال',
-
             'من المهم ملاحظة',
-
             'يجدر بالذكر',
-
             'تجدر الإشارة',
-
             'بشكل عام',
-
             'من ناحية أخرى',
-
             'في نهاية المطاف',
-
             'قد يكون من المهم',
-
             'ينبغي للمستثمرين',
-
             'على المستثمرين مراقبة',
-
             'يبقى من المهم مراقبة',
-
             'من المتوقع أن',
-
             'قد يؤدي ذلك إلى',
-
             'هذا التطور قد',
 
             'what investors should watch',
-
             'it is important to note',
-
             'in conclusion',
-
             'overall',
-
             'on the other hand',
         ];
 
@@ -2266,7 +2928,7 @@ class AdsenseNewsAudit extends Command
 
     /*
     |--------------------------------------------------------------------------
-    | Paragraph count
+    | Paragraph Count
     |--------------------------------------------------------------------------
     */
 
@@ -2298,7 +2960,7 @@ class AdsenseNewsAudit extends Command
 
     /*
     |--------------------------------------------------------------------------
-    | Normalize text
+    | Normalize Text
     |--------------------------------------------------------------------------
     */
 
@@ -2314,12 +2976,6 @@ class AdsenseNewsAudit extends Command
             mb_strtolower(
                 trim($text)
             );
-
-        /*
-        |--------------------------------------------------------------------------
-        | Arabic normalization
-        |--------------------------------------------------------------------------
-        */
 
         $text =
             str_replace(
@@ -2347,24 +3003,12 @@ class AdsenseNewsAudit extends Command
                 $text
             );
 
-        /*
-        |--------------------------------------------------------------------------
-        | Remove punctuation
-        |--------------------------------------------------------------------------
-        */
-
         $text =
             preg_replace(
                 '/[^\p{L}\p{N}\s]/u',
                 ' ',
                 $text
             );
-
-        /*
-        |--------------------------------------------------------------------------
-        | Normalize spaces
-        |--------------------------------------------------------------------------
-        */
 
         $text =
             preg_replace(
@@ -2516,11 +3160,41 @@ class AdsenseNewsAudit extends Command
         );
 
         $this->line(
-            "AI/template risks:        {$aiRisk}"
+            "AI/template warnings:     {$aiRisk}"
         );
 
         $this->line(
             "Duplicate risks:          {$duplicates}"
+        );
+
+        $this->newLine();
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Topic Statistics
+    |--------------------------------------------------------------------------
+    */
+
+    private function displayTopicStatistics(
+        int $clusters,
+        int $articles
+    ): void {
+
+        $this->info(
+            'TOPIC / EVENT CLUSTERING'
+        );
+
+        $this->line(
+            "Topic/event clusters:     {$clusters}"
+        );
+
+        $this->line(
+            "Articles in clusters:     {$articles}"
+        );
+
+        $this->comment(
+            'Note: Topic clustering does not mean duplicate content.'
         );
 
         $this->newLine();
@@ -2541,6 +3215,10 @@ class AdsenseNewsAudit extends Command
 
         $actions = [
 
+            'ADD_ARTICLE_CONTENT' => 0,
+
+            'EXPAND_ARTICLE' => 0,
+
             'ADD_ORIGINAL_VALUE' => 0,
 
             'IMPROVE_ANALYSIS' => 0,
@@ -2551,7 +3229,11 @@ class AdsenseNewsAudit extends Command
 
             'REMOVE_DUPLICATE' => 0,
 
-            'REDUCE_TEMPLATE_REPETITION' => 0,
+            'COMPLETE_ENRICHMENT' => 0,
+
+            'EDITORIAL_REVIEW_AI_PATTERN' => 0,
+
+            'REVIEW_TEMPLATE_LANGUAGE' => 0,
 
             'NONE' => 0,
         ];
@@ -2581,7 +3263,7 @@ class AdsenseNewsAudit extends Command
             $this->line(
                 str_pad(
                     $action,
-                    32
+                    38
                 ) .
                 ': ' .
                 $count
@@ -2593,7 +3275,7 @@ class AdsenseNewsAudit extends Command
 
     /*
     |--------------------------------------------------------------------------
-    | Recommendation code
+    | Recommendation Code
     |--------------------------------------------------------------------------
     */
 
@@ -2604,34 +3286,91 @@ class AdsenseNewsAudit extends Command
         $checks =
             $item['checks'];
 
+        $coreIssues =
+            $item['core_issues'] ?? [];
+
         if (
-            $checks['duplicates']['status'] === 'RISK'
+            in_array(
+                'DUPLICATE_CONTENT',
+                $coreIssues,
+                true
+            )
         ) {
             return 'REMOVE_DUPLICATE';
         }
 
         if (
-            $checks['originality']['status'] === 'FAIL'
+            in_array(
+                'NO_CONTENT',
+                $coreIssues,
+                true
+            )
+        ) {
+            return 'ADD_ARTICLE_CONTENT';
+        }
+
+        if (
+            in_array(
+                'VERY_SHORT_CONTENT',
+                $coreIssues,
+                true
+            )
+        ) {
+            return 'EXPAND_ARTICLE';
+        }
+
+        if (
+            in_array(
+                'LOW_ORIGINAL_VALUE',
+                $coreIssues,
+                true
+            )
         ) {
             return 'ADD_ORIGINAL_VALUE';
         }
 
         if (
-            $checks['ai_risk']['status'] === 'RISK'
-        ) {
-            return 'REDUCE_TEMPLATE_REPETITION';
-        }
-
-        if (
-            $checks['user_value']['status'] !== 'PASS'
+            in_array(
+                'LOW_USER_VALUE',
+                $coreIssues,
+                true
+            )
         ) {
             return 'IMPROVE_ANALYSIS';
         }
 
         if (
-            $checks['source']['status'] !== 'PASS'
+            in_array(
+                'SOURCE_PROBLEM',
+                $coreIssues,
+                true
+            )
         ) {
             return 'REPAIR_SOURCE';
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | AI is editorial only
+        |--------------------------------------------------------------------------
+        */
+
+        if (
+            $checks['ai_risk']['status'] === 'RISK'
+        ) {
+            return 'EDITORIAL_REVIEW_AI_PATTERN';
+        }
+
+        if (
+            $checks['ai_risk']['status'] === 'REVIEW'
+        ) {
+            return 'REVIEW_TEMPLATE_LANGUAGE';
+        }
+
+        if (
+            $checks['enrichment']['status'] !== 'PASS'
+        ) {
+            return 'COMPLETE_ENRICHMENT';
         }
 
         if (
@@ -2645,7 +3384,7 @@ class AdsenseNewsAudit extends Command
 
     /*
     |--------------------------------------------------------------------------
-    | Detailed results
+    | Detailed Results
     |--------------------------------------------------------------------------
     */
 
@@ -2697,7 +3436,7 @@ class AdsenseNewsAudit extends Command
 
     /*
     |--------------------------------------------------------------------------
-    | Single result
+    | Single Result
     |--------------------------------------------------------------------------
     */
 
@@ -2768,6 +3507,54 @@ class AdsenseNewsAudit extends Command
 
         /*
         |--------------------------------------------------------------------------
+        | Topic
+        |--------------------------------------------------------------------------
+        */
+
+        if (
+            !empty(
+                $item['topic_cluster']
+            )
+        ) {
+
+            $cluster =
+                $item['topic_cluster'];
+
+            $this->line(
+                "Topic cluster: {$cluster['id']} ({$cluster['size']} articles)"
+            );
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Core Issues
+        |--------------------------------------------------------------------------
+        */
+
+        if (
+            !empty(
+                $item['core_issues']
+            )
+        ) {
+
+            $this->line(
+                'CORE ISSUES:'
+            );
+
+            foreach (
+                $item['core_issues']
+                as $issue
+            ) {
+
+                $this->line(
+                    '  - ' .
+                    $issue
+                );
+            }
+        }
+
+        /*
+        |--------------------------------------------------------------------------
         | Checks
         |--------------------------------------------------------------------------
         */
@@ -2810,6 +3597,29 @@ class AdsenseNewsAudit extends Command
                     ', ',
                     $item['duplicate_of']
                 )
+            );
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | AI Warning
+        |--------------------------------------------------------------------------
+        */
+
+        $ai =
+            $item['checks']['ai_risk'];
+
+        if (
+            $ai['status'] !== 'PASS'
+        ) {
+
+            $this->line(
+                'AI/TEMPLATE WARNING: ' .
+                $ai['status']
+            );
+
+            $this->line(
+                'AI warning blocks AdSense readiness: NO'
             );
         }
 
@@ -2878,7 +3688,7 @@ class AdsenseNewsAudit extends Command
         );
 
         $this->info(
-            '🤖 AI / TEMPLATE RISK (' .
+            '🤖 AI / TEMPLATE WARNINGS (' .
             $items->count() .
             ')'
         );
@@ -2890,8 +3700,9 @@ class AdsenseNewsAudit extends Command
         if (
             $items->isEmpty()
         ) {
+
             $this->line(
-                'No significant AI/template risks detected.'
+                'No significant AI/template warnings detected.'
             );
 
             return;
@@ -2915,6 +3726,10 @@ class AdsenseNewsAudit extends Command
             );
 
             $this->line(
+                "AdSense blocking: NO"
+            );
+
+            $this->line(
                 "Template hits: {$ai['template_hits']}"
             );
 
@@ -2927,6 +3742,7 @@ class AdsenseNewsAudit extends Command
                 $ai['issues']
                 as $issue
             ) {
+
                 $this->line(
                     "  - {$issue}"
                 );
@@ -2988,6 +3804,7 @@ class AdsenseNewsAudit extends Command
         if (
             empty($groups)
         ) {
+
             $this->line(
                 'No duplicate groups detected.'
             );
@@ -3033,6 +3850,89 @@ class AdsenseNewsAudit extends Command
 
     /*
     |--------------------------------------------------------------------------
+    | Topic/Event Clusters
+    |--------------------------------------------------------------------------
+    */
+
+    private function displayTopicClusters(
+        $news,
+        array $clusters
+    ): void {
+
+        $this->newLine();
+
+        $this->info(
+            '======================================================'
+        );
+
+        $this->info(
+            '🧩 TOPIC / EVENT CLUSTERS (' .
+            count($clusters) .
+            ')'
+        );
+
+        $this->info(
+            '======================================================'
+        );
+
+        if (
+            empty($clusters)
+        ) {
+
+            $this->line(
+                'No meaningful topic/event clusters detected.'
+            );
+
+            return;
+        }
+
+        foreach (
+            $clusters as $index => $cluster
+        ) {
+
+            $clusterId =
+                'TOPIC-' .
+                str_pad(
+                    (string) ($index + 1),
+                    4,
+                    '0',
+                    STR_PAD_LEFT
+                );
+
+            $this->line(
+                "{$clusterId} | " .
+                count($cluster) .
+                " related articles"
+            );
+
+            foreach ($cluster as $id) {
+
+                $item =
+                    $news->firstWhere(
+                        'id',
+                        $id
+                    );
+
+                if (!$item) {
+                    continue;
+                }
+
+                $title =
+                    $item->title_ar
+                    ?: $item->title_en
+                    ?: 'Untitled';
+
+                $this->line(
+                    "  ID {$id} | {$title}"
+                );
+            }
+
+            $this->newLine();
+        }
+    }
+
+    /*
+    |--------------------------------------------------------------------------
     | Final Summary
     |--------------------------------------------------------------------------
     */
@@ -3043,7 +3943,10 @@ class AdsenseNewsAudit extends Command
         int $review,
         int $risk,
         int $weak,
-        float $average
+        float $average,
+        int $aiRisk,
+        int $duplicates,
+        int $clusters
     ): void {
 
         $this->newLine();
@@ -3084,6 +3987,18 @@ class AdsenseNewsAudit extends Command
             "🔴 CONTENT WEAK:      {$weak}"
         );
 
+        $this->line(
+            "🤖 AI warnings:       {$aiRisk}"
+        );
+
+        $this->line(
+            "🔁 Duplicate risks:   {$duplicates}"
+        );
+
+        $this->line(
+            "🧩 Topic clusters:    {$clusters}"
+        );
+
         $this->newLine();
 
         if (
@@ -3092,6 +4007,14 @@ class AdsenseNewsAudit extends Command
 
             $this->error(
                 'High-risk articles detected. Do not treat the whole news collection as ready.'
+            );
+
+        } elseif (
+            $weak > 0
+        ) {
+
+            $this->warn(
+                'Some articles have insufficient content depth and should be improved.'
             );
 
         } elseif (
@@ -3110,6 +4033,10 @@ class AdsenseNewsAudit extends Command
         }
 
         $this->newLine();
+
+        $this->comment(
+            'AI/template warnings are editorial signals and do not automatically block publication.'
+        );
 
         $this->comment(
             'IMPORTANT: This audit cannot guarantee Google AdSense approval.'
@@ -3131,7 +4058,8 @@ class AdsenseNewsAudit extends Command
     private function outputJson(
         array $results,
         int $total,
-        float $average
+        float $average,
+        array $topicClusters
     ): void {
 
         $collection =
@@ -3142,8 +4070,37 @@ class AdsenseNewsAudit extends Command
             'audit' =>
                 'adsense_news',
 
+            'version' =>
+                '2.0',
+
             'generated_at' =>
                 now()->toIso8601String(),
+
+            'read_only' =>
+                true,
+
+            'note' =>
+                'Internal editorial quality audit. Not an official Google AdSense approval test.',
+
+            'thresholds' => [
+
+                'minimum_publishable_score' =>
+                    (int) $this->option(
+                        'min-score'
+                    ),
+
+                'very_short_content' =>
+                    $this->veryShortContentLength,
+
+                'minimum_content' =>
+                    $this->minimumContentLength,
+
+                'topic_similarity' =>
+                    $this->topicSimilarity,
+
+                'duplicate_similarity' =>
+                    $this->highSimilarity,
+            ],
 
             'total' =>
                 $total,
@@ -3186,8 +4143,40 @@ class AdsenseNewsAudit extends Command
                         ->count(),
             ],
 
+            'signals' => [
+
+                'ai_warnings' =>
+                    $collection
+                        ->filter(
+                            fn ($item) =>
+                                in_array(
+                                    $item['checks']['ai_risk']['status'],
+                                    [
+                                        'RISK',
+                                        'REVIEW',
+                                    ],
+                                    true
+                                )
+                        )
+                        ->count(),
+
+                'duplicate_risks' =>
+                    $collection
+                        ->where(
+                            'checks.duplicates.status',
+                            'RISK'
+                        )
+                        ->count(),
+
+                'topic_clusters' =>
+                    count($topicClusters),
+            ],
+
             'articles' =>
                 $results,
+
+            'topic_clusters' =>
+                $topicClusters,
         ];
 
         $this->line(
