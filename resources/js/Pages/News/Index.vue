@@ -176,9 +176,7 @@
               class="block text-[11px] font-bold text-slate-500 dark:text-slate-400 mb-1.5"
             >
               {{
-                locale === 'ar'
-                  ? 'تاريخ الخبر'
-                  : 'News date'
+               
               }}
             </label>
 

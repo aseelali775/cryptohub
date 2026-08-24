@@ -13,11 +13,11 @@ Schedule::command('crypto:fetch-prices')
     ->withoutOverlapping();
 
 Schedule::command('crypto:fetch-news')
-    ->cron('10 */24 * * *')
+    ->cron('10 */12 * * *')
     ->withoutOverlapping();
 
 Schedule::command('news:process-ai')
-    ->cron('15 */10 * * *')
+    ->cron('15 */2 * * *')
     ->withoutOverlapping();
 
 Schedule::command('crypto:generate-ai-reports')
