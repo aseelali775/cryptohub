@@ -7,20 +7,19 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Str;
 
 class RepairNewsWithAI extends Command
 {
     protected $signature = 'news:repair-ai
-                            {--limit=3 : Number of articles to inspect per run}
+                            {--limit=3 : Number of articles to repair per run}
                             {--ids= : Comma-separated article IDs to repair only}';
 
     protected $description =
-        'Safely repair only missing or weak AI fields without rewriting healthy article data.';
+        'Complete only missing or weak editorial AI sections without rewriting healthy article data.';
 
     /*
     |--------------------------------------------------------------------------
-    | Gemini
+    | Gemini Configuration
     |--------------------------------------------------------------------------
     */
 
@@ -28,17 +27,15 @@ class RepairNewsWithAI extends Command
 
     /*
     |--------------------------------------------------------------------------
-    | Important:
-    |
-    | Keep this small because Gemini free-tier request quota is limited.
+    | Small batch to protect Gemini quota.
     |--------------------------------------------------------------------------
     */
 
-    private const DEFAULT_BATCH_LIMIT = 20;
+    private const DEFAULT_BATCH_LIMIT = 3;
 
     /*
     |--------------------------------------------------------------------------
-    | Seconds between Gemini requests.
+    | Delay between Gemini requests.
     |--------------------------------------------------------------------------
     */
 
@@ -46,10 +43,7 @@ class RepairNewsWithAI extends Command
 
     /*
     |--------------------------------------------------------------------------
-    | Retry configuration
-    |
-    | 429 is NEVER retried.
-    | Only temporary server/network errors may retry once.
+    | Retry temporary errors only.
     |--------------------------------------------------------------------------
     */
 
@@ -59,25 +53,17 @@ class RepairNewsWithAI extends Command
 
     /*
     |--------------------------------------------------------------------------
-    | Maximum source content sent to Gemini.
+    | Maximum English source content sent to Gemini.
     |--------------------------------------------------------------------------
     */
 
-    private const MAX_SOURCE_LENGTH = 12000;
+    private const MAX_SOURCE_LENGTH = 6000;
 
     /*
     |--------------------------------------------------------------------------
-    | Quality thresholds
+    | Editorial field thresholds
     |--------------------------------------------------------------------------
     */
-
-    private const MIN_TITLE_AR = 40;
-
-    private const MIN_CONTENT_AR = 400;
-
-    private const MIN_SUMMARY_AR = 100;
-
-    private const MIN_WHY_IT_MATTERS_AR = 150;
 
     private const MIN_ANALYSIS_AR = 300;
 
@@ -87,31 +73,26 @@ class RepairNewsWithAI extends Command
 
     private const MIN_LIMITATIONS_AR = 150;
 
-    private const MIN_KEYWORDS = 3;
-
-    private const MAX_KEYWORDS = 5;
-
     /*
     |--------------------------------------------------------------------------
-    | Allowed AI categories.
+    | Allowed fields.
+    |
+    | IMPORTANT:
+    | Do not add title_ar, content_ar, summary_ar, keywords,
+    | category, sentiment, impact_score or slug here.
     |--------------------------------------------------------------------------
     */
 
-    private array $allowedCategories = [
-        'Bitcoin',
-        'Ethereum',
-        'Regulation',
-        'DeFi',
-        'NFT',
-        'Mining',
-        'Market',
-        'Security',
-        'Blockchain',
+    private array $editorialFields = [
+        'analysis_ar',
+        'context_ar',
+        'what_to_watch_ar',
+        'limitations_ar',
     ];
 
     /*
     |--------------------------------------------------------------------------
-    | Main handler
+    | Main Handler
     |--------------------------------------------------------------------------
     */
 
@@ -122,13 +103,12 @@ class RepairNewsWithAI extends Command
         $apiKey = config('services.gemini.key');
 
         if (empty($apiKey)) {
-
             $this->error(
                 '❌ GEMINI_API_KEY is missing.'
             );
 
             Log::error(
-                'News repair aborted because Gemini API key is missing.'
+                'Editorial repair aborted: Gemini API key missing.'
             );
 
             return self::FAILURE;
@@ -136,42 +116,36 @@ class RepairNewsWithAI extends Command
 
         /*
         |--------------------------------------------------------------------------
-        | Select articles
+        | Get only articles that actually need editorial repair.
         |--------------------------------------------------------------------------
         */
 
         $newsList = $this->getRepairableNews();
 
         if ($newsList->isEmpty()) {
-
             $this->info(
-                '✅ No repairable news articles found.'
+                '✅ No articles need editorial repair.'
             );
 
             return self::SUCCESS;
         }
 
         $this->info(
-            "Found {$newsList->count()} article(s) requiring repair."
+            "Found {$newsList->count()} article(s) requiring editorial completion."
         );
 
         $this->newLine();
 
-        $repaired = 0;
-
+        $processed = 0;
         $failed = 0;
-
         $skipped = 0;
-
         $apiRequests = 0;
-
-        $localRepairs = 0;
-
         $quotaExceeded = false;
+        $changed = false;
 
         /*
         |--------------------------------------------------------------------------
-        | Process articles
+        | Process selected articles
         |--------------------------------------------------------------------------
         */
 
@@ -187,27 +161,18 @@ class RepairNewsWithAI extends Command
 
                 /*
                 |--------------------------------------------------------------------------
-                | Determine exactly what is wrong.
+                | Determine only the four fields that need repair.
                 |--------------------------------------------------------------------------
                 */
 
-                $repairPlan = $this->buildRepairPlan(
+                $missingFields = $this->getMissingEditorialFields(
                     $news
                 );
 
-                /*
-                |--------------------------------------------------------------------------
-                | Nothing to repair.
-                |--------------------------------------------------------------------------
-                */
-
-                if (
-                    empty($repairPlan['ai_fields']) &&
-                    empty($repairPlan['local_fields'])
-                ) {
+                if (empty($missingFields)) {
 
                     $this->line(
-                        '✅ Article already satisfies repair rules.'
+                        '✅ Article already has acceptable editorial fields.'
                     );
 
                     $skipped++;
@@ -215,241 +180,39 @@ class RepairNewsWithAI extends Command
                     continue;
                 }
 
-                /*
-                |--------------------------------------------------------------------------
-                | Display diagnosis.
-                |--------------------------------------------------------------------------
-                */
-
-                if (
-                    !empty($repairPlan['ai_fields'])
-                ) {
-
-                    $this->line(
-                        '🤖 AI fields: ' .
-                        implode(
-                            ', ',
-                            $repairPlan['ai_fields']
-                        )
-                    );
-                }
-
-                if (
-                    !empty($repairPlan['local_fields'])
-                ) {
-
-                    $this->line(
-                        '🔧 Local fields: ' .
-                        implode(
-                            ', ',
-                            $repairPlan['local_fields']
-                        )
-                    );
-                }
-
-                /*
-                |--------------------------------------------------------------------------
-                | Local repairs first.
-                |
-                | These do NOT consume Gemini quota.
-                |--------------------------------------------------------------------------
-                */
-
-                $updates = [];
-
-                /*
-                |----------------------------------------------------------------------
-                | Slug
-                |----------------------------------------------------------------------
-                */
-
-                if (
-                    in_array(
-                        'slug',
-                        $repairPlan['local_fields'],
-                        true
+                $this->line(
+                    'Fields requiring repair: ' .
+                    implode(
+                        ', ',
+                        $missingFields
                     )
-                ) {
-
-                    $slug = $this->buildSlug(
-                        $news->title_en,
-                        $news->id
-                    );
-
-                    if (
-                        $slug !== '' &&
-                        empty($news->slug)
-                    ) {
-
-                        $updates['slug'] = $slug;
-                    }
-                }
-
-                /*
-                |----------------------------------------------------------------------
-                | Keywords
-                |
-                | Only local repair when keywords are the only AI-type
-                | problem. This protects Gemini quota.
-                |----------------------------------------------------------------------
-                */
-
-                if (
-                    in_array(
-                        'keywords',
-                        $repairPlan['local_fields'],
-                        true
-                    )
-                ) {
-
-                    $keywords = $this->buildLocalKeywords(
-                        $news
-                    );
-
-                    if (
-                        count($keywords) >= self::MIN_KEYWORDS
-                    ) {
-
-                        $updates['keywords'] = $keywords;
-                    }
-                }
+                );
 
                 /*
                 |--------------------------------------------------------------------------
-                | Normalize invalid metadata locally where safe.
+                | Source material
                 |--------------------------------------------------------------------------
                 */
 
-                if (
-                    in_array(
-                        'sentiment',
-                        $repairPlan['local_fields'],
-                        true
-                    )
-                ) {
-
-                    /*
-                     * Neutral is the safest fallback when no reliable
-                     * sentiment value exists.
-                     */
-
-                    $updates['sentiment'] = 'Neutral';
-                }
-
-                if (
-                    in_array(
-                        'impact_score',
-                        $repairPlan['local_fields'],
-                        true
-                    )
-                ) {
-
-                    $updates['impact_score'] = 5;
-                }
-
-                /*
-                |--------------------------------------------------------------------------
-                | Category:
-                |
-                | Only use a local fallback if the existing value is empty.
-                | Invalid existing categories are sent to Gemini.
-                |--------------------------------------------------------------------------
-                */
-
-                if (
-                    in_array(
-                        'category_local',
-                        $repairPlan['local_fields'],
-                        true
-                    )
-                ) {
-
-                    $updates['category'] = 'Market';
-                }
-
-                /*
-                |--------------------------------------------------------------------------
-                | Save local repairs before calling Gemini.
-                |--------------------------------------------------------------------------
-                */
-
-                if (!empty($updates)) {
-
-                    $news->update(
-                        $updates
-                    );
-
-                    $localRepairs += count(
-                        $updates
-                    );
-
-                    $this->line(
-                        '🔧 Local repairs saved: ' .
-                        implode(
-                            ', ',
-                            array_keys($updates)
-                        )
-                    );
-                }
-
-                /*
-                |--------------------------------------------------------------------------
-                | Refresh model after local update.
-                |--------------------------------------------------------------------------
-                */
-
-                $news->refresh();
-
-                /*
-                |--------------------------------------------------------------------------
-                | If AI is not needed, finish here.
-                |--------------------------------------------------------------------------
-                */
-
-                if (
-                    empty($repairPlan['ai_fields'])
-                ) {
-
-                    $this->info(
-                        "✅ Local repair completed for ID {$news->id}"
-                    );
-
-                    $repaired++;
-
-                    continue;
-                }
-
-                /*
-                |--------------------------------------------------------------------------
-                | Build source material.
-                |--------------------------------------------------------------------------
-                */
-
-                $sourceMaterial =
-                    $this->buildSourceMaterial(
-                        $news
-                    );
+                $sourceMaterial = $this->buildSourceMaterial(
+                    $news
+                );
 
                 if (
                     mb_strlen(
                         trim($sourceMaterial)
                     ) < 200
                 ) {
-
                     $this->warn(
-                        '⚠️ Not enough factual material for safe AI repair.'
+                        '⚠️ Not enough source material for safe editorial repair.'
                     );
 
                     Log::warning(
-                        'AI repair skipped because source material is insufficient',
+                        'Editorial repair skipped due to insufficient source material',
                         [
                             'news_id' => $news->id,
-                            'source_length' =>
-                                mb_strlen(
-                                    $sourceMaterial
-                                ),
-                            'ai_fields' =>
-                                $repairPlan['ai_fields'],
+                            'source_length' => mb_strlen($sourceMaterial),
+                            'fields' => $missingFields,
                         ]
                     );
 
@@ -460,7 +223,7 @@ class RepairNewsWithAI extends Command
 
                 /*
                 |--------------------------------------------------------------------------
-                | Request Gemini.
+                | One Gemini request for all missing fields of this article.
                 |--------------------------------------------------------------------------
                 */
 
@@ -469,13 +232,13 @@ class RepairNewsWithAI extends Command
                 $result = $this->repairWithGemini(
                     $news,
                     $sourceMaterial,
-                    $repairPlan['ai_fields'],
+                    $missingFields,
                     $apiKey
                 );
 
                 /*
                 |--------------------------------------------------------------------------
-                | Quota exhausted.
+                | Quota exhausted
                 |--------------------------------------------------------------------------
                 */
 
@@ -483,7 +246,6 @@ class RepairNewsWithAI extends Command
                     is_array($result) &&
                     ($result['__quota_exceeded'] ?? false)
                 ) {
-
                     $quotaExceeded = true;
 
                     $this->error(
@@ -491,16 +253,14 @@ class RepairNewsWithAI extends Command
                     );
 
                     $this->warn(
-                        'Processing cycle stopped immediately.'
+                        'Processing stopped immediately. No further requests will be sent.'
                     );
 
                     Log::warning(
-                        'AI repair cycle stopped because Gemini quota was exceeded',
+                        'Editorial repair cycle stopped because Gemini quota was exceeded',
                         [
-                            'news_id' =>
-                                $news->id,
-                            'model' =>
-                                self::GEMINI_MODEL,
+                            'news_id' => $news->id,
+                            'model' => self::GEMINI_MODEL,
                             'retry_seconds' =>
                                 $result['__retry_seconds'] ?? null,
                         ]
@@ -513,7 +273,7 @@ class RepairNewsWithAI extends Command
 
                 /*
                 |--------------------------------------------------------------------------
-                | Temporary failure.
+                | Temporary API failure
                 |--------------------------------------------------------------------------
                 */
 
@@ -521,7 +281,6 @@ class RepairNewsWithAI extends Command
                     is_array($result) &&
                     ($result['__temporary_failure'] ?? false)
                 ) {
-
                     $this->error(
                         "❌ Temporary Gemini failure for ID {$news->id}"
                     );
@@ -533,15 +292,14 @@ class RepairNewsWithAI extends Command
 
                 /*
                 |--------------------------------------------------------------------------
-                | Validate generated response.
+                | Validate generated fields.
                 |--------------------------------------------------------------------------
                 */
 
-                $validation =
-                    $this->validateRepairResult(
-                        $result,
-                        $repairPlan['ai_fields']
-                    );
+                $validation = $this->validateRepairResult(
+                    $result,
+                    $missingFields
+                );
 
                 if (!$validation['valid']) {
 
@@ -549,25 +307,21 @@ class RepairNewsWithAI extends Command
                         "❌ Repair validation failed for ID {$news->id}"
                     );
 
+                    foreach ($validation['errors'] as $error) {
+                        $this->line(
+                            "  - {$error}"
+                        );
+                    }
+
                     Log::warning(
-                        'AI repair validation failed',
+                        'Editorial repair validation failed',
                         [
-                            'news_id' =>
-                                $news->id,
-                            'fields' =>
-                                $repairPlan['ai_fields'],
-                            'errors' =>
-                                $validation['errors'],
-                            'result' =>
-                                $result,
+                            'news_id' => $news->id,
+                            'fields' => $missingFields,
+                            'errors' => $validation['errors'],
+                            'result' => $result,
                         ]
                     );
-
-                    /*
-                    |--------------------------------------------------------------------------
-                    | Do not save anything from an invalid result.
-                    |--------------------------------------------------------------------------
-                    */
 
                     $failed++;
 
@@ -576,231 +330,97 @@ class RepairNewsWithAI extends Command
 
                 /*
                 |--------------------------------------------------------------------------
-                | Apply ONLY fields that:
+                | Build safe update array.
                 |
-                | 1. Were requested.
-                | 2. Are currently missing/weak.
-                | 3. Passed field-specific validation.
+                | Only fields that STILL need repair are saved.
                 |--------------------------------------------------------------------------
                 */
 
-                $aiUpdates = [];
+                $updates = [];
 
-                foreach (
-                    $repairPlan['ai_fields']
-                    as $field
-                ) {
+                foreach ($missingFields as $field) {
 
-                    $currentValue =
-                        trim(
-                            (string)
-                            $news->{$field}
-                        );
+                    $generated = trim(
+                        (string) (
+                            $result[$field] ?? ''
+                        )
+                    );
 
-                    $generatedValue =
-                        trim(
-                            (string)
-                            ($result[$field] ?? '')
-                        );
+                    if (
+                        $generated === ''
+                    ) {
+                        continue;
+                    }
 
                     /*
                     |--------------------------------------------------------------------------
-                    | Never overwrite healthy existing data.
+                    | Protect against replacing a field that became healthy.
                     |--------------------------------------------------------------------------
                     */
 
                     if (
-                        $this->fieldNeedsRepair(
-                            $news,
-                            $field
-                        ) &&
-                        $generatedValue !== ''
-                    ) {
-
-                        $aiUpdates[$field] =
-                            $generatedValue;
-                    }
-                }
-
-                /*
-                |--------------------------------------------------------------------------
-                | Additional AI metadata.
-                |--------------------------------------------------------------------------
-                */
-
-                if (
-                    in_array(
-                        'category',
-                        $repairPlan['ai_fields'],
-                        true
-                    ) &&
-                    isset($result['category']) &&
-                    $this->isValidCategory(
-                        $result['category']
-                    ) &&
-                    $this->fieldNeedsRepair(
-                        $news,
-                        'category'
-                    )
-                ) {
-
-                    $aiUpdates['category'] =
-                        $result['category'];
-                }
-
-                if (
-                    in_array(
-                        'sentiment',
-                        $repairPlan['ai_fields'],
-                        true
-                    ) &&
-                    isset($result['sentiment']) &&
-                    $this->isValidSentiment(
-                        $result['sentiment']
-                    ) &&
-                    $this->fieldNeedsRepair(
-                        $news,
-                        'sentiment'
-                    )
-                ) {
-
-                    $aiUpdates['sentiment'] =
-                        $result['sentiment'];
-                }
-
-                if (
-                    in_array(
-                        'impact_score',
-                        $repairPlan['ai_fields'],
-                        true
-                    ) &&
-                    isset($result['impact_score']) &&
-                    $this->isValidImpactScore(
-                        $result['impact_score']
-                    ) &&
-                    $this->fieldNeedsRepair(
-                        $news,
-                        'impact_score'
-                    )
-                ) {
-
-                    $aiUpdates['impact_score'] =
-                        (int)
-                        $result['impact_score'];
-                }
-
-                /*
-                |--------------------------------------------------------------------------
-                | Keywords from Gemini if local repair did not solve them.
-                |--------------------------------------------------------------------------
-                */
-
-                if (
-                    in_array(
-                        'keywords',
-                        $repairPlan['ai_fields'],
-                        true
-                    ) &&
-                    isset($result['keywords']) &&
-                    $this->fieldNeedsRepair(
-                        $news,
-                        'keywords'
-                    )
-                ) {
-
-                    $keywords =
-                        $this->normalizeKeywords(
-                            $result['keywords']
-                        );
-
-                    if (
-                        count($keywords) >=
-                        self::MIN_KEYWORDS
-                    ) {
-
-                        $aiUpdates['keywords'] =
-                            $keywords;
-                    }
-                }
-
-                /*
-                |--------------------------------------------------------------------------
-                | Safety:
-                | Never save AI updates into fields that became healthy
-                | while the request was running.
-                |--------------------------------------------------------------------------
-                */
-
-                $safeUpdates = [];
-
-                foreach (
-                    $aiUpdates as $field => $value
-                ) {
-
-                    if (
-                        $this->fieldNeedsRepair(
+                        !$this->fieldNeedsRepair(
                             $news,
                             $field
                         )
                     ) {
-
-                        $safeUpdates[$field] =
-                            $value;
+                        continue;
                     }
+
+                    $updates[$field] = $generated;
                 }
 
                 /*
                 |--------------------------------------------------------------------------
-                | Save AI repair.
+                | Nothing safe to save.
                 |--------------------------------------------------------------------------
                 */
 
-                if (!empty($safeUpdates)) {
-
-                    $news->update(
-                        $safeUpdates
-                    );
-
-                    $repaired++;
-
-                    $this->info(
-                        "✅ AI repair saved for ID {$news->id}"
-                    );
-
-                    $this->line(
-                        'Updated fields: ' .
-                        implode(
-                            ', ',
-                            array_keys(
-                                $safeUpdates
-                            )
-                        )
-                    );
-
-                    foreach (
-                        $safeUpdates as $field => $value
-                    ) {
-
-                        if (
-                            is_string($value)
-                        ) {
-
-                            $this->line(
-                                "{$field}: " .
-                                mb_strlen(
-                                    trim($value)
-                                ) .
-                                ' chars'
-                            );
-                        }
-                    }
-                } else {
+                if (empty($updates)) {
 
                     $this->warn(
-                        "⚠️ Gemini returned no safely repairable fields for ID {$news->id}"
+                        "⚠️ No safely repairable fields returned for ID {$news->id}"
                     );
 
                     $skipped++;
+
+                    continue;
+                }
+
+                /*
+                |--------------------------------------------------------------------------
+                | Save ONLY the four editorial fields.
+                |--------------------------------------------------------------------------
+                */
+
+                $news->update(
+                    $updates
+                );
+
+                $processed++;
+                $changed = true;
+
+                $this->info(
+                    "✅ Editorial repair saved for ID {$news->id}"
+                );
+
+                $this->line(
+                    'Updated fields: ' .
+                    implode(
+                        ', ',
+                        array_keys($updates)
+                    )
+                );
+
+                foreach ($updates as $field => $value) {
+
+                    $this->line(
+                        "{$field}: " .
+                        mb_strlen(
+                            trim($value)
+                        ) .
+                        ' chars'
+                    );
                 }
 
             } catch (\Throwable $e) {
@@ -812,29 +432,22 @@ class RepairNewsWithAI extends Command
                 );
 
                 Log::error(
-                    'AI News Repair Exception',
+                    'Editorial repair exception',
                     [
-                        'news_id' =>
-                            $news->id,
-                        'message' =>
-                            $e->getMessage(),
-                        'trace' =>
-                            $e->getTraceAsString(),
+                        'news_id' => $news->id,
+                        'message' => $e->getMessage(),
+                        'trace' => $e->getTraceAsString(),
                     ]
                 );
             }
 
             /*
             |--------------------------------------------------------------------------
-            | Delay only after an actual Gemini request.
+            | Delay only when a Gemini request was made.
             |--------------------------------------------------------------------------
             */
 
-            if (
-                !$quotaExceeded &&
-                $apiRequests > 0
-            ) {
-
+            if (!$quotaExceeded) {
                 sleep(
                     self::RATE_LIMIT_SECONDS
                 );
@@ -843,14 +456,11 @@ class RepairNewsWithAI extends Command
 
         /*
         |--------------------------------------------------------------------------
-        | Clear caches only if changes were made.
+        | Clear caches only when something was actually changed.
         |--------------------------------------------------------------------------
         */
 
-        if (
-            $repaired > 0 ||
-            $localRepairs > 0
-        ) {
+        if ($changed) {
 
             Cache::forget(
                 'ai_market_dashboard_stats'
@@ -880,7 +490,7 @@ class RepairNewsWithAI extends Command
         );
 
         $this->info(
-            'AQL CRYPTO AI REPAIR COMPLETED'
+            'AQL CRYPTO EDITORIAL REPAIR COMPLETED'
         );
 
         $this->info(
@@ -888,19 +498,15 @@ class RepairNewsWithAI extends Command
         );
 
         $this->line(
-            "Repaired articles : {$repaired}"
+            "Articles repaired : {$processed}"
         );
 
         $this->line(
-            "Local fixes        : {$localRepairs}"
+            "Gemini requests   : {$apiRequests}"
         );
 
         $this->line(
-            "Gemini requests    : {$apiRequests}"
-        );
-
-        $this->line(
-            "Failed             : {$failed}"
+            "Failed            : {$failed}"
         );
 
         $this->line(
@@ -908,16 +514,19 @@ class RepairNewsWithAI extends Command
         );
 
         if ($quotaExceeded) {
-
             $this->warn(
-                'Gemini quota was reached and the cycle was stopped safely.'
+                'Gemini quota was reached and the cycle stopped safely.'
             );
         }
 
         $this->newLine();
 
         $this->comment(
-            'Existing healthy article fields were not overwritten.'
+            'Only analysis_ar, context_ar, what_to_watch_ar and limitations_ar were eligible for repair.'
+        );
+
+        $this->comment(
+            'Healthy existing fields were never overwritten.'
         );
 
         /*
@@ -928,7 +537,7 @@ class RepairNewsWithAI extends Command
 
         return (
             $failed > 0 &&
-            $repaired === 0
+            $processed === 0
         )
             ? self::FAILURE
             : self::SUCCESS;
@@ -936,50 +545,83 @@ class RepairNewsWithAI extends Command
 
     /*
     |--------------------------------------------------------------------------
-    | Select repairable articles
+    | Select only articles needing editorial repair.
     |--------------------------------------------------------------------------
     */
 
     private function getRepairableNews()
     {
-        $query =
-            News::query()
-                ->where(
-                    'ai_processed',
-                    true
-                )
-                ->orderBy('id');
+        $query = News::query()
+            ->where(
+                'ai_processed',
+                true
+            )
+            ->where(function ($q) {
+
+                $q->whereNull('analysis_ar')
+                    ->orWhere('analysis_ar', '')
+                    ->orWhereRaw(
+                        'CHAR_LENGTH(TRIM(analysis_ar)) < ?',
+                        [
+                            self::MIN_ANALYSIS_AR,
+                        ]
+                    )
+
+                    ->orWhereNull('context_ar')
+                    ->orWhere('context_ar', '')
+                    ->orWhereRaw(
+                        'CHAR_LENGTH(TRIM(context_ar)) < ?',
+                        [
+                            self::MIN_CONTEXT_AR,
+                        ]
+                    )
+
+                    ->orWhereNull('what_to_watch_ar')
+                    ->orWhere('what_to_watch_ar', '')
+                    ->orWhereRaw(
+                        'CHAR_LENGTH(TRIM(what_to_watch_ar)) < ?',
+                        [
+                            self::MIN_WHAT_TO_WATCH_AR,
+                        ]
+                    )
+
+                    ->orWhereNull('limitations_ar')
+                    ->orWhere('limitations_ar', '')
+                    ->orWhereRaw(
+                        'CHAR_LENGTH(TRIM(limitations_ar)) < ?',
+                        [
+                            self::MIN_LIMITATIONS_AR,
+                        ]
+                    );
+            })
+            ->orderBy('id');
 
         /*
         |--------------------------------------------------------------------------
-        | Specific IDs
+        | Optional IDs
         |--------------------------------------------------------------------------
         */
 
-        $ids =
-            trim(
-                (string)
-                $this->option('ids')
-            );
+        $ids = trim(
+            (string) $this->option('ids')
+        );
 
         if ($ids !== '') {
 
-            $idList =
-                collect(
-                    explode(
-                        ',',
-                        $ids
-                    )
+            $idList = collect(
+                explode(
+                    ',',
+                    $ids
                 )
-                    ->map(
-                        fn ($id) =>
-                            (int)
-                            trim($id)
-                    )
-                    ->filter()
-                    ->unique()
-                    ->values()
-                    ->toArray();
+            )
+                ->map(
+                    fn ($id) =>
+                        (int) trim($id)
+                )
+                ->filter()
+                ->unique()
+                ->values()
+                ->toArray();
 
             if (!empty($idList)) {
 
@@ -996,12 +638,9 @@ class RepairNewsWithAI extends Command
         |--------------------------------------------------------------------------
         */
 
-        $limit =
-            (int)
-            $this->option('limit');
+        $limit = (int) $this->option('limit');
 
         if ($limit <= 0) {
-
             $limit =
                 self::DEFAULT_BATCH_LIMIT;
         }
@@ -1013,307 +652,79 @@ class RepairNewsWithAI extends Command
 
     /*
     |--------------------------------------------------------------------------
-    | Build repair plan
+    | Determine fields that need repair.
     |--------------------------------------------------------------------------
     */
 
-    private function buildRepairPlan(
+    private function getMissingEditorialFields(
         News $news
     ): array {
 
-        $aiFields = [];
+        $fields = [];
 
-        $localFields = [];
-
-        /*
-        |--------------------------------------------------------------------------
-        | Title
-        |--------------------------------------------------------------------------
-        */
-
-        if (
-            $this->fieldNeedsRepair(
-                $news,
-                'title_ar'
-            )
-        ) {
-
-            $aiFields[] =
-                'title_ar';
-        }
-
-        /*
-        |--------------------------------------------------------------------------
-        | Arabic article
-        |--------------------------------------------------------------------------
-        */
-
-        if (
-            $this->fieldNeedsRepair(
-                $news,
-                'content_ar'
-            )
-        ) {
-
-            $aiFields[] =
-                'content_ar';
-        }
-
-        /*
-        |--------------------------------------------------------------------------
-        | Summary
-        |--------------------------------------------------------------------------
-        */
-
-        if (
-            $this->fieldNeedsRepair(
-                $news,
-                'summary_ar'
-            )
-        ) {
-
-            $aiFields[] =
-                'summary_ar';
-        }
-
-        /*
-        |--------------------------------------------------------------------------
-        | Why it matters
-        |--------------------------------------------------------------------------
-        */
-
-        if (
-            $this->fieldNeedsRepair(
-                $news,
-                'why_it_matters_ar'
-            )
-        ) {
-
-            $aiFields[] =
-                'why_it_matters_ar';
-        }
-
-        /*
-        |--------------------------------------------------------------------------
-        | Analysis
-        |--------------------------------------------------------------------------
-        */
-
-        if (
-            $this->fieldNeedsRepair(
-                $news,
-                'analysis_ar'
-            )
-        ) {
-
-            $aiFields[] =
-                'analysis_ar';
-        }
-
-        /*
-        |--------------------------------------------------------------------------
-        | Context
-        |--------------------------------------------------------------------------
-        */
-
-        if (
-            $this->fieldNeedsRepair(
-                $news,
-                'context_ar'
-            )
-        ) {
-
-            $aiFields[] =
-                'context_ar';
-        }
-
-        /*
-        |--------------------------------------------------------------------------
-        | What to watch
-        |--------------------------------------------------------------------------
-        */
-
-        if (
-            $this->fieldNeedsRepair(
-                $news,
-                'what_to_watch_ar'
-            )
-        ) {
-
-            $aiFields[] =
-                'what_to_watch_ar';
-        }
-
-        /*
-        |--------------------------------------------------------------------------
-        | Limitations
-        |--------------------------------------------------------------------------
-        */
-
-        if (
-            $this->fieldNeedsRepair(
-                $news,
-                'limitations_ar'
-            )
-        ) {
-
-            $aiFields[] =
-                'limitations_ar';
-        }
-
-        /*
-        |--------------------------------------------------------------------------
-        | Keywords
-        |
-        | If article already has all editorial fields healthy,
-        | local repair is preferred.
-        |--------------------------------------------------------------------------
-        */
-
-        if (
-            $this->keywordsNeedRepair(
-                $news
-            )
+        foreach (
+            $this->editorialFields as $field
         ) {
 
             if (
-                empty($aiFields)
+                $this->fieldNeedsRepair(
+                    $news,
+                    $field
+                )
             ) {
-
-                $localFields[] =
-                    'keywords';
-
-            } else {
-
-                $aiFields[] =
-                    'keywords';
+                $fields[] = $field;
             }
         }
 
-        /*
-        |--------------------------------------------------------------------------
-        | Category
-        |--------------------------------------------------------------------------
-        */
-
-        $category =
-            trim(
-                (string)
-                $news->category
-            );
-
-        if ($category === '') {
-
-            /*
-             * Missing category can safely receive a neutral
-             * default without Gemini.
-             */
-
-            $localFields[] =
-                'category_local';
-
-        } elseif (
-            !$this->isValidCategory(
-                $category
-            )
-        ) {
-
-            /*
-             * Invalid category should be decided by AI
-             * from the source material.
-             */
-
-            $aiFields[] =
-                'category';
-        }
-
-        /*
-        |--------------------------------------------------------------------------
-        | Sentiment
-        |--------------------------------------------------------------------------
-        */
-
-        $sentiment =
-            trim(
-                (string)
-                $news->sentiment
-            );
-
-        if ($sentiment === '') {
-
-            $aiFields[] =
-                'sentiment';
-
-        } elseif (
-            !$this->isValidSentiment(
-                $sentiment
-            )
-        ) {
-
-            $aiFields[] =
-                'sentiment';
-        }
-
-        /*
-        |--------------------------------------------------------------------------
-        | Impact
-        |--------------------------------------------------------------------------
-        */
-
-        $impact =
-            $news->impact_score;
-
-        if (
-            $impact === null ||
-            $impact === '' ||
-            !is_numeric($impact) ||
-            (int) $impact < 1 ||
-            (int) $impact > 10
-        ) {
-
-            $aiFields[] =
-                'impact_score';
-        }
-
-        /*
-        |--------------------------------------------------------------------------
-        | Slug
-        |
-        | Always local.
-        |--------------------------------------------------------------------------
-        */
-
-        if (
-            trim(
-                (string)
-                $news->slug
-            ) === ''
-        ) {
-
-            $localFields[] =
-                'slug';
-        }
-
-        return [
-            'ai_fields' =>
-                array_values(
-                    array_unique(
-                        $aiFields
-                    )
-                ),
-
-            'local_fields' =>
-                array_values(
-                    array_unique(
-                        $localFields
-                    )
-                ),
-        ];
+        return $fields;
     }
 
     /*
     |--------------------------------------------------------------------------
-    | Build source material
+    | Determine whether a field is missing or weak.
+    |--------------------------------------------------------------------------
+    */
+
+    private function fieldNeedsRepair(
+        News $news,
+        string $field
+    ): bool {
+
+        $value = trim(
+            (string) $news->{$field}
+        );
+
+        if ($value === '') {
+            return true;
+        }
+
+        $minimum = match ($field) {
+
+            'analysis_ar' =>
+                self::MIN_ANALYSIS_AR,
+
+            'context_ar' =>
+                self::MIN_CONTEXT_AR,
+
+            'what_to_watch_ar' =>
+                self::MIN_WHAT_TO_WATCH_AR,
+
+            'limitations_ar' =>
+                self::MIN_LIMITATIONS_AR,
+
+            default =>
+                0,
+        };
+
+        return (
+            $minimum > 0 &&
+            mb_strlen($value) < $minimum
+        );
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Build compact source material.
     |--------------------------------------------------------------------------
     */
 
@@ -1321,184 +732,154 @@ class RepairNewsWithAI extends Command
         News $news
     ): string {
 
-        $titleEn =
-            trim(
-                (string)
-                $news->title_en
-            );
+        $titleEn = trim(
+            (string) $news->title_en
+        );
 
-        $contentEn =
-            trim(
-                mb_substr(
-                    (string)
-                    $news->content_en,
-                    0,
-                    self::MAX_SOURCE_LENGTH
-                )
-            );
+        $titleAr = trim(
+            (string) $news->title_ar
+        );
 
-        $titleAr =
-            trim(
-                (string)
-                $news->title_ar
-            );
+        $contentEn = trim(
+            mb_substr(
+                (string) $news->content_en,
+                0,
+                self::MAX_SOURCE_LENGTH
+            )
+        );
 
-        $contentAr =
-            trim(
-                (string)
-                $news->content_ar
-            );
+        $summaryAr = trim(
+            (string) $news->summary_ar
+        );
 
-        $summaryAr =
-            trim(
-                (string)
-                $news->summary_ar
-            );
-
-        $whyAr =
-            trim(
-                (string)
-                $news->why_it_matters_ar
-            );
-
-        $analysisAr =
-            trim(
-                (string)
-                $news->analysis_ar
-            );
-
-        $contextAr =
-            trim(
-                (string)
-                $news->context_ar
-            );
-
-        $watchAr =
-            trim(
-                (string)
-                $news->what_to_watch_ar
-            );
-
-        $limitationsAr =
-            trim(
-                (string)
-                $news->limitations_ar
-            );
+        $whyAr = trim(
+            (string) $news->why_it_matters_ar
+        );
 
         return implode(
             "\n\n",
             array_filter([
                 'SOURCE: ' .
-                    (string)
-                    ($news->source ?? ''),
-
-                'URL: ' .
-                    (string)
-                    ($news->url ?? ''),
+                    (string) (
+                        $news->source ?? ''
+                    ),
 
                 'TITLE EN: ' .
                     $titleEn,
 
-                'ORIGINAL ENGLISH ARTICLE: ' .
-                    $contentEn,
-
-                'EXISTING ARABIC TITLE: ' .
+                'TITLE AR: ' .
                     $titleAr,
 
-                'EXISTING ARABIC ARTICLE: ' .
-                    $contentAr,
+                'ORIGINAL ARTICLE: ' .
+                    $contentEn,
 
                 'EXISTING SUMMARY: ' .
                     $summaryAr,
 
                 'EXISTING WHY IT MATTERS: ' .
                     $whyAr,
-
-                'EXISTING ANALYSIS: ' .
-                    $analysisAr,
-
-                'EXISTING CONTEXT: ' .
-                    $contextAr,
-
-                'EXISTING WHAT TO WATCH: ' .
-                    $watchAr,
-
-                'EXISTING LIMITATIONS: ' .
-                    $limitationsAr,
             ])
         );
     }
 
     /*
     |--------------------------------------------------------------------------
-    | Gemini repair
+    | Gemini request.
     |--------------------------------------------------------------------------
     */
 
     private function repairWithGemini(
         News $news,
         string $sourceMaterial,
-        array $missingFields,
+        array $fields,
         string $apiKey
     ): ?array {
 
-        $url =
-            sprintf(
-                'https://generativelanguage.googleapis.com/v1beta/models/%s:generateContent?key=%s',
-                self::GEMINI_MODEL,
-                $apiKey
-            );
+        $url = sprintf(
+            'https://generativelanguage.googleapis.com/v1beta/models/%s:generateContent?key=%s',
+            self::GEMINI_MODEL,
+            $apiKey
+        );
 
-        $fieldDescriptions = [];
+        $fieldInstructions = [];
 
-        foreach (
-            $missingFields as $field
-        ) {
+        foreach ($fields as $field) {
 
-            $fieldDescriptions[] =
+            $fieldInstructions[] =
                 $this->getFieldInstruction(
                     $field
                 );
         }
 
-        $fieldsText =
-            implode(
-                "\n\n",
-                $fieldDescriptions
-            );
+        $requestedFields = implode(
+            "\n\n",
+            $fieldInstructions
+        );
 
         $prompt = <<<PROMPT
-You are the senior repair editor for Aql Crypto.
+You are the senior Arabic editorial analyst for Aql Crypto.
 
-You are NOT creating a new article.
+You are repairing an existing cryptocurrency news article.
 
-You are repairing ONLY the missing or weak fields listed below.
+IMPORTANT:
 
-CRITICAL RULE:
+Generate ONLY the missing or weak editorial fields requested below.
 
-Do NOT rewrite healthy existing fields.
+Do NOT rewrite the article.
 
-Do NOT return fields that were not requested.
+Do NOT rewrite the title.
 
-Do NOT invent facts.
+Do NOT rewrite content_ar.
+
+Do NOT rewrite summary_ar.
+
+Do NOT rewrite why_it_matters_ar.
+
+Do NOT generate keywords.
+
+Do NOT generate category.
+
+Do NOT generate sentiment.
+
+Do NOT generate impact_score.
+
+Do NOT generate slug.
+
+Do NOT generate meta description.
+
+Do NOT modify healthy fields.
+
+Use ONLY the supplied source material.
 
 Do NOT use outside knowledge.
 
-Do NOT use current market information unless it exists in the supplied material.
+Do NOT invent:
+- facts
+- dates
+- prices
+- statistics
+- people
+- companies
+- quotes
+- regulations
+- market movements
+- blockchain data
 
-Do NOT invent dates, prices, statistics, people, companies, regulations or events.
+If a conclusion is an interpretation, clearly express it as an interpretation.
 
-Use ONLY the supplied source material and existing article information.
+Use professional Modern Standard Arabic.
 
-The supplied existing Arabic fields are factual editorial material and may be used as context.
+Do not provide financial advice.
 
-The original English article is the primary source.
+Do not recommend buying or selling.
+
+Do not make guaranteed predictions.
 
 ==================================================
-FIELDS TO REPAIR
+FIELDS TO GENERATE
 ==================================================
 
-{$fieldsText}
+{$requestedFields}
 
 ==================================================
 SOURCE MATERIAL
@@ -1507,38 +888,24 @@ SOURCE MATERIAL
 {$sourceMaterial}
 
 ==================================================
-EDITORIAL RULES
+QUALITY REQUIREMENTS
 ==================================================
 
-Write professional Modern Standard Arabic.
+analysis_ar:
+Provide meaningful editorial analysis based on the supplied facts.
+Explain implications and uncertainty.
+Avoid generic filler.
 
-Do not translate sentence by sentence.
+context_ar:
+Explain the background needed to understand this particular article.
+Use only information supported by the supplied material.
 
-Do not copy the source article.
+what_to_watch_ar:
+Identify realistic developments directly connected to this story.
+Do not invent future events.
 
-Do not introduce facts not contained in the source.
-
-Preserve all factual numbers and names accurately.
-
-When interpretation is necessary, clearly use cautious language such as:
-
-"قد يشير ذلك إلى"
-
-"قد يعكس"
-
-"من المحتمل أن"
-
-"يمكن أن يعني"
-
-"لا يمكن الجزم بأن"
-
-Do not give investment advice.
-
-Do not recommend buying or selling.
-
-Do not make guaranteed price predictions.
-
-Do not create unsupported market forecasts.
+limitations_ar:
+Explain what the source does not establish or what remains uncertain.
 
 ==================================================
 OUTPUT
@@ -1552,108 +919,44 @@ PROMPT;
 
         /*
         |--------------------------------------------------------------------------
-        | Dynamic schema
+        | Dynamic response schema.
         |--------------------------------------------------------------------------
         */
 
         $properties = [];
 
-        foreach (
-            $missingFields as $field
-        ) {
+        foreach ($fields as $field) {
 
-            switch ($field) {
-
-                case 'keywords':
-
-                    $properties[$field] = [
-                        'type' =>
-                            'array',
-
-                        'items' => [
-                            'type' =>
-                                'string',
-                        ],
-                    ];
-
-                    break;
-
-                case 'category':
-
-                    $properties[$field] = [
-                        'type' =>
-                            'string',
-
-                        'enum' =>
-                            $this->allowedCategories,
-                    ];
-
-                    break;
-
-                case 'sentiment':
-
-                    $properties[$field] = [
-                        'type' =>
-                            'string',
-
-                        'enum' => [
-                            'Bullish',
-                            'Bearish',
-                            'Neutral',
-                        ],
-                    ];
-
-                    break;
-
-                case 'impact_score':
-
-                    $properties[$field] = [
-                        'type' =>
-                            'integer',
-                    ];
-
-                    break;
-
-                default:
-
-                    $properties[$field] = [
-                        'type' =>
-                            'string',
-                    ];
-
-                    break;
-            }
+            $properties[$field] = [
+                'type' => 'string',
+            ];
         }
 
         $schema = [
-            'type' =>
-                'object',
+            'type' => 'object',
 
-            'properties' =>
-                $properties,
+            'properties' => $properties,
 
-            'required' =>
-                $missingFields,
+            'required' => $fields,
 
-            'additionalProperties' =>
-                false,
+            'additionalProperties' => false,
         ];
 
         $payload = [
+
             'contents' => [
                 [
                     'parts' => [
                         [
-                            'text' =>
-                                $prompt,
+                            'text' => $prompt,
                         ],
                     ],
                 ],
             ],
 
             'generationConfig' => [
-                'temperature' =>
-                    0.2,
+
+                'temperature' => 0.2,
 
                 'response_mime_type' =>
                     'application/json',
@@ -1665,7 +968,7 @@ PROMPT;
 
         /*
         |--------------------------------------------------------------------------
-        | Request
+        | API request
         |--------------------------------------------------------------------------
         */
 
@@ -1677,14 +980,13 @@ PROMPT;
 
             try {
 
-                $response =
-                    Http::timeout(90)
-                        ->acceptJson()
-                        ->asJson()
-                        ->post(
-                            $url,
-                            $payload
-                        );
+                $response = Http::timeout(90)
+                    ->acceptJson()
+                    ->asJson()
+                    ->post(
+                        $url,
+                        $payload
+                    );
 
                 /*
                 |--------------------------------------------------------------------------
@@ -1696,11 +998,10 @@ PROMPT;
                     $response->successful()
                 ) {
 
-                    $text =
-                        data_get(
-                            $response->json(),
-                            'candidates.0.content.parts.0.text'
-                        );
+                    $text = data_get(
+                        $response->json(),
+                        'candidates.0.content.parts.0.text'
+                    );
 
                     if (
                         !is_string($text) ||
@@ -1708,7 +1009,7 @@ PROMPT;
                     ) {
 
                         Log::warning(
-                            'Gemini repair returned empty response',
+                            'Gemini editorial repair returned empty response',
                             [
                                 'news_id' =>
                                     $news->id,
@@ -1718,37 +1019,38 @@ PROMPT;
                         return null;
                     }
 
-                    $text =
-                        trim($text);
+                    $text = trim($text);
 
                     /*
                     |--------------------------------------------------------------------------
-                    | Defensive cleanup
+                    | Remove unexpected markdown fences.
                     |--------------------------------------------------------------------------
                     */
 
-                    $text =
-                        preg_replace(
-                            '/^```(?:json)?\s*/i',
-                            '',
-                            $text
-                        );
+                    $text = preg_replace(
+                        '/^```(?:json)?\s*/i',
+                        '',
+                        $text
+                    );
 
-                    $text =
-                        preg_replace(
-                            '/\s*```$/',
-                            '',
-                            $text
-                        );
+                    $text = preg_replace(
+                        '/\s*```$/',
+                        '',
+                        $text
+                    );
 
-                    $text =
-                        trim($text);
+                    $text = trim($text);
 
-                    $data =
-                        json_decode(
-                            $text,
-                            true
-                        );
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Decode JSON.
+                    |--------------------------------------------------------------------------
+                    */
+
+                    $data = json_decode(
+                        $text,
+                        true
+                    );
 
                     if (
                         json_last_error() !==
@@ -1756,7 +1058,7 @@ PROMPT;
                     ) {
 
                         Log::error(
-                            'Gemini repair JSON decode failed',
+                            'Gemini editorial repair JSON error',
                             [
                                 'news_id' =>
                                     $news->id,
@@ -1779,9 +1081,7 @@ PROMPT;
 
                 /*
                 |--------------------------------------------------------------------------
-                | 429
-                |
-                | NEVER retry automatically.
+                | 429 quota/rate limit
                 |--------------------------------------------------------------------------
                 */
 
@@ -1789,15 +1089,13 @@ PROMPT;
                     $response->status() === 429
                 ) {
 
-                    $body =
-                        $response->json();
+                    $body = $response->json();
 
-                    $message =
-                        data_get(
-                            $body,
-                            'error.message',
-                            'Gemini quota exceeded.'
-                        );
+                    $message = data_get(
+                        $body,
+                        'error.message',
+                        'Gemini quota exceeded.'
+                    );
 
                     $retrySeconds =
                         $this->extractRetrySeconds(
@@ -1822,7 +1120,7 @@ PROMPT;
                     }
 
                     Log::warning(
-                        'Gemini repair quota exceeded',
+                        'Gemini editorial repair quota exceeded',
                         [
                             'news_id' =>
                                 $news->id,
@@ -1835,9 +1133,6 @@ PROMPT;
 
                             'message' =>
                                 $message,
-
-                            'body' =>
-                                $response->body(),
                         ]
                     );
 
@@ -1855,7 +1150,7 @@ PROMPT;
 
                 /*
                 |--------------------------------------------------------------------------
-                | Temporary server errors
+                | Temporary server errors.
                 |--------------------------------------------------------------------------
                 */
 
@@ -1873,7 +1168,7 @@ PROMPT;
                 ) {
 
                     Log::warning(
-                        'Temporary Gemini repair API error',
+                        'Temporary Gemini editorial repair error',
                         [
                             'news_id' =>
                                 $news->id,
@@ -1914,12 +1209,12 @@ PROMPT;
 
                 /*
                 |--------------------------------------------------------------------------
-                | Other HTTP errors
+                | Other errors.
                 |--------------------------------------------------------------------------
                 */
 
                 Log::error(
-                    'Gemini repair HTTP error',
+                    'Gemini editorial repair HTTP error',
                     [
                         'news_id' =>
                             $news->id,
@@ -1937,7 +1232,7 @@ PROMPT;
             } catch (\Throwable $e) {
 
                 Log::error(
-                    'Gemini repair connection error',
+                    'Gemini editorial repair connection error',
                     [
                         'news_id' =>
                             $news->id,
@@ -1982,7 +1277,7 @@ PROMPT;
 
     /*
     |--------------------------------------------------------------------------
-    | Field instructions
+    | Field-specific instructions.
     |--------------------------------------------------------------------------
     */
 
@@ -1992,50 +1287,26 @@ PROMPT;
 
         return match ($field) {
 
-            'title_ar' =>
-                'title_ar: Arabic SEO headline, minimum 40 characters, factual and concise.',
-
-            'content_ar' =>
-                'content_ar: Complete Arabic article based only on the supplied source, minimum 400 characters. Do not invent information.',
-
-            'summary_ar' =>
-                'summary_ar: Factual Arabic summary, minimum 100 characters.',
-
-            'why_it_matters_ar' =>
-                'why_it_matters_ar: Explain why this specific event matters, minimum 150 characters. Do not use generic filler.',
-
             'analysis_ar' =>
-                'analysis_ar: Original editorial analysis based only on supplied facts, minimum 300 characters. Clearly distinguish interpretation from fact.',
+                'analysis_ar: Original Arabic editorial analysis. Minimum 300 characters. Explain why the specific facts may matter and distinguish interpretation from fact.',
 
             'context_ar' =>
-                'context_ar: Explain relevant background supported by the supplied material, minimum 250 characters.',
+                'context_ar: Relevant Arabic background and context derived from the supplied article. Minimum 250 characters.',
 
             'what_to_watch_ar' =>
-                'what_to_watch_ar: Specific future developments or indicators directly connected to this story, minimum 200 characters.',
+                'what_to_watch_ar: Specific developments or indicators directly connected to the story that readers can monitor. Minimum 200 characters.',
 
             'limitations_ar' =>
-                'limitations_ar: Explain missing information, uncertainty or source limitations, minimum 150 characters.',
-
-            'keywords' =>
-                'keywords: 3 to 5 accurate English keywords directly related to this article.',
-
-            'category' =>
-                'category: Select exactly one allowed category that best matches the article.',
-
-            'sentiment' =>
-                'sentiment: Bullish, Bearish or Neutral based only on the specific event described.',
-
-            'impact_score' =>
-                'impact_score: Integer from 1 to 10 reflecting the significance of this article to the crypto ecosystem.',
+                'limitations_ar: Important uncertainty, missing evidence, source limitations, or facts that cannot be established from the material. Minimum 150 characters.',
 
             default =>
-                "{$field}: Generate a valid value based strictly on supplied information.",
+                "{$field}: Generate a valid Arabic editorial field.",
         };
     }
 
     /*
     |--------------------------------------------------------------------------
-    | Validate repair result
+    | Validate response.
     |--------------------------------------------------------------------------
     */
 
@@ -2046,18 +1317,14 @@ PROMPT;
 
         $errors = [];
 
-        if (
-            !is_array($result)
-        ) {
+        if (!is_array($result)) {
 
             return [
-                'valid' =>
-                    false,
+                'valid' => false,
 
-                'errors' =>
-                    [
-                        'Result is not an array.',
-                    ],
+                'errors' => [
+                    'Result is not an array.',
+                ],
             ];
         }
 
@@ -2067,25 +1334,44 @@ PROMPT;
         ) {
 
             return [
-                'valid' =>
-                    false,
+                'valid' => false,
 
-                'errors' =>
-                    [
-                        'Internal control result received.',
-                    ],
+                'errors' => [
+                    'Internal control result received.',
+                ],
             ];
         }
 
         /*
         |--------------------------------------------------------------------------
-        | Validate requested fields
+        | Do not allow unexpected fields.
         |--------------------------------------------------------------------------
         */
 
         foreach (
-            $requestedFields as $field
+            array_keys($result) as $field
         ) {
+
+            if (
+                !in_array(
+                    $field,
+                    $requestedFields,
+                    true
+                )
+            ) {
+
+                $errors[] =
+                    "Unexpected field returned: {$field}";
+            }
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Validate requested fields.
+        |--------------------------------------------------------------------------
+        */
+
+        foreach ($requestedFields as $field) {
 
             if (
                 !array_key_exists(
@@ -2096,79 +1382,6 @@ PROMPT;
 
                 $errors[] =
                     "{$field}: missing";
-                continue;
-            }
-
-            if (
-                $field === 'keywords'
-            ) {
-
-                $keywords =
-                    $this->normalizeKeywords(
-                        $result[$field]
-                    );
-
-                if (
-                    count($keywords) <
-                    self::MIN_KEYWORDS ||
-                    count($keywords) >
-                    self::MAX_KEYWORDS
-                ) {
-
-                    $errors[] =
-                        'keywords: invalid count';
-                }
-
-                continue;
-            }
-
-            if (
-                $field === 'category'
-            ) {
-
-                if (
-                    !$this->isValidCategory(
-                        $result[$field]
-                    )
-                ) {
-
-                    $errors[] =
-                        'category: invalid value';
-                }
-
-                continue;
-            }
-
-            if (
-                $field === 'sentiment'
-            ) {
-
-                if (
-                    !$this->isValidSentiment(
-                        $result[$field]
-                    )
-                ) {
-
-                    $errors[] =
-                        'sentiment: invalid value';
-                }
-
-                continue;
-            }
-
-            if (
-                $field === 'impact_score'
-            ) {
-
-                if (
-                    !$this->isValidImpactScore(
-                        $result[$field]
-                    )
-                ) {
-
-                    $errors[] =
-                        'impact_score: invalid value';
-                }
 
                 continue;
             }
@@ -2185,14 +1398,11 @@ PROMPT;
                 continue;
             }
 
-            $value =
-                trim(
-                    $result[$field]
-                );
+            $value = trim(
+                $result[$field]
+            );
 
-            if (
-                $value === ''
-            ) {
+            if ($value === '') {
 
                 $errors[] =
                     "{$field}: empty";
@@ -2207,8 +1417,7 @@ PROMPT;
 
             if (
                 $minimum > 0 &&
-                mb_strlen($value) <
-                $minimum
+                mb_strlen($value) < $minimum
             ) {
 
                 $errors[] =
@@ -2228,7 +1437,7 @@ PROMPT;
 
     /*
     |--------------------------------------------------------------------------
-    | Minimum length for every field
+    | Minimum field length.
     |--------------------------------------------------------------------------
     */
 
@@ -2237,18 +1446,6 @@ PROMPT;
     ): int {
 
         return match ($field) {
-
-            'title_ar' =>
-                self::MIN_TITLE_AR,
-
-            'content_ar' =>
-                self::MIN_CONTENT_AR,
-
-            'summary_ar' =>
-                self::MIN_SUMMARY_AR,
-
-            'why_it_matters_ar' =>
-                self::MIN_WHY_IT_MATTERS_AR,
 
             'analysis_ar' =>
                 self::MIN_ANALYSIS_AR,
@@ -2269,476 +1466,7 @@ PROMPT;
 
     /*
     |--------------------------------------------------------------------------
-    | Determine if field really needs repair
-    |--------------------------------------------------------------------------
-    */
-
-    private function fieldNeedsRepair(
-        News $news,
-        string $field
-    ): bool {
-
-        /*
-        |--------------------------------------------------------------------------
-        | Standard text fields
-        |--------------------------------------------------------------------------
-        */
-
-        $text =
-            trim(
-                (string)
-                $news->{$field}
-            );
-
-        return match ($field) {
-
-            'title_ar' =>
-                $text === '' ||
-                mb_strlen($text) <
-                self::MIN_TITLE_AR,
-
-            'content_ar' =>
-                $text === '' ||
-                mb_strlen($text) <
-                self::MIN_CONTENT_AR,
-
-            'summary_ar' =>
-                $text === '' ||
-                mb_strlen($text) <
-                self::MIN_SUMMARY_AR,
-
-            'why_it_matters_ar' =>
-                $text === '' ||
-                mb_strlen($text) <
-                self::MIN_WHY_IT_MATTERS_AR,
-
-            'analysis_ar' =>
-                $text === '' ||
-                mb_strlen($text) <
-                self::MIN_ANALYSIS_AR,
-
-            'context_ar' =>
-                $text === '' ||
-                mb_strlen($text) <
-                self::MIN_CONTEXT_AR,
-
-            'what_to_watch_ar' =>
-                $text === '' ||
-                mb_strlen($text) <
-                self::MIN_WHAT_TO_WATCH_AR,
-
-            'limitations_ar' =>
-                $text === '' ||
-                mb_strlen($text) <
-                self::MIN_LIMITATIONS_AR,
-
-            'category' =>
-                $text === '' ||
-                !$this->isValidCategory($text),
-
-            'sentiment' =>
-                $text === '' ||
-                !$this->isValidSentiment($text),
-
-            'impact_score' =>
-                $text === '' ||
-                !$this->isValidImpactScore(
-                    $news->{$field}
-                ),
-
-            'keywords' =>
-                $this->keywordsNeedRepair($news),
-
-            default =>
-                $text === '',
-        };
-    }
-
-    /*
-    |--------------------------------------------------------------------------
-    | Keywords repair check
-    |--------------------------------------------------------------------------
-    */
-
-    private function keywordsNeedRepair(
-        News $news
-    ): bool {
-
-        $keywords =
-            $this->decodeKeywords(
-                $news->keywords
-            );
-
-        if (
-            !is_array($keywords)
-        ) {
-
-            return true;
-        }
-
-        $keywords =
-            $this->normalizeKeywords(
-                $keywords
-            );
-
-        return count($keywords) <
-            self::MIN_KEYWORDS;
-    }
-
-    /*
-    |--------------------------------------------------------------------------
-    | Decode keywords safely
-    |--------------------------------------------------------------------------
-    */
-
-    private function decodeKeywords(
-        mixed $value
-    ): array {
-
-        if (
-            is_array($value)
-        ) {
-
-            return $value;
-        }
-
-        if (
-            is_string($value)
-        ) {
-
-            $decoded =
-                json_decode(
-                    $value,
-                    true
-                );
-
-            if (
-                is_array($decoded)
-            ) {
-
-                return $decoded;
-            }
-        }
-
-        return [];
-    }
-
-    /*
-    |--------------------------------------------------------------------------
-    | Normalize keywords
-    |--------------------------------------------------------------------------
-    */
-
-    private function normalizeKeywords(
-        mixed $keywords
-    ): array {
-
-        if (
-            !is_array($keywords)
-        ) {
-
-            return [];
-        }
-
-        return collect(
-            $keywords
-        )
-            ->map(
-                fn ($keyword) =>
-                    trim(
-                        (string)
-                        $keyword
-                    )
-            )
-            ->filter()
-            ->map(
-                fn ($keyword) =>
-                    preg_replace(
-                        '/\s+/u',
-                        ' ',
-                        $keyword
-                    )
-            )
-            ->unique(
-                fn ($keyword) =>
-                    mb_strtolower(
-                        $keyword
-                    )
-            )
-            ->take(
-                self::MAX_KEYWORDS
-            )
-            ->values()
-            ->toArray();
-    }
-
-    /*
-    |--------------------------------------------------------------------------
-    | Local keyword generator
-    |
-    | Used only when keywords are the only remaining problem.
-    | This saves Gemini requests.
-    |--------------------------------------------------------------------------
-    */
-
-    private function buildLocalKeywords(
-        News $news
-    ): array {
-
-        $keywords = [];
-
-        $text = implode(
-            ' ',
-            [
-                (string)
-                $news->title_en,
-
-                (string)
-                $news->title_ar,
-
-                (string)
-                $news->content_en,
-            ]
-        );
-
-        $knownTerms = [
-            'Bitcoin',
-            'BTC',
-            'Ethereum',
-            'ETH',
-            'Solana',
-            'SOL',
-            'XRP',
-            'Ripple',
-            'BNB',
-            'Bybit',
-            'Coinbase',
-            'Binance',
-            'Kraken',
-            'Tether',
-            'USDT',
-            'USDC',
-            'DeFi',
-            'NFT',
-            'Stablecoin',
-            'Mining',
-            'ETF',
-            'Regulation',
-            'Security',
-            'Blockchain',
-            'AI',
-            'Artificial Intelligence',
-            'Tokenization',
-            'RWA',
-            'Ethereum',
-            'Avalanche',
-            'Polkadot',
-            'Cardano',
-            'ADA',
-            'DOT',
-            'TRON',
-            'TRX',
-            'Chainlink',
-            'LINK',
-            'Hyperliquid',
-            'HYPE',
-            'Polymarket',
-            'Kalshi',
-            'Strategy',
-            'MSTR',
-            'BlackRock',
-            'Bitget',
-            'Coldcard',
-            'CryptoQuant',
-            'Robinhood',
-            'Meta',
-            'OpenAI',
-        ];
-
-        foreach (
-            $knownTerms as $term
-        ) {
-
-            if (
-                stripos(
-                    $text,
-                    $term
-                ) !== false
-            ) {
-
-                $keywords[] =
-                    $term;
-            }
-        }
-
-        /*
-        |--------------------------------------------------------------------------
-        | Add category when valid.
-        |--------------------------------------------------------------------------
-        */
-
-        if (
-            $this->isValidCategory(
-                $news->category
-            )
-        ) {
-
-            $keywords[] =
-                $news->category;
-        }
-
-        $keywords =
-            $this->normalizeKeywords(
-                $keywords
-            );
-
-        /*
-        |--------------------------------------------------------------------------
-        | Ensure at least 3 keywords.
-        |--------------------------------------------------------------------------
-        */
-
-        if (
-            count($keywords) < 3
-        ) {
-
-            $fallbacks = [
-                'Crypto',
-                'Digital Assets',
-                'Blockchain',
-                'Cryptocurrency',
-                'Crypto Market',
-            ];
-
-            foreach (
-                $fallbacks as $fallback
-            ) {
-
-                $keywords[] =
-                    $fallback;
-
-                $keywords =
-                    $this->normalizeKeywords(
-                        $keywords
-                    );
-
-                if (
-                    count($keywords) >=
-                    self::MIN_KEYWORDS
-                ) {
-
-                    break;
-                }
-            }
-        }
-
-        return array_slice(
-            $keywords,
-            0,
-            self::MAX_KEYWORDS
-        );
-    }
-
-    /*
-    |--------------------------------------------------------------------------
-    | Category
-    |--------------------------------------------------------------------------
-    */
-
-    private function isValidCategory(
-        mixed $category
-    ): bool {
-
-        return is_string($category)
-            &&
-            in_array(
-                trim($category),
-                $this->allowedCategories,
-                true
-            );
-    }
-
-    /*
-    |--------------------------------------------------------------------------
-    | Sentiment
-    |--------------------------------------------------------------------------
-    */
-
-    private function isValidSentiment(
-        mixed $sentiment
-    ): bool {
-
-        return is_string($sentiment)
-            &&
-            in_array(
-                trim($sentiment),
-                [
-                    'Bullish',
-                    'Bearish',
-                    'Neutral',
-                ],
-                true
-            );
-    }
-
-    /*
-    |--------------------------------------------------------------------------
-    | Impact score
-    |--------------------------------------------------------------------------
-    */
-
-    private function isValidImpactScore(
-        mixed $score
-    ): bool {
-
-        if (
-            !is_numeric($score)
-        ) {
-
-            return false;
-        }
-
-        $score =
-            (int)
-            $score;
-
-        return $score >= 1 &&
-            $score <= 10;
-    }
-
-    /*
-    |--------------------------------------------------------------------------
-    | Slug
-    |--------------------------------------------------------------------------
-    */
-
-    private function buildSlug(
-        string $title,
-        int|string $id
-    ): string {
-
-        $slug =
-            Str::slug(
-                trim($title)
-            );
-
-        if (
-            $slug === ''
-        ) {
-
-            $slug =
-                'news';
-        }
-
-        return
-            $slug .
-            '-' .
-            $id;
-    }
-
-    /*
-    |--------------------------------------------------------------------------
-    | Retry seconds extractor
+    | Retry-After extractor.
     |--------------------------------------------------------------------------
     */
 
@@ -2746,23 +1474,17 @@ PROMPT;
         array $body
     ): ?int {
 
-        $details =
-            data_get(
-                $body,
-                'error.details',
-                []
-            );
+        $details = data_get(
+            $body,
+            'error.details',
+            []
+        );
 
-        if (
-            !is_array($details)
-        ) {
-
+        if (!is_array($details)) {
             return null;
         }
 
-        foreach (
-            $details as $detail
-        ) {
+        foreach ($details as $detail) {
 
             if (
                 ($detail['@type'] ?? '') ===
@@ -2774,26 +1496,17 @@ PROMPT;
                     null;
 
                 if (
-                    is_string(
-                        $retryDelay
+                    is_string($retryDelay) &&
+                    preg_match(
+                        '/(\d+(?:\.\d+)?)s/',
+                        $retryDelay,
+                        $matches
                     )
                 ) {
 
-                    if (
-                        preg_match(
-                            '/(\d+(?:\.\d+)?)s/',
-                            $retryDelay,
-                            $matches
-                        )
-                    ) {
-
-                        return
-                            (int)
-                            ceil(
-                                (float)
-                                $matches[1]
-                            );
-                    }
+                    return (int) ceil(
+                        (float) $matches[1]
+                    );
                 }
             }
         }
@@ -2803,7 +1516,7 @@ PROMPT;
 
     /*
     |--------------------------------------------------------------------------
-    | Header
+    | Header.
     |--------------------------------------------------------------------------
     */
 
@@ -2816,7 +1529,7 @@ PROMPT;
         );
 
         $this->info(
-            '        AQL CRYPTO AI REPAIR'
+            '        AQL CRYPTO EDITORIAL REPAIR'
         );
 
         $this->info(
@@ -2824,19 +1537,27 @@ PROMPT;
         );
 
         $this->line(
-            'Only missing or weak fields will be repaired.'
+            'Repair target: analysis_ar'
         );
 
         $this->line(
-            'Healthy existing fields will never be rewritten.'
+            'Repair target: context_ar'
         );
 
         $this->line(
-            'Gemini 429 will stop the cycle immediately.'
+            'Repair target: what_to_watch_ar'
         );
 
         $this->line(
-            'Local fixes do not consume Gemini requests.'
+            'Repair target: limitations_ar'
+        );
+
+        $this->line(
+            'Healthy fields will never be overwritten.'
+        );
+
+        $this->line(
+            'Gemini 429 stops the cycle immediately.'
         );
 
         $this->newLine();
@@ -2847,8 +1568,10 @@ PROMPT;
         );
 
         $this->info(
-            'Default batch: ' .
-            self::DEFAULT_BATCH_LIMIT
+            'Batch limit: ' .
+            ((int) $this->option('limit') > 0
+                ? $this->option('limit')
+                : self::DEFAULT_BATCH_LIMIT)
         );
     }
 }
