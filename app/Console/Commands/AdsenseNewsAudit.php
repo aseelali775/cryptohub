@@ -976,137 +976,111 @@ class AdsenseNewsAudit extends Command
         ];
     }
 
-    /*
+/*
     |--------------------------------------------------------------------------
-    | DUPLICATE DETECTION
+    | DUPLICATE DETECTION (TITLE + CONTENT VERIFICATION)
     |--------------------------------------------------------------------------
     */
 
+    private float $titleSimilarityThreshold = 85.0;
+    private float $contentSimilarityThreshold = 70.0;
+
     private function detectDuplicates(Collection $news): array
     {
-        $titles = [];
-
-        foreach ($news as $item) {
-            $rawTitle =
-                $item->title_en
-                ?: $item->title_ar;
-
-            $title = $this->normalizeText($rawTitle);
-
-            if ($title !== '') {
-                $titles[$item->id] = $title;
-            }
-        }
-
         $rawGroups = [];
-
-        $ids = array_keys($titles);
-        $count = count($ids);
+        $items = $news->values();
+        $count = $items->count();
 
         for ($i = 0; $i < $count; $i++) {
-            $idA = $ids[$i];
-            $titleA = $titles[$idA];
-
-            if (mb_strlen($titleA) < 20) {
-                continue;
-            }
-
             for ($j = $i + 1; $j < $count; $j++) {
-                $idB = $ids[$j];
-                $titleB = $titles[$idB];
+                $itemA = $items[$i];
+                $itemB = $items[$j];
 
-                if (mb_strlen($titleB) < 20) {
+                // 1. فحص تشابه العناوين
+                $titleSim = $this->calculateTitleSimilarity($itemA, $itemB);
+
+                if ($titleSim < $this->titleSimilarityThreshold) {
                     continue;
                 }
 
-                similar_text(
-                    $titleA,
-                    $titleB,
-                    $percent
-                );
+                // 2. فحص تشابه المتن عند تحقق تشابه العنوان
+                $contentSim = $this->calculateContentSimilarity($itemA, $itemB);
 
-                if ($percent >= $this->highSimilarity) {
-                    $rawGroups[] = [
-                        $idA,
-                        $idB,
-                    ];
+                // 3. اعتبار المقالين Duplicate فقط إذا تكرر المحتوى النصي بنسبة >= 70%
+                if ($contentSim >= $this->contentSimilarityThreshold) {
+                    $rawGroups[] = [$itemA->id, $itemB->id];
                 }
             }
         }
 
-        $groups = $this->mergeGroups($rawGroups);
-
-        $duplicateMap = [];
-
-        foreach ($groups as $group) {
-            foreach ($group as $articleId) {
-                $duplicateMap[$articleId] =
-                    array_values(array_unique($group));
-            }
-        }
-
-        return $duplicateMap;
+        return $this->mergeGroups($rawGroups);
     }
 
-    private function extractDuplicateGroups(
-        array $duplicateMap
-    ): array {
-        $groups = [];
-
-        foreach ($duplicateMap as $group) {
-            sort($group);
-
-            $key = implode(',', $group);
-            $groups[$key] = $group;
-        }
-
-        return array_values($groups);
-    }
-
-    private function mergeGroups(array $rawGroups): array
+    /**
+     * حساب أقصى نسبة تشابه بين العناوين المتاحة (عربي / إنجليزي)
+     */
+    private function calculateTitleSimilarity(News $itemA, News $itemB): float
     {
-        $merged = [];
+        $maxSim = 0.0;
 
-        foreach ($rawGroups as $group) {
-            $group = array_values(array_unique($group));
+        if (!empty($itemA->title_en) && !empty($itemB->title_en)) {
+            similar_text(
+                mb_strtolower($this->normalizeText($itemA->title_en)),
+                mb_strtolower($this->normalizeText($itemB->title_en)),
+                $percentEn
+            );
+            $maxSim = max($maxSim, $percentEn);
+        }
 
-            if (count($group) < 2) {
-                continue;
-            }
+        if (!empty($itemA->title_ar) && !empty($itemB->title_ar)) {
+            similar_text(
+                $this->normalizeText($itemA->title_ar),
+                $this->normalizeText($itemB->title_ar),
+                $percentAr
+            );
+            $maxSim = max($maxSim, $percentAr);
+        }
 
-            $mergedIntoExisting = false;
+        return $maxSim;
+    }
 
-            foreach ($merged as &$existing) {
-                if (
-                    count(
-                        array_intersect(
-                            $existing,
-                            $group
-                        )
-                    ) > 0
-                ) {
-                    $existing = array_values(
-                        array_unique(
-                            array_merge(
-                                $existing,
-                                $group
-                            )
-                        )
-                    );
+    /**
+     * حساب أقصى نسبة تشابه للمحتوى النصي بعد تنظيف الـ HTML والنصوص
+     */
+    private function calculateContentSimilarity(News $itemA, News $itemB): float
+    {
+        $maxSim = 0.0;
 
-                    $mergedIntoExisting = true;
-                    break;
-                }
-            }
+        // مقارنة المحتوى العربي
+        if (!empty($itemA->content_ar) && !empty($itemB->content_ar)) {
+            $textA = $this->normalizeText(strip_tags($itemA->content_ar));
+            $textB = $this->normalizeText(strip_tags($itemB->content_ar));
 
-            unset($existing);
+            // اقتطاع أول 2000 حرف لتفادي الثقل البرمجي لـ similar_text على النصوص الطويلة
+            $textA = mb_substr($textA, 0, 2000);
+            $textB = mb_substr($textB, 0, 2000);
 
-            if (!$mergedIntoExisting) {
-                $merged[] = $group;
+            if ($textA !== '' && $textB !== '') {
+                similar_text($textA, $textB, $percentAr);
+                $maxSim = max($maxSim, $percentAr);
             }
         }
 
-        return $merged;
+        // مقارنة المحتوى الإنجليزي
+        if (!empty($itemA->content_en) && !empty($itemB->content_en)) {
+            $textA = mb_strtolower($this->normalizeText(strip_tags($itemA->content_en)));
+            $textB = mb_strtolower($this->normalizeText(strip_tags($itemB->content_en)));
+
+            $textA = mb_substr($textA, 0, 2000);
+            $textB = mb_substr($textB, 0, 2000);
+
+            if ($textA !== '' && $textB !== '') {
+                similar_text($textA, $textB, $percentEn);
+                $maxSim = max($maxSim, $percentEn);
+            }
+        }
+
+        return $maxSim;
     }
 
     /*
@@ -1681,6 +1655,6 @@ class AdsenseNewsAudit extends Command
         );
 
         $this->newLine();
-        
+
     }
 }
