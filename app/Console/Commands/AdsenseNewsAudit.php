@@ -23,12 +23,6 @@ class AdsenseNewsAudit extends Command
 
     protected $description = 'Read-only CryptoHub Editorial & Quality Audit System';
 
-    /*
-    |--------------------------------------------------------------------------
-    | INTERNAL THRESHOLDS
-    |--------------------------------------------------------------------------
-    */
-
     private int $minContentLength = 700;
     private int $minArabicLength = 500;
     private int $minAnalysisLength = 250;
@@ -38,17 +32,19 @@ class AdsenseNewsAudit extends Command
 
     /*
     |--------------------------------------------------------------------------
-    | DUPLICATE / SIMILARITY THRESHOLDS
+    | Duplicate / similarity thresholds
     |--------------------------------------------------------------------------
+    |
+    | Duplicate requires BOTH:
+    |   1) title similarity >= 85%
+    |   2) content similarity >= 70%
+    |
+    | Source is intentionally NOT used as an exclusion rule.
+    | Different sources can report the same copied/syndicated story.
+    |
     */
-
-    private float $highSimilarity = 85.0;
-
-    /*
-    |--------------------------------------------------------------------------
-    | AI TEMPLATE DETECTION
-    |--------------------------------------------------------------------------
-    */
+    private float $titleSimilarityThreshold = 85.0;
+    private float $contentSimilarityThreshold = 70.0;
 
     private array $aiFields = [
         'summary_ar',
@@ -76,12 +72,6 @@ class AdsenseNewsAudit extends Command
         'في الختام',
     ];
 
-    /*
-    |--------------------------------------------------------------------------
-    | HANDLE
-    |--------------------------------------------------------------------------
-    */
-
     public function handle(): int
     {
         $this->printHeader();
@@ -104,9 +94,11 @@ class AdsenseNewsAudit extends Command
                     'total' => 0,
                     'message' => 'No news articles found.',
                 ]);
-            } else {
-                $this->warn('No news articles found.');
+
+                return self::SUCCESS;
             }
+
+            $this->warn('No news articles found.');
 
             return self::SUCCESS;
         }
@@ -193,6 +185,8 @@ class AdsenseNewsAudit extends Command
                     'limit' => $limit,
                     'min_score' => $minScore,
                     'read_only' => true,
+                    'title_similarity_threshold' => $this->titleSimilarityThreshold,
+                    'content_similarity_threshold' => $this->contentSimilarityThreshold,
                 ],
 
                 'statistics' => [
@@ -231,7 +225,10 @@ class AdsenseNewsAudit extends Command
         $this->displayTopReasons($topReasons);
 
         if ($this->option('show-all')) {
-            $this->displayDetailedList($collection, '📋 ALL ARTICLES');
+            $this->displayDetailedList(
+                $collection,
+                '📋 ALL ARTICLES'
+            );
         } else {
             if ($this->option('show-risk')) {
                 $this->displayDetailedList(
@@ -294,12 +291,6 @@ class AdsenseNewsAudit extends Command
         return self::SUCCESS;
     }
 
-    /*
-    |--------------------------------------------------------------------------
-    | CORE ARTICLE AUDIT
-    |--------------------------------------------------------------------------
-    */
-
     private function auditArticle(
         News $item,
         array $duplicateMap,
@@ -310,50 +301,35 @@ class AdsenseNewsAudit extends Command
         $contentAr = trim((string) $item->content_ar);
 
         $evals = [
-            'SOURCE_QUALITY' =>
-                $this->evalSourceQuality($item),
-
-            'SOURCE_TRANSPARENCY' =>
-                $this->evalSourceTransparency($item),
-
-            'METADATA' =>
-                $this->evalMetadata($item),
-
-            'CONTENT_DEPTH' =>
-                $this->evalContentDepth($contentAr, $contentEn),
-
-            'STRUCTURE' =>
-                $this->evalStructure($contentAr),
-
-            'FACTUAL_COMPLETENESS' =>
-                $this->evalFactualCompleteness($contentAr, $contentEn),
-
-            'ORIGINALITY' =>
-                $this->evalOriginality($item),
-
-            'USER_VALUE' =>
-                $this->evalUserValue($item),
-
-            'ORIGINAL_VALUE' =>
-                $this->evalOriginalValue($item),
-
-            'ANALYSIS_QUALITY' =>
-                $this->evalAnalysisQuality($item),
-
-            'DUPLICATION' =>
-                isset($duplicateMap[$item->id])
-                    ? [
-                        'score' => 0,
-                        'max' => 10,
-                        'pass' => false,
-                        'reason' => 'Duplicate/similar article',
-                    ]
-                    : [
-                        'score' => 10,
-                        'max' => 10,
-                        'pass' => true,
-                        'reason' => null,
+            'SOURCE_QUALITY' => $this->evalSourceQuality($item),
+            'SOURCE_TRANSPARENCY' => $this->evalSourceTransparency($item),
+            'METADATA' => $this->evalMetadata($item),
+            'CONTENT_DEPTH' => $this->evalContentDepth($contentAr, $contentEn),
+            'STRUCTURE' => $this->evalStructure($contentAr),
+            'FACTUAL_COMPLETENESS' => $this->evalFactualCompleteness(
+                $contentAr,
+                $contentEn
+            ),
+            'ORIGINALITY' => $this->evalOriginality($item),
+            'USER_VALUE' => $this->evalUserValue($item),
+            'ORIGINAL_VALUE' => $this->evalOriginalValue($item),
+            'ANALYSIS_QUALITY' => $this->evalAnalysisQuality($item),
+            'DUPLICATION' => isset($duplicateMap[$item->id])
+                ? [
+                    'score' => 0,
+                    'max' => 10,
+                    'pass' => false,
+                    'reason' => 'Duplicate/similar article',
+                    'details' => [
+                        'group' => $duplicateMap[$item->id],
                     ],
+                ]
+                : [
+                    'score' => 10,
+                    'max' => 10,
+                    'pass' => true,
+                    'reason' => null,
+                ],
         ];
 
         $aiRisk = $this->evalAiTemplateRisk($item);
@@ -371,17 +347,10 @@ class AdsenseNewsAudit extends Command
             min(100, $baseScore - $aiPenalty)
         );
 
-        $isDuplicate =
-            $evals['DUPLICATION']['score'] === 0;
-
-        $originalityPass =
-            $evals['ORIGINALITY']['score'] >= 10;
-
-        $originalValuePass =
-            $evals['ORIGINAL_VALUE']['score'] >= 10;
-
-        $analysisPass =
-            $evals['ANALYSIS_QUALITY']['score'] >= 7;
+        $isDuplicate = $evals['DUPLICATION']['score'] === 0;
+        $originalityPass = $evals['ORIGINALITY']['score'] >= 10;
+        $originalValuePass = $evals['ORIGINAL_VALUE']['score'] >= 10;
+        $analysisPass = $evals['ANALYSIS_QUALITY']['score'] >= 7;
 
         if (
             $finalScore >= $minScore
@@ -464,39 +433,22 @@ class AdsenseNewsAudit extends Command
 
         return [
             'id' => $item->id,
-
             'title' =>
                 $item->title_ar
                 ?: $item->title_en
                 ?: 'Untitled',
-
             'score' => $finalScore,
             'base_score' => $baseScore,
             'ai_penalty' => $aiPenalty,
             'status' => $status,
-
-            'reasons' => array_values(
-                array_unique($reasons)
-            ),
-
+            'reasons' => array_values(array_unique($reasons)),
             'enrichment' => $enrichment,
             'ai_risk' => $aiRisk,
-
-            'duplicate_group' =>
-                $duplicateMap[$item->id] ?? null,
-
-            'topic_cluster' =>
-                $topicMap[$item->id] ?? null,
-
+            'duplicate_group' => $duplicateMap[$item->id] ?? null,
+            'topic_cluster' => $topicMap[$item->id] ?? null,
             'evals' => $evals,
         ];
     }
-
-    /*
-    |--------------------------------------------------------------------------
-    | 1. SOURCE QUALITY - 5
-    |--------------------------------------------------------------------------
-    */
 
     private function evalSourceQuality(News $item): array
     {
@@ -508,12 +460,6 @@ class AdsenseNewsAudit extends Command
             'pass' => $source !== '',
         ];
     }
-
-    /*
-    |--------------------------------------------------------------------------
-    | 2. SOURCE TRANSPARENCY - 5
-    |--------------------------------------------------------------------------
-    */
 
     private function evalSourceTransparency(News $item): array
     {
@@ -529,12 +475,6 @@ class AdsenseNewsAudit extends Command
             'pass' => $valid,
         ];
     }
-
-    /*
-    |--------------------------------------------------------------------------
-    | 3. METADATA - 5
-    |--------------------------------------------------------------------------
-    */
 
     private function evalMetadata(News $item): array
     {
@@ -562,17 +502,6 @@ class AdsenseNewsAudit extends Command
             'pass' => $score >= 4,
         ];
     }
-
-    /*
-    |--------------------------------------------------------------------------
-    | 4. CONTENT DEPTH - 10
-    |--------------------------------------------------------------------------
-    |
-    | Measures the actual available article body in either language.
-    | It does not use the AI source minimum (140 chars) because this audit
-    | evaluates editorial content, while news:process-ai controls AI input.
-    |--------------------------------------------------------------------------
-    */
 
     private function evalContentDepth(
         string $ar,
@@ -610,12 +539,6 @@ class AdsenseNewsAudit extends Command
         ];
     }
 
-    /*
-    |--------------------------------------------------------------------------
-    | 5. STRUCTURE - 5
-    |--------------------------------------------------------------------------
-    */
-
     private function evalStructure(string $ar): array
     {
         $paragraphs = $this->countParagraphs($ar);
@@ -641,15 +564,6 @@ class AdsenseNewsAudit extends Command
             ],
         ];
     }
-
-    /*
-    |--------------------------------------------------------------------------
-    | 6. FACTUAL COMPLETENESS - 10
-    |--------------------------------------------------------------------------
-    |
-    | This is coverage measurement, not semantic fact verification.
-    |--------------------------------------------------------------------------
-    */
 
     private function evalFactualCompleteness(
         string $ar,
@@ -712,12 +626,6 @@ class AdsenseNewsAudit extends Command
         ];
     }
 
-    /*
-    |--------------------------------------------------------------------------
-    | 7. ORIGINALITY - 15
-    |--------------------------------------------------------------------------
-    */
-
     private function evalOriginality(News $item): array
     {
         $ar = trim((string) $item->content_ar);
@@ -756,9 +664,12 @@ class AdsenseNewsAudit extends Command
 
         $originalValueLength =
             mb_strlen(trim((string) $item->why_it_matters_ar))
-            + mb_strlen(trim((string) $item->what_to_watch_ar))
-            + mb_strlen(trim((string) $item->context_ar))
-            + mb_strlen(trim((string) $item->analysis_ar));
+            +
+            mb_strlen(trim((string) $item->what_to_watch_ar))
+            +
+            mb_strlen(trim((string) $item->context_ar))
+            +
+            mb_strlen(trim((string) $item->analysis_ar));
 
         if ($originalValueLength >= 800) {
             $score += 4;
@@ -785,12 +696,6 @@ class AdsenseNewsAudit extends Command
             ],
         ];
     }
-
-    /*
-    |--------------------------------------------------------------------------
-    | 8. USER VALUE - 10
-    |--------------------------------------------------------------------------
-    */
 
     private function evalUserValue(News $item): array
     {
@@ -833,12 +738,6 @@ class AdsenseNewsAudit extends Command
         ];
     }
 
-    /*
-    |--------------------------------------------------------------------------
-    | 9. ORIGINAL VALUE - 15
-    |--------------------------------------------------------------------------
-    */
-
     private function evalOriginalValue(News $item): array
     {
         $whyLength =
@@ -880,12 +779,6 @@ class AdsenseNewsAudit extends Command
         ];
     }
 
-    /*
-    |--------------------------------------------------------------------------
-    | 10. ANALYSIS QUALITY - 10
-    |--------------------------------------------------------------------------
-    */
-
     private function evalAnalysisQuality(News $item): array
     {
         $analysisLength =
@@ -914,12 +807,6 @@ class AdsenseNewsAudit extends Command
             ],
         ];
     }
-
-    /*
-    |--------------------------------------------------------------------------
-    | 11. AI TEMPLATE RISK - PENALTY ONLY
-    |--------------------------------------------------------------------------
-    */
 
     private function evalAiTemplateRisk(News $item): array
     {
@@ -976,14 +863,25 @@ class AdsenseNewsAudit extends Command
         ];
     }
 
-/*
+    /*
     |--------------------------------------------------------------------------
-    | DUPLICATE DETECTION (TITLE + CONTENT VERIFICATION)
+    | DUPLICATE DETECTION
     |--------------------------------------------------------------------------
+    |
+    | A title match alone is NOT enough.
+    |
+    | Two articles are duplicates only when:
+    |
+    |   title similarity >= 85%
+    |   AND
+    |   content similarity >= 70%
+    |
+    | Arabic and English content are compared independently. The highest
+    | available content similarity is used.
+    |
+    | Different sources do NOT automatically make articles unique.
+    |
     */
-
-    private float $titleSimilarityThreshold = 85.0;
-    private float $contentSimilarityThreshold = 70.0;
 
     private function detectDuplicates(Collection $news): array
     {
@@ -996,91 +894,344 @@ class AdsenseNewsAudit extends Command
                 $itemA = $items[$i];
                 $itemB = $items[$j];
 
-                // 1. فحص تشابه العناوين
-                $titleSim = $this->calculateTitleSimilarity($itemA, $itemB);
+                $titleDetails =
+                    $this->calculateTitleSimilarity($itemA, $itemB);
 
-                if ($titleSim < $this->titleSimilarityThreshold) {
+                if (
+                    $titleDetails['similarity']
+                    < $this->titleSimilarityThreshold
+                ) {
                     continue;
                 }
 
-                // 2. فحص تشابه المتن عند تحقق تشابه العنوان
-                $contentSim = $this->calculateContentSimilarity($itemA, $itemB);
+                $contentDetails =
+                    $this->calculateContentSimilarity($itemA, $itemB);
 
-                // 3. اعتبار المقالين Duplicate فقط إذا تكرر المحتوى النصي بنسبة >= 70%
-                if ($contentSim >= $this->contentSimilarityThreshold) {
-                    $rawGroups[] = [$itemA->id, $itemB->id];
+                if (
+                    $contentDetails['similarity']
+                    >= $this->contentSimilarityThreshold
+                ) {
+                    $rawGroups[] = [
+                        'ids' => [
+                            $itemA->id,
+                            $itemB->id,
+                        ],
+                        'similarity' => [
+                            'title' => round(
+                                $titleDetails['similarity'],
+                                1
+                            ),
+                            'content' => round(
+                                $contentDetails['similarity'],
+                                1
+                            ),
+                            'content_ar' =>
+                                $contentDetails['arabic'],
+                            'content_en' =>
+                                $contentDetails['english'],
+                        ],
+                    ];
                 }
             }
         }
 
-        return $this->mergeGroups($rawGroups);
+        return $this->buildDuplicateMap($rawGroups);
     }
 
-    /**
-     * حساب أقصى نسبة تشابه بين العناوين المتاحة (عربي / إنجليزي)
-     */
-    private function calculateTitleSimilarity(News $itemA, News $itemB): float
-    {
-        $maxSim = 0.0;
+    /*
+    |--------------------------------------------------------------------------
+    | TITLE SIMILARITY
+    |--------------------------------------------------------------------------
+    */
 
-        if (!empty($itemA->title_en) && !empty($itemB->title_en)) {
+    private function calculateTitleSimilarity(
+        News $itemA,
+        News $itemB
+    ): array {
+        $maxSim = 0.0;
+        $arabic = null;
+        $english = null;
+
+        $titleAEn = $this->normalizeText(
+            $itemA->title_en
+        );
+
+        $titleBEn = $this->normalizeText(
+            $itemB->title_en
+        );
+
+        if ($titleAEn !== '' && $titleBEn !== '') {
             similar_text(
-                mb_strtolower($this->normalizeText($itemA->title_en)),
-                mb_strtolower($this->normalizeText($itemB->title_en)),
+                $titleAEn,
+                $titleBEn,
                 $percentEn
             );
+
+            $english = round($percentEn, 1);
             $maxSim = max($maxSim, $percentEn);
         }
 
-        if (!empty($itemA->title_ar) && !empty($itemB->title_ar)) {
+        $titleAAr = $this->normalizeText(
+            $itemA->title_ar
+        );
+
+        $titleBAr = $this->normalizeText(
+            $itemB->title_ar
+        );
+
+        if ($titleAAr !== '' && $titleBAr !== '') {
             similar_text(
-                $this->normalizeText($itemA->title_ar),
-                $this->normalizeText($itemB->title_ar),
+                $titleAAr,
+                $titleBAr,
                 $percentAr
             );
+
+            $arabic = round($percentAr, 1);
             $maxSim = max($maxSim, $percentAr);
         }
 
-        return $maxSim;
+        return [
+            'similarity' => $maxSim,
+            'arabic' => $arabic,
+            'english' => $english,
+        ];
     }
 
-    /**
-     * حساب أقصى نسبة تشابه للمحتوى النصي بعد تنظيف الـ HTML والنصوص
-     */
-    private function calculateContentSimilarity(News $itemA, News $itemB): float
-    {
+    /*
+    |--------------------------------------------------------------------------
+    | CONTENT SIMILARITY
+    |--------------------------------------------------------------------------
+    |
+    | HTML is stripped and text is normalized before comparison.
+    |
+    | To prevent extremely long articles from making the command expensive,
+    | only a bounded normalized portion is compared.
+    |
+    | The comparison is done separately for Arabic and English, and the
+    | highest available language similarity is used for the decision.
+    |
+    */
+
+    private function calculateContentSimilarity(
+        News $itemA,
+        News $itemB
+    ): array {
         $maxSim = 0.0;
+        $arabic = null;
+        $english = null;
 
-        // مقارنة المحتوى العربي
-        if (!empty($itemA->content_ar) && !empty($itemB->content_ar)) {
-            $textA = $this->normalizeText(strip_tags($itemA->content_ar));
-            $textB = $this->normalizeText(strip_tags($itemB->content_ar));
+        $textAAr = $this->prepareSimilarityText(
+            $itemA->content_ar
+        );
 
-            // اقتطاع أول 2000 حرف لتفادي الثقل البرمجي لـ similar_text على النصوص الطويلة
-            $textA = mb_substr($textA, 0, 2000);
-            $textB = mb_substr($textB, 0, 2000);
+        $textBAr = $this->prepareSimilarityText(
+            $itemB->content_ar
+        );
 
-            if ($textA !== '' && $textB !== '') {
-                similar_text($textA, $textB, $percentAr);
-                $maxSim = max($maxSim, $percentAr);
+        if ($textAAr !== '' && $textBAr !== '') {
+            similar_text(
+                $textAAr,
+                $textBAr,
+                $percentAr
+            );
+
+            $arabic = round($percentAr, 1);
+            $maxSim = max($maxSim, $percentAr);
+        }
+
+        $textAEn = $this->prepareSimilarityText(
+            $itemA->content_en
+        );
+
+        $textBEn = $this->prepareSimilarityText(
+            $itemB->content_en
+        );
+
+        if ($textAEn !== '' && $textBEn !== '') {
+            similar_text(
+                $textAEn,
+                $textBEn,
+                $percentEn
+            );
+
+            $english = round($percentEn, 1);
+            $maxSim = max($maxSim, $percentEn);
+        }
+
+        return [
+            'similarity' => $maxSim,
+            'arabic' => $arabic,
+            'english' => $english,
+        ];
+    }
+
+    private function prepareSimilarityText(
+        ?string $content
+    ): string {
+        $text = trim((string) $content);
+
+        if ($text === '') {
+            return '';
+        }
+
+        $text = strip_tags($text);
+        $text = html_entity_decode(
+            $text,
+            ENT_QUOTES | ENT_HTML5,
+            'UTF-8'
+        );
+
+        $text = $this->normalizeText($text);
+
+        /*
+        | Keep comparison bounded for performance.
+        |
+        | 4000 normalized characters gives substantially more coverage than
+        | the previous 2000-character limit while keeping pairwise comparison
+        | manageable for the current audit size.
+        */
+        return mb_substr($text, 0, 4000);
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | BUILD DUPLICATE MAP
+    |--------------------------------------------------------------------------
+    |
+    | Keeps compatibility with auditArticle():
+    |
+    | 210 => [210, 216]
+    | 216 => [210, 216]
+    |
+    | Similarity information is also retained for JSON/display diagnostics.
+    |--------------------------------------------------------------------------
+    */
+
+    private function buildDuplicateMap(array $rawGroups): array
+    {
+        if (empty($rawGroups)) {
+            return [];
+        }
+
+        $groups = [];
+        $similarities = [];
+
+        foreach ($rawGroups as $match) {
+            $ids = array_values(
+                array_unique($match['ids'])
+            );
+
+            if (count($ids) < 2) {
+                continue;
+            }
+
+            $mergedIndex = null;
+
+            foreach ($groups as $index => $existing) {
+                if (
+                    count(
+                        array_intersect(
+                            $existing,
+                            $ids
+                        )
+                    ) > 0
+                ) {
+                    $groups[$index] = array_values(
+                        array_unique(
+                            array_merge(
+                                $existing,
+                                $ids
+                            )
+                        )
+                    );
+
+                    $similarities[$index][] =
+                        $match['similarity'];
+
+                    $mergedIndex = $index;
+
+                    break;
+                }
+            }
+
+            if ($mergedIndex === null) {
+                $groups[] = $ids;
+                $similarities[] = [$match['similarity']];
             }
         }
 
-        // مقارنة المحتوى الإنجليزي
-        if (!empty($itemA->content_en) && !empty($itemB->content_en)) {
-            $textA = mb_strtolower($this->normalizeText(strip_tags($itemA->content_en)));
-            $textB = mb_strtolower($this->normalizeText(strip_tags($itemB->content_en)));
+        $duplicateMap = [];
 
-            $textA = mb_substr($textA, 0, 2000);
-            $textB = mb_substr($textB, 0, 2000);
+        foreach ($groups as $index => $group) {
+            sort($group);
 
-            if ($textA !== '' && $textB !== '') {
-                similar_text($textA, $textB, $percentEn);
-                $maxSim = max($maxSim, $percentEn);
+            $groupSimilarity =
+                $this->summarizeDuplicateSimilarity(
+                    $similarities[$index] ?? []
+                );
+
+            foreach ($group as $articleId) {
+                $duplicateMap[$articleId] = [
+                    'ids' => $group,
+                    'matches' => $groupSimilarity,
+                ];
             }
         }
 
-        return $maxSim;
+        return $duplicateMap;
+    }
+
+    private function summarizeDuplicateSimilarity(
+        array $matches
+    ): array {
+        $summary = [];
+
+        foreach ($matches as $match) {
+            $summary[] = [
+                'title' =>
+                    $match['title'] ?? null,
+                'content' =>
+                    $match['content'] ?? null,
+                'content_ar' =>
+                    $match['content_ar'] ?? null,
+                'content_en' =>
+                    $match['content_en'] ?? null,
+            ];
+        }
+
+        return $summary;
+    }
+
+    private function extractDuplicateGroups(
+        array $duplicateMap
+    ): array {
+        $groups = [];
+
+        foreach ($duplicateMap as $data) {
+            /*
+             * New map format.
+             */
+            if (
+                is_array($data)
+                && isset($data['ids'])
+                && is_array($data['ids'])
+            ) {
+                $group = $data['ids'];
+            } else {
+                /*
+                 * Backward-compatible fallback.
+                 */
+                $group = (array) $data;
+            }
+
+            sort($group);
+
+            $key = implode(',', $group);
+
+            $groups[$key] = $group;
+        }
+
+        return array_values($groups);
     }
 
     /*
@@ -1089,13 +1240,16 @@ class AdsenseNewsAudit extends Command
     |--------------------------------------------------------------------------
     */
 
-    private function normalizeText(?string $text): string
-    {
+    private function normalizeText(
+        ?string $text
+    ): string {
         if (!$text) {
             return '';
         }
 
-        $text = mb_strtolower(trim($text));
+        $text = mb_strtolower(
+            trim($text)
+        );
 
         $text = str_replace(
             [
@@ -1138,14 +1292,9 @@ class AdsenseNewsAudit extends Command
         );
     }
 
-    /*
-    |--------------------------------------------------------------------------
-    | COUNT PARAGRAPHS
-    |--------------------------------------------------------------------------
-    */
-
-    private function countParagraphs(string $content): int
-    {
+    private function countParagraphs(
+        string $content
+    ): int {
         if (trim($content) === '') {
             return 0;
         }
@@ -1201,32 +1350,10 @@ class AdsenseNewsAudit extends Command
     |--------------------------------------------------------------------------
     */
 
-    private function detectTopicClusters(Collection $news): array
-    {
+    private function detectTopicClusters(
+        Collection $news
+    ): array {
         $articles = [];
-
-        $stopWords = [
-            'the',
-            'and',
-            'for',
-            'with',
-            'from',
-            'this',
-            'that',
-            'بعد',
-            'من',
-            'في',
-            'على',
-            'إلى',
-            'عن',
-            'مع',
-            'هل',
-            'كيف',
-            'ما',
-            'هذا',
-            'هذه',
-            'الى',
-        ];
 
         foreach ($news as $item) {
             $title =
@@ -1241,8 +1368,39 @@ class AdsenseNewsAudit extends Command
             }
 
             $tokens = array_filter(
-                preg_split('/\s+/u', $normalized)
+                preg_split(
+                    '/\s+/u',
+                    $normalized
+                )
             );
+
+            $stopWords = [
+                'the',
+                'and',
+                'for',
+                'with',
+                'from',
+                'this',
+                'that',
+                'after',
+                'before',
+                'into',
+                'over',
+                'about',
+                'بعد',
+                'من',
+                'في',
+                'على',
+                'الى',
+                'إلى',
+                'عن',
+                'مع',
+                'هل',
+                'كيف',
+                'ما',
+                'هذا',
+                'هذه',
+            ];
 
             $tokens = array_values(
                 array_filter(
@@ -1261,8 +1419,9 @@ class AdsenseNewsAudit extends Command
                 continue;
             }
 
-            $articles[$item->id] =
-                array_values(array_unique($tokens));
+            $articles[$item->id] = array_values(
+                array_unique($tokens)
+            );
         }
 
         $rawClusters = [];
@@ -1291,8 +1450,58 @@ class AdsenseNewsAudit extends Command
         return $this->mergeGroups($rawClusters);
     }
 
-    private function buildTopicMap(array $clusters): array
-    {
+    private function mergeGroups(
+        array $rawGroups
+    ): array {
+        $merged = [];
+
+        foreach ($rawGroups as $group) {
+            $group = array_values(
+                array_unique($group)
+            );
+
+            if (count($group) < 2) {
+                continue;
+            }
+
+            $mergedIntoExisting = false;
+
+            foreach ($merged as &$existing) {
+                if (
+                    count(
+                        array_intersect(
+                            $existing,
+                            $group
+                        )
+                    ) > 0
+                ) {
+                    $existing = array_values(
+                        array_unique(
+                            array_merge(
+                                $existing,
+                                $group
+                            )
+                        )
+                    );
+
+                    $mergedIntoExisting = true;
+                    break;
+                }
+            }
+
+            unset($existing);
+
+            if (!$mergedIntoExisting) {
+                $merged[] = $group;
+            }
+        }
+
+        return $merged;
+    }
+
+    private function buildTopicMap(
+        array $clusters
+    ): array {
         $map = [];
 
         foreach ($clusters as $clusterIndex => $cluster) {
@@ -1308,7 +1517,7 @@ class AdsenseNewsAudit extends Command
 
     /*
     |--------------------------------------------------------------------------
-    | SUMMARY DISPLAY
+    | DISPLAY
     |--------------------------------------------------------------------------
     */
 
@@ -1339,12 +1548,25 @@ class AdsenseNewsAudit extends Command
                 ? round(($risk / $total) * 100)
                 : 0;
 
-        $this->info('======================================================');
-        $this->info('CRYPTOHUB ADSENSE NEWS AUDIT');
-        $this->info('======================================================');
+        $this->info(
+            '======================================================'
+        );
 
-        $this->line("Total articles : {$total}");
-        $this->line("Average Score  : {$avgScore}/100");
+        $this->info(
+            'CRYPTOHUB ADSENSE NEWS AUDIT'
+        );
+
+        $this->info(
+            '======================================================'
+        );
+
+        $this->line(
+            "Total articles : {$total}"
+        );
+
+        $this->line(
+            "Average Score  : {$avgScore}/100"
+        );
 
         $this->newLine();
 
@@ -1360,7 +1582,10 @@ class AdsenseNewsAudit extends Command
             "🔴 RISK    : {$risk} ({$riskPercent}%)"
         );
 
-        $this->line("🔴 WEAK    : {$weak}");
+        $this->line(
+            "🔴 WEAK    : {$weak}"
+        );
+
         $this->line(
             "🔁 DUPLICATE ARTICLES : {$duplicateCount}"
         );
@@ -1372,17 +1597,20 @@ class AdsenseNewsAudit extends Command
         $this->newLine();
     }
 
-    /*
-    |--------------------------------------------------------------------------
-    | TOP REASONS
-    |--------------------------------------------------------------------------
-    */
+    private function displayTopReasons(
+        array $topReasons
+    ): void {
+        $this->info(
+            '======================================================'
+        );
 
-    private function displayTopReasons(array $topReasons): void
-    {
-        $this->info('======================================================');
-        $this->info('TOP REASONS');
-        $this->info('======================================================');
+        $this->info(
+            'TOP REASONS'
+        );
+
+        $this->info(
+            '======================================================'
+        );
 
         arsort($topReasons);
 
@@ -1392,18 +1620,15 @@ class AdsenseNewsAudit extends Command
             }
 
             $this->line(
-                str_pad($reason, 32) . ": {$count}"
+                str_pad(
+                    $reason,
+                    32
+                ) . ": {$count}"
             );
         }
 
         $this->newLine();
     }
-
-    /*
-    |--------------------------------------------------------------------------
-    | DETAILED ARTICLES
-    |--------------------------------------------------------------------------
-    */
 
     private function displayDetailedList(
         Collection $items,
@@ -1413,9 +1638,17 @@ class AdsenseNewsAudit extends Command
             return;
         }
 
-        $this->info('------------------------------------------------------');
-        $this->info("{$title} ({$items->count()})");
-        $this->info('------------------------------------------------------');
+        $this->info(
+            '------------------------------------------------------'
+        );
+
+        $this->info(
+            "{$title} ({$items->count()})"
+        );
+
+        $this->info(
+            '------------------------------------------------------'
+        );
 
         foreach ($items as $item) {
             $this->line(
@@ -1438,7 +1671,10 @@ class AdsenseNewsAudit extends Command
             if (!empty($item['reasons'])) {
                 $this->warn(
                     "   Issues: "
-                    . implode(' | ', $item['reasons'])
+                    . implode(
+                        ' | ',
+                        $item['reasons']
+                    )
                 );
             }
 
@@ -1460,18 +1696,20 @@ class AdsenseNewsAudit extends Command
         }
     }
 
-    /*
-    |--------------------------------------------------------------------------
-    | DUPLICATE DISPLAY
-    |--------------------------------------------------------------------------
-    */
-
     private function displayDuplicateGroups(
         array $duplicateGroups
     ): void {
-        $this->info('======================================================');
-        $this->info('🔁 DUPLICATE / SIMILAR GROUPS');
-        $this->info('======================================================');
+        $this->info(
+            '======================================================'
+        );
+
+        $this->info(
+            '🔁 DUPLICATE / SIMILAR GROUPS'
+        );
+
+        $this->info(
+            '======================================================'
+        );
 
         if (empty($duplicateGroups)) {
             $this->line(
@@ -1484,7 +1722,9 @@ class AdsenseNewsAudit extends Command
         }
 
         foreach ($duplicateGroups as $index => $group) {
-            $this->info('Group #' . ($index + 1));
+            $this->info(
+                'Group #' . ($index + 1)
+            );
 
             $items = News::query()
                 ->whereIn('id', $group)
@@ -1502,18 +1742,25 @@ class AdsenseNewsAudit extends Command
                 );
             }
 
+            /*
+             * Show pairwise similarity diagnostics when available.
+             */
+            foreach ($group as $articleId) {
+                /*
+                 * Find the map entry indirectly through the group is not
+                 * available here, so the main article listing remains concise.
+                 * Detailed similarity is available through --json.
+                 */
+                break;
+            }
+
             $this->newLine();
         }
     }
 
-    /*
-    |--------------------------------------------------------------------------
-    | AI RISK DISPLAY
-    |--------------------------------------------------------------------------
-    */
-
-    private function displayAiRisks(Collection $collection): void
-    {
+    private function displayAiRisks(
+        Collection $collection
+    ): void {
         $items = $collection
             ->filter(
                 fn ($item) =>
@@ -1521,9 +1768,17 @@ class AdsenseNewsAudit extends Command
             )
             ->sortByDesc('ai_penalty');
 
-        $this->info('======================================================');
-        $this->info('🤖 AI / TEMPLATE REPETITION RISKS');
-        $this->info('======================================================');
+        $this->info(
+            '======================================================'
+        );
+
+        $this->info(
+            '🤖 AI / TEMPLATE REPETITION RISKS'
+        );
+
+        $this->info(
+            '======================================================'
+        );
 
         if ($items->isEmpty()) {
             $this->line(
@@ -1560,18 +1815,20 @@ class AdsenseNewsAudit extends Command
         }
     }
 
-    /*
-    |--------------------------------------------------------------------------
-    | TOPIC CLUSTER DISPLAY
-    |--------------------------------------------------------------------------
-    */
-
     private function displayTopicClusters(
         array $clusters
     ): void {
-        $this->info('======================================================');
-        $this->info('🧩 TOPIC / EVENT CLUSTERS');
-        $this->info('======================================================');
+        $this->info(
+            '======================================================'
+        );
+
+        $this->info(
+            '🧩 TOPIC / EVENT CLUSTERS'
+        );
+
+        $this->info(
+            '======================================================'
+        );
 
         if (empty($clusters)) {
             $this->line(
@@ -1584,7 +1841,9 @@ class AdsenseNewsAudit extends Command
         }
 
         foreach ($clusters as $index => $cluster) {
-            $this->info('Cluster #' . ($index + 1));
+            $this->info(
+                'Cluster #' . ($index + 1)
+            );
 
             $items = News::query()
                 ->whereIn('id', $cluster)
@@ -1606,14 +1865,9 @@ class AdsenseNewsAudit extends Command
         }
     }
 
-    /*
-    |--------------------------------------------------------------------------
-    | JSON OUTPUT
-    |--------------------------------------------------------------------------
-    */
-
-    private function outputJson(array $payload): void
-    {
+    private function outputJson(
+        array $payload
+    ): void {
         $this->output->writeln(
             json_encode(
                 $payload,
@@ -1624,19 +1878,21 @@ class AdsenseNewsAudit extends Command
         );
     }
 
-    /*
-    |--------------------------------------------------------------------------
-    | HEADER
-    |--------------------------------------------------------------------------
-    */
-
     private function printHeader(): void
     {
         $this->newLine();
 
-        $this->info('======================================================');
-        $this->info('        CRYPTOHUB ADSENSE NEWS AUDIT');
-        $this->info('======================================================');
+        $this->info(
+            '======================================================'
+        );
+
+        $this->info(
+            '        CRYPTOHUB ADSENSE NEWS AUDIT'
+        );
+
+        $this->info(
+            '======================================================'
+        );
 
         $this->comment(
             'READ ONLY - No database records will be modified.'
@@ -1655,6 +1911,5 @@ class AdsenseNewsAudit extends Command
         );
 
         $this->newLine();
-
     }
 }
