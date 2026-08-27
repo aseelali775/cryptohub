@@ -809,59 +809,77 @@ class AdsenseNewsAudit extends Command
     }
 
     private function evalAiTemplateRisk(News $item): array
-    {
-        $combinedText = '';
+{
+    $combinedText = '';
 
-        foreach ($this->aiFields as $field) {
-            $value = trim((string) $item->{$field});
+    foreach ($this->aiFields as $field) {
+        $value = trim((string) $item->{$field});
 
-            if ($value !== '') {
-                $combinedText .= ' ' . $value;
-            }
+        if ($value !== '') {
+            $combinedText .= ' ' . $value;
         }
+    }
 
-        $combinedText = trim($combinedText);
+    $combinedText = trim($combinedText);
 
-        if ($combinedText === '') {
-            return [
-                'penalty' => 0,
-                'hits' => [],
-                'hit_count' => 0,
-                'risk' => 'NONE',
-            ];
-        }
-
-        $hits = [];
-
-        foreach ($this->aiTemplatePhrases as $phrase) {
-            if (mb_stripos($combinedText, $phrase) !== false) {
-                $hits[] = $phrase;
-            }
-        }
-
-        $hitCount = count($hits);
-
-        if ($hitCount >= 5) {
-            $penalty = 15;
-            $risk = 'HIGH';
-        } elseif ($hitCount >= 3) {
-            $penalty = 10;
-            $risk = 'MEDIUM';
-        } elseif ($hitCount >= 1) {
-            $penalty = 3;
-            $risk = 'LOW';
-        } else {
-            $penalty = 0;
-            $risk = 'NONE';
-        }
-
+    if ($combinedText === '') {
         return [
-            'penalty' => $penalty,
-            'hits' => array_values(array_unique($hits)),
-            'hit_count' => $hitCount,
-            'risk' => $risk,
+            'penalty' => 0,
+            'hits' => [],
+            'hit_count' => 0,
+            'risk' => 'NONE',
         ];
     }
+
+    $hits = [];
+
+    foreach ($this->aiTemplatePhrases as $phrase) {
+        if (mb_stripos($combinedText, $phrase) !== false) {
+            $hits[] = $phrase;
+        }
+    }
+
+    $hits = array_values(array_unique($hits));
+    $hitCount = count($hits);
+
+    /*
+    |--------------------------------------------------------------------------
+    | Graduated AI / Template Penalty
+    |--------------------------------------------------------------------------
+    |
+    | 0-1 hit  = editorial signal only
+    | 2 hits   = very small penalty
+    | 3+ hits  = full template penalty
+    |
+    */
+
+    if ($hitCount === 0) {
+        $penalty = 0;
+        $risk = 'NONE';
+    }
+
+    elseif ($hitCount === 1) {
+        $penalty = 0;
+        $risk = 'LOW';
+    }
+
+    elseif ($hitCount === 2) {
+        $penalty = 1;
+        $risk = 'LOW';
+    }
+
+    else {
+        $penalty = 3;
+        $risk = 'MEDIUM';
+    }
+
+    return [
+        'penalty' => $penalty,
+        'hits' => $hits,
+        'hit_count' => $hitCount,
+        'risk' => $risk,
+    ];
+}
 
     /*
     |--------------------------------------------------------------------------
