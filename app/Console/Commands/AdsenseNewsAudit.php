@@ -1681,5 +1681,6 @@ class AdsenseNewsAudit extends Command
         );
 
         $this->newLine();
+        
     }
 }
