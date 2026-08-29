@@ -12,7 +12,7 @@ use Illuminate\Support\Str;
 class ProcessNewsWithAI extends Command
 {
     protected $signature = 'news:process-ai
-                            {--limit=10 : Number of articles to process}';
+                            {--limit=4 : Number of articles to process}';
 
     protected $description =
         'Analyze unprocessed crypto news and generate original Arabic editorial analysis using Gemini AI.';

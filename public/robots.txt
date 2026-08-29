@@ -3,6 +3,5 @@ Allow: /
 
 Disallow: /api/
 Disallow: /sanctum/
-Disallow: /build/
 
 Sitemap: https://aqlcrypto.com/sitemap.xml
