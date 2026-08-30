@@ -41,8 +41,9 @@ class FetchCryptoNews extends Command
 
         $sources = [
             'CoinTelegraph' => 'https://cointelegraph.com/rss',
-            'Decrypt' => 'https://decrypt.co/feed',
-            'BitcoinMagazine' => 'https://bitcoinmagazine.com/feed',
+            'CryptoSlate'   => 'https://cryptoslate.com/feed/',
+            'NewsBTC'       => 'https://www.newsbtc.com/feed/',
+            'BitcoinMagazine'=> 'https://bitcoinmagazine.com/feed',
         ];
 
         $totalSuccess = 0;
