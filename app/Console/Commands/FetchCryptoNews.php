@@ -39,11 +39,12 @@ class FetchCryptoNews extends Command
         $this->info('Duplicate detection: ENABLED');
         $this->info('AI processing will happen separately.');
 
-        $sources = [
-            'CoinTelegraph' => 'https://cointelegraph.com/rss',
-            'CryptoSlate'   => 'https://cryptoslate.com/feed/',
-            'NewsBTC'       => 'https://www.newsbtc.com/feed/',
-            'BitcoinMagazine'=> 'https://bitcoinmagazine.com/feed',
+       $sources = [
+            'CoinTelegraph'   => 'https://cointelegraph.com/rss',
+            'CoinDesk'        => 'https://www.coindesk.com/arc/outboundfeeds/rss/',
+            'The Block'       => 'https://www.theblock.co/rss.xml',
+            'NewsBTC'         => 'https://www.newsbtc.com/feed/',
+            'BitcoinMagazine' => 'https://bitcoinmagazine.com/feed',
         ];
 
         $totalSuccess = 0;
