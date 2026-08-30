@@ -553,9 +553,9 @@ class FetchCryptoNews extends Command
         return 'https://cryptologos.cc/logos/bitcoin-btc-logo.png';
     }
 
-    /*
+/*
     |--------------------------------------------------------------------------
-    | Extract full article
+    | Extract full article (With Debugging)
     |--------------------------------------------------------------------------
     */
     private function extractFullArticle($url)
@@ -566,6 +566,7 @@ class FetchCryptoNews extends Command
                 ->get($url);
 
             if (!$response->successful()) {
+                Log::warning("Debug Extractor: HTTP Failed", ['url' => $url, 'status' => $response->status()]);
                 return null;
             }
 
@@ -582,6 +583,7 @@ class FetchCryptoNews extends Command
                 str_contains($html, 'verify you are human') || 
                 str_contains($html, 'Just a moment...')
             ) {
+                Log::warning("Debug Extractor: Blocked by Cloudflare/Anti-bot", ['url' => $url]);
                 return null;
             }
 
@@ -596,14 +598,21 @@ class FetchCryptoNews extends Command
             $readability = new Readability($configuration);
 
             if (!$readability->parse($html)) {
+                Log::warning("Debug Extractor: Readability Parse Failed", ['url' => $url]);
                 return null;
             }
 
             $content = trim(strip_tags($readability->getContent()));
             
-            return mb_strlen($content) > 200 ? $content : null;
+            if (mb_strlen($content) <= 200) {
+                Log::warning("Debug Extractor: Content too short", ['url' => $url, 'length' => mb_strlen($content)]);
+                return null;
+            }
+
+            return $content;
 
         } catch (ParseException $e) {
+            Log::warning("Debug Extractor: ParseException", ['url' => $url, 'message' => $e->getMessage()]);
             return null;
         } catch (\Throwable $e) {
             Log::warning('Article extraction exception', [
