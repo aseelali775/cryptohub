@@ -81,20 +81,46 @@ $sources = [
                     continue;
                 }
 
-                $json = json_encode($xml->channel->item);
-                $newsItems = json_decode($json, true);
-
-                if (!is_array($newsItems)) {
-                    continue;
-                }
-
-                /*
+             /*
                 |--------------------------------------------------------------------------
-                | Normalize single item
+                | Convert XML to Array securely while preserving Namespaces (Images)
                 |--------------------------------------------------------------------------
                 */
-                if (isset($newsItems['title'])) {
-                    $newsItems = [$newsItems];
+                $namespaces = $xml->getNamespaces(true);
+                $newsItems = [];
+                
+                // نتعامل مع عنصر واحد أو عدة عناصر
+                $items = isset($xml->channel->item[0]) ? $xml->channel->item : [$xml->channel->item];
+
+                foreach ($items as $xmlItem) {
+                    if (!$xmlItem) continue;
+                    
+                    $itemArray = json_decode(json_encode($xmlItem), true);
+                    
+                    // حقن روابط الصور من وسم media (لحل مشكلة NewsBTC و CoinJournal)
+                    if (isset($namespaces['media'])) {
+                        $media = $xmlItem->children($namespaces['media']);
+                        if (isset($media->content)) {
+                            $itemArray['media:content']['@attributes']['url'] = (string) $media->content->attributes()['url'];
+                        }
+                        if (isset($media->thumbnail)) {
+                            $itemArray['media:thumbnail']['@attributes']['url'] = (string) $media->thumbnail->attributes()['url'];
+                        }
+                    }
+                    
+                    // حقن النص الكامل من وسم content (لحل مشاكل بعض المواقع المتقدمة)
+                    if (isset($namespaces['content'])) {
+                        $content = $xmlItem->children($namespaces['content']);
+                        if (isset($content->encoded)) {
+                            $itemArray['content:encoded'] = (string) $content->encoded;
+                        }
+                    }
+                    
+                    $newsItems[] = $itemArray;
+                }
+
+                if (empty($newsItems)) {
+                    continue;
                 }
 
                 /*
