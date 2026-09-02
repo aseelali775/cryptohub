@@ -540,14 +540,25 @@ $sources = [
     | Extract image
     |--------------------------------------------------------------------------
     */
-    private function extractImage($item)
+   private function extractImage($item)
     {
+        // 1. البحث في enclosure (المعيار الأساسي لمعظم المواقع)
         if (isset($item['enclosure']['@attributes']['url'])) {
             return $item['enclosure']['@attributes']['url'];
         }
 
-        $htmlContent = is_array($item['description'] ?? null) ? ($item['description'][0] ?? '') : ($item['description'] ?? '');
+        // 2. البحث في media:content (لحل مشكلة NewsBTC وغيرها)
+        if (isset($item['media:content']['@attributes']['url'])) {
+            return $item['media:content']['@attributes']['url'];
+        }
 
+        // 3. البحث في media:thumbnail كاحتياط
+        if (isset($item['media:thumbnail']['@attributes']['url'])) {
+            return $item['media:thumbnail']['@attributes']['url'];
+        }
+
+        // 4. استخراج الصورة من description (إذا كانت مضمنة كـ HTML)
+        $htmlContent = is_array($item['description'] ?? null) ? ($item['description'][0] ?? '') : ($item['description'] ?? '');
         if (!empty($htmlContent)) {
             preg_match('/<img[^>]+src="([^">]+)"/i', $htmlContent, $matches);
             if (!empty($matches[1])) {
@@ -555,9 +566,18 @@ $sources = [
             }
         }
 
+        // 5. استخراج الصورة من content:encoded (لحل مشكلة بعض المواقع المتقدمة)
+        $fullContent = is_array($item['content:encoded'] ?? null) ? ($item['content:encoded'][0] ?? '') : ($item['content:encoded'] ?? '');
+        if (!empty($fullContent)) {
+            preg_match('/<img[^>]+src="([^">]+)"/i', $fullContent, $matches);
+            if (!empty($matches[1])) {
+                return $matches[1];
+            }
+        }
+
+        // 6. صورة الطوارئ الافتراضية
         return 'https://cryptologos.cc/logos/bitcoin-btc-logo.png';
     }
-
 /*
     |--------------------------------------------------------------------------
     | Extract full article (With Debugging)
