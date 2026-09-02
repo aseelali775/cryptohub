@@ -41,10 +41,11 @@ class FetchCryptoNews extends Command
 
        $sources = [
             'CoinTelegraph'   => 'https://cointelegraph.com/rss',
-            'CoinDesk'        => 'https://www.coindesk.com/arc/outboundfeeds/rss/',
-            'The Block'       => 'https://www.theblock.co/rss.xml',
             'NewsBTC'         => 'https://www.newsbtc.com/feed/',
             'BitcoinMagazine' => 'https://bitcoinmagazine.com/feed',
+            'TheDailyHodl'    => 'https://dailyhodl.com/feed/',
+            'CryptoPotato'    => 'https://cryptopotato.com/feed/',
+            'AMBCrypto'       => 'https://ambcrypto.com/feed/',
         ];
 
         $totalSuccess = 0;
