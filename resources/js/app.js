@@ -1,5 +1,5 @@
 import { createApp, h } from 'vue';
-import { createInertiaApp } from '@inertiajs/vue3';
+import { createInertiaApp, router } from '@inertiajs/vue3';
 
 createInertiaApp({
   resolve: name => {
@@ -11,4 +11,13 @@ createInertiaApp({
       .use(plugin)
       .mount(el);
   },
+});
+
+// تتبع التنقلات بين الصفحات وإرسالها إلى Google Analytics
+router.on('navigate', (event) => {
+    if (typeof gtag !== 'undefined') {
+        gtag('config', 'G-WKHYN6DQJT', {
+            page_path: event.detail.page.url
+        });
+    }
 });
