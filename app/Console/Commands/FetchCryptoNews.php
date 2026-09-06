@@ -41,11 +41,11 @@ class FetchCryptoNews extends Command
 
 $sources = [
             'CoinTelegraph'   => 'https://cointelegraph.com/rss',
-            'NewsBTC'         => 'https://www.newsbtc.com/feed/',
+            // 'NewsBTC'         => 'https://www.newsbtc.com/feed/',
             'BitcoinMagazine' => 'https://bitcoinmagazine.com/feed',
-            'TheDailyHodl'    => 'https://dailyhodl.com/feed/',
-            'BeInCrypto'      => 'https://beincrypto.com/feed/',
-            'CoinJournal'     => 'https://coinjournal.net/news/feed/',
+            // 'TheDailyHodl'    => 'https://dailyhodl.com/feed/',
+            // 'BeInCrypto'      => 'https://beincrypto.com/feed/',
+            // 'CoinJournal'     => 'https://coinjournal.net/news/feed/',
             'CryptoDaily'     => 'https://cryptodaily.co.uk/feed',
             'Decrypt'         => 'https://decrypt.co/feed'
         ];
