@@ -46,7 +46,7 @@ $sources = [
             // 'TheDailyHodl'    => 'https://dailyhodl.com/feed/',
             // 'BeInCrypto'      => 'https://beincrypto.com/feed/',
             // 'CoinJournal'     => 'https://coinjournal.net/news/feed/',
-            'CryptoDaily'     => 'https://cryptodaily.co.uk/feed',
+            // 'CryptoDaily'     => 'https://cryptodaily.co.uk/feed',
             'Decrypt'         => 'https://decrypt.co/feed'
         ];
 
