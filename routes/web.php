@@ -41,6 +41,7 @@ Route::get('/disclaimer', [LegalPagesController::class, 'disclaimer'])->name('di
 Route::get('/editorial-policy', [LegalPagesController::class, 'editorialPolicy'])->name('editorial.policy');
 // مسار خريطة الموقع لمحركات البحث
 Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
+Route::get('/news-sitemap.xml', [SitemapController::class, 'news'])->name('news.sitemap');
 
 
 // 5. المحرك العالمي للتبديل الفوري بين اللغتين (العربية والإنجليزية)

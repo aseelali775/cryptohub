@@ -262,7 +262,7 @@ const newsArticleSchema = computed(() => ({
     "datePublished": props.newsItem.published_at || new Date().toISOString(),
     "dateModified": props.newsItem.updated_at || new Date().toISOString(),
     "author": {
-        "@type": "Organization",
+        "@type":"Person",
         "name": props.newsItem.author?.name || "Aql Crypto Editorial Team",
         "url": props.newsItem.author?.url || "https://aqlcrypto.com/about"
     },
