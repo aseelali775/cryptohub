@@ -136,4 +136,100 @@ class SitemapController extends Controller
             'Content-Type' => 'application/xml',
         ]);
     }
+
+    /**
+ * Google News Sitemap
+ *
+ * يعرض الأخبار المنشورة خلال آخر 48 ساعة فقط.
+ */
+public function news(): Response
+{
+    $xmlContent = Cache::remember('news_sitemap_xml', 900, function () {
+
+        $baseUrl = rtrim(config('app.url', url('/')), '/');
+
+        // Google News Sitemap:
+        // يجب أن يحتوي فقط على الأخبار الحديثة خلال آخر 48 ساعة.
+        $articles = News::query()
+            ->where('ai_processed', true)
+            ->whereNotNull('title_ar')
+            ->where('title_ar', '!=', '')
+            ->where('created_at', '>=', now()->subHours(48))
+            ->select(
+                'id',
+                'slug',
+                'title_ar',
+                'created_at'
+            )
+            ->latest('created_at')
+            ->get();
+
+        $xml = '<?xml version="1.0" encoding="UTF-8"?>';
+
+        $xml .= '<urlset ';
+        $xml .= 'xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" ';
+        $xml .= 'xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">';
+        
+        foreach ($articles as $article) {
+
+            // تنظيف الـ slug من ID إذا كان موجوداً في نهايته
+            $cleanSlug = $article->slug
+                ? preg_replace('/-' . $article->id . '$/', '', $article->slug)
+                : '';
+
+            $articleUrl = $baseUrl
+                . '/news/'
+                . $article->id
+                . ($cleanSlug ? '-' . $cleanSlug : '');
+
+            $publicationDate = $article->created_at
+                ? $article->created_at->toAtomString()
+                : now()->toAtomString();
+
+            $title = htmlspecialchars(
+                trim(strip_tags($article->title_ar)),
+                ENT_XML1 | ENT_QUOTES,
+                'UTF-8'
+            );
+
+            $loc = htmlspecialchars(
+                $articleUrl,
+                ENT_XML1 | ENT_QUOTES,
+                'UTF-8'
+            );
+
+            $xml .= '<url>';
+
+            $xml .= '<loc>' . $loc . '</loc>';
+
+            $xml .= '<news:news>';
+
+            $xml .= '<news:publication>';
+            $xml .= '<news:name>Aql Crypto</news:name>';
+            $xml .= '<news:language>ar</news:language>';
+            $xml .= '</news:publication>';
+
+            $xml .= '<news:publication_date>'
+                . $publicationDate
+                . '</news:publication_date>';
+
+            $xml .= '<news:title>'
+                . $title
+                . '</news:title>';
+
+            $xml .= '</news:news>';
+
+            $xml .= '</url>';
+        }
+
+        $xml .= '</urlset>';
+
+        return $xml;
+    });
+
+    return response($xmlContent, 200, [
+        'Content-Type' => 'application/xml; charset=UTF-8',
+        'Cache-Control' => 'public, max-age=900',
+    ]);
+}
 }
