@@ -152,7 +152,6 @@ class ProcessNewsWithAI extends Command
                 // If is_relevant === true, proceed with validation
                 // =========================================================
                 if (!$this->isValidResult($result)) {
-                    $this->error("❌ AI result validation failed for ID {$news->id}");
                     $validationFailed++;
                     continue;
                 }
@@ -181,7 +180,6 @@ class ProcessNewsWithAI extends Command
                 $limitationsAr = trim((string) $result['limitations_ar']);
 
                 if (!$this->validateFinalContent($titleAr, $contentAr, $summaryAr, $whyItMattersAr, $analysisAr, $contextAr, $whatToWatchAr, $limitationsAr, $metaDescriptionAr)) {
-                    $this->error("❌ Final content validation failed for ID {$news->id}");
                     $validationFailed++;
                     continue;
                 }
@@ -245,9 +243,6 @@ class ProcessNewsWithAI extends Command
     {
         $url = sprintf('https://generativelanguage.googleapis.com/v1beta/models/%s:generateContent?key=%s', self::GEMINI_MODEL, $apiKey);
 
-        // =========================================================
-        // 3. Updated Prompt with robust Relevance Gate rules
-        // =========================================================
         $prompt = <<<'PROMPT'
 You are the senior editorial analyst for Aql Crypto, an Arabic cryptocurrency news and market-analysis platform.
 
@@ -426,6 +421,20 @@ PROMPT;
             ],
             'required' => [
                 'is_relevant',
+                'rejection_reason',
+                'title_ar',
+                'content_ar',
+                'summary_ar',
+                'meta_description_ar',
+                'why_it_matters_ar',
+                'analysis_ar',
+                'context_ar',
+                'what_to_watch_ar',
+                'limitations_ar',
+                'sentiment',
+                'category',
+                'impact_score',
+                'keywords',
             ],
         ];
 
@@ -449,14 +458,39 @@ PROMPT;
                         return null;
                     }
 
-                    $text = preg_replace('/^```(?:json)?\s*/i', '', trim($text));$text = preg_replace('/\s*```$/', '', $text);
-                    $data = json_decode(trim($text), true);
+                    $text = trim($text);
+                    $text = preg_replace('/^```(?:json)?\s*/i', '', $text);$text = preg_replace('/\s*```$/', '', $text);
+                    $text = trim($text);
+
+                    // =========================================================
+                    // 3. Diagnostic JSON Decode & Logging
+                    // =========================================================
+                    $data = json_decode($text, true);
 
                     if (json_last_error() !== JSON_ERROR_NONE) {
+                        Log::error('Gemini JSON decode failed', [
+                            'news_id' => $news->id,
+                            'json_error' => json_last_error_msg(),
+                            'raw_response' => mb_substr($text, 0, 10000),
+                        ]);
                         return null;
                     }
 
-                    return is_array($data) ? $data : null;
+                    if (!is_array($data)) {
+                        Log::error('Gemini returned non-array result', [
+                            'news_id' => $news->id,
+                            'raw_response' => mb_substr($text, 0, 10000),
+                        ]);
+                        return null;
+                    }
+
+                    Log::info('Gemini raw result received', [
+                        'news_id' => $news->id,
+                        'is_relevant' => $data['is_relevant'] ?? null,
+                        'keys' => array_keys($data),
+                    ]);
+
+                    return $data;
                 }
 
                 if ($response->status() === 429) {
@@ -490,32 +524,121 @@ PROMPT;
 
     private function isValidResult(?array $result): bool
     {
-        // Notice: This function is only called if is_relevant === true
+        // هذه الدالة تُستدعى فقط عندما يكون is_relevant = true
+        if (!is_array($result)) {
+            $this->error('❌ AI result is not an array.');
+            return false;
+        }
+
         $required = [
-            'title_ar', 'content_ar', 'summary_ar', 'meta_description_ar', 'why_it_matters_ar',
-            'analysis_ar', 'context_ar', 'what_to_watch_ar', 'limitations_ar', 'sentiment', 'category', 'impact_score', 'keywords'
+            'title_ar',
+            'content_ar',
+            'summary_ar',
+            'meta_description_ar',
+            'why_it_matters_ar',
+            'analysis_ar',
+            'context_ar',
+            'what_to_watch_ar',
+            'limitations_ar',
+            'sentiment',
+            'category',
+            'impact_score',
+            'keywords',
         ];
 
+        $missing = [];
+
         foreach ($required as $field) {
-            if (!array_key_exists($field, $result)) return false;
+            if (!array_key_exists($field, $result)) {
+                $missing[] = $field;
+            }
+        }
+
+        if (!empty($missing)) {
+            $this->error('❌ Missing AI fields: ' . implode(', ', $missing));
+
+            Log::error('Gemini result validation failed', [
+                'missing_fields' => $missing,
+                'result_keys' => array_keys($result),
+            ]);
+
+            return false;
         }
 
         return true;
     }
 
-    private function validateFinalContent(string $titleAr, string $contentAr, string $summaryAr, string $whyItMattersAr, string $analysisAr, string $contextAr, string $whatToWatchAr, string $limitationsAr, string $metaDescriptionAr): bool
-    {
-        if (mb_strlen($titleAr) < 15 || mb_strlen($titleAr) > 180) return false;
-        if (mb_strlen($contentAr) < self::MIN_ARTICLE_LENGTH || mb_strlen($contentAr) > self::MAX_ARTICLE_LENGTH) return false;
-        if (mb_strlen($summaryAr) < 50) return false;
-        if (mb_strlen($whyItMattersAr) < 100) return false;
-        if (mb_strlen($analysisAr) < 180) return false;
-        if (mb_strlen($contextAr) < 100) return false;
-        if (mb_strlen($whatToWatchAr) < 80) return false;
-        if (mb_strlen($limitationsAr) < 50) return false;
-        if (mb_strlen($metaDescriptionAr) < 50 || mb_strlen($metaDescriptionAr) > 180) return false;
+    private function validateFinalContent(
+        string $titleAr,
+        string $contentAr,
+        string $summaryAr,
+        string $whyItMattersAr,
+        string $analysisAr,
+        string $contextAr,
+        string $whatToWatchAr,
+        string $limitationsAr,
+        string $metaDescriptionAr
+    ): bool {
+        $checks = [
+            'title_ar' => [
+                mb_strlen($titleAr) >= 15 && mb_strlen($titleAr) <= 180,
+                mb_strlen($titleAr),
+                '15-180',
+            ],
+            'content_ar' => [
+                mb_strlen($contentAr) >= self::MIN_ARTICLE_LENGTH &&
+                mb_strlen($contentAr) <= self::MAX_ARTICLE_LENGTH,
+                mb_strlen($contentAr),
+                self::MIN_ARTICLE_LENGTH . '-' . self::MAX_ARTICLE_LENGTH,
+            ],
+            'summary_ar' => [
+                mb_strlen($summaryAr) >= 50,
+                mb_strlen($summaryAr),
+                '>=50',
+            ],
+            'why_it_matters_ar' => [
+                mb_strlen($whyItMattersAr) >= 100,
+                mb_strlen($whyItMattersAr),
+                '>=100',
+            ],
+            'analysis_ar' => [
+                mb_strlen($analysisAr) >= 180,
+                mb_strlen($analysisAr),
+                '>=180',
+            ],
+            'context_ar' => [
+                mb_strlen($contextAr) >= 100,
+                mb_strlen($contextAr),
+                '>=100',
+            ],
+            'what_to_watch_ar' => [
+                mb_strlen($whatToWatchAr) >= 80,
+                mb_strlen($whatToWatchAr),
+                '>=80',
+            ],
+            'limitations_ar' => [
+                mb_strlen($limitationsAr) >= 50,
+                mb_strlen($limitationsAr),
+                '>=50',
+            ],
+            'meta_description_ar' => [
+                mb_strlen($metaDescriptionAr) >= 50 &&
+                mb_strlen($metaDescriptionAr) <= 180,
+                mb_strlen($metaDescriptionAr),
+                '50-180',
+            ],
+        ];
 
-        return true;
+        $valid = true;
+
+        foreach ($checks as $field => [$passed, $length, $expected]) {
+            if (!$passed) {
+                $this->error("❌ {$field}: length={$length}, expected={$expected}");
+                $valid = false;
+            }
+        }
+
+        return $valid;
     }
 
     private function buildSlug(string $title, int|string $id): string
