@@ -9,16 +9,60 @@ class News extends Model
 {
     use HasFactory;
 
-  protected $fillable = [
-        'title_en', 'title_ar', 'content_en', 'content_ar', 'image_url', 
-        'source', 'url', 'summary_ar', 'why_it_matters_ar', 
-        'analysis_ar', 'context_ar', 'what_to_watch_ar', 'limitations_ar', // 🟢 الحقول الجديدة
-        'sentiment', 'category', 'impact_score', 'ai_processed',
-        'slug', 'keywords'
+    protected $fillable = [
+        // =========================================================
+        // المصدر الأصلي
+        // =========================================================
+        'title_en',
+        'content_en',
+        'image_url',
+        'source',
+        'url',
+
+        // =========================================================
+        // المحتوى العربي
+        // =========================================================
+        'title_ar',
+        'content_ar',
+        'summary_ar',
+        'meta_description_ar',
+        'why_it_matters_ar',
+        'analysis_ar',
+        'context_ar',
+        'what_to_watch_ar',
+        'limitations_ar',
+
+        // =========================================================
+        // حقول AI الإنجليزية
+        // =========================================================
+        'ai_title',
+        'ai_content',
+        'ai_summary',
+
+        // =========================================================
+        // التصنيف والتحليل
+        // =========================================================
+        'sentiment',
+        'category',
+        'impact_score',
+        'keywords',
+
+        // =========================================================
+        // حالة المقال ومعالجة AI
+        // =========================================================
+        'ai_processed',
+        'status',
+        'rejection_reason',
+
+        // =========================================================
+        // SEO
+        // =========================================================
+        'slug',
     ];
 
-    // تحويل الكلمات المفتاحية لمصفوفة آلياً
     protected $casts = [
         'keywords' => 'array',
+        'ai_processed' => 'boolean',
+        'impact_score' => 'integer',
     ];
 }
