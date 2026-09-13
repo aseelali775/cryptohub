@@ -27,7 +27,10 @@
            
           <!-- Desktop Header Logo -->
           <Link href="/" class="flex items-center gap-2 flex-shrink-0 cursor-pointer group">
-           <img :src="'/images/logos/logo-horizontal.webp'" alt="AQL Crypto" class="h-10 w-auto object-contain rounded-md shadow-sm group-hover:opacity-90 transition-opacity" />
+            <!-- شعار الوضع العادي (يختفي في المظلم) -->
+            <img :src="'/images/logos/logo-horizontal.webp'" alt="AQL Crypto" class="h-10 w-auto object-contain rounded-md shadow-sm group-hover:opacity-90 transition-opacity block dark:hidden" />
+            <!-- شعار الوضع المظلم (يظهر في المظلم فقط) -->
+            <img :src="'/images/logos/logo-horizontal-dark.webp'" alt="AQL Crypto" class="h-10 w-auto object-contain rounded-md shadow-sm group-hover:opacity-90 transition-opacity hidden dark:block" />
           </Link>
 
           <nav class="hidden lg:flex items-center gap-8 h-full">
