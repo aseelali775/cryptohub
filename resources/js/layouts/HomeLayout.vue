@@ -24,7 +24,7 @@
       
       <header class="w-full bg-white dark:bg-[#0b1121] border-b border-gray-200 dark:border-slate-800/80 sticky top-0 z-40 transition-colors duration-300">
         <div class="max-w-[1440px] mx-auto h-20 px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
-          
+           
           <!-- Desktop Header Logo -->
           <Link href="/" class="flex items-center gap-2 flex-shrink-0 cursor-pointer group">
             <img src="/images/logos/logo-horizontal.webp" alt="AQL Crypto" class="h-10 w-auto object-contain rounded-md shadow-sm group-hover:opacity-90 transition-opacity" />
