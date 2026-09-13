@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Aql Crypto</title>
 
+    <!-- أيقونات الموقع لمحركات البحث والمتصفحات -->
+    <link rel="icon" type="image/webp" href="/favicon.webp">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/favicon.webp">
+
     <!-- Google tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-WKHYN6DQJT"></script>
     <script>
