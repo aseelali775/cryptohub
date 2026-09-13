@@ -109,7 +109,7 @@
               
               <!-- Mobile Sidebar Logo (Using Icon + Text for better UX) -->
               <div class="flex items-center gap-2">
-                <img :src="'/images/logos/logo-icon.webp'" alt="AQL Crypto Icon" class="h-8 w-8 object-contain rounded-md shadow-sm" />
+                <img :src="'/images/logos/logo-icon.webp'" alt="AQL Crypto Icon" class="h-14 w-8 object-contain rounded-md shadow-sm" />
                 <span class="text-lg font-black tracking-tight text-slate-900 dark:text-white font-mono ms-1">
                   AQL CRYPTO
                 </span>
