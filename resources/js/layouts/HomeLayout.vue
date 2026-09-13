@@ -33,6 +33,7 @@
             <img :src="'/images/logos/logo-horizontal-dark.webp'" alt="AQL Crypto" class="h-14 w-auto object-contain rounded-md shadow-sm group-hover:opacity-90 transition-opacity hidden dark:block" />
           </Link>
 
+          
           <nav class="hidden lg:flex items-center gap-8 h-full">
             <Link href="/" class="h-full flex items-center text-sm transition-colors border-b-2" :class="$page.url === '/' ? 'font-bold text-emerald-600 dark:text-emerald-400 border-emerald-500' : 'font-medium text-slate-600 dark:text-slate-400 border-transparent hover:text-slate-900 dark:hover:text-white'">
               {{ t('navHome') }}
