@@ -27,8 +27,8 @@
                                 </div>
                                 <div class="min-w-0 flex-1">
                                     <p class="text-sm text-slate-500 dark:text-slate-400 mb-1">{{ content.email_label }}</p>
-                                    <a href="mailto:support@aqlcrypto.com" class="text-slate-900 dark:text-white font-semibold hover:text-emerald-500 transition break-all break-words text-sm sm:text-base">
-                                        support@aqlcrypto.com
+                                    <a href="mailto:cryptohubadmin665@gmail.com" class="text-slate-900 dark:text-white font-semibold hover:text-emerald-500 transition break-all break-words text-sm sm:text-base">
+                                        cryptohubadmin665@gmail.com
                                     </a>
                                 </div>
                             </div>
