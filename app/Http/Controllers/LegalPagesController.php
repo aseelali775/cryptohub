@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Mail; // تأكد من إضافة هذا السطر
 
 class LegalPagesController extends Controller
 {
@@ -14,14 +15,9 @@ class LegalPagesController extends Controller
     }
 
     // 2. صفحة اتصل بنا
-    public function contact()
-    {
-        return Inertia::render('Legal/Contact');
-    }
-
-    // معالجة نموذج اتصل بنا
     public function submitContact(Request $request)
     {
+        // 1. التحقق من البيانات
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
@@ -29,8 +25,21 @@ class LegalPagesController extends Controller
             'message' => 'required|string|min:10',
         ]);
 
-        // سيتم إضافة كود الإرسال إلى support@aqlcrypto.com لاحقاً
-        return back()->with('success', 'تم إرسال رسالتك بنجاح. | Your message has been sent successfully.');
+        // 2. إرسال الإيميل الفعلي
+        try {
+            Mail::raw("اسم المرسل: {$validated['name']} \nالبريد: {$validated['email']} \n\nالرسالة: \n{$validated['message']}", function ($mail) use ($validated) {
+                // ضع هنا الإيميل الذي تريد استقبال الرسائل عليه
+                $mail->to('cryptohubadmin665@gmail.com') 
+                     ->subject('رسالة من صفحة اتصل بنا: ' . $validated['subject']);
+            });
+
+            // 3. إرجاع رسالة النجاح
+            return back()->with('success', 'تم إرسال رسالتك بنجاح. | Your message has been sent successfully.');
+            
+        } catch (\Exception $e) {
+            // في حال فشل الإرسال (مثلاً مشكلة في إعدادات SMTP) نرجع رسالة خطأ
+            return back()->withErrors(['email_error' => 'حدث خطأ أثناء الإرسال، يرجى المحاولة لاحقاً.']);
+        }
     }
 
     // 3. صفحة سياسة الخصوصية
