@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-use Illuminate\Support\Facades\Mail; // تأكد من إضافة هذا السطر
+use Illuminate\Support\Facades\Mail; // تم استدعاء الكلاس بنجاح
 
 class LegalPagesController extends Controller
 {
@@ -14,7 +14,13 @@ class LegalPagesController extends Controller
         return Inertia::render('Legal/About');
     }
 
-    // 2. صفحة اتصل بنا
+    // 2. صفحة اتصل بنا (الدالة التي تعرض الصفحة للزائر)
+    public function contact()
+    {
+        return Inertia::render('Legal/Contact');
+    }
+
+    // معالجة نموذج اتصل بنا (الدالة التي تستقبل البيانات وترسل الإيميل)
     public function submitContact(Request $request)
     {
         // 1. التحقق من البيانات
@@ -28,7 +34,7 @@ class LegalPagesController extends Controller
         // 2. إرسال الإيميل الفعلي
         try {
             Mail::raw("اسم المرسل: {$validated['name']} \nالبريد: {$validated['email']} \n\nالرسالة: \n{$validated['message']}", function ($mail) use ($validated) {
-                // ضع هنا الإيميل الذي تريد استقبال الرسائل عليه
+                // الإيميل المخصص لاستقبال رسائل الزوار
                 $mail->to('cryptohubadmin665@gmail.com') 
                      ->subject('رسالة من صفحة اتصل بنا: ' . $validated['subject']);
             });
@@ -37,7 +43,7 @@ class LegalPagesController extends Controller
             return back()->with('success', 'تم إرسال رسالتك بنجاح. | Your message has been sent successfully.');
             
         } catch (\Exception $e) {
-            // في حال فشل الإرسال (مثلاً مشكلة في إعدادات SMTP) نرجع رسالة خطأ
+            // في حال فشل الإرسال نرجع رسالة خطأ
             return back()->withErrors(['email_error' => 'حدث خطأ أثناء الإرسال، يرجى المحاولة لاحقاً.']);
         }
     }
