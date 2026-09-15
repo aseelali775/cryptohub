@@ -97,7 +97,7 @@ const form = useForm({
 });
 
 const submit = () => {
-    form.post(route('contact.submit'), {
+    form.post('/contact', { // استبدلنا route() بالمسار المباشر
         preserveScroll: true,
         onSuccess: () => form.reset(),
     });
