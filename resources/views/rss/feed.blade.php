@@ -8,20 +8,25 @@
         <atom:link href="{{ url('/feed') }}" rel="self" type="application/rss+xml" />
         
         @foreach($news as $item)
-            @php
-                // 1. تنظيف الـ slug بنفس الطريقة الموجودة في NewsController@show
-                $cleanSlug = $item->slug ?? '';
-                if ($cleanSlug && preg_match('/-' . preg_quote($item->id, '/') . '$/', $cleanSlug)) {
-                    $cleanSlug = preg_replace('/-' . preg_quote($item->id, '/') . '$/', '', $cleanSlug);
-                }
-                
-                // 2. توليد الرابط الرسمي المتطابق 100% عبر Laravel Route
-                $link = route('news.show', ['id' => $item->id, 'slug' => $cleanSlug]);
+           @php
+    $cleanSlug = $item->slug ?? '';
 
-                // 3. جلب المحتوى العربي أو الإنجليزي كبديل
-                $title = $item->title_ar ?: $item->title_en;
-                $description = $item->summary_ar ?: mb_substr(strip_tags($item->content_ar ?: $item->content_en ?? ''), 0, 200) . '...';
-            @endphp
+    if ($cleanSlug && preg_match('/-' . preg_quote($item->id, '/') . '$/', $cleanSlug)) {
+        $cleanSlug = preg_replace('/-' . preg_quote($item->id, '/') . '$/', '', $cleanSlug);
+    }
+
+    $link = route('news.show', [
+        'id' => $item->id,
+        'slug' => $cleanSlug
+    ]);
+
+    $title = $item->title_ar ?: $item->title_en;
+
+    $content = $item->content_ar ?: ($item->content_en ?? '');
+
+    $description = $item->summary_ar
+        ?: mb_substr(strip_tags($content), 0, 200) . '...';
+@endphp
             
             <item>
                 <title><![CDATA[{{ $title }}]]></title>
