@@ -42,6 +42,8 @@ Route::get('/editorial-policy', [LegalPagesController::class, 'editorialPolicy']
 // مسار خريطة الموقع لمحركات البحث
 Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
 Route::get('/news-sitemap.xml', [SitemapController::class, 'news'])->name('news.sitemap');
+// مسار خلاصة الـ RSS لـ Google Publisher Center
+Route::get('/feed', [NewsController::class, 'rssFeed'])->name('rss.feed');
 
 
 // 5. المحرك العالمي للتبديل الفوري بين اللغتين (العربية والإنجليزية)

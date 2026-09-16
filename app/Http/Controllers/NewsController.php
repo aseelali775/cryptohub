@@ -470,4 +470,21 @@ class NewsController extends Controller
             ]
         );
     }
+
+    /**
+     * توليد خلاصة RSS للأخبار (Google Publisher Center)
+     */
+    public function rssFeed()
+    {
+        $news = News::query()
+            ->where('status', 'published') // التأكد من أن الخبر منشور فعلياً
+            ->where('ai_processed', true)
+            ->latest('created_at')
+            ->limit(100)
+            ->get();
+
+        return response()
+            ->view('rss.feed', compact('news'))
+            ->header('Content-Type', 'application/xml; charset=UTF-8'); // استخدام النوع القياسي الأنسب
+    }
 }
