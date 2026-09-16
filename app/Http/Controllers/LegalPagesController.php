@@ -20,7 +20,7 @@ class LegalPagesController extends Controller
         return Inertia::render('Legal/Contact');
     }
 
-    // معالجة نموذج اتصل بنا (الدالة التي تستقبل البيانات وترسل الإيميل)
+  // معالجة نموذج اتصل بنا
     public function submitContact(Request $request)
     {
         // 1. التحقق من البيانات
@@ -31,12 +31,18 @@ class LegalPagesController extends Controller
             'message' => 'required|string|min:10',
         ]);
 
-        // 2. إرسال الإيميل الفعلي
+        // 2. إرسال الإيميل الفعلي عبر Resend API
         try {
-            Mail::raw("اسم المرسل: {$validated['name']} \nالبريد: {$validated['email']} \n\nالرسالة: \n{$validated['message']}", function ($mail) use ($validated) {
-                // الإيميل المخصص لاستقبال رسائل الزوار
-                $mail->to('cryptohubadmin665@gmail.com') 
-                     ->subject('رسالة من صفحة اتصل بنا: ' . $validated['subject']);
+            $body = "لديك رسالة جديدة من منصة Aql Crypto:\n\n"
+                  . "اسم الزائر: {$validated['name']}\n"
+                  . "البريد الإلكتروني: {$validated['email']}\n"
+                  . "الموضوع: {$validated['subject']}\n\n"
+                  . "نص الرسالة:\n{$validated['message']}";
+
+            Mail::raw($body, function ($mail) use ($validated) {
+                $mail->to('cryptohubadmin665@gmail.com') // البريد الذي سيستقبل الرسائل
+                     ->replyTo($validated['email'], $validated['name']) // للرد المباشر على الزائر
+                     ->subject('رسالة جديدة - ' . $validated['subject']);
             });
 
             // 3. إرجاع رسالة النجاح
@@ -46,8 +52,8 @@ class LegalPagesController extends Controller
             // في حال فشل الإرسال نرجع رسالة خطأ
             return back()->withErrors(['email_error' => 'حدث خطأ أثناء الإرسال، يرجى المحاولة لاحقاً.']);
         }
-    }
-
+    } 
+    
     // 3. صفحة سياسة الخصوصية
     public function privacyPolicy()
     {
