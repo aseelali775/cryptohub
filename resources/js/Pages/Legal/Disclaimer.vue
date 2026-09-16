@@ -58,6 +58,10 @@ const translations = {
             {
                 title: "4. الروابط الخارجية",
                 body: "<p>قد تحتوي المنصة على روابط لمواقع خارجية. نحن غير مسؤولين عن محتوى أو سياسات تلك المواقع، وزيارتك لها تكون على مسؤوليتك الخاصة.</p>"
+            },
+            {
+                title: "5. شروط الاستخدام",
+                body: "<p>قراءتك واستخدامك لهذه المنصة يعني موافقتك على إخلاء المسؤولية هذا بالإضافة إلى <a href='/terms' class='text-emerald-500 hover:underline font-bold'>شروط الاستخدام</a> الخاصة بنا.</p>"
             }
         ]
     },
@@ -80,6 +84,10 @@ const translations = {
             {
                 title: "4. External Links",
                 body: "<p>The platform may contain links to third-party websites. We are not responsible for the content or policies of those sites, and visiting them is at your own risk.</p>"
+            },
+            {
+                title: "5. Terms of Use",
+                body: "<p>By reading and using this platform, you agree to this disclaimer as well as our <a href='/terms' class='text-emerald-500 hover:underline font-bold'>Terms of Use</a>.</p>"
             }
         ]
     }

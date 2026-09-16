@@ -56,9 +56,9 @@ const translations = {
                 title: "4. خدمات الطرف الثالث",
                 body: "<p>قد نستخدم خدمات من جهات خارجية لتحسين أداء المنصة وتحليلها، وتشمل:</p><ul class='list-disc ms-6 mt-2 space-y-2'><li><strong>Google Analytics:</strong> لتحليل حركة المرور وفهم سلوك الزوار.</li><li><strong>Google AdSense (مستقبلاً):</strong> لعرض إعلانات ذات صلة. قد تستخدم جوجل ملفات تعريف ارتباط (DoubleClick DART) لعرض إعلانات بناءً على زياراتك السابقة.</li><li><strong>Cloudflare:</strong> لحماية الموقع من الهجمات الخبيثة وتحسين سرعة التحميل.</li></ul>"
             },
-            {
+           {
                 title: "5. حقوق المستخدم",
-                body: "<p>يحق لك كمستخدم طلب الاطلاع على أي بيانات شخصية أرسلتها لنا (عبر نماذج الاتصال) أو طلب حذفها. يمكنك ذلك عبر مراسلتنا على البريد الرسمي: <strong>support@aqlcrypto.com</strong></p>"
+                body: "<p>يحق لك كمستخدم طلب الاطلاع على أي بيانات شخصية أرسلتها لنا (عبر نماذج الاتصال) أو طلب حذفها. يمكنك القيام بذلك بسهولة عبر <a href='/contact' class='text-emerald-500 hover:underline font-bold'>صفحة اتصل بنا</a>.</p>"
             }
         ]
     },
@@ -84,7 +84,7 @@ const translations = {
             },
             {
                 title: "5. User Rights",
-                body: "<p>You have the right to request access to or deletion of any personal data you have submitted to us (e.g., via contact forms). You can do this by emailing us at: <strong>support@aqlcrypto.com</strong></p>"
+                body: "<p>You have the right to request access to or deletion of any personal data you have submitted to us (e.g., via contact forms). You can easily do this via our <a href='/contact' class='text-emerald-500 hover:underline font-bold'>Contact Us</a> page.</p>"
             }
         ]
     }

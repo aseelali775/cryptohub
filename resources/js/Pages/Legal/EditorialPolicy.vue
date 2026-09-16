@@ -63,6 +63,10 @@ const translations = {
             {
                 title: "حيادية المنصة",
                 body: "<p>منصة AQL Crypto هي جهة إعلامية <strong>مستقلة تماماً</strong>. نحن لا نروج لأي عملة رقمية بشكل مدفوع، ولا نقبل مقالات الرعاية المضللة، ولا نشجع على شراء أصل مالي معين. جميع تحليلاتنا مبنية على قراءة مجردة للبيانات والأحداث.</p>"
+            },
+            {
+                title: "التواصل وتصحيح الأخطاء",
+                body: "<p>نرحب دائماً بملاحظات مجتمعنا. إذا لاحظت أي خطأ في الأخبار أو البيانات المذكورة، يُرجى إبلاغنا فوراً عبر <a href='/contact' class='text-emerald-500 hover:underline font-bold'>صفحة اتصل بنا</a> ليتم مراجعته وتصحيحه بأسرع وقت ممكن.</p>"
             }
         ]
     },
@@ -89,6 +93,10 @@ const translations = {
             {
                 title: "Platform Neutrality",
                 body: "<p>AQL Crypto is a strictly <strong>independent</strong> media and data entity. We do not engage in paid promotions for specific cryptocurrencies, we do not accept misleading sponsored articles, and we do not encourage the purchase of any specific financial asset. All our analyses are based on an objective reading of data and events.</p>"
+            },
+            {
+                title: "Contact & Corrections",
+                body: "<p>We always welcome feedback from our community. If you notice any errors in our news or data, please let us know immediately via our <a href='/contact' class='text-emerald-500 hover:underline font-bold'>Contact Us</a> page so we can review and correct it promptly.</p>"
             }
         ]
     }

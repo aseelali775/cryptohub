@@ -53,6 +53,10 @@ const translations = {
             {
                 title: "4. حقوق الملكية الفكرية",
                 body: "<p>جميع الحقوق، العلامات التجارية، التصاميم، والمحتوى المكتوب (باستثناء الاقتباسات الإخبارية المنسوبة لمصادرها) هي ملك حصري لمنصة AQL Crypto.</p>"
+            },
+            {
+                title: "5. سياسة الخصوصية",
+                body: "<p>يخضع استخدامك لهذه المنصة أيضاً لسياسة الخصوصية الخاصة بنا. لمعرفة كيف نقوم بجمع بياناتك وحمايتها، يُرجى مراجعة <a href='/privacy' class='text-emerald-500 hover:underline font-bold'>سياسة الخصوصية</a>.</p>"
             }
         ]
     },
@@ -74,6 +78,10 @@ const translations = {
             {
                 title: "4. Intellectual Property",
                 body: "<p>All rights, trademarks, designs, and original written content (excluding quoted news attributed to sources) are the exclusive property of AQL Crypto.</p>"
+            },
+            {
+                title: "5. Privacy Policy",
+                body: "<p>Your use of this platform is also governed by our Privacy Policy. To understand how we collect and protect your data, please review our <a href='/privacy' class='text-emerald-500 hover:underline font-bold'>Privacy Policy</a>.</p>"
             }
         ]
     }
