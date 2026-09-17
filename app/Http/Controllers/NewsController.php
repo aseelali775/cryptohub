@@ -49,7 +49,7 @@ class NewsController extends Controller
 
             'publisher' => [
                 'name' => 'Aql Crypto',
-                'logo' => 'https://aqlcrypto.com/images/default-og.jpg',
+                'logo' => 'https://aqlcrypto.com/images/logos/logo-horizontal-dark.webp',
             ],
 
             'translations' => [
@@ -83,408 +83,511 @@ class NewsController extends Controller
     }
 
     /**
-     * صفحة الأخبار.
-     *
-     * تحتوي على:
-     * - البحث
-     * - التصنيف
-     * - المشاعر
-     * - التاريخ
-     * - Pagination
-     *
-     * الأخبار غير المعالجة بالـ AI لا تظهر للعامة.
+ * صفحة الأخبار.
+ *
+ * تحتوي على:
+ * - البحث
+ * - التصنيف
+ * - المشاعر
+ * - التاريخ
+ * - Pagination
+ *
+ * الأخبار غير المعالجة بالـ AI لا تظهر للعامة.
+ */
+public function index()
+{
+    $query = News::query()
+        ->where('ai_processed', true);
+
+    /*
+     * 1. البحث النصي
      */
-    public function index()
-    {
-        $query = News::query()
-            ->where('ai_processed', true);
+    if (request()->filled('search')) {
+        $searchTerm = trim(request('search'));
 
-        /*
-         * 1. البحث النصي
-         */
-        if (request()->filled('search')) {
-
-            $searchTerm = trim(request('search'));
-
-            if ($searchTerm !== '') {
-
-                $query->where(function ($q) use ($searchTerm) {
-
-                    $q->where('title_ar', 'like', "%{$searchTerm}%")
-                        ->orWhere('title_en', 'like', "%{$searchTerm}%")
-                        ->orWhere('content_ar', 'like', "%{$searchTerm}%")
-                        ->orWhere('content_en', 'like', "%{$searchTerm}%");
-
-                });
-            }
+        if ($searchTerm !== '') {
+            $query->where(function ($q) use ($searchTerm) {
+                $q->where('title_ar', 'like', "%{$searchTerm}%")
+                    ->orWhere('title_en', 'like', "%{$searchTerm}%")
+                    ->orWhere('content_ar', 'like', "%{$searchTerm}%")
+                    ->orWhere('content_en', 'like', "%{$searchTerm}%");
+            });
         }
-
-        /*
-         * 2. فلتر التصنيف
-         */
-        if (request()->filled('category')) {
-
-            $query->where(
-                'category',
-                request('category')
-            );
-        }
-
-        /*
-         * 3. فلتر المشاعر
-         */
-        if (request()->filled('sentiment')) {
-
-            $query->where(
-                'sentiment',
-                request('sentiment')
-            );
-        }
-
-        /*
-         * 4. فلتر التاريخ
-         *
-         * التاريخ يصل من Frontend بالشكل:
-         *
-         * YYYY-MM-DD
-         *
-         * مثال:
-         * 2026-08-14
-         */
-        if (request()->filled('date')) {
-
-            $date = request('date');
-
-            /*
-             * التحقق من أن التاريخ صالح
-             * قبل استخدامه في الاستعلام.
-             */
-            if (
-                preg_match(
-                    '/^\d{4}-\d{2}-\d{2}$/',
-                    $date
-                )
-            ) {
-
-                $query->whereDate(
-                    'created_at',
-                    $date
-                );
-            }
-        }
-
-        /*
-         * 5. Pagination
-         *
-         * يتم جلب 12 خبراً فقط في كل صفحة.
-         *
-         * withQueryString()
-         * يحافظ على الفلاتر عند الانتقال:
-         *
-         * /news?page=2
-         *
-         * مع:
-         *
-         * /news?page=2&category=Bitcoin
-         */
-        $newsFeed = $query
-            ->latest('created_at')
-            ->paginate(12)
-            ->withQueryString()
-            ->through(
-                fn (News $item) => $this->mapNewsItem($item)
-            );
-
-        /*
-         * إرسال الصفحة إلى Inertia.
-         */
-        return Inertia::render('News/Index', [
-
-            'newsFeed' => $newsFeed,
-
-            'filters' => request()->only([
-                'search',
-                'category',
-                'sentiment',
-                'date',
-            ]),
-        ]);
     }
 
-    
-
-    /**
-     * عرض خبر واحد.
-     *
-     * الأخبار غير المعالجة بالـ AI
-     * لا تكون متاحة للعامة.
+    /*
+     * 2. فلتر التصنيف
      */
-    public function show($id)
-    {
-        /*
-         * استخراج الرقم فقط من الـ ID.
-         */
-        $numericId = intval($id);
+    if (request()->filled('category')) {
+        $query->where(
+            'category',
+            request('category')
+        );
+    }
+
+    /*
+     * 3. فلتر المشاعر
+     */
+    if (request()->filled('sentiment')) {
+        $query->where(
+            'sentiment',
+            request('sentiment')
+        );
+    }
+
+    /*
+     * 4. فلتر التاريخ
+     *
+     * التاريخ يصل من Frontend بالشكل:
+     *
+     * YYYY-MM-DD
+     *
+     * مثال:
+     * 2026-08-14
+     */
+    if (request()->filled('date')) {
+        $date = request('date');
 
         /*
-         * البحث عن الخبر بشرط:
-         *
-         * 1. ID صحيح
-         * 2. ai_processed = true
-         *
-         * إذا كان الخبر غير موجود أو غير معالج:
-         * 404
+         * التحقق من أن التاريخ صالح
+         * قبل استخدامه في الاستعلام.
          */
-        $item = News::query()
-            ->where('id', $numericId)
-            ->where('ai_processed', true)
-            ->firstOrFail();
-
-        /*
-         * تنظيف الـ slug.
-         *
-         * بعض البيانات القديمة قد تحتوي على:
-         *
-         * article-name-123
-         *
-         * بينما الرابط الصحيح:
-         *
-         * article-name
-         */
-        $cleanSlug = $item->slug ?? '';
-
         if (
-            $cleanSlug &&
             preg_match(
-                '/-' . preg_quote($item->id, '/') . '$/',
-                $cleanSlug
+                '/^\d{4}-\d{2}-\d{2}$/',
+                $date
             )
         ) {
-
-            $cleanSlug = preg_replace(
-                '/-' . preg_quote($item->id, '/') . '$/',
-                '',
-                $cleanSlug
+            $query->whereDate(
+                'created_at',
+                $date
             );
         }
+    }
+
+    /*
+     * 5. Pagination
+     *
+     * يتم جلب 12 خبراً فقط في كل صفحة.
+     *
+     * withQueryString()
+     * يحافظ على الفلاتر عند الانتقال:
+     *
+     * /news?page=2
+     *
+     * مع:
+     *
+     * /news?page=2&category=Bitcoin
+     */
+    $newsFeed = $query
+        ->latest('created_at')
+        ->paginate(12)
+        ->withQueryString()
+        ->through(
+            fn (News $item) => $this->mapNewsItem($item)
+        );
+
+    /*
+     * إرسال الصفحة إلى Inertia.
+     */
+    return Inertia::render('News/Index', [
+        'newsFeed' => $newsFeed,
+
+        'filters' => request()->only([
+            'search',
+            'category',
+            'sentiment',
+            'date',
+        ]),
+    ]);
+}
+
+
+/**
+ * عرض خبر واحد.
+ *
+ * الأخبار غير المعالجة بالـ AI
+ * لا تكون متاحة للعامة.
+ */
+public function show($id)
+{
+    /*
+     * استخراج الرقم فقط من الـ ID.
+     */
+    $numericId = intval($id);
+
+    /*
+     * البحث عن الخبر بشرط:
+     *
+     * 1. ID صحيح
+     * 2. ai_processed = true
+     *
+     * إذا كان الخبر غير موجود أو غير معالج:
+     * 404
+     */
+    $item = News::query()
+        ->where('id', $numericId)
+        ->where('ai_processed', true)
+        ->firstOrFail();
+
+    /*
+     * تنظيف الـ slug.
+     *
+     * بعض البيانات القديمة قد تحتوي على:
+     *
+     * article-name-123
+     *
+     * بينما الرابط الصحيح:
+     *
+     * article-name
+     */
+    $cleanSlug = $item->slug ?? '';
+
+    if (
+        $cleanSlug &&
+        preg_match(
+            '/-' . preg_quote($item->id, '/') . '$/',
+            $cleanSlug
+        )
+    ) {
+        $cleanSlug = preg_replace(
+            '/-' . preg_quote($item->id, '/') . '$/',
+            '',
+            $cleanSlug
+        );
+    }
+
+    /*
+     * بناء الرابط الصحيح.
+     */
+    $expectedPath = 'news/' . $item->id;
+
+    if ($cleanSlug) {
+        $expectedPath .= '-' . $cleanSlug;
+    }
+
+    /*
+     * Redirect 301 إذا كان الرابط الحالي
+     * مختلفاً عن الرابط الرسمي.
+     *
+     * هذا مفيد أيضاً للـ SEO.
+     */
+    if (request()->path() !== $expectedPath) {
+        return redirect(
+            '/' . $expectedPath,
+            301
+        );
+    }
+
+    /*
+     * =========================================================
+     * الأخبار ذات الصلة
+     * =========================================================
+     *
+     * نبدأ بأخبار نفس التصنيف.
+     */
+    $relatedNews = News::query()
+        ->where('id', '!=', $item->id)
+        ->where('ai_processed', true)
+        ->when(
+            $item->category,
+            function ($query) use ($item) {
+                $query->where(
+                    'category',
+                    $item->category
+                );
+            }
+        )
+        ->latest('created_at')
+        ->take(3)
+        ->get();
+
+    /*
+     * =========================================================
+     * حماية مهمة
+     * =========================================================
+     *
+     * هنا لدينا Eloquent\Collection.
+     *
+     * بعد mapNewsItem() تصبح العناصر Arrays.
+     *
+     * لذلك نحولها صراحةً إلى
+     * Illuminate\Support\Collection.
+     */
+    $relatedNews = collect(
+        $relatedNews->map(
+            fn (News $news) => $this->mapNewsItem($news)
+        )->all()
+    )->values();
+
+    /*
+     * =========================================================
+     * تعويض الأخبار الناقصة
+     * =========================================================
+     *
+     * إذا كان لدينا:
+     *
+     * 0 أخبار من نفس التصنيف
+     * أو
+     * 1 خبر
+     * أو
+     * 2 أخبار
+     *
+     * نكمل العدد حتى 3 من أحدث الأخبار.
+     */
+    if ($relatedNews->count() < 3) {
 
         /*
-         * بناء الرابط الصحيح.
+         * IDs الأخبار الموجودة بالفعل.
          */
-        $expectedPath = 'news/' . $item->id;
-
-        if ($cleanSlug) {
-            $expectedPath .= '-' . $cleanSlug;
-        }
+        $existingIds = $relatedNews
+            ->pluck('id')
+            ->filter()
+            ->values()
+            ->all();
 
         /*
-         * Redirect 301 إذا كان الرابط الحالي
-         * مختلفاً عن الرابط الرسمي.
-         *
-         * هذا مفيد أيضاً للـ SEO.
+         * دائماً نستبعد الخبر الحالي.
          */
-        if (request()->path() !== $expectedPath) {
-
-            return redirect(
-                '/' . $expectedPath,
-                301
-            );
-        }
+        $excludedIds = array_merge(
+            [$item->id],
+            $existingIds
+        );
 
         /*
-         * =========================================================
-         * الأخبار ذات الصلة
-         * =========================================================
-         *
-         * نبدأ بأخبار نفس التصنيف.
+         * نحتاج فقط للعدد المتبقي.
          */
+        $remaining = 3 - $relatedNews->count();
 
-        $relatedNews = News::query()
-            ->where('id', '!=', $item->id)
+        /*
+         * جلب الأخبار الإضافية.
+         */
+        $moreNews = News::query()
             ->where('ai_processed', true)
-
-            ->when(
-                $item->category,
-                function ($query) use ($item) {
-
-                    $query->where(
-                        'category',
-                        $item->category
-                    );
-                }
+            ->whereNotIn(
+                'id',
+                $excludedIds
             )
-
             ->latest('created_at')
-            ->take(3)
+            ->take($remaining)
             ->get();
 
         /*
-         * =========================================================
-         * حماية مهمة
-         * =========================================================
-         *
-         * هنا لدينا Eloquent\Collection.
-         *
-         * بعد mapNewsItem() تصبح العناصر Arrays.
-         *
-         * لذلك لا نقوم بـ:
-         *
-         * $relatedNews->map(...)
-         *
-         * ثم نستخدم merge() على Eloquent\Collection.
-         *
-         * بدلاً من ذلك نحولها صراحةً إلى
-         * Illuminate\Support\Collection.
+         * تحويل Eloquent Models
+         * إلى Arrays أولاً.
          */
-
-        $relatedNews = collect(
-            $relatedNews->map(
+        $moreNews = collect(
+            $moreNews->map(
                 fn (News $news) => $this->mapNewsItem($news)
             )->all()
         )->values();
 
         /*
-         * =========================================================
-         * تعويض الأخبار الناقصة
-         * =========================================================
+         * الآن كلاهما Support Collection
+         * تحتوي Arrays.
          *
-         * إذا كان لدينا:
-         *
-         * 0 أخبار من نفس التصنيف
-         * أو
-         * 1 خبر
-         * أو
-         * 2 أخبار
-         *
-         * نكمل العدد حتى 3 من أحدث الأخبار.
+         * وبالتالي merge() آمن.
          */
-        if ($relatedNews->count() < 3) {
-
-            /*
-             * IDs الأخبار الموجودة بالفعل.
-             */
-            $existingIds = $relatedNews
-                ->pluck('id')
-                ->filter()
-                ->values()
-                ->all();
-
-            /*
-             * دائماً نستبعد الخبر الحالي.
-             */
-            $excludedIds = array_merge(
-                [$item->id],
-                $existingIds
-            );
-
-            /*
-             * نحتاج فقط للعدد المتبقي.
-             */
-            $remaining = 3 - $relatedNews->count();
-
-            /*
-             * جلب الأخبار الإضافية.
-             */
-            $moreNews = News::query()
-                ->where('ai_processed', true)
-                ->whereNotIn(
-                    'id',
-                    $excludedIds
-                )
-                ->latest('created_at')
-                ->take($remaining)
-                ->get();
-
-            /*
-             * تحويل Eloquent Models
-             * إلى Arrays أولاً.
-             */
-            $moreNews = collect(
-                $moreNews->map(
-                    fn (News $news) => $this->mapNewsItem($news)
-                )->all()
-            )->values();
-
-            /*
-             * الآن كلاهما Support Collection
-             * تحتوي Arrays.
-             *
-             * وبالتالي merge() آمن.
-             */
-            $relatedNews = $relatedNews
-                ->merge($moreNews)
-                ->values();
-        }
-
-        /*
-         * =========================================================
-         * حماية إضافية نهائية
-         * =========================================================
-         *
-         * نتأكد أن relatedNews:
-         *
-         * - Collection عادية
-         * - تحتوي Arrays فقط
-         * - لا تحتوي الخبر الحالي
-         * - لا تحتوي IDs مكررة
-         * - الحد الأقصى 3 أخبار
-         */
-
-        $relatedNews = collect($relatedNews)
-            ->filter(function ($news) use ($item) {
-
-                /*
-                 * تجاهل أي عنصر غير Array.
-                 */
-                if (!is_array($news)) {
-                    return false;
-                }
-
-                /*
-                 * تجاهل الخبر الحالي.
-                 */
-                if (
-                    isset($news['id']) &&
-                    (int) $news['id'] === (int) $item->id
-                ) {
-                    return false;
-                }
-
-                return true;
-            })
-            ->unique('id')
-            ->take(3)
+        $relatedNews = $relatedNews
+            ->merge($moreNews)
             ->values();
+    }
+
+    /*
+     * =========================================================
+     * حماية إضافية نهائية
+     * =========================================================
+     *
+     * نتأكد أن relatedNews:
+     *
+     * - Collection عادية
+     * - تحتوي Arrays فقط
+     * - لا تحتوي الخبر الحالي
+     * - لا تحتوي IDs مكررة
+     * - الحد الأقصى 3 أخبار
+     */
+    $relatedNews = collect($relatedNews)
+        ->filter(function ($news) use ($item) {
+
+            /*
+             * تجاهل أي عنصر غير Array.
+             */
+            if (!is_array($news)) {
+                return false;
+            }
+
+            /*
+             * تجاهل الخبر الحالي.
+             */
+            if (
+                isset($news['id']) &&
+                (int) $news['id'] === (int) $item->id
+            ) {
+                return false;
+            }
+
+            return true;
+        })
+        ->unique('id')
+        ->take(3)
+        ->values();
+
+    /*
+     * =========================================================
+     * تجهيز بيانات الخبر
+     * =========================================================
+     */
+    $newsItem = $this->mapNewsItem($item);
+
+    /*
+     * =========================================================
+     * SEO Server-Side
+     * =========================================================
+     *
+     * تجهيز بيانات SEO لتظهر في HTML الأولي
+     * قبل تشغيل Vue / JavaScript.
+     */
+
+    /*
+     * عنوان الصفحة.
+     */
+    $seoTitle = $item->title_en
+        ?: $item->title_ar
+        ?: 'Aql Crypto';
+
+    /*
+     * وصف الصفحة.
+     *
+     * الأولوية:
+     * 1. summary_ar
+     * 2. meta_description_ar
+     * 3. أول 160 حرف من المحتوى.
+     */
+    $seoDescription = $item->summary_ar
+        ?: $item->meta_description_ar
+        ?: mb_substr(
+            strip_tags(
+                $item->content_ar
+                    ?: $item->content_en
+                    ?: ''
+            ),
+            0,
+            160
+        );
+
+    /*
+     * الرابط الرسمي للخبر.
+     */
+    $canonicalUrl = url(
+        '/news/' .
+        $item->id .
+        ($cleanSlug ? '-' . $cleanSlug : '')
+    );
+
+    /*
+     * =========================================================
+     * NewsArticle Structured Data
+     * =========================================================
+     */
+    $newsArticleSchema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'NewsArticle',
+
+        'mainEntityOfPage' => [
+            '@type' => 'WebPage',
+            '@id' => $canonicalUrl,
+        ],
+
+        'headline' => $seoTitle,
+
+        'description' => $seoDescription,
+
+        'image' => $item->image_url
+            ? [$item->image_url]
+            : [],
+
+        'datePublished' => $item->created_at
+            ? $item->created_at->toIso8601String()
+            : null,
+
+        'dateModified' => $item->updated_at
+            ? $item->updated_at->toIso8601String()
+            : null,
 
         /*
-         * =========================================================
-         * عرض الخبر
-         * =========================================================
+         * فريق التحرير كيان وليس شخصاً.
          */
-        return Inertia::render(
-            'News/Show',
-            [
-                'newsItem' => $this->mapNewsItem($item),
+        'author' => [
+            '@type' => 'Organization',
+            'name' => 'Aql Crypto Editorial Team',
+            'url' => 'https://aqlcrypto.com/about',
+        ],
 
-                'relatedNews' => $relatedNews,
-            ]
-        );
-    }
+        'publisher' => [
+            '@type' => 'Organization',
+            'name' => 'Aql Crypto',
+            'url' => 'https://aqlcrypto.com',
 
-    /**
-     * توليد خلاصة RSS للأخبار (Google Publisher Center)
+            'logo' => [
+                '@type' => 'ImageObject',
+                'url' => 'https://aqlcrypto.com/images/logos/logo-horizontal-dark.webp',
+            ],
+        ],
+    ];
+
+    /*
+     * =========================================================
+     * عرض الخبر
+     * =========================================================
+     *
+     * نرسل البيانات المعتادة إلى Inertia.
      */
-    public function rssFeed()
-    {
-        $news = News::query()
-            ->where('status', 'published') // التأكد من أن الخبر منشور فعلياً
-            ->where('ai_processed', true)
-            ->latest('created_at')
-            ->limit(100)
-            ->get();
+    $response = Inertia::render(
+        'News/Show',
+        [
+            'newsItem' => $newsItem,
+            'relatedNews' => $relatedNews,
+        ]
+    );
 
-        return response()
-            ->view('rss.feed', compact('news'))
-            ->header('Content-Type', 'application/xml; charset=UTF-8'); // استخدام النوع القياسي الأنسب
-    }
+    /*
+     * =========================================================
+     * تمرير SEO إلى Root Blade
+     * =========================================================
+     *
+     * withViewData() يجعل بيانات SEO متاحة
+     * لملف resources/views/app.blade.php
+     *
+     * عند فتح الخبر مباشرة من المتصفح.
+     */
+    return $response->withViewData([
+        'seo' => [
+            'title' => $seoTitle,
+            'description' => $seoDescription,
+            'canonical' => $canonicalUrl,
+            'image' => $item->image_url,
+            'schema' => $newsArticleSchema,
+        ],
+    ]);
 }
+
+
+/**
+ * توليد خلاصة RSS للأخبار (Google Publisher Center)
+ */
+public function rssFeed()
+{
+    $news = News::query()
+        ->where('status', 'published')
+        ->where('ai_processed', true)
+        ->latest('created_at')
+        ->limit(100)
+        ->get();
+
+    return response()
+        ->view('rss.feed', compact('news'))
+        ->header(
+            'Content-Type',
+            'application/xml; charset=UTF-8'
+        );
+}}
