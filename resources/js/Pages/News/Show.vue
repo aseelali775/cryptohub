@@ -19,9 +19,7 @@
       <meta head-key="twitter:description" name="twitter:description" :content="seoDescription" />
       <meta head-key="twitter:image" name="twitter:image" :content="newsItem?.image_url" />
 
-      <component :is="'script'" type="application/ld+json">
-        {{ JSON.stringify(newsArticleSchema) }}
-      </component>
+   
 
       <component :is="'script'" type="application/ld+json">
         {{ JSON.stringify(breadcrumbSchema) }}
@@ -248,33 +246,7 @@ const displayDate = computed(() => {
     return new Date(props.newsItem.published_at).toLocaleDateString(locale.value === 'ar' ? 'ar-EG' : 'en-US', options);
 });
 
-// 🔴 1. NewsArticle Schema
-const newsArticleSchema = computed(() => ({
-    "@context": "https://schema.org",
-    "@type": "NewsArticle",
-    "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": canonicalUrl.value
-    },
-    "headline": seoTitle.value,
-    "description": seoDescription.value,
-    "image": props.newsItem.image_url ? [props.newsItem.image_url] : [],
-    "datePublished": props.newsItem.published_at || new Date().toISOString(),
-    "dateModified": props.newsItem.updated_at || new Date().toISOString(),
-    "author": {
-        "@type":"Person",
-        "name": props.newsItem.author?.name || "Aql Crypto Editorial Team",
-        "url": props.newsItem.author?.url || "https://aqlcrypto.com/about"
-    },
-    "publisher": {
-        "@type": "Organization",
-        "name": props.newsItem.publisher?.name || "Aql Crypto",
-        "logo": {
-            "@type": "ImageObject",
-            "url": props.newsItem.publisher?.logo || "https://aqlcrypto.com/images/default-og.jpg"
-        }
-    }
-}));
+
 
 // 🔴 2. BreadcrumbList Schema
 const breadcrumbSchema = computed(() => ({
