@@ -17,28 +17,28 @@ class FetchCryptoPrices extends Command
     /**
      * وصف الأمر
      */
-    protected $description = 'جلب أسعار أفضل 250 عملة رقمية حية من CoinGecko وتحديث قاعدة البيانات';
+    protected $description = 'جلب أفضل 250 عملة رقمية من CoinGecko وتحديث قاعدة البيانات';
 
     /**
      * التنفيذ
      */
     public function handle()
     {
-        $this->info('جاري الاتصال وجلب أفضل 250 عملة من CoinGecko...');
+        $this->info('جاري الاتصال وجلب بيانات العملات من CoinGecko...');
 
         try {
             /*
             |--------------------------------------------------------------------------
-            | 1. جلب أفضل 250 عملة
+            | 1. جلب عدد أكبر من النتائج لتوفير 250 عملة فعلية بعد التنقية
             |--------------------------------------------------------------------------
             */
 
-            $response = Http::timeout(15)->get(
+            $response = Http::timeout(20)->get(
                 'https://api.coingecko.com/api/v3/coins/markets',
                 [
                     'vs_currency' => 'usd',
                     'order'       => 'market_cap_desc',
-                    'per_page'    => 250,
+                    'per_page'    => 500,
                     'page'        => 1,
                     'sparkline'   => 'false',
                 ]
@@ -56,27 +56,106 @@ class FetchCryptoPrices extends Command
             $coins = $response->json();
 
             if (!is_array($coins) || empty($coins)) {
-                $this->error('لم يتم استلام بيانات عملات صالحة من CoinGecko.');
+                $this->error(
+                    'لم يتم استلام بيانات عملات صالحة من CoinGecko.'
+                );
 
                 return self::FAILURE;
             }
 
+            $this->info(
+                'تم استلام ' . count($coins) . ' أصل من CoinGecko.'
+            );
+
             /*
             |--------------------------------------------------------------------------
-            | 2. تحديث العملات في قاعدة البيانات
+            | 2. استبعاد الأصول غير المناسبة لقائمة العملات
             |--------------------------------------------------------------------------
+            |
+            | هذه أصول ظهرت ضمن ترتيب CoinGecko لكنها ليست مناسبة لقائمة
+            | "أفضل العملات الرقمية" في Aql Crypto.
+            |
             */
 
-            $updatedCount = 0;
+            $excludedCoinGeckoIds = [
+                'space-exploration-technologies-dinari-tokenized-stock',
+                'figure-heloc',
+                'hunter-biden-s-laptop-3',
+            ];
+
+            $excludedCount = 0;
+
+            $filteredCoins = [];
 
             foreach ($coins as $coin) {
                 if (empty($coin['id'])) {
                     continue;
                 }
 
+                if (in_array($coin['id'], $excludedCoinGeckoIds, true)) {
+                    $excludedCount++;
+                    continue;
+                }
+
+                /*
+                | يجب أن تكون للعملة قيمة سوقية موجبة حتى تدخل
+                | في قائمة أفضل العملات حسب القيمة السوقية.
+                */
+                if (
+                    !isset($coin['market_cap']) ||
+                    (float) $coin['market_cap'] <= 0
+                ) {
+                    continue;
+                }
+
+                $filteredCoins[] = $coin;
+            }
+
+            /*
+            |--------------------------------------------------------------------------
+            | 3. الاحتفاظ بأفضل 250 عملة بعد التنقية
+            |--------------------------------------------------------------------------
+            */
+
+            $coins = array_slice($filteredCoins, 0, 250);
+
+            if (count($coins) < 250) {
+                $this->error(
+                    'بعد تنقية البيانات لم يتوفر 250 أصلًا صالحًا. '
+                    . 'المتاح: ' . count($coins)
+                );
+
+                return self::FAILURE;
+            }
+
+            $this->info(
+                'تم اختيار ' . count($coins) . ' عملة صالحة.'
+            );
+
+            if ($excludedCount > 0) {
+                $this->info(
+                    "تم استبعاد {$excludedCount} أصل غير مناسب."
+                );
+            }
+
+            /*
+            |--------------------------------------------------------------------------
+            | 4. تحديث العملات في قاعدة البيانات
+            |--------------------------------------------------------------------------
+            */
+
+            $updatedCount = 0;
+            $currentCoinGeckoIds = [];
+
+            foreach ($coins as $coin) {
+
+                $coinGeckoId = $coin['id'];
+
+                $currentCoinGeckoIds[] = $coinGeckoId;
+
                 Cryptocurrency::updateOrCreate(
                     [
-                        'coingecko_id' => $coin['id'],
+                        'coingecko_id' => $coinGeckoId,
                     ],
                     [
                         'name'          => $coin['name'] ?? null,
@@ -98,7 +177,23 @@ class FetchCryptoPrices extends Command
 
             /*
             |--------------------------------------------------------------------------
-            | 3. إحصائيات السوق العالمية
+            | 5. حذف العملات القديمة التي لم تعد ضمن أفضل 250
+            |--------------------------------------------------------------------------
+            */
+
+            $deletedCount = Cryptocurrency::query()
+                ->whereNotIn('coingecko_id', $currentCoinGeckoIds)
+                ->delete();
+
+            if ($deletedCount > 0) {
+                $this->info(
+                    "تم حذف {$deletedCount} سجل قديم خارج قائمة أفضل 250."
+                );
+            }
+
+            /*
+            |--------------------------------------------------------------------------
+            | 6. إحصائيات السوق العالمية
             |--------------------------------------------------------------------------
             */
 
@@ -107,6 +202,7 @@ class FetchCryptoPrices extends Command
             );
 
             if ($globalRes->successful()) {
+
                 $globalData = $globalRes->json('data');
 
                 Cache::put(
@@ -121,8 +217,12 @@ class FetchCryptoPrices extends Command
                     now()->addHours(1)
                 );
 
-                $this->info('تم تحديث إحصائيات السوق العالمية.');
+                $this->info(
+                    'تم تحديث إحصائيات السوق العالمية.'
+                );
+
             } else {
+
                 $this->warn(
                     'تعذر تحديث إحصائيات السوق العالمية، لكن تحديث العملات نجح.'
                 );
@@ -130,7 +230,7 @@ class FetchCryptoPrices extends Command
 
             /*
             |--------------------------------------------------------------------------
-            | 4. مؤشر الخوف والطمع
+            | 7. مؤشر الخوف والطمع
             |--------------------------------------------------------------------------
             */
 
@@ -139,9 +239,11 @@ class FetchCryptoPrices extends Command
             );
 
             if ($fngRes->successful()) {
+
                 $fngData = $fngRes->json('data')[0] ?? null;
 
                 if ($fngData) {
+
                     Cache::put(
                         'fear_greed_index',
                         [
@@ -151,9 +253,13 @@ class FetchCryptoPrices extends Command
                         now()->addHours(2)
                     );
 
-                    $this->info('تم تحديث مؤشر الخوف والطمع.');
+                    $this->info(
+                        'تم تحديث مؤشر الخوف والطمع.'
+                    );
                 }
+
             } else {
+
                 $this->warn(
                     'تعذر تحديث مؤشر الخوف والطمع، لكن تحديث العملات نجح.'
                 );
@@ -161,7 +267,7 @@ class FetchCryptoPrices extends Command
 
             /*
             |--------------------------------------------------------------------------
-            | 5. النتيجة النهائية
+            | 8. النتيجة النهائية
             |--------------------------------------------------------------------------
             */
 
@@ -173,6 +279,10 @@ class FetchCryptoPrices extends Command
 
             $this->line(
                 "✓ العملات: {$updatedCount}"
+            );
+
+            $this->line(
+                "✓ السجلات القديمة المحذوفة: {$deletedCount}"
             );
 
             $this->line(
