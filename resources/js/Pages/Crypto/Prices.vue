@@ -657,10 +657,16 @@ const pagination = computed(() => {
 
   if (
     props.cryptos &&
-    !Array.isArray(props.cryptos) &&
-    props.cryptos.meta
+    !Array.isArray(props.cryptos)
   ) {
-    return props.cryptos.meta;
+    return {
+      current_page: props.cryptos.current_page ?? 1,
+      last_page: props.cryptos.last_page ?? 1,
+      from: props.cryptos.from ?? 0,
+      to: props.cryptos.to ?? 0,
+      total: props.cryptos.total ?? 0,
+      per_page: props.cryptos.per_page ?? 25,
+    };
   }
 
   return {
@@ -672,7 +678,10 @@ const pagination = computed(() => {
       : 0,
     total: Array.isArray(props.cryptos)
       ? props.cryptos.length
-      : 0
+      : 0,
+    per_page: Array.isArray(props.cryptos)
+      ? props.cryptos.length
+      : 25,
   };
 
 });
