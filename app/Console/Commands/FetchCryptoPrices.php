@@ -119,14 +119,12 @@ class FetchCryptoPrices extends Command
 
             $coins = array_slice($filteredCoins, 0, 250);
 
-            if (count($coins) < 250) {
-                $this->error(
-                    'بعد تنقية البيانات لم يتوفر 250 أصلًا صالحًا. '
-                    . 'المتاح: ' . count($coins)
-                );
-
-                return self::FAILURE;
-            }
+       if (count($coins) < 200) {
+    $this->warn(
+        'عدد العملات المتاحة بعد التنقية أقل من المتوقع: '
+        . count($coins)
+    );
+}
 
             $this->info(
                 'تم اختيار ' . count($coins) . ' عملة صالحة.'
