@@ -48,10 +48,15 @@ class HomeController extends Controller
         $tickerCryptos = Cryptocurrency::take(8)->get();
         $topGainers = Cryptocurrency::orderBy('change_24h', 'desc')->take(3)->get();
         
-        // 🟢 جلب آخر 4 أخبار وتغليفها لتتوافق مع واجهة Vue الجديدة
-        $latestNews = News::latest()->take(4)->get()->map(function($item) {
-            return $this->mapNewsItem($item);
-        });
+        // 🟢 جلب آخر 4 أخبار (معالجة ومنشورة فقط) وتغليفها لتتوافق مع واجهة Vue
+        $latestNews = News::where('status', 'published')
+            ->where('ai_processed', 1)
+            ->latest()
+            ->take(4)
+            ->get()
+            ->map(function($item) {
+                return $this->mapNewsItem($item);
+            });
 
         // 🟢 قراءة البيانات الحية من الكاش (مع قيم افتراضية في حال كانت فارغة)
         $globalStats = \Illuminate\Support\Facades\Cache::get('market_global_stats', [
