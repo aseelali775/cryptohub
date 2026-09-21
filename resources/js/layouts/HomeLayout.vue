@@ -17,6 +17,8 @@
     <meta head-key="twitter:title" name="twitter:title" :content="'Aql Crypto | ' + t('navHome')" />
     <meta head-key="twitter:description" name="twitter:description" :content="t('seoDescription')" />
     <meta head-key="twitter:image" name="twitter:image" content="https://aqlcrypto.com/images/default-og.jpg" />
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9335744708032421"
+     crossorigin="anonymous"></script>
   </Head>
 
   <div :dir="locale === 'ar' ? 'rtl' : 'ltr'">
@@ -53,6 +55,16 @@
                 AI
               </span>
             </Link>
+
+            <Link
+    href="/academy"
+    class="h-full flex items-center text-sm transition-colors border-b-2"
+    :class="$page.url.startsWith('/academy')
+        ? 'font-bold text-emerald-600 dark:text-emerald-400 border-emerald-500'
+        : 'font-medium text-slate-600 dark:text-slate-400 border-transparent hover:text-slate-900 dark:hover:text-white'"
+>
+    {{ t('navAcademy') }}
+</Link>
           </nav>
 
           <div class="flex items-center gap-3 sm:gap-5 flex-shrink-0">
@@ -147,6 +159,17 @@
                   AI
                 </span>
               </Link>
+               <Link
+    href="/academy"
+    @click="mobileMenuOpen = false"
+    class="block px-4 py-3 rounded-xl text-base font-bold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+    :class="{
+        'bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400':
+            $page.url.startsWith('/academy')
+    }"
+>
+    {{ t('navAcademy') }}
+</Link>
             </div>
             
             <div class="p-6 border-t border-slate-100 dark:border-slate-800/80 shrink-0">
@@ -197,6 +220,9 @@
                 <Link href="/prices" class="hover:text-emerald-500 transition-colors">{{ t('navPrices') }}</Link>
                 <Link href="/news" class="hover:text-emerald-500 transition-colors">{{ t('navNews') }}</Link>
                 <Link href="/ai-market" class="hover:text-emerald-500 transition-colors">{{ t('navAiMarket') }}</Link>
+                <Link href="/academy" class="hover:text-emerald-500 transition-colors">
+    {{ t('navAcademy') }}
+</Link>
               </div>
             </div>
 
@@ -288,6 +314,7 @@ const translations = {
     navPrices: "الأسعار",
     navNews: "الأخبار",
     navAiMarket: "ذكاء السوق",
+    navAcademy: "الأكاديمية",
     searchPlaceholder: "البحث العالمي (قريباً...)",
     newsletterPlaceholder: "أدخل بريدك الإلكتروني",
     btnSubscribe: "قريباً",
@@ -311,6 +338,7 @@ const translations = {
     navPrices: "Prices",
     navNews: "News",
     navAiMarket: "AI Market",
+    navAcademy: "Academy",
     searchPlaceholder: "Global Search (Coming Soon...)",
     newsletterPlaceholder: "Enter your email",
     btnSubscribe: "Soon",

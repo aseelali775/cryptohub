@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\AiMarketController;
 use App\Http\Controllers\LegalPagesController;
 use App\Http\Controllers\SitemapController;
+use App\Http\Controllers\AcademyController;
 
 
 // 1. مسار الصفحة الرئيسية العامة للموقع (مربوط بـ HomeController)
@@ -21,6 +22,18 @@ Route::get('/crypto/{symbol}', [CryptoController::class, 'show'])->name('crypto.
 
 // 4. مسارات قسم الأخبار وتفاصيل الخبر المنفرد (مربوطة بـ NewsController)
 Route::get('/news', [NewsController::class, 'index'])->name('news.index');
+// ==========================================
+// AQL Crypto Academy
+// ==========================================
+
+Route::get('/academy', [AcademyController::class, 'index'])
+    ->name('academy.index');
+
+Route::get('/academy/{topic}', [AcademyController::class, 'topic'])
+    ->name('academy.topic');
+
+Route::get('/academy/{topic}/{article}', [AcademyController::class, 'article'])
+    ->name('academy.article');
 
 Route::get('/news/{id}-{slug?}', [NewsController::class, 'show'])->name('news.show');
 // ... (باقي الروابط)
