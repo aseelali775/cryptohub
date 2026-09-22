@@ -67,22 +67,22 @@
         />
 
         <!-- Article structured data -->
-<component
-    is="script"
-    type="application/ld+json"
-    head-key="academy-article-jsonld"
->
-    {{ JSON.stringify(articleJsonLd) }}
-</component>
+        <component
+            is="script"
+            type="application/ld+json"
+            head-key="academy-article-jsonld"
+        >
+            {{ JSON.stringify(articleJsonLd) }}
+        </component>
 
-<!-- Breadcrumb structured data -->
-<component
-    is="script"
-    type="application/ld+json"
-    head-key="academy-breadcrumb-jsonld"
->
-    {{ JSON.stringify(breadcrumbJsonLd) }}
-</component>
+        <!-- Breadcrumb structured data -->
+        <component
+            is="script"
+            type="application/ld+json"
+            head-key="academy-breadcrumb-jsonld"
+        >
+            {{ JSON.stringify(breadcrumbJsonLd) }}
+        </component>
     </Head>
 
     <div
@@ -286,6 +286,11 @@
 <script setup>
 import { Head, Link, usePage } from '@inertiajs/vue3';
 import { computed } from 'vue';
+import HomeLayout from '@/layouts/HomeLayout.vue';
+
+defineOptions({
+    layout: HomeLayout,
+});
 
 const page = usePage();
 
