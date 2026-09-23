@@ -37,11 +37,16 @@ class AcademyArticle extends Model
     'status',
     'sort_order',
     'published_at',
+
+    'faq_ar',
+    'faq_en',
 ];
 
     protected $casts = [
         'published_at' => 'datetime',
         'sort_order' => 'integer',
+        'faq_ar' => 'array',
+        'faq_en' => 'array',
     ];
 
     public function topic(): BelongsTo
