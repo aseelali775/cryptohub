@@ -104,6 +104,16 @@
         >
             {{ JSON.stringify(breadcrumbJsonLd) }}
         </component>
+
+        <!-- FAQ Structured Data -->
+        <component
+            v-if="faqJsonLd"
+            is="script"
+            type="application/ld+json"
+            head-key="academy-faq-jsonld"
+        >
+            {{ JSON.stringify(faqJsonLd) }}
+        </component>
     </Head>
 
     <div
@@ -237,7 +247,7 @@
                                     stroke-linecap="round"
                                     stroke-linejoin="round"
                                     stroke-width="1.8"
-                                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2Z"
+                                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v12a2 2 0 0 0-2 2Z"
                                 />
                             </svg>
 
@@ -522,6 +532,102 @@
                 </div>
 
                 <!-- ===================================================== -->
+                <!-- FAQ -->
+                <!-- ===================================================== -->
+
+                <section
+                    v-if="faqs.length"
+                    class="mx-auto mt-10 max-w-5xl rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-[#101827] sm:p-8 lg:p-10"
+                    :dir="locale === 'ar' ? 'rtl' : 'ltr'"
+                    :aria-labelledby="'faq-title'"
+                >
+                    <div
+                        :class="
+                            locale === 'ar'
+                                ? 'text-right'
+                                : 'text-left'
+                        "
+                    >
+                        <div
+                            class="mb-2 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1.5 text-xs font-bold text-emerald-700 dark:border-emerald-500/20 dark:bg-emerald-500/10 dark:text-emerald-400"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="h-4 w-4"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="1.8"
+                                    d="M8.5 9.5a3.5 3.5 0 1 1 7 0c0 2.2-3.5 2.5-3.5 4.5m0 3.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                                />
+                            </svg>
+
+                            {{ t('faqLabel') }}
+                        </div>
+
+                        <h2
+                            id="faq-title"
+                            class="text-2xl font-black tracking-tight text-slate-950 dark:text-white sm:text-3xl"
+                        >
+                            {{ t('faqTitle') }}
+                        </h2>
+
+                        <p
+                            class="mt-3 max-w-3xl text-sm leading-7 text-slate-500 dark:text-slate-400 sm:text-base"
+                        >
+                            {{ t('faqDescription') }}
+                        </p>
+                    </div>
+
+                    <div class="mt-7 space-y-4">
+                        <details
+                            v-for="(faq, index) in faqs"
+                            :key="`${faq.question}-${index}`"
+                            class="group overflow-hidden rounded-2xl border border-slate-200 bg-slate-50/70 transition-colors open:border-emerald-200 open:bg-emerald-50/30 dark:border-slate-700 dark:bg-slate-900/40 dark:open:border-emerald-500/30 dark:open:bg-emerald-500/5"
+                        >
+                            <summary
+                                class="flex cursor-pointer list-none items-center justify-between gap-5 px-5 py-5 font-bold text-slate-800 marker:hidden dark:text-slate-100 sm:px-6"
+                            >
+                                <span
+                                    class="leading-7"
+                                >
+                                    {{ faq.question }}
+                                </span>
+
+                                <span
+                                    class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white text-slate-400 shadow-sm transition-transform duration-200 group-open:rotate-45 dark:bg-slate-800 dark:text-slate-300"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="h-5 w-5"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="1.8"
+                                            d="M12 5v14m-7-7h14"
+                                        />
+                                    </svg>
+                                </span>
+                            </summary>
+
+                            <div
+                                class="border-t border-slate-200 px-5 pb-5 pt-4 text-sm leading-8 text-slate-600 dark:border-slate-700 dark:text-slate-300 sm:px-6"
+                            >
+                                {{ faq.answer }}
+                            </div>
+                        </details>
+                    </div>
+                </section>
+
+                <!-- ===================================================== -->
                 <!-- Bottom Navigation -->
                 <!-- ===================================================== -->
 
@@ -638,7 +744,12 @@ const translations = {
         author: 'Aql Crypto Editorial Team',
         marketPage: 'صفحة السوق',
         viewMarketData: 'عرض السعر والبيانات والتحليلات',
-        backToTopic: 'العودة إلى الموضوع'
+        backToTopic: 'العودة إلى الموضوع',
+
+        faqLabel: 'الأسئلة الشائعة',
+        faqTitle: 'الأسئلة الشائعة حول هذا الموضوع',
+        faqDescription:
+            'إجابات مختصرة عن أكثر الأسئلة شيوعًا التي قد تهم القارئ حول هذا الموضوع.'
     },
 
     en: {
@@ -649,7 +760,12 @@ const translations = {
         author: 'Aql Crypto Editorial Team',
         marketPage: 'Market Page',
         viewMarketData: 'View price, market data and analysis',
-        backToTopic: 'Back to Topic'
+        backToTopic: 'Back to Topic',
+
+        faqLabel: 'Frequently Asked Questions',
+        faqTitle: 'Frequently Asked Questions',
+        faqDescription:
+            'Clear answers to common questions readers may have about this topic.'
     }
 };
 
@@ -684,6 +800,67 @@ const seoDescription = computed(() => {
             ? `تعرّف على ${article.value.title || 'العملات الرقمية'} من خلال أكاديمية AQL Crypto.`
             : `Learn about ${article.value.title || 'cryptocurrency'} through AQL Crypto Academy.`)
     );
+});
+
+/*
+|--------------------------------------------------------------------------
+| FAQ
+|--------------------------------------------------------------------------
+|
+| The controller/model provides faq_ar and faq_en directly.
+| We select the correct language here without modifying the
+| original database structure.
+|
+*/
+
+const faqs = computed(() => {
+    const source =
+        locale.value === 'ar'
+            ? article.value.faq_ar
+            : article.value.faq_en;
+
+    return Array.isArray(source) ? source : [];
+});
+
+/*
+|--------------------------------------------------------------------------
+| FAQ Structured Data
+|--------------------------------------------------------------------------
+|
+| Only generate FAQPage JSON-LD when visible FAQ content exists.
+| The structured data uses exactly the same questions and answers
+| rendered on the page.
+|
+*/
+
+const faqJsonLd = computed(() => {
+    if (!faqs.value.length) {
+        return null;
+    }
+
+    return {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        '@id': `${canonicalUrl.value}#faq`,
+
+        mainEntity: faqs.value
+            .filter(
+                (faq) =>
+                    faq &&
+                    typeof faq.question === 'string' &&
+                    faq.question.trim() &&
+                    typeof faq.answer === 'string' &&
+                    faq.answer.trim()
+            )
+            .map((faq) => ({
+                '@type': 'Question',
+                name: faq.question,
+                acceptedAnswer: {
+                    '@type': 'Answer',
+                    text: faq.answer
+                }
+            }))
+    };
 });
 
 /*
@@ -1059,5 +1236,23 @@ const breadcrumbJsonLd = computed(() => {
 .dark .academy-content :deep(code) {
     background: rgb(30 41 59);
     color: rgb(226 232 240);
+}
+
+/*
+|--------------------------------------------------------------------------
+| FAQ
+|--------------------------------------------------------------------------
+*/
+
+details > summary::-webkit-details-marker {
+    display: none;
+}
+
+details > summary {
+    list-style: none;
+}
+
+details > summary::marker {
+    display: none;
 }
 </style>
