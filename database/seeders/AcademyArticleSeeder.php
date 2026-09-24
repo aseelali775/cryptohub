@@ -2174,33 +2174,762 @@ HTML,
     'published_at' => now(),
    ],
             [
-                'title' => 'How Bitcoin Works',
-                'title_ar' => 'كيف يعمل البيتكوين؟',
-                'title_en' => 'How Bitcoin Works',
+    'title' => 'How Bitcoin Works',
+    'title_ar' => 'كيف يعمل البيتكوين؟ شرح مبسط للمعاملات والبلوكتشين والتعدين',
+    'title_en' => 'How Bitcoin Works: Transactions, Blockchain, Mining, and Security',
+    'slug' => 'how-bitcoin-works',
 
-                'slug' => 'how-bitcoin-works',
+    'excerpt' => null,
+    'excerpt_ar' => 'كيف يعمل البيتكوين من لحظة إنشاء المعاملة وإرسالها إلى الشبكة، مرورًا بالتحقق والعقد والتعدين وإثبات العمل وإضافة الكتل إلى البلوكتشين، وصولًا إلى التأكيدات والمحافظ وأمان الشبكة.',
+    'excerpt_en' => 'A practical explanation of how Bitcoin works, from creating and broadcasting a transaction to validation, mining, proof of work, blocks, confirmations, wallets, and blockchain security.',
 
-                'excerpt' => 'Understand how Bitcoin transactions, blocks, nodes, and the Bitcoin network work together.',
-                'excerpt_ar' => 'افهم كيف تعمل معاملات البيتكوين والكتل والعُقد وشبكة البيتكوين معًا.',
-                'excerpt_en' => 'Understand how Bitcoin transactions, blocks, nodes, and the Bitcoin network work together.',
+    'content' => null,
 
-                'content' => '<p>This is a placeholder for the full educational article explaining how Bitcoin works.</p>',
-                'content_ar' => '<p>هذا نص تجريبي للمقال التعليمي الكامل الذي يشرح كيفية عمل البيتكوين.</p>',
-                'content_en' => '<p>This is a placeholder for the full educational article explaining how Bitcoin works.</p>',
+    'content_ar' => <<<'HTML'
+<h2>مقدمة</h2>
 
-                'image' => null,
+<p>قد يبدو البيتكوين للمبتدئ مجرد عملة رقمية يتم إرسالها من شخص إلى آخر، لكن طريقة عمله في الواقع أكثر تعقيدًا من ذلك. فعندما يرسل شخص Bitcoin إلى شخص آخر، لا توجد جهة مركزية تقوم بمراجعة العملية والموافقة عليها كما يحدث في النظام المصرفي التقليدي. بدلًا من ذلك، تعتمد شبكة Bitcoin على مجموعة من القواعد البرمجية، والعقد المستقلة، والتشفير، والتوقيعات الرقمية، والتعدين، وإثبات العمل، والبلوكتشين.</p>
 
-                'seo_title' => 'How Bitcoin Works | AQL Crypto Academy',
-                'seo_title_ar' => 'كيف يعمل البيتكوين؟ | أكاديمية AQL Crypto',
-                'seo_title_en' => 'How Bitcoin Works | AQL Crypto Academy',
+<p>لفهم Bitcoin بشكل صحيح، من المفيد أن نتخيل العملية كاملة منذ اللحظة التي يقرر فيها المستخدم إرسال العملات، مرورًا بإنشاء المعاملة وتوقيعها وبثها إلى الشبكة، ثم التحقق منها وإدخالها في كتلة، وصولًا إلى حصولها على التأكيدات وتسجيلها ضمن السجل العام للشبكة.</p>
 
-                'meta_description' => 'Learn how Bitcoin transactions, blocks, nodes, and the decentralized Bitcoin network work together.',
-                'meta_description_ar' => 'تعرف على كيفية عمل معاملات البيتكوين والكتل والعُقد والشبكة اللامركزية معًا.',
-                'meta_description_en' => 'Learn how Bitcoin transactions, blocks, nodes, and the decentralized Bitcoin network work together.',
+<p>في هذا الدليل من AQL Crypto Academy سنشرح كيفية عمل Bitcoin خطوة بخطوة، مع توضيح دور المحافظ والعناوين والمفاتيح الخاصة وUTXO والـMempool والعقد والمعدنين والكتل وإثبات العمل والرسوم والتأكيدات. الهدف هو بناء صورة متكاملة عن النظام بدلًا من التعامل مع هذه المصطلحات كأجزاء منفصلة.</p>
 
-                'status' => 'published',
-                'sort_order' => 3,
-                'published_at' => now(),
+<h2>كيف تعمل شبكة Bitcoin؟</h2>
+
+<p>Bitcoin عبارة عن شبكة موزعة من أجهزة وبرامج تسمى العقد أو Nodes. لا توجد قاعدة بيانات مركزية واحدة تتحكم في الشبكة، بل تحتفظ العديد من العقد بنسخ من سجل المعاملات وتتحقق من العمليات وفقًا لقواعد البروتوكول.</p>
+
+<p>عندما ينشئ المستخدم معاملة جديدة، لا يرسلها إلى بنك أو شركة Bitcoin مركزية. بل يتم توقيعها بالمفتاح الخاص ثم بثها إلى شبكة Bitcoin. تستقبل العقد المعاملة وتتحقق من صحتها، وإذا اجتازت القواعد يمكن أن تنتشر بين العقد الأخرى.</p>
+
+<p>بعد ذلك يمكن للمعدنين إدراج المعاملات الصحيحة في كتلة جديدة. وعندما يتم العثور على كتلة وفق شروط إثبات العمل وإضافتها إلى السلسلة، تصبح المعاملات الموجودة فيها جزءًا من سجل البلوكتشين.</p>
+
+<h2>ماذا يحدث عندما ترسل Bitcoin؟</h2>
+
+<p>لنفترض أن أحمد يريد إرسال Bitcoin إلى محمد. تبدأ العملية من محفظة أحمد، التي تحتوي على المفاتيح اللازمة للتوقيع على المعاملة.</p>
+
+<p>يحدد أحمد المبلغ والعنوان الذي يريد الإرسال إليه. تنشئ المحفظة معاملة تحدد العملات السابقة التي سيتم إنفاقها والمخرجات الجديدة التي ستنشأ نتيجة المعاملة.</p>
+
+<p>بعد ذلك توقع المحفظة المعاملة باستخدام المفتاح الخاص المناسب. ثم يتم بث المعاملة إلى شبكة Bitcoin.</p>
+
+<p>تقوم العقد بفحص المعاملة. فإذا كانت صحيحة، يمكن أن تنتشر في الشبكة وتدخل في الـMempool. وبعد أن يدرجها أحد المعدنين في كتلة صحيحة ويتم قبول الكتلة، تحصل المعاملة على أول تأكيد.</p>
+
+<p>ومع إضافة كتل جديدة فوق تلك الكتلة، تزداد عدد التأكيدات، ويصبح تغيير المعاملة السابقة أكثر صعوبة.</p>
+
+<h2>ما هي معاملة Bitcoin؟</h2>
+
+<p>معاملة Bitcoin هي بيانات تصف انتقال قيمة من مخرجات سابقة إلى مخرجات جديدة. وهي ليست مجرد رسالة تقول إن شخصًا أرسل مبلغًا إلى عنوان آخر.</p>
+
+<p>تحتوي المعاملة بصورة مبسطة على مدخلات Inputs ومخرجات Outputs. تشير المدخلات إلى مخرجات سابقة يمكن إنفاقها، بينما تحدد المخرجات كيفية توزيع القيمة الجديدة.</p>
+
+<p>يمكن أن تحتوي المعاملة على أكثر من مدخل وأكثر من مخرج. كما أن الفرق بين القيمة الداخلة والقيمة الخارجة يمكن أن يمثل رسوم المعاملة التي يحصل عليها المعدن عند تضمين المعاملة في كتلة.</p>
+
+<h2>المفاتيح الخاصة والتوقيعات الرقمية</h2>
+
+<p>المفتاح الخاص هو عنصر تشفيري مهم يسمح للمستخدم بإثبات قدرته على إنفاق العملات المرتبطة بالمخرجات التي يتحكم فيها.</p>
+
+<p>عندما تنشئ المحفظة معاملة، تستخدم المفتاح الخاص المناسب لإنشاء توقيع رقمي. تستطيع عقد Bitcoin التحقق من صحة التوقيع باستخدام المعلومات العامة المرتبطة به، دون الحاجة إلى معرفة المفتاح الخاص نفسه.</p>
+
+<p>هذه الفكرة مهمة جدًا لأمان Bitcoin، لأن المفتاح الخاص لا ينبغي مشاركته مع الآخرين. الشخص الذي يستطيع التحكم في المفتاح الخاص المرتبط بالأموال يستطيع عادةً إنشاء معاملات تنفق تلك الأموال.</p>
+
+<h2>ما هو عنوان Bitcoin؟</h2>
+
+<p>عنوان Bitcoin هو تمثيل يمكن استخدامه لتحديد وجهة الدفع. يمكن للمستخدم مشاركة العنوان مع شخص آخر حتى يعرف الأخير أين يريد إرسال Bitcoin.</p>
+
+<p>العنوان ليس هو المفتاح الخاص، ولا يمثل العملات نفسها. كما أن العنوان لا يعني أن العملات مخزنة داخله كملف أو رصيد مستقل.</p>
+
+<p>في الواقع، يتم تسجيل المخرجات والمعاملات على البلوكتشين، بينما تستخدم المحفظة المفاتيح اللازمة لإثبات الحق في إنفاق المخرجات التي يتحكم بها المستخدم.</p>
+
+<h2>إرسال المعاملة إلى الشبكة</h2>
+
+<p>بعد إنشاء المعاملة وتوقيعها، تقوم المحفظة ببثها إلى شبكة Bitcoin. قد تصل المعاملة أولًا إلى عقدة متصلة بالمحفظة، ثم تقوم العقدة بإرسالها إلى عقد أخرى، وهكذا تنتشر المعاملة عبر الشبكة.</p>
+
+<p>هذا الانتشار لا يعني أن المعاملة أصبحت نهائية مباشرة. في البداية تحتاج المعاملة إلى اجتياز قواعد التحقق، ثم تنتظر إدراجها في كتلة.</p>
+
+<h2>ما هو الـMempool؟</h2>
+
+<p>الـMempool هو مساحة مؤقتة تحتفظ فيها العقد بالمعاملات الصالحة التي تم التحقق منها ولكنها لم تدخل بعد في كتلة مؤكدة.</p>
+
+<p>لا توجد بالضرورة Mempool عالمية واحدة مشتركة بين جميع العقد. لكل عقدة مجموعة معاملات قد تختلف عن العقد الأخرى وفقًا للمعاملات التي وصلتها وقواعدها وسياساتها.</p>
+
+<p>عندما يختار المعدن المعاملات التي يريد تضمينها في كتلة، يمكنه اختيار معاملات موجودة في الـMempool لديه، مع مراعاة عوامل مثل الرسوم وحجم المعاملة وسياسات العقد.</p>
+
+<h2>كيف تتحقق العقد من المعاملات؟</h2>
+
+<p>قبل قبول المعاملة ونشرها، تتحقق العقد من مجموعة من الشروط. من بين ذلك التحقق من صحة التوقيعات، وأن المدخلات تشير إلى مخرجات قابلة للإنفاق، وأن القيم لا تتجاوز القواعد المسموح بها، وأن المعاملة لا تحاول إنفاق نفس المخرج بطريقة غير صحيحة.</p>
+
+<p>العقد لا تثق بالمعاملة لمجرد أن شخصًا أرسلها. بل تقوم بتطبيق قواعد يمكن تنفيذها برمجيًا.</p>
+
+<p>وهذه النقطة أساسية في نموذج Bitcoin: لا تحتاج العقد إلى معرفة هوية المستخدم أو الوثوق به حتى تتحقق من صحة المعاملة.</p>
+
+<h2>ما هو UTXO؟</h2>
+
+<p>UTXO اختصار لـ Unspent Transaction Output، أي مخرج معاملة غير منفَق. وهو مفهوم أساسي لفهم طريقة إدارة Bitcoin للقيمة.</p>
+
+<p>عندما تحتوي معاملة على مخرج لم يتم إنفاقه بعد، يمكن استخدام هذا المخرج كمدخل في معاملة مستقبلية.</p>
+
+<p>على سبيل المثال، إذا استلم المستخدم مخرجًا بقيمة 0.01 BTC ثم أراد إنفاق 0.006 BTC، فإن المحفظة يمكن أن تنشئ مخرجًا للمستلم بقيمة 0.006 BTC ومخرجًا آخر يعيد الباقي إلى عنوان يتحكم فيه المستخدم، مع احتساب الرسوم وفقًا للمعاملة.</p>
+
+<p>لذلك لا ينبغي التفكير في Bitcoin على أنه حساب مصرفي تقليدي يحتوي على رقم رصيد واحد يتم إنقاصه وزيادته بالطريقة نفسها التي تعمل بها الحسابات البنكية.</p>
+
+<h2>مشكلة الإنفاق المزدوج</h2>
+
+<p>من أكبر التحديات التي واجهت أنظمة النقد الرقمي مشكلة الإنفاق المزدوج، أي محاولة استخدام نفس الوحدة الرقمية في أكثر من عملية.</p>
+
+<p>في النظام المصرفي التقليدي توجد جهة مركزية تحتفظ بسجل الحسابات ويمكنها رفض عملية إذا كان الرصيد غير كافٍ أو إذا كانت الأموال قد استُخدمت سابقًا.</p>
+
+<p>Bitcoin يعالج هذه المشكلة من خلال شبكة موزعة وقواعد تحقق وسجل معاملات مشترك وآلية إجماع تعتمد على إثبات العمل.</p>
+
+<p>عندما تحاول معاملتان إنفاق نفس المخرج، لا يمكن اعتماد المعاملتين معًا ضمن السجل النهائي للشبكة. تعتمد الشبكة على قواعد اختيار السلسلة الصحيحة للتعامل مع الحالات التي تظهر فيها كتل متنافسة.</p>
+
+<h2>من المعاملات إلى الكتل</h2>
+
+<p>المعاملات التي يتم بثها إلى الشبكة يمكن أن يتم تجميعها داخل كتلة. تحتوي الكتلة على مجموعة من المعاملات بالإضافة إلى بيانات أخرى مرتبطة بالبلوك السابق وإثبات العمل.</p>
+
+<p>عندما ينشئ المعدن كتلة مرشحة، يحاول إيجاد قيمة تحقق تستوفي شرط الصعوبة المطلوب من الشبكة.</p>
+
+<p>إذا نجح في ذلك، يبث الكتلة إلى الشبكة. تقوم العقد الأخرى بالتحقق من الكتلة والمعاملات الموجودة فيها. وإذا كانت الكتلة متوافقة مع القواعد، يمكن إضافتها إلى السلسلة.</p>
+
+<h2>ما هو البلوكتشين؟</h2>
+
+<p>البلوكتشين هو سلسلة من الكتل المرتبطة ببعضها. تحتوي كل كتلة على معلومات تجعلها مرتبطة بالكتلة السابقة.</p>
+
+<p>هذا الارتباط يعني أن تعديل بيانات قديمة لا يتطلب فقط تغيير البيانات نفسها، بل يتطلب أيضًا التعامل مع الروابط وإعادة تنفيذ إثبات العمل للكتل اللاحقة، إضافة إلى منافسة السلسلة الحالية على مستوى الشبكة.</p>
+
+<p>لهذا السبب يصبح تغيير تاريخ Bitcoin أكثر صعوبة كلما أضيفت كتل جديدة فوق المعاملة المطلوبة.</p>
+
+<h2>ما هي كتلة Bitcoin؟</h2>
+
+<p>كتلة Bitcoin هي وحدة من وحدات سجل البلوكتشين. تحتوي بصورة مبسطة على رأس الكتلة ومجموعة من المعاملات.</p>
+
+<p>يتضمن رأس الكتلة معلومات مهمة مثل مرجع الكتلة السابقة، وجذر Merkle، والوقت، وبيانات مرتبطة بالصعوبة، وقيمة nonce المستخدمة في عملية إثبات العمل.</p>
+
+<p>تسمح هذه البنية للعقد بالتحقق من ارتباط الكتلة بالسلسلة ومن صحة إثبات العمل والمعاملات الموجودة فيها.</p>
+
+<h2>ما هو Merkle Root؟</h2>
+
+<p>Merkle Root هو قيمة تشفيرية تلخص مجموعة المعاملات الموجودة في الكتلة. يتم بناء شجرة Merkle من تجزئات المعاملات، ثم يتم الوصول في النهاية إلى قيمة واحدة تمثل جذر الشجرة.</p>
+
+<p>وجود Merkle Root داخل رأس الكتلة يساعد على ربط محتوى المعاملات برأس الكتلة. إذا تغيرت معاملة بطريقة تؤثر في التجزئة، فإن النتيجة النهائية لشجرة Merkle تتغير أيضًا.</p>
+
+<h2>ما هو تعدين Bitcoin؟</h2>
+
+<p>التعدين هو العملية التي يستخدم فيها المعدنون القدرة الحاسوبية للمشاركة في تأمين الشبكة وإضافة كتل جديدة إلى البلوكتشين.</p>
+
+<p>يقوم المعدن بتجميع معاملات واختيار مجموعة من بيانات الكتلة ثم يبحث عن قيمة تحقق تجعل تجزئة رأس الكتلة تحقق شرط الصعوبة المطلوب.</p>
+
+<p>هذه العملية تتطلب عددًا كبيرًا من المحاولات الحسابية، ولهذا تستخدم شبكة Bitcoin إثبات العمل.</p>
+
+<h2>ما هو Proof of Work؟</h2>
+
+<p>Proof of Work أو إثبات العمل هو آلية تجعل إنشاء كتلة جديدة يتطلب بذل قدر من العمل الحسابي.</p>
+
+<p>المعدن لا يستطيع ببساطة اختيار أي قيمة والقول إن الكتلة صحيحة. يجب عليه إيجاد نتيجة تجزئة تحقق الهدف المحدد بواسطة صعوبة الشبكة.</p>
+
+<p>الميزة المهمة هنا أن التحقق من الحل أسهل بكثير من العثور عليه. تستطيع العقد التأكد بسرعة نسبيًا من أن إثبات العمل صحيح، بينما يحتاج المعدن إلى عدد كبير من المحاولات للوصول إلى حل صالح.</p>
+
+<h2>كيف يجد المعدّن كتلة جديدة؟</h2>
+
+<p>يغير المعدن قيمًا مختلفة في بيانات الكتلة، ومن ضمنها nonce وبيانات أخرى تسمح بإنتاج تجزئات مختلفة، ثم يعيد الحساب مرارًا حتى يجد نتيجة تحقق شرط الصعوبة.</p>
+
+<p>إذا وجد حلًا صالحًا، يرسل الكتلة إلى الشبكة. تقوم العقد بفحص إثبات العمل وبقية قواعد الكتلة قبل قبولها.</p>
+
+<p>نجاح معدن معين لا يعني أنه يملك سلطة مطلقة على الشبكة. العقد المستقلة لا تقبل الكتلة لمجرد أن معدنًا أرسلها، بل تتحقق منها وفق قواعد Bitcoin.</p>
+
+<h2>لماذا تتغير صعوبة التعدين؟</h2>
+
+<p>تم تصميم Bitcoin بحيث يتم ضبط صعوبة التعدين دوريًا للمساعدة على إبقاء معدل إنتاج الكتل قريبًا من المستوى المستهدف للبروتوكول.</p>
+
+<p>إذا زادت القدرة الحاسوبية الإجمالية للشبكة، فإن تعديل الصعوبة يساعد على منع إنتاج الكتل من التسارع بشكل دائم. وإذا انخفضت القدرة الحاسوبية، تعمل آلية الصعوبة في الاتجاه الآخر.</p>
+
+<p>بهذه الطريقة لا يعتمد جدول إصدار الكتل على بقاء عدد ثابت من المعدنين أو على استخدام أجهزة محددة.</p>
+
+<h2>ماذا يحدث عندما يجد المعدّن كتلة؟</h2>
+
+<p>عندما يجد المعدن كتلة تحقق شروط إثبات العمل، يقوم ببثها إلى الشبكة. تبدأ العقد الأخرى في التحقق من الكتلة.</p>
+
+<p>إذا كانت الكتلة صحيحة، تحتوي على معاملات صحيحة، وتحترم قواعد البروتوكول، يمكن للعقد إضافتها إلى نسختها من السجل.</p>
+
+<p>المعاملات الموجودة داخل الكتلة تحصل عندها على أول تأكيد.</p>
+
+<h2>ما هي تأكيدات Bitcoin؟</h2>
+
+<p>التأكيد يعني أن المعاملة أصبحت موجودة داخل كتلة مقبولة في سلسلة Bitcoin.</p>
+
+<p>عندما تتم إضافة كتلة أخرى فوق الكتلة التي تحتوي على المعاملة، يصبح عدد التأكيدات أكبر. وكلما زاد عدد الكتل التي تبني فوق المعاملة، يصبح تعديل التاريخ السابق أكثر صعوبة من الناحية الحسابية.</p>
+
+<p>لا يوجد رقم واحد يجب استخدامه لكل حالة. بعض الخدمات قد تستخدم متطلبات تأكيد مختلفة بحسب قيمة المعاملة ومستوى المخاطر وسياسة الخدمة.</p>
+
+<h2>ما هي رسوم معاملات Bitcoin؟</h2>
+
+<p>رسوم Bitcoin هي المبلغ الذي يضاف إلى المعاملة لتحفيز المعدنين على تضمينها في الكتل.</p>
+
+<p>لا تعتمد الرسوم ببساطة على قيمة Bitcoin التي ترسلها. في كثير من الحالات تكون العلاقة أكثر ارتباطًا بحجم المعاملة من حيث البيانات وبحالة الطلب على مساحة الكتل.</p>
+
+<p>عندما تكون مساحة الكتل المطلوبة مرتفعة، يمكن أن ترتفع الرسوم التي يرغب المستخدمون في دفعها للحصول على أولوية أكبر.</p>
+
+<h2>ماذا يحدث للمعاملة ذات الرسوم المنخفضة؟</h2>
+
+<p>المعاملة ذات الرسوم المنخفضة قد تنتظر فترة أطول قبل إدراجها في كتلة، بحسب ظروف الشبكة وسياسات العقد والمعدنين.</p>
+
+<p>هذا لا يعني بالضرورة أن المعاملة فاشلة. فقد تبقى في الـMempool حتى تصبح مناسبة للإدراج، أو قد تتصرف العقد المختلفة تجاهها وفق سياساتها.</p>
+
+<h2>هل البيتكوين مخزن داخل المحفظة؟</h2>
+
+<p>من المفاهيم المهمة أن Bitcoin نفسه لا يكون مخزنًا داخل تطبيق المحفظة بالطريقة التي يتم بها تخزين ملف على جهاز الكمبيوتر.</p>
+
+<p>البلوكتشين يسجل المعاملات والمخرجات، بينما المحفظة تدير المفاتيح التي تسمح بإنشاء المعاملات التي تنفق المخرجات التي يتحكم فيها المستخدم.</p>
+
+<p>لهذا السبب تعتبر حماية العبارة الاستردادية أو المفاتيح الخاصة من أهم مسؤوليات مستخدم Bitcoin.</p>
+
+<h2>الفرق بين المحفظة والمنصة</h2>
+
+<p>المحفظة غير الحاضنة تسمح للمستخدم بالتحكم في المفاتيح الخاصة بنفسه. أما المنصة أو البورصة، فقد تحتفظ بالمفاتيح نيابة عن المستخدم إذا كانت الأصول موجودة داخل حساب المنصة.</p>
+
+<p>هذا الاختلاف مهم من ناحية التحكم والمسؤولية. في المحفظة الذاتية يتحمل المستخدم مسؤولية حماية المفاتيح. أما في المنصة، فإن المستخدم يعتمد أيضًا على أنظمة وأمن وسياسات الجهة التي تدير الحساب.</p>
+
+<h2>ما الذي يجعل Bitcoin لامركزيًا؟</h2>
+
+<p>اللامركزية في Bitcoin لا تعني أن النظام بلا قواعد. على العكس، توجد قواعد واضحة يطبقها المشاركون في الشبكة.</p>
+
+<p>تساهم عدة عناصر في اللامركزية، منها وجود عقد مستقلة، وإمكانية تشغيل برنامج التحقق، وعدم وجود جهة واحدة تستطيع تعديل سجل الشبكة بإرادتها، ووجود آلية إجماع لإضافة الكتل.</p>
+
+<p>لكن درجة اللامركزية موضوع يمكن تحليله من زوايا متعددة، مثل توزيع العقد، وتوزيع التعدين، ومصادر البرمجيات، والبنية التحتية، ومقدار اعتماد المستخدمين على الخدمات المركزية.</p>
+
+<h2>ماذا يحدث إذا حاول شخص تغيير معاملة قديمة؟</h2>
+
+<p>إذا حاول شخص تغيير بيانات معاملة قديمة داخل كتلة، فإن التغيير سيؤثر في البيانات المشفرة المرتبطة بالكتلة. وهذا يمكن أن يؤدي إلى تغيير Merkle Root وبالتالي تغيير تجزئة رأس الكتلة.</p>
+
+<p>وبما أن الكتل اللاحقة مرتبطة بالكتلة السابقة، فإن المهاجم سيحتاج إلى إعادة بناء العمل الحسابي للسلسلة المتأثرة ثم منافسة السلسلة التي تقبلها الشبكة.</p>
+
+<p>كلما زاد عدد التأكيدات فوق المعاملة، زادت كمية العمل المطلوبة لإعادة كتابة ذلك الجزء من التاريخ.</p>
+
+<h2>ماذا يحدث إذا تم العثور على كتلتين في الوقت نفسه تقريبًا؟</h2>
+
+<p>يمكن أن يحدث أن يجد معدنان كتلتين صالحتين في فترة متقاربة جدًا. في هذه الحالة قد ترى الشبكة مؤقتًا سلسلتين متنافستين.</p>
+
+<p>تواصل المعدنون والعقد العمل وفق قواعد السلسلة التي تحتوي على أكبر قدر من إثبات العمل المتراكم، ومع ظهور كتلة جديدة يمكن أن تصبح إحدى السلاسل هي السلسلة المعتمدة وتصبح الكتلة الأخرى قديمة أو غير جزء من السلسلة الرئيسية.</p>
+
+<p>لهذا السبب يعتبر انتظار التأكيدات الإضافية طريقة لزيادة الثقة في استقرار المعاملة.</p>
+
+<h2>الرحلة الكاملة لمعاملة Bitcoin</h2>
+
+<p>يمكن تلخيص رحلة المعاملة في الخطوات التالية:</p>
+
+<ol>
+<li>يحدد المستخدم المبلغ والعنوان المستلم.</li>
+<li>تختار المحفظة المخرجات المناسبة لاستخدامها كمدخلات.</li>
+<li>تنشئ المحفظة المعاملة.</li>
+<li>يتم توقيع المعاملة بالمفتاح الخاص المناسب.</li>
+<li>يتم بث المعاملة إلى شبكة Bitcoin.</li>
+<li>تتحقق العقد من المعاملة.</li>
+<li>يمكن أن تدخل المعاملة في الـMempool.</li>
+<li>يختار معدن المعاملة لإدراجها في كتلة.</li>
+<li>يبحث المعدن عن إثبات عمل صالح.</li>
+<li>يبث المعدن الكتلة إلى الشبكة.</li>
+<li>تتحقق العقد من الكتلة والمعاملات.</li>
+<li>تتم إضافة الكتلة إلى السلسلة المقبولة.</li>
+<li>تحصل المعاملة على أول تأكيد.</li>
+<li>تزداد التأكيدات مع إضافة كتل لاحقة.</li>
+</ol>
+
+<h2>أمان Bitcoin ليس ميزة واحدة</h2>
+
+<p>أمان Bitcoin لا يعتمد على التشفير وحده. هناك مجموعة من العناصر التي تعمل معًا، منها التوقيعات الرقمية، وقواعد التحقق، وانتشار المعاملات، والعقد المستقلة، وإثبات العمل، وربط الكتل، وآلية الإجماع.</p>
+
+<p>لكن أمان الشبكة لا يعني أن كل طريقة لاستخدام Bitcoin آمنة تلقائيًا. يمكن للمستخدم أن يخسر أمواله بسبب فقدان المفاتيح الخاصة أو الوقوع في عملية احتيال أو استخدام جهاز مصاب ببرمجيات خبيثة أو إرسال الأموال إلى عنوان خاطئ.</p>
+
+<p>لذلك يجب الفصل بين أمان بروتوكول Bitcoin وأمان المستخدم والخدمات المحيطة به.</p>
+
+<h2>Bitcoin مقابل النظام المصرفي التقليدي</h2>
+
+<p>في النظام المصرفي التقليدي يحتفظ البنك بسجل مركزي للحسابات ويقوم بتسجيل التحويلات وإدارة الأرصدة وفق الأنظمة والقواعد المعمول بها.</p>
+
+<p>في Bitcoin، يتم توزيع سجل المعاملات على شبكة من المشاركين، ويتم التحقق من العمليات وفق قواعد البروتوكول بدل الاعتماد على بنك مركزي واحد.</p>
+
+<p>هذا لا يعني أن أحد النظامين يلغي الحاجة إلى الثقة بالكامل. في Bitcoin ينتقل جزء كبير من الثقة من المؤسسة المركزية إلى البرمجيات والتشفير وقواعد الإجماع والبنية التحتية، بينما يظل المستخدم مسؤولًا عن إدارة مفاتيحه.</p>
+
+<h2>الفرق بين Bitcoin وBlockchain</h2>
+
+<p>Bitcoin هو نظام نقد رقمي وشبكة وبروتوكول يستخدم البلوكتشين كجزء أساسي من بنيته.</p>
+
+<p>أما Blockchain فهو نوع من هياكل تسجيل البيانات يعتمد على ربط الكتل بطريقة تشفيرية. لذلك لا يعني مصطلح Blockchain تلقائيًا Bitcoin.</p>
+
+<p>يمكن استخدام تقنيات البلوكتشين أو تقنيات السجلات الموزعة في مشاريع وأنظمة مختلفة، بينما Bitcoin هو نظام محدد له قواعده وبروتوكوله وشبكته.</p>
+
+<h2>دور العقد Nodes</h2>
+
+<p>العقد هي أجهزة تشغل برنامج Bitcoin وتشارك في الشبكة بدرجات مختلفة. من أهم أدوار العقد الكاملة التحقق من المعاملات والكتل وفق قواعد البروتوكول.</p>
+
+<p>العقد لا تقوم فقط بتخزين البيانات، بل تساعد في تطبيق القواعد. فإذا وصلت كتلة لا تتوافق مع القواعد، تستطيع العقد رفضها بدل قبولها لمجرد أنها صادرة من معدن.</p>
+
+<h2>دور المعدنين</h2>
+
+<p>المعدنون يجمعون المعاملات في كتل ويشاركون في إثبات العمل. نجاح معدن في العثور على كتلة صحيحة يسمح له ببثها إلى الشبكة.</p>
+
+<p>يحصل المعدن على مكافأة وفق قواعد البروتوكول، إضافة إلى رسوم المعاملات الموجودة في الكتلة، مع مراعاة قواعد إصدار Bitcoin.</p>
+
+<p>المعدن لا يستطيع إنشاء كمية غير محدودة من Bitcoin أو تجاهل قواعد الشبكة لمجرد امتلاكه قدرة حاسوبية كبيرة، لأن العقد تتحقق من صحة الكتلة.</p>
+
+<h2>دور المستخدمين</h2>
+
+<p>المستخدمون هم الذين ينشئون المعاملات ويستخدمون المحافظ ويتفاعلون مع شبكة Bitcoin.</p>
+
+<p>قد يكون المستخدم فردًا أو شركة أو خدمة، وقد يستخدم محفظة ذاتية أو يعتمد على منصة خارجية.</p>
+
+<p>المستخدم لا يحتاج إلى فهم كل التفاصيل الرياضية للبروتوكول حتى يستخدم Bitcoin، لكن فهم المفاهيم الأساسية مثل المفاتيح الخاصة والعناوين والتأكيدات والرسوم يساعد على استخدام النظام بصورة أكثر وعيًا.</p>
+
+<h2>مثال مبسط على معاملة Bitcoin</h2>
+
+<p>لنفترض أن أحمد لديه مخرجان غير منفَقين بقيمتين مختلفتين، ويريد إرسال مبلغ إلى محمد.</p>
+
+<p>تختار المحفظة مخرجًا أو أكثر لتغطية المبلغ المطلوب ورسوم المعاملة. ثم تنشئ مخرجًا يوجه المبلغ إلى محمد، وقد تنشئ مخرجًا آخر يمثل الباقي ويعود إلى عنوان يسيطر عليه أحمد.</p>
+
+<p>بعد توقيع المعاملة، يتم بثها إلى الشبكة. تتحقق العقد من صلاحيتها، ثم يمكن لمعدن إدراجها في كتلة.</p>
+
+<p>عندما تقبل الشبكة الكتلة، تصبح المعاملة مؤكدة. وبعد إضافة المزيد من الكتل، تزداد التأكيدات.</p>
+
+<h2>كيف يعمل Bitcoin في جملة واحدة؟</h2>
+
+<p>يمكن تلخيص النظام بهذه الصورة: <strong>المستخدم ينشئ معاملة ويوقعها، العقد تتحقق منها، المعدنون يجمعون المعاملات في كتل ويثبتون العمل عليها، ثم تضيف الشبكة الكتل الصحيحة إلى البلوكتشين وفق قواعد الإجماع.</strong></p>
+
+<h2>الخاتمة</h2>
+
+<p>فهم طريقة عمل Bitcoin يصبح أسهل عندما ننظر إليه كنظام متكامل بدل التركيز على كلمة واحدة مثل التعدين أو البلوكتشين.</p>
+
+<p>المحفظة تدير المفاتيح، والمفاتيح تسمح بالتوقيع، والتوقيع يثبت القدرة على إنفاق المخرجات، والعقد تتحقق من المعاملات، والـMempool يحتفظ بالمعاملات التي تنتظر إدراجها، والمعدنون يبنون الكتل ويشاركون في إثبات العمل، والبلوكتشين يسجل السلسلة التاريخية للكتل، بينما تجعل التأكيدات المتراكمة تغيير التاريخ السابق أكثر صعوبة.</p>
+
+<p>ومن خلال اجتماع هذه المكونات تعمل شبكة Bitcoin دون الحاجة إلى قاعدة بيانات مركزية واحدة تتحكم في جميع المعاملات.</p>
+
+<p>إذا كنت تريد الانتقال من فهم طريقة عمل Bitcoin إلى فهم طريقة إنشائه وتطوره تاريخيًا، يمكنك متابعة مقال <a href="/academy/bitcoin/history-of-bitcoin">تاريخ البيتكوين</a>. وللتعرف على التعدين بصورة أكثر تفصيلًا، راجع <a href="/academy/bitcoin/bitcoin-mining">دليل تعدين البيتكوين</a>. كما يمكنك قراءة <a href="/academy/bitcoin/bitcoin-wallets">دليل محافظ البيتكوين</a> لفهم إدارة المفاتيح والأموال، أو العودة إلى <a href="/academy/bitcoin/what-is-bitcoin">دليل ما هو البيتكوين؟</a> إذا كنت في بداية رحلتك.</p>
+
+<p>ويمكنك أيضًا متابعة <a href="/crypto/BTC">صفحة Bitcoin في AQL Crypto</a> لمراقبة بيانات السوق المتعلقة بالبيتكوين.</p>
+
+<p><strong>تنبيه تعليمي:</strong> هذا المقال تعليمي ويهدف إلى شرح التقنية والمفاهيم الأساسية في Bitcoin. لا يمثل توصية استثمارية أو مالية، ولا يضمن أي نتيجة مالية. ينبغي للمستخدم إجراء بحثه الخاص وفهم المخاطر قبل اتخاذ أي قرار يتعلق بالأصول الرقمية.</p>
+HTML,
+
+    'content_en' => <<<'HTML'
+<h2>Introduction</h2>
+
+<p>Bitcoin may appear to a beginner as nothing more than a digital currency that can be sent from one person to another. In reality, the system behind it is much more sophisticated. When someone sends Bitcoin, there is no central bank that reviews the transaction and approves it in the same way a traditional financial institution processes a transfer. Instead, Bitcoin relies on a combination of software rules, independent nodes, cryptography, digital signatures, mining, proof of work, and a blockchain.</p>
+
+<p>To understand Bitcoin properly, it is useful to follow the complete process from the moment a user decides to send coins, through transaction creation, signing, broadcasting, validation, block inclusion, and confirmations.</p>
+
+<p>In this AQL Crypto Academy guide, we will explain how Bitcoin works step by step, including the role of wallets, addresses, private keys, UTXOs, the mempool, nodes, miners, blocks, proof of work, fees, confirmations, and network security.</p>
+
+<h2>How the Bitcoin Network Works</h2>
+
+<p>Bitcoin is a distributed network made up of computers and software known as nodes. There is no single central database controlling the entire system. Instead, many nodes maintain copies of blockchain data and validate transactions according to the rules of the Bitcoin protocol.</p>
+
+<p>When a user creates a transaction, it is not sent to a central Bitcoin company for approval. The transaction is signed using the appropriate private key and then broadcast to the Bitcoin network. Nodes receive the transaction and check whether it follows the protocol rules.</p>
+
+<p>If the transaction is valid, it can propagate through other nodes. Miners can then include valid transactions in a new block. When a valid block is found through proof of work and accepted by the network, the transactions inside it become part of the blockchain record.</p>
+
+<h2>What Happens When You Send Bitcoin?</h2>
+
+<p>Imagine that Alice wants to send Bitcoin to Bob. The process begins with Alice's wallet, which manages the keys required to authorize the transaction.</p>
+
+<p>Alice enters the amount she wants to send and Bob's Bitcoin address. The wallet selects suitable previous outputs that can be spent and creates a new transaction describing the inputs and outputs.</p>
+
+<p>The wallet then signs the transaction using the appropriate private key. The signed transaction is broadcast to the Bitcoin network.</p>
+
+<p>Nodes validate the transaction. If it follows the rules, it can propagate through the network and enter the mempool of participating nodes. A miner may then include it in a block. Once that block is accepted, the transaction receives its first confirmation.</p>
+
+<p>As additional blocks are added after it, the number of confirmations increases and changing the transaction's position in the historical record becomes more difficult.</p>
+
+<h2>What Is a Bitcoin Transaction?</h2>
+
+<p>A Bitcoin transaction is structured data that transfers value from previously created outputs to new outputs. It is not simply a message saying that one person sent money to another.</p>
+
+<p>In simplified terms, a transaction contains inputs and outputs. Inputs reference previous outputs that can be spent, while outputs define how the resulting value is distributed.</p>
+
+<p>A transaction can contain multiple inputs and multiple outputs. The difference between the total input value and the total output value can represent transaction fees paid to the miner that includes the transaction in a block.</p>
+
+<h2>Private Keys and Digital Signatures</h2>
+
+<p>A private key is a cryptographic secret that allows a user to authorize spending from outputs controlled by that key.</p>
+
+<p>When a wallet creates a transaction, it uses the appropriate private key to produce a digital signature. Bitcoin nodes can verify the signature using the corresponding public information without learning the private key itself.</p>
+
+<p>This is fundamental to Bitcoin security. Private keys should never be shared with other people. Whoever controls the relevant private keys can generally authorize transactions spending the associated funds.</p>
+
+<h2>What Is a Bitcoin Address?</h2>
+
+<p>A Bitcoin address is a representation that can be used to specify a payment destination. A user can share an address with another person who wants to send Bitcoin.</p>
+
+<p>An address is not the same thing as a private key, and it is not a container holding physical digital coins. Bitcoin transactions and outputs are recorded on the blockchain, while a wallet manages the cryptographic keys needed to authorize spending.</p>
+
+<p>This distinction is important because losing access to the relevant private keys can mean losing the ability to spend the associated funds.</p>
+
+<h2>Broadcasting a Transaction</h2>
+
+<p>After a transaction has been created and signed, the wallet broadcasts it to the Bitcoin network. It may first reach one connected node, which can then relay it to other nodes.</p>
+
+<p>This process allows transactions to propagate across the distributed network. However, broadcasting does not mean that the transaction is immediately final.</p>
+
+<p>The transaction must first pass validation and then wait to be included in a valid block.</p>
+
+<h2>What Is the Mempool?</h2>
+
+<p>The mempool is a temporary collection of valid transactions that a node has received and accepted according to its policies but that have not yet been included in a confirmed block.</p>
+
+<p>There is not necessarily one universal mempool shared identically by every Bitcoin node. Each node can have a different set of transactions depending on what it has received and the policies it follows.</p>
+
+<p>When miners construct blocks, they can select transactions available to them, taking factors such as transaction fees, transaction size, and network conditions into account.</p>
+
+<h2>How Nodes Validate Transactions</h2>
+
+<p>Bitcoin nodes check a number of conditions before accepting and relaying transactions. They can verify digital signatures, confirm that referenced outputs are spendable, check that values follow the protocol rules, and reject attempts to spend the same output in conflicting ways.</p>
+
+<p>Nodes do not accept transactions simply because someone claims that they are valid. They independently apply the rules implemented by the Bitcoin software.</p>
+
+<p>This is one of the important ideas behind Bitcoin: participants do not need to know or trust the identity of the sender in order to verify whether a transaction follows the protocol.</p>
+
+<h2>What Is a Bitcoin UTXO?</h2>
+
+<p>UTXO stands for Unspent Transaction Output. It is one of the most important concepts for understanding how Bitcoin represents spendable value.</p>
+
+<p>When a transaction creates an output that has not yet been spent, that output can later become an input to another transaction.</p>
+
+<p>For example, if a user controls a UTXO worth 0.01 BTC and wants to spend 0.006 BTC, the wallet may create an output of 0.006 BTC for the recipient and another output returning the remaining value to an address controlled by the sender, after accounting for the transaction fee.</p>
+
+<p>Bitcoin therefore should not be thought of as a traditional bank account with one balance number that is simply increased and decreased after every payment.</p>
+
+<h2>The Double-Spending Problem</h2>
+
+<p>One of the major challenges of digital money is the double-spending problem: the possibility of attempting to use the same digital value in more than one transaction.</p>
+
+<p>In a traditional banking system, a central institution maintains account records and can reject transactions that conflict with the recorded balance or previous transfers.</p>
+
+<p>Bitcoin addresses this problem through a distributed network, transaction validation rules, a shared blockchain history, and a consensus mechanism based on proof of work.</p>
+
+<p>If conflicting transactions attempt to spend the same output, they cannot both become part of the accepted final history in the same way. Bitcoin uses consensus rules to determine which chain becomes the accepted chain when competing blocks temporarily appear.</p>
+
+<h2>From Transactions to Blocks</h2>
+
+<p>Transactions broadcast across the network can be grouped into blocks. A block contains a set of transactions and additional data that links it to the previous block and proves that the required proof of work was performed.</p>
+
+<p>A miner constructs a candidate block and searches for a valid proof of work that satisfies the current network difficulty target.</p>
+
+<p>If the miner succeeds, the block is broadcast to the network. Other nodes verify the block and its transactions. If everything follows the protocol rules, the block can become part of the blockchain.</p>
+
+<h2>The Blockchain</h2>
+
+<p>The blockchain is a sequence of blocks linked together. Each block contains information that connects it cryptographically to the previous block.</p>
+
+<p>This means that changing historical data is not as simple as editing one record. A modification can affect the cryptographic relationships between blocks and require the attacker to redo proof of work for affected blocks while competing with the existing chain.</p>
+
+<p>As more blocks are added after a transaction, rewriting that portion of history becomes increasingly difficult.</p>
+
+<h2>What Is a Bitcoin Block?</h2>
+
+<p>A Bitcoin block is a unit of the blockchain's historical record. In simplified terms, it contains a block header and a collection of transactions.</p>
+
+<p>The block header includes information such as the previous block reference, the Merkle root, a timestamp, difficulty-related information, and a nonce used during proof of work.</p>
+
+<p>This structure allows nodes to verify that the block is properly connected to the chain and that its proof of work and transactions satisfy the protocol.</p>
+
+<h2>What Is the Merkle Root?</h2>
+
+<p>The Merkle root is a cryptographic summary of the transactions contained in a block. Transaction hashes are organized into a Merkle tree, eventually producing a single root value.</p>
+
+<p>The Merkle root links the transaction set to the block header. If transaction data changes in a way that affects its hash, the resulting Merkle root changes as well.</p>
+
+<h2>What Is Bitcoin Mining?</h2>
+
+<p>Mining is the process through which miners use computational power to participate in securing the network and producing new blocks.</p>
+
+<p>A miner selects transactions and constructs a candidate block, then repeatedly searches for a value that causes the block header hash to satisfy the current difficulty requirement.</p>
+
+<p>This process requires a large number of computational attempts, which is why Bitcoin uses proof of work as part of its consensus mechanism.</p>
+
+<h2>What Is Proof of Work?</h2>
+
+<p>Proof of Work is a mechanism that makes the creation of a valid block require computational work.</p>
+
+<p>A miner cannot simply choose any value and declare a block valid. The miner must find a hash that satisfies the target defined by the network's difficulty rules.</p>
+
+<p>An important property of proof of work is that verifying a discovered solution is much easier than finding it. Nodes can verify the result relatively quickly, while miners may need a very large number of attempts to discover a valid result.</p>
+
+<h2>How Does a Miner Find a Block?</h2>
+
+<p>Miners vary data in the block header and related block information, including the nonce and other values that allow different hashes to be produced.</p>
+
+<p>The miner repeatedly performs the required hashing process until a result satisfies the network's target.</p>
+
+<p>Once a valid result is found, the miner broadcasts the block. Nodes then verify the proof of work and the rest of the block.</p>
+
+<p>A successful miner does not gain unlimited authority over Bitcoin. Nodes still independently verify whether the proposed block follows the protocol rules.</p>
+
+<h2>Why Does Mining Difficulty Change?</h2>
+
+<p>Bitcoin is designed to adjust mining difficulty periodically so that block production remains close to the protocol's intended schedule.</p>
+
+<p>If the total computational power of the network increases, difficulty can adjust to prevent blocks from being produced permanently faster. If total computational power decreases, the adjustment can work in the opposite direction.</p>
+
+<p>This means Bitcoin's issuance and block production do not depend on keeping a fixed number of miners or a fixed type of hardware online.</p>
+
+<h2>What Happens When a Miner Finds a Block?</h2>
+
+<p>When a miner finds a block that satisfies the proof-of-work requirement, the miner broadcasts it to the network.</p>
+
+<p>Other nodes verify the block, its proof of work, and the transactions inside it. If the block follows the protocol rules, nodes can accept it as part of their view of the blockchain.</p>
+
+<p>Transactions included in that accepted block receive their first confirmation.</p>
+
+<h2>What Are Bitcoin Confirmations?</h2>
+
+<p>A confirmation means that a transaction has been included in an accepted block in the Bitcoin blockchain.</p>
+
+<p>When another block is added on top of that block, the transaction has another confirmation. As more blocks build on top of the original block, changing that transaction's position in the historical record becomes more difficult.</p>
+
+<p>There is no single confirmation count that is appropriate for every situation. Exchanges and other services may use different requirements depending on transaction value, risk tolerance, and operational policy.</p>
+
+<h2>What Are Bitcoin Transaction Fees?</h2>
+
+<p>Bitcoin transaction fees provide an economic incentive for miners to include transactions in blocks.</p>
+
+<p>Fees are not simply determined by how many bitcoins are being transferred. In many cases, the fee is more closely related to the amount of transaction data and the demand for limited block space.</p>
+
+<p>When demand for block space is high, users may choose to pay higher fees to increase the priority of their transactions.</p>
+
+<h2>What Happens to a Low-Fee Transaction?</h2>
+
+<p>A transaction with a relatively low fee may take longer to be included in a block, depending on network conditions and the policies of nodes and miners.</p>
+
+<p>This does not automatically mean that the transaction has failed. It may remain in relevant mempools until conditions change, although different nodes can have different policies for retaining transactions.</p>
+
+<h2>Bitcoin Is Not Stored Inside the Wallet</h2>
+
+<p>One important concept is that Bitcoin is not stored inside a wallet application in the same way a document is stored as a file on a computer.</p>
+
+<p>The blockchain records transactions and outputs, while the wallet manages the keys needed to create transactions that spend outputs controlled by the user.</p>
+
+<p>This is why protecting a wallet's recovery phrase or private keys is one of the most important responsibilities of a Bitcoin user.</p>
+
+<h2>Wallets vs Exchanges</h2>
+
+<p>A self-custody wallet allows the user to control the relevant private keys. An exchange or custodial platform may hold those keys on behalf of the user while the assets remain inside the platform's system.</p>
+
+<p>This distinction affects both control and responsibility. With self-custody, the user is responsible for protecting the keys. With a custodial service, the user also depends on the security, systems, and policies of the service provider.</p>
+
+<h2>What Makes Bitcoin Decentralized?</h2>
+
+<p>Bitcoin's decentralization does not mean that the system has no rules. The opposite is true: the network is governed by clearly defined protocol rules that participating software can enforce.</p>
+
+<p>Several components contribute to Bitcoin's decentralized structure, including independent nodes, the ability to verify transactions, the absence of a single institution controlling the blockchain, and a consensus mechanism for selecting valid blocks.</p>
+
+<p>However, decentralization can be examined from several perspectives, including node distribution, mining concentration, software development, infrastructure, and users' dependence on centralized services.</p>
+
+<h2>What Happens If Someone Tries to Change an Old Transaction?</h2>
+
+<p>If someone attempts to change a transaction in an old block, the change can affect the cryptographic data associated with that block. This can change the Merkle root and therefore the block header hash.</p>
+
+<p>Because later blocks are linked to earlier blocks, the attacker would need to redo the proof of work for the affected history and then compete with the chain accepted by the network.</p>
+
+<p>The more confirmations a transaction has, the greater the amount of computational work required to rewrite that portion of history.</p>
+
+<h2>What Happens If Two Blocks Are Found at Nearly the Same Time?</h2>
+
+<p>Two miners can occasionally find valid blocks at nearly the same time. For a short period, different parts of the network may see competing valid chains.</p>
+
+<p>Mining continues according to the consensus rules, and as additional blocks are found, one chain can accumulate more proof of work than the other. The network then converges on the chain with the greatest accumulated proof of work according to Bitcoin's rules.</p>
+
+<p>This is one reason why additional confirmations increase confidence that a transaction will remain part of the accepted blockchain history.</p>
+
+<h2>The Complete Journey of a Bitcoin Transaction</h2>
+
+<p>The complete process can be summarized as follows:</p>
+
+<ol>
+<li>The user specifies the amount and recipient address.</li>
+<li>The wallet selects suitable unspent outputs.</li>
+<li>The wallet constructs the transaction.</li>
+<li>The transaction is signed with the appropriate private key.</li>
+<li>The transaction is broadcast to the Bitcoin network.</li>
+<li>Nodes validate the transaction.</li>
+<li>The transaction may enter node mempools.</li>
+<li>A miner selects the transaction for inclusion in a block.</li>
+<li>The miner searches for a valid proof of work.</li>
+<li>The miner broadcasts the completed block.</li>
+<li>Nodes verify the block and its transactions.</li>
+<li>The block is accepted as part of the blockchain.</li>
+<li>The transaction receives its first confirmation.</li>
+<li>Additional blocks increase the confirmation count.</li>
+</ol>
+
+<h2>Bitcoin Security Is a System</h2>
+
+<p>Bitcoin security does not depend on one feature alone. Several mechanisms work together, including digital signatures, transaction validation, network propagation, independent nodes, proof of work, block linking, and consensus rules.</p>
+
+<p>However, network security does not mean that every method of using Bitcoin is automatically safe. Users can lose funds by losing private keys, falling for scams, using compromised devices, exposing recovery phrases, or sending funds to an incorrect address.</p>
+
+<p>It is therefore important to distinguish between the security of the Bitcoin protocol and the security of the individual user and surrounding services.</p>
+
+<h2>Bitcoin vs Traditional Banking</h2>
+
+<p>In a traditional banking system, a financial institution maintains a centralized record of accounts and processes transfers according to its systems, policies, and applicable regulations.</p>
+
+<p>In Bitcoin, the transaction history is maintained across a distributed network, and participants validate transactions according to protocol rules rather than relying on one central bank to approve every transfer.</p>
+
+<p>This does not mean that Bitcoin eliminates every form of trust. Instead, part of the trust model moves from a central institution toward software, cryptography, consensus rules, and network infrastructure, while users remain responsible for managing their own keys when using self-custody.</p>
+
+<h2>Bitcoin vs Blockchain</h2>
+
+<p>Bitcoin is a digital monetary system, network, and protocol that uses a blockchain as a fundamental part of its design.</p>
+
+<p>Blockchain is a type of data structure in which blocks of information are linked together using cryptographic techniques. Therefore, the word blockchain does not automatically mean Bitcoin.</p>
+
+<p>Blockchain or distributed-ledger technologies can be used in many different systems, while Bitcoin is one specific network with its own protocol, monetary rules, and consensus mechanism.</p>
+
+<h2>The Role of Nodes</h2>
+
+<p>Nodes are computers running Bitcoin software and participating in the network. Full nodes play an important role by independently validating transactions and blocks according to the protocol.</p>
+
+<p>Nodes do more than store data. They help enforce the rules. If a block violates the protocol, nodes can reject it rather than accepting it simply because a miner broadcast it.</p>
+
+<h2>The Role of Miners</h2>
+
+<p>Miners assemble transactions into blocks and participate in proof of work. When a miner finds a valid block, it broadcasts that block to the network.</p>
+
+<p>The miner can receive a reward according to Bitcoin's issuance rules as well as transaction fees included in the block.</p>
+
+<p>A miner cannot create an unlimited amount of Bitcoin or ignore protocol rules simply because the miner controls significant computing power. Nodes independently verify whether the proposed block is valid.</p>
+
+<h2>The Role of Users</h2>
+
+<p>Users create transactions, operate wallets, receive Bitcoin, and interact with the network.</p>
+
+<p>A user may be an individual, business, or service. They may use a self-custody wallet or rely on a custodial platform.</p>
+
+<p>Users do not need to understand every mathematical detail of the protocol to use Bitcoin, but understanding concepts such as private keys, addresses, confirmations, fees, and transaction finality can help them use the system more safely.</p>
+
+<h2>A Simple Bitcoin Example</h2>
+
+<p>Suppose Alice controls two unspent outputs and wants to send a certain amount to Bob.</p>
+
+<p>The wallet selects one or more outputs that can cover the payment and the transaction fee. It then creates an output paying Bob and may create another output returning the remaining value to an address controlled by Alice.</p>
+
+<p>The wallet signs the transaction and broadcasts it. Nodes validate it, and a miner can include it in a block.</p>
+
+<p>Once the block is accepted, the transaction has its first confirmation. Additional blocks then increase the confirmation count.</p>
+
+<h2>Bitcoin in One Sentence</h2>
+
+<p><strong>Bitcoin works by allowing users to create and sign transactions, nodes to independently validate them, miners to group transactions into blocks and secure them through proof of work, and the network to maintain an accepted blockchain according to consensus rules.</strong></p>
+
+<h2>Conclusion</h2>
+
+<p>Understanding how Bitcoin works becomes much easier when the system is viewed as a collection of connected components rather than focusing on one term such as mining or blockchain.</p>
+
+<p>The wallet manages keys, keys authorize signatures, signatures prove control over spendable outputs, nodes validate transactions, the mempool temporarily holds transactions waiting for inclusion, miners build blocks and perform proof of work, the blockchain records the historical sequence of blocks, and additional confirmations make rewriting previous history increasingly difficult.</p>
+
+<p>Together, these components allow Bitcoin to operate without a single central database controlling every transaction.</p>
+
+<p>If you want to understand how Bitcoin developed over time, continue with our <a href="/academy/bitcoin/history-of-bitcoin">History of Bitcoin</a> guide. For a deeper explanation of mining, read <a href="/academy/bitcoin/bitcoin-mining">Bitcoin Mining Explained</a>. You can also read our <a href="/academy/bitcoin/bitcoin-wallets">Bitcoin Wallets</a> guide to learn more about keys and wallet security, or return to <a href="/academy/bitcoin/what-is-bitcoin">What Is Bitcoin?</a> if you are just starting.</p>
+
+<p>You can also visit the <a href="/crypto/BTC">Bitcoin market page on AQL Crypto</a> to follow Bitcoin market data.</p>
+
+<p><strong>Educational disclaimer:</strong> This article is provided for educational and informational purposes only. It is not financial or investment advice and does not guarantee any financial outcome. Readers should conduct their own research and understand the risks before making decisions involving digital assets.</p>
+HTML,
+
+    'image' => null,
+
+    'seo_title' => null,
+    'seo_title_ar' => 'كيف يعمل البيتكوين؟ شرح المعاملات والبلوكتشين والتعدين | AQL Crypto Academy',
+    'seo_title_en' => 'How Bitcoin Works: Transactions, Blockchain, Mining | AQL Crypto Academy',
+
+    'meta_description' => null,
+    'meta_description_ar' => 'تعرف على كيفية عمل البيتكوين من إنشاء المعاملة وتوقيعها وإرسالها إلى الشبكة، مرورًا بالعقد والـMempool والتعدين وإثبات العمل والكتل والتأكيدات والمحافظ ونظام UTXO.',
+    'meta_description_en' => 'Learn how Bitcoin works from transaction creation and network validation to mining, proof of work, blocks, confirmations, wallets, UTXOs, and blockchain security.',
+
+    'faq_ar' => [
+        [
+            'question' => 'كيف يعمل البيتكوين؟',
+            'answer' => 'يعمل البيتكوين من خلال شبكة موزعة تتحقق من المعاملات وفق قواعد البروتوكول. يتم توقيع المعاملة بالمفتاح الخاص، وتتحقق العقد منها، ثم يمكن للمعدنين إدراجها في كتلة وتأمين السجل باستخدام إثبات العمل.'
+        ],
+        [
+            'question' => 'ما هو UTXO في البيتكوين؟',
+            'answer' => 'UTXO هو مخرج معاملة غير منفَق يمكن استخدامه لاحقًا كمدخل في معاملة جديدة. ويعد أحد المفاهيم الأساسية لفهم كيفية تمثيل Bitcoin للقيمة القابلة للإنفاق.'
+        ],
+        [
+            'question' => 'ما هو Mempool؟',
+            'answer' => 'الـMempool هو مجموعة مؤقتة من المعاملات التي تم التحقق منها وفق سياسات العقد ولكنها لم تدخل بعد في كتلة مؤكدة.'
+        ],
+        [
+            'question' => 'ما هو تعدين البيتكوين؟',
+            'answer' => 'تعدين البيتكوين هو عملية استخدام القدرة الحاسوبية للمشاركة في إنشاء الكتل وتأمين الشبكة من خلال آلية إثبات العمل.'
+        ],
+        [
+            'question' => 'ما هو Proof of Work؟',
+            'answer' => 'إثبات العمل هو آلية تجعل إنشاء كتلة صحيحة يتطلب قدرًا من العمل الحسابي، بينما يمكن للعقد التحقق من الحل بسهولة أكبر من العثور عليه.'
+        ],
+        [
+            'question' => 'ماذا تعني تأكيدات Bitcoin؟',
+            'answer' => 'التأكيد يعني أن المعاملة أصبحت ضمن كتلة مقبولة في البلوكتشين. وتزداد التأكيدات عندما تتم إضافة كتل جديدة فوق الكتلة التي تحتوي على المعاملة.'
+        ],
+        [
+            'question' => 'هل البيتكوين مخزن داخل المحفظة؟',
+            'answer' => 'لا. البلوكتشين يسجل المعاملات والمخرجات، بينما تدير المحفظة المفاتيح اللازمة لإنشاء المعاملات التي تنفق المخرجات التي يتحكم بها المستخدم.'
+        ],
+        [
+            'question' => 'كيف تمنع شبكة Bitcoin الإنفاق المزدوج؟',
+            'answer' => 'تستخدم Bitcoin قواعد التحقق وسجل المعاملات الموزع وآلية الإجماع وإثبات العمل لمنع اعتماد معاملات متعارضة تنفق المخرج نفسه ضمن التاريخ المقبول للشبكة.'
+        ],
+        [
+            'question' => 'ما دور العقد في شبكة Bitcoin؟',
+            'answer' => 'تتحقق العقد من المعاملات والكتل وفق قواعد البروتوكول، وتساعد في نشر البيانات الصحيحة ورفض البيانات التي لا تتوافق مع قواعد الشبكة.'
+        ],
+        [
+            'question' => 'لماذا تحتاج معاملات Bitcoin إلى رسوم؟',
+            'answer' => 'تساعد الرسوم على تحفيز المعدنين لإدراج المعاملات في الكتل، وتتأثر عادة بحجم المعاملة والطلب على مساحة الكتل أكثر من قيمة المبلغ المرسل نفسها.'
+        ],
+    ],
+
+    'faq_en' => [
+        [
+            "question" => "How does Bitcoin work?",
+            "answer" => "Bitcoin works through a distributed network that validates transactions according to protocol rules. Transactions are signed with private keys, verified by nodes, and can then be included in blocks secured through proof of work."
+        ],
+        [
+            "question" => "What is a Bitcoin UTXO?",
+            "answer" => "A UTXO is an unspent transaction output that can later be used as an input in another transaction. It is a fundamental concept for understanding how Bitcoin represents spendable value."
+        ],
+        [
+            "question" => "What is the Bitcoin mempool?",
+            "answer" => "The mempool is a temporary collection of transactions that a node has accepted according to its policies but that have not yet been included in a confirmed block."
+        ],
+        [
+            "question" => "What is Bitcoin mining?",
+            "answer" => "Bitcoin mining is the process of using computational power to participate in block production and help secure the network through proof of work."
+        ],
+        [
+            "question" => "What is Proof of Work?",
+            "answer" => "Proof of Work is a mechanism that requires computational effort to produce a valid block while allowing network participants to verify the resulting proof more easily."
+        ],
+        [
+            "question" => "What are Bitcoin confirmations?",
+            "answer" => "A confirmation means that a transaction has been included in an accepted blockchain block. Additional confirmations occur as more blocks are added on top of that block."
+        ],
+        [
+            "question" => "Is Bitcoin stored inside a wallet?",
+            "answer" => "No. The blockchain records transactions and outputs, while a wallet manages the cryptographic keys needed to authorize transactions spending outputs controlled by the user."
+        ],
+        [
+            "question" => "How does Bitcoin prevent double spending?",
+            "answer" => "Bitcoin uses transaction validation rules, a distributed transaction history, consensus rules, and proof of work to prevent conflicting transactions from both becoming part of the accepted blockchain history."
+        ],
+        [
+            "question" => "What do Bitcoin nodes do?",
+            "answer" => "Bitcoin nodes validate transactions and blocks according to protocol rules, relay valid data, and reject data that does not follow the network's rules."
+        ],
+        [
+            "question" => "Why do Bitcoin transactions have fees?",
+            "answer" => "Transaction fees provide an incentive for miners to include transactions in blocks. Fees are generally influenced by transaction size and demand for block space rather than simply by the amount being transferred."
+        ],
+    ],
+
+    'status' => 'published',
+    'sort_order' => 3,
+    'published_at' => now(),
             ],
 
             [
