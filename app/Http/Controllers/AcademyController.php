@@ -124,64 +124,130 @@ class AcademyController extends Controller
     /**
      * Academy article page.
      */
-    public function article(string $topic, string $article): Response
-    {
-        $academyArticle = AcademyArticle::query()
-            ->where('slug', $article)
-            ->where('status', 'published')
-            ->whereNotNull('published_at')
-            ->where('published_at', '<=', now())
-            ->whereHas('topic', function ($query) use ($topic) {
-                $query
-                    ->where('slug', $topic)
-                    ->where('is_active', true);
-            })
-            ->with('topic')
-            ->firstOrFail();
+  public function article(string $topic, string $article): Response
+{
+    $academyArticle = AcademyArticle::query()
+        ->where('slug', $article)
+        ->where('status', 'published')
+        ->whereNotNull('published_at')
+        ->where('published_at', '<=', now())
+        ->whereHas('topic', function ($query) use ($topic) {
+            $query
+                ->where('slug', $topic)
+                ->where('is_active', true);
+        })
+        ->with('topic')
+        ->firstOrFail();
 
-        /*
-         * Localize article fields.
-         */
-        $academyArticle->setAttribute(
+    /*
+    |--------------------------------------------------------------------------
+    | Previous Article
+    |--------------------------------------------------------------------------
+    | نفس الموضوع + منشور + ترتيب أقل
+    */
+    $previousArticle = AcademyArticle::query()
+        ->where('topic_id', $academyArticle->topic_id)
+        ->where('status', 'published')
+        ->whereNotNull('published_at')
+        ->where('published_at', '<=', now())
+        ->where('sort_order', '<', $academyArticle->sort_order)
+        ->orderByDesc('sort_order')
+        ->first();
+
+    /*
+    |--------------------------------------------------------------------------
+    | Next Article
+    |--------------------------------------------------------------------------
+    | نفس الموضوع + منشور + ترتيب أكبر
+    |--------------------------------------------------------------------------
+    */
+    $nextArticle = AcademyArticle::query()
+        ->where('topic_id', $academyArticle->topic_id)
+        ->where('status', 'published')
+        ->whereNotNull('published_at')
+        ->where('published_at', '<=', now())
+        ->where('sort_order', '>', $academyArticle->sort_order)
+        ->orderBy('sort_order')
+        ->first();
+
+    /*
+    |--------------------------------------------------------------------------
+    | Localized Article
+    |--------------------------------------------------------------------------
+    */
+    $academyArticle->setAttribute(
+        'title',
+        $academyArticle->localized_title
+    );
+
+    $academyArticle->setAttribute(
+        'excerpt',
+        $academyArticle->localized_excerpt
+    );
+
+    $academyArticle->setAttribute(
+        'content',
+        $academyArticle->localized_content
+    );
+
+    $academyArticle->setAttribute(
+        'seo_title',
+        $academyArticle->localized_seo_title
+    );
+
+    $academyArticle->setAttribute(
+        'meta_description',
+        $academyArticle->localized_meta_description
+    );
+
+    /*
+    |--------------------------------------------------------------------------
+    | Localized Topic
+    |--------------------------------------------------------------------------
+    */
+    $academyArticle->topic->setAttribute(
+        'name',
+        $academyArticle->topic->localized_name
+    );
+
+    $academyArticle->topic->setAttribute(
+        'description',
+        $academyArticle->topic->localized_description
+    );
+
+    /*
+    |--------------------------------------------------------------------------
+    | Localize Previous / Next
+    |--------------------------------------------------------------------------
+    */
+    if ($previousArticle) {
+        $previousArticle->setAttribute(
             'title',
-            $academyArticle->localized_title
+            $previousArticle->localized_title
         );
 
-        $academyArticle->setAttribute(
+        $previousArticle->setAttribute(
             'excerpt',
-            $academyArticle->localized_excerpt
+            $previousArticle->localized_excerpt
         );
-
-        $academyArticle->setAttribute(
-            'content',
-            $academyArticle->localized_content
-        );
-
-        $academyArticle->setAttribute(
-            'seo_title',
-            $academyArticle->localized_seo_title
-        );
-
-        $academyArticle->setAttribute(
-            'meta_description',
-            $academyArticle->localized_meta_description
-        );
-
-        /*
-         * Localize the related topic.
-         */
-        $academyArticle->topic->setAttribute(
-            'name',
-            $academyArticle->topic->localized_name
-        );
-
-        $academyArticle->topic->setAttribute(
-            'description',
-            $academyArticle->topic->localized_description
-        );
-
-        return Inertia::render('Academy/Article', [
-            'article' => $academyArticle,
-        ]);
     }
+
+    if ($nextArticle) {
+        $nextArticle->setAttribute(
+            'title',
+            $nextArticle->localized_title
+        );
+
+        $nextArticle->setAttribute(
+            'excerpt',
+            $nextArticle->localized_excerpt
+        );
+    }
+
+    return Inertia::render('Academy/Article', [
+        'article' => $academyArticle,
+        'previousArticle' => $previousArticle,
+        'nextArticle' => $nextArticle,
+    ]);
+}
 }

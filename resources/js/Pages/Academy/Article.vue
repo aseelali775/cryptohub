@@ -628,61 +628,188 @@
                 </section>
 
                 <!-- ===================================================== -->
-                <!-- Bottom Navigation -->
-                <!-- ===================================================== -->
+<!-- Learning Path Navigation -->
+<!-- ===================================================== -->
 
-                <div
-                    class="mx-auto mt-8 max-w-5xl"
+<div
+    v-if="previousArticle || nextArticle"
+    class="mx-auto mt-10 max-w-5xl"
+>
+    <div
+        class="grid grid-cols-1 gap-4 md:grid-cols-2"
+    >
+        <!-- Previous Lesson -->
+        <Link
+            v-if="previousArticle"
+            :href="`/academy/${topic.slug}/${previousArticle.slug}`"
+            class="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-emerald-300 hover:shadow-md dark:border-slate-800 dark:bg-[#101827] dark:hover:border-emerald-500/40"
+        >
+            <div
+                class="flex items-center gap-3"
+                :class="
+                    locale === 'ar'
+                        ? 'flex-row-reverse justify-end'
+                        : 'justify-start'
+                "
+            >
+                <span
+                    class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-slate-100 text-slate-500 transition-colors group-hover:bg-emerald-50 group-hover:text-emerald-600 dark:bg-slate-800 dark:text-slate-400 dark:group-hover:bg-emerald-500/10 dark:group-hover:text-emerald-400"
                 >
-                    <Link
-                        :href="`/academy/${topic.slug}`"
-                        class="group flex items-center justify-between gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:border-emerald-300 hover:shadow-md dark:border-slate-800 dark:bg-[#101827] dark:hover:border-emerald-500/40"
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-5 w-5"
+                        :class="
+                            locale === 'ar'
+                                ? 'rotate-180'
+                                : ''
+                        "
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
                     >
-                        <div
-                            :class="
-                                locale === 'ar'
-                                    ? 'text-right'
-                                    : 'text-left'
-                            "
-                        >
-                            <span
-                                class="block text-xs font-bold uppercase tracking-wide text-slate-400 dark:text-slate-500"
-                            >
-                                {{ t('backToTopic') }}
-                            </span>
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="1.8"
+                            d="M9 5l7 7-7 7"
+                        />
+                    </svg>
+                </span>
 
-                            <span
-                                class="mt-1 block font-bold text-slate-800 dark:text-slate-100"
-                            >
-                                {{ topic.name }}
-                            </span>
-                        </div>
+                <span
+                    class="text-xs font-bold uppercase tracking-wide text-slate-400 dark:text-slate-500"
+                >
+                    {{ t('previousLesson') }}
+                </span>
+            </div>
 
-                        <span
-                            class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600 transition-transform group-hover:scale-105 dark:bg-emerald-500/10 dark:text-emerald-400"
-                        >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                class="h-5 w-5"
-                                :class="
-                                    locale === 'ar'
-                                        ? 'rotate-180'
-                                        : ''
-                                "
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="1.8"
-                                    d="M9 5l7 7-7 7"
-                                />
-                            </svg>
-                        </span>
-                    </Link>
-                </div>
+            <div
+                class="mt-3 font-bold text-slate-800 transition-colors group-hover:text-emerald-600 dark:text-slate-100 dark:group-hover:text-emerald-400"
+                :class="
+                    locale === 'ar'
+                        ? 'text-right'
+                        : 'text-left'
+                "
+            >
+                {{ previousArticle.title }}
+            </div>
+        </Link>
+
+        <!-- Next Lesson -->
+        <Link
+            v-if="nextArticle"
+            :href="`/academy/${topic.slug}/${nextArticle.slug}`"
+            class="group rounded-2xl border border-emerald-200 bg-emerald-50/60 p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-emerald-300 hover:shadow-md dark:border-emerald-500/20 dark:bg-emerald-500/5 dark:hover:border-emerald-500/40"
+        >
+            <div
+                class="flex items-center gap-3"
+                :class="
+                    locale === 'ar'
+                        ? 'justify-start'
+                        : 'justify-end'
+                "
+            >
+                <span
+                    class="text-xs font-bold uppercase tracking-wide text-emerald-600/70 dark:text-emerald-400/70"
+                >
+                    {{ t('nextLesson') }}
+                </span>
+
+                <span
+                    class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-white text-emerald-600 shadow-sm dark:bg-slate-900 dark:text-emerald-400"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-5 w-5"
+                        :class="
+                            locale === 'ar'
+                                ? 'rotate-180'
+                                : ''
+                        "
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="1.8"
+                            d="M9 5l7 7-7 7"
+                        />
+                    </svg>
+                </span>
+            </div>
+
+            <div
+                class="mt-3 font-bold text-slate-800 transition-colors group-hover:text-emerald-600 dark:text-slate-100 dark:group-hover:text-emerald-400"
+                :class="
+                    locale === 'ar'
+                        ? 'text-right'
+                        : 'text-left'
+                "
+            >
+                {{ nextArticle.title }}
+            </div>
+        </Link>
+    </div>
+</div>
+
+<!-- ===================================================== -->
+<!-- Back to Topic -->
+<!-- ===================================================== -->
+
+<div
+    class="mx-auto mt-5 max-w-5xl"
+>
+    <Link
+        :href="`/academy/${topic.slug}`"
+        class="group flex items-center justify-between gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:border-emerald-300 hover:shadow-md dark:border-slate-800 dark:bg-[#101827] dark:hover:border-emerald-500/40"
+    >
+        <div
+            :class="
+                locale === 'ar'
+                    ? 'text-right'
+                    : 'text-left'
+            "
+        >
+            <span
+                class="block text-xs font-bold uppercase tracking-wide text-slate-400 dark:text-slate-500"
+            >
+                {{ t('backToTopic') }}
+            </span>
+
+            <span
+                class="mt-1 block font-bold text-slate-800 dark:text-slate-100"
+            >
+                {{ topic.name }}
+            </span>
+        </div>
+
+        <span
+            class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600 transition-transform group-hover:scale-105 dark:bg-emerald-500/10 dark:text-emerald-400"
+        >
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5"
+                :class="
+                    locale === 'ar'
+                        ? 'rotate-180'
+                        : ''
+                "
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+            >
+                <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.8"
+                    d="M9 5l7 7-7 7"
+                />
+            </svg>
+        </span>
+    </Link>
+</div>
             </article>
         </main>
     </div>
@@ -704,6 +831,14 @@ const locale = computed(() => page.props.locale || 'ar');
 const article = computed(() => page.props.article || {});
 
 const topic = computed(() => article.value.topic || {});
+
+const previousArticle = computed(
+    () => page.props.previousArticle || null
+);
+
+const nextArticle = computed(
+    () => page.props.nextArticle || null
+);
 
 /*
 |--------------------------------------------------------------------------
@@ -745,6 +880,8 @@ const translations = {
         marketPage: 'صفحة السوق',
         viewMarketData: 'عرض السعر والبيانات والتحليلات',
         backToTopic: 'العودة إلى الموضوع',
+        previousLesson: 'الدرس السابق',
+        nextLesson: 'الدرس التالي',
 
         faqLabel: 'الأسئلة الشائعة',
         faqTitle: 'الأسئلة الشائعة حول هذا الموضوع',
@@ -761,6 +898,8 @@ const translations = {
         marketPage: 'Market Page',
         viewMarketData: 'View price, market data and analysis',
         backToTopic: 'Back to Topic',
+        previousLesson: 'Previous Lesson',
+        nextLesson: 'Next Lesson',
 
         faqLabel: 'Frequently Asked Questions',
         faqTitle: 'Frequently Asked Questions',
