@@ -2963,34 +2963,1151 @@ HTML,
             ],
 
             [
-                'title' => 'Bitcoin Wallets',
-                'title_ar' => 'محافظ البيتكوين',
-                'title_en' => 'Bitcoin Wallets',
+    'title' => 'Bitcoin Wallets',
+    'title_ar' => 'محافظ البيتكوين: الدليل الشامل للمفاتيح وSeed Phrase والأمان',
+    'title_en' => 'Bitcoin Wallets: A Complete Guide to Keys, Seed Phrases, and Security',
+    'slug' => 'bitcoin-wallets',
 
-                'slug' => 'bitcoin-wallets',
+    'excerpt' => null,
 
-                'excerpt' => 'Learn how Bitcoin wallets work, the difference between custodial and non-custodial wallets, and how private keys are used.',
-                'excerpt_ar' => 'تعرف على كيفية عمل محافظ البيتكوين، والفرق بين المحافظ الحاضنة وغير الحاضنة، ودور المفاتيح الخاصة.',
-                'excerpt_en' => 'Learn how Bitcoin wallets work, the difference between custodial and non-custodial wallets, and how private keys are used.',
+    'excerpt_ar' => 'ما هي محفظة البيتكوين وكيف تعمل؟ تعرف على المفاتيح الخاصة والعامة وعناوين Bitcoin وعبارة الاسترداد Seed Phrase، والفرق بين المحافظ الساخنة والباردة ومحافظ الأجهزة، والحفظ الذاتي والمنصات، وأهم قواعد حماية أموالك الرقمية.',
+    
+    'excerpt_en' => 'What is a Bitcoin wallet and how does it work? Learn about private and public keys, Bitcoin addresses, recovery phrases, hot and cold wallets, hardware wallets, self-custody, exchanges, backups, and the most important security practices.',
 
-                'content' => '<p>This is a placeholder for the full educational article about Bitcoin wallets.</p>',
-                'content_ar' => '<p>هذا نص تجريبي للمقال التعليمي الكامل حول محافظ البيتكوين.</p>',
-                'content_en' => '<p>This is a placeholder for the full educational article about Bitcoin wallets.</p>',
+    'content' => null,
 
-                'image' => null,
+    'content_ar' => <<<'HTML'
+<h2>مقدمة</h2>
 
-                'seo_title' => 'Bitcoin Wallets | AQL Crypto Academy',
-                'seo_title_ar' => 'محافظ البيتكوين | أكاديمية AQL Crypto',
-                'seo_title_en' => 'Bitcoin Wallets | AQL Crypto Academy',
+<p>تُعد محفظة البيتكوين واحدة من أهم المفاهيم التي يجب على أي شخص يريد فهم Bitcoin أن يتعلمها بشكل صحيح. فكثير من المبتدئين يعتقدون أن شراء البيتكوين يعني وضع العملات داخل تطبيق يسمى "المحفظة"، لكن هذا الوصف غير دقيق من الناحية التقنية.</p>
 
-                'meta_description' => 'Learn how Bitcoin wallets work, including private keys, addresses, custodial wallets, and non-custodial wallets.',
-                'meta_description_ar' => 'تعرف على كيفية عمل محافظ البيتكوين، بما في ذلك المفاتيح الخاصة والعناوين والمحافظ الحاضنة وغير الحاضنة.',
-                'meta_description_en' => 'Learn how Bitcoin wallets work, including private keys, addresses, custodial wallets, and non-custodial wallets.',
+<p>البيتكوين نفسه لا يتم تخزينه داخل الهاتف أو الكمبيوتر أو جهاز المحفظة. أرصدة البيتكوين والمعاملات المرتبطة بها مسجلة على شبكة Bitcoin والبلوكتشين، بينما تقوم المحفظة بإدارة المفاتيح التشفيرية التي تمنح صاحبها القدرة على التصرف في الأموال المرتبطة بهذه المفاتيح.</p>
 
-                'status' => 'published',
-                'sort_order' => 5,
-                'published_at' => now(),
-            ],
+<p>وهذا الفرق مهم جدًا؛ لأن فقدان الهاتف لا يعني بالضرورة فقدان البيتكوين، كما أن امتلاك التطبيق وحده لا يعني امتلاك الأموال. ما يحدد القدرة على التحكم في البيتكوين هو الوصول إلى المفاتيح اللازمة لتوقيع المعاملات.</p>
+
+<p>في هذا الدليل من AQL Crypto Academy سنشرح محافظ Bitcoin من البداية، ونوضح العلاقة بين المحفظة والمفتاح الخاص والعنوان وعبارة الاسترداد Seed Phrase، ثم ننتقل إلى أنواع المحافظ المختلفة، والحفظ الذاتي، والمحافظ الساخنة والباردة، ومحافظ الأجهزة، والنسخ الاحتياطي، والخصوصية، وأخطر الأخطاء وعمليات الاحتيال التي يجب على المستخدم تجنبها.</p>
+
+<h2>ما هي محفظة Bitcoin؟</h2>
+
+<p>محفظة Bitcoin هي برنامج أو جهاز أو نظام يساعد المستخدم على إدارة المفاتيح التشفيرية المستخدمة لاستقبال وإنفاق البيتكوين.</p>
+
+<p>المحفظة تستطيع إنشاء المفاتيح والعناوين، ومتابعة المعاملات المرتبطة بها، وإنشاء المعاملات وتوقيعها عندما يريد المستخدم إرسال Bitcoin.</p>
+
+<p>ومن المهم التمييز بين ثلاثة أشياء:</p>
+
+<ul>
+    <li><strong>Bitcoin blockchain:</strong> السجل العام الذي يحتوي على المعاملات.</li>
+    <li><strong>Private Key:</strong> المفتاح السري الذي يسمح بتوقيع المعاملات وإنفاق الأموال المرتبطة به.</li>
+    <li><strong>Wallet:</strong> البرنامج أو الجهاز الذي يساعد في إدارة هذه المفاتيح واستخدامها.</li>
+</ul>
+
+<p>لذلك فإن عبارة "البيتكوين موجود في المحفظة" مفيدة للتبسيط في المحادثات اليومية، لكنها ليست الوصف التقني الدقيق.</p>
+
+<h2>هل البيتكوين موجود داخل المحفظة؟</h2>
+
+<p>لا. البيتكوين ليس ملفًا يتم وضعه داخل الهاتف، وليس عملة رقمية يتم تخزينها داخل تطبيق المحفظة.</p>
+
+<p>عندما يستقبل شخص Bitcoin، يتم تسجيل معاملة على شبكة Bitcoin تؤدي إلى إنشاء مخرجات يمكن إنفاقها لاحقًا وفقًا لقواعد البروتوكول. وتحتفظ المحفظة بالمعلومات والمفاتيح التي تمكنها من التعرف على الأموال المرتبطة بها وإنشاء المعاملات اللازمة لإنفاقها.</p>
+
+<p>لهذا السبب يمكن استعادة محفظة على جهاز جديد باستخدام معلومات الاسترداد الصحيحة، حتى لو تعرض الهاتف القديم للتلف أو الضياع.</p>
+
+<p>لكن هذا لا يعني أن استعادة المحفظة أمر سحري. يجب أن تكون معلومات الاسترداد صحيحة، وأن تكون المحفظة الجديدة متوافقة مع نوع المحفظة وطريقة اشتقاق المفاتيح المستخدمة سابقًا.</p>
+
+<h2>ما هو المفتاح الخاص Private Key؟</h2>
+
+<p>المفتاح الخاص هو سر تشفيري يستخدم لتوقيع معاملات Bitcoin. امتلاك المفتاح الخاص يعني امتلاك القدرة على إنشاء توقيع يسمح للشبكة بالتحقق من أن صاحب المفتاح يملك الحق في إنفاق الأموال المرتبطة به.</p>
+
+<p>المفتاح الخاص ليس كلمة مرور عادية، وليس شيئًا ينبغي مشاركته مع أي شخص.</p>
+
+<p>إذا حصل شخص آخر على المفتاح الخاص أو على معلومات استرداد تسمح بإعادة إنشاء المفاتيح، فقد يستطيع إنفاق الأموال المرتبطة بها.</p>
+
+<p>لهذا السبب يجب التعامل مع المفاتيح الخاصة وعبارات الاسترداد على أنها معلومات سرية للغاية.</p>
+
+<h2>ما هو المفتاح العام Public Key؟</h2>
+
+<p>المفتاح العام يتم اشتقاقه رياضيًا من المفتاح الخاص، ويمكن استخدامه ضمن أنظمة Bitcoin المختلفة لإنشاء بيانات مرتبطة باستقبال الأموال.</p>
+
+<p>يمكن نشر المعلومات العامة دون أن تمنح الآخرين القدرة على إنفاق الأموال. أما المفتاح الخاص فيجب أن يبقى سريًا.</p>
+
+<p>يمكن تبسيط العلاقة بالشكل التالي:</p>
+
+<p><strong>Private Key → Public Key → Address / Script</strong></p>
+
+<p>هذه العلاقة ليست مجرد تسلسل نصي بسيط، لأن المحافظ الحديثة تستخدم هياكل اشتقاق متعددة وعناوين وأنواع نصوص مختلفة، لكن الفكرة الأساسية هي أن المعلومات السرية تستخدم للتحكم في الأموال، بينما يمكن استخدام المعلومات العامة لتلقيها.</p>
+
+<h2>ما هو عنوان Bitcoin؟</h2>
+
+<p>عنوان Bitcoin هو معرف يمكن استخدامه لتحديد مكان إرسال البيتكوين وفقًا لقواعد معينة في الشبكة.</p>
+
+<p>قد تبدأ بعض العناوين الحديثة بـ <code>bc1</code>، بينما توجد أنواع أخرى من العناوين ذات صيغ مختلفة.</p>
+
+<p>العنوان ليس هو المفتاح الخاص.</p>
+
+<p>يمكن مشاركة عنوان الاستقبال مع شخص يريد إرسال Bitcoin إليك، لكن لا ينبغي مشاركة المفتاح الخاص أو عبارة الاسترداد معه.</p>
+
+<p>ومن الأفضل أيضًا عدم افتراض أن استخدام عنوان واحد لجميع المدفوعات هو أفضل ممارسة للخصوصية. كثير من المحافظ الحديثة تستطيع إنشاء عناوين استقبال متعددة لتقليل إعادة استخدام العنوان.</p>
+
+<h2>ما هي عبارة الاسترداد Seed Phrase؟</h2>
+
+<p>عبارة الاسترداد، التي تسمى أيضًا Seed Phrase أو Recovery Phrase، هي مجموعة من الكلمات تستخدمها العديد من المحافظ الحديثة كوسيلة لاستعادة المحفظة.</p>
+
+<p>بدلًا من مطالبة المستخدم بحفظ عدد كبير من المفاتيح الخاصة بشكل منفصل، يمكن لمحفظة حديثة أن تعتمد على مصدر استرداد واحد تستطيع منه اشتقاق مجموعة من المفاتيح والعناوين.</p>
+
+<p>ولهذا فإن عبارة الاسترداد قد تكون أهم معلومة يجب على مستخدم المحفظة حمايتها.</p>
+
+<p>إذا حصل شخص غير مصرح له على عبارة الاسترداد، فقد يتمكن من استعادة المحفظة على جهاز آخر والوصول إلى الأموال المرتبطة بها.</p>
+
+<h2>Seed Phrase ليست كلمة مرور</h2>
+
+<p>من الأخطاء الشائعة اعتبار عبارة الاسترداد مجرد كلمة مرور يمكن تغييرها أو استعادتها من خلال الدعم الفني.</p>
+
+<p>في المحافظ غير الحاضنة، لا يوجد عادة بنك مركزي يستطيع إعادة تعيين العبارة أو استرجاعها لك.</p>
+
+<p>إذا فقدت عبارة الاسترداد ولم يعد لديك أي وسيلة أخرى لاستعادة المفاتيح، فقد تفقد القدرة على الوصول إلى الأموال نهائيًا.</p>
+
+<p>ولهذا يجب حفظها بطريقة آمنة ومدروسة، وعدم إرسالها عبر البريد الإلكتروني أو تطبيقات المحادثة أو تخزينها في صور الهاتف أو الخدمات السحابية.</p>
+
+<h2>الفرق بين Private Key وSeed Phrase</h2>
+
+<p>المفتاح الخاص هو مفتاح تشفيري محدد يمكن استخدامه لتوقيع معاملات معينة، بينما عبارة الاسترداد هي وسيلة استرداد يمكن للمحفظة استخدامها لإعادة إنشاء مجموعة من المفاتيح.</p>
+
+<p>في المحافظ الحديثة قد تنتج عبارة استرداد واحدة عددًا كبيرًا من المفاتيح والعناوين وفق نظام اشتقاق محدد.</p>
+
+<p>لذلك لا ينبغي افتراض أن كل محفظة تستخدم العبارة بالطريقة نفسها دون معرفة مواصفاتها.</p>
+
+<h2>كيف تعمل المحفظة عند إرسال Bitcoin؟</h2>
+
+<p>عندما تريد إرسال Bitcoin، تمر العملية بعدة مراحل مترابطة.</p>
+
+<ol>
+    <li>تختار المحفظة الأموال القابلة للإنفاق التي ستستخدمها في المعاملة.</li>
+    <li>تحدد عنوان المستلم والمبلغ المطلوب إرساله.</li>
+    <li>تحسب المحفظة الرسوم وفق إعداداتها والظروف الحالية للشبكة.</li>
+    <li>تنشئ المعاملة.</li>
+    <li>تستخدم المفتاح الخاص لتوقيع المعاملة.</li>
+    <li>تتحقق المحفظة من المعاملة قبل بثها.</li>
+    <li>يتم إرسال المعاملة إلى شبكة Bitcoin.</li>
+    <li>تقوم العقد بالتحقق من صحتها.</li>
+    <li>يمكن أن تدخل المعاملة في الـMempool بانتظار تضمينها في كتلة.</li>
+    <li>بعد تضمينها في كتلة تبدأ مرحلة التأكيدات.</li>
+</ol>
+
+<p>وهنا تظهر أهمية المفتاح الخاص: المحفظة لا تحتاج إلى إرسال المفتاح الخاص إلى الشبكة حتى تثبت حقها في إنفاق الأموال. يتم استخدامه محليًا لإنشاء التوقيع، ثم يتم نشر المعاملة والتوقيع اللازم للتحقق منها.</p>
+
+<h2>ما هي المحافظ الساخنة Hot Wallets؟</h2>
+
+<p>المحفظة الساخنة هي محفظة تكون المفاتيح التي تتحكم في الأموال متاحة على جهاز متصل بالإنترنت أو يمكن أن يتفاعل معه الإنترنت، مثل الهاتف أو الكمبيوتر.</p>
+
+<p>الميزة الرئيسية للمحافظ الساخنة هي سهولة الاستخدام وسرعة الوصول إلى الأموال.</p>
+
+<p>يمكن أن تكون مناسبة للمبالغ الصغيرة أو الاستخدام اليومي، لكن اتصال الجهاز بالإنترنت يزيد من مساحة المخاطر مقارنة بالتخزين البارد.</p>
+
+<p>إذا كان الجهاز مصابًا ببرمجيات ضارة، فقد يحاول المهاجم سرقة المفاتيح أو تغيير بيانات المعاملة أو خداع المستخدم.</p>
+
+<h2>ما هي المحافظ الباردة Cold Wallets؟</h2>
+
+<p>المحفظة الباردة هي أسلوب لحفظ المفاتيح بطريقة تقلل تعرضها للإنترنت.</p>
+
+<p>تستخدم المحافظ الباردة عادة عندما يريد المستخدم تقليل مخاطر الهجمات الإلكترونية المباشرة، خصوصًا عند تخزين مبالغ أكبر لفترة أطول.</p>
+
+<p>لكن كلمة "باردة" لا تعني أن الجهاز آمن تلقائيًا. يجب أيضًا التأكد من مصدر الجهاز والبرنامج، وحماية عبارة الاسترداد، والتحقق من المعاملات على شاشة موثوقة عندما يكون ذلك متاحًا.</p>
+
+<h2>محافظ الهاتف</h2>
+
+<p>محافظ الهاتف من أكثر أنواع المحافظ سهولة للمبتدئين.</p>
+
+<p>يمكن استخدامها للدفع والاستقبال والتحقق من الرصيد وإدارة المعاملات أثناء التنقل.</p>
+
+<p>لكن الهاتف جهاز متصل بالإنترنت وقد يحتوي على تطبيقات كثيرة، لذلك يجب تحديث نظام التشغيل والمحفظة، واستخدام قفل قوي للجهاز، وتجنب تثبيت التطبيقات من مصادر غير موثوقة.</p>
+
+<p>ومن الأفضل عمومًا ألا يحتفظ المستخدم بمبالغ كبيرة جدًا في محفظة هاتفية مخصصة للاستخدام اليومي.</p>
+
+<h2>محافظ سطح المكتب</h2>
+
+<p>تعمل محافظ سطح المكتب على أجهزة الكمبيوتر، ويمكن أن توفر ميزات أكثر تقدمًا من بعض محافظ الهاتف.</p>
+
+<p>لكن الكمبيوتر المتصل بالإنترنت يمثل أيضًا بيئة يمكن أن تستهدفها البرمجيات الضارة، ولذلك يجب الاهتمام بتحديث النظام واستخدام برامج موثوقة وحماية الجهاز.</p>
+
+<h2>محافظ الويب</h2>
+
+<p>محفظة الويب هي خدمة يمكن الوصول إليها عبر المتصفح.</p>
+
+<p>يجب التمييز هنا بين خدمة تحتفظ بالمفاتيح نيابة عن المستخدم وخدمة تساعد المستخدم على إدارة مفاتيحه بنفسه.</p>
+
+<p>في الحالة الأولى يكون المستخدم معتمدًا على الجهة التي تحتفظ بالمفاتيح. أما في الحفظ الذاتي، فيكون التحكم في المفاتيح لدى المستخدم.</p>
+
+<p>هذه نقطة أساسية عند تقييم أي خدمة تدعي أنها "محفظة Bitcoin".</p>
+
+<h2>محافظ الأجهزة Hardware Wallets</h2>
+
+<p>محفظة الأجهزة هي جهاز مخصص للمساعدة في حماية المفاتيح الخاصة وإجراء عمليات التوقيع بطريقة تقلل تعرض المفاتيح للبيئة المتصلة بالإنترنت.</p>
+
+<p>الفكرة الأساسية هي أن المفتاح الخاص لا يحتاج إلى مغادرة البيئة الآمنة للجهاز من أجل توقيع المعاملة.</p>
+
+<p>لكن شراء جهاز باهظ الثمن لا يجعل الأموال آمنة تلقائيًا. يجب التأكد من شراء الجهاز من مصدر موثوق، واتباع إجراءات الإعداد الرسمية، والتحقق من العبارة التي يعرضها الجهاز، وعدم إدخال عبارة الاسترداد في موقع ويب يطلبها بحجة "المزامنة" أو "التحقق".</p>
+
+<h2>الحفظ الذاتي Self-Custody</h2>
+
+<p>الحفظ الذاتي يعني أن المستخدم يحتفظ بالمفاتيح التي تتحكم في أمواله بدل الاعتماد على جهة وسيطة لحفظها.</p>
+
+<p>هذا يمنح المستخدم قدرًا أكبر من التحكم، لكنه ينقل المسؤولية إليه أيضًا.</p>
+
+<p>في البنك، يمكن في بعض الحالات طلب إعادة تعيين كلمة المرور أو معالجة مشكلة في الحساب. أما في Bitcoin، فقد لا توجد جهة يمكنها إعادة الأموال إذا فقد المستخدم مفاتيحه أو سمح لشخص آخر بالحصول عليها.</p>
+
+<p>ولهذا فإن الحفظ الذاتي ليس مجرد ميزة؛ إنه مسؤولية تتطلب فهم النسخ الاحتياطي والأمان وإدارة المفاتيح.</p>
+
+<h2>المحفظة مقابل منصة التداول</h2>
+
+<p>عندما تشتري Bitcoin من منصة تداول، قد لا يعني ذلك أنك تتحكم مباشرة في المفاتيح الخاصة.</p>
+
+<p>قد تحتفظ المنصة بالأصول نيابة عن المستخدم وتسمح له برؤية الرصيد وإجراء عمليات السحب.</p>
+
+<p>في هذه الحالة يعتمد المستخدم على المنصة في حفظ المفاتيح وتنفيذ عمليات السحب وفق سياساتها.</p>
+
+<p>أما في المحفظة ذات الحفظ الذاتي، فالمستخدم هو المسؤول عن المفاتيح.</p>
+
+<p>لا يعني هذا أن أحد النموذجين مناسب لكل شخص أو كل استخدام. المهم هو أن يفهم المستخدم الفرق بين ملكية الحساب على منصة وبين التحكم المباشر في المفاتيح.</p>
+
+<h2>ماذا تعني عبارة Not Your Keys, Not Your Coins؟</h2>
+
+<p>هذه العبارة الشائعة في مجتمع Bitcoin تلخص فكرة الحفظ الذاتي: إذا لم تكن أنت من يتحكم في المفاتيح الخاصة، فإن قدرتك على التحكم المباشر في الأموال تعتمد على الجهة التي تحتفظ بالمفاتيح.</p>
+
+<p>العبارة لا تعني أن كل منصة ستفشل أو أن كل مستخدم يجب أن يتصرف بطريقة واحدة، لكنها تذكر المستخدم بوجود مخاطر الطرف المقابل عندما يعتمد على جهة أخرى لحفظ المفاتيح.</p>
+
+<h2>كيف تختار محفظة Bitcoin؟</h2>
+
+<p>قبل اختيار المحفظة، اسأل نفسك أولًا عن طبيعة الاستخدام.</p>
+
+<ul>
+    <li>هل ستستخدم Bitcoin للمدفوعات اليومية؟</li>
+    <li>هل ستحتفظ بمبلغ صغير أم مدخرات طويلة الأجل؟</li>
+    <li>هل تحتاج إلى الوصول السريع من الهاتف؟</li>
+    <li>هل تحتاج إلى جهاز مخصص للتوقيع؟</li>
+    <li>هل تفهم طريقة النسخ الاحتياطي والاسترداد؟</li>
+    <li>هل المحفظة مفتوحة المصدر أو لديها معلومات تقنية كافية للمراجعة؟</li>
+    <li>هل توفر طريقة واضحة لاستعادة الأموال؟</li>
+    <li>هل المشروع معروف وله سجل أمني جيد؟</li>
+</ul>
+
+<p>لا ينبغي اختيار المحفظة بناءً على التصميم الجميل أو عدد التنزيلات فقط.</p>
+
+<h2>كيف تنشئ محفظة بأمان؟</h2>
+
+<p>عند إنشاء محفظة جديدة، يجب التعامل مع مرحلة الإعداد باعتبارها أهم جزء من العملية.</p>
+
+<ol>
+    <li>نزّل البرنامج أو اشتر الجهاز من المصدر الرسمي.</li>
+    <li>تأكد من صحة الموقع والتطبيق قبل تثبيته.</li>
+    <li>أنشئ المحفظة وفق التعليمات الرسمية.</li>
+    <li>اكتب عبارة الاسترداد بالطريقة التي توصي بها المحفظة.</li>
+    <li>لا تلتقط صورة للشاشة لعبارة الاسترداد.</li>
+    <li>لا ترسل العبارة إلى نفسك عبر البريد أو تطبيقات المحادثة.</li>
+    <li>لا تدخل العبارة في موقع ويب إلا إذا كان ذلك جزءًا واضحًا من عملية استعادة موثوقة، وحتى عندها يجب التأكد من الموقع والجهاز.</li>
+    <li>اختبر عملية الاسترداد وفق تعليمات المحفظة قبل الاعتماد عليها لمبالغ كبيرة.</li>
+</ol>
+
+<h2>كيف تحفظ Seed Phrase؟</h2>
+
+<p>يجب حفظ عبارة الاسترداد بطريقة تقلل خطر السرقة والضياع في الوقت نفسه.</p>
+
+<p>النسخة الرقمية الموجودة على الهاتف أو البريد الإلكتروني أو التخزين السحابي يمكن أن تكون معرضة للاختراق أو النسخ غير المقصود.</p>
+
+<p>لهذا يفضل كثير من المستخدمين الاحتفاظ بالعبارة في شكل مادي محفوظ في مكان آمن، مع التفكير في مخاطر الحريق والماء والسرقة والوصول غير المصرح به.</p>
+
+<p>كما ينبغي التفكير في كيفية الوصول إليها في حالات الطوارئ، دون تحويلها إلى معلومة متاحة لأي شخص.</p>
+
+<h2>لماذا لا يجب تصوير Seed Phrase؟</h2>
+
+<p>الصورة تبدو وسيلة سهلة لحفظ العبارة، لكنها قد تنتقل تلقائيًا إلى النسخ الاحتياطي السحابي أو تبقى في معرض الصور أو تتم مزامنتها مع أجهزة أخرى.</p>
+
+<p>إذا تمكن شخص من الوصول إلى الحساب السحابي أو الهاتف، فقد يحصل على نسخة من العبارة.</p>
+
+<p>لذلك لا ينبغي التعامل مع صورة Seed Phrase على أنها نسخة احتياطية آمنة لمجرد أنها موجودة على الهاتف.</p>
+
+<h2>ماذا يحدث إذا فقدت الهاتف؟</h2>
+
+<p>فقدان الهاتف لا يعني بالضرورة فقدان Bitcoin.</p>
+
+<p>إذا كانت المحفظة تعتمد على عبارة استرداد صحيحة وتم حفظها بشكل آمن، فقد يستطيع المستخدم استعادة المحفظة على جهاز آخر متوافق.</p>
+
+<p>لكن يجب الحذر من التطبيقات المزيفة التي تدعي أنها تستطيع استعادة الأموال، ومن الأشخاص الذين يطلبون عبارة الاسترداد بحجة المساعدة.</p>
+
+<h2>ماذا يحدث إذا فقدت Hardware Wallet؟</h2>
+
+<p>إذا كان لديك نسخة احتياطية صحيحة من معلومات الاسترداد، فإن فقدان جهاز المحفظة نفسه لا يعني بالضرورة فقدان الأموال.</p>
+
+<p>لكن يجب حماية النسخة الاحتياطية بعناية؛ لأن أي شخص يحصل عليها قد يستطيع استعادة المحفظة.</p>
+
+<p>لذلك يجب التفكير في الجهاز والنسخة الاحتياطية كجزأين مختلفين من نظام الأمان.</p>
+
+<h2>ماذا يحدث إذا نسيت كلمة المرور؟</h2>
+
+<p>يجب التمييز بين كلمة مرور الجهاز أو التطبيق وبين عبارة الاسترداد.</p>
+
+<p>قد توفر بعض المحافظ طرقًا مختلفة لاستعادة الوصول المحلي إلى التطبيق، بينما قد تكون بعض كلمات المرور أو بيانات التشفير ضرورية لفك محفظة محلية.</p>
+
+<p>في جميع الحالات، لا ينبغي افتراض وجود خدمة مركزية قادرة على استعادة كل شيء كما يحدث مع الحسابات التقليدية.</p>
+
+<h2>النسخ الاحتياطي والاسترداد</h2>
+
+<p>النسخ الاحتياطي جزء أساسي من أمان المحفظة.</p>
+
+<p>يجب أن يفكر المستخدم في سيناريوهات مثل:</p>
+
+<ul>
+    <li>ضياع الهاتف.</li>
+    <li>تعطل الكمبيوتر.</li>
+    <li>سرقة الجهاز.</li>
+    <li>تلف الجهاز بسبب الماء أو الحريق.</li>
+    <li>نسيان كلمة المرور المحلية.</li>
+    <li>الحاجة إلى استعادة المحفظة بعد سنوات.</li>
+</ul>
+
+<p>الهدف من النسخ الاحتياطي هو التأكد من أن حادثًا واحدًا لا يؤدي إلى فقدان القدرة على الوصول إلى الأموال.</p>
+
+<h2>أخطر خطأ: مشاركة Seed Phrase</h2>
+
+<p>لا ينبغي إعطاء عبارة الاسترداد لأي شخص.</p>
+
+<p>لن تحتاج خدمة الدعم الشرعية عادةً إلى معرفة العبارة السرية حتى تساعدك في مشكلة تقنية عادية.</p>
+
+<p>إذا طلب منك شخص على Telegram أو WhatsApp أو البريد الإلكتروني أو أي منصة أخرى إرسال Seed Phrase حتى "يفتح" المحفظة أو "يستعيد" الأموال، فهذه إشارة قوية إلى محاولة سرقة.</p>
+
+<p>وتنطبق القاعدة نفسها على المواقع التي تطلب منك إدخال العبارة بحجة ربط المحفظة أو مزامنتها أو التحقق منها.</p>
+
+<h2>أشهر عمليات الاحتيال المتعلقة بالمحافظ</h2>
+
+<h3>التطبيقات المزيفة</h3>
+
+<p>قد تظهر تطبيقات تحمل أسماء أو شعارات مشابهة لمحافظ معروفة. تثبيت تطبيق غير موثوق قد يؤدي إلى سرقة المفاتيح أو العبارة السرية.</p>
+
+<h3>الدعم الفني المزيف</h3>
+
+<p>قد ينتحل المحتال شخصية موظف دعم ويطلب عبارة الاسترداد أو مفتاحًا خاصًا أو يرسل رابطًا لاستعادة المحفظة.</p>
+
+<h3>مواقع التصيد Phishing</h3>
+
+<p>قد يبدو الموقع مشابهًا لموقع محفظة أو منصة معروفة، لكنه في الحقيقة مصمم لسرقة معلومات الدخول أو Seed Phrase.</p>
+
+<h3>العروض المجانية الوهمية</h3>
+
+<p>قد تطلب بعض المواقع من المستخدم إرسال Bitcoin أولًا مقابل وعد بإعادة مبلغ أكبر. هذا النوع من الوعود يجب التعامل معه باعتباره علامة خطر واضحة.</p>
+
+<h3>تغيير عنوان المستلم</h3>
+
+<p>بعض البرمجيات الخبيثة قد تحاول مراقبة الحافظة Clipboard واستبدال عنوان Bitcoin الذي نسخته بعنوان يملكه المهاجم.</p>
+
+<p>لذلك يجب دائمًا التحقق من عنوان المستلم قبل تأكيد المعاملة، وخصوصًا عند إرسال مبالغ كبيرة.</p>
+
+<h2>Address Poisoning</h2>
+
+<p>في بعض أساليب الاحتيال يمكن للمهاجم إنشاء معاملات تجعل عنوانًا مشابهًا لعنوان سبق أن تعامل معه المستخدم يظهر في سجل المعاملات.</p>
+
+<p>إذا قام المستخدم لاحقًا بنسخ عنوان من سجل قديم دون التحقق منه، فقد يرسل الأموال إلى العنوان الخطأ.</p>
+
+<p>الحل الأساسي هو عدم الاعتماد على أول أو آخر عدة أحرف من العنوان فقط، بل التحقق من العنوان كاملًا أو استخدام وسائل موثوقة لتحديد المستلم.</p>
+
+<h2>خصوصية Bitcoin والمحافظ</h2>
+
+<p>Bitcoin ليس نظامًا مجهولًا بالكامل.</p>
+
+<p>المعاملات مسجلة على بلوكتشين عامة، ويمكن لأي شخص فحص المعاملات والعناوين الموجودة على الشبكة.</p>
+
+<p>لا يظهر اسم الشخص تلقائيًا بجانب العنوان، لكن يمكن ربط العناوين بهوية حقيقية من خلال معلومات خارجية، مثل بيانات المنصات أو عمليات الشراء أو أنماط استخدام العناوين.</p>
+
+<p>ولهذا فإن إدارة العناوين وإعادة استخدامها وطريقة ربط المحفظة بالخدمات المختلفة يمكن أن تؤثر في الخصوصية.</p>
+
+<h2>هل يمكن استخدام أكثر من محفظة؟</h2>
+
+<p>نعم. يمكن للمستخدم امتلاك أكثر من محفظة، وقد يكون ذلك منطقيًا لأسباب تنظيمية وأمنية.</p>
+
+<p>على سبيل المثال، يمكن تخصيص محفظة ساخنة للمبالغ الصغيرة والاستخدام اليومي، واستخدام محفظة باردة للمدخرات طويلة الأجل.</p>
+
+<p>لكن تعدد المحافظ يزيد أيضًا من المسؤولية؛ لأن كل نسخة احتياطية وكل عبارة استرداد تحتاج إلى إدارة آمنة.</p>
+
+<h2>محفظة للاستخدام اليومي ومحفظة للتخزين</h2>
+
+<p>من الأساليب العملية فصل الأموال حسب الاستخدام.</p>
+
+<p>المحفظة اليومية تحتوي على مبلغ محدود يحتاجه المستخدم للمدفوعات أو الاستخدامات المتكررة، بينما يتم الاحتفاظ بالمدخرات في بيئة أكثر حماية.</p>
+
+<p>هذا يقلل من أثر اختراق جهاز يستخدم يوميًا، لأن المهاجم لن يجد بالضرورة كل الأموال في نفس المكان.</p>
+
+<h2>هل المحافظ الباردة آمنة بنسبة 100%؟</h2>
+
+<p>لا توجد وسيلة تقنية تمنح ضمانًا مطلقًا ضد جميع الأخطاء والمخاطر.</p>
+
+<p>المحفظة الباردة تقلل نوعًا معينًا من المخاطر، خصوصًا المخاطر المرتبطة بالاتصال المستمر بالإنترنت، لكنها لا تمنع المستخدم من الوقوع في خداع اجتماعي أو كشف عبارة الاسترداد أو توقيع معاملة غير صحيحة.</p>
+
+<p>الأمان الحقيقي يعتمد على مجموعة من الإجراءات وليس على نوع الجهاز وحده.</p>
+
+<h2>ما الذي يجعل نظام المحفظة آمنًا؟</h2>
+
+<p>يمكن التفكير في أمان المحفظة على أنه مجموعة طبقات:</p>
+
+<ul>
+    <li>برنامج موثوق.</li>
+    <li>جهاز آمن ومحدث.</li>
+    <li>مفتاح خاص محمي.</li>
+    <li>عبارة استرداد محفوظة بشكل صحيح.</li>
+    <li>نسخة احتياطية يمكن استعادتها.</li>
+    <li>تحقق من عناوين المستلمين.</li>
+    <li>حذر من الروابط والتطبيقات المزيفة.</li>
+    <li>عدم مشاركة الأسرار مع أي شخص.</li>
+    <li>تقليل المبالغ الموجودة في الأجهزة المتصلة بالإنترنت.</li>
+</ul>
+
+<h2>قائمة فحص قبل استخدام أي محفظة</h2>
+
+<p>قبل تحويل مبلغ حقيقي إلى محفظة جديدة، اسأل:</p>
+
+<ul>
+    <li>هل حصلت على البرنامج أو الجهاز من مصدر موثوق؟</li>
+    <li>هل أفهم من يملك المفاتيح؟</li>
+    <li>هل المحفظة ذات حفظ ذاتي أم حاضنة؟</li>
+    <li>هل لدي نسخة احتياطية؟</li>
+    <li>هل أعرف كيف أستعيد المحفظة؟</li>
+    <li>هل اختبرت الاستعادة بطريقة آمنة؟</li>
+    <li>هل أعرف أين توجد Seed Phrase؟</li>
+    <li>هل يستطيع شخص آخر الوصول إليها؟</li>
+    <li>هل أتحقق من عنوان المستلم قبل الإرسال؟</li>
+    <li>هل أحتفظ بمبلغ مناسب لطبيعة أمان المحفظة؟</li>
+</ul>
+
+<h2>مثال مبسط</h2>
+
+<p>لنفترض أن أحمد أنشأ محفظة Bitcoin على هاتفه.</p>
+
+<p>المحفظة أنشأت مفاتيحًا وعناوين، ثم حفظ أحمد عبارة الاسترداد في مكان آمن.</p>
+
+<p>أرسل له صديقه Bitcoin إلى أحد عناوين الاستقبال.</p>
+
+<p>المعاملة أصبحت مسجلة على شبكة Bitcoin، ويمكن للمحفظة عرض الرصيد المرتبط بالمفاتيح التي تديرها.</p>
+
+<p>بعد عدة أشهر، تلف الهاتف.</p>
+
+<p>إذا كانت عبارة الاسترداد محفوظة بطريقة صحيحة، يستطيع أحمد استخدام محفظة متوافقة لاستعادة المفاتيح والوصول إلى الأموال الموجودة على الشبكة.</p>
+
+<p>أما إذا كانت عبارة الاسترداد قد ضاعت ولم توجد وسيلة أخرى لاستعادة المفاتيح، فقد يفقد أحمد القدرة على التحكم في الأموال.</p>
+
+<h2>Bitcoin Wallet مقابل الحساب البنكي</h2>
+
+<p>هناك اختلاف جوهري بين النموذجين.</p>
+
+<p>في الحساب البنكي، البنك يحتفظ بالسجل ويحدد صلاحيات الوصول إلى الحساب، ويمكنه في بعض الحالات إعادة تعيين بيانات الدخول أو معالجة النزاعات وفق النظام المصرفي.</p>
+
+<p>في Bitcoin، الشبكة العامة تتحقق من المعاملات وفق قواعد البروتوكول، والمستخدم الذي يحتفظ بمفاتيحه الخاصة يكون مسؤولًا بدرجة كبيرة عن حماية الوصول إليها.</p>
+
+<p>هذا الاختلاف هو أحد أهم أسباب ضرورة فهم المحافظ قبل استخدامها.</p>
+
+<h2>الفرق بين Bitcoin Wallet وBitcoin Address</h2>
+
+<p>العنوان ليس محفظة.</p>
+
+<p>يمكن للمحفظة إدارة عدد كبير من العناوين والمفاتيح، بينما يمثل العنوان نقطة استقبال يمكن استخدامها في سياق معين.</p>
+
+<p>لذلك فإن امتلاك عنوان Bitcoin واحد لا يعني أن المستخدم يمتلك "محفظة" واحدة بالمعنى الكامل.</p>
+
+<h2>الفرق بين Wallet وPrivate Key وSeed Phrase</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>المصطلح</th>
+            <th>المعنى</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Wallet</td>
+            <td>برنامج أو جهاز أو نظام يدير المفاتيح ويساعد في إنشاء ومتابعة المعاملات.</td>
+        </tr>
+        <tr>
+            <td>Private Key</td>
+            <td>مفتاح سري يستخدم لتوقيع المعاملات والتحكم في الأموال المرتبطة به.</td>
+        </tr>
+        <tr>
+            <td>Public Key</td>
+            <td>معلومة عامة مشتقة من المفتاح الخاص وتستخدم ضمن آليات استقبال والتحقق.</td>
+        </tr>
+        <tr>
+            <td>Address</td>
+            <td>معرف يمكن استخدامه لتلقي Bitcoin وفق نوع العنوان والقواعد المرتبطة به.</td>
+        </tr>
+        <tr>
+            <td>Seed Phrase</td>
+            <td>عبارة استرداد تستخدمها محافظ حديثة لإعادة إنشاء مجموعة من المفاتيح والمحافظ.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>ما الذي يجب ألا تفعله أبدًا؟</h2>
+
+<ul>
+    <li>لا ترسل Seed Phrase إلى شخص آخر.</li>
+    <li>لا تحفظ Seed Phrase كصورة على هاتف متصل بالإنترنت.</li>
+    <li>لا تكتب Seed Phrase في نموذج موقع غير موثوق.</li>
+    <li>لا تثق برسائل الدعم التي تطلب المفاتيح الخاصة.</li>
+    <li>لا تنسخ عنوان المستلم دون التحقق منه.</li>
+    <li>لا تحتفظ بكل مدخراتك في محفظة ساخنة لمجرد سهولة استخدامها.</li>
+    <li>لا تثبت محفظة من مصدر غير رسمي.</li>
+    <li>لا تعتبر وجود جهاز Hardware Wallet وحده ضمانًا مطلقًا للأمان.</li>
+</ul>
+
+<h2>كيف يعمل نظام المحفظة في جملة واحدة؟</h2>
+
+<p>يمكن تلخيص الفكرة في جملة بسيطة:</p>
+
+<p><strong>محفظة Bitcoin لا تخزن البيتكوين نفسه، بل تدير المفاتيح التي تسمح للمستخدم بالتصرف في البيتكوين المسجل على البلوكتشين.</strong></p>
+
+<h2>الخاتمة</h2>
+
+<p>فهم محافظ Bitcoin هو خطوة أساسية للانتقال من مجرد معرفة اسم البيتكوين إلى فهم كيفية استخدامه فعليًا.</p>
+
+<p>أهم فكرة يجب الاحتفاظ بها هي أن البيتكوين موجود كسجلات على الشبكة، بينما المحفظة تدير المفاتيح التي تمنح القدرة على التصرف في الأموال.</p>
+
+<p>ومن هنا تأتي أهمية Private Key وSeed Phrase والنسخ الاحتياطي والحفظ الذاتي.</p>
+
+<p>لا توجد محفظة واحدة مناسبة لجميع الاستخدامات. قد تكون المحفظة الساخنة مناسبة للمبالغ الصغيرة والاستخدام اليومي، بينما قد تكون حلول التخزين البارد أكثر ملاءمة لمن يريد تقليل التعرض للهجمات عبر الإنترنت عند حفظ المدخرات.</p>
+
+<p>وفي جميع الحالات، يبقى العامل البشري جزءًا أساسيًا من الأمان. فقد يكون أقوى جهاز عديم الفائدة إذا شارك المستخدم عبارة الاسترداد مع محتال أو وقع في موقع تصيد.</p>
+
+<p>إذا فهمت الفرق بين المحفظة والمفتاح الخاص والعنوان وSeed Phrase، وأدركت مسؤولية الحفظ الذاتي، فقد قطعت خطوة مهمة نحو استخدام Bitcoin بصورة أكثر وعيًا.</p>
+
+<h2>روابط مفيدة داخل AQL Crypto Academy</h2>
+
+<ul>
+    <li><a href="/academy/bitcoin/what-is-bitcoin">ما هو البيتكوين؟ دليل المبتدئين لفهم Bitcoin</a></li>
+    <li><a href="/academy/bitcoin/history-of-bitcoin">تاريخ البيتكوين: من الفكرة إلى الأصل الرقمي العالمي</a></li>
+    <li><a href="/academy/bitcoin/how-bitcoin-works">كيف يعمل البيتكوين؟ شرح المعاملات والبلوكتشين والتعدين</a></li>
+    <li><a href="/academy/bitcoin/bitcoin-mining">تعدين البيتكوين: كيف يعمل التعدين وإثبات العمل؟</a></li>
+    <li><a href="/academy/bitcoin/bitcoin-halving">Bitcoin Halving: ما هو تنصيف البيتكوين وكيف يعمل؟</a></li>
+    <li><a href="/crypto/BTC">سعر Bitcoin ومعلومات السوق</a></li>
+</ul>
+
+<h2>تنبيه تعليمي</h2>
+
+<p>هذا المقال تعليمي ويهدف إلى شرح مفاهيم Bitcoin والمحافظ والأمان بصورة مبسطة. لا يمثل نصيحة استثمارية أو مالية أو قانونية. قبل استخدام أي محفظة أو تحويل أموال حقيقية، تحقق من المعلومات الرسمية الخاصة بالمحفظة والخدمة والجهاز الذي تستخدمه.</p>
+HTML,
+
+    'content_en' => <<<'HTML'
+<h2>Introduction</h2>
+
+<p>Bitcoin wallets are one of the most important concepts anyone learning about Bitcoin should understand correctly. Beginners often imagine that buying Bitcoin means placing digital coins inside an application called a wallet. That description is useful for everyday conversation, but it is not technically accurate.</p>
+
+<p>Bitcoin itself is not stored inside a phone, computer, exchange application, or hardware wallet. Bitcoin transactions and the resulting records exist on the Bitcoin network and blockchain. A wallet manages the cryptographic keys that allow a user to control and spend funds associated with those keys.</p>
+
+<p>This distinction matters. Losing a phone does not necessarily mean losing Bitcoin, while simply having the wallet application does not necessarily mean that you control the funds. What matters is access to the keys required to authorize transactions.</p>
+
+<p>In this AQL Crypto Academy guide, we will explain Bitcoin wallets from the ground up, including private keys, public keys, Bitcoin addresses, recovery phrases, hot and cold wallets, hardware wallets, self-custody, exchanges, backups, privacy, common mistakes, and the most important wallet security practices.</p>
+
+<h2>What Is a Bitcoin Wallet?</h2>
+
+<p>A Bitcoin wallet is software, hardware, or another system that helps manage the cryptographic keys used to receive and spend Bitcoin.</p>
+
+<p>A wallet can generate keys and addresses, monitor transactions associated with them, create transactions, and sign transactions when the user wants to spend Bitcoin.</p>
+
+<p>It is useful to distinguish between three concepts:</p>
+
+<ul>
+    <li><strong>Bitcoin blockchain:</strong> the public ledger containing Bitcoin transactions.</li>
+    <li><strong>Private key:</strong> a secret cryptographic key used to authorize spending.</li>
+    <li><strong>Wallet:</strong> software or hardware that manages keys and helps the user interact with the Bitcoin network.</li>
+</ul>
+
+<p>For this reason, saying that "Bitcoin is stored in a wallet" is a convenient simplification, but it is not the technically precise description.</p>
+
+<h2>Is Bitcoin Stored Inside the Wallet?</h2>
+
+<p>No. Bitcoin is not a file stored inside a phone, computer, or wallet application.</p>
+
+<p>When Bitcoin is received, a transaction is recorded on the Bitcoin network and creates outputs that can later be spent according to Bitcoin's rules. The wallet maintains the keys and information required to identify and spend funds controlled by those keys.</p>
+
+<p>This is why a wallet can sometimes be restored on a new device even when the old phone or computer has been lost or destroyed.</p>
+
+<p>However, recovery is not automatic or magical. The recovery information must be correct, and the replacement wallet must support the relevant wallet structure and derivation method.</p>
+
+<h2>What Is a Private Key?</h2>
+
+<p>A private key is a secret cryptographic value used to create digital signatures for Bitcoin transactions.</p>
+
+<p>A private key is not an ordinary password and should never be shared with another person.</p>
+
+<p>If an unauthorized person obtains a private key or recovery information that can recreate the relevant keys, that person may be able to spend the associated Bitcoin.</p>
+
+<p>This is why private keys and recovery phrases must be treated as highly sensitive information.</p>
+
+<h2>What Is a Public Key?</h2>
+
+<p>A public key is mathematically derived from a private key and can be used as part of Bitcoin's mechanisms for receiving funds and verifying signatures.</p>
+
+<p>Public information can be shared without giving someone the ability to spend the funds. The private key must remain secret.</p>
+
+<p>The relationship can be simplified as:</p>
+
+<p><strong>Private Key → Public Key → Address / Script</strong></p>
+
+<p>The actual process is more sophisticated because modern Bitcoin wallets use different derivation structures, scripts, and address types, but the basic idea remains the same: secret key material controls spending, while public information can be used for receiving and verification.</p>
+
+<h2>What Is a Bitcoin Address?</h2>
+
+<p>A Bitcoin address is an identifier that can be used to specify where Bitcoin should be sent according to a particular Bitcoin script and address format.</p>
+
+<p>Many modern Bitcoin addresses begin with <code>bc1</code>, although other address formats also exist.</p>
+
+<p>A Bitcoin address is not a private key.</p>
+
+<p>You can give a receiving address to someone who wants to send you Bitcoin, but you should never give them your private key or recovery phrase.</p>
+
+<p>Modern wallets can generate multiple receiving addresses, and avoiding unnecessary address reuse can help improve privacy.</p>
+
+<h2>What Is a Recovery Phrase or Seed Phrase?</h2>
+
+<p>A recovery phrase, also called a seed phrase, is a sequence of words used by many modern wallets as a way to recover wallet keys.</p>
+
+<p>Instead of requiring the user to keep track of many private keys individually, modern wallet designs can derive many keys and addresses from a common recovery source.</p>
+
+<p>This makes the recovery phrase one of the most important pieces of information a wallet user must protect.</p>
+
+<p>If an unauthorized person obtains the recovery phrase, they may be able to restore the wallet elsewhere and access the associated funds.</p>
+
+<h2>A Seed Phrase Is Not an Ordinary Password</h2>
+
+<p>One of the most common beginner mistakes is treating a recovery phrase as if it were an ordinary password that can simply be reset through customer support.</p>
+
+<p>With self-custodial Bitcoin wallets, there may be no central organization capable of resetting or recovering the phrase for you.</p>
+
+<p>If the recovery phrase is lost and there is no other way to recover the keys, access to the funds may be permanently lost.</p>
+
+<p>This is why recovery information should be stored securely and should never be emailed, sent through messaging applications, or uploaded to cloud storage.</p>
+
+<h2>Private Key vs Seed Phrase</h2>
+
+<p>A private key is a specific cryptographic key used to authorize spending, while a recovery phrase is a recovery mechanism that can be used by a wallet to recreate a set of keys.</p>
+
+<p>Modern wallets may derive many private keys and addresses from a single recovery phrase using hierarchical deterministic wallet structures.</p>
+
+<p>Therefore, users should not assume that every wallet handles recovery phrases in exactly the same way.</p>
+
+<h2>What Happens When You Send Bitcoin?</h2>
+
+<p>When you send Bitcoin, several connected steps take place.</p>
+
+<ol>
+    <li>The wallet selects spendable funds that can be used for the transaction.</li>
+    <li>The recipient address and amount are specified.</li>
+    <li>The wallet calculates an appropriate transaction fee according to its settings and network conditions.</li>
+    <li>The transaction is constructed.</li>
+    <li>The transaction is signed using the relevant private key.</li>
+    <li>The wallet performs checks before broadcasting the transaction.</li>
+    <li>The transaction is broadcast to the Bitcoin network.</li>
+    <li>Network nodes validate the transaction.</li>
+    <li>The transaction may enter the mempool while waiting to be included in a block.</li>
+    <li>Once included in a block, the transaction begins accumulating confirmations.</li>
+</ol>
+
+<p>The private key is important because the wallet does not need to publish the secret key to the network. Instead, the key is used locally to create a digital signature, and the transaction containing the necessary verification data is broadcast.</p>
+
+<h2>What Are Hot Wallets?</h2>
+
+<p>A hot wallet is a wallet whose keys are managed in an environment connected to the internet or regularly exposed to online activity, such as a smartphone or computer.</p>
+
+<p>The main advantage of hot wallets is convenience.</p>
+
+<p>They can be useful for everyday payments and relatively small amounts, but an internet-connected environment creates additional attack surfaces compared with offline storage.</p>
+
+<p>If the device is compromised by malware, an attacker may attempt to steal key material, manipulate transactions, or deceive the user.</p>
+
+<h2>What Are Cold Wallets?</h2>
+
+<p>A cold wallet is a method of storing or using keys in a way that reduces their exposure to the internet.</p>
+
+<p>Cold storage is commonly used when a user wants to reduce exposure to online attacks, especially when protecting longer-term savings.</p>
+
+<p>However, "cold" does not automatically mean "safe." Users still need to verify the device and software source, protect the recovery phrase, and carefully review transactions before signing them.</p>
+
+<h2>Mobile Wallets</h2>
+
+<p>Mobile wallets are among the easiest Bitcoin wallets for beginners to use.</p>
+
+<p>They can be used to send and receive Bitcoin, check balances, and manage transactions while traveling.</p>
+
+<p>However, smartphones are internet-connected devices and often run many applications. Users should keep the operating system and wallet software updated, use strong device security, and avoid installing applications from untrusted sources.</p>
+
+<p>It is generally sensible not to keep large long-term savings in a wallet designed primarily for everyday mobile use.</p>
+
+<h2>Desktop Wallets</h2>
+
+<p>Desktop wallets run on computers and may offer more advanced functionality than some mobile wallets.</p>
+
+<p>However, an internet-connected computer can also be targeted by malware, keyloggers, and other attacks.</p>
+
+<p>Users should keep the operating system and wallet software updated, use trustworthy security practices, and avoid installing unknown software.</p>
+
+<h2>Web Wallets</h2>
+
+<p>A web wallet is a wallet or wallet-related service accessed through a web browser.</p>
+
+<p>It is important to distinguish between a service that holds keys on behalf of the user and a service that allows the user to maintain control of their own keys.</p>
+
+<p>In a custodial model, the user depends on the provider to hold and protect the keys. In a self-custodial model, the user controls the keys directly.</p>
+
+<p>This distinction should always be considered when evaluating a service described as a Bitcoin wallet.</p>
+
+<h2>Hardware Wallets</h2>
+
+<p>A hardware wallet is a dedicated device designed to help protect private keys and sign transactions while reducing exposure of sensitive key material to an internet-connected computer.</p>
+
+<p>The core idea is that the private key does not need to leave the protected environment of the device in order to sign a transaction.</p>
+
+<p>However, buying an expensive hardware wallet does not automatically make funds safe. The device should come from a trustworthy source, the official setup process should be followed, and the recovery phrase should never be entered into an untrusted website claiming to synchronize or verify the wallet.</p>
+
+<h2>Self-Custody</h2>
+
+<p>Self-custody means that the user controls the private keys rather than relying on an intermediary to hold them.</p>
+
+<p>This can provide greater direct control, but it also transfers responsibility to the user.</p>
+
+<p>With a traditional bank, a user may be able to reset credentials or request assistance with certain account problems. With Bitcoin, there may be no central institution that can restore funds if the user loses the keys or gives them to an attacker.</p>
+
+<p>Self-custody is therefore not merely a feature. It is a responsibility that requires an understanding of backups, key security, and recovery.</p>
+
+<h2>Wallets vs Exchanges</h2>
+
+<p>Buying Bitcoin on an exchange does not necessarily mean that the buyer directly controls the private keys.</p>
+
+<p>The exchange may hold the assets and keys on behalf of the customer while providing an account interface and withdrawal functionality.</p>
+
+<p>In that situation, the customer depends on the exchange for custody and access.</p>
+
+<p>With a self-custodial wallet, the user controls the keys.</p>
+
+<p>Neither model should be reduced to a universal rule for every user. The important point is to understand whether you control the keys or whether another organization controls them on your behalf.</p>
+
+<h2>What Does "Not Your Keys, Not Your Coins" Mean?</h2>
+
+<p>This common Bitcoin phrase summarizes the idea of self-custody: if you do not control the private keys, your ability to directly control the associated funds depends on the party holding those keys.</p>
+
+<p>The phrase does not mean that every exchange will fail or that every user must use one particular custody model. Instead, it highlights the counterparty risk that exists when another organization controls the keys.</p>
+
+<h2>How Should You Choose a Bitcoin Wallet?</h2>
+
+<p>Start by considering how you intend to use Bitcoin.</p>
+
+<ul>
+    <li>Will you use Bitcoin for everyday payments?</li>
+    <li>Are you holding a small amount or long-term savings?</li>
+    <li>Do you need quick access from a phone?</li>
+    <li>Do you need a dedicated signing device?</li>
+    <li>Do you understand the backup and recovery process?</li>
+    <li>Does the wallet provide enough technical information to evaluate its security?</li>
+    <li>Does it provide a clear recovery process?</li>
+    <li>Does the project have a trustworthy history?</li>
+</ul>
+
+<p>A wallet should not be selected simply because it has an attractive design or a large number of downloads.</p>
+
+<h2>How to Set Up a Wallet Securely</h2>
+
+<p>Creating a wallet should be treated as one of the most important security stages.</p>
+
+<ol>
+    <li>Download the software or purchase the hardware from an official or trustworthy source.</li>
+    <li>Verify the website and application before installation.</li>
+    <li>Create the wallet according to the official instructions.</li>
+    <li>Write down the recovery phrase as instructed by the wallet.</li>
+    <li>Do not take a screenshot of the recovery phrase.</li>
+    <li>Do not email the phrase to yourself.</li>
+    <li>Do not enter the phrase into an untrusted website.</li>
+    <li>Understand and, where appropriate, safely test the recovery procedure before using large amounts.</li>
+</ol>
+
+<h2>How Should You Store a Seed Phrase?</h2>
+
+<p>A recovery phrase should be stored in a way that reduces both theft and accidental loss.</p>
+
+<p>A digital copy stored on a phone, email account, or cloud service may be exposed through account compromise, malware, synchronization, or accidental sharing.</p>
+
+<p>For this reason, many users prefer a physical backup stored in a secure location, while also considering risks such as fire, water damage, theft, and unauthorized access.</p>
+
+<p>It is also important to think about how the backup could be accessed during an emergency without making the secret available to unauthorized people.</p>
+
+<h2>Why Should You Never Photograph a Seed Phrase?</h2>
+
+<p>A photograph may appear to be an easy backup method, but it can be automatically synchronized to cloud storage or remain in a phone's photo library.</p>
+
+<p>If an attacker gains access to the phone or cloud account, the attacker may obtain a copy of the phrase.</p>
+
+<p>For this reason, a screenshot or photograph should not be considered a secure recovery method simply because it is stored on a personal device.</p>
+
+<h2>What Happens If You Lose Your Phone?</h2>
+
+<p>Losing a phone does not necessarily mean losing Bitcoin.</p>
+
+<p>If the wallet is backed up correctly and the recovery phrase is available, the wallet may be restored on another compatible device.</p>
+
+<p>However, users should be extremely careful about fake recovery applications and people who request the recovery phrase while pretending to provide technical support.</p>
+
+<h2>What Happens If You Lose a Hardware Wallet?</h2>
+
+<p>If you have a correct backup of the wallet's recovery information, losing the hardware device itself does not necessarily mean losing the Bitcoin.</p>
+
+<p>However, the backup must be protected carefully because anyone who obtains it may be able to restore the wallet.</p>
+
+<p>The device and its backup should therefore be treated as separate parts of the security system.</p>
+
+<h2>What Happens If You Forget the Password?</h2>
+
+<p>A wallet application's password should not automatically be confused with the wallet's recovery phrase.</p>
+
+<p>Different wallets have different recovery and encryption models. Some local wallet passwords may be required to decrypt wallet data, while other recovery mechanisms depend on a seed phrase.</p>
+
+<p>Users should never assume that a centralized support team can recover everything in the same way a traditional online account provider can.</p>
+
+<h2>Wallet Backup and Recovery</h2>
+
+<p>Backups are a fundamental part of wallet security.</p>
+
+<p>Users should consider scenarios such as:</p>
+
+<ul>
+    <li>Loss of a smartphone.</li>
+    <li>Computer failure.</li>
+    <li>Device theft.</li>
+    <li>Fire or water damage.</li>
+    <li>Loss of a local wallet password.</li>
+    <li>Needing to restore a wallet years later.</li>
+</ul>
+
+<p>The purpose of a backup is to ensure that a single incident does not permanently remove access to the funds.</p>
+
+<h2>The Most Dangerous Mistake: Sharing Your Seed Phrase</h2>
+
+<p>A recovery phrase should never be given to another person.</p>
+
+<p>A legitimate support team should not normally need your secret recovery phrase to solve an ordinary technical problem.</p>
+
+<p>If someone on Telegram, WhatsApp, email, social media, or another platform asks for your seed phrase in order to "unlock" or "recover" your wallet, treat it as a strong warning sign of theft.</p>
+
+<p>The same principle applies to websites asking for a recovery phrase to "connect," "synchronize," or "verify" a wallet.</p>
+
+<h2>Common Wallet Scams</h2>
+
+<h3>Fake Wallet Applications</h3>
+
+<p>Attackers may publish applications using names, logos, or designs similar to legitimate wallets. Installing an untrusted wallet can expose private keys or recovery information.</p>
+
+<h3>Fake Technical Support</h3>
+
+<p>Scammers may impersonate support staff and request private keys, recovery phrases, passwords, or links to supposed recovery pages.</p>
+
+<h3>Phishing Websites</h3>
+
+<p>A phishing website may look almost identical to a legitimate wallet or exchange website while actually being designed to steal credentials or recovery information.</p>
+
+<h3>Fake Giveaways</h3>
+
+<p>Some scams promise to return more Bitcoin than the user sends. Requests to send Bitcoin first in exchange for a guaranteed larger return should be treated as a major warning sign.</p>
+
+<h3>Recipient Address Replacement</h3>
+
+<p>Malware can sometimes monitor the clipboard and replace a copied Bitcoin address with an address controlled by an attacker.</p>
+
+<p>For this reason, always verify the recipient address before confirming a transaction, especially when sending a large amount.</p>
+
+<h2>Address Poisoning</h2>
+
+<p>Some scams attempt to make an address that resembles one previously used by the victim appear in transaction history.</p>
+
+<p>If the user later copies an address from transaction history without checking it carefully, funds may be sent to the attacker's address.</p>
+
+<p>The safest approach is to verify the recipient address carefully rather than relying only on a few beginning or ending characters.</p>
+
+<h2>Bitcoin Wallets and Privacy</h2>
+
+<p>Bitcoin is not completely anonymous.</p>
+
+<p>Bitcoin transactions are recorded on a public blockchain, meaning transaction history associated with addresses can be observed.</p>
+
+<p>A person's real-world identity is not automatically displayed beside an address, but an address can sometimes be linked to a person through exchange records, purchases, public information, or transaction patterns.</p>
+
+<p>Wallet behavior, address reuse, and the way a wallet interacts with external services can therefore affect privacy.</p>
+
+<h2>Can You Use More Than One Wallet?</h2>
+
+<p>Yes. A user can have multiple Bitcoin wallets, and doing so can be useful for organization and security.</p>
+
+<p>For example, a user might keep a small amount in a hot wallet for everyday spending and use a cold wallet for longer-term savings.</p>
+
+<p>However, multiple wallets also create additional backup responsibilities because every recovery mechanism must be managed securely.</p>
+
+<h2>A Daily Wallet and a Savings Wallet</h2>
+
+<p>A practical strategy is to separate funds according to their intended use.</p>
+
+<p>A daily wallet can contain a limited amount needed for payments and frequent transactions, while long-term savings can be held in a more protected environment.</p>
+
+<p>This can reduce the impact of a compromise involving an everyday device because an attacker may not automatically gain access to all of the user's funds.</p>
+
+<h2>Are Cold Wallets 100% Safe?</h2>
+
+<p>No security system provides an absolute guarantee against every possible failure.</p>
+
+<p>Cold storage can reduce certain risks, particularly those associated with continuous internet exposure, but it does not prevent social engineering, recovery phrase theft, malicious setup procedures, or users approving incorrect transactions.</p>
+
+<p>Bitcoin security is therefore a system of multiple protections rather than a property of one device.</p>
+
+<h2>What Makes a Wallet Security System Strong?</h2>
+
+<p>Wallet security can be understood as several layers:</p>
+
+<ul>
+    <li>Trusted wallet software.</li>
+    <li>A secure and updated device.</li>
+    <li>Protected private keys.</li>
+    <li>A securely stored recovery phrase.</li>
+    <li>A recoverable backup.</li>
+    <li>Careful verification of recipient addresses.</li>
+    <li>Protection against phishing and fake applications.</li>
+    <li>Never sharing secrets with other people.</li>
+    <li>Keeping only appropriate amounts in internet-connected wallets.</li>
+</ul>
+
+<h2>Wallet Security Checklist</h2>
+
+<p>Before transferring real funds to a new wallet, ask yourself:</p>
+
+<ul>
+    <li>Did I obtain the wallet from a trustworthy source?</li>
+    <li>Do I understand who controls the private keys?</li>
+    <li>Is the wallet custodial or self-custodial?</li>
+    <li>Do I have a secure backup?</li>
+    <li>Do I understand how recovery works?</li>
+    <li>Have I safely tested the recovery process where appropriate?</li>
+    <li>Do I know where the recovery phrase is stored?</li>
+    <li>Can anyone else access it?</li>
+    <li>Do I verify the recipient address before sending?</li>
+    <li>Is the amount appropriate for the wallet's security model?</li>
+</ul>
+
+<h2>A Simple Example</h2>
+
+<p>Suppose Ahmed creates a Bitcoin wallet on his phone.</p>
+
+<p>The wallet creates keys and addresses, and Ahmed stores the recovery phrase securely.</p>
+
+<p>A friend sends Bitcoin to one of Ahmed's receiving addresses.</p>
+
+<p>The transaction is recorded on the Bitcoin network, and the wallet can display the balance associated with the keys it manages.</p>
+
+<p>Several months later, Ahmed's phone stops working.</p>
+
+<p>If the recovery phrase was stored correctly, Ahmed may restore the wallet on a compatible device and regain access to the funds on the blockchain.</p>
+
+<p>If the recovery phrase was lost and there is no other way to recover the keys, Ahmed may permanently lose the ability to control those funds.</p>
+
+<h2>Bitcoin Wallets vs Bank Accounts</h2>
+
+<p>The two systems have important differences.</p>
+
+<p>With a bank account, the bank maintains the account ledger and controls access according to its rules. It may also provide account recovery and dispute procedures.</p>
+
+<p>With Bitcoin, the public network validates transactions according to protocol rules, while a user controlling their own private keys is largely responsible for protecting access to those keys.</p>
+
+<p>This difference is one of the most important reasons to understand wallets before using Bitcoin.</p>
+
+<h2>Bitcoin Wallet vs Bitcoin Address</h2>
+
+<p>An address is not a wallet.</p>
+
+<p>A wallet can manage many addresses and keys, while an address is generally used as a receiving identifier within a particular transaction context.</p>
+
+<p>Therefore, having one Bitcoin address does not mean that the user has a single wallet in the complete technical sense.</p>
+
+<h2>Wallet vs Private Key vs Seed Phrase</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Term</th>
+            <th>Meaning</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Wallet</td>
+            <td>Software, hardware, or another system that manages keys and helps create and monitor transactions.</td>
+        </tr>
+        <tr>
+            <td>Private Key</td>
+            <td>A secret cryptographic key used to authorize transactions and control associated funds.</td>
+        </tr>
+        <tr>
+            <td>Public Key</td>
+            <td>Public information derived from a private key and used within receiving and verification mechanisms.</td>
+        </tr>
+        <tr>
+            <td>Address</td>
+            <td>An identifier that can be used to receive Bitcoin according to a particular address and script format.</td>
+        </tr>
+        <tr>
+            <td>Seed Phrase</td>
+            <td>A recovery phrase used by modern wallets to recreate a set of keys and wallet information.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>What Should You Never Do?</h2>
+
+<ul>
+    <li>Never send your seed phrase to another person.</li>
+    <li>Never store your seed phrase as a photograph on an internet-connected phone.</li>
+    <li>Never type your seed phrase into an untrusted website.</li>
+    <li>Never trust support messages asking for private keys.</li>
+    <li>Never send Bitcoin without checking the recipient address.</li>
+    <li>Never keep all of your savings in a hot wallet simply because it is convenient.</li>
+    <li>Never install a wallet from an untrusted source.</li>
+    <li>Never assume that owning a hardware wallet alone guarantees complete security.</li>
+</ul>
+
+<h2>Bitcoin Wallets in One Sentence</h2>
+
+<p><strong>A Bitcoin wallet does not store the Bitcoin itself; it manages the keys that allow the user to control Bitcoin recorded on the blockchain.</strong></p>
+
+<h2>Conclusion</h2>
+
+<p>Understanding Bitcoin wallets is an essential step in moving from simply knowing what Bitcoin is to understanding how it can be used safely.</p>
+
+<p>The most important idea is that Bitcoin exists as records on the network, while the wallet manages the keys that provide control over associated funds.</p>
+
+<p>This is why private keys, recovery phrases, backups, and self-custody are so important.</p>
+
+<p>There is no single wallet that is perfect for every use. A hot wallet may be convenient for small everyday amounts, while cold storage may provide stronger protection against certain online risks for longer-term savings.</p>
+
+<p>In every case, the human factor remains a major part of security. Even a well-designed hardware device cannot protect a user who gives a recovery phrase to a scammer or approves a fraudulent transaction.</p>
+
+<p>If you understand the difference between a wallet, private key, address, and recovery phrase, and you understand the responsibility involved in self-custody, you have taken an important step toward using Bitcoin more safely and confidently.</p>
+
+<h2>Useful Links Inside AQL Crypto Academy</h2>
+
+<ul>
+    <li><a href="/academy/bitcoin/what-is-bitcoin">What Is Bitcoin? A Beginner's Guide to Bitcoin</a></li>
+    <li><a href="/academy/bitcoin/history-of-bitcoin">Bitcoin History: From the Original Idea to a Global Digital Asset</a></li>
+    <li><a href="/academy/bitcoin/how-bitcoin-works">How Bitcoin Works: Transactions, Blockchain, Mining, and Security</a></li>
+    <li><a href="/academy/bitcoin/bitcoin-mining">Bitcoin Mining: How Mining and Proof of Work Work</a></li>
+    <li><a href="/academy/bitcoin/bitcoin-halving">Bitcoin Halving: What Is Bitcoin Halving and How Does It Work?</a></li>
+    <li><a href="/crypto/BTC">Bitcoin Price and Market Information</a></li>
+</ul>
+
+<h2>Educational Disclaimer</h2>
+
+<p>This article is educational and is intended to explain Bitcoin wallets, keys, recovery phrases, and security concepts in an accessible way. It is not financial, investment, or legal advice. Before using a wallet or transferring real funds, verify the official documentation for the wallet, service, and device you are using.</p>
+HTML,
+
+    'image' => null,
+
+    'seo_title' => null,
+
+    'seo_title_ar' => 'محافظ البيتكوين: شرح المفاتيح وSeed Phrase والأمان | AQL Crypto Academy',
+
+    'seo_title_en' => 'Bitcoin Wallets: Keys, Seed Phrases, and Security | AQL Crypto Academy',
+
+    'meta_description' => null,
+
+    'meta_description_ar' => 'تعرف على محافظ البيتكوين وكيف تعمل، والفرق بين Private Key وPublic Key وBitcoin Address وSeed Phrase، وأنواع المحافظ الساخنة والباردة ومحافظ الأجهزة، والحفظ الذاتي وأهم قواعد الأمان.',
+
+    'meta_description_en' => 'Learn how Bitcoin wallets work, the difference between private keys, public keys, addresses and seed phrases, hot and cold wallets, hardware wallets, self-custody, backups, and Bitcoin wallet security.',
+
+    'faq_ar' => [
+        [
+            'question' => 'ما هي محفظة البيتكوين؟',
+            'answer' => 'محفظة البيتكوين هي برنامج أو جهاز أو نظام يساعد المستخدم على إدارة المفاتيح التشفيرية المستخدمة لاستقبال وإنفاق Bitcoin. البيتكوين نفسه لا يتم تخزينه داخل المحفظة، بل توجد سجلاته على البلوكتشين.'
+        ],
+        [
+            'question' => 'هل البيتكوين موجود داخل المحفظة؟',
+            'answer' => 'لا. البيتكوين موجود كسجلات على شبكة Bitcoin والبلوكتشين، بينما تدير المحفظة المفاتيح التي تسمح للمستخدم بالتحكم في الأموال المرتبطة بها.'
+        ],
+        [
+            'question' => 'ما هو المفتاح الخاص Private Key؟',
+            'answer' => 'المفتاح الخاص هو سر تشفيري يستخدم لتوقيع معاملات Bitcoin وإثبات القدرة على إنفاق الأموال المرتبطة به. يجب الحفاظ عليه سريًا وعدم مشاركته مع أي شخص.'
+        ],
+        [
+            'question' => 'ما هي Seed Phrase؟',
+            'answer' => 'Seed Phrase أو Recovery Phrase هي مجموعة من الكلمات تستخدمها العديد من المحافظ الحديثة لاستعادة المحفظة وإعادة إنشاء المفاتيح والعناوين المرتبطة بها.'
+        ],
+        [
+            'question' => 'ما الفرق بين المحفظة الساخنة والمحفظة الباردة؟',
+            'answer' => 'المحفظة الساخنة تعمل في بيئة متصلة بالإنترنت مثل الهاتف أو الكمبيوتر، بينما تهدف المحفظة الباردة إلى تقليل تعرض المفاتيح للإنترنت، وغالبًا تستخدم للتخزين طويل الأجل.'
+        ],
+        [
+            'question' => 'هل يمكن استعادة البيتكوين إذا فقدت الهاتف؟',
+            'answer' => 'يمكن استعادة الوصول إلى المحفظة في كثير من الحالات إذا كانت معلومات الاسترداد الصحيحة محفوظة وكانت المحفظة الجديدة متوافقة مع طريقة الاسترداد المستخدمة سابقًا.'
+        ],
+        [
+            'question' => 'هل يجب مشاركة Seed Phrase مع دعم المحفظة؟',
+            'answer' => 'لا. يجب عدم مشاركة Seed Phrase مع أي شخص. طلب عبارة الاسترداد بحجة الدعم الفني أو فتح المحفظة أو استعادة الأموال يعد علامة قوية على محاولة احتيال.'
+        ],
+        [
+            'question' => 'هل محافظ الأجهزة آمنة تمامًا؟',
+            'answer' => 'لا توجد وسيلة توفر أمانًا مطلقًا. محافظ الأجهزة يمكن أن تقلل بعض المخاطر المرتبطة بالإنترنت، لكن المستخدم لا يزال مسؤولًا عن حماية الجهاز وعبارة الاسترداد والتحقق من المعاملات.'
+        ],
+        [
+            'question' => 'ما الفرق بين المحفظة ومنصة التداول؟',
+            'answer' => 'في المحفظة ذات الحفظ الذاتي يتحكم المستخدم بالمفاتيح الخاصة، بينما قد تحتفظ منصة التداول بالمفاتيح نيابة عن المستخدم. لذلك يجب معرفة من يتحكم بالمفاتيح قبل الاعتماد على أي خدمة.'
+        ],
+        [
+            'question' => 'هل Bitcoin مجهول تمامًا؟',
+            'answer' => 'لا. معاملات Bitcoin مسجلة على بلوكتشين عامة ويمكن تحليلها، وقد يمكن ربط العناوين بهوية حقيقية من خلال معلومات خارجية مثل بيانات المنصات أو المعاملات.'
+        ],
+    ],
+
+    'faq_en' => [
+        [
+            "question" => "What is a Bitcoin wallet?",
+            "answer" => "A Bitcoin wallet is software, hardware, or another system that helps manage the cryptographic keys used to receive and spend Bitcoin. The Bitcoin itself is not stored inside the wallet; its records exist on the blockchain."
+        ],
+        [
+            "question" => "Is Bitcoin stored inside a wallet?",
+            "answer" => "No. Bitcoin exists as records on the Bitcoin network and blockchain, while the wallet manages the keys that allow the user to control associated funds."
+        ],
+        [
+            "question" => "What is a private key?",
+            "answer" => "A private key is a secret cryptographic value used to sign Bitcoin transactions and authorize spending. It must remain secret and should never be shared with another person."
+        ],
+        [
+            "question" => "What is a seed phrase?",
+            "answer" => "A seed phrase, also called a recovery phrase, is a sequence of words used by many modern wallets to restore a wallet and recreate its associated keys and addresses."
+        ],
+        [
+            "question" => "What is the difference between a hot wallet and a cold wallet?",
+            "answer" => "A hot wallet operates in an internet-connected environment such as a phone or computer, while cold storage is designed to reduce the exposure of private keys to the internet and is often used for longer-term storage."
+        ],
+        [
+            "question" => "Can Bitcoin be recovered if I lose my phone?",
+            "answer" => "In many cases, wallet access can be restored if the correct recovery information was securely backed up and the replacement wallet is compatible with the original recovery method."
+        ],
+        [
+            "question" => "Should I share my seed phrase with wallet support?",
+            "answer" => "No. You should never share your seed phrase with anyone. A person asking for it to provide technical support, unlock a wallet, or recover funds is a strong warning sign of a scam."
+        ],
+        [
+            "question" => "Are hardware wallets completely safe?",
+            "answer" => "No security method is completely risk-free. Hardware wallets can reduce certain online risks, but users are still responsible for protecting the device, recovery information, and transaction approvals."
+        ],
+        [
+            "question" => "What is the difference between a wallet and an exchange?",
+            "answer" => "With a self-custodial wallet, the user controls the private keys. An exchange or other custodian may hold the keys on behalf of the user. Understanding who controls the keys is essential when evaluating a service."
+        ],
+        [
+            "question" => "Is Bitcoin completely anonymous?",
+            "answer" => "No. Bitcoin transactions are recorded on a public blockchain and can be analyzed. Addresses may sometimes be linked to real-world identities through external information such as exchange records or transaction activity."
+        ],
+    ],
+
+    'status' => 'published',
+    'sort_order' => 4,
+    'published_at' => now(),
+],
 
             [
                 'title' => 'Bitcoin vs Ethereum',
