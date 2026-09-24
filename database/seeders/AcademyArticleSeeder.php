@@ -2932,37 +2932,7 @@ HTML,
     'published_at' => now(),
             ],
 
-            [
-                'title' => 'Bitcoin Mining Explained',
-                'title_ar' => 'شرح تعدين البيتكوين',
-                'title_en' => 'Bitcoin Mining Explained',
-
-                'slug' => 'bitcoin-mining',
-
-                'excerpt' => 'Learn what Bitcoin mining is, how proof of work operates, and how new blocks are added to the blockchain.',
-                'excerpt_ar' => 'تعرف على تعدين البيتكوين، وكيف تعمل آلية إثبات العمل، وكيف تتم إضافة الكتل الجديدة إلى البلوكشين.',
-                'excerpt_en' => 'Learn what Bitcoin mining is, how proof of work operates, and how new blocks are added to the blockchain.',
-
-                'content' => '<p>This is a placeholder for the full educational article about Bitcoin mining.</p>',
-                'content_ar' => '<p>هذا نص تجريبي للمقال التعليمي الكامل حول تعدين البيتكوين.</p>',
-                'content_en' => '<p>This is a placeholder for the full educational article about Bitcoin mining.</p>',
-
-                'image' => null,
-
-                'seo_title' => 'Bitcoin Mining Explained | AQL Crypto Academy',
-                'seo_title_ar' => 'شرح تعدين البيتكوين | أكاديمية AQL Crypto',
-                'seo_title_en' => 'Bitcoin Mining Explained | AQL Crypto Academy',
-
-                'meta_description' => 'Learn how Bitcoin mining and proof of work operate and how miners help secure the Bitcoin network.',
-                'meta_description_ar' => 'تعرف على كيفية عمل تعدين البيتكوين وإثبات العمل ودور المعدنين في تأمين شبكة البيتكوين.',
-                'meta_description_en' => 'Learn how Bitcoin mining and proof of work operate and how miners help secure the Bitcoin network.',
-
-                'status' => 'published',
-                'sort_order' => 4,
-                'published_at' => now(),
-            ],
-
-            [
+           [
     'title' => 'Bitcoin Wallets',
     'title_ar' => 'محافظ البيتكوين: الدليل الشامل للمفاتيح وSeed Phrase والأمان',
     'title_en' => 'Bitcoin Wallets: A Complete Guide to Keys, Seed Phrases, and Security',
@@ -4108,7 +4078,1844 @@ HTML,
     'sort_order' => 4,
     'published_at' => now(),
 ],
+           [
+    'title' => 'Bitcoin Mining',
+    'title_ar' => 'تعدين البيتكوين: كيف يعمل التعدين وإثبات العمل؟',
+    'title_en' => 'Bitcoin Mining Explained: Proof of Work, Miners, Pools, and Security',
+    'slug' => 'bitcoin-mining',
 
+    'excerpt' => null,
+    'excerpt_ar' => 'كيف يعمل تعدين البيتكوين؟ تعرف على دور المعدنين في إنشاء الكتل والتحقق من المعاملات، وProof of Work وNonce وHash وMining Difficulty ومكافآت الكتل وMining Pools واستهلاك الطاقة وعلاقة التعدين بأمان شبكة Bitcoin.',
+    'excerpt_en' => 'How does Bitcoin mining work? Learn how miners build blocks and secure the Bitcoin network through Proof of Work, nonces, hashes, mining difficulty, block rewards, mining pools, energy use, and network security.',
+
+    'content' => null,
+
+    'content_ar' => <<<'HTML'
+<h2>مقدمة</h2>
+
+<p>يُعد تعدين البيتكوين من أكثر المفاهيم ارتباطًا بشبكة Bitcoin، لكنه في الوقت نفسه من أكثر المفاهيم التي يحيط بها سوء فهم. فكلمة "التعدين" قد تجعل البعض يعتقد أن المعدنين يقومون بإنشاء عملات جديدة بطريقة عشوائية، أو أن أجهزة التعدين تقوم بحل معادلات رياضية مفيدة خارج الشبكة. في الحقيقة، تعدين Bitcoin هو جزء أساسي من آلية التوافق التي تستخدمها الشبكة لإضافة كتل جديدة إلى البلوكتشين وترتيب المعاملات وحماية النظام من بعض أشكال التلاعب.</p>
+
+<p>يعتمد Bitcoin على آلية تسمى <strong>Proof of Work</strong> أو إثبات العمل. يقوم المعدنون باستخدام قدر كبير من القدرة الحاسوبية للبحث عن نتيجة تجزئة Hash تستوفي شرطًا محددًا تفرضه الشبكة. عندما يعثر أحد المعدنين على نتيجة صحيحة، يستطيع نشر الكتلة إلى الشبكة، ثم تقوم العقد Nodes بالتحقق من صحة الكتلة وفق قواعد Bitcoin قبل قبولها.</p>
+
+<p>التعدين لا يعني أن المعدّن يستطيع كتابة أي بيانات يريدها داخل البلوكتشين. فالكتلة يجب أن تلتزم بقواعد البروتوكول، والعقد المستقلة في الشبكة تتحقق من هذه القواعد. لذلك فإن التعدين والتوافق والعقد والمستخدمين تعمل معًا ضمن نظام واحد.</p>
+
+<p>في هذا الدليل سنشرح تعدين Bitcoin من البداية، بدءًا من معاملات المستخدمين والـMempool، ثم بناء الكتلة، وBlock Header وNonce وHash وProof of Work، وصولًا إلى صعوبة التعدين ومكافآت الكتل وMining Pools وتكاليف التعدين وعلاقته بأمان الشبكة وهجوم 51%.</p>
+
+<hr>
+
+<h2>ما هو تعدين Bitcoin؟</h2>
+
+<p>تعدين Bitcoin هو العملية التي يتم من خلالها تنافس المعدنين على إنشاء كتل جديدة وفق قواعد الشبكة باستخدام Proof of Work.</p>
+
+<p>المعدّن لا يقرر وحده أن كتلة معينة أصبحت صحيحة. بل يقوم ببناء كتلة مرشحة، ثم يبحث عن Proof of Work صالح. بعد نشر الكتلة، تتحقق العقد المستقلة من محتواها ومن صحة إثبات العمل وبقية قواعد التوافق.</p>
+
+<p>بعبارة مبسطة، التعدين يقوم بوظيفتين رئيسيتين:</p>
+
+<ul>
+<li>المساعدة في ترتيب وتأكيد المعاملات داخل كتل.</li>
+<li>توفير آلية تنافسية مكلفة حسابيًا تجعل تعديل تاريخ الشبكة أمرًا صعبًا.</li>
+</ul>
+
+<p>كما يحصل المعدّن الذي يجد كتلة صالحة على مكافأة تتكون من <strong>Block Subsidy</strong> بالإضافة إلى رسوم المعاملات الموجودة في الكتلة.</p>
+
+<hr>
+
+<h2>لماذا يحتاج Bitcoin إلى التعدين؟</h2>
+
+<p>Bitcoin صُمم ليعمل دون وجود بنك مركزي أو جهة واحدة مسؤولة عن تسجيل جميع المعاملات. لذلك تحتاج الشبكة إلى آلية تسمح للمشاركين بالاتفاق على ترتيب المعاملات والكتل.</p>
+
+<p>هنا يأتي دور Proof of Work. بدل أن تمنح جهة مركزية شخصًا واحدًا حق تحديد الكتلة التالية، يتنافس المعدنون باستخدام القدرة الحاسوبية لإنتاج كتلة تستوفي شرط الشبكة.</p>
+
+<p>هذا لا يعني أن التعدين وحده يقرر صحة المعاملات. فالعقد التي تشغل برنامج Bitcoin تتحقق من الكتل والمعاملات وفق قواعد التوافق.</p>
+
+<hr>
+
+<h2>علاقة التعدين بالـBlockchain</h2>
+
+<p>الـBlockchain هو سجل مرتب من الكتل. تحتوي كل كتلة على مجموعة من المعاملات ومعلومات مرتبطة بالكتلة السابقة وبيانات أخرى يستخدمها البروتوكول.</p>
+
+<p>عندما يتم قبول كتلة جديدة، تصبح جزءًا من سلسلة الكتل. وكلما أضيفت كتل جديدة فوقها، يصبح تغيير تاريخ السلسلة أكثر تكلفة من الناحية الحسابية.</p>
+
+<p>لذلك لا يمكن فهم التعدين بمعزل عن البلوكتشين. التعدين هو العملية التي تتنافس من خلالها أجهزة التعدين على إنتاج الكتل، بينما تقوم العقد بالتحقق من أن هذه الكتل تتوافق مع قواعد الشبكة.</p>
+
+<hr>
+
+<h2>من هم معدنو Bitcoin؟</h2>
+
+<p>المعدنون هم أفراد أو شركات أو كيانات تشغل أجهزة متخصصة لتنفيذ عمليات Hashing بهدف العثور على Proof of Work صالح.</p>
+
+<p>في بدايات Bitcoin كان من الممكن تعدين العملة باستخدام أجهزة الحاسوب العادية. لكن مع زيادة المنافسة وتطور الشبكة، أصبحت أجهزة ASIC المتخصصة هي التقنية الأساسية المستخدمة في تعدين Bitcoin على نطاق واسع.</p>
+
+<p>قد يعمل المعدّن بشكل منفرد، أو ينضم إلى Mining Pool حيث تتعاون مجموعة كبيرة من المعدنين وتقسم مكافآت التعدين وفق نظام دفع محدد.</p>
+
+<hr>
+
+<h2>ما الذي يقوم به المعدّن فعليًا؟</h2>
+
+<p>يمكن تبسيط عمل المعدّن إلى سلسلة من الخطوات:</p>
+
+<ol>
+<li>الحصول على معاملات صالحة يمكن تضمينها في كتلة.</li>
+<li>اختيار المعاملات وترتيبها وفق سياسات التعدين.</li>
+<li>إنشاء Block Template.</li>
+<li>إنشاء معاملة Coinbase الخاصة بمكافأة الكتلة.</li>
+<li>بناء Merkle Root للمعاملات.</li>
+<li>تكوين Block Header.</li>
+<li>تغيير Nonce وقيم أخرى قابلة للتعديل.</li>
+<li>حساب Hash للـBlock Header مرارًا.</li>
+<li>مقارنة النتيجة بالهدف Target المطلوب.</li>
+<li>عند العثور على نتيجة صالحة، نشر الكتلة إلى الشبكة.</li>
+</ol>
+
+<p>توضح مواصفات BIP22 وBIP23 كيفية تعامل برامج التعدين مع قوالب الكتل، والـtransactions والـtarget والـnonce وغيرها من عناصر عملية التعدين. :contentReference[oaicite:1]{index=1}</p>
+
+<hr>
+
+<h2>ما هي معاملات Bitcoin؟</h2>
+
+<p>قبل أن توجد كتلة، توجد معاملات يقوم المستخدمون بإنشائها وبثها إلى شبكة Bitcoin.</p>
+
+<p>المعاملة تحدد كيفية نقل قيمة Bitcoin من مدخلات إلى مخرجات وفق قواعد النظام. تستقبل العقد المعاملات وتتحقق منها، ويمكن للمعاملة الصالحة أن تدخل إلى الـMempool في العقدة.</p>
+
+<p>بعد ذلك يستطيع المعدّن اختيار المعاملات التي يريد تضمينها في الكتلة التي يعمل عليها.</p>
+
+<hr>
+
+<h2>اختيار المعاملات من الـMempool</h2>
+
+<p>الـMempool هو مجموعة المعاملات غير المؤكدة التي تحتفظ بها العقد وفق سياساتها المحلية قبل تضمينها في كتلة.</p>
+
+<p>المعدّن أو برنامج التعدين يستطيع الحصول على معلومات المعاملات التي يمكن تضمينها في Block Template.</p>
+
+<p>عادةً تكون رسوم المعاملة أحد العوامل المهمة عند ترتيب المعاملات من وجهة نظر اقتصاديات التعدين، لكن اختيار المعاملات يخضع أيضًا لقواعد الحجم والاعتماد بين المعاملات وسياسات البرنامج.</p>
+
+<p>لذلك فإن وجود معاملة في Mempool لا يعني تلقائيًا أنها ستدخل الكتلة التالية.</p>
+
+<hr>
+
+<h2>بناء كتلة جديدة</h2>
+
+<p>بعد اختيار مجموعة من المعاملات، يتم بناء كتلة مرشحة.</p>
+
+<p>تتكون الكتلة بصورة مبسطة من:</p>
+
+<ul>
+<li>Block Header.</li>
+<li>عدد المعاملات.</li>
+<li>المعاملات الموجودة داخل الكتلة.</li>
+</ul>
+
+<p>الـBlock Header هو الجزء الذي يرتبط مباشرة بعملية Proof of Work، بينما تمثل المعاملات المحتوى الاقتصادي الأساسي للكتلة.</p>
+
+<hr>
+
+<h2>ما هو Block Header؟</h2>
+
+<p>رأس الكتلة يحتوي على مجموعة من الحقول التي تلخص معلومات مهمة عن الكتلة.</p>
+
+<p>من أهمها:</p>
+
+<ul>
+<li>Version.</li>
+<li>Previous Block Hash.</li>
+<li>Merkle Root.</li>
+<li>Time.</li>
+<li>nBits أو تمثيل الهدف المستخدم في تحديد صعوبة إثبات العمل.</li>
+<li>Nonce.</li>
+</ul>
+
+<p>وجود Hash للكتلة السابقة داخل الرأس يربط الكتل ببعضها. كما أن Merkle Root يمثل التزامًا بمحتوى معاملات الكتلة.</p>
+
+<hr>
+
+<h2>ما هو Nonce؟</h2>
+
+<p>الـNonce هو قيمة موجودة في Block Header يستطيع المعدّن تغييرها أثناء البحث عن Hash صالح.</p>
+
+<p>الفكرة الأساسية هي أن تغيير الـNonce يؤدي إلى تغيير الـHash الناتج. لذلك يستطيع المعدّن تجربة أعداد مختلفة بسرعة كبيرة.</p>
+
+<p>لكن مساحة الـNonce محدودة، ولذلك لا يعتمد التعدين دائمًا على تغيير الـNonce وحده. يمكن تغيير عناصر أخرى مسموحة في قالب العمل، مثل بعض بيانات Coinbase أو الوقت وفق القواعد المستخدمة.</p>
+
+<p>توضح مواصفات BIP23 أن نطاق الـnonce من العناصر التي يمكن أن يحددها قالب التعدين، وأن قوالب التعدين يمكن أن تسمح بتعديلات مختلفة مثل الوقت وبيانات Coinbase. :contentReference[oaicite:2]{index=2}</p>
+
+<hr>
+
+<h2>ما هو Hash؟</h2>
+
+<p>الـHash هو ناتج دالة تجزئة تشفيرية. في Bitcoin تستخدم عملية التعدين SHA-256 ضمن آلية إثبات العمل.</p>
+
+<p>من أهم خصائص دالة التجزئة أن تغييرًا صغيرًا جدًا في البيانات المدخلة يؤدي عادةً إلى نتيجة مختلفة تمامًا.</p>
+
+<p>لذلك عندما يغير المعدّن الـNonce، تتغير نتيجة Hash، ويجب عليه اختبار النتيجة الجديدة لمعرفة ما إذا كانت تحقق شرط الشبكة.</p>
+
+<hr>
+
+<h2>ما هو Proof of Work؟</h2>
+
+<p><strong>Proof of Work</strong> هو إثبات حسابي يوضح أن المعدّن أنفق قدرًا من العمل الحسابي للعثور على نتيجة تستوفي شرطًا معينًا.</p>
+
+<p>الشرط الأساسي في التعدين هو أن يكون Hash الناتج من Block Header أقل من Target محدد من قبل قواعد الشبكة.</p>
+
+<p>لا يحتاج باقي المشاركين إلى إعادة تنفيذ ملايين أو مليارات المحاولات التي قام بها المعدّن. يمكنهم التحقق من النتيجة النهائية بسرعة نسبيًا.</p>
+
+<p>هذه الخاصية هي إحدى النقاط المهمة في تصميم Proof of Work: العثور على الحل مكلف من ناحية المحاولات، بينما التحقق من الحل أسهل بكثير.</p>
+
+<hr>
+
+<h2>كيف يحاول المعدّن العثور على Block Hash صالح؟</h2>
+
+<p>لنفترض أن المعدّن أنشأ Block Header معينًا.</p>
+
+<p>يقوم الجهاز بحساب Hash، ثم يفحص النتيجة:</p>
+
+<ul>
+<li>إذا كانت النتيجة لا تحقق Target، يجرب قيمة أخرى.</li>
+<li>إذا كانت تحقق Target، يكون قد وجد Proof of Work صالحًا.</li>
+</ul>
+
+<p>هذه العملية تتكرر بسرعة هائلة.</p>
+
+<p>لا يستطيع المعدّن معرفة مسبقًا أي Nonce سيعمل. لذلك يعتمد التعدين على المحاولة والاختبار بسرعة كبيرة.</p>
+
+<hr>
+
+<h2>لماذا تحتاج عملية التعدين إلى محاولات كثيرة؟</h2>
+
+<p>لأن نتيجة Hash تبدو عشوائية بالنسبة إلى عملية البحث. تغيير Nonce لا يجعل المعدّن أقرب إلى الحل بطريقة خطية.</p>
+
+<p>قد يجد جهاز سريع الحل بعد عدد قليل من المحاولات، وقد يحتاج إلى عدد هائل من المحاولات في حالات أخرى.</p>
+
+<p>لهذا السبب تقاس قدرة أجهزة التعدين عادةً بمعدل الـHash Rate، أي عدد عمليات التجزئة التي تستطيع تنفيذها في الثانية.</p>
+
+<hr>
+
+<h2>صعوبة التعدين Mining Difficulty</h2>
+
+<p>Mining Difficulty هي مقياس يعبّر عن مدى صعوبة العثور على Proof of Work صالح مقارنة بمستوى مرجعي محدد.</p>
+
+<p>لكن من الناحية التقنية، العامل المباشر الذي يتحقق منه المعدّن هو <strong>Target</strong>. كلما أصبح Target أكثر تقييدًا، يصبح العثور على Hash صالح أكثر صعوبة.</p>
+
+<p>لذلك ينبغي عدم الخلط بين Difficulty وHash Rate وTarget. فهي مفاهيم مرتبطة لكنها ليست الشيء نفسه.</p>
+
+<hr>
+
+<h2>لماذا تتغير صعوبة التعدين؟</h2>
+
+<p>Bitcoin مصمم ليستهدف متوسطًا يقارب عشر دقائق بين الكتل. لذلك عندما تتغير القدرة الإجمالية للشبكة على التعدين، تحتاج الشبكة إلى تعديل مستوى الصعوبة للحفاظ على معدل إنتاج الكتل قريبًا من الهدف.</p>
+
+<p>إذا زادت القدرة الحاسوبية بشكل كبير، فإن بقاء الصعوبة ثابتة قد يؤدي إلى إنتاج الكتل بسرعة أكبر من المستوى المستهدف. والعكس صحيح عندما تنخفض القدرة الحاسوبية.</p>
+
+<p>ولهذا تستخدم Bitcoin آلية تعديل للصعوبة وفق قواعد البروتوكول.</p>
+
+<hr>
+
+<h2>كيف تحافظ الشبكة على معدل إنتاج الكتل؟</h2>
+
+<p>لا تفرض الشبكة أن يتم العثور على كتلة كل عشر دقائق بالضبط. الرقم هو متوسط مستهدف على المدى الطويل، بينما يمكن أن تكون الفترات بين الكتل أقصر أو أطول.</p>
+
+<p>بعد فترات محددة من الكتل، يتم تعديل الصعوبة استنادًا إلى الزمن الذي استغرقته الفترة السابقة، وفق قواعد البروتوكول.</p>
+
+<p>لذلك فإن عشر دقائق ليست مؤقتًا ينتهي عنده التعدين ثم تبدأ كتلة جديدة، بل هي متوسط مستهدف لمعدل إنتاج الكتل.</p>
+
+<hr>
+
+<h2>ماذا يحدث عندما يجد المعدّن كتلة؟</h2>
+
+<p>عندما يجد المعدّن Block Header يحقق Proof of Work، يقوم ببناء الكتلة كاملة ثم يبثها إلى شبكة Bitcoin.</p>
+
+<p>تستقبل العقد الكتلة وتتحقق من:</p>
+
+<ul>
+<li>صحة Proof of Work.</li>
+<li>ارتباط الكتلة بالكتلة السابقة.</li>
+<li>صحة المعاملات.</li>
+<li>صحة Merkle Root.</li>
+<li>صحة Coinbase Transaction.</li>
+<li>الالتزام بقواعد حجم الكتلة والقواعد الأخرى.</li>
+<li>صحة المكافأة التي يحصل عليها المعدّن.</li>
+</ul>
+
+<p>إذا خالفت الكتلة قواعد التوافق، تستطيع العقد رفضها حتى لو كانت تحتوي على Proof of Work صالح.</p>
+
+<hr>
+
+<h2>التحقق من الكتلة بواسطة Nodes</h2>
+
+<p>العقد Nodes عنصر أساسي في نظام Bitcoin لأنها لا تعتمد على المعدّن لتحديد صحة الكتلة.</p>
+
+<p>المعدّن يقدم كتلة، والعقد تتحقق منها.</p>
+
+<p>هذه النقطة مهمة جدًا لفهم اللامركزية. فالمعدّن الذي يمتلك قدرة حسابية كبيرة لا يحصل تلقائيًا على صلاحية إنشاء Bitcoin إضافي أو تجاوز قواعد البروتوكول.</p>
+
+<hr>
+
+<h2>مكافأة الكتلة Block Reward</h2>
+
+<p>تتكون إيرادات المعدّن من عنصرين رئيسيين:</p>
+
+<ul>
+<li><strong>Block Subsidy:</strong> وحدات Bitcoin الجديدة المسموح بإصدارها مع الكتلة.</li>
+<li><strong>Transaction Fees:</strong> رسوم المعاملات الموجودة في الكتلة.</li>
+</ul>
+
+<p>الـBlock Subsidy ليس مبلغًا ثابتًا إلى الأبد، بل ينخفض وفق جدول Bitcoin المعروف باسم Halving.</p>
+
+<hr>
+
+<h2>Bitcoin Block Subsidy</h2>
+
+<p>بدأت مكافأة التعدين في بدايات Bitcoin عند 50 BTC لكل كتلة. ثم تنخفض إلى النصف كل 210,000 كتلة تقريبًا.</p>
+
+<p>وبحسب جدول Bitcoin.org، أصبحت المكافأة بعد Halving عام 2024 مقدارها <strong>3.125 BTC</strong> لكل كتلة. ومن المقرر أن تنخفض إلى 1.5625 BTC بعد الـHalving التالي عند الكتلة 1,050,000، مع كون تاريخ الحدث تقديريًا لأن إنتاج الكتل لا يحدث في فواصل زمنية ثابتة تمامًا. :contentReference[oaicite:3]{index=3}</p>
+
+<hr>
+
+<h2>Transaction Fees</h2>
+
+<p>رسوم المعاملات هي جزء آخر من دخل المعدّن.</p>
+
+<p>عندما يضيف المعدّن مجموعة من المعاملات إلى كتلة، يستطيع الحصول على الرسوم المرتبطة بهذه المعاملات وفق قواعد Bitcoin.</p>
+
+<p>مع مرور الوقت، ينخفض Block Subsidy بسبب الـHalving، ولذلك تصبح رسوم المعاملات عنصرًا أكثر أهمية في اقتصاديات التعدين.</p>
+
+<hr>
+
+<h2>Bitcoin Halving وعلاقته بالتعدين</h2>
+
+<p>الـHalving هو حدث تنخفض فيه مكافأة الإصدار الجديدة للمعدنين إلى النصف تقريبًا كل 210,000 كتلة.</p>
+
+<p>حدثت عمليات Halving الرئيسية في:</p>
+
+<table>
+<thead>
+<tr>
+<th>الحدث</th>
+<th>التاريخ</th>
+<th>الكتلة</th>
+<th>المكافأة الجديدة</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Halving الأول</td>
+<td>2012</td>
+<td>210,000</td>
+<td>25 BTC</td>
+</tr>
+<tr>
+<td>Halving الثاني</td>
+<td>2016</td>
+<td>420,000</td>
+<td>12.5 BTC</td>
+</tr>
+<tr>
+<td>Halving الثالث</td>
+<td>2020</td>
+<td>630,000</td>
+<td>6.25 BTC</td>
+</tr>
+<tr>
+<td>Halving الرابع</td>
+<td>2024</td>
+<td>840,000</td>
+<td>3.125 BTC</td>
+</tr>
+</tbody>
+</table>
+
+<p>يهدف جدول الإصدار إلى جعل المعروض من Bitcoin محدودًا وفق قواعد البروتوكول، مع استمرار انخفاض الإصدار الجديد بمرور الوقت. :contentReference[oaicite:4]{index=4}</p>
+
+<hr>
+
+<h2>كيف كان التعدين في بدايات Bitcoin؟</h2>
+
+<p>عندما أطلق Bitcoin، كان التعدين أقل تنافسية بكثير من التعدين الصناعي الحديث.</p>
+
+<p>كان بإمكان المستخدم تشغيل برنامج Bitcoin على جهاز حاسوب عادي والمشاركة في عملية التعدين باستخدام وحدة المعالجة المركزية CPU.</p>
+
+<p>مع نمو الشبكة وارتفاع قيمة Bitcoin وزيادة المنافسة، ظهرت تقنيات أكثر تخصصًا.</p>
+
+<hr>
+
+<h2>التعدين باستخدام CPU</h2>
+
+<p>CPU Mining يعني استخدام المعالج العام للحاسوب لتنفيذ عمليات Hashing.</p>
+
+<p>كان هذا مناسبًا نسبيًا في المراحل الأولى من Bitcoin، عندما كانت المنافسة وقدرة الشبكة أقل بكثير.</p>
+
+<p>لكن المعالجات العامة لم تعد مناسبة اقتصاديًا لمنافسة أجهزة ASIC الحديثة على شبكة Bitcoin الرئيسية.</p>
+
+<hr>
+
+<h2>التعدين باستخدام GPU</h2>
+
+<p>بعد مرحلة CPU، أصبحت وحدات معالجة الرسومات GPU مستخدمة في بعض أنظمة التعدين بسبب قدرتها العالية على تنفيذ عمليات حسابية متوازية.</p>
+
+<p>كانت GPU أكثر كفاءة من CPU في بعض خوارزميات التعدين، لكنها في تعدين Bitcoin تم تجاوزها لاحقًا بواسطة أجهزة متخصصة بدرجة أكبر.</p>
+
+<hr>
+
+<h2>ظهور ASIC</h2>
+
+<p>ASIC تعني <strong>Application-Specific Integrated Circuit</strong>، أي دائرة متكاملة مصممة لأداء مهمة محددة.</p>
+
+<p>في تعدين Bitcoin، صُممت ASICs لتنفيذ عمليات SHA-256 بكفاءة عالية جدًا مقارنة بالأجهزة العامة.</p>
+
+<p>أدى ظهور ASIC إلى تغيير اقتصاديات التعدين بصورة كبيرة، وأصبح تعدين Bitcoin على نطاق تنافسي مرتبطًا بأجهزة متخصصة ومرافق كهربائية وتبريد وإدارة تشغيلية.</p>
+
+<hr>
+
+<h2>لماذا أصبحت ASIC مهمة؟</h2>
+
+<p>التعدين عملية تعتمد على عدد هائل من عمليات Hashing. لذلك فإن تحسين كفاءة الجهاز في تنفيذ هذه العمليات يمكن أن يحدث فرقًا كبيرًا في التكلفة التشغيلية.</p>
+
+<p>تتنافس أجهزة ASIC على عدة عوامل، منها:</p>
+
+<ul>
+<li>Hash Rate.</li>
+<li>استهلاك الكهرباء.</li>
+<li>الكفاءة الطاقية.</li>
+<li>السعر.</li>
+<li>التبريد.</li>
+<li>العمر التشغيلي.</li>
+</ul>
+
+<hr>
+
+<h2>Mining Pools</h2>
+
+<p>Mining Pool هو تجمع لمعدنين يتعاونون في تنفيذ أعمال التعدين وتقاسم العوائد وفق نظام دفع معين.</p>
+
+<p>بدل أن يعتمد المعدّن على فرصة العثور على كتلة كاملة بمفرده، يساهم بقوة Hashing ضمن مجموعة كبيرة.</p>
+
+<p>تستخدم مجمعات التعدين آليات تسمح بإثبات مساهمة المعدّن في العمل، حتى عندما لا يكون هو الذي وجد الكتلة النهائية.</p>
+
+<p>توجد مواصفات تاريخية مثل BIP23 تصف امتدادات مخصصة للتعدين الجماعي وتبادل قوالب العمل بين الخادم والمعدنين. :contentReference[oaicite:5]{index=5}</p>
+
+<hr>
+
+<h2>لماذا ينضم المعدنون إلى Mining Pools؟</h2>
+
+<p>السبب الرئيسي هو تقليل تذبذب الدخل.</p>
+
+<p>المعدّن الفردي قد يمتلك قدرة حسابية كبيرة، لكنه قد يمر بفترات طويلة دون العثور على كتلة كاملة. أما في Pool، فإن مساهمته تدخل ضمن قوة Hashing جماعية، ويمكن أن يحصل على دفعات وفق نظام المجمع عندما تحقق المجموعة شروط الدفع.</p>
+
+<p>هذا لا يعني أن Pool يلغي مخاطر التعدين أو يضمن الربح.</p>
+
+<hr>
+
+<h2>كيف يتم توزيع مكافآت الـMining Pool؟</h2>
+
+<p>تختلف طرق توزيع المكافآت بين المجمعات. بعض الأنظمة تعتمد على مقدار العمل الذي قدمه المعدّن، بينما تستخدم أنظمة أخرى طرقًا مختلفة لحساب الحصة.</p>
+
+<p>لذلك يجب على أي شخص يفكر في التعدين قراءة شروط Pool ورسومه وطريقة احتساب الدفعات قبل الاشتراك.</p>
+
+<hr>
+
+<h2>Solo Mining مقابل Pool Mining</h2>
+
+<table>
+<thead>
+<tr>
+<th>العنصر</th>
+<th>Solo Mining</th>
+<th>Pool Mining</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>طريقة العمل</td>
+<td>المعدّن يعمل بشكل مستقل</td>
+<td>المعدّن يعمل ضمن مجموعة</td>
+</tr>
+<tr>
+<td>تذبذب الدخل</td>
+<td>مرتفع</td>
+<td>عادةً أقل</td>
+</tr>
+<tr>
+<td>مكافأة الكتلة</td>
+<td>للمعدّن عند العثور على كتلة صالحة</td>
+<td>توزع وفق نظام Pool</td>
+</tr>
+<tr>
+<td>الإدارة</td>
+<td>مسؤولية المعدّن</td>
+<td>جزء منها يتولاها Pool</td>
+</tr>
+</tbody>
+</table>
+
+<hr>
+
+<h2>تكلفة تعدين Bitcoin</h2>
+
+<p>لا تعتمد تكلفة التعدين على سعر جهاز ASIC فقط.</p>
+
+<p>هناك مجموعة من المصاريف التي تؤثر على اقتصاديات التعدين، ومنها:</p>
+
+<ul>
+<li>الكهرباء.</li>
+<li>أجهزة ASIC.</li>
+<li>التبريد.</li>
+<li>البنية التحتية الكهربائية.</li>
+<li>الإنترنت والاتصالات.</li>
+<li>الصيانة.</li>
+<li>المكان.</li>
+<li>الاستبدال والإصلاح.</li>
+<li>رسوم Mining Pool.</li>
+</ul>
+
+<hr>
+
+<h2>الكهرباء</h2>
+
+<p>الكهرباء من أهم عناصر تكلفة التعدين.</p>
+
+<p>جهاز التعدين يعمل على مدار فترات طويلة ويستهلك الطاقة بصورة مستمرة. لذلك فإن فرقًا صغيرًا في تكلفة الكيلوواط/ساعة يمكن أن يؤثر بصورة كبيرة على اقتصاديات التشغيل.</p>
+
+<p>ولهذا السبب يبحث مشغلو التعدين عن مصادر كهرباء منخفضة التكلفة ومستقرة، لكن انخفاض سعر الكهرباء وحده لا يكفي للحكم على نجاح مشروع التعدين.</p>
+
+<hr>
+
+<h2>الأجهزة</h2>
+
+<p>أجهزة ASIC لها تكلفة شراء أولية، كما أن قيمتها الاقتصادية يمكن أن تتغير مع ظهور أجيال أكثر كفاءة.</p>
+
+<p>قد يكون جهاز قوي من ناحية Hash Rate لكنه أقل كفاءة كهربائية من جهاز أحدث، ولذلك يجب تقييم Hash Rate مع استهلاك الطاقة وليس بصورة منفصلة.</p>
+
+<hr>
+
+<h2>التبريد</h2>
+
+<p>أجهزة التعدين تحول جزءًا كبيرًا من الطاقة الكهربائية إلى حرارة.</p>
+
+<p>لذلك تحتاج مزارع التعدين إلى أنظمة تبريد وتهوية مناسبة. وفي البيئات الحارة يمكن أن تصبح إدارة الحرارة عنصرًا رئيسيًا في التكلفة والاستمرارية.</p>
+
+<hr>
+
+<h2>الإنترنت والبنية التحتية</h2>
+
+<p>التعدين يحتاج إلى اتصال مستقر بالشبكة وإلى بنية تحتية كهربائية مناسبة.</p>
+
+<p>انقطاع الكهرباء أو الاتصال قد يؤدي إلى توقف الجهاز عن العمل أو فقدان فرص المشاركة في العمل الحالي.</p>
+
+<hr>
+
+<h2>صيانة أجهزة التعدين</h2>
+
+<p>أجهزة ASIC تعمل لفترات طويلة تحت حمل مرتفع، ولذلك تحتاج إلى تنظيف وتهوية ومراقبة درجات الحرارة والمراوح ومكونات الطاقة.</p>
+
+<p>كما يجب وضع خطة للتعامل مع الأعطال واستبدال المكونات عند الحاجة.</p>
+
+<hr>
+
+<h2>هل تعدين Bitcoin مربح؟</h2>
+
+<p>لا توجد إجابة ثابتة عن هذا السؤال.</p>
+
+<p>ربحية التعدين تعتمد على مجموعة من المتغيرات المتغيرة، منها:</p>
+
+<ul>
+<li>سعر Bitcoin.</li>
+<li>سعر الكهرباء.</li>
+<li>Hash Rate الخاص بالجهاز.</li>
+<li>كفاءة الجهاز.</li>
+<li>صعوبة الشبكة.</li>
+<li>رسوم Pool.</li>
+<li>تكلفة الأجهزة.</li>
+<li>تكاليف التبريد والصيانة.</li>
+<li>المنافسة في الشبكة.</li>
+</ul>
+
+<p>لذلك لا ينبغي اعتبار ارتفاع سعر Bitcoin وحده دليلًا على أن تعدين Bitcoin مربح.</p>
+
+<hr>
+
+<h2>لماذا لا يمكن الحكم على الربحية من سعر Bitcoin فقط؟</h2>
+
+<p>إذا ارتفع سعر Bitcoin، قد ترتفع الإيرادات المحسوبة بالدولار، لكن في الوقت نفسه يمكن أن ترتفع المنافسة وHash Rate والصعوبة، وقد تتغير تكاليف الكهرباء والأجهزة.</p>
+
+<p>كذلك فإن انخفاض Block Subsidy بعد كل Halving يؤثر في الإيرادات الناتجة عن الإصدار الجديد.</p>
+
+<p>لذلك تحتاج دراسة التعدين إلى نموذج حسابي يأخذ الإيرادات والتكاليف والاستهلاك والعمر التشغيلي للجهاز في الاعتبار.</p>
+
+<hr>
+
+<h2>Hash Rate</h2>
+
+<p>Hash Rate هو عدد عمليات التجزئة التي يستطيع جهاز أو مجموعة أجهزة تنفيذها في الثانية.</p>
+
+<p>يُقاس عادة بوحدات مثل:</p>
+
+<ul>
+<li>KH/s.</li>
+<li>MH/s.</li>
+<li>GH/s.</li>
+<li>TH/s.</li>
+<li>PH/s.</li>
+<li>EH/s.</li>
+</ul>
+
+<p>في تعدين Bitcoin الحديث، أصبحت مستويات Hash Rate كبيرة جدًا بسبب استخدام أعداد ضخمة من أجهزة ASIC المتخصصة.</p>
+
+<hr>
+
+<h2>العلاقة بين Hash Rate وأمان الشبكة</h2>
+
+<p>Hash Rate لا يساوي الأمان بشكل مباشر، لكنه يمثل كمية القدرة الحسابية المشاركة في Proof of Work.</p>
+
+<p>كلما زادت القدرة الإجمالية اللازمة لمنافسة السلسلة، يصبح تنفيذ إعادة تنظيم واسعة النطاق أكثر تكلفة من الناحية الحسابية والاقتصادية.</p>
+
+<p>لكن الأمان يعتمد أيضًا على توزيع التعدين وحوافز المشاركين وقواعد العقد وعوامل أخرى.</p>
+
+<hr>
+
+<h2>هل التعدين يستهلك طاقة؟</h2>
+
+<p>نعم. Proof of Work يعتمد بطبيعته على تنفيذ عدد كبير من عمليات Hashing، ولذلك يستهلك تعدين Bitcoin طاقة كهربائية.</p>
+
+<p>كمية الطاقة المستخدمة ليست رقمًا ثابتًا إلى الأبد، لأنها تتأثر بسعر Bitcoin واقتصاديات التعدين وكفاءة الأجهزة وأسعار الكهرباء وحجم المنافسة.</p>
+
+<p>لذلك من الأفضل التمييز بين حقيقة أن Proof of Work يستهلك الطاقة وبين محاولة إعطاء رقم ثابت لاستهلاك الشبكة دون تحديد طريقة القياس والفترة الزمنية.</p>
+
+<hr>
+
+<h2>الطاقة المتجددة والتعدين</h2>
+
+<p>يمكن تشغيل أجهزة التعدين باستخدام مصادر كهرباء مختلفة، بما في ذلك مصادر متجددة عندما تكون متاحة اقتصاديًا وتقنيًا.</p>
+
+<p>لكن وصف التعدين بأنه "متجدد" أو "غير متجدد" يتطلب معرفة مصدر الكهرباء الفعلي ومزيج الطاقة في المكان المستخدم.</p>
+
+<p>لذلك ينبغي الحذر من التعميم عند الحديث عن الأثر البيئي لتعدين Bitcoin.</p>
+
+<hr>
+
+<h2>التعدين واللامركزية</h2>
+
+<p>التعدين أحد عناصر اللامركزية، لكنه ليس العنصر الوحيد.</p>
+
+<p>العقد المستقلة التي تتحقق من القواعد، والمستخدمون الذين يشغلون البرامج، وتوزيع المعدنين، وآليات نشر المعلومات، كلها عناصر تؤثر في طبيعة الشبكة.</p>
+
+<p>يمكن أن يكون هناك عدد كبير من أجهزة التعدين، لكن إذا تركزت السيطرة التشغيلية في عدد قليل من الكيانات فقد تظهر مخاطر مختلفة.</p>
+
+<hr>
+
+<h2>هل يمكن للمعدّن تغيير معاملات Bitcoin؟</h2>
+
+<p>المعدّن يستطيع اختيار المعاملات التي يريد تضمينها في كتلة وفق القواعد والسياسات التي يعمل بها، لكنه لا يستطيع جعل معاملة غير صالحة تصبح صحيحة بمجرد وضعها في كتلة.</p>
+
+<p>العقد المستقلة ستتحقق من المعاملات.</p>
+
+<p>إذا كانت المعاملة تخالف قواعد التوافق، فلن تصبح صحيحة لمجرد أن معدّنًا وضعها داخل Block.</p>
+
+<hr>
+
+<h2>هل يستطيع المعدّن إنشاء Bitcoin من العدم؟</h2>
+
+<p>لا يستطيع المعدّن تجاوز قواعد الإصدار المعتمدة في Bitcoin وإنشاء كمية إضافية من Bitcoin لنفسه خارج المسموح به.</p>
+
+<p>تتحقق العقد من Coinbase Transaction ومن قيمة المكافأة المسموح بها وفق ارتفاع الكتلة وقواعد البروتوكول.</p>
+
+<p>إذا حاول المعدّن إنشاء مكافأة أكبر من المسموح، يمكن للعقد رفض الكتلة.</p>
+
+<hr>
+
+<h2>ما هو Double Spending ومحاولة إعادة التنظيم؟</h2>
+
+<p>Double Spending يعني محاولة إنفاق القيمة نفسها أكثر من مرة.</p>
+
+<p>من أهداف تصميم Bitcoin منع قبول تاريخ متناقض للمعاملات.</p>
+
+<p>إذا ظهرت كتلتان متعارضتان في وقت متقارب، يمكن أن يحدث انقسام مؤقت في السلسلة حتى تتقدم إحدى السلاسل وفق قواعد التوافق الخاصة بـProof of Work.</p>
+
+<hr>
+
+<h2>ماذا يحدث إذا وجد معدنان كتلتين في الوقت نفسه؟</h2>
+
+<p>من الممكن أن يعثر معدنان مختلفان على كتلتين صحيحتين تقريبًا في الوقت نفسه.</p>
+
+<p>في هذه الحالة يمكن أن تستقبل أجزاء مختلفة من الشبكة الكتلتين أولًا، لكن هذا لا يعني أن السلسلتين ستستمران إلى الأبد.</p>
+
+<p>عندما تظهر كتلة جديدة مبنية فوق إحدى السلاسل، يصبح من المرجح أن تصبح تلك السلسلة هي السلسلة النشطة، بينما تصبح الكتلة الأخرى جزءًا من حالة قديمة أو يتم التعامل معها كـstale block وفق قواعد التنفيذ.</p>
+
+<hr>
+
+<h2>Confirmations وعلاقتها بالتعدين</h2>
+
+<p>عندما تدخل معاملة في كتلة، يمكن اعتبارها قد حصلت على تأكيد واحد.</p>
+
+<p>عند إضافة كتلة جديدة فوق الكتلة التي تحتوي على المعاملة، يزداد عدد التأكيدات.</p>
+
+<p>هذا مهم لأن تغيير تاريخ قديم يتطلب إعادة تنفيذ Proof of Work للسلسلة المتأثرة ومحاولة اللحاق بالسلسلة الحالية، بينما تستمر بقية الشبكة في إضافة كتل جديدة.</p>
+
+<hr>
+
+<h2>51% Attack</h2>
+
+<p>يشير مصطلح 51% Attack بصورة مبسطة إلى امتلاك جهة أو مجموعة من المشاركين غالبية كبيرة من القدرة الحسابية المستخدمة في Proof of Work.</p>
+
+<p>الهدف من شرح هذا المفهوم هو فهم المخاطر النظرية والعملية المتعلقة بالسيطرة على جزء كبير من Hash Rate، وليس افتراض أن أي جهة محددة تمتلك هذه السيطرة حاليًا.</p>
+
+<hr>
+
+<h2>ما الذي يستطيع هجوم 51% فعله وما الذي لا يستطيع فعله؟</h2>
+
+<p>إذا امتلك مهاجم قدرة تعدين كافية، يمكنه زيادة قدرته على بناء سلسلة بديلة ومحاولة إعادة تنظيم معاملات حديثة وفق ظروف معينة.</p>
+
+<p>لكن ذلك لا يعني أنه يستطيع ببساطة:</p>
+
+<ul>
+<li>إنشاء Bitcoin غير محدود.</li>
+<li>سرقة Bitcoin من عنوان دون امتلاك المفاتيح الخاصة.</li>
+<li>إجبار العقد على قبول كتلة تخالف قواعد التوافق.</li>
+<li>تغيير قواعد Bitcoin وحده.</li>
+</ul>
+
+<p>هذه نقطة مهمة: قوة Hashing تمنح تأثيرًا على اختيار السلسلة المبنية وفق Proof of Work، لكنها لا تلغي قواعد التحقق التي تطبقها العقد.</p>
+
+<hr>
+
+<h2>التعدين ومقاومة الرقابة</h2>
+
+<p>يمكن للمعدنين اختيار المعاملات التي يضعونها في الكتل، لذلك يمكن أن تحدث سياسات مختلفة للمعاملات بين المعدنين.</p>
+
+<p>لكن وجود عدة معدنين ومجمعات وعقد وشبكة موزعة يجعل الرقابة الكاملة أكثر تعقيدًا من وجود جهة واحدة تتحكم في دفتر الأستاذ.</p>
+
+<p>وفي المقابل، يمكن أن تؤدي مركزية التعدين أو المجمعات إلى مخاطر تتعلق بتوزيع القوة، ولهذا تُعد اللامركزية التشغيلية موضوعًا مهمًا في تصميم النظام.</p>
+
+<hr>
+
+<h2>مستقبل تعدين Bitcoin</h2>
+
+<p>من المرجح أن يستمر التعدين في التطور من الناحية التقنية والاقتصادية.</p>
+
+<p>قد تظهر أجهزة أكثر كفاءة، وتتحسن أنظمة التبريد، وتتغير أسواق الكهرباء، وتتغير اقتصاديات Mining Pools.</p>
+
+<p>وفي الوقت نفسه سيستمر Block Subsidy في الانخفاض مع الـHalving، بينما تصبح رسوم المعاملات عنصرًا أكثر أهمية في نموذج حوافز المعدنين على المدى الطويل. :contentReference[oaicite:6]{index=6}</p>
+
+<hr>
+
+<h2>مثال مبسط لدورة التعدين</h2>
+
+<p>لنفترض أن أحمد أرسل Bitcoin إلى محمد.</p>
+
+<ol>
+<li>ينشئ أحمد المعاملة.</li>
+<li>تنتشر المعاملة إلى شبكة Bitcoin.</li>
+<li>تتحقق العقد من صحة المعاملة.</li>
+<li>يمكن أن تدخل المعاملة إلى Mempool.</li>
+<li>يختار معدّن المعاملة ضمن Block Template.</li>
+<li>يتم بناء Merkle Root.</li>
+<li>يتم بناء Block Header.</li>
+<li>يبدأ المعدّن بتجربة قيم Nonce وغيرها من القيم المسموح بتغييرها.</li>
+<li>يحسب Hash لكل محاولة.</li>
+<li>يعثر على نتيجة تحقق Target المطلوب.</li>
+<li>ينشر الكتلة.</li>
+<li>تتحقق العقد من الكتلة.</li>
+<li>إذا كانت صحيحة، يتم قبولها ضمن السلسلة النشطة.</li>
+<li>تضاف كتل لاحقة، فتزداد تأكيدات المعاملة.</li>
+</ol>
+
+<hr>
+
+<h2>الرحلة الكاملة من المعاملة إلى الكتلة</h2>
+
+<p>يمكن تلخيص العملية بالكامل بالشكل التالي:</p>
+
+<p><strong>User → Transaction → Nodes → Mempool → Miner → Block Template → Merkle Root → Block Header → Hash Attempts → Proof of Work → Block Broadcast → Node Validation → Blockchain</strong></p>
+
+<p>هذه السلسلة توضح أن التعدين ليس نظامًا منفصلًا عن بقية Bitcoin، بل هو مرحلة ضمن نظام متكامل يبدأ من المستخدم وينتهي بقبول الكتلة وفق قواعد التوافق.</p>
+
+<hr>
+
+<h2>أهم المصطلحات في Bitcoin Mining</h2>
+
+<table>
+<thead>
+<tr>
+<th>المصطلح</th>
+<th>المعنى</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mining</td>
+<td>عملية إنشاء الكتل باستخدام Proof of Work.</td>
+</tr>
+<tr>
+<td>Miner</td>
+<td>الجهة التي تشغل أجهزة التعدين.</td>
+</tr>
+<tr>
+<td>Hash Rate</td>
+<td>عدد عمليات Hash التي يمكن تنفيذها في الثانية.</td>
+</tr>
+<tr>
+<td>Proof of Work</td>
+<td>إثبات حسابي يتطلب العثور على Hash يستوفي Target.</td>
+</tr>
+<tr>
+<td>Nonce</td>
+<td>قيمة قابلة للتغيير داخل Block Header أثناء البحث.</td>
+</tr>
+<tr>
+<td>Target</td>
+<td>الحد الذي يجب أن يكون Hash الناتج أقل منه.</td>
+</tr>
+<tr>
+<td>Difficulty</td>
+<td>مقياس يعبر عن مستوى صعوبة العثور على Proof of Work.</td>
+</tr>
+<tr>
+<td>Block Header</td>
+<td>رأس الكتلة الذي يحتوي على معلومات تستخدم في Proof of Work.</td>
+</tr>
+<tr>
+<td>Merkle Root</td>
+<td>جذر شجرة Merkle الذي يمثل معاملات الكتلة.</td>
+</tr>
+<tr>
+<td>Block Subsidy</td>
+<td>الإصدار الجديد المسموح به للمعدّن ضمن مكافأة الكتلة.</td>
+</tr>
+<tr>
+<td>Transaction Fees</td>
+<td>الرسوم التي ترتبط بالمعاملات الموجودة في الكتلة.</td>
+</tr>
+<tr>
+<td>Mining Pool</td>
+<td>مجموعة من المعدنين تتعاون في التعدين وتقاسم العوائد.</td>
+</tr>
+<tr>
+<td>ASIC</td>
+<td>شريحة متخصصة مصممة لتنفيذ مهمة محددة بكفاءة عالية.</td>
+</tr>
+</tbody>
+</table>
+
+<hr>
+
+<h2>أخطاء المبتدئين حول التعدين</h2>
+
+<h3>الخطأ الأول: التعدين يعني إنشاء Bitcoin بلا حدود</h3>
+<p>التعدين يخضع لقواعد الإصدار، والـBlock Subsidy ينخفض مع مرور الوقت.</p>
+
+<h3>الخطأ الثاني: المعدّن يستطيع تغيير أي شيء في Bitcoin</h3>
+<p>العقد تتحقق من قواعد التوافق، ولذلك لا يكفي أن يقوم المعدّن ببناء كتلة تحتوي على بيانات مخالفة.</p>
+
+<h3>الخطأ الثالث: Hash Rate يعني الربح</h3>
+<p>Hash Rate عنصر مهم، لكنه لا يحدد الربحية بمفرده. استهلاك الكهرباء والكفاءة والصعوبة والرسوم وسعر Bitcoin كلها عوامل مهمة.</p>
+
+<h3>الخطأ الرابع: ارتفاع سعر Bitcoin يعني أن كل المعدنين يربحون</h3>
+<p>اقتصاديات التعدين تعتمد على مجموعة من المتغيرات، وليس على السعر وحده.</p>
+
+<h3>الخطأ الخامس: التعدين هو نفس تشغيل عقدة Bitcoin</h3>
+<p>العقدة والتحقق من القواعد شيء، والتعدين وإنتاج Proof of Work شيء آخر. يمكن تشغيل عقدة Bitcoin دون تعدين.</p>
+
+<h3>الخطأ السادس: امتلاك جهاز تعدين يعني الحصول على مكافأة يومية ثابتة</h3>
+<p>التعدين عملية احتمالية، والدخل يختلف حسب طريقة التشغيل وPool ومقدار القدرة الحسابية والظروف الاقتصادية.</p>
+
+<hr>
+
+<h2>روابط مفيدة داخل AQL Crypto Academy</h2>
+
+<ul>
+<li><a href="/academy/bitcoin/what-is-bitcoin">ما هو البيتكوين؟ دليل المبتدئين</a></li>
+<li><a href="/academy/bitcoin/history-of-bitcoin">تاريخ البيتكوين منذ البداية</a></li>
+<li><a href="/academy/bitcoin/how-bitcoin-works">كيف يعمل Bitcoin؟ شرح الشبكة والمعاملات والبلوكات</a></li>
+<li><a href="/academy/bitcoin/bitcoin-wallets">محافظ البيتكوين والمفاتيح وSeed Phrase</a></li>
+<li><a href="/academy/bitcoin/bitcoin-halving">Bitcoin Halving: ما هو التنصيف وكيف يؤثر على الإصدار؟</a></li>
+<li><a href="/crypto/BTC">صفحة Bitcoin والأسعار والمؤشرات في AQL Crypto</a></li>
+</ul>
+
+<hr>
+
+<h2>الخاتمة</h2>
+
+<p>تعدين Bitcoin ليس مجرد تشغيل أجهزة قوية ومحاولة الحصول على عملات جديدة. إنه جزء من آلية التوافق التي تساعد شبكة Bitcoin على إنتاج كتل جديدة وترتيب المعاملات وتأمين السجل التاريخي.</p>
+
+<p>يقوم المعدّن ببناء كتلة مرشحة ثم يحاول العثور على Proof of Work صالح عن طريق إجراء عدد هائل من عمليات Hashing. وعندما يعثر على نتيجة تحقق Target المطلوب، ينشر الكتلة إلى الشبكة. بعد ذلك تتحقق العقد المستقلة من صحة الكتلة قبل قبولها.</p>
+
+<p>تتداخل في اقتصاديات التعدين عدة عوامل، مثل Hash Rate وDifficulty وBlock Subsidy ورسوم المعاملات وسعر الكهرباء وكفاءة أجهزة ASIC. ومع استمرار انخفاض Block Subsidy عبر الـHalving، تصبح رسوم المعاملات عنصرًا أكثر أهمية في نموذج حوافز التعدين.</p>
+
+<p>ولفهم Bitcoin بصورة كاملة، يجب النظر إلى التعدين باعتباره جزءًا من منظومة أكبر تضم المستخدمين والعقد والمعدنين والمحافظ والمعاملات والـBlockchain وقواعد التوافق.</p>
+
+<p><strong>باختصار:</strong> التعدين هو عملية تنافسية تستخدم Proof of Work لإنتاج كتل جديدة وتأمين ترتيب السجل، بينما تقوم العقد المستقلة بالتحقق من أن هذه الكتل تلتزم بقواعد Bitcoin.</p>
+
+<hr>
+
+<h2>تنبيه تعليمي</h2>
+
+<p>هذا المقال تعليمي ولا يمثل نصيحة استثمارية أو مالية أو قانونية أو توصية بشراء أجهزة تعدين أو تشغيل مشروع تعدين. اقتصاديات التعدين تختلف باختلاف الدولة وسعر الكهرباء والأجهزة وظروف الشبكة وأسعار السوق، وقد تتغير بمرور الوقت.</p>
+HTML,
+
+    'content_en' => <<<'HTML'
+<h2>Introduction</h2>
+
+<p>Bitcoin mining is one of the most important concepts in the Bitcoin network, but it is also one of the most misunderstood. The word "mining" can make it sound as if miners simply create new coins whenever they want. In reality, Bitcoin mining is a competitive process that helps produce new blocks, order transactions, and provide the Proof of Work mechanism used by the network.</p>
+
+<p>Bitcoin uses a consensus mechanism called <strong>Proof of Work</strong>. Miners use specialized computing hardware to perform a very large number of hash calculations while searching for a result that satisfies a network-defined target. When a miner finds a valid result, the miner can broadcast the block to the network. Independent nodes then verify the block according to Bitcoin's consensus rules.</p>
+
+<p>Mining does not give a miner unlimited authority over the blockchain. A miner can construct a candidate block, but the block must follow the rules enforced by nodes. This distinction between producing blocks and validating them is fundamental to understanding Bitcoin.</p>
+
+<p>In this guide, we will explain Bitcoin mining from the ground up, including transactions, the mempool, block construction, block headers, nonces, hashes, Proof of Work, mining difficulty, block rewards, halving, ASIC hardware, mining pools, costs, energy use, and the relationship between mining and Bitcoin security.</p>
+
+<hr>
+
+<h2>What Is Bitcoin Mining?</h2>
+
+<p>Bitcoin mining is the competitive process through which miners attempt to produce new blocks using Proof of Work.</p>
+
+<p>A miner constructs a candidate block and searches for a valid Proof of Work. Once a block is found, it is broadcast to the network. Independent Bitcoin nodes then verify the block and its transactions before accepting it.</p>
+
+<p>Bitcoin mining has two major roles:</p>
+
+<ul>
+<li>Helping include and order valid transactions in blocks.</li>
+<li>Providing a costly computational process that makes large-scale modification of the blockchain history difficult.</li>
+</ul>
+
+<p>A successful miner can receive a reward consisting of the block subsidy plus the transaction fees included in the block.</p>
+
+<hr>
+
+<h2>Why Does Bitcoin Need Mining?</h2>
+
+<p>Bitcoin was designed to operate without a central bank or a single institution responsible for maintaining the transaction ledger.</p>
+
+<p>The network therefore needs a mechanism that allows participants to converge on a history of blocks and transactions.</p>
+
+<p>Proof of Work provides a competitive mechanism in which miners use computing power to propose the next block. Nodes then independently verify whether the proposed block follows the consensus rules.</p>
+
+<p>Mining therefore should not be viewed as the entire consensus system. It is one important component of a larger system involving miners, nodes, users, transactions, and consensus rules.</p>
+
+<hr>
+
+<h2>Mining and the Blockchain</h2>
+
+<p>The Bitcoin blockchain is an ordered chain of blocks. Each block contains transactions and information linking it to the previous block.</p>
+
+<p>When a new valid block is accepted, it becomes part of the chain. As additional blocks are built on top of it, changing older history generally becomes increasingly difficult because the attacker would need to reproduce the relevant Proof of Work and compete with the continuing chain.</p>
+
+<p>Mining is therefore closely connected to the blockchain: miners compete to produce blocks, while nodes verify that those blocks follow Bitcoin's rules.</p>
+
+<hr>
+
+<h2>Who Are Bitcoin Miners?</h2>
+
+<p>Bitcoin miners are individuals, companies, or other operators that run specialized hardware to perform hashing operations in the search for valid Proof of Work.</p>
+
+<p>In Bitcoin's early years, ordinary computer CPUs could participate in mining. As competition increased, mining hardware evolved through GPUs and eventually specialized ASIC devices.</p>
+
+<p>Modern Bitcoin mining at competitive scale relies heavily on specialized ASIC hardware.</p>
+
+<p>Miners may operate independently through solo mining or participate in mining pools that combine hashing power and distribute rewards according to the pool's payout rules.</p>
+
+<hr>
+
+<h2>What Does a Miner Actually Do?</h2>
+
+<p>The mining process can be simplified into a sequence of steps:</p>
+
+<ol>
+<li>Obtain valid transactions that can potentially be included in a block.</li>
+<li>Select and organize transactions.</li>
+<li>Create a block template.</li>
+<li>Create the coinbase transaction for the miner's reward.</li>
+<li>Construct the Merkle Root.</li>
+<li>Build the block header.</li>
+<li>Change the nonce and other permitted fields.</li>
+<li>Hash the block header repeatedly.</li>
+<li>Compare each result with the required target.</li>
+<li>Broadcast the block when a valid Proof of Work is found.</li>
+</ol>
+
+<p>BIP22 and BIP23 describe standardized mechanisms related to Bitcoin block templates, transactions, targets, nonce ranges, and pooled mining. :contentReference[oaicite:7]{index=7}</p>
+
+<hr>
+
+<h2>What Are Bitcoin Transactions?</h2>
+
+<p>Before a transaction can appear inside a block, it is created and broadcast to the Bitcoin network.</p>
+
+<p>Nodes verify transactions according to Bitcoin's rules. Valid unconfirmed transactions can be held in a node's mempool and may later be selected by miners for inclusion in a block.</p>
+
+<p>Transactions therefore provide the economic activity that miners may include in their candidate blocks.</p>
+
+<hr>
+
+<h2>Choosing Transactions from the Mempool</h2>
+
+<p>The mempool is a collection of unconfirmed transactions maintained according to the policies of individual nodes.</p>
+
+<p>Mining software can receive transaction information through block templates and choose which transactions to include.</p>
+
+<p>Transaction fees are an important economic consideration for miners, although transaction selection can also depend on dependencies, block limits, policy rules, and other factors.</p>
+
+<p>A transaction being present in a mempool does not guarantee that it will be included in the next block.</p>
+
+<hr>
+
+<h2>Building a New Block</h2>
+
+<p>After selecting transactions, the miner constructs a candidate block.</p>
+
+<p>At a simplified level, a block contains:</p>
+
+<ul>
+<li>A block header.</li>
+<li>The number of transactions.</li>
+<li>The transactions included in the block.</li>
+</ul>
+
+<p>The block header is the part directly used in Proof of Work, while the transactions represent the economic activity recorded by the block.</p>
+
+<hr>
+
+<h2>What Is a Block Header?</h2>
+
+<p>The block header contains several fields that summarize important information about the block.</p>
+
+<p>Important fields include:</p>
+
+<ul>
+<li>Version.</li>
+<li>Previous block hash.</li>
+<li>Merkle Root.</li>
+<li>Time.</li>
+<li>nBits, which encodes the target used for Proof of Work.</li>
+<li>Nonce.</li>
+</ul>
+
+<p>The previous block hash links the block to the preceding chain history. The Merkle Root commits the header to the transactions contained in the block.</p>
+
+<hr>
+
+<h2>What Is a Nonce?</h2>
+
+<p>The nonce is a field in the block header that miners can vary while searching for a valid hash.</p>
+
+<p>Changing the nonce changes the resulting hash, allowing the miner to test different candidate headers.</p>
+
+<p>The nonce space itself is limited, so modern mining systems also make use of other permitted changes, such as coinbase-related data or time fields, depending on the mining setup and protocol rules.</p>
+
+<p>BIP23 specifically describes nonce ranges and several types of permitted block-template mutations used in mining workflows. :contentReference[oaicite:8]{index=8}</p>
+
+<hr>
+
+<h2>What Is a Hash?</h2>
+
+<p>A hash is the output of a cryptographic hash function. Bitcoin's Proof of Work uses double SHA-256 hashing of the block header.</p>
+
+<p>A major property of cryptographic hashing is that a small change in the input can produce a very different output.</p>
+
+<p>As a result, changing the nonce or another permitted field changes the resulting hash, and the miner must test the new result against the target.</p>
+
+<hr>
+
+<h2>What Is Proof of Work?</h2>
+
+<p><strong>Proof of Work</strong> is a computational proof showing that a miner has performed a large amount of hashing work to find a result satisfying a specific condition.</p>
+
+<p>The basic condition is that the resulting block-header hash must be below the target defined by the network's consensus rules.</p>
+
+<p>Other nodes do not need to repeat all the attempts made by the miner. They can verify the final result relatively quickly.</p>
+
+<p>This asymmetry is a central property of Proof of Work: finding a valid result requires repeated computational effort, while verifying a discovered result is comparatively inexpensive.</p>
+
+<hr>
+
+<h2>How Does a Miner Find a Valid Block Hash?</h2>
+
+<p>A miner begins with a candidate block header.</p>
+
+<p>The miner repeatedly:</p>
+
+<ul>
+<li>Hashes the header.</li>
+<li>Checks the resulting value against the target.</li>
+<li>Changes the nonce or another permitted field if the result is invalid.</li>
+<li>Repeats the process.</li>
+</ul>
+
+<p>If a result satisfies the target, the miner has found a valid Proof of Work for that block header.</p>
+
+<hr>
+
+<h2>Why Does Mining Require So Many Attempts?</h2>
+
+<p>Hash outputs behave unpredictably from the perspective of the search process. A miner cannot simply calculate how many nonce changes are needed to reach a solution.</p>
+
+<p>A successful result might appear relatively early by chance, or it might require an enormous number of attempts.</p>
+
+<p>This is why mining power is commonly measured using hash rate, which describes the number of hash calculations a device or group can perform per second.</p>
+
+<hr>
+
+<h2>Mining Difficulty</h2>
+
+<p>Mining difficulty is a metric describing how difficult it is to find a valid Proof of Work relative to a reference level.</p>
+
+<p>Technically, miners directly test their hashes against a <strong>target</strong>. A more restrictive target makes valid results harder to find.</p>
+
+<p>Difficulty, target, and hash rate are related concepts, but they are not interchangeable.</p>
+
+<hr>
+
+<h2>Why Does Mining Difficulty Change?</h2>
+
+<p>Bitcoin is designed to target an average block interval of roughly ten minutes.</p>
+
+<p>If the total amount of mining power changes substantially, leaving the difficulty unchanged could cause blocks to be produced significantly faster or slower than the intended long-term rate.</p>
+
+<p>The protocol therefore adjusts the difficulty according to its consensus rules.</p>
+
+<hr>
+
+<h2>How Does Bitcoin Maintain the Block Production Rate?</h2>
+
+<p>Bitcoin does not require every block to appear exactly ten minutes after the previous block.</p>
+
+<p>Ten minutes is a long-term average target. Individual blocks can arrive much faster or much slower.</p>
+
+<p>Difficulty adjustments help the network keep the average block production rate close to the intended level over time.</p>
+
+<hr>
+
+<h2>What Happens When a Miner Finds a Block?</h2>
+
+<p>When a miner finds a block header that satisfies the Proof of Work target, the miner broadcasts the complete block to the Bitcoin network.</p>
+
+<p>Nodes then verify:</p>
+
+<ul>
+<li>The Proof of Work.</li>
+<li>The previous block reference.</li>
+<li>The transactions.</li>
+<li>The Merkle Root.</li>
+<li>The coinbase transaction.</li>
+<li>The block reward.</li>
+<li>The block's compliance with consensus rules.</li>
+</ul>
+
+<p>A block can therefore contain a valid Proof of Work and still be rejected if it violates another consensus rule.</p>
+
+<hr>
+
+<h2>Nodes Validate the Block</h2>
+
+<p>Bitcoin nodes are essential because miners do not have the final authority to define what is valid.</p>
+
+<p>A miner proposes a block. Nodes independently verify it.</p>
+
+<p>This distinction is important for understanding Bitcoin's decentralized architecture. A miner with substantial hashing power cannot simply create invalid Bitcoin or override consensus rules through hashing power alone.</p>
+
+<hr>
+
+<h2>Block Reward</h2>
+
+<p>A miner's block reward has two primary components:</p>
+
+<ul>
+<li><strong>Block Subsidy:</strong> newly issued bitcoin permitted by the protocol.</li>
+<li><strong>Transaction Fees:</strong> fees associated with the transactions included in the block.</li>
+</ul>
+
+<p>The block subsidy decreases according to Bitcoin's halving schedule.</p>
+
+<hr>
+
+<h2>Bitcoin Block Subsidy</h2>
+
+<p>Bitcoin's original block subsidy was 50 BTC per block. The subsidy is reduced by half every 210,000 blocks approximately.</p>
+
+<p>According to Bitcoin.org's halving schedule, the fourth halving occurred at block 840,000 in April 2024, reducing the subsidy to <strong>3.125 BTC</strong>. The next halving is associated with block 1,050,000 and is estimated to reduce the subsidy to 1.5625 BTC. :contentReference[oaicite:9]{index=9}</p>
+
+<hr>
+
+<h2>Transaction Fees</h2>
+
+<p>Transaction fees are another component of miner revenue.</p>
+
+<p>When miners include transactions in a block, they can collect the fees associated with those transactions according to Bitcoin's rules.</p>
+
+<p>Because the block subsidy decreases over time, transaction fees become an increasingly important part of the long-term mining incentive structure.</p>
+
+<hr>
+
+<h2>Bitcoin Halving and Mining</h2>
+
+<p>The Bitcoin halving is an event in which the block subsidy is reduced by half approximately every 210,000 blocks.</p>
+
+<table>
+<thead>
+<tr>
+<th>Event</th>
+<th>Date</th>
+<th>Block</th>
+<th>New subsidy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>First halving</td>
+<td>2012</td>
+<td>210,000</td>
+<td>25 BTC</td>
+</tr>
+<tr>
+<td>Second halving</td>
+<td>2016</td>
+<td>420,000</td>
+<td>12.5 BTC</td>
+</tr>
+<tr>
+<td>Third halving</td>
+<td>2020</td>
+<td>630,000</td>
+<td>6.25 BTC</td>
+</tr>
+<tr>
+<td>Fourth halving</td>
+<td>2024</td>
+<td>840,000</td>
+<td>3.125 BTC</td>
+</tr>
+</tbody>
+</table>
+
+<p>The halving schedule reduces the rate at which new bitcoin enters circulation and forms part of Bitcoin's predetermined monetary issuance rules. :contentReference[oaicite:10]{index=10}</p>
+
+<hr>
+
+<h2>How Was Bitcoin Mined in the Early Days?</h2>
+
+<p>Bitcoin mining was very different during the early years of the network.</p>
+
+<p>Ordinary computer CPUs could participate in mining because competition and total network hashing power were far lower than they are today.</p>
+
+<p>As Bitcoin became more valuable and more miners joined the network, specialized hardware gradually became dominant.</p>
+
+<hr>
+
+<h2>CPU Mining</h2>
+
+<p>CPU mining uses the general-purpose processor of a computer to perform hashing operations.</p>
+
+<p>This was practical during Bitcoin's early period, but general-purpose CPUs are no longer competitive with modern specialized Bitcoin mining hardware on the main network.</p>
+
+<hr>
+
+<h2>GPU Mining</h2>
+
+<p>GPU mining uses graphics processing units to perform many parallel computations.</p>
+
+<p>GPUs offered advantages over CPUs for certain types of hashing workloads, but Bitcoin mining later moved toward even more specialized hardware.</p>
+
+<hr>
+
+<h2>The Rise of ASICs</h2>
+
+<p>ASIC stands for <strong>Application-Specific Integrated Circuit</strong>.</p>
+
+<p>Bitcoin ASICs are specialized chips designed to perform SHA-256 hashing extremely efficiently.</p>
+
+<p>The emergence of ASICs transformed Bitcoin mining economics. Competitive mining became increasingly dependent on specialized machines, electricity costs, cooling systems, and operational infrastructure.</p>
+
+<hr>
+
+<h2>Why Are ASICs Important?</h2>
+
+<p>Mining involves an enormous number of hash calculations. Improving the number of hashes performed per unit of electricity can therefore have a major impact on mining economics.</p>
+
+<p>ASIC miners are evaluated using factors such as:</p>
+
+<ul>
+<li>Hash rate.</li>
+<li>Power consumption.</li>
+<li>Energy efficiency.</li>
+<li>Purchase price.</li>
+<li>Cooling requirements.</li>
+<li>Reliability and operating life.</li>
+</ul>
+
+<hr>
+
+<h2>Mining Pools</h2>
+
+<p>A mining pool is a group of miners that combines hashing power and distributes rewards according to the pool's payout mechanism.</p>
+
+<p>Instead of relying entirely on the probability of a single miner finding a complete block, a miner contributes hashing power to a larger group.</p>
+
+<p>Pool systems use mechanisms that allow them to estimate and account for individual miners' contributions even when another miner in the pool finds the final block.</p>
+
+<p>BIP23 describes extensions designed for pooled mining and communication between pool infrastructure and miners. :contentReference[oaicite:11]{index=11}</p>
+
+<hr>
+
+<h2>Why Do Miners Join Mining Pools?</h2>
+
+<p>The main reason is to reduce income variance.</p>
+
+<p>An individual miner may have substantial computing power but could go for a long time without finding a full block. Pool mining allows the miner to contribute to a larger combined hash rate and receive payouts according to the pool's rules.</p>
+
+<p>Pool mining does not guarantee profitability.</p>
+
+<hr>
+
+<h2>How Are Mining Pool Rewards Distributed?</h2>
+
+<p>Different pools use different payout methods.</p>
+
+<p>Some systems calculate payouts based on submitted work or shares, while others use different formulas and conditions.</p>
+
+<p>Anyone considering pool mining should understand the pool's fees, payout mechanism, minimum payout, and operating policies.</p>
+
+<hr>
+
+<h2>Solo Mining vs Pool Mining</h2>
+
+<table>
+<thead>
+<tr>
+<th>Factor</th>
+<th>Solo Mining</th>
+<th>Pool Mining</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Operation</td>
+<td>Miner works independently</td>
+<td>Miner contributes to a group</td>
+</tr>
+<tr>
+<td>Income variance</td>
+<td>High</td>
+<td>Usually lower</td>
+</tr>
+<tr>
+<td>Block reward</td>
+<td>Miner receives it when finding a valid block</td>
+<td>Distributed according to pool rules</td>
+</tr>
+<tr>
+<td>Infrastructure</td>
+<td>Managed by the miner</td>
+<td>Partly handled by pool infrastructure</td>
+</tr>
+</tbody>
+</table>
+
+<hr>
+
+<h2>The Cost of Bitcoin Mining</h2>
+
+<p>Mining costs involve much more than the price of an ASIC.</p>
+
+<p>Important cost categories include:</p>
+
+<ul>
+<li>Electricity.</li>
+<li>ASIC hardware.</li>
+<li>Cooling.</li>
+<li>Electrical infrastructure.</li>
+<li>Internet connectivity.</li>
+<li>Maintenance.</li>
+<li>Facility costs.</li>
+<li>Repairs and replacement.</li>
+<li>Mining pool fees.</li>
+</ul>
+
+<hr>
+
+<h2>Electricity</h2>
+
+<p>Electricity is one of the most important operating costs in Bitcoin mining.</p>
+
+<p>Mining machines can operate continuously and consume significant amounts of electricity. Even a small difference in electricity price can materially affect mining economics.</p>
+
+<p>This is why miners often look for reliable and competitively priced electricity sources.</p>
+
+<hr>
+
+<h2>Hardware</h2>
+
+<p>ASIC machines have an initial purchase cost, and their economic value can change when newer and more efficient generations are released.</p>
+
+<p>A machine with a high hash rate may still be less competitive than a newer machine if it consumes substantially more electricity per unit of hashing power.</p>
+
+<hr>
+
+<h2>Cooling</h2>
+
+<p>Mining hardware converts a large portion of its electrical energy into heat.</p>
+
+<p>Mining facilities therefore need appropriate airflow, ventilation, or other cooling systems.</p>
+
+<p>In hot climates, heat management can become a major operating consideration.</p>
+
+<hr>
+
+<h2>Internet and Infrastructure</h2>
+
+<p>Mining requires stable network connectivity and suitable electrical infrastructure.</p>
+
+<p>Power failures, network interruptions, or infrastructure problems can reduce uptime and affect mining operations.</p>
+
+<hr>
+
+<h2>ASIC Maintenance</h2>
+
+<p>ASIC miners operate under sustained workloads and require appropriate airflow, temperature monitoring, cleaning, and maintenance.</p>
+
+<p>Operators may also need spare components and procedures for dealing with hardware failures.</p>
+
+<hr>
+
+<h2>Is Bitcoin Mining Profitable?</h2>
+
+<p>There is no universal answer.</p>
+
+<p>Mining profitability depends on multiple variables, including:</p>
+
+<ul>
+<li>Bitcoin price.</li>
+<li>Electricity price.</li>
+<li>Machine hash rate.</li>
+<li>Machine efficiency.</li>
+<li>Network difficulty.</li>
+<li>Pool fees.</li>
+<li>Hardware cost.</li>
+<li>Cooling and maintenance expenses.</li>
+<li>Competition.</li>
+</ul>
+
+<p>Therefore, Bitcoin's market price alone cannot determine whether a mining operation is profitable.</p>
+
+<hr>
+
+<h2>Why Can't Profitability Be Judged by Bitcoin's Price Alone?</h2>
+
+<p>A higher Bitcoin price can increase potential revenue measured in fiat currency, but mining difficulty, network hash rate, hardware competition, electricity costs, and other factors can also change.</p>
+
+<p>In addition, each halving reduces the block subsidy.</p>
+
+<p>A serious mining analysis therefore needs to consider both expected revenue and the complete operating cost structure.</p>
+
+<hr>
+
+<h2>Hash Rate</h2>
+
+<p>Hash rate is the number of hash calculations that a machine or group of machines can perform per second.</p>
+
+<p>Common units include:</p>
+
+<ul>
+<li>KH/s.</li>
+<li>MH/s.</li>
+<li>GH/s.</li>
+<li>TH/s.</li>
+<li>PH/s.</li>
+<li>EH/s.</li>
+</ul>
+
+<p>Modern Bitcoin mining operates at extremely large aggregate hash rates because the network contains a large amount of specialized ASIC hardware.</p>
+
+<hr>
+
+<h2>Hash Rate and Network Security</h2>
+
+<p>Hash rate is not identical to security, but it represents the computational power participating in Bitcoin's Proof of Work.</p>
+
+<p>When significant computational resources are required to compete with the existing chain, reorganizing large portions of recent history becomes increasingly expensive.</p>
+
+<p>However, security also depends on miner distribution, incentives, node validation, network topology, and other factors.</p>
+
+<hr>
+
+<h2>Does Bitcoin Mining Consume Energy?</h2>
+
+<p>Yes. Proof of Work requires large numbers of hash calculations, and Bitcoin mining therefore consumes electricity.</p>
+
+<p>The network's energy consumption is not a permanently fixed number. It can change as hardware efficiency, Bitcoin's economics, electricity prices, mining competition, and other factors change.</p>
+
+<p>It is therefore important to distinguish the fact that Proof of Work consumes energy from any single estimate of total network energy use, which depends on methodology and time period.</p>
+
+<hr>
+
+<h2>Renewable Energy and Bitcoin Mining</h2>
+
+<p>Bitcoin mining can operate using different electricity sources, including renewable sources where they are available and economically practical.</p>
+
+<p>However, describing the entire mining industry as renewable or non-renewable requires information about the actual electricity sources used by individual operations and regions.</p>
+
+<p>Environmental claims should therefore be evaluated using a defined methodology and time period rather than broad assumptions.</p>
+
+<hr>
+
+<h2>Mining and Decentralization</h2>
+
+<p>Mining is one component of Bitcoin's decentralized architecture, but it is not the only component.</p>
+
+<p>Independent nodes, users, miners, network communication, and consensus rules all contribute to the system.</p>
+
+<p>A large amount of mining hardware does not automatically guarantee decentralization if operational control becomes concentrated among a small number of entities.</p>
+
+<hr>
+
+<h2>Can a Miner Change Bitcoin Transactions?</h2>
+
+<p>A miner can choose which transactions to include in a candidate block according to the miner's policies and the network rules.</p>
+
+<p>However, a miner cannot make an invalid transaction valid simply by placing it in a block.</p>
+
+<p>Independent nodes validate the transactions according to Bitcoin's consensus rules.</p>
+
+<hr>
+
+<h2>Can a Miner Create Bitcoin Out of Nothing?</h2>
+
+<p>No. A miner cannot arbitrarily create additional bitcoin beyond the amount permitted by Bitcoin's consensus rules.</p>
+
+<p>Nodes verify the coinbase transaction and the permitted block subsidy based on the block height and protocol rules.</p>
+
+<p>If a miner attempts to claim an invalid reward, nodes can reject the block.</p>
+
+<hr>
+
+<h2>Double Spending and Chain Reorganizations</h2>
+
+<p>Double spending means attempting to spend the same value more than once.</p>
+
+<p>Bitcoin's design seeks to establish a consistent transaction history through its consensus mechanism.</p>
+
+<p>If competing valid blocks are discovered around the same time, a temporary chain split can occur until subsequent Proof of Work causes one branch to become the active chain under the consensus rules.</p>
+
+<hr>
+
+<h2>What Happens If Two Miners Find Blocks at Nearly the Same Time?</h2>
+
+<p>It is possible for two different miners to discover valid blocks at nearly the same time.</p>
+
+<p>Different parts of the network may receive the competing blocks first.</p>
+
+<p>When a subsequent block is found on one branch, the network can converge on the branch with more accumulated Proof of Work according to Bitcoin's chain-selection rules, while the competing block may become stale.</p>
+
+<hr>
+
+<h2>Confirmations and Mining</h2>
+
+<p>When a transaction is included in a block, that block provides one confirmation for the transaction.</p>
+
+<p>When additional blocks are built on top of it, the number of confirmations increases.</p>
+
+<p>Changing older history generally becomes more difficult because an attacker would need to reproduce the required Proof of Work while competing with the chain that continues to grow.</p>
+
+<hr>
+
+<h2>The 51% Attack</h2>
+
+<p>A 51% attack is a simplified term for a situation in which an entity or coordinated group controls a majority of the mining hash power.</p>
+
+<p>The concept is useful for understanding the risks associated with controlling a large portion of Proof of Work.</p>
+
+<p>It does not mean that any particular entity currently has such control.</p>
+
+<hr>
+
+<h2>What Can and Cannot a 51% Attack Do?</h2>
+
+<p>A sufficiently powerful attacker could increase its ability to build an alternative chain and potentially reorganize recent transactions under certain conditions.</p>
+
+<p>However, majority hashing power does not allow the attacker to:</p>
+
+<ul>
+<li>Create unlimited bitcoin.</li>
+<li>Steal bitcoin directly from an address without the required private keys.</li>
+<li>Force nodes to accept blocks that violate consensus rules.</li>
+<li>Unilaterally rewrite Bitcoin's consensus rules.</li>
+</ul>
+
+<p>This distinction is important: hashing power affects the competition over the Proof of Work chain, while nodes continue to enforce the validity rules of Bitcoin.</p>
+
+<hr>
+
+<h2>Mining and Censorship Resistance</h2>
+
+<p>Miners can choose which transactions to include in their blocks, so mining policies can differ.</p>
+
+<p>However, a distributed set of miners, pools, nodes, and network participants makes complete censorship more complicated than in a system controlled by a single ledger operator.</p>
+
+<p>At the same time, concentration of mining or pool control can create risks, which is why mining decentralization remains an important topic.</p>
+
+<hr>
+
+<h2>The Future of Bitcoin Mining</h2>
+
+<p>Bitcoin mining will likely continue to evolve technically and economically.</p>
+
+<p>Hardware efficiency may improve, cooling technologies may evolve, electricity markets may change, and mining pool infrastructure may continue to develop.</p>
+
+<p>At the same time, the block subsidy will continue to decline through the halving schedule, making transaction fees increasingly important to the long-term mining incentive structure. :contentReference[oaicite:12]{index=12}</p>
+
+<hr>
+
+<h2>A Simple Example of the Mining Cycle</h2>
+
+<p>Suppose Alice sends Bitcoin to Bob.</p>
+
+<ol>
+<li>Alice creates the transaction.</li>
+<li>The transaction is broadcast to the Bitcoin network.</li>
+<li>Nodes validate the transaction.</li>
+<li>The transaction may enter a mempool.</li>
+<li>A miner selects it for a block template.</li>
+<li>The miner constructs the Merkle Root.</li>
+<li>The miner builds the block header.</li>
+<li>The miner changes the nonce and other permitted values.</li>
+<li>The miner hashes the candidate header repeatedly.</li>
+<li>A valid result is found.</li>
+<li>The block is broadcast.</li>
+<li>Nodes validate the block.</li>
+<li>The block is accepted into the active chain if valid.</li>
+<li>Additional blocks increase the transaction's confirmation count.</li>
+</ol>
+
+<hr>
+
+<h2>The Complete Journey from Transaction to Block</h2>
+
+<p>The complete process can be summarized as:</p>
+
+<p><strong>User → Transaction → Nodes → Mempool → Miner → Block Template → Merkle Root → Block Header → Hash Attempts → Proof of Work → Block Broadcast → Node Validation → Blockchain</strong></p>
+
+<p>This illustrates why Bitcoin mining should not be viewed as an isolated activity. It is one stage in a larger system connecting users, transactions, miners, nodes, and consensus rules.</p>
+
+<hr>
+
+<h2>Key Bitcoin Mining Terms</h2>
+
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mining</td>
+<td>The process of producing blocks through Proof of Work.</td>
+</tr>
+<tr>
+<td>Miner</td>
+<td>An operator running mining hardware.</td>
+</tr>
+<tr>
+<td>Hash Rate</td>
+<td>The number of hashes a system can calculate per second.</td>
+</tr>
+<tr>
+<td>Proof of Work</td>
+<td>A computational proof requiring a hash below the target.</td>
+</tr>
+<tr>
+<td>Nonce</td>
+<td>A value miners can vary in the block header.</td>
+</tr>
+<tr>
+<td>Target</td>
+<td>The threshold that a valid block hash must satisfy.</td>
+</tr>
+<tr>
+<td>Difficulty</td>
+<td>A measure describing the relative difficulty of finding valid Proof of Work.</td>
+</tr>
+<tr>
+<td>Block Header</td>
+<td>The header containing fields used in the Proof of Work process.</td>
+</tr>
+<tr>
+<td>Merkle Root</td>
+<td>A root hash representing the transactions included in a block.</td>
+</tr>
+<tr>
+<td>Block Subsidy</td>
+<td>New bitcoin issuance permitted as part of the block reward.</td>
+</tr>
+<tr>
+<td>Transaction Fees</td>
+<td>Fees associated with transactions included in a block.</td>
+</tr>
+<tr>
+<td>Mining Pool</td>
+<td>A group of miners combining hashing power and sharing rewards.</td>
+</tr>
+<tr>
+<td>ASIC</td>
+<td>A specialized integrated circuit designed for a particular task.</td>
+</tr>
+</tbody>
+</table>
+
+<hr>
+
+<h2>Common Beginner Mistakes About Bitcoin Mining</h2>
+
+<h3>Mistake 1: Mining Creates Unlimited Bitcoin</h3>
+<p>Mining follows Bitcoin's issuance rules, and the block subsidy decreases over time.</p>
+
+<h3>Mistake 2: Miners Can Change Anything They Want</h3>
+<p>Nodes enforce consensus rules, so a miner cannot make an invalid block valid merely by finding Proof of Work.</p>
+
+<h3>Mistake 3: Hash Rate Equals Profit</h3>
+<p>Hash rate is important, but profitability also depends on electricity, hardware efficiency, difficulty, fees, Bitcoin price, and other costs.</p>
+
+<h3>Mistake 4: A Higher Bitcoin Price Means Every Miner Is Profitable</h3>
+<p>Mining economics depend on multiple changing variables rather than price alone.</p>
+
+<h3>Mistake 5: Mining Is the Same as Running a Bitcoin Node</h3>
+<p>Running a node and validating the network are different from performing mining work. A Bitcoin node can operate without mining.</p>
+
+<h3>Mistake 6: Owning a Mining Machine Means Receiving a Fixed Daily Reward</h3>
+<p>Mining is probabilistic, and income depends on the mining method, pool, hash rate, network conditions, and operating economics.</p>
+
+<hr>
+
+<h2>Useful Links in AQL Crypto Academy</h2>
+
+<ul>
+<li><a href="/academy/bitcoin/what-is-bitcoin">What Is Bitcoin? A Beginner's Guide</a></li>
+<li><a href="/academy/bitcoin/history-of-bitcoin">The History of Bitcoin</a></li>
+<li><a href="/academy/bitcoin/how-bitcoin-works">How Bitcoin Works: Transactions, Blocks, and the Network</a></li>
+<li><a href="/academy/bitcoin/bitcoin-wallets">Bitcoin Wallets, Keys, and Seed Phrases</a></li>
+<li><a href="/academy/bitcoin/bitcoin-halving">Bitcoin Halving: What It Is and Why It Matters</a></li>
+<li><a href="/crypto/BTC">Bitcoin Price and Market Data on AQL Crypto</a></li>
+</ul>
+
+<hr>
+
+<h2>Conclusion</h2>
+
+<p>Bitcoin mining is much more than running powerful machines to receive newly issued bitcoin. It is part of the consensus architecture that helps Bitcoin produce blocks, order transactions, and secure its historical record.</p>
+
+<p>A miner builds a candidate block and repeatedly performs hashing operations while searching for a valid Proof of Work. When a valid result is found, the block is broadcast to the network. Independent nodes then verify the block before accepting it.</p>
+
+<p>Mining economics depend on many variables, including hash rate, difficulty, block subsidy, transaction fees, Bitcoin price, electricity costs, ASIC efficiency, cooling, and maintenance.</p>
+
+<p>As the block subsidy continues to decline through the halving schedule, transaction fees become increasingly important to the long-term incentive structure of Bitcoin mining.</p>
+
+<p><strong>In one sentence:</strong> Bitcoin mining is a competitive Proof of Work process used to produce new blocks and help secure the blockchain, while independent nodes verify that those blocks follow Bitcoin's consensus rules.</p>
+
+<hr>
+
+<h2>Educational Disclaimer</h2>
+
+<p>This article is for educational purposes only and does not constitute financial, investment, legal, or business advice. Bitcoin mining economics vary by location, electricity prices, hardware costs, network conditions, and market prices, and these factors can change over time.</p>
+HTML,
+
+    'image' => null,
+
+    'seo_title' => null,
+    'seo_title_ar' => 'تعدين البيتكوين: شرح التعدين وProof of Work | AQL Crypto Academy',
+    'seo_title_en' => 'Bitcoin Mining Explained: Proof of Work, Miners and Security | AQL Crypto Academy',
+
+    'meta_description' => null,
+    'meta_description_ar' => 'تعرف على تعدين البيتكوين وكيف يعمل Proof of Work، ودور المعدنين والعقد وMining Pools وASIC، وصعوبة التعدين ومكافآت الكتل وHalving واستهلاك الطاقة وأمان شبكة Bitcoin.',
+    'meta_description_en' => 'Learn how Bitcoin mining works, including Proof of Work, miners, nodes, ASICs, mining pools, difficulty, block rewards, halving, energy use, and Bitcoin network security.',
+
+    'faq_ar' => [
+        [
+            'question' => 'ما هو تعدين البيتكوين؟',
+            'answer' => 'تعدين البيتكوين هو عملية تنافسية يستخدم فيها المعدنون القدرة الحاسوبية للبحث عن Proof of Work صالح وإنتاج كتل جديدة وفق قواعد شبكة Bitcoin.'
+        ],
+        [
+            'question' => 'ما هو Proof of Work في البيتكوين؟',
+            'answer' => 'Proof of Work هو إثبات حسابي يتطلب من المعدّن تنفيذ عدد كبير من عمليات التجزئة للعثور على Hash يحقق الهدف Target المحدد من قبل الشبكة.'
+        ],
+        [
+            'question' => 'ما هو Hash Rate؟',
+            'answer' => 'Hash Rate هو عدد عمليات التجزئة التي يستطيع جهاز أو مجموعة من أجهزة التعدين تنفيذها في الثانية، ويستخدم لقياس القدرة الحسابية المستخدمة في التعدين.'
+        ],
+        [
+            'question' => 'ما هو Nonce في تعدين البيتكوين؟',
+            'answer' => 'Nonce هو حقل موجود في Block Header يستطيع المعدّن تغييره أثناء البحث عن Hash صالح يحقق شرط Proof of Work.'
+        ],
+        [
+            'question' => 'لماذا تتغير صعوبة تعدين البيتكوين؟',
+            'answer' => 'تتغير صعوبة التعدين وفق قواعد الشبكة للمساعدة في الحفاظ على متوسط إنتاج الكتل قريبًا من المستوى المستهدف، رغم تغير إجمالي القدرة الحاسوبية المشاركة في التعدين.'
+        ],
+        [
+            'question' => 'كم يحصل المعدّن من البيتكوين عند العثور على كتلة؟',
+            'answer' => 'يحصل المعدّن على Block Subsidy المسموح به وفق ارتفاع الكتلة بالإضافة إلى رسوم المعاملات الموجودة في الكتلة. وينخفض Block Subsidy إلى النصف تقريبًا كل 210,000 كتلة.'
+        ],
+        [
+            'question' => 'ما الفرق بين Solo Mining وMining Pool؟',
+            'answer' => 'في Solo Mining يعمل المعدّن بشكل مستقل ويتحمل تذبذبًا أكبر في احتمالية الحصول على المكافآت، بينما يجمع Mining Pool قوة عدة معدنين ويوزع العوائد وفق نظام دفع محدد.'
+        ],
+        [
+            'question' => 'هل يمكن للمعدّن إنشاء Bitcoin إضافي كما يريد؟',
+            'answer' => 'لا. تتحقق عقد Bitcoin من قيمة المكافأة ومن قواعد الإصدار، ويمكن رفض الكتلة إذا حاول المعدّن المطالبة بمكافأة غير مسموح بها.'
+        ],
+        [
+            'question' => 'هل تعدين البيتكوين مربح دائمًا؟',
+            'answer' => 'لا. الربحية تعتمد على سعر Bitcoin وسعر الكهرباء وكفاءة الأجهزة وصعوبة الشبكة والرسوم وتكلفة الأجهزة والتبريد والصيانة وعوامل أخرى.'
+        ],
+        [
+            'question' => 'هل تعدين البيتكوين يستهلك الكهرباء؟',
+            'answer' => 'نعم. يعتمد Proof of Work على تنفيذ عدد كبير من عمليات Hashing، ولذلك يستهلك تعدين Bitcoin طاقة كهربائية تختلف كميتها بمرور الوقت وفق كفاءة الأجهزة واقتصاديات التعدين والظروف التشغيلية.'
+        ],
+    ],
+
+    'faq_en' => [
+        [
+            'question' => 'What is Bitcoin mining?',
+            'answer' => 'Bitcoin mining is a competitive process in which miners use computing power to search for valid Proof of Work and produce new blocks according to Bitcoin network rules.'
+        ],
+        [
+            'question' => 'What is Proof of Work in Bitcoin?',
+            'answer' => 'Proof of Work is a computational proof that requires miners to perform many hash calculations in order to find a hash that satisfies the target defined by the network.'
+        ],
+        [
+            'question' => 'What is hash rate?',
+            'answer' => 'Hash rate is the number of hash calculations that a mining device or group of devices can perform per second. It is commonly used to describe mining computing power.'
+        ],
+        [
+            'question' => 'What is a nonce in Bitcoin mining?',
+            'answer' => 'A nonce is a field in the Bitcoin block header that miners can change while searching for a valid hash that satisfies the Proof of Work target.'
+        ],
+        [
+            'question' => 'Why does Bitcoin mining difficulty change?',
+            'answer' => 'Mining difficulty changes according to Bitcoin protocol rules to help keep the average block production rate close to the intended target despite changes in total mining power.'
+        ],
+        [
+            'question' => 'How much Bitcoin does a miner receive for finding a block?',
+            'answer' => 'A successful miner receives the block subsidy permitted at that block height plus the transaction fees included in the block. The block subsidy is reduced by half approximately every 210,000 blocks.'
+        ],
+        [
+    'question' => "What is the difference between solo mining and pool mining?",
+    'answer' => "In solo mining, a miner operates independently and faces greater variance in finding blocks. In pool mining, miners combine hashing power and receive payouts according to the pool's payment system."
+        ],
+        [
+            'question' => 'Can a Bitcoin miner create unlimited new bitcoin?',
+            'answer' => 'No. Bitcoin nodes verify the permitted block reward and issuance rules. A block that claims an invalid reward can be rejected by nodes.'
+        ],
+        [
+            'question' => 'Is Bitcoin mining always profitable?',
+            'answer' => 'No. Profitability depends on Bitcoin price, electricity costs, hardware efficiency, network difficulty, fees, hardware costs, cooling, maintenance, and other operating conditions.'
+        ],
+        [
+            'question' => 'Does Bitcoin mining consume electricity?',
+            'answer' => 'Yes. Proof of Work requires large numbers of hashing operations, so Bitcoin mining consumes electricity. The amount changes over time with hardware efficiency, mining economics, and operating conditions.'
+        ],
+    ],
+
+    'status' => 'published',
+    'sort_order' => 5,
+    'published_at' => now(),
+],
             [
                 'title' => 'Bitcoin vs Ethereum',
                 'title_ar' => 'البيتكوين مقابل الإيثريوم',
