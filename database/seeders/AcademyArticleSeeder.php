@@ -730,35 +730,1449 @@ HTML,
 ],
 
             [
-                'title' => 'Bitcoin History',
-                'title_ar' => 'تاريخ البيتكوين',
-                'title_en' => 'Bitcoin History',
+    'title' => 'Bitcoin History',
 
-                'slug' => 'history-of-bitcoin',
+    'title_ar' => 'تاريخ البيتكوين: من الفكرة الأولى إلى أصل رقمي عالمي',
 
-                'excerpt' => 'Explore the origins of Bitcoin, the publication of the Bitcoin whitepaper, and its early development.',
-                'excerpt_ar' => 'استكشف نشأة البيتكوين، وصدور الورقة البيضاء، والمراحل الأولى من تطور الشبكة.',
-                'excerpt_en' => 'Explore the origins of Bitcoin, the publication of the Bitcoin whitepaper, and its early development.',
+    'title_en' => 'The History of Bitcoin: From an Idea to a Global Digital Asset',
 
-                'content' => '<p>This is a placeholder for the full educational article about Bitcoin history.</p>',
-                'content_ar' => '<p>هذا نص تجريبي للمقال التعليمي الكامل حول تاريخ البيتكوين.</p>',
-                'content_en' => '<p>This is a placeholder for the full educational article about Bitcoin history.</p>',
+    'slug' => 'history-of-bitcoin',
 
-                'image' => null,
+    'excerpt' => 'Explore the history of Bitcoin, from the early ideas behind digital cash and the 2008 whitepaper to the launch of the network, Bitcoin Pizza Day, the rise of exchanges, major market cycles, institutional adoption, spot Bitcoin ETFs, and the modern Bitcoin ecosystem.',
 
-                'seo_title' => 'Bitcoin History | AQL Crypto Academy',
-                'seo_title_ar' => 'تاريخ البيتكوين | أكاديمية AQL Crypto',
-                'seo_title_en' => 'Bitcoin History | AQL Crypto Academy',
+    'excerpt_ar' => 'اكتشف تاريخ البيتكوين منذ الأفكار الأولى للنقد الرقمي، مرورًا بالورقة البيضاء عام 2008 وإطلاق الشبكة عام 2009، وصولًا إلى أول سعر للبيتكوين وBitcoin Pizza Day وظهور البورصات والدورات السعرية والتبني المؤسسي وصناديق Bitcoin ETF ووضع البيتكوين في العصر الحديث.',
 
-                'meta_description' => 'Explore the history of Bitcoin, from its whitepaper and early development to its growth as a global digital asset.',
-                'meta_description_ar' => 'استكشف تاريخ البيتكوين، بدءًا من الورقة البيضاء والمراحل الأولى لتطوره وصولًا إلى نموه كأصل رقمي عالمي.',
-                'meta_description_en' => 'Explore the history of Bitcoin, from its whitepaper and early development to its growth as a global digital asset.',
+    'excerpt_en' => 'Explore the history of Bitcoin, from the early ideas behind digital cash and the 2008 whitepaper to the launch of the network, Bitcoin Pizza Day, the rise of exchanges, major market cycles, institutional adoption, spot Bitcoin ETFs, and the modern Bitcoin ecosystem.',
 
-                'status' => 'published',
-                'sort_order' => 2,
-                'published_at' => now(),
-            ],
+    'content' => <<<'HTML'
+<h2>Introduction</h2>
 
+<p>Bitcoin is often described as the first successful decentralized digital currency, but its history did not begin with the publication of the Bitcoin whitepaper in 2008. The system emerged from decades of research into cryptography, digital payments, electronic cash, distributed networks, and methods for preventing digital money from being copied or spent twice.</p>
+
+<p>Understanding Bitcoin's history helps explain why the network was designed the way it was. Concepts such as cryptographic signatures, proof of work, peer-to-peer networking, limited issuance, and decentralized verification were influenced by earlier ideas and experiments. Bitcoin combined several of these concepts into a working system that could operate without a central bank or payment company controlling the ledger.</p>
+
+<p>This article follows the major stages of Bitcoin's development, from the ideas that existed before Bitcoin to the launch of the network in 2009, its early community, the first attempts to assign monetary value to bitcoin, the growth of exchanges, major market cycles, institutional adoption, spot Bitcoin exchange-traded products, and the role Bitcoin plays in the modern digital-asset ecosystem.</p>
+
+<h2>Before Bitcoin</h2>
+
+<p>The idea of digital money is much older than Bitcoin. Long before blockchain networks existed, researchers were asking whether money could be represented electronically and transferred through computer networks.</p>
+
+<p>One major challenge was the double-spending problem. A physical banknote can normally be handed from one person to another, but digital information can be copied. If a digital monetary unit could simply be copied like a file, the same unit could potentially be spent more than once.</p>
+
+<p>Traditional electronic payments solved this problem by relying on trusted institutions. A bank, payment processor, or other central organization could maintain a database recording account balances and deciding which transactions were valid.</p>
+
+<p>Bitcoin attempted a different approach: instead of relying on one central institution, it proposed a distributed network in which participants could independently verify transactions according to common rules.</p>
+
+<h2>Digital Cash Experiments Before Bitcoin</h2>
+
+<p>During the 1980s and 1990s, cryptographers developed several important ideas related to electronic cash.</p>
+
+<p>David Chaum's work on digital cash was particularly influential in demonstrating that cryptography could be used to create electronic payment systems with strong privacy properties. Chaum's ideas did not create Bitcoin, but they formed part of the broader history of research into digital money.</p>
+
+<p>Other proposals attempted to solve different parts of the problem. Wei Dai described b-money, a proposal for an anonymous distributed electronic cash system. Nick Szabo developed the concept of bit gold, which explored scarce digital units created through computational work and cryptographic processes.</p>
+
+<p>Adam Back's Hashcash introduced a proof-of-work mechanism originally designed for applications such as reducing email spam. Proof of work later became a central component of Bitcoin's consensus mechanism.</p>
+
+<p>These projects were not simply earlier versions of Bitcoin. Each had its own assumptions, mechanisms, limitations, and goals. Their importance lies in showing that the technical and conceptual building blocks required for decentralized digital money had been discussed for years.</p>
+
+<h2>The 2008 Financial Crisis</h2>
+
+<p>Bitcoin appeared during a period of severe stress in the global financial system. In 2008, the financial crisis affected banks, credit markets, businesses, governments, and households around the world.</p>
+
+<p>The crisis became an important historical context for Bitcoin's emergence. However, it would be too simplistic to say that the financial crisis alone created Bitcoin. The technology behind Bitcoin was the result of a much longer development of cryptographic and distributed-systems ideas.</p>
+
+<p>The timing nevertheless matters. Bitcoin's first block contains a reference to a newspaper headline about the British government's response to the banking crisis. The message has often been interpreted as a statement about the financial environment in which Bitcoin was created.</p>
+
+<p>Whether the reference should be viewed as a political statement, a timestamp, a commentary on banking, or a combination of these interpretations, it provides a clear historical connection between Bitcoin's launch and the financial environment of 2008 and 2009.</p>
+
+<h2>The Appearance of Satoshi Nakamoto</h2>
+
+<p>In 2008, a person or group using the pseudonym Satoshi Nakamoto introduced Bitcoin to the public.</p>
+
+<p>Satoshi's real-world identity has never been reliably established. Many people have claimed or been alleged to be Satoshi, but there is no broadly accepted cryptographic proof establishing the identity behind the pseudonym.</p>
+
+<p>The use of a pseudonym was significant because Bitcoin's design did not require users to trust the identity of its creator. The system was presented as a set of rules and software that participants could inspect, run, and verify independently.</p>
+
+<p>Satoshi communicated with other developers and researchers through email and online forums. The early project gradually attracted contributors who reviewed the code, reported problems, proposed improvements, and helped operate the emerging network.</p>
+
+<h2>The Bitcoin Whitepaper in 2008</h2>
+
+<p>On October 31, 2008, Satoshi Nakamoto published the paper titled <em>Bitcoin: A Peer-to-Peer Electronic Cash System</em>.</p>
+
+<p>The paper described a system for electronic transactions that would not depend on a trusted financial institution. Instead, transactions would be recorded in a chain of blocks secured through proof of work.</p>
+
+<p>The whitepaper introduced several ideas that remain central to Bitcoin. Transactions could be digitally signed, participants could verify the history of transactions, and proof of work could be used to make it computationally expensive to rewrite the established transaction history.</p>
+
+<p>The paper also described how a distributed network could reach agreement on which version of the transaction history should be accepted. This was essential because the system did not have a central administrator maintaining the ledger.</p>
+
+<p>The whitepaper was short compared with a modern technical specification, but its importance came from combining several existing concepts into a coherent protocol.</p>
+
+<h2>The Launch of the Bitcoin Network in 2009</h2>
+
+<p>The Bitcoin network officially entered its operational phase in January 2009.</p>
+
+<p>On January 3, 2009, the first block of the Bitcoin blockchain was created. This block is commonly called the Genesis Block or Block 0.</p>
+
+<p>The Genesis Block is special because it forms the beginning of Bitcoin's blockchain and contains data that distinguishes it from later blocks. It also contains the famous newspaper headline referring to the banking crisis.</p>
+
+<p>Bitcoin software was then made available so that other participants could download it, examine the source code, run nodes, and participate in the network.</p>
+
+<p>At this stage Bitcoin had almost no established monetary value. The project was primarily an experiment involving a small group of technically interested participants.</p>
+
+<h2>The First Bitcoin Transactions</h2>
+
+<p>One of the most important early milestones occurred in January 2009 when Satoshi Nakamoto sent bitcoin to Hal Finney.</p>
+
+<p>Hal Finney was a computer scientist and cryptographer who became one of the earliest people to run Bitcoin software and interact with Satoshi.</p>
+
+<p>The transaction is historically important because it demonstrated that Bitcoin could move value between independent participants rather than merely existing as software on Satoshi's computer.</p>
+
+<p>Finney's involvement also showed the importance of independent verification. Bitcoin was designed so that participants could run the software themselves rather than simply trusting the creator's description of how the system worked.</p>
+
+<p>Finney later became one of the best-known early contributors to Bitcoin's history.</p>
+
+<h2>Hal Finney and the Early Community</h2>
+
+<p>Hal Finney had a background in cryptography and was already familiar with digital-cash research before Bitcoin appeared.</p>
+
+<p>His early involvement helped provide feedback on the software and contributed to the project's early development.</p>
+
+<p>The relationship between Satoshi and early contributors demonstrates an important feature of Bitcoin's history: although Satoshi created the initial protocol and software, Bitcoin quickly became a collaborative open-source project.</p>
+
+<p>As more people examined the code and participated in discussions, the project became less dependent on one individual and increasingly dependent on publicly visible rules, software, and community development.</p>
+
+<h2>The First Known Bitcoin Price</h2>
+
+<p>In the earliest months of Bitcoin, there was no established market price comparable to the prices displayed on modern exchanges.</p>
+
+<p>On October 5, 2009, the New Liberty Standard published one of the earliest known exchange rates for bitcoin against the U.S. dollar. The rate valued approximately 1 U.S. dollar at more than 1,300 BTC, meaning one bitcoin was worth considerably less than one cent.</p>
+
+<p>This was an important psychological milestone because it gave bitcoin a reference value expressed in traditional currency.</p>
+
+<p>Bitcoin's value at this stage should not be compared directly with its later market price. Liquidity was extremely limited, the user base was tiny, and there were no mature exchanges or institutional markets.</p>
+
+<h2>Bitcoin Pizza Day</h2>
+
+<p>May 22, 2010 became one of the most famous dates in Bitcoin history.</p>
+
+<p>Laszlo Hanyecz used 10,000 BTC to arrange the purchase of two pizzas. The transaction is widely remembered as Bitcoin Pizza Day and is considered one of the earliest famous examples of bitcoin being used to purchase a real-world good.</p>
+
+<p>The event was significant because it demonstrated a practical use beyond exchanging coins among developers and enthusiasts.</p>
+
+<p>The enormous value that 10,000 BTC would represent at later market prices turned the story into one of the most famous examples of Bitcoin's early history. However, judging the transaction using later prices ignores the economic conditions of 2010, when bitcoin had very little established market value.</p>
+
+<h2>The Emergence of Bitcoin Exchanges</h2>
+
+<p>As Bitcoin gained attention, users needed easier ways to exchange it for traditional currencies and other digital assets.</p>
+
+<p>Early exchanges and trading services began appearing in 2010 and the following years. Mt. Gox eventually became one of the most prominent Bitcoin exchanges of the early period.</p>
+
+<p>Exchanges changed Bitcoin's development because they made price discovery easier. Instead of relying primarily on informal arrangements between individuals, users could see market prices and trade against other participants.</p>
+
+<p>However, centralized exchanges also introduced new risks. Users had to trust the exchange to protect funds, maintain accurate records, process withdrawals, and operate securely.</p>
+
+<h2>The Disappearance of Satoshi</h2>
+
+<p>As Bitcoin's community grew, Satoshi gradually became less involved in public development.</p>
+
+<p>Rather than remaining the permanent public leader of the project, Satoshi communicated less frequently and transferred development responsibilities to other contributors.</p>
+
+<p>The exact reasons for Satoshi's withdrawal are not known with certainty. Claims about motives should therefore be treated cautiously.</p>
+
+<p>What is historically significant is what happened to the project afterward. Bitcoin continued operating even though its creator was no longer actively directing the community.</p>
+
+<p>This became an important demonstration of Bitcoin's decentralized character. The network did not shut down because one individual disappeared. Developers continued maintaining the software, miners continued securing the network, and users continued making transactions.</p>
+
+<h2>The Growth of the Bitcoin Community</h2>
+
+<p>During the early 2010s, Bitcoin developed from a small cryptography project into a broader online community.</p>
+
+<p>Developers worked on the Bitcoin Core software and other implementations. Miners contributed computational power. Users experimented with payments and marketplaces. Entrepreneurs built exchanges, wallets, payment services, mining hardware, and other businesses around the ecosystem.</p>
+
+<p>The growth of the community also created disagreements about Bitcoin's future.</p>
+
+<p>Some participants focused on Bitcoin as a payment system. Others viewed it primarily as a scarce digital asset. Developers debated scalability, block size, transaction fees, privacy, security, and the best way to modify the protocol without damaging its decentralized characteristics.</p>
+
+<p>These debates became a permanent feature of Bitcoin development.</p>
+
+<h2>Bitcoin's Major Market Cycles</h2>
+
+<p>Bitcoin's price history has been characterized by repeated periods of rapid appreciation followed by substantial declines.</p>
+
+<p>In the early years, even relatively small amounts of capital could move the market because liquidity was limited.</p>
+
+<p>The 2011 period brought major public attention and a dramatic increase in price. Bitcoin subsequently experienced a major decline before recovering and entering another growth period.</p>
+
+<p>In 2013, Bitcoin experienced another major market expansion. The rise attracted new users and media attention, but it was followed by a prolonged decline.</p>
+
+<p>The collapse of Mt. Gox in 2014 became one of the most important negative events in Bitcoin's early history. The exchange experienced a major loss of customer funds and ultimately collapsed.</p>
+
+<p>Despite these setbacks, the Bitcoin network itself continued operating. The distinction between the Bitcoin protocol and centralized companies built around it became increasingly important.</p>
+
+<h2>The 2017 Cycle and SegWit</h2>
+
+<p>Bitcoin entered another major period of growth in 2017.</p>
+
+<p>The year was important not only because of market activity but also because of technological developments. Segregated Witness, commonly known as SegWit, was activated on the Bitcoin network.</p>
+
+<p>SegWit changed how transaction data was structured and helped address certain technical limitations. It also enabled the development of technologies such as the Lightning Network, which aims to support faster and potentially cheaper Bitcoin transactions through an additional layer.</p>
+
+<p>The 2017 period also demonstrated the social complexity of decentralized protocol development. Disagreements about scaling contributed to competing proposals and eventually to network forks.</p>
+
+<h2>Bitcoin in 2018 and the Bear Market</h2>
+
+<p>Following the extreme market activity of 2017, Bitcoin entered a prolonged period of declining prices in 2018.</p>
+
+<p>The period reminded market participants that Bitcoin was capable of very large price movements in both directions.</p>
+
+<p>Despite the decline in market prices, development did not stop. Companies continued building infrastructure, exchanges improved their systems, custody services developed, and developers continued working on Bitcoin and related technologies.</p>
+
+<p>This separation between market cycles and protocol development became an important characteristic of Bitcoin's history.</p>
+
+<h2>Institutional Adoption</h2>
+
+<p>During the late 2010s and early 2020s, Bitcoin increasingly attracted interest from financial institutions, publicly traded companies, asset managers, payment companies, and professional investors.</p>
+
+<p>Institutional participation developed in several forms, including custody services, investment products, corporate treasury strategies, futures markets, and research coverage.</p>
+
+<p>Institutional involvement did not eliminate Bitcoin's volatility. Instead, it expanded the number and type of participants interacting with the asset.</p>
+
+<p>The arrival of institutional infrastructure also made Bitcoin more accessible to investors who preferred regulated financial products rather than managing private keys directly.</p>
+
+<h2>Bitcoin in 2020 and 2021</h2>
+
+<p>The 2020 period was another major stage in Bitcoin's history.</p>
+
+<p>The third Bitcoin halving occurred in May 2020, reducing the block subsidy paid to miners from 12.5 BTC to 6.25 BTC per block.</p>
+
+<p>Bitcoin subsequently experienced another major market expansion, with increased participation from both retail and institutional investors.</p>
+
+<p>In 2021, El Salvador became the first country to adopt Bitcoin as legal tender. The decision generated significant international discussion about the possible role of Bitcoin in national monetary systems.</p>
+
+<p>The same period also saw major growth in cryptocurrency markets more broadly, followed by substantial volatility.</p>
+
+<h2>The 2022 Market Downturn</h2>
+
+<p>In 2022, the broader cryptocurrency market experienced a severe downturn.</p>
+
+<p>Several major companies and crypto projects experienced financial difficulties or failure. The collapse of FTX later in 2022 became one of the most significant events in the industry's history.</p>
+
+<p>Bitcoin's network itself continued processing transactions throughout the period.</p>
+
+<p>The events of 2022 reinforced the distinction between the Bitcoin protocol and centralized companies, exchanges, lenders, and other businesses operating around digital assets.</p>
+
+<h2>Bitcoin in 2023</h2>
+
+<p>Bitcoin's ecosystem continued developing in 2023.</p>
+
+<p>One of the most discussed developments was the emergence of Ordinals and related methods for recording additional data on individual satoshis through Bitcoin transactions.</p>
+
+<p>The year also saw growing institutional interest in regulated Bitcoin investment products. Several large asset managers submitted applications or proposals for spot Bitcoin exchange-traded products in the United States.</p>
+
+<p>These developments contributed to a changing perception of Bitcoin among parts of the traditional financial industry.</p>
+
+<h2>Spot Bitcoin ETFs and ETPs in 2024</h2>
+
+<p>January 2024 became another major milestone in Bitcoin's history.</p>
+
+<p>On January 10, 2024, the U.S. Securities and Exchange Commission announced the approval of the listing and trading of several spot bitcoin exchange-traded product shares.</p>
+
+<p>Trading began on January 11, 2024.</p>
+
+<p>These products are commonly called spot Bitcoin ETFs in public discussions, although the SEC's terminology referred to them as exchange-traded products.</p>
+
+<p>The significance of this development was that investors could gain exposure to the price of bitcoin through regulated market products without necessarily purchasing and managing bitcoin directly.</p>
+
+<p>It represented another stage in Bitcoin's integration with traditional financial markets.</p>
+
+<h2>The Fourth Bitcoin Halving</h2>
+
+<p>In April 2024, Bitcoin experienced its fourth halving.</p>
+
+<p>The block subsidy was reduced from 6.25 BTC to 3.125 BTC per block.</p>
+
+<p>Halvings are programmed into Bitcoin's monetary policy and occur after a defined number of blocks. They reduce the rate at which new bitcoins enter circulation.</p>
+
+<p>Halvings have historically attracted considerable attention because they affect the supply schedule, although a halving by itself does not guarantee a particular future price.</p>
+
+<h2>Bitcoin Today</h2>
+
+<p>Bitcoin today is no longer limited to a small community of cryptography enthusiasts.</p>
+
+<p>Its ecosystem includes individual users, developers, miners, exchanges, custodians, financial institutions, payment services, investment products, researchers, and companies building infrastructure around the network.</p>
+
+<p>At the same time, Bitcoin remains fundamentally different from a conventional company or financial institution. There is no central Bitcoin corporation responsible for the network. The protocol is implemented through software operated by independent participants.</p>
+
+<p>Bitcoin's development continues through open-source software, technical proposals, research, and community discussion.</p>
+
+<p>The network also continues to face unresolved questions. These include scalability, transaction fees, privacy, energy use, regulation, custody, user security, and the long-term role of Bitcoin within the global financial system.</p>
+
+<p>For users who want to follow Bitcoin's current market data rather than its historical development, AQL Crypto provides a dedicated Bitcoin market page at <a href="/crypto/BTC">Bitcoin Market</a>.</p>
+
+<h2>Complete Bitcoin Timeline</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Milestone</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1980s</td>
+            <td>Early cryptographic research into electronic cash and digital privacy expands.</td>
+        </tr>
+        <tr>
+            <td>1997</td>
+            <td>Hashcash introduces a proof-of-work concept for computational cost.</td>
+        </tr>
+        <tr>
+            <td>1998</td>
+            <td>Wei Dai describes b-money, an early proposal for distributed electronic cash.</td>
+        </tr>
+        <tr>
+            <td>2005</td>
+            <td>Nick Szabo develops and discusses ideas related to bit gold and digital scarcity.</td>
+        </tr>
+        <tr>
+            <td>October 31, 2008</td>
+            <td>Satoshi Nakamoto publishes the Bitcoin whitepaper.</td>
+        </tr>
+        <tr>
+            <td>January 3, 2009</td>
+            <td>The Bitcoin Genesis Block is created.</td>
+        </tr>
+        <tr>
+            <td>January 2009</td>
+            <td>Hal Finney receives bitcoin from Satoshi Nakamoto in one of the earliest known Bitcoin transactions between participants.</td>
+        </tr>
+        <tr>
+            <td>October 2009</td>
+            <td>New Liberty Standard publishes an early exchange rate for bitcoin against the U.S. dollar.</td>
+        </tr>
+        <tr>
+            <td>May 22, 2010</td>
+            <td>Laszlo Hanyecz uses 10,000 BTC to purchase two pizzas, creating the event known as Bitcoin Pizza Day.</td>
+        </tr>
+        <tr>
+            <td>2010</td>
+            <td>Early Bitcoin exchanges begin appearing, including Mt. Gox.</td>
+        </tr>
+        <tr>
+            <td>2012</td>
+            <td>The first Bitcoin halving reduces the block subsidy from 50 BTC to 25 BTC.</td>
+        </tr>
+        <tr>
+            <td>2013</td>
+            <td>Bitcoin experiences another major market expansion and attracts global media attention.</td>
+        </tr>
+        <tr>
+            <td>2014</td>
+            <td>Mt. Gox collapses after losing access to a large amount of customer bitcoin.</td>
+        </tr>
+        <tr>
+            <td>2016</td>
+            <td>The second halving reduces the block subsidy from 25 BTC to 12.5 BTC.</td>
+        </tr>
+        <tr>
+            <td>2017</td>
+            <td>SegWit activates and Bitcoin experiences a major market cycle.</td>
+        </tr>
+        <tr>
+            <td>2020</td>
+            <td>The third halving reduces the block subsidy from 12.5 BTC to 6.25 BTC.</td>
+        </tr>
+        <tr>
+            <td>2021</td>
+            <td>El Salvador adopts Bitcoin as legal tender.</td>
+        </tr>
+        <tr>
+            <td>2022</td>
+            <td>A major cryptocurrency market downturn affects the wider digital-asset industry.</td>
+        </tr>
+        <tr>
+            <td>2023</td>
+            <td>Ordinals gain attention and major financial institutions pursue spot Bitcoin investment products.</td>
+        </tr>
+        <tr>
+            <td>January 2024</td>
+            <td>The SEC approves the listing and trading of several spot bitcoin exchange-traded products in the United States.</td>
+        </tr>
+        <tr>
+            <td>April 2024</td>
+            <td>The fourth Bitcoin halving reduces the block subsidy from 6.25 BTC to 3.125 BTC.</td>
+        </tr>
+        <tr>
+            <td>2025–2026</td>
+            <td>Bitcoin continues to develop as a decentralized network and as an asset integrated with a growing financial and technology ecosystem.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Conclusion</h2>
+
+<p>The history of Bitcoin is the history of several ideas coming together: cryptography, digital scarcity, electronic payments, peer-to-peer networking, proof of work, and decentralized consensus.</p>
+
+<p>The 2008 whitepaper provided a practical design for combining these concepts. The launch of the network in 2009 transformed the proposal into a functioning system. Early contributors such as Hal Finney helped test and develop the software, while later communities, miners, developers, exchanges, businesses, and users expanded the ecosystem.</p>
+
+<p>Bitcoin's history also demonstrates that the network's development has not followed a straight line. It has passed through technological debates, security incidents, market crashes, rapid growth, regulatory changes, and increasing institutional involvement.</p>
+
+<p>Understanding this history provides useful context for understanding Bitcoin today. The current market is only one part of a much longer story that began with decades of research into whether digital value could exist without a central authority.</p>
+
+<p><strong>Important note:</strong> This article is educational and historical in nature. It is not investment, financial, legal, or tax advice. Bitcoin and other digital assets can be highly volatile, and users should conduct their own research and consider the laws and regulations applicable in their jurisdiction.</p>
+
+<h2>Frequently Asked Questions</h2>
+
+<h3>What is the history of Bitcoin?</h3>
+<p>Bitcoin's history began with decades of research into cryptography and digital cash before Satoshi Nakamoto published the Bitcoin whitepaper in 2008. The network launched in January 2009 and gradually developed into a global digital-asset ecosystem.</p>
+
+<h3>Who created Bitcoin?</h3>
+<p>Bitcoin was introduced by a person or group using the pseudonym Satoshi Nakamoto. The real-world identity of Satoshi has not been reliably established.</p>
+
+<h3>When was the Bitcoin whitepaper published?</h3>
+<p>The Bitcoin whitepaper was published on October 31, 2008, under the title Bitcoin: A Peer-to-Peer Electronic Cash System.</p>
+
+<h3>When did Bitcoin launch?</h3>
+<p>The Bitcoin Genesis Block was created on January 3, 2009. This date is generally regarded as the beginning of the Bitcoin blockchain.</p>
+
+<h3>Who received the first Bitcoin transaction?</h3>
+<p>Hal Finney received 10 BTC from Satoshi Nakamoto in one of the earliest known Bitcoin transactions between two participants.</p>
+
+<h3>What was the first Bitcoin price?</h3>
+<p>One of the earliest known dollar-denominated exchange rates was published by New Liberty Standard in October 2009, valuing one U.S. dollar at approximately 1,309 BTC.</p>
+
+<h3>What is Bitcoin Pizza Day?</h3>
+<p>Bitcoin Pizza Day is observed on May 22 because Laszlo Hanyecz used 10,000 BTC to arrange the purchase of two pizzas in 2010.</p>
+
+<h3>When did Satoshi Nakamoto disappear?</h3>
+<p>Satoshi gradually withdrew from active public involvement in Bitcoin development around the early years of the project. The exact reasons for the withdrawal are not known with certainty.</p>
+
+<h3>When was the first Bitcoin halving?</h3>
+<p>The first Bitcoin halving occurred in 2012 and reduced the block subsidy from 50 BTC to 25 BTC.</p>
+
+<h3>When were spot Bitcoin ETFs approved in the United States?</h3>
+<p>The SEC announced approval of the listing and trading of several spot bitcoin exchange-traded product shares on January 10, 2024, with trading beginning on January 11.</p>
+
+<h3>Is Bitcoin still being developed?</h3>
+<p>Yes. Bitcoin's open-source software continues to be maintained and improved by developers and contributors around the world.</p>
+
+<h3>Where can I follow the current Bitcoin market?</h3>
+<p>You can follow current Bitcoin market information on the <a href="/crypto/BTC">Bitcoin market page</a> on AQL Crypto.</p>
+
+<h2>Related Articles</h2>
+
+<ul>
+    <li><a href="/academy/bitcoin/what-is-bitcoin">What Is Bitcoin?</a></li>
+    <li><a href="/academy/bitcoin/how-bitcoin-works">How Bitcoin Works</a></li>
+    <li><a href="/academy/bitcoin/bitcoin-mining">Bitcoin Mining Explained</a></li>
+    <li><a href="/academy/bitcoin/bitcoin-wallets">Bitcoin Wallets</a></li>
+    <li><a href="/academy/bitcoin/bitcoin-halving">Bitcoin Halving</a></li>
+    <li><a href="/crypto/BTC">Bitcoin Market</a></li>
+</ul>
+HTML,
+
+    'content_ar' => <<<'HTML'
+<h2>مقدمة</h2>
+
+<p>تاريخ البيتكوين ليس مجرد قصة ارتفاع سعر أصل رقمي من بضعة أجزاء من السنت إلى قيم مرتفعة. فالبيتكوين ظهر نتيجة تراكم طويل من الأفكار والأبحاث في التشفير، والنقد الإلكتروني، والمدفوعات الرقمية، والشبكات الموزعة، وطرق منع الإنفاق المزدوج للأموال الرقمية.</p>
+
+<p>لفهم البيتكوين بصورة صحيحة، من المهم معرفة ما الذي كان موجودًا قبل ظهوره، ولماذا كانت فكرة النقد الرقمي اللامركزي صعبة تقنيًا، وكيف جمع ساتوشي ناكاموتو بين عدد من التقنيات والأفكار السابقة في نظام واحد يعمل من خلال شبكة من المشاركين بدلًا من الاعتماد على بنك أو مؤسسة مركزية واحدة.</p>
+
+<p>في هذا المقال نستعرض رحلة البيتكوين منذ الأفكار الأولى للنقد الرقمي، مرورًا بمحاولات سابقة لحل مشكلة المال الإلكتروني، والأزمة المالية العالمية عام 2008، وظهور ساتوشي ناكاموتو، والورقة البيضاء، وإطلاق الشبكة عام 2009، وأولى المعاملات، وهال فيني، وأول سعر معروف للبيتكوين، وBitcoin Pizza Day، ثم نمو المجتمع وظهور البورصات والدورات السعرية والتبني المؤسسي وصولًا إلى صناديق Bitcoin ETF والبيتكوين في العصر الحديث.</p>
+
+<h2>ما قبل البيتكوين</h2>
+
+<p>لم تبدأ فكرة النقود الرقمية مع Bitcoin. فمنذ ظهور الحواسيب والشبكات الإلكترونية بدأ الباحثون يتساءلون عما إذا كان من الممكن إنشاء نوع من المال يمكن نقله عبر الإنترنت دون الحاجة إلى نقل أوراق نقدية أو الاعتماد على بنية مصرفية تقليدية.</p>
+
+<p>كانت هناك مشكلة أساسية تجعل الأمر مختلفًا عن إرسال صورة أو ملف عبر الإنترنت: عند إرسال ملف رقمي يمكن الاحتفاظ بنسخة منه وإرسال النسخة نفسها إلى شخص آخر. أما النقود فلا ينبغي أن تعمل بهذه الطريقة؛ فإذا أمكن نسخ الوحدة المالية بسهولة، فقد يستطيع المستخدم إنفاق القيمة نفسها أكثر من مرة.</p>
+
+<p>الأنظمة المالية التقليدية تحل هذه المشكلة من خلال وجود جهة موثوقة. فعندما يرسل شخص أموالًا من حسابه البنكي، يحتفظ البنك بسجل للحسابات ويقرر ما إذا كان الرصيد كافيًا وما إذا كانت العملية صحيحة.</p>
+
+<p>كان السؤال الذي سبق Bitcoin هو: هل يمكن بناء نظام مالي رقمي يستطيع المشاركون فيه التحقق من المعاملات دون وجود جهة مركزية واحدة تتحكم في السجل؟</p>
+
+<h2>محاولات النقد الرقمي قبل Bitcoin</h2>
+
+<p>خلال الثمانينيات والتسعينيات ظهرت مجموعة مهمة من الأبحاث والمشروعات التي حاولت استخدام التشفير لإنشاء نقد إلكتروني أو أنظمة دفع رقمية أكثر خصوصية.</p>
+
+<p>كان عمل عالم التشفير ديفيد تشاوم من المحطات المهمة في تاريخ النقد الإلكتروني. فقد قدم أفكارًا حول استخدام التشفير لإنشاء أنظمة دفع رقمية تتمتع بخصائص خصوصية قوية.</p>
+
+<p>لاحقًا ظهرت أفكار أخرى حاولت معالجة جوانب مختلفة من المشكلة. طرح Wei Dai مفهوم b-money، وهو اقتراح لنظام نقد إلكتروني موزع. كما ناقش Nick Szabo مفهوم bit gold، الذي تناول فكرة الندرة الرقمية واستخدام العمل الحسابي والتشفير لإنشاء وحدات رقمية ذات قيمة.</p>
+
+<p>أما Adam Back فقد طور Hashcash، وهو نظام يستخدم إثبات العمل لجعل تنفيذ عمليات حسابية مكلفة نسبيًا. كان الهدف الأصلي من Hashcash مختلفًا عن Bitcoin، لكنه قدم مفهومًا أصبح لاحقًا جزءًا أساسيًا من آلية عمل شبكة Bitcoin.</p>
+
+<p>من المهم عدم اعتبار هذه المشاريع نسخًا أولية من Bitcoin. لكل مشروع منها تصميمه وأهدافه وافتراضاته المختلفة. أهميتها التاريخية تتمثل في أنها أظهرت أن مشكلة النقد الرقمي كانت موضع بحث جدي قبل ظهور Bitcoin بسنوات طويلة.</p>
+
+<h2>أزمة 2008</h2>
+
+<p>ظهر Bitcoin في واحدة من أكثر الفترات اضطرابًا في التاريخ المالي الحديث. ففي عام 2008 تعرض النظام المالي العالمي لأزمة كبيرة أثرت في البنوك والأسواق الائتمانية والشركات والحكومات والأفراد.</p>
+
+<p>أصبحت الأزمة المالية جزءًا مهمًا من السياق التاريخي لظهور Bitcoin، لكن من غير الدقيق اختزال نشأة Bitcoin في الأزمة المالية وحدها. فالتقنيات والأفكار التي استخدمها Bitcoin كانت نتيجة أبحاث امتدت لسنوات طويلة قبل عام 2008.</p>
+
+<p>ومع ذلك، فإن توقيت ظهور Bitcoin له دلالة واضحة. فالكتلة الأولى في سلسلة Bitcoin، المعروفة باسم Genesis Block، تضمنت نصًا يشير إلى عنوان صحفي يتعلق بأزمة البنوك وإجراءات الإنقاذ المالي.</p>
+
+<p>وقد فُسر هذا النص بطرق مختلفة؛ فالبعض يراه تعليقًا على النظام المصرفي، والبعض يعتبره دليلًا على السياق الزمني للكتلة، بينما يرى آخرون أنه يجمع بين الأمرين. المؤكد تاريخيًا هو أن النص موجود داخل الكتلة الأولى، وأن إطلاق Bitcoin حدث في فترة كانت فيها الثقة في المؤسسات المالية التقليدية موضوعًا واسع النقاش.</p>
+
+<h2>ظهور ساتوشي ناكاموتو</h2>
+
+<p>في عام 2008 ظهر اسم Satoshi Nakamoto في مجتمع التشفير، وهو الاسم المستعار الذي ارتبط بتقديم نظام Bitcoin.</p>
+
+<p>حتى اليوم لا توجد هوية واقعية مثبتة بشكل موثوق للشخص أو المجموعة التي كانت وراء هذا الاسم. ظهرت على مر السنين ادعاءات كثيرة حول هوية ساتوشي، لكن لا يوجد إثبات تشفيري مقبول على نطاق واسع يحدد صاحب الاسم.</p>
+
+<p>استخدام اسم مستعار كان مهمًا من ناحية تصميم المشروع. فالبيتكوين لم يكن مبنيًا على ضرورة معرفة هوية المؤسس أو الثقة بشخص معين، بل على قواعد يمكن قراءة الكود الخاص بها وتشغيلها والتحقق من نتائجها بصورة مستقلة.</p>
+
+<p>تواصل ساتوشي مع عدد من الباحثين والمطورين عبر البريد الإلكتروني والمنتديات المتخصصة. ومع مرور الوقت بدأ المشروع يجذب مساهمين آخرين شاركوا في اختبار البرنامج ومراجعة الكود والإبلاغ عن المشكلات والمساهمة في تطوير الشبكة.</p>
+
+<h2>الورقة البيضاء 2008</h2>
+
+<p>في 31 أكتوبر 2008 نشر ساتوشي ناكاموتو الورقة البيضاء الشهيرة بعنوان <em>Bitcoin: A Peer-to-Peer Electronic Cash System</em>، أي «Bitcoin: نظام نقد إلكتروني من نظير إلى نظير».</p>
+
+<p>قدمت الورقة تصورًا لنظام يستطيع تنفيذ معاملات إلكترونية دون الحاجة إلى مؤسسة مالية موثوقة تتولى حفظ السجل والتحقق من العمليات.</p>
+
+<p>اعتمد التصور على شبكة موزعة، وتوقيعات رقمية، وسجل للمعاملات، وإثبات العمل، وآلية تسمح للمشاركين بالاتفاق على سلسلة المعاملات التي تمثل التاريخ الصحيح للشبكة.</p>
+
+<p>كانت مشكلة الإنفاق المزدوج إحدى أهم المشكلات التي حاول التصميم حلها. بدلًا من وجود قاعدة بيانات مركزية، اقترح Bitcoin شبكة يستطيع المشاركون فيها التحقق من المعاملات وفق قواعد مشتركة.</p>
+
+<p>الورقة البيضاء لم تخترع جميع التقنيات التي استخدمتها Bitcoin من الصفر، لكن أهميتها كانت في جمع مجموعة من الأفكار السابقة داخل تصميم واحد عملي قابل للتشغيل.</p>
+
+<h2>إطلاق الشبكة عام 2009</h2>
+
+<p>في 3 يناير 2009 تم إنشاء أول كتلة في سلسلة Bitcoin، وهي الكتلة التي تعرف باسم Genesis Block أو Block 0.</p>
+
+<p>تمثل هذه الكتلة نقطة البداية لسلسلة Bitcoin، ولها خصائص خاصة تميزها عن الكتل اللاحقة.</p>
+
+<p>تضمنت الكتلة الأولى أيضًا الإشارة الشهيرة إلى عنوان صحفي يتعلق بأزمة البنوك، وهو أمر أصبح جزءًا من تاريخ Bitcoin منذ الأيام الأولى.</p>
+
+<p>بعد ذلك أصبح برنامج Bitcoin متاحًا للمستخدمين والمطورين، وأصبح بإمكان المشاركين تشغيل البرنامج، والتحقق من الكود، وتشغيل العقد، والمساهمة في الشبكة.</p>
+
+<p>في هذه المرحلة لم يكن للبيتكوين سعر سوقي ناضج. كان المشروع لا يزال صغيرًا جدًا ويشارك فيه عدد محدود من المهتمين بالتشفير والبرمجيات.</p>
+
+<h2>أول المعاملات</h2>
+
+<p>من أهم المحطات في بداية Bitcoin انتقال العملة من مجرد برنامج وتجربة تقنية إلى شبكة يستطيع فيها مستخدم إرسال وحدات Bitcoin إلى مستخدم آخر.</p>
+
+<p>في يناير 2009 أرسل ساتوشي ناكاموتو كمية من البيتكوين إلى Hal Finney، الذي كان من أوائل الأشخاص الذين شغلوا برنامج Bitcoin وتفاعلوا مع ساتوشي.</p>
+
+<p>كانت هذه المعاملة مهمة لأنها أظهرت أن النظام يستطيع تنفيذ عملية نقل قيمة بين مشاركين مستقلين.</p>
+
+<p>وتوجد أهمية إضافية لهذه المرحلة في كون Bitcoin مشروعًا مفتوح المصدر. فبدلًا من الاعتماد على كلام المؤسس، أصبح بإمكان المشاركين تشغيل البرنامج بأنفسهم ومراقبة الشبكة والتحقق من العمليات.</p>
+
+<h2>Hal Finney</h2>
+
+<p>كان Hal Finney عالم حاسوب ومبرمجًا له خلفية في التشفير، وكان مهتمًا بأبحاث النقد الرقمي قبل ظهور Bitcoin.</p>
+
+<p>أصبح فيني أحد أوائل الأشخاص الذين اختبروا Bitcoin وتفاعلوا مع ساتوشي. كما كان من المشاركين الأوائل الذين ساعدوا في اختبار النظام وتقديم الملاحظات.</p>
+
+<p>توضح قصة Hal Finney أن Bitcoin لم يبقَ مشروعًا لشخص واحد لفترة طويلة. فبعد إطلاق البرنامج بدأ مطورون ومستخدمون آخرون بفحص الكود وتشغيل العقد ومناقشة التحسينات.</p>
+
+<p>ومع مرور الوقت تحول Bitcoin إلى مشروع مفتوح المصدر يعتمد على مجموعة من المساهمين بدلًا من اعتماد الشبكة على المؤسس وحده.</p>
+
+<h2>أول سعر للبيتكوين</h2>
+
+<p>في الأشهر الأولى من Bitcoin لم يكن هناك سعر رسمي أو سوق عالمي منظم مثل الأسواق الموجودة اليوم.</p>
+
+<p>في 5 أكتوبر 2009 نشر New Liberty Standard أحد أقدم أسعار الصرف المعروفة للبيتكوين مقابل الدولار الأمريكي. كان السعر يعني أن الدولار الواحد يعادل أكثر من 1300 BTC تقريبًا، أي أن قيمة البيتكوين الواحد كانت أقل بكثير من سنت واحد.</p>
+
+<p>كانت هذه لحظة مهمة من الناحية التاريخية لأنها أعطت Bitcoin قيمة مرجعية مقابل عملة تقليدية.</p>
+
+<p>لكن لا ينبغي مقارنة ذلك السعر مباشرة بالأسعار الحديثة. فقد كان عدد المستخدمين محدودًا جدًا، والسيولة منخفضة، ولم تكن هناك بنية سوقية ناضجة أو بورصات عالمية كبيرة.</p>
+
+<h2>Bitcoin Pizza Day</h2>
+
+<p>يعد 22 مايو 2010 واحدًا من أشهر الأيام في تاريخ Bitcoin.</p>
+
+<p>في ذلك اليوم استخدم Laszlo Hanyecz مبلغ 10,000 BTC لشراء بيتزا، وأصبح الحدث معروفًا باسم Bitcoin Pizza Day.</p>
+
+<p>أهمية هذه الحادثة لا تتعلق فقط بالبيتزا، وإنما بكونها مثالًا مشهورًا على استخدام Bitcoin للحصول على سلعة حقيقية بدلًا من اقتصار استخدامه على التجارب بين المطورين والمستخدمين الأوائل.</p>
+
+<p>لاحقًا أصبحت قيمة 10,000 BTC ضخمة جدًا مقارنة بسعر عام 2010، ولذلك أصبحت القصة من أشهر الأمثلة على التحول الكبير الذي مر به Bitcoin.</p>
+
+<p>ومع ذلك، فإن تقييم قرار شراء البيتزا اعتمادًا على سعر Bitcoin بعد سنوات لا يعكس الظروف الاقتصادية في ذلك الوقت، عندما كانت قيمة Bitcoin السوقية محدودة للغاية.</p>
+
+<h2>ظهور البورصات</h2>
+
+<p>مع زيادة عدد المستخدمين أصبح هناك احتياج إلى طرق أسهل لتبادل Bitcoin مقابل الدولار والعملات الأخرى.</p>
+
+<p>بدأت خدمات وبورصات مبكرة بالظهور في عام 2010 وما بعده، وأصبحت Mt. Gox لاحقًا واحدة من أشهر البورصات في السنوات الأولى.</p>
+
+<p>غيرت البورصات طبيعة السوق لأنها ساعدت في اكتشاف السعر. أصبح بإمكان المستخدم رؤية سعر متداول وإرسال أوامر بيع وشراء بدلًا من الاعتماد فقط على الاتفاقات الفردية.</p>
+
+<p>لكن ظهور البورصات المركزية أضاف نوعًا جديدًا من المخاطر. فعندما يترك المستخدم عملاته في منصة مركزية، يصبح مطالبًا بالثقة في قدرة المنصة على حماية الأموال وتنفيذ عمليات السحب والمحافظة على أمن أنظمتها.</p>
+
+<p>أصبحت هذه المفارقة من أهم الموضوعات في تاريخ العملات الرقمية: الشبكة نفسها لامركزية، لكن كثيرًا من الخدمات التي يستخدمها الناس للوصول إليها قد تكون مركزية.</p>
+
+<h2>اختفاء ساتوشي</h2>
+
+<p>مع نمو المشروع بدأ ساتوشي ناكاموتو بالتراجع تدريجيًا عن المشاركة العلنية في تطوير Bitcoin.</p>
+
+<p>لم يستمر ساتوشي في لعب دور القائد الدائم للمشروع، بل انتقلت مسؤوليات التطوير تدريجيًا إلى مساهمين آخرين.</p>
+
+<p>لا توجد معلومات موثوقة تكفي للجزم بالأسباب الدقيقة التي جعلت ساتوشي يتراجع عن المشاركة. لذلك يجب التعامل بحذر مع القصص التي تقدم سببًا محددًا على أنه حقيقة مؤكدة.</p>
+
+<p>الأهم تاريخيًا هو أن Bitcoin استمر بعد ابتعاد مؤسسه.</p>
+
+<p>واصلت العقد تشغيل الشبكة، واستمر المعدنون في تأمينها، واستمر المطورون في تحسين البرنامج، واستمر المستخدمون في إجراء المعاملات.</p>
+
+<p>أصبح استمرار المشروع دون وجود مؤسس يديره بشكل مباشر جزءًا مهمًا من الطريقة التي ينظر بها كثير من الباحثين إلى طبيعة Bitcoin اللامركزية.</p>
+
+<h2>نمو مجتمع Bitcoin</h2>
+
+<p>خلال السنوات الأولى من العقد الثاني للألفية تحول Bitcoin من مشروع صغير في مجتمع التشفير إلى نظام جذب مطورين ومستخدمين ورواد أعمال ومعدنين ومستثمرين.</p>
+
+<p>بدأت المحافظ بالظهور والتطور، وظهرت خدمات الدفع والبورصات ومواقع الأخبار وأدوات التعدين.</p>
+
+<p>وفي الوقت نفسه ظهرت أسئلة مهمة حول مستقبل الشبكة. هل يجب أن يكون Bitcoin وسيلة دفع يومية؟ أم أصلًا رقميًا نادرًا؟ كيف يمكن زيادة عدد المعاملات؟ كيف يمكن الحفاظ على اللامركزية؟ وما حجم التغييرات التي يمكن إدخالها على البروتوكول دون التأثير في خصائصه الأساسية؟</p>
+
+<p>هذه الأسئلة أصبحت جزءًا دائمًا من تطوير Bitcoin.</p>
+
+<h2>الدورات السعرية</h2>
+
+<p>تميز تاريخ Bitcoin بتكرار دورات من الصعود الحاد ثم الانخفاضات الكبيرة.</p>
+
+<p>في السنوات الأولى كانت السيولة منخفضة جدًا، ولذلك كان من الممكن أن تؤثر مبالغ محدودة نسبيًا في السعر.</p>
+
+<p>في عام 2011 شهد Bitcoin ارتفاعًا كبيرًا في الاهتمام والسعر، ثم تبعه انخفاض قوي.</p>
+
+<p>وفي عام 2013 حدثت دورة أخرى من النمو السريع، ثم دخل Bitcoin في فترة طويلة من التصحيح.</p>
+
+<p>كان انهيار Mt. Gox عام 2014 من أهم الأحداث السلبية في تاريخ السوق المبكر. فقد فقدت المنصة إمكانية الوصول إلى كمية كبيرة من أموال العملاء وانتهى الأمر بانهيارها.</p>
+
+<p>لكن شبكة Bitcoin نفسها استمرت في العمل. وهذا ساعد على توضيح الفرق بين بروتوكول Bitcoin وبين الشركات والمنصات المركزية التي تبني خدماتها حوله.</p>
+
+<h2>2017 وSegWit</h2>
+
+<p>كان عام 2017 محطة مهمة جدًا في تاريخ Bitcoin من الناحية التقنية والسوقية.</p>
+
+<p>شهدت الشبكة تفعيل Segregated Witness أو SegWit، وهو تغيير تقني في طريقة تنظيم بيانات المعاملات.</p>
+
+<p>ساعد SegWit في معالجة بعض القيود التقنية ومهد لتطوير حلول إضافية مثل Lightning Network، الذي يهدف إلى تمكين معاملات Bitcoin بطريقة أسرع وأقل تكلفة في بعض الاستخدامات من خلال طبقة إضافية.</p>
+
+<p>شهد عام 2017 أيضًا نقاشات حادة حول قابلية Bitcoin للتوسع وحجم الكتل. وأدت الخلافات حول طريقة تطوير الشبكة إلى ظهور مقترحات مختلفة وانقسامات في بعض الحالات.</p>
+
+<p>أظهرت تلك الفترة أن تطوير نظام لامركزي لا يعتمد فقط على الجانب التقني، وإنما يتضمن أيضًا نقاشات اجتماعية واقتصادية واسعة حول قواعد الشبكة.</p>
+
+<h2>مرحلة 2018</h2>
+
+<p>بعد الارتفاع الكبير في 2017 دخل Bitcoin في فترة هبوط طويلة خلال 2018.</p>
+
+<p>أكدت هذه المرحلة أن Bitcoin يمكن أن يمر بتقلبات كبيرة جدًا، وأن الارتفاعات السابقة لا تعني استمرار ارتفاع السعر إلى أجل غير محدد.</p>
+
+<p>لكن تطوير البنية التحتية لم يتوقف. استمرت الشركات في بناء خدمات الحفظ والتداول، واستمر المطورون في العمل على البرمجيات والبروتوكولات المرتبطة بالبيتكوين.</p>
+
+<p>وأصبح من الواضح بشكل متزايد أن تطور شبكة Bitcoin لا يتحرك بالضرورة بنفس سرعة حركة السعر.</p>
+
+<h2>التبني المؤسسي</h2>
+
+<p>خلال أواخر العقد الثاني من الألفية والعقد الثالث بدأت المؤسسات المالية والشركات الاستثمارية الكبرى في إظهار اهتمام متزايد بالبيتكوين.</p>
+
+<p>ظهر ذلك في عدة صور، منها خدمات الحفظ المؤسسي، والمنتجات الاستثمارية، والأسواق الآجلة، والبحوث المتخصصة، واستراتيجيات الشركات المتعلقة بالبيتكوين.</p>
+
+<p>لم يؤد دخول المؤسسات إلى اختفاء تقلبات Bitcoin، لكنه وسع قاعدة المشاركين في السوق وأدخل فئات جديدة من المستثمرين.</p>
+
+<p>كما ساعدت خدمات الحفظ والمنتجات المالية المنظمة في جعل التعرض للبيتكوين ممكنًا بالنسبة إلى مستثمرين لا يرغبون في إدارة المفاتيح الخاصة بأنفسهم.</p>
+
+<h2>Bitcoin في 2020 و2021</h2>
+
+<p>كان عام 2020 مرحلة أخرى مهمة في تاريخ Bitcoin.</p>
+
+<p>في مايو 2020 حدث التنصيف الثالث للبيتكوين، وانخفضت مكافأة الكتلة من 12.5 BTC إلى 6.25 BTC.</p>
+
+<p>بعد ذلك شهد Bitcoin دورة نمو كبيرة وازداد اهتمام المستثمرين الأفراد والمؤسسات به.</p>
+
+<p>وفي عام 2021 أصبحت السلفادور أول دولة تعتمد Bitcoin كعملة قانونية، وهو قرار أثار نقاشًا دوليًا واسعًا حول إمكانية استخدام Bitcoin في الأنظمة النقدية الوطنية.</p>
+
+<p>شهدت الفترة نفسها نموًا كبيرًا في سوق الأصول الرقمية بشكل عام، تلاه لاحقًا مستوى مرتفع من التقلبات.</p>
+
+<h2>هبوط 2022</h2>
+
+<p>في عام 2022 تعرض سوق العملات والأصول الرقمية لهبوط حاد.</p>
+
+<p>واجهت عدة شركات ومشروعات في قطاع العملات الرقمية صعوبات مالية أو انهارت، وكان انهيار FTX في نهاية العام من أبرز أحداث تلك المرحلة.</p>
+
+<p>استمرت شبكة Bitcoin نفسها في معالجة المعاملات خلال تلك الفترة.</p>
+
+<p>أبرزت أحداث 2022 أهمية التمييز بين بروتوكول Bitcoin وبين الشركات المركزية والبورصات ومنصات الإقراض وغيرها من الخدمات التي تعمل في صناعة الأصول الرقمية.</p>
+
+<h2>Bitcoin في 2023</h2>
+
+<p>استمر تطور منظومة Bitcoin في عام 2023.</p>
+
+<p>كان ظهور Ordinals والاهتمام بإمكانية تسجيل بيانات إضافية مرتبطة بالساتوشيات من أكثر التطورات التي أثارت النقاش داخل المجتمع.</p>
+
+<p>كما شهد العام زيادة في اهتمام المؤسسات المالية بالمنتجات الاستثمارية المرتبطة بالبيتكوين، وتقدمت مؤسسات مالية كبرى بطلبات ومقترحات لإنشاء منتجات فورية مرتبطة بسعر Bitcoin في الولايات المتحدة.</p>
+
+<p>ساهمت هذه التطورات في زيادة ارتباط Bitcoin بالقطاع المالي التقليدي.</p>
+
+<h2>صناديق Bitcoin ETF في 2024</h2>
+
+<p>كان يناير 2024 من أهم المحطات الحديثة في تاريخ Bitcoin.</p>
+
+<p>في 10 يناير 2024 أعلنت هيئة الأوراق المالية والبورصات الأمريكية SEC الموافقة على إدراج وتداول عدد من المنتجات المتداولة في البورصة المرتبطة بسعر البيتكوين الفوري.</p>
+
+<p>بدأ التداول في هذه المنتجات في 11 يناير 2024.</p>
+
+<p>يستخدم الناس عادة تعبير «Bitcoin Spot ETFs» أو «صناديق Bitcoin ETF» عند الحديث عنها، بينما استخدمت SEC في بيانها مصطلح Exchange-Traded Products.</p>
+
+<p>أهمية هذه المنتجات أنها أتاحت للمستثمرين التعرض لسعر Bitcoin من خلال منتجات مالية منظمة دون الحاجة بالضرورة إلى شراء البيتكوين وإدارة المفاتيح الخاصة بأنفسهم.</p>
+
+<p>يمثل ذلك مرحلة جديدة في العلاقة بين Bitcoin والأسواق المالية التقليدية.</p>
+
+<h2>تنصيف Bitcoin الرابع</h2>
+
+<p>في أبريل 2024 حدث التنصيف الرابع للبيتكوين.</p>
+
+<p>انخفضت مكافأة الكتلة من 6.25 BTC إلى 3.125 BTC.</p>
+
+<p>التنصيف جزء مبرمج من السياسة النقدية للبيتكوين، ويحدث بعد عدد محدد من الكتل. وتتمثل فكرته الأساسية في تقليل معدل إصدار وحدات Bitcoin الجديدة مع مرور الوقت.</p>
+
+<p>يحظى التنصيف باهتمام كبير من المشاركين في السوق بسبب تأثيره في جدول إصدار المعروض الجديد، لكن حدوث التنصيف وحده لا يضمن اتجاهًا سعريًا معينًا في المستقبل.</p>
+
+<h2>البيتكوين اليوم</h2>
+
+<p>أصبح Bitcoin اليوم مختلفًا بصورة كبيرة عن المشروع الصغير الذي بدأ عام 2009.</p>
+
+<p>تضم منظومته مطورين ومعدنين ومستخدمين أفرادًا وبورصات وشركات حفظ ومؤسسات مالية وخدمات دفع وشركات تقنية وباحثين ومؤسسات استثمارية.</p>
+
+<p>ومع ذلك، يظل Bitcoin مختلفًا عن شركة أو مؤسسة مالية تقليدية. فلا توجد شركة مركزية واحدة تملك الشبكة وتديرها. يعمل البروتوكول من خلال برمجيات يشغلها مشاركون مستقلون حول العالم.</p>
+
+<p>ويستمر تطوير Bitcoin من خلال البرمجيات مفتوحة المصدر، والاقتراحات التقنية، والأبحاث، والمناقشات بين المطورين والمستخدمين.</p>
+
+<p>ولا تزال هناك تحديات ونقاشات مستمرة، منها قابلية التوسع، ورسوم المعاملات، والخصوصية، واستهلاك الطاقة، والتنظيم، وحفظ المفاتيح، وأمن المستخدم، والدور المستقبلي للبيتكوين في النظام المالي العالمي.</p>
+
+<p>ولمتابعة بيانات Bitcoin الحالية بدلًا من تاريخه، يمكنك زيارة <a href="/crypto/BTC">صفحة Bitcoin في AQL Crypto</a>.</p>
+
+<h2>الجدول الزمني الكامل لتاريخ البيتكوين</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>التاريخ</th>
+            <th>المحطة التاريخية</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>الثمانينيات</td>
+            <td>تطور أبحاث التشفير والنقد الإلكتروني والخصوصية الرقمية.</td>
+        </tr>
+        <tr>
+            <td>1997</td>
+            <td>ظهور Hashcash واستخدام مفهوم إثبات العمل في أنظمة رقمية.</td>
+        </tr>
+        <tr>
+            <td>1998</td>
+            <td>طرح Wei Dai لفكرة b-money كنظام نقد إلكتروني موزع.</td>
+        </tr>
+        <tr>
+            <td>2005</td>
+            <td>تطوير ومناقشة Nick Szabo لأفكار مرتبطة بمفهوم bit gold والندرة الرقمية.</td>
+        </tr>
+        <tr>
+            <td>31 أكتوبر 2008</td>
+            <td>نشر ساتوشي ناكاموتو الورقة البيضاء للبيتكوين.</td>
+        </tr>
+        <tr>
+            <td>3 يناير 2009</td>
+            <td>إنشاء Genesis Block، أول كتلة في سلسلة Bitcoin.</td>
+        </tr>
+        <tr>
+            <td>يناير 2009</td>
+            <td>استلام Hal Finney للبيتكوين من ساتوشي في واحدة من أقدم المعاملات المعروفة بين مشاركين في الشبكة.</td>
+        </tr>
+        <tr>
+            <td>أكتوبر 2009</td>
+            <td>نشر New Liberty Standard أحد أقدم أسعار الصرف المعروفة للبيتكوين مقابل الدولار.</td>
+        </tr>
+        <tr>
+            <td>22 مايو 2010</td>
+            <td>استخدام 10,000 BTC لشراء بيتزا، وهو الحدث المعروف باسم Bitcoin Pizza Day.</td>
+        </tr>
+        <tr>
+            <td>2010</td>
+            <td>ظهور بورصات Bitcoin المبكرة، ومنها Mt. Gox.</td>
+        </tr>
+        <tr>
+            <td>2012</td>
+            <td>أول تنصيف للبيتكوين، وانخفاض مكافأة الكتلة من 50 إلى 25 BTC.</td>
+        </tr>
+        <tr>
+            <td>2013</td>
+            <td>دورة نمو كبيرة وزيادة الاهتمام العالمي بالبيتكوين.</td>
+        </tr>
+        <tr>
+            <td>2014</td>
+            <td>انهيار Mt. Gox بعد فقدان كمية كبيرة من أموال العملاء.</td>
+        </tr>
+        <tr>
+            <td>2016</td>
+            <td>التنصيف الثاني وانخفاض مكافأة الكتلة من 25 إلى 12.5 BTC.</td>
+        </tr>
+        <tr>
+            <td>2017</td>
+            <td>تفعيل SegWit ومرور Bitcoin بدورة سوقية كبيرة.</td>
+        </tr>
+        <tr>
+            <td>2020</td>
+            <td>التنصيف الثالث وانخفاض مكافأة الكتلة من 12.5 إلى 6.25 BTC.</td>
+        </tr>
+        <tr>
+            <td>2021</td>
+            <td>السلفادور تعتمد Bitcoin كعملة قانونية.</td>
+        </tr>
+        <tr>
+            <td>2022</td>
+            <td>هبوط واسع في سوق الأصول الرقمية وأزمات عدد من الشركات والمنصات.</td>
+        </tr>
+        <tr>
+            <td>2023</td>
+            <td>زيادة الاهتمام بـ Ordinals وارتفاع اهتمام المؤسسات بمنتجات Bitcoin الفورية.</td>
+        </tr>
+        <tr>
+            <td>يناير 2024</td>
+            <td>الموافقة الأمريكية على إدراج وتداول عدد من المنتجات المتداولة المرتبطة بسعر Bitcoin الفوري.</td>
+        </tr>
+        <tr>
+            <td>أبريل 2024</td>
+            <td>التنصيف الرابع وانخفاض مكافأة الكتلة من 6.25 إلى 3.125 BTC.</td>
+        </tr>
+        <tr>
+            <td>2025–2026</td>
+            <td>استمرار تطور شبكة Bitcoin وتوسع البنية المالية والتقنية المحيطة بها.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>الخلاصة</h2>
+
+<p>تاريخ البيتكوين هو تاريخ مجموعة من الأفكار التي تطورت على مدى عقود: التشفير، والندرة الرقمية، والنقد الإلكتروني، والشبكات من نظير إلى نظير، وإثبات العمل، والتوافق اللامركزي.</p>
+
+<p>جاءت ورقة 2008 لتجمع عددًا من هذه المفاهيم داخل تصميم واحد. ثم حول إطلاق الشبكة في 2009 الفكرة إلى نظام يعمل فعليًا.</p>
+
+<p>شارك Hal Finney ومطورون ومستخدمون أوائل في اختبار النظام وتطويره، ثم توسعت المنظومة مع ظهور المحافظ والبورصات وخدمات الدفع والتعدين والشركات والمؤسسات المالية.</p>
+
+<p>لم يكن تاريخ Bitcoin خطًا مستقيمًا. فقد مر بمراحل من النمو السريع والانخفاضات الحادة، ومشكلات أمنية، وخلافات تقنية، وتغيرات تنظيمية، وارتفاع في الاهتمام المؤسسي.</p>
+
+<p>وفهم هذا التاريخ يساعد على فهم Bitcoin اليوم. فالسعر الحالي ليس سوى جزء من قصة بدأت قبل أكثر من عقد، بينما جذور الفكرة نفسها تعود إلى عقود من البحث في إمكانية إنشاء قيمة رقمية يمكن نقلها دون الاعتماد على سلطة مركزية.</p>
+
+<p><strong>تنبيه:</strong> هذا المقال تعليمي وتاريخي ولا يمثل نصيحة استثمارية أو مالية أو قانونية أو ضريبية. الأصول الرقمية قد تكون شديدة التقلب، وينبغي للمستخدم إجراء أبحاثه الخاصة والاطلاع على القوانين واللوائح المطبقة في بلده.</p>
+
+<h2>الأسئلة الشائعة</h2>
+
+<h3>ما هو تاريخ البيتكوين؟</h3>
+<p>بدأ تاريخ Bitcoin من أبحاث وأفكار سابقة حول التشفير والنقد الرقمي، ثم نشر ساتوشي ناكاموتو الورقة البيضاء عام 2008 وأطلق الشبكة في يناير 2009. وبعد ذلك تطورت Bitcoin إلى منظومة عالمية من المستخدمين والمطورين والمعدنين والأسواق والخدمات المالية.</p>
+
+<h3>من أنشأ البيتكوين؟</h3>
+<p>تم تقديم Bitcoin بواسطة شخص أو مجموعة استخدمت اسم Satoshi Nakamoto. ولم يتم إثبات الهوية الحقيقية لساتوشي بشكل موثوق.</p>
+
+<h3>متى نُشرت الورقة البيضاء للبيتكوين؟</h3>
+<p>نُشرت الورقة البيضاء في 31 أكتوبر 2008 بعنوان Bitcoin: A Peer-to-Peer Electronic Cash System.</p>
+
+<h3>متى أُطلقت شبكة البيتكوين؟</h3>
+<p>تم إنشاء Genesis Block في 3 يناير 2009، ويُعد هذا التاريخ نقطة البداية لسلسلة Bitcoin.</p>
+
+<h3>من استلم أول معاملة Bitcoin؟</h3>
+<p>استلم Hal Finney كمية من Bitcoin من ساتوشي ناكاموتو في واحدة من أقدم المعاملات المعروفة بين مشاركين في الشبكة.</p>
+
+<h3>ما أول سعر معروف للبيتكوين؟</h3>
+<p>في أكتوبر 2009 نشر New Liberty Standard أحد أقدم أسعار الصرف المعروفة للبيتكوين مقابل الدولار، وكان الدولار الواحد يعادل حوالي 1309 BTC تقريبًا.</p>
+
+<h3>ما هو Bitcoin Pizza Day؟</h3>
+<p>يُحتفل بـ Bitcoin Pizza Day في 22 مايو، تخليدًا لاستخدام Laszlo Hanyecz مبلغ 10,000 BTC لشراء بيتزتين عام 2010.</p>
+
+<h3>متى اختفى ساتوشي ناكاموتو؟</h3>
+<p>تراجع ساتوشي تدريجيًا عن المشاركة العلنية في تطوير Bitcoin خلال السنوات الأولى للمشروع. ولا توجد معلومات مؤكدة حول السبب الدقيق لابتعاده.</p>
+
+<h3>متى حدث أول تنصيف للبيتكوين؟</h3>
+<p>حدث أول تنصيف عام 2012، وانخفضت مكافأة الكتلة من 50 BTC إلى 25 BTC.</p>
+
+<h3>متى تمت الموافقة على Bitcoin ETF في الولايات المتحدة؟</h3>
+<p>أعلنت SEC في 10 يناير 2024 الموافقة على إدراج وتداول عدد من المنتجات المتداولة المرتبطة بسعر Bitcoin الفوري، وبدأ التداول في 11 يناير.</p>
+
+<h3>هل لا يزال تطوير Bitcoin مستمرًا؟</h3>
+<p>نعم. لا يزال برنامج Bitcoin مفتوح المصدر يخضع للصيانة والتطوير والمراجعة من مطورين ومساهمين حول العالم.</p>
+
+<h3>أين يمكنني متابعة سعر Bitcoin الحالي؟</h3>
+<p>يمكنك متابعة بيانات Bitcoin الحالية من خلال <a href="/crypto/BTC">صفحة Bitcoin Market في AQL Crypto</a>.</p>
+
+<h2>مقالات ذات صلة</h2>
+
+<ul>
+    <li><a href="/academy/bitcoin/what-is-bitcoin">ما هو البيتكوين؟ دليل المبتدئين</a></li>
+    <li><a href="/academy/bitcoin/how-bitcoin-works">كيف يعمل البيتكوين؟</a></li>
+    <li><a href="/academy/bitcoin/bitcoin-mining">شرح تعدين البيتكوين</a></li>
+    <li><a href="/academy/bitcoin/bitcoin-wallets">محافظ البيتكوين</a></li>
+    <li><a href="/academy/bitcoin/bitcoin-halving">تنصيف البيتكوين</a></li>
+    <li><a href="/crypto/BTC">سوق البيتكوين</a></li>
+</ul>
+HTML,
+
+    'content_en' => <<<'HTML'
+<h2>Introduction</h2>
+
+<p>Bitcoin is often described as the first successful decentralized digital currency, but its history began long before the Bitcoin network itself. The technology emerged from decades of research into cryptography, electronic cash, digital payments, distributed systems, and methods for preventing digital money from being copied or spent more than once.</p>
+
+<p>Understanding Bitcoin's history is important because many of the design choices that appear unusual today were responses to problems that researchers had been studying for years. Digital signatures, proof of work, peer-to-peer communication, cryptographic verification, and decentralized consensus all had histories before Bitcoin combined them into one working system.</p>
+
+<p>This article follows the major milestones in Bitcoin's development, from the early digital-cash experiments and the financial environment of 2008 to Satoshi Nakamoto's whitepaper, the launch of the network in 2009, Hal Finney, the first known exchange rates, Bitcoin Pizza Day, the growth of exchanges and communities, major market cycles, institutional adoption, spot Bitcoin exchange-traded products, and Bitcoin's modern ecosystem.</p>
+
+<h2>Before Bitcoin</h2>
+
+<p>The idea of digital money did not begin with Bitcoin. As computers and computer networks developed, researchers started asking whether money could be represented electronically and transferred over networks.</p>
+
+<p>The central technical challenge was the double-spending problem. Digital information can be copied, while a monetary unit should not be spendable by two people at the same time.</p>
+
+<p>Traditional financial systems solve this problem through trusted institutions. A bank or payment processor maintains a central record of balances and transactions and decides whether a payment is valid.</p>
+
+<p>The question that preceded Bitcoin was whether digital value could instead be transferred through a network where participants independently verify transactions without relying on a single institution to maintain the complete ledger.</p>
+
+<h2>Digital Cash Experiments Before Bitcoin</h2>
+
+<p>During the 1980s and 1990s, cryptographers developed several important concepts related to electronic cash and privacy-preserving payments.</p>
+
+<p>David Chaum's research into digital cash demonstrated that cryptography could be used to build electronic payment systems with strong privacy characteristics.</p>
+
+<p>Other proposals focused on different parts of the problem. Wei Dai described b-money, an early proposal for distributed electronic cash. Nick Szabo developed ideas around bit gold, exploring digital scarcity and computational work.</p>
+
+<p>Adam Back's Hashcash introduced a proof-of-work mechanism designed to impose computational cost. Although Hashcash was created for purposes such as reducing spam, the proof-of-work concept later became a central part of Bitcoin.</p>
+
+<p>These systems should not be described as simple prototypes of Bitcoin. They had different designs and goals. Their historical importance comes from demonstrating that many of the ideas required for decentralized digital money had already been discussed and researched before Bitcoin appeared.</p>
+
+<h2>The 2008 Financial Crisis</h2>
+
+<p>Bitcoin emerged during a major period of stress in the global financial system.</p>
+
+<p>In 2008, the financial crisis affected banks, credit markets, businesses, governments, and households around the world. The crisis became an important part of the historical context surrounding Bitcoin's emergence.</p>
+
+<p>However, it would be inaccurate to reduce Bitcoin's creation to the financial crisis alone. The protocol depended on cryptographic and distributed-systems research that had developed over many years.</p>
+
+<p>The timing nevertheless remains significant. The Bitcoin Genesis Block contains a reference to a newspaper headline concerning the banking crisis and government intervention.</p>
+
+<p>The message has been interpreted in different ways. Some view it as commentary on the banking system, some as evidence of the timing of the block, and others as both. What can be established directly is that the message exists in the first block and that Bitcoin launched during a period of intense discussion about the financial system.</p>
+
+<h2>The Emergence of Satoshi Nakamoto</h2>
+
+<p>In 2008, the name Satoshi Nakamoto appeared in discussions surrounding Bitcoin.</p>
+
+<p>Satoshi was a pseudonym used by the person or group that introduced Bitcoin. The real-world identity behind the name has never been reliably established.</p>
+
+<p>Many identity claims have appeared over the years, but no widely accepted cryptographic evidence has established the identity of Satoshi.</p>
+
+<p>The pseudonymous nature of Bitcoin's creator is historically significant because the network does not depend on users knowing who created it. Participants can inspect the software, run their own nodes, verify transactions, and follow the protocol rules without requiring a personal relationship with the creator.</p>
+
+<p>Satoshi communicated with early developers and researchers through email and online forums. The project gradually attracted other contributors who tested the software, examined the code, reported problems, and proposed improvements.</p>
+
+<h2>The 2008 Bitcoin Whitepaper</h2>
+
+<p>On October 31, 2008, Satoshi Nakamoto published the Bitcoin whitepaper titled <em>Bitcoin: A Peer-to-Peer Electronic Cash System</em>.</p>
+
+<p>The paper proposed a system for electronic transactions that would not depend on a trusted financial institution.</p>
+
+<p>Instead, transactions would be broadcast to a distributed network, digitally signed, verified, and recorded in blocks secured through proof of work.</p>
+
+<p>The whitepaper described how participants could agree on a common transaction history without relying on a central authority to maintain the ledger.</p>
+
+<p>Proof of work was particularly important because it made rewriting the accepted transaction history computationally expensive.</p>
+
+<p>The whitepaper did not invent every individual component from nothing. Its historical significance was in combining several existing cryptographic and distributed-systems ideas into a coherent protocol that could be implemented and operated by independent participants.</p>
+
+<h2>The Launch of the Network in 2009</h2>
+
+<p>On January 3, 2009, the first Bitcoin block was created. It is commonly called the Genesis Block or Block 0.</p>
+
+<p>The Genesis Block represents the starting point of the Bitcoin blockchain and contains data that distinguishes it from later blocks.</p>
+
+<p>It also contains the well-known newspaper headline referencing the financial crisis and banking intervention.</p>
+
+<p>Bitcoin software was then made available to other users and developers. Participants could run the software, inspect the source code, operate nodes, and participate in the network.</p>
+
+<p>At this stage Bitcoin had almost no established market value. The network was small and consisted primarily of technically interested users and cryptography enthusiasts.</p>
+
+<h2>The First Bitcoin Transactions</h2>
+
+<p>One of the most important early milestones was Bitcoin's transition from a software experiment into a system capable of transferring value between participants.</p>
+
+<p>In January 2009, Satoshi Nakamoto sent bitcoin to Hal Finney, one of the earliest people to run the Bitcoin software and communicate with Satoshi.</p>
+
+<p>The transaction was important because it demonstrated that the system could transfer bitcoin between independent participants.</p>
+
+<p>It also illustrated the importance of independent verification. Bitcoin users could run the software themselves and verify the network rather than simply trusting a central administrator.</p>
+
+<h2>Hal Finney</h2>
+
+<p>Hal Finney was a computer scientist and programmer with a background in cryptography and an interest in digital-cash research.</p>
+
+<p>He became one of Bitcoin's earliest users and contributors. His involvement helped test the early software and provided feedback during the project's initial development.</p>
+
+<p>Finney's role is significant because Bitcoin quickly became more than a project controlled by one person. Other developers and users began examining the source code, operating nodes, and discussing possible improvements.</p>
+
+<p>The open-source model allowed the project to continue developing through contributions from a broader community.</p>
+
+<h2>The First Known Bitcoin Price</h2>
+
+<p>During Bitcoin's first months, there was no mature global market price comparable to the prices displayed on modern exchanges.</p>
+
+<p>On October 5, 2009, New Liberty Standard published one of the earliest known dollar-denominated exchange rates for bitcoin. The published rate valued one U.S. dollar at approximately 1,309 BTC, meaning one bitcoin was worth considerably less than one cent.</p>
+
+<p>This was an important historical milestone because it provided a reference value for bitcoin in terms of a traditional currency.</p>
+
+<p>However, that rate should not be compared directly with modern market prices. Bitcoin had very limited liquidity, a tiny user base, and no mature global exchange infrastructure.</p>
+
+<h2>Bitcoin Pizza Day</h2>
+
+<p>May 22, 2010 is one of the best-known dates in Bitcoin history.</p>
+
+<p>On that day, Laszlo Hanyecz used 10,000 BTC to arrange the purchase of two pizzas. The event became known as Bitcoin Pizza Day.</p>
+
+<p>The historical importance of the transaction comes from its demonstration that bitcoin could be used to purchase a real-world good rather than simply being exchanged among developers and early enthusiasts.</p>
+
+<p>The enormous value that 10,000 BTC could represent at later market prices turned the story into one of Bitcoin's most famous historical examples.</p>
+
+<p>However, evaluating the purchase using prices from years later ignores the economic environment of 2010, when bitcoin had very limited market value.</p>
+
+<h2>The Emergence of Bitcoin Exchanges</h2>
+
+<p>As Bitcoin attracted more users, people needed easier ways to exchange bitcoin for traditional currencies.</p>
+
+<p>Early exchange services appeared around 2010 and the following years. Mt. Gox eventually became one of the most prominent exchanges during Bitcoin's early period.</p>
+
+<p>Exchanges changed Bitcoin's market structure because they made price discovery easier. Users could see market prices and place orders rather than relying entirely on informal transactions.</p>
+
+<p>However, centralized exchanges introduced additional risks. Users had to trust the exchange to protect funds, maintain accurate balances, process withdrawals, and operate secure systems.</p>
+
+<p>This created an important distinction that remains relevant today: the Bitcoin protocol is decentralized, while many services used to access and trade Bitcoin are centralized.</p>
+
+<h2>The Withdrawal of Satoshi</h2>
+
+<p>As the Bitcoin community expanded, Satoshi Nakamoto gradually reduced public involvement in the project's development.</p>
+
+<p>Development responsibilities increasingly moved toward other contributors.</p>
+
+<p>The precise reasons for Satoshi's withdrawal are not known with certainty, so claims about specific motives should be treated cautiously.</p>
+
+<p>The important historical fact is that Bitcoin continued after its creator became less active.</p>
+
+<p>Nodes continued running the software, miners continued securing the network, developers continued maintaining the code, and users continued making transactions.</p>
+
+<p>The continued operation of the network without an active central founder became an important part of Bitcoin's historical identity.</p>
+
+<h2>The Growth of the Bitcoin Community</h2>
+
+<p>During the early 2010s, Bitcoin developed from a small cryptography project into a broader technology and financial community.</p>
+
+<p>Developers worked on Bitcoin software. Miners provided computational power. Entrepreneurs created exchanges, wallets, payment services, mining businesses, and other infrastructure.</p>
+
+<p>The community also developed competing views about Bitcoin's purpose.</p>
+
+<p>Some participants focused on Bitcoin as a payment network. Others viewed it primarily as a scarce digital asset. Developers and users debated scalability, transaction fees, privacy, block size, security, and protocol changes.</p>
+
+<p>These disagreements became a permanent feature of decentralized protocol development.</p>
+
+<h2>Bitcoin's Major Market Cycles</h2>
+
+<p>Bitcoin's market history has been characterized by repeated periods of rapid appreciation followed by significant declines.</p>
+
+<p>During the early years, limited liquidity meant that relatively small amounts of capital could influence market prices.</p>
+
+<p>Bitcoin experienced a major increase in attention and price in 2011, followed by a substantial decline.</p>
+
+<p>Another major expansion occurred in 2013, bringing Bitcoin greater international attention before another prolonged downturn.</p>
+
+<p>The collapse of Mt. Gox in 2014 became one of the most important negative events in Bitcoin's early market history. The exchange lost access to a large amount of customer funds and eventually collapsed.</p>
+
+<p>Despite the failure of the exchange, the Bitcoin network continued operating. This helped emphasize the distinction between the protocol and centralized companies operating around it.</p>
+
+<h2>2017 and SegWit</h2>
+
+<p>2017 was a major year for Bitcoin in both technical development and market activity.</p>
+
+<p>Segregated Witness, commonly called SegWit, was activated on the network. The upgrade changed the structure of transaction data and helped address certain technical limitations.</p>
+
+<p>SegWit also enabled further development of technologies such as the Lightning Network, which aims to support faster and potentially cheaper Bitcoin transactions through an additional layer.</p>
+
+<p>The year also featured intense debates over Bitcoin's scaling strategy and block-size limits. Different proposals eventually contributed to network splits and competing implementations.</p>
+
+<p>The period demonstrated that decentralized protocol development involves technical, economic, and social considerations rather than purely engineering decisions.</p>
+
+<h2>Bitcoin in 2018</h2>
+
+<p>After the strong market activity of 2017, Bitcoin entered a prolonged decline during 2018.</p>
+
+<p>The period demonstrated again that Bitcoin can experience large price movements in both directions.</p>
+
+<p>At the same time, development and infrastructure work continued. Companies improved custody services, exchanges developed their systems, and developers continued working on Bitcoin and related technologies.</p>
+
+<p>This helped establish an important pattern: Bitcoin's technological development does not necessarily move in line with its market price.</p>
+
+<h2>Institutional Adoption</h2>
+
+<p>During the late 2010s and early 2020s, Bitcoin attracted increasing interest from financial institutions, asset managers, publicly traded companies, payment companies, and professional investors.</p>
+
+<p>Institutional participation took several forms, including custody services, investment products, futures markets, research, and corporate strategies related to Bitcoin.</p>
+
+<p>Institutional involvement did not remove Bitcoin's volatility, but it expanded the types of participants interacting with the asset.</p>
+
+<p>Financial infrastructure also made it easier for investors to gain exposure to Bitcoin without directly managing private keys.</p>
+
+<h2>Bitcoin in 2020 and 2021</h2>
+
+<p>2020 was another important period in Bitcoin's history.</p>
+
+<p>In May 2020, Bitcoin experienced its third halving. The block subsidy decreased from 12.5 BTC to 6.25 BTC.</p>
+
+<p>Bitcoin subsequently entered another major market cycle, attracting increasing attention from both retail and institutional investors.</p>
+
+<p>In 2021, El Salvador became the first country to adopt Bitcoin as legal tender. The decision generated international discussion about the possible role of Bitcoin within national monetary systems.</p>
+
+<p>The same period also saw major growth across the wider digital-asset industry, followed by significant volatility.</p>
+
+<h2>The 2022 Downturn</h2>
+
+<p>In 2022, the broader cryptocurrency market experienced a severe downturn.</p>
+
+<p>Several major companies and projects experienced financial problems or failure. The collapse of FTX later in 2022 became one of the most significant events in the digital-asset industry's history.</p>
+
+<p>The Bitcoin network itself continued processing transactions throughout the period.</p>
+
+<p>The events reinforced the importance of distinguishing between the Bitcoin protocol and centralized exchanges, lenders, companies, and other services built around digital assets.</p>
+
+<h2>Bitcoin in 2023</h2>
+
+<p>Bitcoin's ecosystem continued to evolve in 2023.</p>
+
+<p>Ordinals and related methods for recording additional data associated with individual satoshis attracted significant attention and debate within the Bitcoin community.</p>
+
+<p>The year also brought increasing institutional interest in spot Bitcoin investment products. Several major financial institutions submitted applications or proposals for such products in the United States.</p>
+
+<p>These developments contributed to Bitcoin's growing relationship with traditional financial markets.</p>
+
+<h2>Spot Bitcoin ETFs and ETPs in 2024</h2>
+
+<p>January 2024 became another major milestone in Bitcoin's history.</p>
+
+<p>On January 10, 2024, the U.S. Securities and Exchange Commission announced approval for the listing and trading of several spot bitcoin exchange-traded product shares.</p>
+
+<p>Trading began on January 11, 2024.</p>
+
+<p>These products are commonly referred to as spot Bitcoin ETFs in public discussions, although the SEC used the term exchange-traded products in its announcement.</p>
+
+<p>The importance of these products is that they provide investors with exposure to the price of bitcoin through regulated financial market products without necessarily requiring them to purchase bitcoin and manage private keys directly.</p>
+
+<p>This represented another stage in Bitcoin's integration with traditional financial markets.</p>
+
+<h2>The Fourth Bitcoin Halving</h2>
+
+<p>In April 2024, Bitcoin experienced its fourth halving.</p>
+
+<p>The block subsidy decreased from 6.25 BTC to 3.125 BTC.</p>
+
+<p>Bitcoin's halving mechanism is programmed into its monetary policy. Halvings occur after a defined number of blocks and reduce the rate at which new bitcoins enter circulation.</p>
+
+<p>Halvings attract considerable market attention because they affect the issuance schedule. However, a halving by itself does not guarantee a particular future price movement.</p>
+
+<h2>Bitcoin Today</h2>
+
+<p>Bitcoin today is very different from the small experimental network launched in 2009.</p>
+
+<p>The ecosystem includes individual users, developers, miners, exchanges, custodians, financial institutions, payment services, technology companies, researchers, and investment products.</p>
+
+<p>Bitcoin nevertheless remains fundamentally different from a conventional company or financial institution. There is no single central corporation that owns and operates the network. The protocol operates through software run by independent participants.</p>
+
+<p>Bitcoin continues to evolve through open-source software development, technical proposals, research, testing, and community discussion.</p>
+
+<p>The network also continues to face major questions involving scalability, transaction fees, privacy, energy consumption, regulation, custody, user security, and its long-term role within the global financial system.</p>
+
+<p>For users interested in current Bitcoin market information rather than its historical development, AQL Crypto provides a dedicated <a href="/crypto/BTC">Bitcoin Market page</a>.</p>
+
+<h2>Complete Bitcoin Timeline</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Historical milestone</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1980s</td>
+            <td>Cryptographic research into electronic cash and digital privacy expands.</td>
+        </tr>
+        <tr>
+            <td>1997</td>
+            <td>Hashcash introduces a proof-of-work concept involving computational cost.</td>
+        </tr>
+        <tr>
+            <td>1998</td>
+            <td>Wei Dai describes b-money as an early proposal for distributed electronic cash.</td>
+        </tr>
+        <tr>
+            <td>2005</td>
+            <td>Nick Szabo develops and discusses ideas related to bit gold and digital scarcity.</td>
+        </tr>
+        <tr>
+            <td>October 31, 2008</td>
+            <td>Satoshi Nakamoto publishes the Bitcoin whitepaper.</td>
+        </tr>
+        <tr>
+            <td>January 3, 2009</td>
+            <td>The Bitcoin Genesis Block is created.</td>
+        </tr>
+        <tr>
+            <td>January 2009</td>
+            <td>Hal Finney receives bitcoin from Satoshi in one of the earliest known transactions between network participants.</td>
+        </tr>
+        <tr>
+            <td>October 2009</td>
+            <td>New Liberty Standard publishes an early exchange rate for bitcoin against the U.S. dollar.</td>
+        </tr>
+        <tr>
+            <td>May 22, 2010</td>
+            <td>Laszlo Hanyecz uses 10,000 BTC to purchase two pizzas, creating the event known as Bitcoin Pizza Day.</td>
+        </tr>
+        <tr>
+            <td>2010</td>
+            <td>Early Bitcoin exchanges begin appearing, including Mt. Gox.</td>
+        </tr>
+        <tr>
+            <td>2012</td>
+            <td>The first Bitcoin halving reduces the block subsidy from 50 BTC to 25 BTC.</td>
+        </tr>
+        <tr>
+            <td>2013</td>
+            <td>Bitcoin experiences another major market expansion and receives growing international attention.</td>
+        </tr>
+        <tr>
+            <td>2014</td>
+            <td>Mt. Gox collapses after losing access to a large amount of customer funds.</td>
+        </tr>
+        <tr>
+            <td>2016</td>
+            <td>The second halving reduces the block subsidy from 25 BTC to 12.5 BTC.</td>
+        </tr>
+        <tr>
+            <td>2017</td>
+            <td>SegWit activates and Bitcoin experiences a major market cycle.</td>
+        </tr>
+        <tr>
+            <td>2020</td>
+            <td>The third halving reduces the block subsidy from 12.5 BTC to 6.25 BTC.</td>
+        </tr>
+        <tr>
+            <td>2021</td>
+            <td>El Salvador adopts Bitcoin as legal tender.</td>
+        </tr>
+        <tr>
+            <td>2022</td>
+            <td>A major downturn affects the wider digital-asset industry.</td>
+        </tr>
+        <tr>
+            <td>2023</td>
+            <td>Ordinals gain attention and major financial institutions pursue spot Bitcoin investment products.</td>
+        </tr>
+        <tr>
+            <td>January 2024</td>
+            <td>The SEC approves the listing and trading of several spot bitcoin exchange-traded products in the United States.</td>
+        </tr>
+        <tr>
+            <td>April 2024</td>
+            <td>The fourth Bitcoin halving reduces the block subsidy from 6.25 BTC to 3.125 BTC.</td>
+        </tr>
+        <tr>
+            <td>2025–2026</td>
+            <td>Bitcoin continues developing as a decentralized network and as an asset integrated with a growing financial and technology ecosystem.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Conclusion</h2>
+
+<p>The history of Bitcoin is the history of several ideas coming together: cryptography, digital scarcity, electronic cash, peer-to-peer networking, proof of work, and decentralized consensus.</p>
+
+<p>The 2008 whitepaper combined many of these concepts into a coherent design. The launch of the network in 2009 transformed that design into a functioning system.</p>
+
+<p>Early contributors such as Hal Finney helped test and develop the software. Later communities of developers, miners, users, exchanges, businesses, and institutions expanded the ecosystem.</p>
+
+<p>Bitcoin's history has not been linear. It has included rapid market growth, severe downturns, technical disagreements, security incidents, regulatory changes, new technologies, and increasing institutional involvement.</p>
+
+<p>Understanding this history provides useful context for understanding Bitcoin today. The current market is only one part of a much longer story whose technical roots extend back decades before the first Bitcoin block.</p>
+
+<p><strong>Disclaimer:</strong> This article is provided for educational and historical purposes only. It is not investment, financial, legal, or tax advice. Digital assets can be highly volatile, and users should conduct their own research and consider the laws and regulations applicable in their jurisdiction.</p>
+
+<h2>Frequently Asked Questions</h2>
+
+<h3>What is the history of Bitcoin?</h3>
+<p>Bitcoin's history grew from decades of research into cryptography and digital cash. Satoshi Nakamoto published the Bitcoin whitepaper in 2008, launched the network in January 2009, and the project later developed into a global ecosystem of users, developers, miners, exchanges, companies, and financial institutions.</p>
+
+<h3>Who created Bitcoin?</h3>
+<p>Bitcoin was introduced by a person or group using the pseudonym Satoshi Nakamoto. The real-world identity behind the name has not been reliably established.</p>
+
+<h3>When was the Bitcoin whitepaper published?</h3>
+<p>The Bitcoin whitepaper was published on October 31, 2008, under the title Bitcoin: A Peer-to-Peer Electronic Cash System.</p>
+
+<h3>When did Bitcoin launch?</h3>
+<p>The Bitcoin Genesis Block was created on January 3, 2009, marking the beginning of the Bitcoin blockchain.</p>
+
+<h3>Who received the first Bitcoin transaction?</h3>
+<p>Hal Finney received bitcoin from Satoshi Nakamoto in one of the earliest known Bitcoin transactions between network participants.</p>
+
+<h3>What was the first known Bitcoin price?</h3>
+<p>One of the earliest known dollar-denominated exchange rates was published by New Liberty Standard in October 2009, valuing one U.S. dollar at approximately 1,309 BTC.</p>
+
+<h3>What is Bitcoin Pizza Day?</h3>
+<p>Bitcoin Pizza Day is observed on May 22 because Laszlo Hanyecz used 10,000 BTC to arrange the purchase of two pizzas in 2010.</p>
+
+<h3>When did Satoshi Nakamoto disappear?</h3>
+<p>Satoshi gradually withdrew from active public involvement in Bitcoin development during the project's early years. The precise reasons for the withdrawal are not known with certainty.</p>
+
+<h3>When was the first Bitcoin halving?</h3>
+<p>The first Bitcoin halving occurred in 2012 and reduced the block subsidy from 50 BTC to 25 BTC.</p>
+
+<h3>When were spot Bitcoin ETFs approved in the United States?</h3>
+<p>The SEC announced approval for the listing and trading of several spot bitcoin exchange-traded product shares on January 10, 2024, with trading beginning on January 11.</p>
+
+<h3>Is Bitcoin still being developed?</h3>
+<p>Yes. Bitcoin is open-source software and continues to be maintained, reviewed, and developed by contributors around the world.</p>
+
+<h3>Where can I follow the current Bitcoin market?</h3>
+<p>You can follow current Bitcoin market information on the <a href="/crypto/BTC">Bitcoin Market page</a> on AQL Crypto.</p>
+
+<h2>Related Articles</h2>
+
+<ul>
+    <li><a href="/academy/bitcoin/what-is-bitcoin">What Is Bitcoin?</a></li>
+    <li><a href="/academy/bitcoin/how-bitcoin-works">How Bitcoin Works</a></li>
+    <li><a href="/academy/bitcoin/bitcoin-mining">Bitcoin Mining Explained</a></li>
+    <li><a href="/academy/bitcoin/bitcoin-wallets">Bitcoin Wallets</a></li>
+    <li><a href="/academy/bitcoin/bitcoin-halving">Bitcoin Halving</a></li>
+    <li><a href="/crypto/BTC">Bitcoin Market</a></li>
+</ul>
+HTML,
+
+    'image' => null,
+
+    // SEO
+    'seo_title' => 'Bitcoin History: From 2008 to Today | AQL Crypto Academy',
+
+    'seo_title_ar' => 'تاريخ البيتكوين من 2008 إلى اليوم | أكاديمية AQL Crypto',
+
+    'seo_title_en' => 'Bitcoin History: From 2008 to Today | AQL Crypto Academy',
+
+    'meta_description' => 'Explore the complete history of Bitcoin, from early digital cash ideas and the 2008 whitepaper to the 2009 network launch, Bitcoin Pizza Day, major market cycles, institutional adoption, spot Bitcoin ETFs, and Bitcoin today.',
+
+    'meta_description_ar' => 'تعرف على تاريخ البيتكوين كاملًا منذ أفكار النقد الرقمي الأولى والورقة البيضاء عام 2008، مرورًا بإطلاق الشبكة عام 2009 وBitcoin Pizza Day والبورصات والدورات السعرية والتبني المؤسسي وصناديق Bitcoin ETF وصولًا إلى البيتكوين اليوم.',
+
+    'meta_description_en' => 'Explore the complete history of Bitcoin, from early digital cash ideas and the 2008 whitepaper to the 2009 network launch, Bitcoin Pizza Day, major market cycles, institutional adoption, spot Bitcoin ETFs, and Bitcoin today.',
+
+    // FAQ عربي
+    'faq_ar' => [
+        [
+            'question' => 'ما هو تاريخ البيتكوين؟',
+            'answer' => 'بدأ تاريخ Bitcoin من أبحاث وأفكار سابقة حول التشفير والنقد الرقمي، ثم نشر ساتوشي ناكاموتو الورقة البيضاء عام 2008 وأطلق الشبكة في يناير 2009، وبعد ذلك تطورت Bitcoin إلى منظومة عالمية من المستخدمين والمطورين والمعدنين والأسواق والخدمات المالية.'
+        ],
+        [
+            'question' => 'من أنشأ البيتكوين؟',
+            'answer' => 'تم تقديم Bitcoin بواسطة شخص أو مجموعة استخدمت اسم Satoshi Nakamoto، ولم يتم إثبات الهوية الحقيقية لساتوشي بشكل موثوق.'
+        ],
+        [
+            'question' => 'متى نُشرت الورقة البيضاء للبيتكوين؟',
+            'answer' => 'نُشرت الورقة البيضاء للبيتكوين في 31 أكتوبر 2008 بعنوان Bitcoin: A Peer-to-Peer Electronic Cash System.'
+        ],
+        [
+            'question' => 'متى أُطلقت شبكة البيتكوين؟',
+            'answer' => 'تم إنشاء Genesis Block في 3 يناير 2009، ويُعد هذا التاريخ نقطة البداية لسلسلة Bitcoin.'
+        ],
+        [
+            'question' => 'من استلم أول معاملة Bitcoin؟',
+            'answer' => 'استلم Hal Finney كمية من Bitcoin من ساتوشي ناكاموتو في واحدة من أقدم المعاملات المعروفة بين مشاركين في الشبكة.'
+        ],
+        [
+            'question' => 'ما أول سعر معروف للبيتكوين؟',
+            'answer' => 'في أكتوبر 2009 نشر New Liberty Standard أحد أقدم أسعار الصرف المعروفة للبيتكوين مقابل الدولار، وكان الدولار الواحد يعادل حوالي 1309 BTC تقريبًا.'
+        ],
+        [
+            'question' => 'ما هو Bitcoin Pizza Day؟',
+            'answer' => 'يُحتفل بـ Bitcoin Pizza Day في 22 مايو، تخليدًا لاستخدام Laszlo Hanyecz مبلغ 10,000 BTC لشراء بيتزتين عام 2010.'
+        ],
+        [
+            'question' => 'متى اختفى ساتوشي ناكاموتو؟',
+            'answer' => 'تراجع ساتوشي تدريجيًا عن المشاركة العلنية في تطوير Bitcoin خلال السنوات الأولى للمشروع، ولا توجد معلومات مؤكدة حول السبب الدقيق لابتعاده.'
+        ],
+        [
+            'question' => 'متى حدث أول تنصيف للبيتكوين؟',
+            'answer' => 'حدث أول تنصيف للبيتكوين عام 2012، وانخفضت مكافأة الكتلة من 50 BTC إلى 25 BTC.'
+        ],
+        [
+            'question' => 'متى تمت الموافقة على Bitcoin ETF في الولايات المتحدة؟',
+            'answer' => 'أعلنت SEC في 10 يناير 2024 الموافقة على إدراج وتداول عدد من المنتجات المتداولة المرتبطة بسعر Bitcoin الفوري، وبدأ التداول في 11 يناير 2024.'
+        ],
+        [
+            'question' => 'هل لا يزال تطوير Bitcoin مستمرًا؟',
+            'answer' => 'نعم. لا يزال برنامج Bitcoin مفتوح المصدر يخضع للصيانة والتطوير والمراجعة من مطورين ومساهمين حول العالم.'
+        ],
+        [
+            'question' => 'أين يمكنني متابعة سعر Bitcoin الحالي؟',
+            'answer' => 'يمكنك متابعة بيانات Bitcoin الحالية من خلال صفحة Bitcoin Market في AQL Crypto.'
+        ],
+    ],
+
+    // FAQ English
+    'faq_en' => [
+        [
+            'question' => 'What is the history of Bitcoin?',
+            'answer' => 'Bitcoin grew from decades of research into cryptography and digital cash. Satoshi Nakamoto published the Bitcoin whitepaper in 2008, launched the network in January 2009, and the project later developed into a global ecosystem.'
+        ],
+        [
+            'question' => 'Who created Bitcoin?',
+            'answer' => 'Bitcoin was introduced by a person or group using the pseudonym Satoshi Nakamoto. The real-world identity behind the name has not been reliably established.'
+        ],
+        [
+            'question' => 'When was the Bitcoin whitepaper published?',
+            'answer' => 'The Bitcoin whitepaper was published on October 31, 2008, under the title Bitcoin: A Peer-to-Peer Electronic Cash System.'
+        ],
+        [
+            'question' => 'When did Bitcoin launch?',
+            'answer' => 'The Bitcoin Genesis Block was created on January 3, 2009, marking the beginning of the Bitcoin blockchain.'
+        ],
+        [
+            'question' => 'Who received the first Bitcoin transaction?',
+            'answer' => 'Hal Finney received bitcoin from Satoshi Nakamoto in one of the earliest known Bitcoin transactions between network participants.'
+        ],
+        [
+            'question' => 'What was the first known Bitcoin price?',
+            'answer' => 'One of the earliest known dollar-denominated exchange rates was published by New Liberty Standard in October 2009, valuing one U.S. dollar at approximately 1,309 BTC.'
+        ],
+        [
+            'question' => 'What is Bitcoin Pizza Day?',
+            'answer' => 'Bitcoin Pizza Day is observed on May 22 because Laszlo Hanyecz used 10,000 BTC to arrange the purchase of two pizzas in 2010.'
+        ],
+       [
+    'question' => 'When did Satoshi Nakamoto disappear?',
+    'answer' => 'Satoshi gradually withdrew from active public involvement in Bitcoin development during the project\'s early years. The precise reasons for the withdrawal are not known with certainty.'
+       ],
+        [
+            'question' => 'When was the first Bitcoin halving?',
+            'answer' => 'The first Bitcoin halving occurred in 2012 and reduced the block subsidy from 50 BTC to 25 BTC.'
+        ],
+        [
+            'question' => 'When were spot Bitcoin ETFs approved in the United States?',
+            'answer' => 'The SEC announced approval for the listing and trading of several spot bitcoin exchange-traded product shares on January 10, 2024, with trading beginning on January 11.'
+        ],
+        [
+            'question' => 'Is Bitcoin still being developed?',
+            'answer' => 'Yes. Bitcoin is open-source software and continues to be maintained, reviewed, and developed by contributors around the world.'
+        ],
+        [
+            'question' => 'Where can I follow the current Bitcoin market?',
+            'answer' => 'You can follow current Bitcoin market information on the Bitcoin Market page on AQL Crypto.'
+        ],
+    ],
+
+    'status' => 'published',
+
+    'sort_order' => 2,
+
+    'published_at' => now(),
+   ],
             [
                 'title' => 'How Bitcoin Works',
                 'title_ar' => 'كيف يعمل البيتكوين؟',
