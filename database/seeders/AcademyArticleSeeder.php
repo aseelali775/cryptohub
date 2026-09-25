@@ -10977,6 +10977,1208 @@ HTML,
         'sort_order' => 1,
         'published_at' => now(),
     ],
+    [
+    'title' => 'How Does Blockchain Work?',
+    'title_ar' => 'كيف تعمل تقنية البلوك تشين؟ شرح Blockchain خطوة بخطوة',
+    'title_en' => 'How Does Blockchain Work? A Step-by-Step Guide',
+
+    'slug' => 'how-does-blockchain-work',
+
+    'excerpt' => 'Learn how blockchain works step by step, from creating and broadcasting a transaction to validation, block creation, consensus, hashing, and linking blocks together.',
+    'excerpt_ar' => 'تعرف على كيفية عمل تقنية البلوك تشين خطوة بخطوة، بدءًا من إنشاء المعاملة وانتشارها والتحقق منها، مرورًا بتكوين الكتل وآلية التوافق والتجزئة، وصولًا إلى ربط الكتل معًا وتأكيد البيانات.',
+    'excerpt_en' => 'Learn how blockchain works step by step, from creating and broadcasting a transaction to validation, block creation, consensus, hashing, and linking blocks together.',
+
+    'content' => null,
+
+    'content_ar' => <<<'HTML'
+<p>
+بعد أن تعرفنا في الدرس السابق على <strong>ما هي تقنية البلوك تشين Blockchain</strong>، حان الوقت لفهم السؤال الأهم:
+<strong>كيف تعمل Blockchain فعليًا؟</strong>
+</p>
+
+<p>
+قد تبدو البلوك تشين في البداية تقنية معقدة بسبب المصطلحات المرتبطة بها مثل
+المعاملات، والكتل، والتجزئة، والعقد، وآلية التوافق. لكن عند تقسيم العملية إلى مراحل بسيطة،
+يمكن فهم الفكرة بسهولة.
+</p>
+
+<p>
+في هذا الدرس سنشرح رحلة البيانات داخل شبكة Blockchain منذ إنشاء المعاملة وحتى تسجيلها داخل كتلة
+وربطها بالكتل السابقة، مع توضيح دور العقد وآليات التوافق والـ Hash.
+</p>
+
+<h2>كيف تعمل Blockchain باختصار؟</h2>
+
+<p>
+يمكن تبسيط العملية الأساسية في عدة مراحل مترابطة:
+</p>
+
+<ol>
+    <li>إنشاء معاملة أو بيانات جديدة.</li>
+    <li>بث المعاملة إلى شبكة Blockchain.</li>
+    <li>استقبال المعاملة والتحقق من صحتها.</li>
+    <li>تجميع المعاملات المقبولة في كتلة Block.</li>
+    <li>اختيار أو إنشاء الكتلة وفق آلية التوافق المستخدمة في الشبكة.</li>
+    <li>إضافة الكتلة إلى السلسلة.</li>
+    <li>ربط الكتلة الجديدة بالكتلة السابقة باستخدام التشفير والتجزئة Hash.</li>
+    <li>انتشار الكتلة الجديدة بين العقد وتحديث نسخ السجل.</li>
+</ol>
+
+<p>
+هذه الخطوات تختلف في تفاصيلها من شبكة إلى أخرى، لأن Bitcoin وEthereum وغيرها من شبكات Blockchain
+لا تستخدم جميعها الآلية نفسها. لكن الفكرة الأساسية هي وجود شبكة من المشاركين تتعاون وفق قواعد
+متفق عليها لتسجيل البيانات والتحقق منها دون الاعتماد بالضرورة على قاعدة بيانات مركزية واحدة.
+</p>
+
+<h2>1. إنشاء المعاملة Transaction</h2>
+
+<p>
+تبدأ العملية عندما يريد أحد المستخدمين تسجيل عملية جديدة على الشبكة.
+في شبكة مالية مثل Bitcoin، يمكن أن تكون هذه العملية إرسال عملة رقمية من عنوان إلى عنوان آخر.
+</p>
+
+<p>
+يقوم المستخدم باستخدام محفظته لإنشاء المعاملة، وتحتوي المعاملة عادةً على معلومات مثل المرسل،
+والمستقبل، والقيمة، وبيانات أخرى تعتمد على تصميم الشبكة.
+</p>
+
+<p>
+بعد ذلك يتم استخدام المفتاح الخاص للمستخدم لتوقيع المعاملة رقميًا.
+هذا التوقيع يساعد الشبكة على التحقق من أن المعاملة صادرة من صاحب الحق في استخدام الأصول المرتبطة
+بها، دون الحاجة إلى إرسال المفتاح الخاص نفسه إلى الشبكة.
+</p>
+
+<p>
+<strong>مهم:</strong> المفتاح الخاص يجب ألا تتم مشاركته مع الآخرين، لأنه يمثل وسيلة أساسية للتحكم
+في الأصول المرتبطة بالمحفظة.
+</p>
+
+<h2>2. بث المعاملة إلى الشبكة</h2>
+
+<p>
+بعد إنشاء المعاملة وتوقيعها، يتم إرسالها إلى شبكة Blockchain.
+لا تذهب المعاملة عادةً إلى خادم مركزي واحد، بل تنتشر عبر مجموعة من العقد
+<strong>Nodes</strong> التي تشارك في الشبكة.
+</p>
+
+<p>
+يمكن تصور ذلك كأن مستخدمًا أرسل معلومة إلى شبكة كبيرة من أجهزة الكمبيوتر،
+ثم تبدأ هذه الأجهزة في مشاركة المعلومة مع بعضها وفق قواعد الشبكة.
+</p>
+
+<p>
+هذا الانتشار هو أحد العناصر التي تساعد الشبكات اللامركزية على العمل دون نقطة تحكم مركزية واحدة.
+</p>
+
+<h2>3. التحقق من المعاملة Validation</h2>
+
+<p>
+عندما تستقبل العقد المعاملة، تقوم بفحصها وفق قواعد الشبكة.
+وقد تشمل عملية التحقق، بحسب تصميم Blockchain، التأكد من صحة التوقيع الرقمي،
+وصحة تنسيق المعاملة، وعدم محاولة إنفاق نفس الرصيد بطريقة غير مسموحة، وتوفر الشروط المطلوبة
+لإدراج المعاملة.
+</p>
+
+<p>
+إذا لم تستوفِ المعاملة القواعد المطلوبة، يمكن رفضها وعدم تضمينها في السجل النهائي.
+أما المعاملات الصحيحة فتستمر في مسارها نحو الإدراج في كتلة.
+</p>
+
+<h2>4. أين تذهب المعاملة قبل أن تصبح جزءًا من Block؟</h2>
+
+<p>
+في كثير من شبكات Blockchain، توجد معاملات صحيحة تنتظر الإدراج في كتلة قبل أن تصبح جزءًا من
+السلسلة الرئيسية.
+</p>
+
+<p>
+في Bitcoin، يُستخدم مصطلح <strong>mempool</strong> لوصف مجموعة المعاملات التي تعرفها العقد
+والتي لم تُدرج بعد في كتلة.
+</p>
+
+<p>
+وجود المعاملة في mempool لا يعني بالضرورة أنها أصبحت نهائية وغير قابلة للتغيير؛ بل يعني أنها
+تنتظر أن تتم معالجتها وفق قواعد الشبكة.
+</p>
+
+<h2>5. إنشاء الكتلة Block</h2>
+
+<p>
+بعد التحقق من المعاملات، يتم تجميع مجموعة من المعاملات داخل كتلة
+<strong>Block</strong>.
+</p>
+
+<p>
+يمكن النظر إلى الكتلة على أنها حاوية منظمة تحتوي على مجموعة من البيانات، بالإضافة إلى معلومات
+تساعد الشبكة على ربطها بالكتل الأخرى والتحقق من سلامة السلسلة.
+</p>
+
+<p>
+تختلف بنية الكتلة بالتفصيل من Blockchain إلى أخرى، لكن الكتلة قد تحتوي على معلومات مثل:
+</p>
+
+<ul>
+    <li>مجموعة من المعاملات.</li>
+    <li>مرجع أو Hash للكتلة السابقة.</li>
+    <li>بيانات مرتبطة بآلية التوافق.</li>
+    <li>وقت أو معلومات أخرى حسب تصميم الشبكة.</li>
+    <li>بيانات تشفيرية تساعد على التحقق من محتوى الكتلة.</li>
+</ul>
+
+<h2>6. ما هو Hash؟</h2>
+
+<p>
+الـ <strong>Hash</strong> هو ناتج دالة تجزئة تقوم بتحويل بيانات ذات حجم معين إلى قيمة رقمية
+بطول محدد وفق الخوارزمية المستخدمة.
+</p>
+
+<p>
+في أنظمة Blockchain، تُستخدم دوال التجزئة في عدة أماكن للمساعدة في التحقق من البيانات وربط أجزاء
+من السجل ببعضها.
+</p>
+
+<p>
+من الخصائص المهمة لدوال التجزئة التشفيرية أن تغيير البيانات الداخلة إليها يؤدي عادةً إلى تغير
+ناتج التجزئة بشكل واضح.
+</p>
+
+<p>
+لهذا السبب يمكن استخدام الـ Hash كنوع من البصمة الرقمية للبيانات.
+</p>
+
+<h2>7. كيف ترتبط الكتل ببعضها؟</h2>
+
+<p>
+إحدى الأفكار الأساسية في Blockchain هي أن الكتلة الجديدة تحتوي على معلومات مرتبطة بالكتلة
+السابقة، وغالبًا يكون من ضمنها Hash للكتلة السابقة.
+</p>
+
+<p>
+يمكن تبسيط الفكرة بالشكل التالي:
+</p>
+
+<p>
+<strong>Block 1 → Block 2 → Block 3 → Block 4</strong>
+</p>
+
+<p>
+إذا تم تعديل بيانات مهمة داخل Block 2، فإن الـ Hash الخاص بها سيتغير.
+وبالتالي لن تتطابق العلاقة المتوقعة بين Block 2 وBlock 3.
+</p>
+
+<p>
+هذا يجعل اكتشاف التغييرات غير المصرح بها أسهل بكثير، ويشكل جزءًا مهمًا من سبب تسمية التقنية
+<strong>Blockchain</strong>، أي سلسلة من الكتل المرتبطة ببعضها.
+</p>
+
+<p>
+لكن من المهم فهم أن الـ Hash وحده لا يجعل التلاعب مستحيلًا. مستوى الحماية يعتمد أيضًا على آلية
+التوافق، وتوزيع الشبكة، وعدد المشاركين، والقواعد البرمجية، والافتراضات الأمنية الخاصة بالشبكة.
+</p>
+
+<h2>8. ما هي Nodes؟</h2>
+
+<p>
+العقد أو <strong>Nodes</strong> هي أجهزة أو برامج تشارك في تشغيل شبكة Blockchain وفق الأدوار
+التي تحددها الشبكة.
+</p>
+
+<p>
+ليست جميع العقد متطابقة في الوظائف. بعض العقد قد تحتفظ بنسخة من بيانات السجل، وبعضها يشارك في
+التحقق من المعاملات، وبعض الشبكات تحتوي على أنواع مختلفة من العقد حسب تصميمها.
+</p>
+
+<p>
+وجود عدد كبير من المشاركين المستقلين يساعد على توزيع عملية حفظ البيانات والتحقق منها بدل الاعتماد
+على خادم مركزي واحد.
+</p>
+
+<h2>9. ما معنى اللامركزية؟</h2>
+
+<p>
+اللامركزية تعني، بصورة مبسطة، أن التحكم في الشبكة أو السجل لا يعتمد على جهة مركزية واحدة فقط.
+بدلًا من وجود قاعدة بيانات واحدة يديرها خادم واحد، يمكن أن توجد نسخ متعددة من السجل لدى
+مشاركين مختلفين.
+</p>
+
+<p>
+لكن اللامركزية ليست مفهومًا ثنائيًا بسيطًا. فدرجة اللامركزية تختلف بين الشبكات، وقد تختلف حسب
+عدد المشاركين، وتوزيعهم، وآلية الحوكمة، ومتطلبات تشغيل العقد، وطريقة اتخاذ القرارات.
+</p>
+
+<h2>10. ما هي Consensus Mechanism؟</h2>
+
+<p>
+عندما توجد مجموعة كبيرة من الأجهزة المستقلة، يظهر سؤال مهم:
+<strong>كيف تتفق هذه الأجهزة على حالة السجل؟</strong>
+</p>
+
+<p>
+هنا تأتي آلية التوافق <strong>Consensus Mechanism</strong>.
+وهي مجموعة من القواعد والإجراءات التي تستخدمها الشبكة للوصول إلى اتفاق حول البيانات التي يجب
+اعتمادها.
+</p>
+
+<p>
+توجد آليات توافق مختلفة، ولا تعمل كل شبكات Blockchain بالطريقة نفسها.
+</p>
+
+<h3>Proof of Work — إثبات العمل</h3>
+
+<p>
+يُستخدم <strong>Proof of Work (PoW)</strong> في Bitcoin.
+يعتمد النظام على عملية تنافسية تتطلب من المشاركين المعروفين باسم المعدنين
+<strong>Miners</strong> إجراء عمليات حسابية وفق شروط محددة للشبكة.
+</p>
+
+<p>
+عندما ينجح أحد المشاركين في إنشاء كتلة مستوفية للشروط، تقوم الشبكة بالتحقق منها وفق قواعدها،
+ثم يمكن أن تصبح جزءًا من السلسلة.
+</p>
+
+<p>
+يتطلب إثبات العمل موارد حوسبة وطاقة، وهو جزء أساسي من تصميم أمان Bitcoin.
+</p>
+
+<h3>Proof of Stake — إثبات الحصة</h3>
+
+<p>
+في <strong>Proof of Stake (PoS)</strong>، تستخدم الشبكة آلية مختلفة لاختيار المشاركين الذين
+يساعدون في اقتراح الكتل أو التحقق منها، وغالبًا ترتبط المشاركة بحجز أو إيداع كمية من الأصل
+الرقمي وفق قواعد الشبكة.
+</p>
+
+<p>
+يُستخدم Proof of Stake في عدد من الشبكات الحديثة، ومن المهم عدم افتراض أن كل Blockchain تستخدم
+التعدين أو Proof of Work.
+</p>
+
+<h2>11. ماذا يحدث عند قبول الكتلة؟</h2>
+
+<p>
+بعد إنشاء الكتلة وفق قواعد الشبكة، تقوم العقد الأخرى بفحصها.
+إذا كانت الكتلة صحيحة ومتوافقة مع قواعد الشبكة، يمكن للعقد قبولها وتحديث حالة السجل لديها.
+</p>
+
+<p>
+ثم تستمر الشبكة في استقبال معاملات جديدة وإنشاء كتل جديدة.
+وبذلك تتكون سلسلة متتابعة من الكتل.
+</p>
+
+<h2>12. ما معنى تأكيد المعاملة؟</h2>
+
+<p>
+عندما يتم تضمين المعاملة داخل كتلة، يمكن اعتبارها مؤكدة وفق قواعد الشبكة بدرجة معينة.
+ومع إضافة كتل أخرى فوق الكتلة التي تحتوي على المعاملة، تزداد عادةً ما يسمى
+<strong>عدد التأكيدات Confirmations</strong>.
+</p>
+
+<p>
+في بعض الشبكات، زيادة عدد الكتل اللاحقة تجعل إعادة تنظيم السجل أو تغيير المعاملة أكثر صعوبة
+من الناحية العملية، لكن معنى "النهائية" يختلف بين الشبكات.
+</p>
+
+<p>
+لذلك لا ينبغي افتراض أن جميع Blockchain توفر نفس نموذج التأكيد أو نفس مفهوم النهائية.
+</p>
+
+<h2>مثال مبسط: إرسال Bitcoin</h2>
+
+<p>
+لنفترض أن أحمد يريد إرسال كمية من Bitcoin إلى محمد.
+يمكن تبسيط العملية على النحو التالي:
+</p>
+
+<ol>
+    <li>ينشئ أحمد المعاملة من خلال محفظته.</li>
+    <li>يوقع أحمد المعاملة باستخدام المفتاح الخاص.</li>
+    <li>تنتشر المعاملة إلى شبكة Bitcoin.</li>
+    <li>تتحقق العقد من المعاملة وفق قواعد الشبكة.</li>
+    <li>تدخل المعاملة ضمن المعاملات التي يمكن تضمينها في كتلة.</li>
+    <li>يعمل المعدنون ضمن آلية Proof of Work لإنشاء كتلة وفق قواعد Bitcoin.</li>
+    <li>تقوم العقد بالتحقق من الكتلة.</li>
+    <li>إذا تم قبولها، تصبح المعاملة جزءًا من السجل.</li>
+    <li>مع إضافة كتل لاحقة، تحصل المعاملة على تأكيدات إضافية.</li>
+</ol>
+
+<p>
+هذا المثال يوضح كيف تعمل عدة مكونات معًا: المحفظة، والتوقيع الرقمي، والعقد، والمعاملات،
+والكتل، والـ Hash، وآلية التوافق.
+</p>
+
+<h2>Blockchain ليست مجرد قائمة معاملات</h2>
+
+<p>
+قد يكون من السهل تصور Blockchain على أنها مجرد ملف يحتوي على قائمة من المعاملات، لكن النظام
+أكثر تعقيدًا من ذلك.
+</p>
+
+<p>
+الشبكة تحتاج إلى قواعد تحدد:
+</p>
+
+<ul>
+    <li>كيف يتم إنشاء المعاملات.</li>
+    <li>كيف يتم التحقق منها.</li>
+    <li>كيف يتم إنشاء الكتل.</li>
+    <li>من يشارك في التحقق أو اقتراح الكتل.</li>
+    <li>كيف يتم حل حالات الاختلاف بين المشاركين.</li>
+    <li>كيف يتم ربط البيانات ببعضها.</li>
+    <li>ما الذي يجعل المشاركين يتبعون السجل والقواعد نفسها.</li>
+</ul>
+
+<h2>هل كل Blockchain تعمل مثل Bitcoin؟</h2>
+
+<p>
+لا.
+Bitcoin هي إحدى شبكات Blockchain، لكنها ليست النموذج الوحيد.
+</p>
+
+<p>
+تختلف الشبكات في:
+</p>
+
+<ul>
+    <li>آلية التوافق.</li>
+    <li>سرعة معالجة المعاملات.</li>
+    <li>تكلفة المعاملات.</li>
+    <li>طريقة إدارة العقد.</li>
+    <li>تصميم الأصول الرقمية.</li>
+    <li>درجة اللامركزية.</li>
+    <li>دعم العقود الذكية.</li>
+    <li>قواعد الحوكمة.</li>
+</ul>
+
+<p>
+لذلك من الأفضل عند دراسة Blockchain أن نتعامل معها كفئة من التقنيات والشبكات المختلفة، وليس
+كنظام واحد متطابق في جميع الحالات.
+</p>
+
+<h2>Blockchain مقابل قاعدة البيانات التقليدية</h2>
+
+<p>
+قاعدة البيانات التقليدية يمكن أن تكون مناسبة جدًا عندما تحتاج مؤسسة إلى نظام مركزي سريع وفعال
+لإدارة البيانات.
+</p>
+
+<p>
+أما Blockchain فتقدم نموذجًا مختلفًا يعتمد على سجل موزع وقواعد مشتركة وآليات للتحقق والتوافق.
+</p>
+
+<p>
+يمكن تلخيص بعض الفروق العامة:
+</p>
+
+<ul>
+    <li><strong>قاعدة البيانات التقليدية:</strong> غالبًا تدار بواسطة جهة أو مجموعة جهات محددة.</li>
+    <li><strong>Blockchain العامة:</strong> يمكن أن تسمح لعدد كبير من المشاركين بالتحقق من السجل وفق قواعد الشبكة.</li>
+    <li><strong>قابلية التعديل:</strong> قواعد البيانات التقليدية مصممة عادةً لتسهيل التحديث والحذف، بينما بعض شبكات Blockchain مصممة بحيث تكون إضافة البيانات وتغيير السجل التاريخي أكثر تقييدًا.</li>
+    <li><strong>الأداء:</strong> قواعد البيانات التقليدية قد تكون أكثر ملاءمة لكثير من التطبيقات المركزية التي تتطلب سرعة عالية وتحديثات متكررة.</li>
+</ul>
+
+<p>
+لذلك Blockchain ليست بديلًا تلقائيًا لكل قاعدة بيانات. اختيار التقنية يعتمد على المشكلة التي
+تحاول حلها.
+</p>
+
+<h2>لماذا يصعب تعديل البيانات القديمة؟</h2>
+
+<p>
+هناك عدة طبقات تعمل معًا لتجعل تغيير البيانات التاريخية أمرًا صعبًا، منها:
+</p>
+
+<ul>
+    <li>الربط بين الكتل باستخدام التجزئة.</li>
+    <li>وجود نسخ أو حالات موزعة بين المشاركين.</li>
+    <li>قواعد التحقق المشتركة.</li>
+    <li>آلية التوافق.</li>
+    <li>التكلفة أو المخاطر المرتبطة بمحاولة مخالفة قواعد الشبكة.</li>
+</ul>
+
+<p>
+لكن عبارة "لا يمكن تغيير Blockchain" تحتاج إلى فهم دقيق.
+فهي لا تعني أن التغيير مستحيل رياضيًا في جميع الظروف، بل تعني أن تصميم الشبكة قد يجعل تعديل
+السجل التاريخي المقبول مكلفًا أو صعبًا أو قابلًا للاكتشاف، بحسب نوع الشبكة وآلية توافقها.
+</p>
+
+<h2>ما دور التشفير في Blockchain؟</h2>
+
+<p>
+التشفير جزء أساسي من كثير من شبكات Blockchain.
+ويُستخدم في وظائف متعددة، مثل التوقيعات الرقمية ودوال التجزئة وإثبات ملكية المفاتيح.
+</p>
+
+<p>
+من المهم التمييز بين <strong>التشفير Encryption</strong> و<strong>التجزئة Hashing</strong>.
+فهما ليسا الشيء نفسه.
+</p>
+
+<p>
+التشفير يهدف عادةً إلى حماية البيانات بحيث يمكن فكها باستخدام مفتاح مناسب، بينما التجزئة تنتج
+بصمة رقمية للبيانات وتستخدم في التحقق من سلامتها وربط أجزاء من السجل.
+</p>
+
+<h2>ما هي Smart Contracts؟</h2>
+
+<p>
+العقود الذكية <strong>Smart Contracts</strong> هي برامج تعمل على بعض شبكات Blockchain وتنفذ
+قواعد منطقية محددة وفق البيئة البرمجية للشبكة.
+</p>
+
+<p>
+يمكن أن تحتوي على شروط وإجراءات يتم تنفيذها عندما تتحقق متطلبات معينة.
+وهذا يسمح ببناء تطبيقات وخدمات تتجاوز مجرد تسجيل التحويلات المالية.
+</p>
+
+<p>
+العقود الذكية ستكون موضوعًا مهمًا في دراسة Blockchain لاحقًا، خصوصًا عند الانتقال إلى شبكات
+مثل Ethereum والتطبيقات اللامركزية.
+</p>
+
+<h2>أين تستخدم Blockchain؟</h2>
+
+<p>
+يمكن استخدام تقنيات Blockchain في حالات متعددة، مثل:
+</p>
+
+<ul>
+    <li>الأصول والعملات الرقمية.</li>
+    <li>التحويلات والمدفوعات في بعض الأنظمة.</li>
+    <li>العقود الذكية.</li>
+    <li>التطبيقات اللامركزية.</li>
+    <li>توثيق بعض أنواع البيانات.</li>
+    <li>إدارة الأصول الرقمية.</li>
+    <li>بعض تطبيقات سلاسل الإمداد.</li>
+</ul>
+
+<p>
+لكن وجود Blockchain كخيار تقني لا يعني أنها الخيار الأفضل لكل استخدام.
+يجب تقييم التكلفة، والأداء، والخصوصية، والحوكمة، والأمان، وحاجة المشروع فعلًا إلى سجل موزع.
+</p>
+
+<h2>أهم مزايا طريقة عمل Blockchain</h2>
+
+<ul>
+    <li>توزيع السجل بين عدد من المشاركين وفق تصميم الشبكة.</li>
+    <li>وجود قواعد مشتركة للتحقق من البيانات.</li>
+    <li>استخدام التوقيعات الرقمية والتجزئة في وظائف أمنية مهمة.</li>
+    <li>إمكانية بناء سجلات يصعب تغيير تاريخها بعد اعتمادها، بحسب الشبكة.</li>
+    <li>إمكانية تشغيل أنظمة لا تعتمد على جهة مركزية واحدة في بعض الحالات.</li>
+</ul>
+
+<h2>أهم حدود Blockchain</h2>
+
+<ul>
+    <li>ليست كل Blockchain لامركزية بالدرجة نفسها.</li>
+    <li>بعض الشبكات قد تعاني من ارتفاع الرسوم أو محدودية الأداء في ظروف معينة.</li>
+    <li>آليات التوافق المختلفة لها تكاليف وخصائص مختلفة.</li>
+    <li>فقدان المفاتيح الخاصة قد يؤدي إلى فقدان الوصول إلى الأصول في بعض الأنظمة.</li>
+    <li>العقود الذكية قد تحتوي على أخطاء برمجية إذا لم تُصمم وتُختبر جيدًا.</li>
+    <li>وجود سجل غير قابل للتعديل بسهولة قد يكون ميزة في بعض الاستخدامات وقيودًا في استخدامات أخرى.</li>
+</ul>
+
+<h2>العلاقة بين Bitcoin وBlockchain</h2>
+
+<p>
+Bitcoin وBlockchain مرتبطان ارتباطًا وثيقًا، لكنهما ليسا المصطلح نفسه.
+</p>
+
+<p>
+<strong>Bitcoin</strong> هو نظام وأصل رقمي وشبكة لها قواعد محددة، بينما
+<strong>Blockchain</strong> تصف نوعًا من البنية التقنية المستخدمة لتسجيل البيانات وربطها وفق
+قواعد الشبكة.
+</p>
+
+<p>
+يمكنك مراجعة درس
+<a href="/academy/bitcoin/how-bitcoin-works">كيف يعمل Bitcoin؟</a>
+لفهم كيفية تطبيق عدد من هذه المفاهيم داخل شبكة Bitcoin.
+</p>
+
+<p>
+كما يمكنك العودة إلى
+<a href="/academy/bitcoin">مسار تعلم Bitcoin</a>
+إذا أردت مراجعة المفاهيم الأساسية قبل متابعة دروس Blockchain.
+</p>
+
+<h2>خلاصة الدرس</h2>
+
+<p>
+تعمل Blockchain من خلال مجموعة من المكونات التي تتعاون معًا بدل الاعتماد على قاعدة بيانات مركزية
+واحدة في الشبكات العامة.
+</p>
+
+<p>
+تبدأ العملية بإنشاء معاملة، ثم توقيعها وبثها إلى الشبكة. تقوم العقد بالتحقق منها، وبعد ذلك يمكن
+تجميع المعاملات في كتلة. وفق آلية التوافق المستخدمة، يتم اعتماد الكتلة وإضافتها إلى السلسلة،
+ثم ترتبط بالكتل السابقة باستخدام معلومات التجزئة.
+</p>
+
+<p>
+ومع استمرار إضافة الكتل وتحديث حالة الشبكة، يتكون سجل موزع تحكمه قواعد مشتركة.
+</p>
+
+<p>
+في الدرس التالي سنتعمق في أحد أهم المكونات التي تجعل Blockchain مختلفة:
+<strong>ما هي الكتلة Block؟ وما الذي يوجد داخلها؟ وكيف يتم تنظيم بياناتها؟</strong>
+</p>
+HTML,
+
+    'content_en' => <<<'HTML'
+<p>
+After learning <strong>what Blockchain is</strong> in the previous lesson, it is time to answer
+the most important practical question:
+<strong>How does Blockchain actually work?</strong>
+</p>
+
+<p>
+Blockchain can seem complicated because it involves terms such as transactions, blocks, hashes,
+nodes, and consensus mechanisms. However, the overall process becomes much easier to understand
+when it is divided into a series of simple steps.
+</p>
+
+<p>
+In this lesson, we will follow the journey of data through a Blockchain network, from creating
+a transaction to validating it, including it in a block, reaching consensus, and linking that
+block to the existing chain.
+</p>
+
+<h2>How Does Blockchain Work in Simple Terms?</h2>
+
+<p>
+The basic process can be simplified into several connected stages:
+</p>
+
+<ol>
+    <li>A new transaction or piece of data is created.</li>
+    <li>The transaction is broadcast to the Blockchain network.</li>
+    <li>Network nodes receive and validate the transaction.</li>
+    <li>Valid transactions are collected into a block.</li>
+    <li>The block is created or selected according to the network's consensus mechanism.</li>
+    <li>The block is added to the chain.</li>
+    <li>The new block is linked to the previous block using cryptographic hashing.</li>
+    <li>The new block is propagated and accepted by other participating nodes.</li>
+</ol>
+
+<p>
+The exact implementation differs between Blockchain networks. Bitcoin and Ethereum, for example,
+do not use identical mechanisms or data structures.
+</p>
+
+<p>
+The general idea is that participants follow a common set of rules to validate and maintain a
+shared record without necessarily depending on one central database administrator.
+</p>
+
+<h2>1. Creating a Transaction</h2>
+
+<p>
+The process begins when a user wants to record a new transaction on the network.
+In a financial Blockchain such as Bitcoin, this may involve sending digital currency from one
+address to another.
+</p>
+
+<p>
+A wallet creates the transaction using information such as the sender, recipient, amount, and
+other data required by the specific network.
+</p>
+
+<p>
+The transaction is then digitally signed using the user's private key.
+The digital signature allows the network to verify that the transaction was authorized by the
+holder of the relevant private key without revealing the private key itself.
+</p>
+
+<p>
+<strong>Important:</strong> A private key should never be shared with others because it can provide
+control over assets associated with the wallet.
+</p>
+
+<h2>2. Broadcasting the Transaction</h2>
+
+<p>
+After the transaction is created and signed, it is broadcast to the Blockchain network.
+It does not normally travel to one central server. Instead, it can propagate among participating
+network nodes.
+</p>
+
+<p>
+You can think of this as sending information into a large network of computers, where participating
+devices share the information according to the network's rules.
+</p>
+
+<p>
+This distributed propagation is one of the mechanisms that allows public Blockchain networks to
+operate without a single central point of control.
+</p>
+
+<h2>3. Transaction Validation</h2>
+
+<p>
+When nodes receive a transaction, they check it against the rules of the network.
+Depending on the Blockchain, validation may include checking the digital signature, transaction
+format, available balance or inputs, and whether the transaction follows the network's rules.
+</p>
+
+<p>
+If a transaction fails validation, it may be rejected and excluded from the accepted record.
+Valid transactions can continue toward inclusion in a block.
+</p>
+
+<h2>4. Where Does a Transaction Wait Before Becoming a Block?</h2>
+
+<p>
+Many Blockchain networks have transactions waiting to be included in a block before they become
+part of the confirmed chain.
+</p>
+
+<p>
+In Bitcoin, the term <strong>mempool</strong> is commonly used for transactions that nodes know
+about but that have not yet been included in a block.
+</p>
+
+<p>
+A transaction being in the mempool does not necessarily mean that it is final or permanently
+recorded. It is waiting to be processed according to the network's rules.
+</p>
+
+<h2>5. Creating a Block</h2>
+
+<p>
+After transactions are validated, a group of them can be collected into a
+<strong>Block</strong>.
+</p>
+
+<p>
+A block can be viewed as an organized container holding transaction data together with additional
+information that helps the network connect the block to the rest of the chain and verify it.
+</p>
+
+<p>
+Block structures vary between networks, but a block may contain information such as:
+</p>
+
+<ul>
+    <li>A collection of transactions.</li>
+    <li>A reference or hash of the previous block.</li>
+    <li>Consensus-related information.</li>
+    <li>A timestamp or other network-specific metadata.</li>
+    <li>Cryptographic data used to verify the block.</li>
+</ul>
+
+<h2>6. What Is a Hash?</h2>
+
+<p>
+A <strong>hash</strong> is the output of a hash function that converts input data into a fixed-size
+digital value according to the algorithm being used.
+</p>
+
+<p>
+Cryptographic hash functions are used in Blockchain systems for several purposes, including
+data integrity checks and connecting different parts of the record.
+</p>
+
+<p>
+An important property is that changing the input data normally produces a significantly different
+hash output.
+</p>
+
+<p>
+This allows a hash to act as a kind of digital fingerprint for data.
+</p>
+
+<h2>7. How Are Blocks Linked Together?</h2>
+
+<p>
+One of the core ideas behind Blockchain is that a new block contains information that connects it
+to the previous block. In many Blockchain designs, this includes the hash of the previous block.
+</p>
+
+<p>
+The concept can be simplified as:
+</p>
+
+<p>
+<strong>Block 1 → Block 2 → Block 3 → Block 4</strong>
+</p>
+
+<p>
+If important data inside Block 2 is modified, its hash will change. The expected relationship
+between Block 2 and Block 3 would then no longer match.
+</p>
+
+<p>
+This makes unauthorized changes much easier to detect and is an important part of why the system
+is described as a chain of blocks.
+</p>
+
+<p>
+However, hashing alone does not make manipulation mathematically impossible. The security of a
+Blockchain also depends on its consensus mechanism, network distribution, software rules, and
+other security assumptions.
+</p>
+
+<h2>8. What Are Nodes?</h2>
+
+<p>
+<strong>Nodes</strong> are computers or software instances that participate in a Blockchain network
+according to the roles defined by that network.
+</p>
+
+<p>
+Not all nodes necessarily perform exactly the same functions. Some may maintain copies of the
+ledger, some may validate transactions, and some networks may have different node types.
+</p>
+
+<p>
+Having multiple independent participants can distribute the process of storing and validating
+the record instead of relying on one central server.
+</p>
+
+<h2>9. What Does Decentralization Mean?</h2>
+
+<p>
+Decentralization, in simple terms, means that control over a network or record is not dependent
+on only one central authority.
+</p>
+
+<p>
+Instead of maintaining one database controlled by a single server, a public Blockchain can
+maintain distributed copies or states across multiple participants.
+</p>
+
+<p>
+However, decentralization is not simply an all-or-nothing property. Different networks have
+different degrees of decentralization depending on factors such as the number and distribution
+of participants, governance, hardware requirements, and consensus design.
+</p>
+
+<h2>10. What Is a Consensus Mechanism?</h2>
+
+<p>
+When many independent computers participate in a network, an important question appears:
+<strong>How do they agree on the state of the ledger?</strong>
+</p>
+
+<p>
+This is where a <strong>consensus mechanism</strong> comes in.
+It is a set of rules and procedures that helps the network reach agreement about which data
+should be accepted.
+</p>
+
+<p>
+Different Blockchain networks use different consensus mechanisms.
+</p>
+
+<h3>Proof of Work</h3>
+
+<p>
+<strong>Proof of Work (PoW)</strong> is used by Bitcoin.
+It involves a competitive process in which participants known as miners perform computational
+work according to the network's rules.
+</p>
+
+<p>
+When a miner successfully produces a block that satisfies the required conditions, other nodes
+can verify it according to the rules before accepting it.
+</p>
+
+<p>
+Proof of Work requires computational resources and energy and is a fundamental part of Bitcoin's
+security model.
+</p>
+
+<h3>Proof of Stake</h3>
+
+<p>
+<strong>Proof of Stake (PoS)</strong> uses a different approach to selecting participants who
+help propose or validate blocks. Participation is generally associated with locking or staking
+an amount of the network's native asset according to its rules.
+</p>
+
+<p>
+Many modern Blockchain networks use Proof of Stake or related mechanisms, so it is important not
+to assume that every Blockchain uses mining or Proof of Work.
+</p>
+
+<h2>11. What Happens When a Block Is Accepted?</h2>
+
+<p>
+After a block is produced according to the network's rules, other nodes verify it.
+If the block is valid, nodes can accept it and update their local view of the ledger.
+</p>
+
+<p>
+The network then continues processing new transactions and producing new blocks.
+Over time, this creates a sequence of connected blocks.
+</p>
+
+<h2>12. What Does Transaction Confirmation Mean?</h2>
+
+<p>
+When a transaction is included in a block, it can be considered confirmed to a certain degree
+according to the network's rules.
+</p>
+
+<p>
+As additional blocks are added after the block containing the transaction, the transaction gains
+what are commonly called <strong>confirmations</strong>.
+</p>
+
+<p>
+In some networks, additional blocks make reorganizing the relevant part of the ledger more
+difficult in practice. However, the exact meaning of finality differs between Blockchain systems.
+</p>
+
+<h2>A Simple Example: Sending Bitcoin</h2>
+
+<p>
+Suppose Ahmed wants to send Bitcoin to Mohammed.
+The process can be simplified as follows:
+</p>
+
+<ol>
+    <li>Ahmed creates the transaction using his wallet.</li>
+    <li>Ahmed signs the transaction using his private key.</li>
+    <li>The transaction is broadcast to the Bitcoin network.</li>
+    <li>Nodes validate the transaction according to Bitcoin's rules.</li>
+    <li>The transaction becomes eligible for inclusion in a block.</li>
+    <li>Miners use Proof of Work to produce a valid block according to Bitcoin's rules.</li>
+    <li>Nodes verify the block.</li>
+    <li>If accepted, the transaction becomes part of the ledger.</li>
+    <li>Additional blocks provide further confirmations.</li>
+</ol>
+
+<p>
+This example shows how several components work together: wallets, digital signatures, nodes,
+transactions, blocks, hashing, and consensus.
+</p>
+
+<h2>Blockchain Is More Than a List of Transactions</h2>
+
+<p>
+It is tempting to think of Blockchain as simply a file containing a list of transactions.
+In reality, the system is more complex.
+</p>
+
+<p>
+The network needs rules that determine:
+</p>
+
+<ul>
+    <li>How transactions are created.</li>
+    <li>How transactions are validated.</li>
+    <li>How blocks are produced.</li>
+    <li>Who can participate in validation or block production.</li>
+    <li>How disagreements between participants are resolved.</li>
+    <li>How data is linked together.</li>
+    <li>Why participants follow the same ledger and protocol rules.</li>
+</ul>
+
+<h2>Does Every Blockchain Work Like Bitcoin?</h2>
+
+<p>
+No.
+Bitcoin is one Blockchain network, but it is not the only model.
+</p>
+
+<p>
+Blockchain networks can differ in:
+</p>
+
+<ul>
+    <li>Consensus mechanism.</li>
+    <li>Transaction processing speed.</li>
+    <li>Transaction costs.</li>
+    <li>Node requirements.</li>
+    <li>Digital asset design.</li>
+    <li>Degree of decentralization.</li>
+    <li>Smart contract capabilities.</li>
+    <li>Governance models.</li>
+</ul>
+
+<p>
+For this reason, it is better to think of Blockchain as a family of technologies and networks
+rather than one identical system.
+</p>
+
+<h2>Blockchain vs Traditional Databases</h2>
+
+<p>
+Traditional databases can be extremely useful when an organization needs a centralized,
+high-performance system for managing data.
+</p>
+
+<p>
+Blockchain provides a different model based on distributed records, shared rules, validation,
+and consensus.
+</p>
+
+<p>
+Some general differences include:
+</p>
+
+<ul>
+    <li><strong>Traditional database:</strong> often controlled by a specific organization or group of administrators.</li>
+    <li><strong>Public Blockchain:</strong> can allow many participants to verify the ledger according to network rules.</li>
+    <li><strong>Data modification:</strong> traditional databases are generally designed to make updating and deleting records practical, while some Blockchain systems are designed to make historical changes more restricted.</li>
+    <li><strong>Performance:</strong> traditional databases can be better suited to many centralized applications that require high throughput and frequent updates.</li>
+</ul>
+
+<p>
+Blockchain is therefore not automatically a replacement for every database. The right technology
+depends on the problem being solved.
+</p>
+
+<h2>Why Is It Difficult to Modify Historical Data?</h2>
+
+<p>
+Several layers work together to make historical modification difficult, including:
+</p>
+
+<ul>
+    <li>Hash-based links between blocks.</li>
+    <li>Distributed copies or states maintained by participants.</li>
+    <li>Shared validation rules.</li>
+    <li>The consensus mechanism.</li>
+    <li>The cost or risk associated with attempting to violate the network's rules.</li>
+</ul>
+
+<p>
+The statement "Blockchain cannot be changed" should therefore be understood carefully.
+It does not mean that modification is mathematically impossible under every circumstance.
+Instead, a Blockchain's design may make changing accepted historical data expensive, difficult,
+or detectable depending on the network and its consensus mechanism.
+</p>
+
+<h2>What Role Does Cryptography Play in Blockchain?</h2>
+
+<p>
+Cryptography is an important part of many Blockchain networks.
+It is used for several functions, including digital signatures, hashing, and proving control of
+cryptographic keys.
+</p>
+
+<p>
+It is important to distinguish <strong>encryption</strong> from <strong>hashing</strong>.
+They are not the same thing.
+</p>
+
+<p>
+Encryption is generally intended to protect data so that it can be recovered using an appropriate
+key, while hashing produces a digital fingerprint of data and can be used for integrity checks
+and linking records.
+</p>
+
+<h2>What Are Smart Contracts?</h2>
+
+<p>
+<strong>Smart contracts</strong> are programs that run on some Blockchain networks and execute
+defined logic according to the network's execution environment.
+</p>
+
+<p>
+They can contain conditions and actions that execute when specified requirements are met.
+This allows Blockchain networks to support applications beyond simple financial transfers.
+</p>
+
+<p>
+Smart contracts will become an important topic later in the Blockchain learning path, especially
+when studying networks such as Ethereum and decentralized applications.
+</p>
+
+<h2>Where Is Blockchain Used?</h2>
+
+<p>
+Blockchain technology can be used in several areas, including:
+</p>
+
+<ul>
+    <li>Digital assets and cryptocurrencies.</li>
+    <li>Transfers and payments in certain systems.</li>
+    <li>Smart contracts.</li>
+    <li>Decentralized applications.</li>
+    <li>Some forms of data verification and record keeping.</li>
+    <li>Digital asset management.</li>
+    <li>Certain supply-chain applications.</li>
+</ul>
+
+<p>
+However, the existence of a Blockchain use case does not automatically make Blockchain the best
+technical choice. Cost, performance, privacy, governance, security, and the actual need for a
+distributed ledger should all be considered.
+</p>
+
+<h2>Key Advantages of Blockchain's Design</h2>
+
+<ul>
+    <li>Distributed record keeping according to the network's design.</li>
+    <li>Shared rules for validating data.</li>
+    <li>Use of digital signatures and hashing for important security functions.</li>
+    <li>The ability to create records that are difficult to alter after acceptance, depending on the network.</li>
+    <li>The ability to operate systems without relying on a single central authority in some cases.</li>
+</ul>
+
+<h2>Key Limitations of Blockchain</h2>
+
+<ul>
+    <li>Not every Blockchain is decentralized to the same degree.</li>
+    <li>Some networks may experience high fees or performance limitations under certain conditions.</li>
+    <li>Different consensus mechanisms have different costs and properties.</li>
+    <li>Loss of private keys can result in loss of access to assets in some systems.</li>
+    <li>Smart contracts can contain software vulnerabilities if they are not properly designed and tested.</li>
+    <li>A ledger that is difficult to modify can be an advantage in some applications and a limitation in others.</li>
+</ul>
+
+<h2>The Relationship Between Bitcoin and Blockchain</h2>
+
+<p>
+Bitcoin and Blockchain are closely related, but they are not the same term.
+</p>
+
+<p>
+<strong>Bitcoin</strong> is a system, digital asset, and network with its own rules, while
+<strong>Blockchain</strong> describes a type of technical structure used to record and link data
+according to a network's rules.
+</p>
+
+<p>
+You can review
+<a href="/academy/bitcoin/how-bitcoin-works">How Bitcoin Works</a>
+to see how several of these concepts are applied within the Bitcoin network.
+</p>
+
+<p>
+You can also return to the
+<a href="/academy/bitcoin">Bitcoin learning path</a>
+if you want to review the fundamentals before continuing with Blockchain.
+</p>
+
+<h2>Lesson Summary</h2>
+
+<p>
+Blockchain works through a collection of components that cooperate to maintain a shared record
+rather than relying on a single central database in public networks.
+</p>
+
+<p>
+The process begins with a transaction, followed by signing and broadcasting. Nodes validate the
+transaction, valid transactions can be collected into a block, and the block is accepted through
+the network's consensus mechanism. The new block is then connected to previous blocks using
+cryptographic hash information.
+</p>
+
+<p>
+As new blocks continue to be added and the network state is updated, the system maintains a
+distributed record governed by shared rules.
+</p>
+
+<p>
+In the next lesson, we will examine one of the most important components in detail:
+<strong>What is a Block, what does it contain, and how is its data organized?</strong>
+</p>
+HTML,
+
+    'image' => null,
+
+    'seo_title' => 'How Does Blockchain Work? Step-by-Step Guide | AQL Crypto Academy',
+    'seo_title_ar' => 'كيف تعمل تقنية البلوك تشين؟ شرح Blockchain خطوة بخطوة | AQL Crypto Academy',
+    'seo_title_en' => 'How Does Blockchain Work? Step-by-Step Guide | AQL Crypto Academy',
+
+    'meta_description' => 'Learn how blockchain works step by step, including transactions, nodes, blocks, hashes, consensus, confirmations, and the difference between Blockchain and Bitcoin.',
+    'meta_description_ar' => 'تعرف على كيفية عمل البلوك تشين Blockchain خطوة بخطوة، من المعاملات والعقد والكتل إلى التجزئة وآلية التوافق والتأكيد، والفرق بين Blockchain وBitcoin.',
+    'meta_description_en' => 'Learn how blockchain works step by step, including transactions, nodes, blocks, hashes, consensus, confirmations, and the difference between Blockchain and Bitcoin.',
+
+    'faq_ar' => [
+        [
+            'question' => 'كيف تعمل تقنية البلوك تشين بشكل مبسط؟',
+            'answer' => 'تبدأ العملية بإنشاء معاملة ثم توقيعها وبثها إلى الشبكة. تقوم العقد بالتحقق منها، ثم يمكن تجميع المعاملات الصحيحة في كتلة. وفق آلية التوافق المستخدمة، يتم اعتماد الكتلة وربطها بالكتل السابقة وتحديث السجل.'
+        ],
+        [
+            'question' => 'ما هو الـ Block في Blockchain؟',
+            'answer' => 'الـ Block هو وحدة منظمة من البيانات داخل Blockchain، ويمكن أن يحتوي على مجموعة من المعاملات ومعلومات تشفيرية وبيانات تساعد على ربط الكتلة بالكتل الأخرى والتحقق منها.'
+        ],
+        [
+            'question' => 'ما هو Hash في البلوك تشين؟',
+            'answer' => 'الـ Hash هو ناتج دالة تجزئة يحول البيانات إلى قيمة رقمية ثابتة وفق الخوارزمية المستخدمة. يستخدم في Blockchain للمساعدة في التحقق من سلامة البيانات وربط أجزاء السجل.'
+        ],
+        [
+            'question' => 'ما هي Nodes في Blockchain؟',
+            'answer' => 'العقد Nodes هي أجهزة أو برامج تشارك في شبكة Blockchain وتؤدي أدوارًا تحددها الشبكة، مثل حفظ البيانات أو التحقق من المعاملات والكتل.'
+        ],
+        [
+            'question' => 'ما معنى Consensus Mechanism؟',
+            'answer' => 'آلية التوافق هي مجموعة القواعد التي تساعد المشاركين في الشبكة على الاتفاق على البيانات والحالة المقبولة للسجل. تختلف آليات التوافق بين الشبكات.'
+        ],
+        [
+            'question' => 'هل كل شبكات Blockchain تستخدم التعدين؟',
+            'answer' => 'لا. Bitcoin تستخدم Proof of Work الذي يعتمد على التعدين، بينما تستخدم شبكات أخرى آليات مختلفة مثل Proof of Stake.'
+        ],
+        [
+            'question' => 'هل يمكن تغيير البيانات الموجودة في Blockchain؟',
+            'answer' => 'تختلف الإجابة حسب تصميم الشبكة. العديد من شبكات Blockchain تجعل تغيير البيانات التاريخية المقبولة صعبًا أو مكلفًا أو قابلًا للاكتشاف، لكن عبارة أن Blockchain لا يمكن تغييرها مطلقًا ليست دقيقة في جميع الظروف.'
+        ],
+        [
+            'question' => 'هل Blockchain هي نفسها Bitcoin؟',
+            'answer' => 'لا. Bitcoin هي شبكة وأصل رقمي له قواعده الخاصة، بينما Blockchain هي نوع من البنية التقنية المستخدمة في تسجيل وربط البيانات ضمن شبكات معينة.'
+        ],
+        [
+            'question' => 'ما الفرق بين Blockchain وقاعدة البيانات؟',
+            'answer' => 'قاعدة البيانات التقليدية غالبًا تعتمد على إدارة مركزية وتسمح بتحديث البيانات وحذفها بسهولة، بينما بعض شبكات Blockchain تعتمد على سجل موزع وقواعد مشتركة وآليات توافق تجعل تعديل التاريخ أكثر تقييدًا.'
+        ],
+        [
+            'question' => 'ما هي Smart Contracts؟',
+            'answer' => 'العقود الذكية هي برامج تعمل على بعض شبكات Blockchain وتنفذ منطقًا وشروطًا محددة وفق قواعد الشبكة، وتسمح ببناء تطبيقات تتجاوز مجرد تسجيل التحويلات.'
+        ],
+    ],
+
+    'faq_en' => [
+        [
+            'question' => 'How does Blockchain work in simple terms?',
+            'answer' => 'A transaction is created, digitally signed, and broadcast to the network. Nodes validate it, valid transactions can be collected into a block, and the block is accepted according to the network’s consensus mechanism and linked to previous blocks.'
+        ],
+        [
+            'question' => 'What is a Block in Blockchain?',
+            'answer' => 'A block is an organized unit of data in a Blockchain. It can contain transactions, cryptographic information, and other data used to connect and validate the block within the chain.'
+        ],
+        [
+            'question' => 'What is a Hash in Blockchain?',
+            'answer' => 'A hash is the output of a hash function that converts data into a fixed-size digital value. Blockchain systems use hashing for purposes such as data integrity checks and linking records.'
+        ],
+        [
+            'question' => 'What are Nodes in Blockchain?',
+            'answer' => 'Nodes are computers or software instances that participate in a Blockchain network and perform roles defined by the network, such as maintaining data or validating transactions and blocks.'
+        ],
+        [
+            'question' => 'What is a Consensus Mechanism?',
+            'answer' => 'A consensus mechanism is a set of rules and procedures that helps network participants agree on the accepted state of the ledger. Different Blockchain networks use different consensus mechanisms.'
+        ],
+        [
+            'question' => 'Does every Blockchain use mining?',
+            'answer' => 'No. Bitcoin uses Proof of Work, which involves mining, while other Blockchain networks use different mechanisms such as Proof of Stake.'
+        ],
+        [
+            'question' => 'Can Blockchain data be changed?',
+            'answer' => 'It depends on the network design. Many Blockchain systems make changing accepted historical data difficult, costly, or detectable, but it is not accurate to say that Blockchain data can never be changed under any circumstances.'
+        ],
+        [
+            'question' => 'Is Blockchain the same as Bitcoin?',
+            'answer' => 'No. Bitcoin is a network and digital asset with its own rules, while Blockchain describes a type of technical structure used to record and link data in certain networks.'
+        ],
+        [
+            'question' => 'What is the difference between Blockchain and a traditional database?',
+            'answer' => 'Traditional databases are often centrally managed and designed for practical data updates and deletions, while some Blockchain networks use distributed records, shared validation rules, and consensus mechanisms that make historical changes more restricted.'
+        ],
+        [
+            'question' => 'What are Smart Contracts?',
+            'answer' => 'Smart contracts are programs that run on some Blockchain networks and execute defined logic and conditions according to the network’s rules. They allow developers to build applications beyond simple transfers.'
+        ],
+    ],
+
+    'status' => 'published',
+    'sort_order' => 2,
+    'published_at' => now(),
+],
 ];
 
 foreach ($blockchainArticles as $article) {
