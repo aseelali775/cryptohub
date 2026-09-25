@@ -11,6 +11,7 @@ class AcademyArticleSeeder extends Seeder
     public function run(): void
     {
         $bitcoin = AcademyTopic::where('slug', 'bitcoin')->firstOrFail();
+        $blockchain = AcademyTopic::where('slug', 'blockchain')->firstOrFail();
 
         $articles = [
             [
@@ -10095,5 +10096,898 @@ HTML,
                 $article
             );
         }
+
+        $blockchainArticles = [
+    [
+        'title' => 'What Is Blockchain?',
+        'title_ar' => 'ما هي تقنية البلوكتشين؟ دليل المبتدئين لفهم Blockchain',
+        'title_en' => 'What Is Blockchain? A Beginner\'s Guide to Blockchain Technology',
+
+        'slug' => 'what-is-blockchain',
+
+        'excerpt' => 'Blockchain is a distributed ledger technology that allows data and transactions to be recorded across a network of computers without relying on a single central database. This beginner-friendly guide explains how blockchain works, what blocks and nodes are, why blockchain is difficult to alter, how it differs from Bitcoin, and where the technology can be used.',
+        'excerpt_ar' => 'البلوكتشين هي تقنية سجل موزع تسمح بتسجيل البيانات والمعاملات عبر شبكة من أجهزة الكمبيوتر بدل الاعتماد على قاعدة بيانات مركزية واحدة. في هذا الدليل للمبتدئين ستتعرف على كيفية عمل البلوكتشين، وما هي الكتل والعقد، ولماذا يصعب تغيير السجل، وما الفرق بين البلوكتشين والبيتكوين، وأهم استخدامات هذه التقنية.',
+        'excerpt_en' => 'Blockchain is a distributed ledger technology that allows data and transactions to be recorded across a network of computers without relying on a single central database. This beginner-friendly guide explains how blockchain works, what blocks and nodes are, why blockchain is difficult to alter, how it differs from Bitcoin, and where the technology can be used.',
+
+        'content' => null,
+
+        'content_ar' => <<<'HTML'
+<h2>مقدمة</h2>
+
+<p>أصبحت كلمة <strong>Blockchain</strong> أو "البلوكتشين" من أكثر المصطلحات انتشارًا في عالم التقنية والعملات الرقمية. ومع ذلك، يعتقد كثير من المبتدئين أن البلوكتشين تعني البيتكوين نفسه، بينما العلاقة بينهما مختلفة.</p>
+
+<p>البلوكتشين هي تقنية لتنظيم وتسجيل البيانات بطريقة موزعة، ويمكن استخدامها في شبكات مختلفة ولأغراض متعددة. أما Bitcoin فهو نظام وشبكة وأصل رقمي يستخدم تقنية البلوكتشين ضمن تصميمه.</p>
+
+<p>لفهم العملات الرقمية والمشروعات المبنية على الشبكات اللامركزية، من المهم أولًا فهم الفكرة الأساسية للبلوكتشين: <strong>كيف يمكن لمجموعة من أجهزة الكمبيوتر المستقلة أن تتفق على سجل مشترك للبيانات دون الاعتماد على قاعدة بيانات مركزية واحدة؟</strong></p>
+
+<p>في هذا الدليل من <strong>AQL Crypto Academy</strong> سنشرح البلوكتشين من البداية، بدءًا من تعريفها، ثم نتعرف على الكتل والمعاملات والعقد والتشفير وآلية التوافق، ونوضح لماذا يصعب تغيير البيانات المسجلة، ثم ننتقل إلى أهم الاستخدامات والمزايا والتحديات.</p>
+
+<h2>ما هي تقنية البلوكتشين؟</h2>
+
+<p>يمكن تعريف البلوكتشين ببساطة بأنها <strong>نوع من تقنيات السجلات الموزعة (Distributed Ledger Technology)</strong> يتم فيه تنظيم البيانات في سجلات مترابطة، وتشارك عدة أجهزة أو جهات في الاحتفاظ بالسجل والتحقق من العمليات وفق قواعد محددة.</p>
+
+<p>كلمة Blockchain تتكون من كلمتين:</p>
+
+<ul>
+<li><strong>Block</strong> وتعني كتلة.</li>
+<li><strong>Chain</strong> وتعني سلسلة.</li>
+</ul>
+
+<p>وسميت بهذا الاسم لأن البيانات في كثير من شبكات البلوكتشين يتم تنظيمها داخل كتل ترتبط بالكتل السابقة، فتتكون سلسلة متتابعة من السجلات.</p>
+
+<p>لكن البلوكتشين ليست مجرد سلسلة من الملفات أو قاعدة بيانات عادية. الفكرة الأساسية تتعلق أيضًا بكيفية <strong>توزيع السجل والتحقق من البيانات والتوصل إلى توافق بين المشاركين</strong>.</p>
+
+<h2>ما المشكلة التي تحاول البلوكتشين حلها؟</h2>
+
+<p>في الأنظمة التقليدية، غالبًا توجد جهة مركزية مسؤولة عن حفظ قاعدة البيانات وتحديثها. على سبيل المثال، يحتفظ البنك بسجلات الحسابات والمعاملات الخاصة بعملائه، ويكون البنك مسؤولًا عن التحقق من العمليات وتحديث سجله الداخلي.</p>
+
+<p>هذا النموذج مفيد في كثير من التطبيقات، لكنه يعني أن المشاركين يعتمدون على جهة واحدة أو مجموعة محددة من المؤسسات للحفاظ على السجل.</p>
+
+<p>البلوكتشين تقدم نموذجًا مختلفًا في بعض تطبيقاتها: يمكن توزيع نسخة من السجل على عدد من المشاركين، واستخدام قواعد تشفير وتوافق للتحقق من التحديثات.</p>
+
+<p>وبذلك لا يعتمد النظام بالضرورة على قاعدة بيانات واحدة يتحكم بها طرف واحد.</p>
+
+<p>لكن من المهم عدم افتراض أن كل Blockchain لا مركزية بنفس الدرجة. فهناك شبكات عامة مفتوحة، وشبكات خاصة أو مرخصة، وتختلف درجة التوزيع وطريقة الإدارة من مشروع إلى آخر.</p>
+
+<h2>كيف تعمل البلوكتشين؟</h2>
+
+<p>لفهم طريقة عمل البلوكتشين، يمكن تقسيم العملية إلى مجموعة من الخطوات والمكونات الأساسية.</p>
+
+<h3>1. إنشاء المعاملة أو البيانات</h3>
+
+<p>تبدأ العملية عندما ينشئ مستخدم أو نظام عملية جديدة. قد تكون هذه العملية تحويلًا لعملة رقمية، أو تسجيل بيانات، أو تنفيذ عملية داخل تطبيق مبني على الشبكة.</p>
+
+<p>في شبكات العملات الرقمية، يمكن أن تحتوي المعاملة على معلومات تتعلق بالقيمة التي يتم نقلها والجهة المستقبلة والتوقيع الرقمي الذي يثبت امتلاك الصلاحية اللازمة لتنفيذ العملية.</p>
+
+<h3>2. بث المعاملة إلى الشبكة</h3>
+
+<p>بعد إنشاء المعاملة، يتم إرسالها إلى الشبكة. تستقبل العقد المشاركة البيانات وتتحقق منها وفق القواعد الخاصة بالشبكة.</p>
+
+<p>قد تشمل عملية التحقق التأكد من صحة التوقيع الرقمي، وعدم وجود تعارض مع حالة السجل الحالية، واستيفاء المعاملة للقواعد المحددة في البروتوكول.</p>
+
+<h3>3. تجميع العمليات في كتلة</h3>
+
+<p>في شبكات البلوكتشين التي تستخدم مفهوم الكتل، يتم تجميع مجموعة من العمليات التي اجتازت التحقق داخل كتلة جديدة.</p>
+
+<p>تحتوي الكتلة عادةً على بيانات المعاملات ومعلومات مرتبطة بالكتلة السابقة وبيانات أخرى تعتمد على تصميم الشبكة.</p>
+
+<h3>4. إضافة الكتلة إلى السجل</h3>
+
+<p>بعد اجتياز الكتلة لآلية التوافق الخاصة بالشبكة، تتم إضافتها إلى السلسلة وفق قواعد البروتوكول.</p>
+
+<p>وبمجرد إضافة كتل أخرى بعدها، يصبح تغيير الكتلة القديمة أكثر صعوبة في الأنظمة المصممة بحيث تعتمد على الترابط والتوافق والتشفير.</p>
+
+<h2>ما هي الكتلة (Block)؟</h2>
+
+<p>الكتلة هي وحدة من وحدات البيانات في شبكة البلوكتشين.</p>
+
+<p>قد تحتوي الكتلة، بحسب تصميم الشبكة، على مجموعة من المعاملات بالإضافة إلى معلومات تقنية تستخدم لربطها بالسجل السابق والمساعدة في التحقق من سلامة السلسلة.</p>
+
+<p>ومن العناصر التي قد توجد في الكتلة:</p>
+
+<ul>
+<li>بيانات المعاملات.</li>
+<li>مرجع أو تجزئة للكتلة السابقة.</li>
+<li>طابع زمني أو معلومات مرتبطة بالوقت.</li>
+<li>بيانات مرتبطة بآلية التوافق.</li>
+<li>بيانات أخرى يحددها بروتوكول الشبكة.</li>
+</ul>
+
+<p>تختلف التفاصيل الدقيقة من Blockchain إلى أخرى، لذلك لا توجد بنية واحدة متطابقة لجميع شبكات البلوكتشين.</p>
+
+<h2>ما هي التجزئة (Hash)؟</h2>
+
+<p>التجزئة أو <strong>Hash</strong> هي نتيجة يتم إنتاجها باستخدام دالة رياضية تشفيرية لتحويل البيانات إلى قيمة ذات طول محدد وفق خوارزمية معينة.</p>
+
+<p>في كثير من تصميمات البلوكتشين، تستخدم التجزئة للمساعدة في ربط الكتل والتحقق من سلامة البيانات.</p>
+
+<p>إذا تغيرت البيانات التي تدخل إلى دالة التجزئة، فإن النتيجة الناتجة تتغير بطريقة تجعل اكتشاف التغيير ممكنًا.</p>
+
+<p>ولهذا تلعب التجزئة دورًا مهمًا في جعل العبث بالسجلات أكثر وضوحًا وصعوبة.</p>
+
+<h2>ما هي العقد (Nodes)؟</h2>
+
+<p>العقد هي أجهزة كمبيوتر أو خوادم تشارك في تشغيل شبكة البلوكتشين وفق أدوار مختلفة.</p>
+
+<p>يمكن أن تختلف وظيفة العقد من شبكة إلى أخرى، لكن بعض العقد تقوم بتخزين البيانات والتحقق من المعاملات والكتل ونشر المعلومات إلى بقية الشبكة.</p>
+
+<p>في بعض الشبكات توجد عقد كاملة تتحقق بشكل مستقل من قواعد البروتوكول، بينما توجد أدوار أخرى مثل المدققين أو المعدنين بحسب آلية التوافق المستخدمة.</p>
+
+<p>وجود عدد من المشاركين المستقلين يساعد في تقليل الاعتماد على نقطة مركزية واحدة في الشبكات المصممة بهذا الشكل.</p>
+
+<h2>ما هي اللامركزية؟</h2>
+
+<p>اللامركزية تعني توزيع بعض وظائف النظام بين عدة مشاركين بدل تركيز التحكم في جهة واحدة.</p>
+
+<p>لكن اللامركزية ليست خاصية تعمل بطريقة "نعم أو لا". يمكن أن تختلف درجة اللامركزية بين الشبكات بحسب عدد المشاركين، وطريقة تشغيل العقد، وآلية التوافق، وتوزيع صلاحيات الإدارة، وغيرها من العوامل.</p>
+
+<p>في شبكة عامة لامركزية، يمكن لعدد كبير من المشاركين تشغيل برامج الشبكة والتحقق من القواعد. بينما قد تعتمد شبكة خاصة على مجموعة محددة من المؤسسات أو الجهات المصرح لها.</p>
+
+<p>لذلك من الأفضل عند تقييم أي Blockchain أن نسأل: <strong>من يشغل العقد؟ من يستطيع المشاركة؟ من يتحكم في قواعد الشبكة؟ وكيف يتم اتخاذ القرارات؟</strong></p>
+
+<h2>ما هو التوافق (Consensus)؟</h2>
+
+<p>في شبكة موزعة، تحتاج الأجهزة المشاركة إلى طريقة للاتفاق على الحالة الصحيحة للسجل.</p>
+
+<p>وهنا تأتي آليات <strong>التوافق (Consensus Mechanisms)</strong>.</p>
+
+<p>آلية التوافق هي مجموعة من القواعد التي تحدد كيفية قبول التحديثات وترتيبها والتوصل إلى اتفاق بين المشاركين في الشبكة.</p>
+
+<p>ومن أشهر الآليات:</p>
+
+<ul>
+<li><strong>Proof of Work (إثبات العمل)</strong></li>
+<li><strong>Proof of Stake (إثبات الحصة)</strong></li>
+</ul>
+
+<p>لكل آلية تصميمها ومزاياها وتكاليفها ومخاطرها المختلفة. وسنتناول هذه الآليات بالتفصيل في دروس لاحقة ضمن مسار Blockchain في أكاديمية AQL Crypto.</p>
+
+<h2>ما علاقة البلوكتشين بالعملات الرقمية؟</h2>
+
+<p>ارتبط اسم Blockchain بالعملات الرقمية لأن Bitcoin كان أول تطبيق واسع الانتشار قدم نظامًا للنقد الرقمي يعتمد على سجل موزع وسلسلة من الكتل وإثبات العمل.</p>
+
+<p>لكن استخدام البلوكتشين لم يتوقف عند Bitcoin.</p>
+
+<p>ظهرت شبكات أخرى بتصاميم مختلفة، وأصبحت البلوكتشين أساسًا لتطبيقات مثل العقود الذكية، والتطبيقات اللامركزية، وبعض أنظمة الأصول الرقمية.</p>
+
+<p>لذلك يجب التمييز بين <strong>التقنية</strong> و<strong>التطبيق</strong>: Blockchain هي تقنية أو مجموعة من الأساليب المستخدمة لبناء سجلات موزعة، بينما Bitcoin هو أحد الأنظمة التي تستخدم هذه الأفكار.</p>
+
+<h2>ما الفرق بين Blockchain و Bitcoin؟</h2>
+
+<p>الفرق الأساسي بسيط:</p>
+
+<table>
+<thead>
+<tr>
+<th>العنصر</th>
+<th>Blockchain</th>
+<th>Bitcoin</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ما هو؟</td>
+<td>تقنية للسجلات الموزعة تستخدمها شبكات مختلفة</td>
+<td>شبكة وبروتوكول وأصل رقمي</td>
+</tr>
+<tr>
+<td>الاستخدام</td>
+<td>يمكن استخدامها في تطبيقات وشبكات متعددة</td>
+<td>مصمم كنظام نقد رقمي وشبكة لتحويل Bitcoin</td>
+</tr>
+<tr>
+<td>آلية التوافق</td>
+<td>تختلف بحسب الشبكة</td>
+<td>يستخدم Proof of Work</td>
+</tr>
+<tr>
+<td>الأصل الرقمي</td>
+<td>ليست أصلًا رقميًا بحد ذاتها</td>
+<td>Bitcoin هو الأصل الرقمي المرتبط بالشبكة</td>
+</tr>
+</tbody>
+</table>
+
+<p>وبالتالي فإن القول إن "Bitcoin وBlockchain هما الشيء نفسه" غير دقيق.</p>
+
+<p>يمكن تشبيه العلاقة بشكل مبسط بأن Bitcoin هو نظام محدد، بينما Blockchain تمثل إحدى التقنيات الأساسية المستخدمة في بناء هذا النظام.</p>
+
+<h2>لماذا يصعب تغيير بيانات البلوكتشين؟</h2>
+
+<p>تستخدم العديد من شبكات البلوكتشين مجموعة من الآليات التي تجعل تغيير السجل السابق أمرًا صعبًا، مثل التشفير، وربط الكتل، وآليات التوافق، وتوزيع نسخ السجل على المشاركين.</p>
+
+<p>إذا حاول شخص تغيير بيانات قديمة، فقد يؤدي ذلك إلى تغيير التجزئة المرتبطة بالكتلة، ثم يصبح هناك تعارض مع الكتل التالية.</p>
+
+<p>وفي الشبكات التي تعتمد على آليات توافق معينة، قد يحتاج المهاجم أيضًا إلى تجاوز أو منافسة الآلية التي تستخدمها الشبكة لحماية السجل.</p>
+
+<p>لكن من المهم استخدام تعبير دقيق: <strong>البلوكتشين ليست "مستحيلة التغيير" في كل الظروف.</strong> تختلف مقاومة التغيير بحسب تصميم الشبكة، وآلية التوافق، ودرجة اللامركزية، ومن يملك القدرة على المشاركة أو التحكم.</p>
+
+<h2>هل يمكن حذف معاملة من البلوكتشين؟</h2>
+
+<p>يعتمد ذلك على تصميم الشبكة والآلية التي تستخدمها، لكن في البلوكتشين العامة التي تعتمد على سجل متسلسل، لا يكون حذف معاملة مؤكدة أمرًا مشابهًا بحذف صف من قاعدة بيانات مركزية.</p>
+
+<p>عادةً ما يصبح السجل السابق جزءًا من تاريخ الشبكة، وقد يكون تغييره أو إعادة تنظيمه أمرًا مكلفًا أو صعبًا جدًا بحسب الشبكة.</p>
+
+<p>وهذا أحد الأسباب التي تجعل البلوكتشين مناسبة لبعض الحالات التي تحتاج إلى سجل يمكن التحقق منه ومقاوم للتلاعب.</p>
+
+<h2>ما هي العقود الذكية؟</h2>
+
+<p>العقد الذكي أو <strong>Smart Contract</strong> هو برنامج يعمل على شبكة Blockchain تدعم تنفيذ البرامج وفق قواعد الشبكة.</p>
+
+<p>يمكن للعقد الذكي تنفيذ عمليات محددة عندما تتحقق شروط معينة، مما يسمح ببناء تطبيقات وخدمات تعمل وفق منطق برمجي على الشبكة.</p>
+
+<p>العقود الذكية لا تعني أن هناك عقدًا قانونيًا تقليديًا بالضرورة. المصطلح يشير أساسًا إلى برامج تنفذ منطقًا محددًا على شبكة بلوكتشين.</p>
+
+<p>سنخصص درسًا مستقلًا لاحقًا في هذا المسار لشرح <strong>Smart Contracts</strong> بالتفصيل.</p>
+
+<h2>أهم استخدامات البلوكتشين</h2>
+
+<p>يمكن استخدام تقنيات البلوكتشين في مجالات مختلفة، وتختلف فائدتها حسب طبيعة المشكلة وتصميم النظام.</p>
+
+<h3>العملات الرقمية</h3>
+
+<p>من أشهر استخدامات البلوكتشين تسجيل معاملات العملات الرقمية مثل Bitcoin وغيرها من الشبكات.</p>
+
+<h3>العقود الذكية</h3>
+
+<p>تسمح بعض الشبكات بتنفيذ برامج وعقود ذكية على السجل الموزع، مما أدى إلى ظهور تطبيقات مالية وغير مالية مبنية على Blockchain.</p>
+
+<h3>التمويل اللامركزي</h3>
+
+<p>تستخدم بعض شبكات البلوكتشين لبناء تطبيقات مالية تعرف باسم <strong>DeFi</strong>، مثل بعض منصات الإقراض والتبادل والخدمات المالية التي تعمل من خلال العقود الذكية.</p>
+
+<h3>تتبع سلاسل الإمداد</h3>
+
+<p>يمكن استخدام السجل الموزع لتسجيل مراحل معينة من حركة المنتجات أو البيانات بين أطراف مختلفة، عندما يكون هذا التصميم مناسبًا للحالة.</p>
+
+<h3>الأصول الرقمية</h3>
+
+<p>يمكن استخدام بعض شبكات Blockchain لإنشاء وتمثيل أصول رقمية مختلفة، بما في ذلك الرموز القابلة للاستبدال وغير القابلة للاستبدال.</p>
+
+<h3>الهوية والبيانات</h3>
+
+<p>يمكن أن تدخل تقنيات السجلات الموزعة في بعض حلول الهوية أو مشاركة البيانات، لكن ملاءمة Blockchain لهذه الاستخدامات تعتمد على التصميم والخصوصية والمتطلبات القانونية.</p>
+
+<h2>مزايا البلوكتشين</h2>
+
+<h3>سجل قابل للتحقق</h3>
+
+<p>في الشبكات العامة، يمكن للمشاركين استخدام أدوات الشبكة للتحقق من البيانات والمعاملات وفق قواعد البروتوكول.</p>
+
+<h3>تقليل الاعتماد على نقطة مركزية</h3>
+
+<p>يمكن لبعض تصميمات Blockchain توزيع حفظ السجل والتحقق منه بين عدد من المشاركين بدل الاعتماد على قاعدة بيانات مركزية واحدة.</p>
+
+<h3>الشفافية</h3>
+
+<p>بعض الشبكات العامة تسمح لأي شخص بالاطلاع على بيانات السجل، وهو ما يوفر مستوى مرتفعًا من الشفافية مقارنة بأنظمة تكون بياناتها داخل قواعد بيانات خاصة.</p>
+
+<h3>مقاومة التلاعب</h3>
+
+<p>ربط السجلات بالتشفير وآليات التوافق يمكن أن يجعل تغيير البيانات السابقة أكثر صعوبة، خصوصًا في الشبكات العامة ذات المشاركة الواسعة.</p>
+
+<h2>تحديات البلوكتشين</h2>
+
+<p>رغم المزايا المحتملة، لا تخلو تقنية Blockchain من التحديات.</p>
+
+<h3>قابلية التوسع</h3>
+
+<p>بعض الشبكات تواجه قيودًا تتعلق بعدد العمليات التي يمكن معالجتها خلال فترة معينة، وقد تحتاج إلى حلول إضافية لتحسين القدرة الاستيعابية.</p>
+
+<h3>استهلاك الطاقة</h3>
+
+<p>الشبكات التي تعتمد على Proof of Work تحتاج إلى موارد حوسبية وطاقة كبيرة مقارنة ببعض آليات التوافق الأخرى. ويختلف استهلاك الطاقة بصورة كبيرة من شبكة إلى أخرى.</p>
+
+<h3>التكلفة</h3>
+
+<p>قد تتطلب بعض العمليات رسومًا للشبكة، وقد ترتفع هذه الرسوم عندما يزداد الطلب على مساحة الكتل أو موارد الشبكة.</p>
+
+<h3>التعقيد التقني</h3>
+
+<p>فهم المفاتيح الخاصة والمحافظ والعقود الذكية وآليات التوافق قد يكون صعبًا بالنسبة للمستخدم الجديد، كما أن أخطاء المستخدم قد تكون لها عواقب مهمة في بعض الأنظمة.</p>
+
+<h3>الخصوصية</h3>
+
+<p>الشفافية ليست دائمًا ميزة في كل استخدام. فقد تكون بعض البيانات حساسة أو شخصية، ولذلك يجب تصميم الأنظمة بطريقة تراعي الخصوصية والقوانين ومتطلبات حماية البيانات.</p>
+
+<h3>الحوكمة</h3>
+
+<p>كل شبكة تحتاج إلى طريقة لاتخاذ القرارات المتعلقة بتطوير البروتوكول وإجراء التغييرات. وتختلف نماذج الحوكمة بين الشبكات العامة والخاصة والمشروعات المختلفة.</p>
+
+<h2>هل Blockchain آمنة؟</h2>
+
+<p>لا توجد إجابة واحدة تنطبق على جميع شبكات البلوكتشين.</p>
+
+<p>أمان الشبكة يعتمد على مجموعة من العوامل، مثل تصميم البروتوكول، وآلية التوافق، وعدد المشاركين، وتوزيع القدرة على التحقق، وجودة البرمجيات، وأمان التطبيقات والعقود الذكية.</p>
+
+<p>كما يجب التمييز بين <strong>أمان Blockchain نفسها</strong> وبين أمان التطبيقات المبنية عليها.</p>
+
+<p>فحتى إذا كانت الشبكة الأساسية تعمل وفق تصميم آمن، يمكن أن يحتوي تطبيق أو عقد ذكي مبني عليها على خطأ برمجي يؤدي إلى خسارة المستخدمين.</p>
+
+<h2>هل Blockchain مناسبة لكل مشروع؟</h2>
+
+<p>لا.</p>
+
+<p>وجود Blockchain لا يعني تلقائيًا أن المشروع يحتاج إليها.</p>
+
+<p>إذا كان هناك طرف موثوق واحد يمكنه إدارة قاعدة البيانات بكفاءة وأمان، فقد تكون قاعدة البيانات التقليدية أكثر ملاءمة وأقل تعقيدًا في بعض الحالات.</p>
+
+<p>تكون فكرة السجل الموزع أكثر أهمية عندما توجد حاجة فعلية إلى مشاركة سجل بين أطراف متعددة مع تقليل الاعتماد على جهة مركزية واحدة، أو عندما تكون خصائص الشبكة اللامركزية جزءًا أساسيًا من تصميم النظام.</p>
+
+<p>لذلك يجب تقييم المشكلة أولًا، ثم اختيار التقنية المناسبة بدل استخدام Blockchain لمجرد أنها تقنية حديثة.</p>
+
+<h2>Blockchain العامة والخاصة</h2>
+
+<p>يمكن تقسيم شبكات البلوكتشين بصورة عامة إلى نماذج مختلفة بحسب من يستطيع المشاركة في الشبكة ومن يملك صلاحيات التحقق والإدارة.</p>
+
+<h3>Blockchain عامة</h3>
+
+<p>تكون الشبكات العامة مفتوحة بدرجات مختلفة أمام المشاركين، ويمكن لأي شخص عادةً الوصول إلى بياناتها العامة والتفاعل معها وفق قواعد الشبكة.</p>
+
+<h3>Blockchain خاصة أو مرخصة</h3>
+
+<p>تستخدم بعض المؤسسات شبكات تسمح بالمشاركة وفق صلاحيات محددة، بحيث لا يستطيع أي شخص الانضمام أو تنفيذ أدوار معينة دون الحصول على إذن.</p>
+
+<p>الاختلاف بين النموذجين يؤثر على اللامركزية والخصوصية والأداء والحوكمة، ولذلك لا يمكن اعتبار أحدهما مناسبًا لجميع الحالات.</p>
+
+<h2>ما علاقة Blockchain بـ Web3 وDeFi؟</h2>
+
+<p>أصبحت Blockchain جزءًا أساسيًا من العديد من المفاهيم المرتبطة بـ <strong>Web3</strong> و<strong>DeFi</strong>.</p>
+
+<p>يمكن استخدام الشبكات القابلة للبرمجة لبناء تطبيقات لامركزية، وعقود ذكية، وأنظمة مالية تعتمد على الأصول الرقمية.</p>
+
+<p>لكن هذه المصطلحات ليست مترادفة. Blockchain هي تقنية أو بنية أساسية، بينما DeFi يشير إلى مجموعة من التطبيقات والخدمات المالية المبنية باستخدام تقنيات مثل Blockchain والعقود الذكية، وWeb3 هو مصطلح أوسع يستخدم لوصف رؤى ونماذج مختلفة للويب المبني حول الملكية الرقمية والشبكات اللامركزية.</p>
+
+<p>سننتقل لاحقًا في أكاديمية AQL Crypto إلى دروس مستقلة تشرح DeFi وWeb3 بصورة أكثر تفصيلًا.</p>
+
+<h2>الأسئلة الشائعة</h2>
+
+<h3>ما هي البلوكتشين؟</h3>
+
+<p>البلوكتشين هي تقنية سجل موزع تنظم البيانات في سجلات مترابطة، وتستخدم التشفير وآليات التوافق في العديد من تطبيقاتها للسماح لمشاركين متعددين بالتحقق من حالة السجل.</p>
+
+<h3>هل Blockchain هي نفسها Bitcoin؟</h3>
+
+<p>لا. Bitcoin هو نظام وشبكة وأصل رقمي، بينما Blockchain هي تقنية أو بنية سجل موزع يمكن استخدامها في Bitcoin وفي شبكات ومشروعات أخرى.</p>
+
+<h3>كيف تعمل البلوكتشين؟</h3>
+
+<p>تنشأ المعاملات أو البيانات، ثم يتم نشرها والتحقق منها وفق قواعد الشبكة، وبعد ذلك يمكن تجميعها في كتل وإضافتها إلى السجل من خلال آلية التوافق الخاصة بالشبكة.</p>
+
+<h3>ما هي الكتلة في Blockchain؟</h3>
+
+<p>الكتلة هي وحدة من البيانات تحتوي عادةً على مجموعة من المعاملات أو العمليات، إضافة إلى معلومات تقنية تربطها بالسجل السابق وفق تصميم الشبكة.</p>
+
+<h3>ما هي العقد في Blockchain؟</h3>
+
+<p>العقد هي أجهزة أو خوادم تشارك في تشغيل الشبكة، وقد تقوم بأدوار مثل تخزين البيانات والتحقق من المعاملات والكتل ونشر المعلومات.</p>
+
+<h3>هل يمكن تغيير بيانات Blockchain؟</h3>
+
+<p>تختلف درجة مقاومة التغيير بين الشبكات. في كثير من شبكات البلوكتشين العامة، تجعل التجزئة وربط الكتل وآلية التوافق وتوزيع السجل تغيير البيانات السابقة أمرًا صعبًا، لكن لا يصح وصف كل Blockchain بأنها مستحيلة التغيير في جميع الظروف.</p>
+
+<h3>ما الفرق بين Blockchain العامة والخاصة؟</h3>
+
+<p>البلوكتشين العامة تكون مفتوحة بدرجات مختلفة أمام المشاركين، بينما تفرض الشبكات الخاصة أو المرخصة قيودًا على من يستطيع المشاركة أو تنفيذ أدوار محددة في الشبكة.</p>
+
+<h3>ما هو التوافق في Blockchain؟</h3>
+
+<p>التوافق هو مجموعة من القواعد والآليات التي تستخدمها الشبكة للوصول إلى اتفاق حول حالة السجل وترتيب التحديثات بين المشاركين.</p>
+
+<h3>هل Blockchain تستخدم فقط في العملات الرقمية؟</h3>
+
+<p>لا. يمكن استخدام تقنيات Blockchain في تطبيقات مثل العقود الذكية والأصول الرقمية وبعض حلول تتبع البيانات وسلاسل الإمداد وغيرها، لكن مدى ملاءمتها يختلف من حالة إلى أخرى.</p>
+
+<h3>هل كل Blockchain لامركزية؟</h3>
+
+<p>لا. تختلف درجة اللامركزية بين الشبكات، وقد تكون بعض الشبكات العامة موزعة بدرجة كبيرة، بينما تستخدم شبكات أخرى نموذجًا خاصًا أو مرخصًا يعتمد على عدد محدود من المشاركين.</p>
+
+<h2>الخلاصة</h2>
+
+<p>البلوكتشين ليست اسمًا آخر للبيتكوين، وليست مجرد قاعدة بيانات عادية. إنها مجموعة من التقنيات والأساليب التي يمكن استخدامها لبناء سجل موزع تتشارك عدة أطراف في تشغيله والتحقق منه وفق قواعد محددة.</p>
+
+<p>لفهم Blockchain بشكل جيد، يجب فهم عدة مفاهيم مترابطة: <strong>الكتل، المعاملات، العقد، التجزئة، التشفير، التوافق، واللامركزية</strong>.</p>
+
+<p>كما يجب إدراك أن كل شبكة Blockchain لها تصميمها الخاص، وأن درجة اللامركزية والأمان والسرعة والتكلفة والخصوصية تختلف من شبكة إلى أخرى.</p>
+
+<p>إذا كان هذا هو أول درس لك في مسار Blockchain، فالخطوة التالية هي التعرف بالتفصيل على <strong>كيفية عمل البلوكتشين</strong> وكيف تنتقل المعاملة من لحظة إنشائها حتى تصبح جزءًا من السجل.</p>
+
+<p>وفي الدروس التالية من <strong>AQL Crypto Academy</strong> سنتناول أيضًا الكتل والمعاملات، وآليات التوافق، وProof of Work وProof of Stake، ثم العقود الذكية واستخدامات Blockchain المختلفة.</p>
+
+<p><strong>ملاحظة:</strong> هذا المحتوى تعليمي وإعلامي ولا يمثل نصيحة مالية أو استثمارية. تختلف خصائص ومخاطر شبكات Blockchain والمشروعات المبنية عليها، وينبغي إجراء البحث المستقل قبل اتخاذ أي قرار مالي أو تقني.</p>
+HTML,
+
+        'content_en' => <<<'HTML'
+<h2>Introduction</h2>
+
+<p><strong>Blockchain</strong> has become one of the most widely discussed technologies in finance and technology. However, many beginners assume that blockchain and Bitcoin are the same thing. They are not.</p>
+
+<p>Blockchain is a technology used to organize and maintain distributed records. Bitcoin is a specific network, protocol, and digital asset that uses blockchain as part of its design.</p>
+
+<p>To understand cryptocurrencies and decentralized applications, it is useful to start with a simple question: <strong>How can independent computers maintain and agree on a shared record without relying entirely on one central database?</strong></p>
+
+<p>In this guide from <strong>AQL Crypto Academy</strong>, we will explain blockchain from the ground up. We will cover blocks, transactions, nodes, hashing, consensus, decentralization, security, common use cases, and the main limitations of blockchain technology.</p>
+
+<h2>What Is Blockchain?</h2>
+
+<p>Blockchain can be broadly described as a type of <strong>Distributed Ledger Technology (DLT)</strong> in which data is organized into linked records and maintained or verified across multiple participants according to defined rules.</p>
+
+<p>The word blockchain combines two concepts:</p>
+
+<ul>
+<li><strong>Block</strong> — a unit containing data.</li>
+<li><strong>Chain</strong> — a sequence in which blocks are linked together.</li>
+</ul>
+
+<p>In many blockchain systems, records are grouped into blocks, and each block contains information that connects it to the previous block.</p>
+
+<p>Blockchain, however, is more than a chain of data. The broader concept also involves how the ledger is distributed, how participants validate updates, and how the network reaches agreement about the state of the record.</p>
+
+<h2>What Problem Does Blockchain Try to Solve?</h2>
+
+<p>Traditional systems commonly rely on a central organization to maintain a database. For example, a bank maintains its own records of customer accounts and transactions and is responsible for validating and updating those records.</p>
+
+<p>This model is useful in many applications, but it means that participants depend on a particular organization or group of institutions to maintain the authoritative record.</p>
+
+<p>Some blockchain systems use a different approach. Copies of the ledger can be maintained across multiple participants, while cryptographic techniques and consensus rules are used to validate updates.</p>
+
+<p>This can reduce reliance on a single central database in applications where that property is useful.</p>
+
+<p>It is important to remember, however, that not all blockchains are equally decentralized. Public, permissionless networks and private or permissioned networks can have very different governance and participation models.</p>
+
+<h2>How Does Blockchain Work?</h2>
+
+<p>Blockchain becomes easier to understand when the process is divided into several basic steps.</p>
+
+<h3>1. Creating a Transaction or Record</h3>
+
+<p>The process begins when a user or system creates a new transaction or piece of data. In a cryptocurrency network, this may involve transferring digital value from one address to another.</p>
+
+<p>A transaction may include information about the amount being transferred, the destination, and a digital signature proving that the required authorization is available.</p>
+
+<h3>2. Broadcasting the Transaction</h3>
+
+<p>The transaction is then broadcast to the network. Participating nodes receive it and check it against the rules of the particular blockchain.</p>
+
+<p>Validation may involve checking digital signatures, ensuring that the transaction does not conflict with the current state of the ledger, and confirming that it follows the protocol's rules.</p>
+
+<h3>3. Grouping Transactions into a Block</h3>
+
+<p>In blockchain systems that use blocks, validated transactions can be grouped together into a proposed block.</p>
+
+<p>The block typically contains transaction data as well as technical information used to connect it with previous records and support the network's consensus mechanism.</p>
+
+<h3>4. Adding the Block to the Ledger</h3>
+
+<p>After the block satisfies the network's consensus rules, it can be added to the chain.</p>
+
+<p>As additional blocks are added, modifying an earlier record can become increasingly difficult in systems designed around cryptographic linking and distributed consensus.</p>
+
+<h2>What Is a Block?</h2>
+
+<p>A block is a unit of data used by many blockchain networks.</p>
+
+<p>Depending on the network, a block may contain transactions along with technical information used to connect it to earlier blocks and help participants verify the integrity of the chain.</p>
+
+<p>A block may contain elements such as:</p>
+
+<ul>
+<li>Transaction data.</li>
+<li>A reference or hash of a previous block.</li>
+<li>A timestamp or time-related information.</li>
+<li>Data related to the consensus mechanism.</li>
+<li>Other information defined by the network's protocol.</li>
+</ul>
+
+<p>The exact structure varies between blockchain networks, so there is no single block format shared by every blockchain.</p>
+
+<h2>What Is a Hash?</h2>
+
+<p>A <strong>hash</strong> is the output produced by a cryptographic hash function when data is processed through a defined mathematical algorithm.</p>
+
+<p>Blockchain systems commonly use hashes to help connect records and detect changes in data.</p>
+
+<p>If the underlying input changes, the resulting hash also changes. This makes unauthorized changes easier to detect and can contribute to the integrity of the chain.</p>
+
+<h2>What Are Nodes?</h2>
+
+<p>Nodes are computers or servers that participate in operating a blockchain network.</p>
+
+<p>The exact role of a node varies between networks, but nodes may store blockchain data, validate transactions and blocks, and relay information to other participants.</p>
+
+<p>Some networks have full nodes that independently enforce protocol rules, while other systems use additional roles such as miners or validators depending on the consensus mechanism.</p>
+
+<p>A distributed set of participants can reduce reliance on a single point of control in networks designed around that model.</p>
+
+<h2>What Does Decentralization Mean?</h2>
+
+<p>Decentralization generally means distributing certain responsibilities or control across multiple participants instead of concentrating them in one organization.</p>
+
+<p>Decentralization is not an all-or-nothing property. Blockchain networks can differ significantly in how many independent participants operate nodes, who can validate transactions, how decisions are made, and who can change protocol rules.</p>
+
+<p>In a public permissionless network, participation can be open to a broad set of users. A private or permissioned network may restrict participation to approved organizations.</p>
+
+<p>When evaluating a blockchain, useful questions include: <strong>Who runs the nodes? Who can participate? Who controls protocol changes? And how is consensus reached?</strong></p>
+
+<h2>What Is Consensus?</h2>
+
+<p>A distributed network needs a way for participating computers to agree on the valid state of the ledger.</p>
+
+<p>This is the role of <strong>consensus mechanisms</strong>.</p>
+
+<p>A consensus mechanism defines rules for accepting, ordering, and validating updates so that independent participants can maintain a shared view of the network.</p>
+
+<p>Two well-known consensus approaches are:</p>
+
+<ul>
+<li><strong>Proof of Work</strong></li>
+<li><strong>Proof of Stake</strong></li>
+</ul>
+
+<p>Each approach has different design characteristics, costs, security assumptions, and trade-offs. These mechanisms will be covered in more detail in later Blockchain lessons.</p>
+
+<h2>How Is Blockchain Related to Cryptocurrencies?</h2>
+
+<p>Blockchain became strongly associated with cryptocurrencies because Bitcoin introduced a widely used system for digital value transfer based on a distributed ledger, blocks, cryptographic techniques, and proof of work.</p>
+
+<p>Blockchain technology, however, is not limited to Bitcoin.</p>
+
+<p>Many other networks have been developed with different architectures and purposes. Some support programmable applications, smart contracts, and digital assets.</p>
+
+<p>This distinction is important: <strong>blockchain is a technology or architecture, while Bitcoin is a specific system that uses blockchain as part of its design.</strong></p>
+
+<h2>What Is the Difference Between Blockchain and Bitcoin?</h2>
+
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>Blockchain</th>
+<th>Bitcoin</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>What is it?</td>
+<td>A distributed-ledger technology used by different networks</td>
+<td>A network, protocol, and digital asset</td>
+</tr>
+<tr>
+<td>Purpose</td>
+<td>Can support many different applications and systems</td>
+<td>Designed as a decentralized digital monetary system and network</td>
+</tr>
+<tr>
+<td>Consensus</td>
+<td>Depends on the specific blockchain</td>
+<td>Uses Proof of Work</td>
+</tr>
+<tr>
+<td>Digital asset</td>
+<td>Blockchain itself is not necessarily an asset</td>
+<td>Bitcoin is the digital asset associated with the network</td>
+</tr>
+</tbody>
+</table>
+
+<p>Therefore, saying that Bitcoin and blockchain are the same thing is inaccurate.</p>
+
+<p>A simple way to think about the relationship is that Bitcoin is a specific system, while blockchain is one of the core technologies used to maintain its transaction history.</p>
+
+<h2>Why Is Blockchain Data Difficult to Alter?</h2>
+
+<p>Many blockchain systems combine cryptographic hashing, linked records, consensus mechanisms, and distributed validation to make unauthorized changes to historical data difficult.</p>
+
+<p>If someone changes data in an earlier block, the hash associated with that block may change, creating a mismatch with later blocks.</p>
+
+<p>Depending on the network's consensus mechanism, an attacker may also need to overcome or compete with the mechanism used to protect the chain.</p>
+
+<p>It is important to use precise language here: <strong>blockchain data is not universally "impossible to change" under every circumstance.</strong> Resistance to change depends on the network's design, consensus mechanism, decentralization, participation model, and security assumptions.</p>
+
+<h2>Can a Blockchain Transaction Be Deleted?</h2>
+
+<p>The answer depends on the network's architecture and rules, but in many public blockchain systems, removing a confirmed transaction is not equivalent to deleting a row from a centralized database.</p>
+
+<p>Once a transaction becomes part of the accepted history, changing or reorganizing that history may be difficult or expensive depending on the network.</p>
+
+<p>This characteristic can make blockchain useful in situations where maintaining a verifiable historical record is important.</p>
+
+<h2>What Are Smart Contracts?</h2>
+
+<p>A <strong>smart contract</strong> is a program deployed on a blockchain network that supports programmable execution.</p>
+
+<p>Smart contracts can execute predefined logic when specified conditions are met, allowing developers to build applications and services that interact with blockchain state.</p>
+
+<p>The term does not necessarily mean a traditional legal contract. In blockchain technology, it primarily refers to software that executes defined logic according to the rules of the network.</p>
+
+<p>Smart contracts will be covered in greater detail in a later lesson in the Blockchain learning path.</p>
+
+<h2>Common Uses of Blockchain</h2>
+
+<p>Blockchain technology can be used in different areas, although its usefulness depends on the problem being solved and the design of the system.</p>
+
+<h3>Cryptocurrencies</h3>
+
+<p>One of the best-known uses of blockchain is recording transactions for cryptocurrencies such as Bitcoin and other digital-asset networks.</p>
+
+<h3>Smart Contracts</h3>
+
+<p>Some blockchains support programmable smart contracts, enabling applications that operate according to code deployed on the network.</p>
+
+<h3>Decentralized Finance</h3>
+
+<p>Some blockchain networks support decentralized-finance applications known as <strong>DeFi</strong>, including certain lending, exchange, and financial services implemented through smart contracts.</p>
+
+<h3>Supply Chain Tracking</h3>
+
+<p>A distributed ledger can be used to record selected stages in the movement of products or information between multiple parties when such a design provides practical value.</p>
+
+<h3>Digital Assets</h3>
+
+<p>Some blockchain networks can represent or manage different forms of digital assets, including fungible and non-fungible tokens.</p>
+
+<h3>Identity and Data Systems</h3>
+
+<p>Distributed-ledger technologies can be considered in certain identity and data-sharing systems, although privacy, legal requirements, and technical architecture must be evaluated carefully.</p>
+
+<h2>Advantages of Blockchain</h2>
+
+<h3>Verifiable Records</h3>
+
+<p>On public networks, participants can use network tools to inspect and verify transactions and other ledger data according to the protocol's rules.</p>
+
+<h3>Reduced Reliance on a Single Database</h3>
+
+<p>Some blockchain architectures distribute ledger storage and validation among multiple participants rather than relying entirely on one central database.</p>
+
+<h3>Transparency</h3>
+
+<p>Some public blockchains make transaction data publicly inspectable, providing a level of transparency that is different from systems where records remain inside private institutional databases.</p>
+
+<h3>Resistance to Unauthorized Changes</h3>
+
+<p>Cryptographic linking and consensus mechanisms can make historical changes more difficult, particularly in large public networks with broad participation.</p>
+
+<h2>Challenges of Blockchain</h2>
+
+<h3>Scalability</h3>
+
+<p>Some blockchain networks face limitations in the number of operations they can process within a given period and may require additional technologies or scaling solutions.</p>
+
+<h3>Energy Consumption</h3>
+
+<p>Proof-of-Work networks require substantial computational resources and can consume significant amounts of electricity compared with some alternative consensus mechanisms. Energy use varies considerably between networks.</p>
+
+<h3>Fees</h3>
+
+<p>Some networks charge transaction or execution fees, and fees can increase when demand for network capacity rises.</p>
+
+<h3>Technical Complexity</h3>
+
+<p>Private keys, wallets, smart contracts, consensus mechanisms, and network security can be difficult for beginners to understand. In some systems, user mistakes can result in significant losses.</p>
+
+<h3>Privacy</h3>
+
+<p>Transparency is not always desirable. Sensitive or personal information may require stronger privacy protections, so blockchain systems must be designed carefully around data protection requirements.</p>
+
+<h3>Governance</h3>
+
+<p>Every blockchain needs mechanisms for making decisions about protocol development and changes. Governance models differ substantially between networks and projects.</p>
+
+<h2>Is Blockchain Secure?</h2>
+
+<p>There is no single answer that applies to every blockchain.</p>
+
+<p>Security depends on factors such as protocol design, consensus mechanism, network participation, distribution of validation power, software quality, and the security of applications and smart contracts built on top of the network.</p>
+
+<p>It is also important to distinguish between <strong>the security of the blockchain protocol</strong> and <strong>the security of applications built on it</strong>.</p>
+
+<p>A blockchain network may operate according to its intended rules while an application or smart contract deployed on that network contains a software vulnerability.</p>
+
+<h2>Is Blockchain Suitable for Every Project?</h2>
+
+<p>No.</p>
+
+<p>The existence of blockchain technology does not automatically mean that a project needs it.</p>
+
+<p>If one trusted organization can efficiently and securely operate a centralized database, a traditional database may be simpler and more appropriate for the particular use case.</p>
+
+<p>Distributed-ledger technology becomes more relevant when multiple parties need to share a record and there is a meaningful reason to reduce dependence on a single central operator, or when decentralized properties are an essential part of the system's design.</p>
+
+<p>The right approach is therefore to evaluate the problem first and then choose the technology that best fits the requirements.</p>
+
+<h2>Public and Private Blockchains</h2>
+
+<p>Blockchain networks can be designed with different participation and permission models.</p>
+
+<h3>Public Blockchain</h3>
+
+<p>Public networks are generally open to broader participation, depending on their specific rules. Users can typically access publicly available ledger data and interact with the network according to its protocol.</p>
+
+<h3>Private or Permissioned Blockchain</h3>
+
+<p>Some organizations use networks in which participation and specific roles are restricted to approved entities.</p>
+
+<p>The difference affects decentralization, privacy, performance, governance, and operational requirements. Neither model is automatically suitable for every use case.</p>
+
+<h2>How Is Blockchain Related to Web3 and DeFi?</h2>
+
+<p>Blockchain has become an important technology within discussions around <strong>Web3</strong> and <strong>DeFi</strong>.</p>
+
+<p>Programmable blockchain networks can support decentralized applications, smart contracts, and financial systems involving digital assets.</p>
+
+<p>These terms are not interchangeable, however. Blockchain refers to an underlying technology or architecture. DeFi describes a broad category of financial applications and services built using technologies such as blockchain and smart contracts. Web3 is a broader term used for different visions of a more decentralized internet and digital ownership.</p>
+
+<p>Later sections of AQL Crypto Academy will explore DeFi and Web3 in more detail.</p>
+
+<h2>Frequently Asked Questions</h2>
+
+<h3>What is blockchain?</h3>
+
+<p>Blockchain is a type of distributed-ledger technology that organizes data into linked records and uses cryptographic techniques and consensus mechanisms in many implementations to allow multiple participants to verify the state of the ledger.</p>
+
+<h3>Is blockchain the same as Bitcoin?</h3>
+
+<p>No. Bitcoin is a specific network, protocol, and digital asset, while blockchain is a broader technology or ledger architecture that can be used by Bitcoin and other systems.</p>
+
+<h3>How does blockchain work?</h3>
+
+<p>Transactions or data are created, broadcast, and validated according to network rules. Valid operations can then be grouped into blocks and added to the ledger through the network's consensus mechanism.</p>
+
+<h3>What is a block in blockchain?</h3>
+
+<p>A block is a unit of data that may contain transactions or other records along with technical information that connects it to earlier parts of the ledger.</p>
+
+<h3>What are blockchain nodes?</h3>
+
+<p>Nodes are computers or servers that participate in operating a blockchain network. Depending on the network, they may store data, validate transactions and blocks, and relay information.</p>
+
+<h3>Can blockchain data be changed?</h3>
+
+<p>The degree of resistance to change varies between networks. In many public blockchains, cryptographic linking, consensus mechanisms, and distributed validation make changing historical records difficult, but it is not accurate to say that every blockchain is absolutely impossible to change under all circumstances.</p>
+
+<h3>What is the difference between public and private blockchains?</h3>
+
+<p>Public blockchains generally allow broader participation, while private or permissioned blockchains restrict participation or specific network roles to approved entities.</p>
+
+<h3>What is consensus in blockchain?</h3>
+
+<p>Consensus is the set of rules and mechanisms a distributed network uses to agree on the valid state of its ledger and the ordering or acceptance of updates.</p>
+
+<h3>Is blockchain only used for cryptocurrencies?</h3>
+
+<p>No. Blockchain technology can also support smart contracts, digital assets, decentralized applications, and certain data or supply-chain systems, although its suitability depends on the specific use case.</p>
+
+<h3>Is every blockchain decentralized?</h3>
+
+<p>No. The degree of decentralization varies between networks. Some public networks have broad participation, while private or permissioned systems may rely on a limited group of organizations or participants.</p>
+
+<h2>Conclusion</h2>
+
+<p>Blockchain is not another name for Bitcoin, and it is not simply an ordinary database. It is a collection of technologies and design approaches that can be used to create distributed ledgers in which multiple participants maintain and verify a shared record according to defined rules.</p>
+
+<p>To understand blockchain properly, it is important to connect several concepts: <strong>blocks, transactions, nodes, hashing, cryptography, consensus, and decentralization</strong>.</p>
+
+<p>It is equally important to remember that every blockchain has its own architecture. Decentralization, security, scalability, fees, privacy, and governance can differ substantially from one network to another.</p>
+
+<p>If this is your first serious introduction to blockchain, the next step is to learn <strong>how a blockchain processes a transaction and turns it into part of the shared ledger</strong>.</p>
+
+<p>In the upcoming lessons of <strong>AQL Crypto Academy</strong>, we will explore blocks and transactions, consensus mechanisms, Proof of Work and Proof of Stake, smart contracts, and practical blockchain use cases.</p>
+
+<p><strong>Disclaimer:</strong> This article is provided for educational and informational purposes only and does not constitute financial or investment advice. Blockchain networks and applications can involve significant technical, financial, security, and regulatory risks. Readers should conduct their own research before making financial or technical decisions.</p>
+HTML,
+
+        'image' => null,
+
+        'seo_title' => 'What Is Blockchain? Beginner\'s Guide | AQL Crypto Academy',
+        'seo_title_ar' => 'ما هي البلوكتشين؟ شرح Blockchain للمبتدئين | AQL Crypto Academy',
+        'seo_title_en' => 'What Is Blockchain? Beginner\'s Guide | AQL Crypto Academy',
+
+        'meta_description' => 'Learn what blockchain technology is, how blocks, transactions, nodes, hashing, and consensus work, and how blockchain differs from Bitcoin.',
+        'meta_description_ar' => 'تعرف على تقنية البلوكتشين Blockchain وكيف تعمل الكتل والمعاملات والعقد والتجزئة والتوافق، وما الفرق بين البلوكتشين والبيتكوين وأهم استخداماتها.',
+        'meta_description_en' => 'Learn what blockchain technology is, how blocks, transactions, nodes, hashing, and consensus work, and how blockchain differs from Bitcoin.',
+
+        'faq_ar' => [
+            [
+                'question' => 'ما هي البلوكتشين؟',
+                'answer' => 'البلوكتشين هي تقنية سجل موزع تنظم البيانات في سجلات مترابطة وتستخدم التشفير وآليات التوافق في العديد من تطبيقاتها للتحقق من حالة السجل.'
+            ],
+            [
+                'question' => 'هل Blockchain هي نفسها Bitcoin؟',
+                'answer' => 'لا. Bitcoin هو نظام وشبكة وأصل رقمي، بينما Blockchain هي تقنية أوسع يمكن استخدامها في Bitcoin وفي العديد من الشبكات والمشروعات الأخرى.'
+            ],
+            [
+                'question' => 'كيف تعمل البلوكتشين؟',
+                'answer' => 'يتم إنشاء المعاملات أو البيانات ثم نشرها والتحقق منها وفق قواعد الشبكة، وبعد ذلك يمكن تجميعها في كتل وإضافتها إلى السجل من خلال آلية التوافق.'
+            ],
+            [
+                'question' => 'ما هي الكتلة في Blockchain؟',
+                'answer' => 'الكتلة هي وحدة من البيانات تحتوي عادةً على مجموعة من المعاملات أو العمليات، بالإضافة إلى معلومات تقنية تربطها بالسجل السابق.'
+            ],
+            [
+                'question' => 'ما هي العقد في Blockchain؟',
+                'answer' => 'العقد هي أجهزة أو خوادم تشارك في تشغيل شبكة البلوكتشين، وقد تقوم بتخزين البيانات والتحقق من المعاملات والكتل ونشر المعلومات.'
+            ],
+            [
+                'question' => 'هل يمكن تغيير بيانات Blockchain؟',
+                'answer' => 'تختلف مقاومة التغيير بين الشبكات، لكن التشفير وربط الكتل وآليات التوافق تجعل تغيير السجل التاريخي صعبًا في كثير من الشبكات العامة.'
+            ],
+            [
+                'question' => 'ما الفرق بين البلوكتشين العامة والخاصة؟',
+                'answer' => 'البلوكتشين العامة تسمح عادةً بمشاركة أوسع، بينما تقيد البلوكتشين الخاصة أو المرخصة المشاركة أو بعض الأدوار بجهات محددة.'
+            ],
+            [
+                'question' => 'ما هو التوافق في Blockchain؟',
+                'answer' => 'التوافق هو مجموعة القواعد والآليات التي تستخدمها الشبكة للوصول إلى اتفاق حول الحالة الصحيحة للسجل وقبول التحديثات.'
+            ],
+            [
+                'question' => 'هل تستخدم Blockchain فقط في العملات الرقمية؟',
+                'answer' => 'لا. يمكن استخدامها أيضًا في العقود الذكية والأصول الرقمية والتطبيقات اللامركزية وبعض حلول البيانات وسلاسل الإمداد.'
+            ],
+            [
+                'question' => 'هل كل Blockchain لامركزية؟',
+                'answer' => 'لا. تختلف درجة اللامركزية بين الشبكات، وقد تكون بعض الشبكات عامة ومفتوحة بينما تكون شبكات أخرى خاصة أو مرخصة.'
+            ],
+        ],
+
+        'faq_en' => [
+            [
+                'question' => 'What is blockchain?',
+                'answer' => 'Blockchain is a type of distributed-ledger technology that organizes data into linked records and uses cryptographic techniques and consensus mechanisms in many implementations.'
+            ],
+            [
+                'question' => 'Is blockchain the same as Bitcoin?',
+                'answer' => 'No. Bitcoin is a specific network, protocol, and digital asset, while blockchain is a broader technology that can be used by Bitcoin and other systems.'
+            ],
+            [
+                'question' => 'How does blockchain work?',
+                'answer' => 'Transactions or data are created, broadcast, and validated according to network rules, then valid operations can be grouped into blocks and added to the ledger through consensus.'
+            ],
+            [
+                'question' => 'What is a block in blockchain?',
+                'answer' => 'A block is a unit of data that may contain transactions or other records along with technical information linking it to earlier parts of the ledger.'
+            ],
+            [
+                'question' => 'What are blockchain nodes?',
+                'answer' => 'Nodes are computers or servers that participate in operating a blockchain network and may store data, validate transactions and blocks, and relay information.'
+            ],
+            [
+                'question' => 'Can blockchain data be changed?',
+                'answer' => 'Resistance to change varies between networks, but cryptographic linking, consensus mechanisms, and distributed validation can make historical changes difficult in many public blockchains.'
+            ],
+            [
+                'question' => 'What is the difference between public and private blockchains?',
+                'answer' => 'Public blockchains generally allow broader participation, while private or permissioned blockchains restrict participation or specific roles to approved entities.'
+            ],
+            [
+                'question' => 'What is consensus in blockchain?',
+                'answer' => 'Consensus is the set of rules and mechanisms a distributed network uses to agree on the valid state of its ledger and accept updates.'
+            ],
+            [
+                'question' => 'Is blockchain only used for cryptocurrencies?',
+                'answer' => 'No. Blockchain can also support smart contracts, digital assets, decentralized applications, and certain data and supply-chain systems.'
+            ],
+            [
+                'question' => 'Is every blockchain decentralized?',
+                'answer' => 'No. The degree of decentralization varies between networks, and some systems are public while others are private or permissioned.'
+            ],
+        ],
+
+        'status' => 'published',
+        'sort_order' => 1,
+        'published_at' => now(),
+    ],
+];
+
+foreach ($blockchainArticles as $article) {
+    AcademyArticle::updateOrCreate(
+        [
+            'topic_id' => $blockchain->id,
+            'slug' => $article['slug'],
+        ],
+        $article
+    );
+}
+
     }
 }
