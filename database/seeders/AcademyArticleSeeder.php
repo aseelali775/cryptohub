@@ -12179,6 +12179,8518 @@ HTML,
     'sort_order' => 2,
     'published_at' => now(),
 ],
+[
+    'title' => 'What Is a Blockchain Block?',
+    'title_ar' => 'ما هي الكتلة Block في البلوك تشين؟ شرح مكونات الكتلة',
+    'title_en' => 'What Is a Blockchain Block? Understanding Its Components',
+
+    'slug' => 'what-is-a-block',
+
+    'excerpt' => 'Learn what a Blockchain block is, what information it contains, how blocks are created and validated, and how they connect together to form a Blockchain.',
+    'excerpt_ar' => 'تعرف على ماهية الكتلة Block في البلوك تشين، وما الذي تحتويه من بيانات، وكيف يتم إنشاؤها والتحقق منها وربطها بالكتل الأخرى لتكوين سلسلة Blockchain.',
+    'excerpt_en' => 'Learn what a Blockchain block is, what information it contains, how blocks are created and validated, and how they connect together to form a Blockchain.',
+
+    'content' => null,
+
+    'content_ar' => <<<'HTML'
+<p>
+بعد أن تعرفنا في الدرس الأول على <strong>ما هي تقنية البلوك تشين Blockchain</strong>، وشرحنا في الدرس الثاني
+<a href="/academy/blockchain/how-does-blockchain-work">كيف تعمل Blockchain خطوة بخطوة</a>،
+سننتقل الآن إلى أحد أهم المكونات التي تقوم عليها هذه التقنية: <strong>الكتلة Block</strong>.
+</p>
+
+<p>
+لفهم Blockchain بشكل جيد، يجب أن نفهم ما هي الكتلة، وما الذي يوجد بداخلها، وكيف ترتبط بالكتل الأخرى،
+وكيف تتحقق الشبكة من صحتها.
+</p>
+
+<p>
+يمكن تشبيه الكتلة بصفحة في سجل رقمي موزع. تحتوي هذه الصفحة على مجموعة من البيانات، بالإضافة إلى
+معلومات تساعد الشبكة على التحقق من الكتلة وربطها بالسجل السابق.
+</p>
+
+<h2>ما هي Block في Blockchain؟</h2>
+
+<p>
+الـ <strong>Block</strong> هي وحدة بيانات منظمة داخل شبكة Blockchain.
+وفي العديد من شبكات Blockchain تحتوي الكتلة على مجموعة من المعاملات، بالإضافة إلى بيانات وصفية
+ومعلومات تشفيرية تساعد في ربطها بالكتل الأخرى والتحقق منها.
+</p>
+
+<p>
+عندما يتم قبول كتلة جديدة وفق قواعد الشبكة، تصبح جزءًا من السجل المتسلسل.
+ومع إضافة كتل أخرى بعدها، تتكون سلسلة مترابطة من الكتل.
+</p>
+
+<p>
+وهنا يمكن تبسيط العلاقة بالشكل التالي:
+</p>
+
+<p>
+<strong>Block 1 → Block 2 → Block 3 → Block 4</strong>
+</p>
+
+<p>
+كل كتلة ليست منفصلة تمامًا عن التي قبلها، بل توجد علاقة تشفيرية ومنطقية بين الكتل وفق تصميم
+الشبكة.
+</p>
+
+<h2>لماذا تحتاج Blockchain إلى Blocks؟</h2>
+
+<p>
+بدل تسجيل كل معاملة بصورة منفصلة في سلسلة غير منظمة، تقوم العديد من شبكات Blockchain بتجميع
+عدد من المعاملات أو البيانات داخل وحدات تسمى Blocks.
+</p>
+
+<p>
+هذا التنظيم يساعد الشبكة على:
+</p>
+
+<ul>
+    <li>تجميع البيانات في وحدات واضحة.</li>
+    <li>ترتيب الأحداث والمعاملات.</li>
+    <li>ربط البيانات التاريخية ببعضها.</li>
+    <li>تسهيل عملية التحقق من السجل.</li>
+    <li>تطبيق آلية التوافق الخاصة بالشبكة.</li>
+</ul>
+
+<p>
+ومع ذلك، تختلف طريقة إنشاء الكتل ومحتوياتها وحجمها من Blockchain إلى أخرى.
+</p>
+
+<h2>ما الذي يوجد داخل Block؟</h2>
+
+<p>
+تختلف بنية الكتل حسب الشبكة، لكن يمكن تقسيم المعلومات الموجودة في كثير من أنظمة Blockchain
+بشكل عام إلى قسمين رئيسيين:
+</p>
+
+<ol>
+    <li><strong>Block Header</strong> أو رأس الكتلة.</li>
+    <li><strong>Block Body</strong> أو محتوى الكتلة.</li>
+</ol>
+
+<p>
+رأس الكتلة يحتوي عادةً على معلومات تساعد في تعريف الكتلة وربطها والتحقق منها، بينما يحتوي جسم
+الكتلة على البيانات التي يتم تسجيلها، مثل المعاملات في شبكات Blockchain المالية.
+</p>
+
+<h2>1. Block Header — رأس الكتلة</h2>
+
+<p>
+رأس الكتلة هو جزء مهم من بنية الكتلة، ويحتوي على مجموعة من المعلومات التي تعتمد على تصميم الشبكة.
+</p>
+
+<p>
+في Bitcoin، يتضمن رأس الكتلة حقولًا محددة مثل:
+</p>
+
+<ul>
+    <li>Version.</li>
+    <li>Previous Block Hash.</li>
+    <li>Merkle Root.</li>
+    <li>Timestamp.</li>
+    <li>Difficulty Target.</li>
+    <li>Nonce.</li>
+</ul>
+
+<p>
+هذه الحقول لها أدوار مختلفة في عملية التحقق وإنشاء الكتل وربطها بالسلسلة.
+</p>
+
+<h2>2. Previous Block Hash — تجزئة الكتلة السابقة</h2>
+
+<p>
+من أهم العناصر التي تساعد على ربط الكتل ببعضها هي الإشارة إلى الكتلة السابقة.
+وفي Bitcoin، يحتوي رأس الكتلة على <strong>Hash</strong> للكتلة السابقة.
+</p>
+
+<p>
+يمكن تبسيط الفكرة:
+</p>
+
+<p>
+<strong>Block 2 يحتوي على Hash الخاص بـ Block 1</strong>
+</p>
+
+<p>
+ثم:
+</p>
+
+<p>
+<strong>Block 3 يحتوي على Hash الخاص بـ Block 2</strong>
+</p>
+
+<p>
+وهكذا.
+</p>
+
+<p>
+إذا تغيرت بيانات مهمة في Block 1، فإن Hash الخاص بها سيتغير، وبالتالي لن تتطابق الإشارة
+الموجودة في Block 2 مع القيمة الجديدة.
+</p>
+
+<p>
+هذه العلاقة تجعل تعديل البيانات التاريخية أكثر صعوبة وتساعد على اكتشاف التغييرات.
+</p>
+
+<h2>3. Merkle Root — جذر Merkle</h2>
+
+<p>
+في Bitcoin، يتم استخدام بنية تسمى <strong>Merkle Tree</strong> لتنظيم تجزئات المعاملات داخل الكتلة،
+ويتم تخزين قيمة تسمى <strong>Merkle Root</strong> في رأس الكتلة.
+</p>
+
+<p>
+يمكن اعتبار Merkle Root بمثابة قيمة تلخص مجموعة المعاملات الموجودة في الكتلة بطريقة تشفيرية.
+</p>
+
+<p>
+إذا تغيرت إحدى المعاملات، فإن التغيير ينتقل عبر بنية Merkle Tree ويؤثر في Merkle Root.
+وهذا يوفر وسيلة فعالة للمساعدة في التحقق من أن مجموعة المعاملات لم تتغير.
+</p>
+
+<p>
+هذه الفكرة مهمة جدًا عند دراسة كيفية التحقق من محتوى الكتل دون الحاجة إلى التعامل مع كل البيانات
+بالطريقة نفسها في كل عملية تحقق.
+</p>
+
+<h2>4. Timestamp — الطابع الزمني</h2>
+
+<p>
+تحتوي كتل بعض الشبكات، ومنها Bitcoin، على معلومات زمنية مرتبطة بالكتلة.
+</p>
+
+<p>
+يساعد الطابع الزمني في تسجيل وقت تقريبي مرتبط بالكتلة وفق قواعد الشبكة.
+لكن من المهم عدم اعتباره بالضرورة ساعة دقيقة تثبت لحظة إنشاء الكتلة في كل الظروف.
+</p>
+
+<p>
+تختلف قواعد التعامل مع الوقت من شبكة إلى أخرى.
+</p>
+
+<h2>5. Nonce — الرقم المستخدم في Proof of Work</h2>
+
+<p>
+في Bitcoin، يعد <strong>Nonce</strong> أحد الحقول الموجودة في رأس الكتلة، ويرتبط بعملية
+<strong>Proof of Work</strong>.
+</p>
+
+<p>
+يحاول المعدنون تغيير قيمة Nonce وغيرها من البيانات القابلة للتغيير بهدف الوصول إلى Hash
+يستوفي شرط الصعوبة الذي تحدده الشبكة.
+</p>
+
+<p>
+عندما يجد أحد المعدنين قيمة مناسبة، يستطيع تقديم الكتلة إلى الشبكة، ثم تقوم العقد بالتحقق منها.
+</p>
+
+<p>
+لذلك فإن Nonce ليس "رقمًا سحريًا" يجعل الكتلة صحيحة بمفرده، بل هو جزء من عملية البحث الحسابي
+المستخدمة في آلية Proof of Work.
+</p>
+
+<h2>6. Difficulty Target — هدف الصعوبة</h2>
+
+<p>
+في Bitcoin، يحدد بروتوكول الشبكة شرطًا حسابيًا يجب أن يحققه Hash الخاص برأس الكتلة حتى تكون
+الكتلة صالحة من ناحية Proof of Work.
+</p>
+
+<p>
+يُستخدم مفهوم <strong>Difficulty</strong> لوصف مدى صعوبة العثور على حل مناسب مقارنةً بظروف
+أخرى في الشبكة.
+</p>
+
+<p>
+تتغير صعوبة التعدين في Bitcoin وفق آلية محددة بهدف الحفاظ على معدل إنتاج الكتل قريبًا من
+المعدل المستهدف للبروتوكول.
+</p>
+
+<h2>7. Block Body — محتوى الكتلة</h2>
+
+<p>
+إلى جانب رأس الكتلة، تحتوي الكتلة على البيانات التي يتم تسجيلها.
+في Bitcoin، يشمل ذلك مجموعة من المعاملات.
+</p>
+
+<p>
+يمكن أن تتضمن الكتلة أيضًا معاملة خاصة مرتبطة بمكافأة التعدين وفق قواعد Bitcoin.
+</p>
+
+<p>
+في شبكات أخرى، قد يكون محتوى الكتلة مختلفًا تمامًا، وقد تحتوي الكتلة على معاملات أو بيانات
+مرتبطة بتحديث حالة الشبكة أو تنفيذ عقود ذكية أو أنواع أخرى من المعلومات.
+</p>
+
+<h2>كيف تتكون الكتلة خطوة بخطوة؟</h2>
+
+<p>
+يمكن تبسيط عملية تكوين كتلة في شبكة تستخدم نموذجًا قريبًا من Bitcoin إلى المراحل التالية:
+</p>
+
+<ol>
+    <li>ينشئ المستخدمون معاملات جديدة.</li>
+    <li>تنتشر المعاملات إلى العقد.</li>
+    <li>تتحقق العقد من المعاملات وفق قواعد الشبكة.</li>
+    <li>تتجمع المعاملات الصالحة ضمن مجموعة من المعاملات المرشحة للكتلة.</li>
+    <li>يتم بناء محتوى الكتلة ورأسها.</li>
+    <li>في Proof of Work، يحاول المعدنون العثور على حل يستوفي شرط الشبكة.</li>
+    <li>يتم بث الكتلة المقترحة إلى الشبكة.</li>
+    <li>تتحقق العقد من صحة الكتلة.</li>
+    <li>إذا استوفت القواعد وتم قبولها، تصبح جزءًا من السجل وفق آلية الشبكة.</li>
+</ol>
+
+<p>
+هذه الخطوات هي تبسيط تعليمي، لأن التفاصيل الدقيقة تختلف حسب Blockchain المستخدمة.
+</p>
+
+<h2>كيف تتحقق Nodes من الكتلة؟</h2>
+
+<p>
+عندما تستقبل العقد كتلة جديدة، لا تفترض تلقائيًا أنها صحيحة.
+بل تقوم بفحصها وفق قواعد البروتوكول.
+</p>
+
+<p>
+يمكن أن تشمل عملية التحقق، حسب الشبكة:
+</p>
+
+<ul>
+    <li>التحقق من صحة بنية الكتلة.</li>
+    <li>التحقق من ارتباطها بالكتلة السابقة.</li>
+    <li>التحقق من المعاملات الموجودة بداخلها.</li>
+    <li>التحقق من التوقيعات والشروط المطلوبة.</li>
+    <li>التحقق من قواعد حجم الكتلة.</li>
+    <li>التحقق من متطلبات آلية التوافق.</li>
+    <li>التحقق من أن الكتلة لا تخالف قواعد البروتوكول.</li>
+</ul>
+
+<p>
+إذا فشلت الكتلة في الاختبارات المطلوبة، يمكن للعقد رفضها وعدم اعتمادها ضمن السجل الذي تتبعه.
+</p>
+
+<h2>ماذا يحدث إذا تم تغيير Transaction داخل Block؟</h2>
+
+<p>
+لنفترض أن كتلة تحتوي على عدة معاملات، ثم تم تغيير قيمة إحدى المعاملات بعد تسجيل الكتلة.
+</p>
+
+<p>
+سيؤثر هذا التغيير في Hash أو البنية التشفيرية المرتبطة بالبيانات، وفي Bitcoin سيؤثر أيضًا
+في Merkle Root.
+</p>
+
+<p>
+وبالتالي لن تتطابق البيانات الجديدة مع المعلومات الموجودة في رأس الكتلة.
+وإذا حاول شخص إعادة بناء الكتلة، فسيواجه أيضًا مشكلة الارتباط بالكتلة التالية وبقواعد التوافق.
+</p>
+
+<p>
+لهذا السبب لا يكفي تغيير البيانات داخل ملف أو نسخة محلية من Blockchain لجعل التغيير مقبولًا
+من الشبكة.
+</p>
+
+<h2>Block Height — ارتفاع الكتلة</h2>
+
+<p>
+يشير <strong>Block Height</strong> في شبكات مثل Bitcoin إلى موضع الكتلة ضمن سلسلة الكتل.
+</p>
+
+<p>
+يمكن تبسيط الفكرة كالتالي:
+</p>
+
+<ul>
+    <li>كتلة مبكرة في السلسلة لها ارتفاع منخفض.</li>
+    <li>الكتل التي تأتي بعدها تحصل على ارتفاع أكبر.</li>
+    <li>ارتفاع الكتلة يساعد في تحديد موقعها النسبي داخل السلسلة.</li>
+</ul>
+
+<p>
+يجب التمييز بين Block Height وBlock Hash.
+فالـ Height يصف موقع الكتلة، بينما الـ Hash هو قيمة تجزئة مرتبطة ببياناتها وفق خوارزمية معينة.
+</p>
+
+<h2>Block Time — زمن إنشاء الكتلة</h2>
+
+<p>
+يشير Block Time إلى الفترة المستهدفة أو المتوسطة بين إنتاج الكتل في شبكة معينة، بحسب تصميم
+البروتوكول.
+</p>
+
+<p>
+في Bitcoin، يبلغ الهدف البروتوكولي المعروف حوالي <strong>10 دقائق لكل كتلة في المتوسط</strong>،
+لكن الكتل الفردية لا تظهر بالضرورة بفاصل زمني ثابت تمامًا.
+</p>
+
+<p>
+أما الشبكات الأخرى فقد تستخدم أزمنة مختلفة تمامًا.
+</p>
+
+<h2>Block Size — حجم الكتلة</h2>
+
+<p>
+حجم الكتلة هو مقدار البيانات التي يمكن أن تحتوي عليها الكتلة وفق قواعد الشبكة.
+</p>
+
+<p>
+تحديد حجم أو سعة الكتلة يؤثر في عدد المعاملات التي يمكن إدراجها وفي بعض خصائص الأداء والتخزين
+والشبكة.
+</p>
+
+<p>
+ولا تستخدم جميع Blockchain نفس طريقة قياس أو تحديد سعة الكتلة.
+فبعض الشبكات تستخدم مفاهيم مختلفة مثل حدود الغاز أو موارد تنفيذ أخرى بدل الاعتماد على حجم
+البيانات وحده.
+</p>
+
+<h2>ما الفرق بين Block وBlockchain؟</h2>
+
+<p>
+الفرق بسيط من حيث الفكرة:
+</p>
+
+<ul>
+    <li><strong>Block:</strong> وحدة واحدة من البيانات ضمن السجل.</li>
+    <li><strong>Blockchain:</strong> سلسلة من الكتل المرتبطة ببعضها وفق قواعد الشبكة.</li>
+</ul>
+
+<p>
+يمكن تشبيه ذلك بكتاب:
+الكتلة تشبه صفحة أو مجموعة صفحات منظمة، بينما Blockchain تشبه الكتاب الكامل الذي يحتوي على
+هذه الصفحات بترتيب وروابط محددة.
+</p>
+
+<h2>هل كل Blockchain تحتوي على نفس مكونات Block؟</h2>
+
+<p>
+لا.
+هذه نقطة مهمة جدًا.
+</p>
+
+<p>
+الحقول الموجودة في كتلة Bitcoin ليست بالضرورة موجودة بالشكل نفسه في Ethereum أو أي شبكة أخرى.
+قد تختلف:
+</p>
+
+<ul>
+    <li>بنية رأس الكتلة.</li>
+    <li>طريقة تخزين المعاملات.</li>
+    <li>آلية التوافق.</li>
+    <li>طريقة تمثيل حالة الشبكة.</li>
+    <li>البيانات المرتبطة بتنفيذ العقود الذكية.</li>
+    <li>طريقة حساب الرسوم والموارد.</li>
+</ul>
+
+<p>
+لذلك عند دراسة Block يجب دائمًا معرفة Blockchain التي نتحدث عنها.
+</p>
+
+<h2>Block في Bitcoin</h2>
+
+<p>
+في Bitcoin، ترتبط الكتل بنظام Proof of Work، ويحتوي رأس الكتلة على معلومات مثل Hash الكتلة
+السابقة وMerkle Root وTimestamp وDifficulty Target وNonce.
+</p>
+
+<p>
+ويحتوي جسم الكتلة على معاملات Bitcoin التي تم تضمينها فيها وفق قواعد الشبكة.
+</p>
+
+<p>
+هذا التصميم يجمع بين التجزئة، والتوقيعات الرقمية، وآلية التوافق، والعقد، وسلسلة الكتل لتكوين
+السجل الذي تعتمد عليه شبكة Bitcoin.
+</p>
+
+<p>
+إذا أردت مراجعة الصورة الكاملة لكيفية عمل Bitcoin، يمكنك الرجوع إلى
+<a href="/academy/bitcoin/how-bitcoin-works">درس كيف يعمل Bitcoin؟</a>.
+</p>
+
+<h2>لماذا تعتبر Blocks مهمة لأمان Blockchain؟</h2>
+
+<p>
+الكتل مهمة لأنها ليست مجرد حاويات للبيانات.
+إنها جزء من نظام متكامل يربط البيانات التاريخية بقواعد التحقق والتوافق.
+</p>
+
+<p>
+وتساهم عدة عناصر معًا في حماية السجل، منها:
+</p>
+
+<ul>
+    <li>Hashing.</li>
+    <li>الربط بين الكتل.</li>
+    <li>التوقيعات الرقمية.</li>
+    <li>العقد المستقلة.</li>
+    <li>آلية التوافق.</li>
+    <li>قواعد البروتوكول.</li>
+</ul>
+
+<p>
+لذلك لا ينبغي اختزال أمان Blockchain في وجود Hash فقط.
+الأمان ينتج عن تفاعل مجموعة من الآليات معًا.
+</p>
+
+<h2>هل يمكن حذف Block من Blockchain؟</h2>
+
+<p>
+يعتمد ذلك على تصميم الشبكة وما المقصود بالحذف.
+في Blockchain العامة، لا تعمل الكتل عادةً مثل الملفات الموجودة في قاعدة بيانات مركزية يمكن
+للمدير حذفها ببساطة من جميع النسخ.
+</p>
+
+<p>
+قد تحدث إعادة تنظيم للسلسلة في بعض الشبكات، وقد يتم استبدال سلسلة مؤقتة بسلسلة أخرى وفق قواعد
+التوافق.
+</p>
+
+<p>
+لذلك من الأدق القول إن الكتل المقبولة تصبح جزءًا من التاريخ المشترك للشبكة، لكن مفهوم النهائية
+والإعادة التنظيم يختلف من Blockchain إلى أخرى.
+</p>
+
+<h2>Blocks والـ Confirmations</h2>
+
+<p>
+عندما يتم تضمين معاملة في كتلة، يمكن اعتبارها حصلت على تأكيد وفق قواعد الشبكة.
+وعندما تتم إضافة كتل جديدة بعدها، يزداد عدد التأكيدات المرتبطة بها في النماذج التي تستخدم هذا
+المفهوم.
+</p>
+
+<p>
+لهذا السبب يهتم المستخدمون والتطبيقات بعدد الكتل التي تم بناؤها فوق الكتلة التي تحتوي على
+المعاملة.
+</p>
+
+<p>
+كلما زادت التأكيدات في بعض الشبكات، تقل عادةً احتمالية أن يتم تغيير موضع المعاملة بسبب إعادة
+تنظيم السلسلة، لكن لا توجد قاعدة واحدة تنطبق على جميع Blockchain.
+</p>
+
+<h2>مثال مبسط لفهم Block</h2>
+
+<p>
+تخيل سجلًا يحتوي على ثلاث صفحات:
+</p>
+
+<ul>
+    <li>الصفحة الأولى تحتوي على العمليات من المجموعة الأولى.</li>
+    <li>الصفحة الثانية تحتوي على العمليات التالية وتشير إلى الصفحة السابقة.</li>
+    <li>الصفحة الثالثة تحتوي على عمليات جديدة وتشير إلى الصفحة الثانية.</li>
+</ul>
+
+<p>
+إذا حاول شخص تغيير بيانات مهمة في الصفحة الثانية، فإن البصمة الرقمية المرتبطة بها ستتغير،
+وبالتالي ستتأثر العلاقة بينها وبين الصفحة الثالثة.
+</p>
+
+<p>
+في Blockchain الحقيقية، العملية أكثر تعقيدًا من هذا المثال، لأنها تشمل آليات التوافق والعقد
+والتوقيعات وقواعد البروتوكول.
+</p>
+
+<h2>الخلاصة</h2>
+
+<p>
+الـ <strong>Block</strong> هي إحدى الوحدات الأساسية في Blockchain.
+وتحتوي على بيانات ومعلومات تساعد الشبكة على تنظيم السجل والتحقق منه وربطه بالكتل الأخرى.
+</p>
+
+<p>
+في Bitcoin، يتكون رأس الكتلة من مجموعة من الحقول المهمة مثل Previous Block Hash وMerkle Root
+وTimestamp وDifficulty Target وNonce، بينما يحتوي جسم الكتلة على المعاملات.
+</p>
+
+<p>
+ولا تعمل جميع شبكات Blockchain بالطريقة نفسها؛ فقد تختلف بنية الكتلة وآلية التوافق والبيانات
+المخزنة من شبكة إلى أخرى.
+</p>
+
+<p>
+بعد فهم الكتلة ومكوناتها، يصبح من السهل الانتقال إلى مفهوم مهم جدًا:
+<strong>كيف تعمل دوال التجزئة Hash Functions، ولماذا تستخدم Blockchain الـ Hash؟</strong>
+</p>
+
+<p>
+سنخصص درسًا لاحقًا لهذا المفهوم بالتفصيل.
+</p>
+HTML,
+
+    'content_en' => <<<'HTML'
+<p>
+After learning <strong>what Blockchain is</strong> in the first lesson, and understanding
+<a href="/academy/blockchain/how-does-blockchain-work">how Blockchain works step by step</a>
+in the second lesson, we can now examine one of its most important building blocks:
+the <strong>Block</strong>.
+</p>
+
+<p>
+Understanding what a block is, what it contains, and how it connects to other blocks is essential
+for understanding how a Blockchain maintains an organized and verifiable record.
+</p>
+
+<p>
+A simple way to think about a block is as a structured page in a distributed digital record.
+It contains data together with information that helps the network validate the block and connect
+it to the existing chain.
+</p>
+
+<h2>What Is a Block in Blockchain?</h2>
+
+<p>
+A <strong>Block</strong> is an organized unit of data within a Blockchain network.
+In many Blockchain systems, a block contains a collection of transactions along with metadata
+and cryptographic information used to connect and validate it.
+</p>
+
+<p>
+When a new block is accepted according to the network's rules, it becomes part of the ordered
+record. As more blocks are added, they form a connected chain.
+</p>
+
+<p>
+The relationship can be simplified as:
+</p>
+
+<p>
+<strong>Block 1 → Block 2 → Block 3 → Block 4</strong>
+</p>
+
+<p>
+Each block is therefore connected to the blocks around it according to the design of the network.
+</p>
+
+<h2>Why Does Blockchain Use Blocks?</h2>
+
+<p>
+Instead of recording every transaction as an isolated entry in an unstructured sequence,
+many Blockchain networks group transactions or other data into units called blocks.
+</p>
+
+<p>
+This organization helps the network:
+</p>
+
+<ul>
+    <li>Group data into identifiable units.</li>
+    <li>Maintain an ordered history.</li>
+    <li>Connect historical data.</li>
+    <li>Support ledger verification.</li>
+    <li>Apply the network's consensus mechanism.</li>
+</ul>
+
+<p>
+The exact way blocks are created, structured, and limited differs between Blockchain networks.
+</p>
+
+<h2>What Is Inside a Block?</h2>
+
+<p>
+Block structures vary between networks, but many systems can be described conceptually as having
+two major parts:
+</p>
+
+<ol>
+    <li><strong>Block Header</strong>.</li>
+    <li><strong>Block Body</strong>.</li>
+</ol>
+
+<p>
+The header generally contains information used to identify, connect, and validate the block,
+while the body contains the data being recorded, such as transactions in financial Blockchain
+networks.
+</p>
+
+<h2>1. Block Header</h2>
+
+<p>
+The Block Header is an important part of the block structure and contains fields defined by the
+specific Blockchain protocol.
+</p>
+
+<p>
+In Bitcoin, the block header includes fields such as:
+</p>
+
+<ul>
+    <li>Version.</li>
+    <li>Previous Block Hash.</li>
+    <li>Merkle Root.</li>
+    <li>Timestamp.</li>
+    <li>Difficulty Target.</li>
+    <li>Nonce.</li>
+</ul>
+
+<p>
+These fields serve different purposes related to block creation, validation, and chain linkage.
+</p>
+
+<h2>2. Previous Block Hash</h2>
+
+<p>
+One of the most important mechanisms for connecting blocks is the reference to the previous block.
+In Bitcoin, the block header contains the <strong>hash of the previous block</strong>.
+</p>
+
+<p>
+The concept can be simplified as:
+</p>
+
+<p>
+<strong>Block 2 contains the hash of Block 1</strong>
+</p>
+
+<p>
+Then:
+</p>
+
+<p>
+<strong>Block 3 contains the hash of Block 2</strong>
+</p>
+
+<p>
+And so on.
+</p>
+
+<p>
+If important data in Block 1 changes, its hash changes, and the reference stored in Block 2 would
+no longer match the modified block.
+</p>
+
+<p>
+This relationship makes unauthorized historical modification more difficult and helps the network
+detect changes.
+</p>
+
+<h2>3. Merkle Root</h2>
+
+<p>
+Bitcoin uses a structure called a <strong>Merkle Tree</strong> to organize transaction hashes
+within a block. A value called the <strong>Merkle Root</strong> is stored in the block header.
+</p>
+
+<p>
+The Merkle Root can be viewed as a cryptographic summary of the transactions included in the block.
+</p>
+
+<p>
+If a transaction changes, the effect propagates through the Merkle Tree and changes the Merkle Root.
+This provides an efficient mechanism for helping verify that the transaction set has not been
+altered.
+</p>
+
+<h2>4. Timestamp</h2>
+
+<p>
+Blocks in some Blockchain networks, including Bitcoin, contain time-related information.
+</p>
+
+<p>
+The timestamp provides a time value associated with the block according to the network's rules.
+It should not necessarily be interpreted as a perfectly accurate record of the exact moment when
+the block was created.
+</p>
+
+<p>
+Time-related rules vary between Blockchain networks.
+</p>
+
+<h2>5. Nonce</h2>
+
+<p>
+In Bitcoin, the <strong>Nonce</strong> is one of the fields in the block header and is closely
+associated with <strong>Proof of Work</strong>.
+</p>
+
+<p>
+Miners repeatedly modify the Nonce and other changeable block data while searching for a hash that
+satisfies the network's difficulty requirement.
+</p>
+
+<p>
+Once a suitable value is found, the miner can broadcast the block, and other nodes verify it.
+</p>
+
+<p>
+The Nonce is therefore not a magic number that makes a block valid by itself. It is one part of
+the computational search used by Proof of Work.
+</p>
+
+<h2>6. Difficulty Target</h2>
+
+<p>
+In Bitcoin, the protocol defines a computational condition that the block header hash must satisfy
+for the Proof of Work to be valid.
+</p>
+
+<p>
+The concept of <strong>difficulty</strong> describes how difficult it is to find an acceptable
+solution under the network's current conditions.
+</p>
+
+<p>
+Bitcoin adjusts its mining difficulty according to protocol rules to keep the average block
+production rate close to the protocol's target.
+</p>
+
+<h2>7. Block Body</h2>
+
+<p>
+Along with the header, a block contains the data being recorded.
+In Bitcoin, this includes a collection of transactions.
+</p>
+
+<p>
+A Bitcoin block can also contain a special transaction associated with the mining reward according
+to Bitcoin's rules.
+</p>
+
+<p>
+Other Blockchain networks can have very different block contents. They may contain transactions,
+state updates, smart-contract-related data, or other information depending on their architecture.
+</p>
+
+<h2>How Is a Block Created?</h2>
+
+<p>
+The process can be simplified for a network using a model similar to Bitcoin:
+</p>
+
+<ol>
+    <li>Users create new transactions.</li>
+    <li>The transactions propagate through the network.</li>
+    <li>Nodes validate transactions according to network rules.</li>
+    <li>Valid transactions become candidates for inclusion in a block.</li>
+    <li>The block body and header are constructed.</li>
+    <li>Under Proof of Work, miners search for a solution satisfying the network's requirement.</li>
+    <li>The proposed block is broadcast to the network.</li>
+    <li>Other nodes verify the block.</li>
+    <li>If it satisfies the rules and is accepted, it becomes part of the network's record.</li>
+</ol>
+
+<p>
+This is an educational simplification because the exact process differs between Blockchain networks.
+</p>
+
+<h2>How Do Nodes Verify a Block?</h2>
+
+<p>
+When nodes receive a new block, they do not automatically assume it is valid.
+They check it against the protocol rules.
+</p>
+
+<p>
+Depending on the network, validation can include:
+</p>
+
+<ul>
+    <li>Checking the block structure.</li>
+    <li>Checking its connection to the previous block.</li>
+    <li>Validating the transactions inside it.</li>
+    <li>Checking signatures and required conditions.</li>
+    <li>Checking block size or resource limits.</li>
+    <li>Checking consensus requirements.</li>
+    <li>Checking that the block does not violate protocol rules.</li>
+</ul>
+
+<p>
+If a block fails the required checks, nodes can reject it and avoid treating it as part of their
+accepted chain.
+</p>
+
+<h2>What Happens If a Transaction Inside a Block Changes?</h2>
+
+<p>
+Suppose a block contains several transactions and someone changes an important part of one of them
+after the block has been accepted.
+</p>
+
+<p>
+That change affects the cryptographic data associated with the block, and in Bitcoin it also changes
+the Merkle Root.
+</p>
+
+<p>
+The modified data would therefore no longer match the information recorded in the block header.
+An attempt to rebuild the block would also face the problem of maintaining its connection to
+subsequent blocks and satisfying the network's consensus rules.
+</p>
+
+<p>
+This is why simply editing a local copy of Blockchain data does not make the modified version
+acceptable to the network.
+</p>
+
+<h2>Block Height</h2>
+
+<p>
+<strong>Block Height</strong> refers, in networks such as Bitcoin, to the position of a block
+within the chain.
+</p>
+
+<p>
+The concept can be simplified as:
+</p>
+
+<ul>
+    <li>Early blocks have lower heights.</li>
+    <li>Later blocks have higher heights.</li>
+    <li>The height helps identify the block's relative position in the chain.</li>
+</ul>
+
+<p>
+Block Height should not be confused with Block Hash.
+Height describes position, while a hash is a cryptographic value derived from data using a
+specific hash function.
+</p>
+
+<h2>Block Time</h2>
+
+<p>
+Block Time refers to the target or average interval between blocks in a network, depending on
+the protocol design.
+</p>
+
+<p>
+In Bitcoin, the protocol targets approximately <strong>10 minutes per block on average</strong>,
+but individual blocks are not produced at exactly ten-minute intervals.
+</p>
+
+<p>
+Other Blockchain networks can use very different block intervals.
+</p>
+
+<h2>Block Size</h2>
+
+<p>
+Block size describes how much data a block can contain under the rules of a particular network.
+</p>
+
+<p>
+Block capacity can affect the number of transactions that can be included and can influence
+performance, storage, and network characteristics.
+</p>
+
+<p>
+Not all Blockchain networks measure or limit capacity in the same way. Some systems use other
+resource concepts, such as gas or execution limits, rather than relying only on raw block size.
+</p>
+
+<h2>What Is the Difference Between a Block and a Blockchain?</h2>
+
+<p>
+The basic distinction is:
+</p>
+
+<ul>
+    <li><strong>Block:</strong> one organized unit of data within the record.</li>
+    <li><strong>Blockchain:</strong> a sequence of connected blocks maintained according to network rules.</li>
+</ul>
+
+<p>
+A simple analogy is a book:
+a block can be compared to an organized page or group of pages, while the Blockchain is the complete
+book containing those pages in an ordered and connected structure.
+</p>
+
+<h2>Does Every Blockchain Block Have the Same Components?</h2>
+
+<p>
+No.
+This is an important point.
+</p>
+
+<p>
+The fields found in a Bitcoin block do not necessarily exist in exactly the same form in Ethereum
+or another Blockchain network.
+</p>
+
+<p>
+Networks can differ in:
+</p>
+
+<ul>
+    <li>Block header structure.</li>
+    <li>Transaction representation.</li>
+    <li>Consensus mechanism.</li>
+    <li>State representation.</li>
+    <li>Smart-contract execution data.</li>
+    <li>Fee and resource accounting.</li>
+</ul>
+
+<p>
+When studying blocks, it is therefore important to identify which Blockchain network is being discussed.
+</p>
+
+<h2>Blocks in Bitcoin</h2>
+
+<p>
+Bitcoin blocks are part of a Proof of Work system. The block header contains information such as
+the previous block hash, Merkle Root, timestamp, difficulty target, and Nonce.
+</p>
+
+<p>
+The block body contains Bitcoin transactions included according to the network's rules.
+</p>
+
+<p>
+This design combines hashing, digital signatures, consensus, nodes, and chained blocks to maintain
+the Bitcoin record.
+</p>
+
+<p>
+You can review
+<a href="/academy/bitcoin/how-bitcoin-works">How Bitcoin Works</a>
+to revisit the broader process.
+</p>
+
+<h2>Why Are Blocks Important for Blockchain Security?</h2>
+
+<p>
+Blocks are important because they are not merely containers for data.
+They are part of a larger system connecting historical data with validation and consensus rules.
+</p>
+
+<p>
+Several mechanisms work together to protect the record, including:
+</p>
+
+<ul>
+    <li>Hashing.</li>
+    <li>Links between blocks.</li>
+    <li>Digital signatures.</li>
+    <li>Independent network nodes.</li>
+    <li>Consensus mechanisms.</li>
+    <li>Protocol rules.</li>
+</ul>
+
+<p>
+Blockchain security should therefore not be reduced to the existence of hashes alone.
+Its security comes from the interaction of multiple mechanisms.
+</p>
+
+<h2>Can a Block Be Deleted From a Blockchain?</h2>
+
+<p>
+The answer depends on the network design and on what is meant by "delete."
+A public Blockchain does not normally work like a centralized database where an administrator can
+simply delete a record from every copy.
+</p>
+
+<p>
+Some Blockchain systems can experience chain reorganizations, where one temporary chain is replaced
+by another according to consensus rules.
+</p>
+
+<p>
+It is therefore more accurate to say that accepted blocks become part of the network's shared
+history, while the exact meaning of finality and reorganization varies between Blockchain systems.
+</p>
+
+<h2>Blocks and Confirmations</h2>
+
+<p>
+When a transaction is included in a block, it can be considered confirmed to a certain degree
+according to the network's rules.
+As additional blocks are added after the block containing the transaction, the transaction gains
+additional confirmations in systems that use this concept.
+</p>
+
+<p>
+This is why users and applications often consider how many blocks have been built on top of the
+block containing a transaction.
+</p>
+
+<p>
+In some networks, additional confirmations reduce the practical likelihood that the transaction's
+position will change because of a chain reorganization, but the exact model differs between networks.
+</p>
+
+<h2>A Simple Example of a Block</h2>
+
+<p>
+Imagine a record containing three pages:
+</p>
+
+<ul>
+    <li>The first page contains the first group of operations.</li>
+    <li>The second page contains later operations and references the previous page.</li>
+    <li>The third page contains new operations and references the second page.</li>
+</ul>
+
+<p>
+If someone changes important information on the second page, its digital fingerprint changes,
+which affects its relationship with the third page.
+</p>
+
+<p>
+A real Blockchain is more complex because it also involves consensus mechanisms, nodes, signatures,
+and protocol rules.
+</p>
+
+<h2>Lesson Summary</h2>
+
+<p>
+A <strong>Block</strong> is one of the fundamental units of a Blockchain.
+It contains data and information that help the network organize, validate, and connect the record
+to other blocks.
+</p>
+
+<p>
+In Bitcoin, the block header includes important fields such as Previous Block Hash, Merkle Root,
+Timestamp, Difficulty Target, and Nonce, while the block body contains transactions.
+</p>
+
+<p>
+Not every Blockchain uses the same structure. Block formats, consensus mechanisms, and stored data
+can vary significantly between networks.
+</p>
+
+<p>
+After understanding blocks and their components, the next important concept is:
+<strong>How do hash functions work, and why does Blockchain use hashing?</strong>
+</p>
+
+<p>
+That concept will be examined in detail in a later lesson.
+</p>
+HTML,
+
+    'image' => null,
+
+    'seo_title' => 'What Is a Blockchain Block? Components Explained | AQL Crypto Academy',
+    'seo_title_ar' => 'ما هي الكتلة Block في البلوك تشين؟ شرح المكونات | AQL Crypto Academy',
+    'seo_title_en' => 'What Is a Blockchain Block? Components Explained | AQL Crypto Academy',
+
+    'meta_description' => 'Learn what a Blockchain block is, what it contains, how blocks are created and validated, and how they connect to form a Blockchain.',
+    'meta_description_ar' => 'تعرف على ما هي الكتلة Block في البلوك تشين ومكوناتها، وكيف يتم إنشاء الكتل والتحقق منها وربطها معًا لتكوين سلسلة Blockchain.',
+    'meta_description_en' => 'Learn what a Blockchain block is, what it contains, how blocks are created and validated, and how they connect to form a Blockchain.',
+
+    'faq_ar' => [
+        [
+            'question' => 'ما هي الكتلة Block في البلوك تشين؟',
+            'answer' => 'الكتلة Block هي وحدة منظمة من البيانات داخل Blockchain، ويمكن أن تحتوي على مجموعة من المعاملات ومعلومات أخرى تساعد الشبكة على التحقق منها وربطها بالكتل الأخرى.'
+        ],
+        [
+            'question' => 'ماذا يوجد داخل Block؟',
+            'answer' => 'تختلف محتويات الكتلة حسب الشبكة، لكن يمكن أن تتضمن رأس الكتلة وبيانات مثل Hash الكتلة السابقة وبيانات زمنية ومعلومات مرتبطة بالتوافق، إضافة إلى المعاملات أو بيانات الشبكة.'
+        ],
+        [
+            'question' => 'ما هو Block Header؟',
+            'answer' => 'Block Header هو الجزء الذي يحتوي على معلومات تعريفية وتشفيرية مهمة للكتلة. في Bitcoin يتضمن Version وPrevious Block Hash وMerkle Root وTimestamp وDifficulty Target وNonce.'
+        ],
+        [
+            'question' => 'ما هو Previous Block Hash؟',
+            'answer' => 'هو Hash يشير إلى الكتلة السابقة وفق تصميم الشبكة. يساعد هذا الارتباط على إنشاء سلسلة بين الكتل واكتشاف التغييرات في البيانات التاريخية.'
+        ],
+        [
+            'question' => 'ما هو Merkle Root؟',
+            'answer' => 'Merkle Root هو قيمة تلخص تجزئات مجموعة المعاملات داخل الكتلة باستخدام بنية Merkle Tree. يستخدم في Bitcoin للمساعدة في التحقق من مجموعة المعاملات.'
+        ],
+        [
+            'question' => 'ما هو Nonce في Bitcoin؟',
+            'answer' => 'Nonce هو حقل في رأس كتلة Bitcoin يستخدم ضمن عملية Proof of Work، حيث يجرب المعدنون قيمًا مختلفة للمساعدة في العثور على Hash يستوفي شرط الشبكة.'
+        ],
+        [
+            'question' => 'ما هو Block Height؟',
+            'answer' => 'Block Height هو موضع الكتلة داخل سلسلة الكتل في شبكات مثل Bitcoin، ويزداد عادةً مع إضافة كتل جديدة.'
+        ],
+        [
+            'question' => 'كم يستغرق إنشاء Block في Bitcoin؟',
+            'answer' => 'يستهدف بروتوكول Bitcoin متوسطًا يقارب 10 دقائق لكل كتلة، لكن الكتل الفردية لا يتم إنتاجها بفاصل ثابت تمامًا.'
+        ],
+        [
+            'question' => 'هل جميع Blockchain تستخدم نفس شكل Block؟',
+            'answer' => 'لا. تختلف بنية الكتل ومحتوياتها وآلية التوافق والموارد المستخدمة من شبكة Blockchain إلى أخرى.'
+        ],
+        [
+            'question' => 'هل يمكن حذف Block من Blockchain؟',
+            'answer' => 'لا يمكن التعامل مع الكتلة في Blockchain العامة مثل سجل مركزي يستطيع مدير واحد حذفه من جميع النسخ. ومع ذلك، يمكن أن تحدث إعادة تنظيمات للسلسلة في بعض الشبكات، ويختلف مفهوم النهائية من شبكة إلى أخرى.'
+        ],
+    ],
+
+    'faq_en' => [
+        [
+            'question' => 'What is a Block in Blockchain?',
+            'answer' => 'A block is an organized unit of data within a Blockchain. It can contain transactions and other information used to validate the block and connect it to other blocks.'
+        ],
+        [
+            'question' => 'What is inside a Blockchain block?',
+            'answer' => 'Block contents vary by network, but they can include a block header, previous block information, timestamps, consensus-related data, transactions, and other network-specific information.'
+        ],
+        [
+            'question' => 'What is a Block Header?',
+            'answer' => 'A Block Header contains important identification and cryptographic information. In Bitcoin, it includes fields such as Version, Previous Block Hash, Merkle Root, Timestamp, Difficulty Target, and Nonce.'
+        ],
+        [
+            'question' => 'What is the Previous Block Hash?',
+            'answer' => 'It is a hash that references the previous block according to the network design. This connection helps create the chain and makes historical changes easier to detect.'
+        ],
+        [
+            'question' => 'What is the Merkle Root?',
+            'answer' => 'The Merkle Root is a value derived from the hashes of transactions using a Merkle Tree. In Bitcoin, it is included in the block header and helps verify the transaction set.'
+        ],
+        [
+            'question' => 'What is a Nonce in Bitcoin?',
+            'answer' => 'A Nonce is a field in the Bitcoin block header used as part of Proof of Work. Miners try different values while searching for a hash that satisfies the network requirement.'
+        ],
+        [
+            'question' => 'What is Block Height?',
+            'answer' => 'Block Height refers to the position of a block in the chain in networks such as Bitcoin. It generally increases as new blocks are added.'
+        ],
+        [
+            'question' => 'How long does it take to create a Bitcoin block?',
+            'answer' => 'Bitcoin targets an average of about 10 minutes per block, but individual blocks are not produced at exactly ten-minute intervals.'
+        ],
+        [
+            'question' => 'Does every Blockchain use the same block structure?',
+            'answer' => 'No. Block structures, contents, consensus mechanisms, and resource models can differ significantly between Blockchain networks.'
+        ],
+        [
+            'question' => 'Can a Blockchain block be deleted?',
+            'answer' => 'A public Blockchain does not normally allow a single administrator to simply delete a block from every copy of the record. Some networks can experience chain reorganizations, and the meaning of finality varies between networks.'
+        ],
+    ],
+
+    'status' => 'published',
+    'sort_order' => 3,
+    'published_at' => now(),
+],
+[
+    'title' => 'What Is a Hash Function in Blockchain?',
+    'title_ar' => 'ما هي دوال التجزئة Hash Functions في البلوك تشين؟ شرح مبسط',
+    'title_en' => 'What Is a Hash Function in Blockchain? A Beginner’s Guide',
+
+    'slug' => 'what-is-hash-function',
+
+    'excerpt' => 'Learn what cryptographic hash functions are, how hashing works, why Blockchain uses hashes, and how hashes help protect data integrity and connect blocks together.',
+    'excerpt_ar' => 'تعرف على دوال التجزئة التشفيرية Hash Functions، وكيف تعمل، ولماذا تستخدمها تقنية البلوك تشين، وكيف تساعد في حماية سلامة البيانات وربط الكتل والمعاملات ببعضها.',
+    'excerpt_en' => 'Learn what cryptographic hash functions are, how hashing works, why Blockchain uses hashes, and how hashes help protect data integrity and connect blocks together.',
+
+    'content' => null,
+
+    'content_ar' => <<<'HTML'
+<p>
+بعد أن تعرفنا في الدرس السابق على <strong>الكتلة Block</strong> ومكوناتها، سننتقل الآن إلى أحد
+أهم المفاهيم التقنية التي تعتمد عليها العديد من شبكات Blockchain: <strong>دوال التجزئة
+Hash Functions</strong>.
+</p>
+
+<p>
+قد تسمع كثيرًا عن كلمة Hash عند دراسة Bitcoin وBlockchain، وقد يبدو المصطلح معقدًا في البداية.
+لكن الفكرة الأساسية بسيطة:
+<strong>دالة التجزئة تحول البيانات إلى قيمة رقمية ثابتة يمكن استخدامها كبصمة رقمية للبيانات.</strong>
+</p>
+
+<p>
+في هذا الدرس سنتعرف على ماهية Hash، وكيف يتم إنتاجه، وما الخصائص التي تجعل دوال التجزئة
+التشفيرية مفيدة في Blockchain، وكيف تستخدم في ربط الكتل والتحقق من البيانات وبناء Merkle Tree.
+</p>
+
+<h2>ما هو Hash؟</h2>
+
+<p>
+الـ <strong>Hash</strong> هو ناتج تطبيق دالة تجزئة على مجموعة من البيانات.
+تأخذ دالة التجزئة بيانات كمدخل Input وتنتج قيمة رقمية ذات طول محدد وفق الخوارزمية المستخدمة.
+</p>
+
+<p>
+يمكن تصور العملية بهذه الصورة:
+</p>
+
+<p>
+<strong>Data → Hash Function → Hash</strong>
+</p>
+
+<p>
+إذا أدخلنا النص أو الملف أو البيانات نفسها إلى دالة التجزئة نفسها، نحصل على النتيجة نفسها،
+بافتراض عدم تغير البيانات والخوارزمية.
+</p>
+
+<p>
+أما إذا تغيرت البيانات، حتى بطريقة صغيرة جدًا، فمن المتوقع أن تتغير قيمة الـHash بشكل كبير.
+وهذه الخاصية مهمة جدًا للتحقق من سلامة البيانات.
+</p>
+
+<h2>لماذا تستخدم Blockchain الـHash؟</h2>
+
+<p>
+تستخدم شبكات Blockchain التجزئة في وظائف متعددة، ومن أهمها:
+</p>
+
+<ul>
+    <li>التحقق من سلامة البيانات.</li>
+    <li>ربط الكتل ببعضها.</li>
+    <li>بناء هياكل مثل Merkle Tree.</li>
+    <li>المساعدة في آليات مثل Proof of Work في Bitcoin.</li>
+    <li>إنشاء معرفات تشفيرية مرتبطة بالبيانات.</li>
+</ul>
+
+<p>
+لكن طريقة استخدام Hash تختلف من Blockchain إلى أخرى.
+لذلك لا ينبغي افتراض أن جميع الشبكات تستخدم Hash بالطريقة نفسها.
+</p>
+
+<h2>كيف تعمل دالة التجزئة؟</h2>
+
+<p>
+لنأخذ فكرة مبسطة.
+لدينا بيانات معينة:
+</p>
+
+<p>
+<strong>"Hello Blockchain"</strong>
+</p>
+
+<p>
+نمرر هذه البيانات إلى دالة تجزئة، فتنتج قيمة Hash.
+إذا غيرنا البيانات إلى:
+</p>
+
+<p>
+<strong>"Hello blockchain"</strong>
+</p>
+
+<p>
+فإن تغيير حرف واحد يمكن أن يؤدي إلى Hash مختلف تمامًا.
+</p>
+
+<p>
+هذا السلوك يجعل Hash مناسبًا لاكتشاف التغييرات في البيانات.
+</p>
+
+<p>
+في التطبيقات الحقيقية، لا يتم استخدام نصوص بسيطة بهذه الطريقة فقط، بل يمكن أن تكون المدخلات
+معاملات وكتلًا وبيانات بروتوكول معقدة.
+</p>
+
+<h2>أهم خصائص Cryptographic Hash Functions</h2>
+
+<p>
+لكي تكون دالة التجزئة مفيدة في التطبيقات التشفيرية، توجد مجموعة من الخصائص المهمة.
+ولا يعني ذلك أن كل دالة تحمل اسم Hash تحقق جميع الخصائص الأمنية المطلوبة.
+</p>
+
+<h3>1. Deterministic — حتمية النتيجة</h3>
+
+<p>
+إذا استخدمت البيانات نفسها والخوارزمية نفسها، تحصل على النتيجة نفسها.
+</p>
+
+<p>
+هذه الخاصية ضرورية لأن العقد المختلفة في الشبكة تحتاج إلى الوصول إلى النتيجة نفسها عند معالجة
+البيانات نفسها.
+</p>
+
+<h3>2. سرعة حساب الـHash</h3>
+
+<p>
+يجب أن يكون حساب Hash لبيانات صحيحة سريعًا نسبيًا في الاستخدامات المعتادة.
+لكن في بعض الأنظمة، مثل Proof of Work في Bitcoin، يتم استغلال هذه الخاصية إلى جانب صعوبة العثور
+على Hash يستوفي شرطًا محددًا.
+</p>
+
+<h3>3. Avalanche Effect — تأثير الانهيار</h3>
+
+<p>
+التغيير الصغير في البيانات المدخلة يمكن أن يؤدي إلى تغيير كبير في قيمة Hash الناتجة.
+</p>
+
+<p>
+هذه الخاصية تجعل من الصعب الاعتماد على التشابه بين Hash الناتج عن بيانات أصلية وHash الناتج عن
+بيانات تم تعديلها.
+</p>
+
+<h3>4. مقاومة إيجاد مدخل ينتج Hash محدد</h3>
+
+<p>
+من الخصائص الأمنية المهمة أن يكون من الصعب عمليًا العثور على بيانات تنتج Hash معينًا مستهدفًا،
+بحسب نوع الهجوم والخوارزمية.
+</p>
+
+<h3>5. مقاومة التصادم Collision Resistance</h3>
+
+<p>
+التصادم يحدث عندما تنتج مدخلات مختلفة القيمة نفسها من دالة التجزئة.
+</p>
+
+<p>
+من الناحية الرياضية، إذا كان مجال المدخلات أكبر من مجال المخرجات، فإن التصادمات موجودة بالضرورة.
+لكن الدالة التشفيرية الجيدة تهدف إلى جعل العثور على تصادم عمليًا أمرًا بالغ الصعوبة ضمن نموذج
+الهجوم المعني.
+</p>
+
+<h2>ما هو Collision؟</h2>
+
+<p>
+التصادم <strong>Collision</strong> يعني وجود مدخلين مختلفين ينتجان نفس قيمة Hash.
+</p>
+
+<p>
+بشكل مبسط:
+</p>
+
+<p>
+<strong>Data A → Hash X</strong><br>
+<strong>Data B → Hash X</strong>
+</p>
+
+<p>
+إذا كانت Data A وData B مختلفتين ولكنهما أعطتا Hash نفسه، فهذا يسمى تصادمًا.
+</p>
+
+<p>
+الدوال التشفيرية الحديثة يتم تصميمها بحيث يكون العثور على مثل هذه التصادمات أمرًا صعبًا
+عمليًا عند استخدامها بالشكل الصحيح.
+</p>
+
+<h2>هل الـHash هو تشفير Encryption؟</h2>
+
+<p>
+لا.
+وهذا من أهم المفاهيم التي يجب فهمها.
+</p>
+
+<h3>Hashing</h3>
+
+<p>
+التجزئة تنتج قيمة مشتقة من البيانات، ولا تهدف في الأصل إلى توفير طريقة مباشرة لاستعادة البيانات
+الأصلية من الـHash.
+</p>
+
+<h3>Encryption</h3>
+
+<p>
+التشفير يهدف إلى تحويل البيانات إلى صيغة غير مفهومة لمن لا يملك المفتاح المناسب، مع إمكانية
+استعادة البيانات الأصلية باستخدام عملية فك التشفير والمفتاح المناسب.
+</p>
+
+<p>
+لذلك:
+</p>
+
+<ul>
+    <li><strong>Hashing:</strong> يستخدم عادةً لإنتاج بصمة رقمية والتحقق من البيانات.</li>
+    <li><strong>Encryption:</strong> يستخدم عادةً لحماية سرية البيانات وإمكانية استعادتها.</li>
+</ul>
+
+<p>
+الخلط بين المصطلحين قد يؤدي إلى فهم خاطئ لطريقة عمل Blockchain.
+</p>
+
+<h2>ما علاقة Hash بالكتل؟</h2>
+
+<p>
+كما شرحنا في
+<a href="/academy/blockchain/what-is-a-block">درس الكتلة Block</a>،
+تستخدم Blockchain الـHash لربط أجزاء من السجل.
+</p>
+
+<p>
+في Bitcoin، يحتوي رأس الكتلة على Hash للكتلة السابقة.
+</p>
+
+<p>
+يمكن تصور السلسلة:
+</p>
+
+<p>
+<strong>Block 1 → Hash 1 → Block 2 → Hash 2 → Block 3</strong>
+</p>
+
+<p>
+وبشكل أدق، تحتوي الكتلة اللاحقة على مرجع إلى Hash الكتلة السابقة.
+</p>
+
+<p>
+إذا تغيرت بيانات Block 1، فإن Hash الخاص بها سيتغير، وبالتالي لن يتطابق المرجع الموجود في
+Block 2 مع الكتلة المعدلة.
+</p>
+
+<p>
+هذه إحدى الآليات التي تساعد على اكتشاف التغييرات في السجل.
+</p>
+
+<h2>هل Hash يجعل Blockchain غير قابلة للاختراق؟</h2>
+
+<p>
+لا.
+من الخطأ القول إن وجود Hash وحده يجعل Blockchain غير قابلة للاختراق أو التلاعب.
+</p>
+
+<p>
+أمان Blockchain يعتمد على مجموعة من العناصر التي تعمل معًا، مثل:
+</p>
+
+<ul>
+    <li>دوال التجزئة.</li>
+    <li>التوقيعات الرقمية.</li>
+    <li>آلية التوافق.</li>
+    <li>توزيع العقد.</li>
+    <li>قواعد البروتوكول.</li>
+    <li>الحوافز الاقتصادية في بعض الشبكات.</li>
+</ul>
+
+<p>
+لذلك فإن الـHash هو جزء من منظومة الأمان، وليس المنظومة كلها.
+</p>
+
+<h2>Hash في Bitcoin</h2>
+
+<p>
+تستخدم Bitcoin دوال تجزئة تشفيرية في عدة أجزاء من تصميمها.
+ومن أشهر الأمثلة استخدام <strong>SHA-256</strong>.
+</p>
+
+<p>
+يظهر Hash في Bitcoin في وظائف متعددة، ومنها:
+</p>
+
+<ul>
+    <li>ربط الكتل ببعضها.</li>
+    <li>حساب Merkle Root من معاملات الكتلة.</li>
+    <li>عملية Proof of Work.</li>
+    <li>إنشاء قيم تشفيرية تستخدم في أجزاء مختلفة من النظام.</li>
+</ul>
+
+<p>
+لذلك فإن فهم Hash يساعدك على فهم جزء مهم من طريقة عمل Bitcoin.
+ويمكنك مراجعة
+<a href="/academy/bitcoin/how-bitcoin-works">درس كيف يعمل Bitcoin؟</a>
+لرؤية الصورة الكاملة للنظام.
+</p>
+
+<h2>Hash وProof of Work</h2>
+
+<p>
+في Bitcoin، يستخدم التعدين <strong>Proof of Work</strong> عملية بحث حسابية تعتمد على Hash.
+</p>
+
+<p>
+يحاول المعدن تغيير قيم معينة في بيانات الكتلة، مثل Nonce، للوصول إلى Hash يستوفي الشرط الذي
+يحدده البروتوكول.
+</p>
+
+<p>
+هذه العملية لا تعني أن المعدن يبحث عن كلمة سر سرية.
+بل يقوم بتجربة عدد كبير من الاحتمالات حتى يجد قيمة تنتج Hash مناسبًا.
+</p>
+
+<p>
+وبما أن التحقق من الحل أسهل بكثير من العثور عليه، تستطيع العقد الأخرى التحقق من أن العمل المطلوب
+قد تم وفق قواعد الشبكة.
+</p>
+
+<p>
+وهذا جزء أساسي من تصميم Proof of Work في Bitcoin.
+</p>
+
+<h2>ما هو Merkle Tree؟</h2>
+
+<p>
+Merkle Tree هي بنية بيانات تستخدم التجزئة لتنظيم مجموعة من البيانات.
+وتستخدم Bitcoin هذه البنية لتلخيص معاملات الكتلة في قيمة تسمى
+<strong>Merkle Root</strong>.
+</p>
+
+<p>
+يمكن تبسيط الفكرة:
+</p>
+
+<ol>
+    <li>يتم حساب Hash لكل معاملة.</li>
+    <li>يتم دمج بعض قيم Hash وحساب Hash جديد منها.</li>
+    <li>تتكرر العملية على مستويات مختلفة.</li>
+    <li>في النهاية يتم الوصول إلى قيمة واحدة تسمى Merkle Root.</li>
+</ol>
+
+<p>
+يمكن تصور البنية بشكل مبسط:
+</p>
+
+<p>
+<strong>
+Transaction Hashes
+→ Hash Pairs
+→ Higher-Level Hashes
+→ Merkle Root
+</strong>
+</p>
+
+<p>
+إذا تغيرت معاملة، فإن Hash الخاص بها يتغير، وهذا التغيير ينتقل عبر الشجرة ويؤثر في Merkle Root.
+</p>
+
+<h2>لماذا Merkle Tree مهمة؟</h2>
+
+<p>
+تسمح Merkle Tree بإنشاء طريقة منظمة وفعالة نسبيًا لإثبات أن معاملة معينة تنتمي إلى مجموعة
+معاملات مرتبطة بجذر معين، دون الحاجة في بعض أنواع التحقق إلى إرسال جميع المعاملات.
+</p>
+
+<p>
+هذه الفكرة مهمة في الأنظمة التي تحتاج إلى التحقق من عضوية البيانات بطريقة أكثر كفاءة.
+</p>
+
+<h2>Hash للملفات والبيانات</h2>
+
+<p>
+لا يقتصر استخدام Hash على Blockchain.
+يمكن استخدام دوال التجزئة للتحقق من سلامة الملفات والبيانات في أنظمة كثيرة.
+</p>
+
+<p>
+مثلًا، إذا كان لديك ملف كبير وقمت بحساب Hash له، ثم قام شخص بتعديل الملف، فإن Hash الناتج
+من النسخة المعدلة سيكون مختلفًا غالبًا.
+</p>
+
+<p>
+لذلك يمكن مقارنة Hash النسخة الأصلية مع Hash النسخة المستلمة للمساعدة في اكتشاف التغيير.
+</p>
+
+<h2>هل يمكن معرفة البيانات الأصلية من الـHash؟</h2>
+
+<p>
+لا توجد طريقة عامة مباشرة لفك Hash واستعادة البيانات الأصلية كما يحدث مع فك التشفير.
+</p>
+
+<p>
+لكن هذا لا يعني أن جميع البيانات محمية من التخمين.
+إذا كانت البيانات الأصلية ذات احتمالات قليلة أو معروفة الشكل، يمكن للمهاجم تجربة مدخلات محتملة
+وحساب Hash لكل منها ومقارنتها بالقيمة المعروفة.
+</p>
+
+<p>
+لهذا السبب تعتمد قوة استخدام Hash في التطبيقات الأمنية على خصائص الخوارزمية وعلى طبيعة البيانات
+والطريقة التي يتم بها استخدامها.
+</p>
+
+<h2>هل يمكن أن يكون لـHash نفسه أكثر من Data؟</h2>
+
+<p>
+من الناحية الرياضية، نعم، يمكن أن توجد مدخلات مختلفة تنتج القيمة نفسها عندما يكون حجم فضاء
+المدخلات أكبر من فضاء المخرجات.
+وهذا يسمى Collision.
+</p>
+
+<p>
+لكن الدوال التشفيرية الحديثة مصممة بحيث يكون العثور على تصادم عملي صالح أمرًا شديد الصعوبة
+وفق نموذج التهديد والخوارزمية المستخدمة.
+</p>
+
+<h2>لماذا تغيير حرف واحد يغير الـHash؟</h2>
+
+<p>
+هذه النتيجة مرتبطة بخصائص دوال التجزئة التشفيرية، وخصوصًا تأثير الانهيار
+<strong>Avalanche Effect</strong>.
+</p>
+
+<p>
+التغيير الصغير في المدخلات يؤدي إلى تغيير كبير في المخرجات، بدل أن يكون التغيير في Hash متناسبًا
+بشكل بسيط مع حجم التغيير في البيانات.
+</p>
+
+<p>
+وهذا يجعل Hash مفيدًا في اكتشاف التغييرات.
+</p>
+
+<h2>هل جميع Blockchain تستخدم SHA-256؟</h2>
+
+<p>
+لا.
+Bitcoin تستخدم SHA-256 في وظائف مهمة، لكن شبكات Blockchain الأخرى قد تستخدم خوارزميات
+تجزئة مختلفة.
+</p>
+
+<p>
+اختيار الخوارزمية يعتمد على تصميم البروتوكول ومتطلباته الأمنية والتقنية.
+</p>
+
+<p>
+لذلك لا ينبغي استخدام عبارة "Blockchain تستخدم SHA-256" كقاعدة عامة لكل الشبكات.
+الأدق أن نقول إن <strong>Bitcoin تستخدم SHA-256 ضمن تصميمها</strong>.
+</p>
+
+<h2>Hash vs Hash Rate</h2>
+
+<p>
+يجب أيضًا عدم الخلط بين:
+</p>
+
+<ul>
+    <li><strong>Hash:</strong> قيمة ناتجة عن دالة التجزئة.</li>
+    <li><strong>Hash Rate:</strong> معدل عدد عمليات التجزئة التي يستطيع جهاز أو شبكة تنفيذها خلال فترة زمنية.</li>
+</ul>
+
+<p>
+في التعدين، يستخدم Hash Rate لوصف القدرة الحسابية، بينما Hash نفسه هو ناتج عملية التجزئة.
+</p>
+
+<h2>مثال مبسط لفهم Hash</h2>
+
+<p>
+تخيل أن لدينا صندوقًا يحتوي على مستند، ونستخدم آلة تنتج بطاقة تعريف خاصة لهذا المستند.
+إذا لم يتغير المستند، يمكن للآلة إنتاج البطاقة نفسها مرة أخرى.
+</p>
+
+<p>
+لكن إذا تم تغيير محتوى المستند، فمن المتوقع أن تنتج الآلة بطاقة مختلفة.
+</p>
+
+<p>
+الـHash يشبه هذه البطاقة الرقمية من حيث الفكرة، مع اختلاف كبير في التفاصيل الرياضية والتشفيرية.
+</p>
+
+<h2>ما الذي تعلمناه حتى الآن؟</h2>
+
+<p>
+في الدروس السابقة تعرفنا على:
+</p>
+
+<ul>
+    <li><a href="/academy/blockchain">مسار Blockchain</a>.</li>
+    <li><a href="/academy/blockchain/how-does-blockchain-work">كيفية عمل Blockchain خطوة بخطوة</a>.</li>
+    <li><a href="/academy/blockchain/what-is-a-block">ما هي Block ومكوناتها</a>.</li>
+</ul>
+
+<p>
+والآن أصبح لدينا مفهوم أساسي آخر: <strong>Hash</strong>.
+</p>
+
+<p>
+فهم هذه المفاهيم معًا يجعل من السهل الانتقال لاحقًا إلى موضوعات أكثر تقدمًا مثل العقد Nodes،
+وآليات التوافق، وProof of Work، وProof of Stake، والتوقيعات الرقمية، والعقود الذكية.
+</p>
+
+<h2>الخلاصة</h2>
+
+<p>
+دوال التجزئة Hash Functions هي أدوات رياضية وتشفيرية تحول البيانات إلى قيم ذات طول محدد وفق
+الخوارزمية المستخدمة.
+</p>
+
+<p>
+تستخدم Blockchain الـHash في وظائف متعددة، منها ربط الكتل، والتحقق من سلامة البيانات، وبناء
+Merkle Trees، والمساعدة في Proof of Work في Bitcoin.
+</p>
+
+<p>
+لكن الـHash وحده لا يضمن أمان Blockchain بالكامل. الأمان يعتمد على تفاعل التجزئة مع التوقيعات
+الرقمية والعقد وآلية التوافق وقواعد البروتوكول وغيرها من العناصر.
+</p>
+
+<p>
+في الدرس القادم سننتقل إلى عنصر آخر أساسي في الشبكة:
+<strong>ما هي Nodes؟ وما الذي تفعله العقد داخل Blockchain؟</strong>
+</p>
+HTML,
+
+    'content_en' => <<<'HTML'
+<p>
+After learning about <strong>Blockchain blocks</strong> and their components in the previous
+lesson, we can now examine one of the most important technical concepts used by many Blockchain
+networks: <strong>cryptographic hash functions</strong>.
+</p>
+
+<p>
+You will often see the word Hash when studying Bitcoin and Blockchain. The concept may seem
+technical at first, but the basic idea is simple:
+<strong>a hash function transforms data into a fixed-size digital value that can act as a fingerprint of the data.</strong>
+</p>
+
+<p>
+In this lesson, we will explain what a hash is, how hashing works, why cryptographic hash
+functions are useful in Blockchain, and how hashes help connect blocks, verify data, and build
+Merkle Trees.
+</p>
+
+<h2>What Is a Hash?</h2>
+
+<p>
+A <strong>hash</strong> is the output produced when data is processed by a hash function.
+A hash function takes input data and produces a digital value of a defined size according to
+the algorithm being used.
+</p>
+
+<p>
+The basic idea can be represented as:
+</p>
+
+<p>
+<strong>Data → Hash Function → Hash</strong>
+</p>
+
+<p>
+If the same data is processed with the same algorithm, the same hash is produced, assuming the
+input and algorithm have not changed.
+</p>
+
+<p>
+If the input changes, even slightly, the resulting hash is expected to change significantly.
+This property is extremely useful for detecting changes in data.
+</p>
+
+<h2>Why Does Blockchain Use Hashing?</h2>
+
+<p>
+Blockchain networks use hashing for multiple purposes, including:
+</p>
+
+<ul>
+    <li>Checking data integrity.</li>
+    <li>Linking blocks together.</li>
+    <li>Building structures such as Merkle Trees.</li>
+    <li>Supporting mechanisms such as Bitcoin's Proof of Work.</li>
+    <li>Creating cryptographic identifiers associated with data.</li>
+</ul>
+
+<p>
+The exact use of hashing differs between Blockchain networks, so the same assumptions should not
+be applied to every Blockchain.
+</p>
+
+<h2>How Does a Hash Function Work?</h2>
+
+<p>
+Consider a simple example.
+Suppose the input is:
+</p>
+
+<p>
+<strong>"Hello Blockchain"</strong>
+</p>
+
+<p>
+A hash function processes this input and produces a hash.
+If the input changes to:
+</p>
+
+<p>
+<strong>"Hello blockchain"</strong>
+</p>
+
+<p>
+changing one character can produce a completely different hash.
+</p>
+
+<p>
+This behavior makes hashing useful for detecting changes in data.
+</p>
+
+<p>
+Real Blockchain systems do not simply hash short text strings. Their inputs can include
+transactions, block data, and complex protocol structures.
+</p>
+
+<h2>Important Properties of Cryptographic Hash Functions</h2>
+
+<p>
+Cryptographic hash functions are designed with important security properties. Not every function
+called a "hash" necessarily provides all of these properties.
+</p>
+
+<h3>1. Deterministic Output</h3>
+
+<p>
+The same input processed by the same algorithm produces the same output.
+</p>
+
+<p>
+This is important because different nodes need to reach the same result when processing the same data.
+</p>
+
+<h3>2. Efficient Computation</h3>
+
+<p>
+A hash should generally be practical to compute for valid inputs.
+However, systems such as Bitcoin's Proof of Work combine fast hash computation with the difficulty
+of finding a hash that satisfies a specific condition.
+</p>
+
+<h3>3. Avalanche Effect</h3>
+
+<p>
+A small change in the input can produce a large change in the resulting hash.
+</p>
+
+<p>
+This makes it difficult to infer similarity between hashes simply because their inputs are similar.
+</p>
+
+<h3>4. Resistance to Finding a Specific Preimage</h3>
+
+<p>
+An important cryptographic property is that it should be computationally difficult to find an input
+that produces a specified target hash, under the relevant security model.
+</p>
+
+<h3>5. Collision Resistance</h3>
+
+<p>
+A collision occurs when two different inputs produce the same hash.
+</p>
+
+<p>
+Mathematically, if the input space is larger than the output space, collisions must exist.
+A secure cryptographic hash function is designed so that finding a useful collision is computationally
+impractical under the relevant attack model.
+</p>
+
+<h2>What Is a Collision?</h2>
+
+<p>
+A <strong>collision</strong> occurs when two different inputs produce the same hash value.
+</p>
+
+<p>
+In simplified form:
+</p>
+
+<p>
+<strong>Data A → Hash X</strong><br>
+<strong>Data B → Hash X</strong>
+</p>
+
+<p>
+If Data A and Data B are different but produce the same hash, this is a collision.
+</p>
+
+<p>
+Modern cryptographic hash functions are designed to make practical collision finding extremely
+difficult when used correctly.
+</p>
+
+<h2>Is Hashing the Same as Encryption?</h2>
+
+<p>
+No.
+This is one of the most important distinctions to understand.
+</p>
+
+<h3>Hashing</h3>
+
+<p>
+Hashing produces a value derived from the input data. It is not primarily designed to provide a
+direct method for recovering the original input from the hash.
+</p>
+
+<h3>Encryption</h3>
+
+<p>
+Encryption transforms data into a protected form so that someone without the appropriate key
+cannot normally understand it, while authorized users can recover the original data through
+decryption.
+</p>
+
+<p>
+In simple terms:
+</p>
+
+<ul>
+    <li><strong>Hashing:</strong> commonly used for digital fingerprints and integrity verification.</li>
+    <li><strong>Encryption:</strong> commonly used to protect confidentiality while allowing authorized recovery.</li>
+</ul>
+
+<p>
+Confusing these concepts can lead to an incorrect understanding of Blockchain security.
+</p>
+
+<h2>How Are Hashes Related to Blocks?</h2>
+
+<p>
+As explained in the
+<a href="/academy/blockchain/what-is-a-block">Blockchain Block lesson</a>,
+Blockchain systems use hashes to connect parts of the record.
+</p>
+
+<p>
+In Bitcoin, the block header contains the hash of the previous block.
+</p>
+
+<p>
+The chain can be simplified as:
+</p>
+
+<p>
+<strong>Block 1 → Hash 1 → Block 2 → Hash 2 → Block 3</strong>
+</p>
+
+<p>
+More precisely, each later block contains a reference to the hash of the previous block.
+</p>
+
+<p>
+If important data in Block 1 changes, its hash changes, and the reference stored in Block 2 would
+no longer match the modified block.
+</p>
+
+<p>
+This is one mechanism that helps detect changes in historical data.
+</p>
+
+<h2>Does Hashing Make Blockchain Unhackable?</h2>
+
+<p>
+No.
+It would be incorrect to say that the existence of hashes alone makes a Blockchain impossible
+to attack or manipulate.
+</p>
+
+<p>
+Blockchain security depends on multiple components working together, including:
+</p>
+
+<ul>
+    <li>Cryptographic hashing.</li>
+    <li>Digital signatures.</li>
+    <li>Consensus mechanisms.</li>
+    <li>Network nodes and distribution.</li>
+    <li>Protocol rules.</li>
+    <li>Economic incentives in some networks.</li>
+</ul>
+
+<p>
+Hashing is therefore one part of the security model rather than the entire security system.
+</p>
+
+<h2>Hashing in Bitcoin</h2>
+
+<p>
+Bitcoin uses cryptographic hash functions in several parts of its design.
+One of the best-known examples is <strong>SHA-256</strong>.
+</p>
+
+<p>
+Hashing appears in Bitcoin in several functions, including:
+</p>
+
+<ul>
+    <li>Connecting blocks.</li>
+    <li>Calculating the Merkle Root from transactions.</li>
+    <li>Proof of Work.</li>
+    <li>Other cryptographic operations within the protocol.</li>
+</ul>
+
+<p>
+Understanding hashing therefore helps explain an important part of Bitcoin's architecture.
+You can review
+<a href="/academy/bitcoin/how-bitcoin-works">How Bitcoin Works</a>
+for the broader picture.
+</p>
+
+<h2>Hashing and Proof of Work</h2>
+
+<p>
+Bitcoin mining uses <strong>Proof of Work</strong>, which involves a computational search based
+on hashing.
+</p>
+
+<p>
+Miners repeatedly modify certain values in the block data, such as the Nonce, while searching
+for a hash that satisfies the condition defined by the protocol.
+</p>
+
+<p>
+The miner is not searching for a secret password.
+Instead, the miner performs a large number of attempts until finding a value that produces an
+acceptable hash.
+</p>
+
+<p>
+Because verifying a proposed solution is much easier than finding it, other nodes can efficiently
+check whether the required work was performed according to the network rules.
+</p>
+
+<p>
+This is a fundamental part of Bitcoin's Proof of Work design.
+</p>
+
+<h2>What Is a Merkle Tree?</h2>
+
+<p>
+A <strong>Merkle Tree</strong> is a data structure that uses hashing to organize a collection
+of data.
+Bitcoin uses this structure to summarize the transactions in a block into a value called the
+<strong>Merkle Root</strong>.
+</p>
+
+<p>
+The basic idea can be simplified as:
+</p>
+
+<ol>
+    <li>Calculate a hash for each transaction.</li>
+    <li>Combine selected hash values and calculate new hashes.</li>
+    <li>Repeat the process across multiple levels.</li>
+    <li>Eventually reach a single value called the Merkle Root.</li>
+</ol>
+
+<p>
+A simplified representation is:
+</p>
+
+<p>
+<strong>
+Transaction Hashes
+→ Hash Pairs
+→ Higher-Level Hashes
+→ Merkle Root
+</strong>
+</p>
+
+<p>
+If one transaction changes, its hash changes, and that change propagates through the tree and
+affects the Merkle Root.
+</p>
+
+<h2>Why Is a Merkle Tree Useful?</h2>
+
+<p>
+Merkle Trees provide a structured and efficient way to prove that a particular piece of data
+belongs to a set associated with a particular root, without always requiring every piece of data
+to be transmitted for the verification.
+</p>
+
+<p>
+This concept is useful in systems that need efficient proofs of data membership.
+</p>
+
+<h2>Hashing Files and Data</h2>
+
+<p>
+Hashing is not limited to Blockchain.
+Hash functions are also widely used to check the integrity of files and data.
+</p>
+
+<p>
+For example, if you calculate the hash of a large file and someone changes the file,
+the hash of the modified version will generally be different.
+</p>
+
+<p>
+Comparing the original hash with the hash of the received file can therefore help detect changes.
+</p>
+
+<h2>Can You Recover the Original Data From a Hash?</h2>
+
+<p>
+There is no general direct "decryption" process that recovers the original data from a hash in
+the same way that encrypted data can be decrypted.
+</p>
+
+<p>
+However, this does not mean that every input is protected equally well from guessing.
+If the original data has a small or predictable set of possibilities, an attacker can try likely
+inputs, calculate their hashes, and compare them with the known hash.
+</p>
+
+<p>
+The security of hashing therefore depends on the algorithm, the input data, and how the hash is used.
+</p>
+
+<h2>Can Different Data Produce the Same Hash?</h2>
+
+<p>
+Mathematically, yes. If the input space is larger than the output space, different inputs must
+eventually share some outputs.
+This is known as a collision.
+</p>
+
+<p>
+Modern cryptographic hash functions are designed to make finding a practical collision extremely
+difficult under their intended security assumptions.
+</p>
+
+<h2>Why Does Changing One Character Change the Hash?</h2>
+
+<p>
+This behavior is related to the properties of cryptographic hash functions, particularly the
+<strong>Avalanche Effect</strong>.
+</p>
+
+<p>
+A small input change can cause a large change in the output instead of producing a small,
+proportional change.
+</p>
+
+<p>
+This makes hashing useful for detecting modifications.
+</p>
+
+<h2>Does Every Blockchain Use SHA-256?</h2>
+
+<p>
+No.
+Bitcoin uses SHA-256 for important functions, but other Blockchain networks can use different
+hash algorithms.
+</p>
+
+<p>
+The choice depends on the protocol's technical and security requirements.
+</p>
+
+<p>
+It is therefore more accurate to say that <strong>Bitcoin uses SHA-256 as part of its design</strong>
+rather than saying that every Blockchain uses SHA-256.
+</p>
+
+<h2>Hash vs Hash Rate</h2>
+
+<p>
+Two terms should not be confused:
+</p>
+
+<ul>
+    <li><strong>Hash:</strong> the value produced by a hash function.</li>
+    <li><strong>Hash Rate:</strong> the number of hashing operations a device or network can perform over a period of time.</li>
+</ul>
+
+<p>
+In mining, Hash Rate describes computational capacity, while a Hash is the result of a hashing operation.
+</p>
+
+<h2>A Simple Analogy for Understanding Hashing</h2>
+
+<p>
+Imagine a machine that produces a unique identification card for a document.
+If the document does not change, the machine can produce the same identification card again.
+</p>
+
+<p>
+If the document is modified, the machine is expected to produce a different card.
+</p>
+
+<p>
+A hash is similar to this digital fingerprint idea, although the underlying mathematics and
+cryptographic properties are much more precise.
+</p>
+
+<h2>What Have We Learned So Far?</h2>
+
+<p>
+In the previous lessons, we learned:
+</p>
+
+<ul>
+    <li><a href="/academy/blockchain">The Blockchain learning path</a>.</li>
+    <li><a href="/academy/blockchain/how-does-blockchain-work">How Blockchain works step by step</a>.</li>
+    <li><a href="/academy/blockchain/what-is-a-block">What a Block is and what it contains</a>.</li>
+</ul>
+
+<p>
+We now have another important concept: <strong>hashing</strong>.
+</p>
+
+<p>
+Understanding these concepts together makes it easier to study more advanced topics such as nodes,
+consensus mechanisms, Proof of Work, Proof of Stake, digital signatures, and smart contracts.
+</p>
+
+<h2>Lesson Summary</h2>
+
+<p>
+Cryptographic hash functions transform data into fixed-size values according to the algorithm being
+used.
+</p>
+
+<p>
+Blockchain systems use hashing for several purposes, including linking blocks, checking data
+integrity, building Merkle Trees, and supporting Proof of Work in Bitcoin.
+</p>
+
+<p>
+Hashing alone does not guarantee Blockchain security. Security depends on the interaction of
+hashing with digital signatures, network nodes, consensus mechanisms, protocol rules, and other
+components.
+</p>
+
+<p>
+In the next lesson, we will examine another essential part of the network:
+<strong>What are Nodes, and what do nodes do inside a Blockchain?</strong>
+</p>
+HTML,
+
+    'image' => null,
+
+    'seo_title' => 'What Is a Hash Function in Blockchain? Complete Guide | AQL Crypto Academy',
+    'seo_title_ar' => 'ما هي دوال التجزئة Hash Functions في البلوك تشين؟ شرح مبسط | AQL Crypto Academy',
+    'seo_title_en' => 'What Is a Hash Function in Blockchain? Complete Guide | AQL Crypto Academy',
+
+    'meta_description' => 'Learn what hash functions are, how hashing works, why Blockchain uses hashes, and how hashing protects data integrity and links blocks.',
+    'meta_description_ar' => 'تعرف على دوال التجزئة Hash Functions وكيف تعمل، ولماذا تستخدم Blockchain الـHash في حماية البيانات وربط الكتل وبناء Merkle Tree وProof of Work.',
+    'meta_description_en' => 'Learn what hash functions are, how hashing works, why Blockchain uses hashes, and how hashing protects data integrity and links blocks.',
+
+    'faq_ar' => [
+        [
+            'question' => 'ما هو Hash في البلوك تشين؟',
+            'answer' => 'الـHash هو قيمة تنتجها دالة تجزئة عند معالجة البيانات، ويمكن استخدامه كبصمة رقمية تساعد في التحقق من سلامة البيانات وربط أجزاء السجل.'
+        ],
+        [
+            'question' => 'ما هي Hash Function؟',
+            'answer' => 'هي دالة رياضية تحول بيانات الإدخال إلى قيمة ذات طول محدد وفق الخوارزمية المستخدمة. تستخدم دوال التجزئة التشفيرية في وظائف أمنية وتقنية متعددة.'
+        ],
+        [
+            'question' => 'هل Hash هو نفسه Encryption؟',
+            'answer' => 'لا. Hashing ينتج بصمة رقمية للبيانات ولا يهدف إلى استعادة البيانات الأصلية مباشرة، بينما Encryption يهدف إلى حماية سرية البيانات مع إمكانية فك التشفير باستخدام المفتاح المناسب.'
+        ],
+        [
+            'question' => 'لماذا تستخدم Blockchain الـHash؟',
+            'answer' => 'يستخدم Hash في وظائف متعددة، منها التحقق من سلامة البيانات، وربط الكتل، وبناء Merkle Trees، ودعم Proof of Work في Bitcoin.'
+        ],
+        [
+            'question' => 'ما هو Collision في Hashing؟',
+            'answer' => 'Collision هو حدوث حالتين مختلفتين من بيانات الإدخال تنتجان قيمة Hash نفسها. الدوال التشفيرية الحديثة مصممة لجعل العثور على تصادم عملي أمرًا شديد الصعوبة.'
+        ],
+        [
+            'question' => 'لماذا يؤدي تغيير حرف واحد إلى تغيير Hash بشكل كبير؟',
+            'answer' => 'بسبب خاصية تسمى Avalanche Effect، حيث يمكن لتغيير صغير جدًا في البيانات أن يؤدي إلى تغيير كبير في قيمة Hash الناتجة.'
+        ],
+        [
+            'question' => 'هل يمكن استعادة البيانات الأصلية من Hash؟',
+            'answer' => 'لا توجد عملية عامة مباشرة لاستعادة البيانات الأصلية من Hash مثل فك التشفير. لكن يمكن تخمين البيانات إذا كانت احتمالاتها قليلة أو معروفة ثم مقارنة Hash الناتج بالقيمة المعروفة.'
+        ],
+        [
+            'question' => 'ما علاقة Hash بالكتل في Blockchain؟',
+            'answer' => 'في Bitcoin تحتوي الكتلة اللاحقة على Hash للكتلة السابقة، مما يساعد على ربط الكتل واكتشاف التغييرات في البيانات التاريخية.'
+        ],
+        [
+            'question' => 'ما هو Merkle Root؟',
+            'answer' => 'Merkle Root هو قيمة تلخص مجموعة من معاملات الكتلة من خلال بنية Merkle Tree، ويستخدم في Bitcoin للمساعدة في التحقق من مجموعة المعاملات.'
+        ],
+        [
+            'question' => 'هل كل Blockchain تستخدم SHA-256؟',
+            'answer' => 'لا. Bitcoin تستخدم SHA-256 في وظائف مهمة، لكن شبكات Blockchain الأخرى يمكن أن تستخدم خوارزميات تجزئة مختلفة.'
+        ],
+    ],
+
+    'faq_en' => [
+        [
+            'question' => 'What is a Hash in Blockchain?',
+            'answer' => 'A hash is a value produced by a hash function when processing data. It can act as a digital fingerprint used to help verify data integrity and connect parts of a record.'
+        ],
+        [
+            'question' => 'What is a Hash Function?',
+            'answer' => 'A hash function transforms input data into a fixed-size value according to the algorithm being used. Cryptographic hash functions are used for multiple security and technical purposes.'
+        ],
+        [
+            'question' => 'Is Hashing the same as Encryption?',
+            'answer' => 'No. Hashing produces a digital fingerprint and is not designed for direct recovery of the original data, while encryption is designed to protect confidentiality while allowing authorized decryption.'
+        ],
+        [
+            'question' => 'Why does Blockchain use hashing?',
+            'answer' => 'Hashing is used for several purposes, including data integrity checks, connecting blocks, building Merkle Trees, and supporting Proof of Work in Bitcoin.'
+        ],
+        [
+            'question' => 'What is a Hash Collision?',
+            'answer' => 'A collision occurs when two different inputs produce the same hash value. Modern cryptographic hash functions are designed to make finding a practical collision extremely difficult.'
+        ],
+        [
+            'question' => 'Why does changing one character change the hash?',
+            'answer' => 'This is related to the Avalanche Effect, where a very small change in the input can cause a large change in the resulting hash.'
+        ],
+        [
+            'question' => 'Can you recover the original data from a hash?',
+            'answer' => 'There is no general direct method for recovering original data from a hash like decrypting encrypted data. However, predictable or low-entropy inputs can sometimes be guessed and compared against the known hash.'
+        ],
+        [
+            'question' => 'How does a hash connect Blockchain blocks?',
+            'answer' => 'In Bitcoin, a later block contains a hash reference to the previous block, helping connect the chain and detect changes to historical data.'
+        ],
+        [
+            'question' => 'What is a Merkle Root?',
+            'answer' => 'A Merkle Root is a value that summarizes a collection of transactions through a Merkle Tree. Bitcoin uses it to help verify the transaction set in a block.'
+        ],
+        [
+            'question' => 'Does every Blockchain use SHA-256?',
+            'answer' => 'No. Bitcoin uses SHA-256 for important functions, while other Blockchain networks can use different hashing algorithms.'
+        ],
+    ],
+
+    'status' => 'published',
+    'sort_order' => 4,
+    'published_at' => now(),
+],
+[
+    'title' => 'What Are Blockchain Nodes?',
+    'title_ar' => 'ما هي العقد Nodes في البلوك تشين؟ شرح دور العقد وأنواعها',
+    'title_en' => 'What Are Blockchain Nodes? A Beginner’s Guide to Blockchain Nodes',
+    'slug' => 'what-are-blockchain-nodes',
+
+    'excerpt' => null,
+    'excerpt_ar' => 'تعرّف على مفهوم العقد Nodes في البلوك تشين، وكيف تتحقق من المعاملات والكتل، وما الفرق بين Full Nodes وLight Nodes وArchival Nodes والعقد المستخدمة في التعدين والتحقق.',
+    'excerpt_en' => 'Learn what blockchain nodes are, how they validate transactions and blocks, and the differences between full nodes, light nodes, archival nodes, miners, and validators.',
+
+    'content' => null,
+
+    'content_ar' => <<<'HTML'
+<h2>ما هي العقد Nodes في البلوك تشين؟</h2>
+
+<p>
+تُعد <strong>العقد Nodes</strong> من أهم المكونات التي تجعل شبكات البلوك تشين تعمل بطريقة موزعة بدلًا من الاعتماد على خادم مركزي واحد.
+</p>
+
+<p>
+ببساطة، العقدة هي جهاز كمبيوتر أو خادم يشغّل برنامجًا خاصًا بشبكة البلوك تشين ويتواصل مع بقية الأجهزة المشاركة في الشبكة. وبحسب نوع العقدة والشبكة التي تعمل عليها، يمكن أن تقوم بمهام مثل استقبال المعاملات، والتحقق من البيانات، وتخزين نسخة من سجل البلوك تشين، ونشر المعلومات إلى العقد الأخرى.
+</p>
+
+<p>
+لفهم الصورة كاملة، يمكنك أولًا مراجعة درس
+<a href="/academy/blockchain">ما هي تقنية البلوك تشين؟</a>
+ثم الانتقال إلى
+<a href="/academy/blockchain/how-does-blockchain-work">كيف تعمل تقنية البلوك تشين؟</a>
+قبل التعمق في دور العقد.
+</p>
+
+<h2>ما المقصود بـ Node في البلوك تشين؟</h2>
+
+<p>
+الـ <strong>Node</strong> أو العقدة هي جهاز متصل بشبكة البلوك تشين ويشغّل برنامج الشبكة الذي يسمح له بالمشاركة في عملية تبادل البيانات وفق القواعد المحددة للبروتوكول.
+</p>
+
+<p>
+ولا يعني وجود جهاز على الشبكة بالضرورة أنه يقوم بكل وظائف البلوك تشين. فهناك أنواع مختلفة من العقد، وتختلف مسؤولياتها حسب تصميم الشبكة والبرنامج المستخدم.
+</p>
+
+<p>
+على سبيل المثال، قد تقوم عقدة كاملة Full Node بتنزيل والتحقق من كمية كبيرة من بيانات البلوك تشين، بينما قد تعتمد عقدة خفيفة Light Node على عقد أخرى للحصول على بعض البيانات التي تحتاجها.
+</p>
+
+<h2>لماذا تحتاج البلوك تشين إلى العقد؟</h2>
+
+<p>
+الهدف الأساسي من توزيع البيانات على عدد كبير من العقد هو تقليل الاعتماد على نقطة مركزية واحدة.
+</p>
+
+<p>
+في نظام مركزي تقليدي، يمكن أن يكون هناك خادم رئيسي يحتفظ بالسجل ويقرر ما هي البيانات الصحيحة. أما في شبكة البلوك تشين، فيمكن لعدد كبير من المشاركين الاحتفاظ بالبيانات والتحقق منها وفق قواعد البروتوكول.
+</p>
+
+<p>
+وهذا يساعد الشبكة على تحقيق خصائص مثل:
+</p>
+
+<ul>
+    <li>توزيع البيانات بين عدد كبير من المشاركين.</li>
+    <li>التحقق من المعاملات والكتل وفق قواعد محددة.</li>
+    <li>تقليل الاعتماد على نقطة مركزية واحدة.</li>
+    <li>نشر المعلومات الجديدة بين أجزاء الشبكة.</li>
+    <li>الحفاظ على نسخة من سجل الشبكة لدى أنواع معينة من العقد.</li>
+</ul>
+
+<h2>كيف تعمل العقد في شبكة البلوك تشين؟</h2>
+
+<p>
+يمكن تبسيط عمل العقد إلى مجموعة من الخطوات. عندما يتم إنشاء معاملة جديدة، يتم إرسالها إلى الشبكة، وتستقبلها العقد التي تتلقى هذه البيانات.
+</p>
+
+<p>
+بعد ذلك، تقوم العقد المناسبة بفحص المعاملة وفق قواعد الشبكة. وقد تشمل عملية التحقق التأكد من صحة التوقيع الرقمي، وصحة تنسيق المعاملة، وعدم محاولة إنفاق الأصول بطريقة تخالف قواعد البروتوكول.
+</p>
+
+<p>
+إذا كانت المعاملة صالحة وفق القواعد التي تطبقها العقدة، يمكن نشرها إلى عقد أخرى في الشبكة.
+</p>
+
+<p>
+وعندما يتم إنشاء كتلة جديدة، تقوم العقد المناسبة باستقبال الكتلة والتحقق من محتوياتها ومن ارتباطها بسلسلة الكتل السابقة. وإذا كانت الكتلة لا تتوافق مع قواعد الشبكة، فقد ترفضها العقدة ولا تقوم بتمريرها باعتبارها كتلة صالحة.
+</p>
+
+<p>
+للتعمق أكثر في مفهوم الكتلة، راجع درس
+<a href="/academy/blockchain/what-is-a-block">ما هي الكتلة Block في البلوك تشين؟</a>
+</p>
+
+<h2>ما الذي تتحقق منه العقد؟</h2>
+
+<p>
+تختلف تفاصيل التحقق من شبكة إلى أخرى، ولكن يمكن أن تشمل عملية التحقق عددًا من القواعد التقنية.
+</p>
+
+<h3>1. التحقق من المعاملة</h3>
+
+<p>
+تتحقق العقدة من أن المعاملة تتوافق مع قواعد البروتوكول، مثل صحة البيانات والتوقيع وعدم وجود تعارض واضح مع حالة الشبكة التي تعرفها العقدة.
+</p>
+
+<h3>2. التحقق من التوقيعات</h3>
+
+<p>
+تستخدم العديد من شبكات البلوك تشين التوقيعات الرقمية لإثبات أن صاحب المفتاح الخاص المرتبط بالأصول أو الحساب هو من سمح بتنفيذ المعاملة.
+</p>
+
+<h3>3. التحقق من الكتل</h3>
+
+<p>
+عند استقبال كتلة جديدة، يمكن للعقدة التحقق من مجموعة من المعلومات، مثل ارتباط الكتلة بالكتلة السابقة، وصحة المعاملات الموجودة داخلها، والتزامها بقواعد البروتوكول وآلية الإجماع المستخدمة في الشبكة.
+</p>
+
+<h3>4. التحقق من قواعد الإجماع</h3>
+
+<p>
+تختلف آليات الإجماع بين شبكات البلوك تشين. فقد تعتمد بعض الشبكات على Proof of Work، بينما تستخدم شبكات أخرى Proof of Stake أو آليات مختلفة.
+</p>
+
+<p>
+لذلك لا يمكن افتراض أن كل عقدة في جميع الشبكات تعمل بالطريقة نفسها.
+</p>
+
+<h2>ما هي Full Node؟</h2>
+
+<p>
+<strong>Full Node</strong> أو العقدة الكاملة هي عقدة تقوم عادةً بتنزيل وتخزين والتحقق من قدر كبير من بيانات سلسلة البلوك تشين وفق قواعد البروتوكول.
+</p>
+
+<p>
+تساعد العقد الكاملة في التحقق المستقل من صحة البيانات بدلًا من الاعتماد الكامل على طرف خارجي يخبرها بما هو صحيح.
+</p>
+
+<p>
+ومن المهم التفريق بين <strong>تخزين البيانات</strong> و<strong>التحقق منها</strong>. فوجود بيانات على جهاز لا يعني بالضرورة أن البرنامج يقوم بالتحقق الكامل من جميع قواعد الشبكة.
+</p>
+
+<h2>ما هي Light Node؟</h2>
+
+<p>
+<strong>Light Node</strong> أو العقدة الخفيفة مصممة لتحتاج إلى موارد تخزين ومعالجة أقل من العقدة الكاملة.
+</p>
+
+<p>
+بدلًا من الاحتفاظ بكل بيانات البلوك تشين، يمكن للعقدة الخفيفة الاحتفاظ بمعلومات محددة والاعتماد على عقد أخرى للحصول على البيانات الإضافية التي تحتاجها.
+</p>
+
+<p>
+هذا يجعل هذا النوع مناسبًا في بعض الحالات للأجهزة ذات الموارد المحدودة، مثل بعض الهواتف أو البيئات التي لا يمكن فيها تخزين سلسلة بلوك تشين كاملة.
+</p>
+
+<p>
+لكن المقابل هو أن مستوى الاستقلالية والتحقق المحلي قد يختلف عن العقدة الكاملة.
+</p>
+
+<h2>ما هي Archival Node؟</h2>
+
+<p>
+مصطلح <strong>Archival Node</strong> أو العقدة الأرشيفية يُستخدم في بعض شبكات البلوك تشين لوصف عقدة تحتفظ ببيانات تاريخية موسعة، وقد تشمل حالات تاريخية للشبكة لا تحتاج إليها العقدة الكاملة العادية في كل استخدام.
+</p>
+
+<p>
+ويختلف معنى ومتطلبات العقدة الأرشيفية حسب تصميم الشبكة والبرنامج المستخدم. لذلك لا ينبغي اعتبار Archival Node نوعًا موحدًا له المواصفات نفسها في جميع شبكات البلوك تشين.
+</p>
+
+<h2>ما الفرق بين Node وMiner؟</h2>
+
+<p>
+هناك خلط شائع بين العقدة والمُعدّن، لكنهما ليسا الشيء نفسه.
+</p>
+
+<p>
+<strong>Node</strong> هي جهاز أو برنامج مشارك في شبكة البلوك تشين، بينما <strong>Miner</strong> هو مشارك يؤدي وظيفة التعدين في الشبكات التي تستخدم آلية Proof of Work.
+</p>
+
+<p>
+قد يشغّل المُعدّن برنامج عقدة ويتلقى المعاملات والكتل مثل المشاركين الآخرين، لكنه يستخدم أيضًا موارد الحوسبة لتنفيذ عملية التعدين وإثبات العمل وفق قواعد الشبكة.
+</p>
+
+<p>
+إذن:
+</p>
+
+<ul>
+    <li>كل Miner يحتاج إلى المشاركة في شبكة البلوك تشين بطريقة تتوافق مع البروتوكول.</li>
+    <li>لكن ليس كل Node هي Miner.</li>
+    <li>تشغيل Full Node لا يعني أنك تقوم بالتعدين.</li>
+</ul>
+
+<h2>ما الفرق بين Node وValidator؟</h2>
+
+<p>
+يظهر مصطلح <strong>Validator</strong> أو المدقق بشكل خاص في شبكات تستخدم آليات إجماع مثل Proof of Stake.
+</p>
+
+<p>
+الـ Validator هو مشارك له دور محدد في آلية الإجماع، وقد يشارك في اقتراح الكتل أو التصويت عليها أو تأكيدها وفق قواعد الشبكة.
+</p>
+
+<p>
+أما Node فهي مفهوم أوسع يشير إلى جهاز أو برنامج متصل بالشبكة ويشارك في تشغيلها وتبادل بياناتها بحسب وظيفته.
+</p>
+
+<p>
+لذلك، يمكن أن تكون هناك عقد لا تؤدي دور Validator، بينما يقوم Validator بتشغيل البنية البرمجية اللازمة للمشاركة في الشبكة وفق آلية الإجماع.
+</p>
+
+<h2>كيف تساعد العقد في اللامركزية؟</h2>
+
+<p>
+من أهم أفكار البلوك تشين أن البيانات وقواعد الشبكة لا تعتمد بالضرورة على خادم واحد تديره جهة واحدة.
+</p>
+
+<p>
+عندما توجد عقد متعددة في مواقع مختلفة وتقوم بالتحقق من البيانات وفق القواعد نفسها، يصبح من الصعب اختزال الشبكة في جهاز مركزي واحد.
+</p>
+
+<p>
+لكن اللامركزية ليست مجرد عدد العقد فقط. فهي تتأثر أيضًا بعوامل أخرى، مثل توزيع مشغلي العقد، وتوزيع موارد الشبكة، وآلية الإجماع، ومتطلبات تشغيل العقد، وطبيعة البروتوكول.
+</p>
+
+<p>
+لذلك فإن زيادة عدد العقد لا تعني تلقائيًا أن الشبكة أصبحت أكثر لامركزية في كل جانب.
+</p>
+
+<h2>كيف تنتشر المعاملات بين العقد؟</h2>
+
+<p>
+تستخدم شبكات البلوك تشين عادةً اتصالًا نظيرًا إلى نظير <strong>Peer-to-Peer</strong> يسمح للعقد بالتواصل مباشرة مع عقد أخرى.
+</p>
+
+<p>
+عندما تستقبل عقدة معاملة جديدة وتتحقق من أنها تستوفي القواعد التي يمكنها فحصها، يمكنها نشرها إلى مجموعة من العقد المتصلة بها.
+</p>
+
+<p>
+تستقبل عقد أخرى هذه المعاملة، وتقوم بدورها بالتحقق منها ثم قد تنشرها إلى عقد إضافية.
+</p>
+
+<p>
+بهذه الطريقة يمكن أن تنتشر البيانات عبر الشبكة دون الحاجة إلى خادم مركزي واحد يقوم بتوزيع كل شيء على جميع المشاركين.
+</p>
+
+<h2>هل كل العقد تحتفظ بنسخة كاملة من البلوك تشين؟</h2>
+
+<p>
+لا.
+</p>
+
+<p>
+يعتمد ذلك على نوع العقدة وتصميم الشبكة والبرنامج المستخدم.
+</p>
+
+<p>
+العقد الكاملة عادةً تحتفظ ببيانات واسعة وتتحقق منها، بينما العقد الخفيفة تحتاج إلى كمية أقل من البيانات وقد تعتمد على عقد أخرى.
+</p>
+
+<p>
+كما توجد في بعض الأنظمة عقد أرشيفية تحتفظ ببيانات تاريخية أكثر تفصيلًا.
+</p>
+
+<h2>هل تشغيل Node يعني امتلاك عملات رقمية؟</h2>
+
+<p>
+لا.
+</p>
+
+<p>
+تشغيل عقدة لا يعني بالضرورة أنك تمتلك عملة رقمية أو أنك تقوم بالتداول.
+</p>
+
+<p>
+قد يشغّل شخص عقدة بهدف التحقق بشكل مستقل من بيانات الشبكة، أو المساهمة في بنيتها التحتية، أو دراسة البروتوكول، أو تطوير التطبيقات التي تتفاعل معها.
+</p>
+
+<h2>هل تشغيل Node يحقق أرباحًا؟</h2>
+
+<p>
+ليس بالضرورة.
+</p>
+
+<p>
+تشغيل عقدة عادية لا يعني تلقائيًا الحصول على مكافآت مالية.
+</p>
+
+<p>
+المكافآت، عندما تكون موجودة، تعتمد على دور محدد في بروتوكول الشبكة، مثل التعدين في بعض شبكات Proof of Work أو التحقق والمشاركة في الإجماع في بعض شبكات Proof of Stake.
+</p>
+
+<p>
+لذلك يجب عدم الخلط بين تشغيل Node عادية وبين المشاركة في التعدين أو التحقق كـ Validator.
+</p>
+
+<h2>ما المتطلبات اللازمة لتشغيل عقدة؟</h2>
+
+<p>
+تعتمد المتطلبات على شبكة البلوك تشين نفسها. وقد تشمل:
+</p>
+
+<ul>
+    <li>مساحة تخزين كافية.</li>
+    <li>ذاكرة RAM مناسبة.</li>
+    <li>معالج قادر على تشغيل برنامج العقدة.</li>
+    <li>اتصال إنترنت مستقر.</li>
+    <li>وقت تشغيل مناسب للحفاظ على اتصال العقدة بالشبكة.</li>
+    <li>تحميل برنامج العقدة الصحيح والمتوافق مع الشبكة.</li>
+</ul>
+
+<p>
+بعض الشبكات قد تحتاج إلى موارد أكبر بكثير من شبكات أخرى، ولذلك لا توجد مواصفات موحدة لتشغيل جميع أنواع العقد.
+</p>
+
+<h2>ما فوائد تشغيل Full Node؟</h2>
+
+<p>
+يمكن لتشغيل عقدة كاملة أن يمنح المستخدم درجة أعلى من الاستقلالية في التعامل مع بيانات الشبكة، لأنها تستطيع التحقق من البيانات وفق قواعد البروتوكول بدلًا من الاعتماد بالكامل على خدمة خارجية.
+</p>
+
+<p>
+وقد تكون العقدة الكاملة مفيدة للمطورين والمستخدمين المتقدمين والخدمات التي تحتاج إلى التفاعل المباشر مع شبكة البلوك تشين.
+</p>
+
+<p>
+لكن تشغيلها قد يحتاج إلى موارد تخزين وذاكرة واتصال مناسبة، وقد يتطلب إدارة وتحديث البرنامج باستمرار.
+</p>
+
+<h2>هل العقد تجعل البلوك تشين غير قابل للاختراق؟</h2>
+
+<p>
+لا.
+</p>
+
+<p>
+العقد جزء مهم من بنية الشبكة، لكنها لا تجعل أي بلوك تشين محصنًا تلقائيًا ضد جميع أنواع الهجمات.
+</p>
+
+<p>
+أمن الشبكة يعتمد على مجموعة من العناصر، مثل تصميم البروتوكول، وآلية الإجماع، وتوزيع المشاركين، وقواعد التحقق، وأمان البرمجيات والمفاتيح الخاصة والبنية التحتية.
+</p>
+
+<p>
+كما أن التطبيقات والمحافظ والخدمات التي تتعامل مع البلوك تشين يمكن أن تحتوي على نقاط ضعف حتى إذا كان البروتوكول نفسه يعمل وفق قواعده.
+</p>
+
+<h2>العلاقة بين Nodes وBlockchain</h2>
+
+<p>
+يمكن تصور العلاقة بطريقة بسيطة:
+</p>
+
+<ul>
+    <li><strong>Blockchain:</strong> سجل موزع يتكون من سلسلة من الكتل وفق قواعد محددة.</li>
+    <li><strong>Node:</strong> جهاز أو برنامج يشارك في شبكة البلوك تشين ويتعامل مع بياناتها وفق وظيفته.</li>
+    <li><strong>Transaction:</strong> عملية يتم إرسالها إلى الشبكة وتخضع للتحقق وفق قواعد البروتوكول.</li>
+    <li><strong>Block:</strong> مجموعة من البيانات والمعاملات يتم تنظيمها وفق قواعد الشبكة.</li>
+    <li><strong>Miner:</strong> مشارك يؤدي وظيفة التعدين في شبكات Proof of Work.</li>
+    <li><strong>Validator:</strong> مشارك يؤدي دورًا في آلية الإجماع في شبكات تستخدم آليات مثل Proof of Stake.</li>
+</ul>
+
+<h2>مثال مبسط لفهم دور العقد</h2>
+
+<p>
+تخيل أن مجموعة من الأشخاص تحتفظ بدفتر حسابات مشترك. عندما يضيف شخص عملية جديدة إلى الدفتر، لا يعتمد الجميع على شخص واحد ليخبرهم بأنها صحيحة.
+</p>
+
+<p>
+بدلًا من ذلك، يمكن لعدد من المشاركين فحص العملية وفق قواعد متفق عليها، ثم تحديث سجلاتهم عندما تصبح البيانات جزءًا من السجل المعتمد.
+</p>
+
+<p>
+هذا المثال مبسط جدًا ولا يمثل جميع التفاصيل التقنية للبلوك تشين، لكنه يساعد على فهم الفكرة الأساسية: <strong>العقد هي جزء من البنية التي تسمح للشبكة الموزعة بتبادل البيانات والتحقق منها دون الاعتماد الكامل على خادم مركزي واحد.</strong>
+</p>
+
+<h2>ما علاقة العقد بدوال التجزئة؟</h2>
+
+<p>
+تستخدم العديد من شبكات البلوك تشين دوال التجزئة في أجزاء مختلفة من النظام، مثل ربط الكتل والتحقق من سلامة البيانات وبناء هياكل بيانات معينة.
+</p>
+
+<p>
+يمكنك معرفة المزيد في درس
+<a href="/academy/blockchain/what-is-hash-function">ما هي دوال التجزئة Hash Functions في البلوك تشين؟</a>
+</p>
+
+<p>
+ومع ذلك، فإن العقد لا تعتمد على Hash Functions وحدها. فهي جزء من مجموعة أكبر من القواعد والتقنيات التي تشمل التوقيعات الرقمية، وآليات الإجماع، وبروتوكولات الاتصال، وهياكل البيانات.
+</p>
+
+<h2>الخلاصة</h2>
+
+<p>
+العقد Nodes هي أحد المكونات الأساسية لشبكات البلوك تشين. وهي أجهزة أو برامج تتصل بالشبكة وتشارك في تبادل البيانات والتحقق منها وتخزينها بحسب نوع العقدة ووظيفتها.
+</p>
+
+<p>
+هناك أنواع مختلفة من العقد، مثل Full Nodes وLight Nodes وبعض العقد الأرشيفية، كما توجد أدوار متخصصة مثل Miners في Proof of Work وValidators في بعض شبكات Proof of Stake.
+</p>
+
+<p>
+وفهم دور العقد يساعدك على فهم كيفية انتقال المعاملات، وكيف يتم التحقق من الكتل، وكيف تعمل البلوك تشين كشبكة موزعة بدلًا من الاعتماد على خادم مركزي واحد.
+</p>
+
+<p>
+بعد فهم العقد، ستكون الخطوة التالية في مسار Blockchain هي الانتقال إلى المفاهيم التي تشرح بصورة أعمق كيفية مشاركة المشاركين في الشبكة وآليات الإجماع واتخاذ القرار داخلها.
+</p>
+
+<h2>روابط مفيدة داخل أكاديمية AQL Crypto</h2>
+
+<ul>
+    <li><a href="/academy/blockchain">مسار Blockchain الكامل</a></li>
+    <li><a href="/academy/blockchain/what-is-blockchain">ما هي تقنية البلوك تشين؟</a></li>
+    <li><a href="/academy/blockchain/how-does-blockchain-work">كيف تعمل تقنية البلوك تشين؟</a></li>
+    <li><a href="/academy/blockchain/what-is-a-block">ما هي الكتلة Block في البلوك تشين؟</a></li>
+    <li><a href="/academy/blockchain/what-is-hash-function">ما هي دوال التجزئة Hash Functions؟</a></li>
+    <li><a href="/academy/bitcoin/how-bitcoin-works">كيف يعمل Bitcoin؟</a></li>
+</ul>
+HTML,
+
+    'content_en' => <<<'HTML'
+<h2>What Are Blockchain Nodes?</h2>
+
+<p>
+<strong>Blockchain nodes</strong> are one of the fundamental components that allow blockchain networks to operate in a distributed way instead of depending on a single central server.
+</p>
+
+<p>
+In simple terms, a node is a computer or server running blockchain software and communicating with other participants in the network. Depending on the blockchain and the type of node, it may receive transactions, validate data, store blockchain information, relay data to other nodes, or participate in consensus-related activities.
+</p>
+
+<p>
+If you are new to blockchain, start with
+<a href="/academy/blockchain">What Is Blockchain?</a>
+and then read
+<a href="/academy/blockchain/how-does-blockchain-work">How Does Blockchain Work?</a>
+before going deeper into the role of nodes.
+</p>
+
+<h2>What Is a Node in Blockchain?</h2>
+
+<p>
+A <strong>node</strong> is a computer or software instance connected to a blockchain network and running software that allows it to communicate with other participants according to the rules of the protocol.
+</p>
+
+<p>
+Not every node performs exactly the same tasks. Different blockchain networks support different node types and architectures.
+</p>
+
+<p>
+For example, a full node may download, store, and independently validate a large amount of blockchain data, while a light node may keep a smaller amount of information and request additional data from other nodes when needed.
+</p>
+
+<h2>Why Does Blockchain Need Nodes?</h2>
+
+<p>
+One of the main purposes of distributing blockchain data across many nodes is to reduce dependence on a single central point.
+</p>
+
+<p>
+In a traditional centralized system, a central server or authority may maintain the primary record and determine which data is valid. In a blockchain network, multiple participants can maintain data and verify it according to the rules of the protocol.
+</p>
+
+<p>
+Depending on the network design, nodes can help provide:
+</p>
+
+<ul>
+    <li>Distributed data storage.</li>
+    <li>Independent transaction and block validation.</li>
+    <li>Reduced dependence on a single central server.</li>
+    <li>Propagation of new information across the network.</li>
+    <li>Access to blockchain data for users and applications.</li>
+</ul>
+
+<h2>How Do Blockchain Nodes Work?</h2>
+
+<p>
+The process can be simplified into several steps. When a new transaction is created, it is sent to the network and received by nodes that are able to process it.
+</p>
+
+<p>
+The appropriate node software checks the transaction against the rules it can validate. Depending on the blockchain, this may include checking digital signatures, transaction structure, available balances or resources, and whether the transaction violates known protocol rules.
+</p>
+
+<p>
+If the transaction is considered valid, the node can relay it to other connected nodes.
+</p>
+
+<p>
+When a new block is created, nodes can receive it and verify information such as its relationship to the previous block, the validity of its transactions, and compliance with the blockchain's consensus and protocol rules.
+</p>
+
+<p>
+If a block does not satisfy the rules enforced by the node, the node may reject it rather than treating it as a valid part of the chain.
+</p>
+
+<p>
+For more information about blocks, see
+<a href="/academy/blockchain/what-is-a-block">What Is a Block in Blockchain?</a>
+</p>
+
+<h2>What Do Nodes Validate?</h2>
+
+<p>
+The exact validation process differs between blockchain networks, but it can include several important checks.
+</p>
+
+<h3>1. Transaction Validation</h3>
+
+<p>
+Nodes can verify that a transaction follows the protocol rules, including checking its structure and other conditions required by the network.
+</p>
+
+<h3>2. Digital Signatures</h3>
+
+<p>
+Many blockchain systems use digital signatures to prove that a transaction was authorized by the holder of the appropriate private key.
+</p>
+
+<h3>3. Block Validation</h3>
+
+<p>
+When a node receives a new block, it can verify information such as the connection to the previous block, the validity of the transactions, and compliance with the network's rules.
+</p>
+
+<h3>4. Consensus Rules</h3>
+
+<p>
+Different blockchain networks use different consensus mechanisms. Some use Proof of Work, while others use Proof of Stake or other approaches.
+</p>
+
+<p>
+Therefore, it is incorrect to assume that every node in every blockchain network performs exactly the same tasks.
+</p>
+
+<h2>What Is a Full Node?</h2>
+
+<p>
+A <strong>Full Node</strong> is a node that generally downloads, stores, and independently validates a substantial amount of blockchain data according to the network's rules.
+</p>
+
+<p>
+Full nodes can provide an important form of independent verification because they do not have to blindly trust an external service to determine whether blockchain data follows the protocol.
+</p>
+
+<p>
+The exact storage and validation requirements depend on the blockchain implementation. A node's ability to independently validate data is more important than simply having a copy of some blockchain files.
+</p>
+
+<h2>What Is a Light Node?</h2>
+
+<p>
+A <strong>Light Node</strong> is designed to operate with lower storage and resource requirements than a full node.
+</p>
+
+<p>
+Instead of storing and processing the entire blockchain history, a light client may keep a smaller set of information and request additional data from other nodes when necessary.
+</p>
+
+<p>
+This can make light clients useful in environments with limited storage or computing resources, including some mobile and lightweight applications.
+</p>
+
+<p>
+The trade-off is that the level of independent verification can differ from that of a full node.
+</p>
+
+<h2>What Is an Archival Node?</h2>
+
+<p>
+The term <strong>Archival Node</strong> is used in some blockchain ecosystems for nodes that retain extensive historical information, potentially including historical states that ordinary full nodes may not retain in the same way.
+</p>
+
+<p>
+The exact meaning and requirements of an archival node depend on the blockchain and its software implementation. It should therefore not be treated as a universal node type with identical requirements across all blockchain networks.
+</p>
+
+<h2>What Is the Difference Between a Node and a Miner?</h2>
+
+<p>
+A common misunderstanding is that every node is a miner. They are not the same thing.
+</p>
+
+<p>
+A <strong>Node</strong> is a computer or software instance participating in a blockchain network, while a <strong>Miner</strong> performs the mining function in blockchain systems that use Proof of Work.
+</p>
+
+<p>
+A miner may also operate node software and receive and relay blockchain data, but mining adds a specialized computational role associated with producing blocks according to the Proof of Work rules.
+</p>
+
+<p>
+In other words:
+</p>
+
+<ul>
+    <li>Not every node is a miner.</li>
+    <li>Running a full node does not automatically mean that you are mining.</li>
+    <li>Mining is a specialized role used by Proof of Work networks.</li>
+</ul>
+
+<h2>What Is the Difference Between a Node and a Validator?</h2>
+
+<p>
+The term <strong>Validator</strong> is commonly used in blockchain networks that use consensus mechanisms such as Proof of Stake.
+</p>
+
+<p>
+A validator is a participant with a specific role in the consensus mechanism. Depending on the protocol, validators may propose blocks, attest to blocks, vote on network decisions, or perform other consensus-related tasks.
+</p>
+
+<p>
+A node is a broader concept referring to a computer or software instance connected to the blockchain network and performing functions defined by the network's architecture.
+</p>
+
+<p>
+Therefore, not every node is necessarily a validator, while validators need the appropriate software and network participation mechanisms to perform their role.
+</p>
+
+<h2>How Do Nodes Support Decentralization?</h2>
+
+<p>
+A central idea of blockchain technology is that the network does not necessarily depend on one server controlled by one organization.
+</p>
+
+<p>
+When multiple independent participants operate nodes and verify data according to the same protocol rules, the network can distribute important functions across many participants.
+</p>
+
+<p>
+However, decentralization is not determined only by the number of nodes. It can also depend on factors such as geographic and organizational distribution, hardware requirements, consensus design, economic incentives, and who controls the infrastructure.
+</p>
+
+<p>
+For this reason, simply counting nodes does not provide a complete measurement of decentralization.
+</p>
+
+<h2>How Do Transactions Spread Between Nodes?</h2>
+
+<p>
+Many blockchain networks use <strong>Peer-to-Peer (P2P)</strong> communication, allowing nodes to communicate directly with other nodes.
+</p>
+
+<p>
+When a node receives a new transaction and determines that it satisfies the relevant validation rules, it can relay the transaction to connected peers.
+</p>
+
+<p>
+Those nodes can perform their own checks and relay the transaction further.
+</p>
+
+<p>
+This creates a distributed communication process in which information can move through the network without requiring one central server to distribute every transaction to every participant.
+</p>
+
+<h2>Does Every Node Store the Entire Blockchain?</h2>
+
+<p>
+No.
+</p>
+
+<p>
+It depends on the node type and the blockchain architecture.
+</p>
+
+<p>
+Full nodes generally maintain and validate a substantial amount of blockchain data, while light clients use fewer local resources and may request information from other nodes.
+</p>
+
+<p>
+Some networks also support archival nodes that retain additional historical information.
+</p>
+
+<h2>Does Running a Node Mean Owning Cryptocurrency?</h2>
+
+<p>
+No.
+</p>
+
+<p>
+Running a node does not automatically mean that you own cryptocurrency or participate in trading.
+</p>
+
+<p>
+Someone may operate a node to independently verify blockchain data, support network infrastructure, learn about the protocol, develop applications, or interact directly with the blockchain.
+</p>
+
+<h2>Does Running a Node Make Money?</h2>
+
+<p>
+Not necessarily.
+</p>
+
+<p>
+Running an ordinary node does not automatically provide financial rewards.
+</p>
+
+<p>
+Rewards, when available, are normally associated with specific protocol roles, such as mining in some Proof of Work networks or validator participation in certain Proof of Stake systems.
+</p>
+
+<p>
+Therefore, operating a node should not automatically be considered the same as mining or validating.
+</p>
+
+<h2>What Are the Requirements for Running a Node?</h2>
+
+<p>
+The requirements depend heavily on the blockchain network. They may include:
+</p>
+
+<ul>
+    <li>Enough storage capacity.</li>
+    <li>Sufficient RAM.</li>
+    <li>A processor capable of running the node software.</li>
+    <li>A stable internet connection.</li>
+    <li>Suitable uptime to keep the node connected to the network.</li>
+    <li>Correct and up-to-date blockchain node software.</li>
+</ul>
+
+<p>
+Some networks require significantly more resources than others, so there is no universal hardware specification for every blockchain node.
+</p>
+
+<h2>What Are the Benefits of Running a Full Node?</h2>
+
+<p>
+Running a full node can give a user greater independence when interacting with blockchain data because the node can validate information according to the protocol rather than relying entirely on an external service.
+</p>
+
+<p>
+Full nodes can be useful for developers, advanced users, infrastructure providers, and applications that need direct access to blockchain network data.
+</p>
+
+<p>
+However, operating a full node can require significant storage, memory, bandwidth, maintenance, and software updates depending on the network.
+</p>
+
+<h2>Do Nodes Make Blockchain Unhackable?</h2>
+
+<p>
+No.
+</p>
+
+<p>
+Nodes are an important part of blockchain infrastructure, but they do not automatically make a blockchain immune to every type of attack.
+</p>
+
+<p>
+Blockchain security depends on multiple factors, including protocol design, consensus mechanisms, participant distribution, validation rules, software security, private-key security, and infrastructure.
+</p>
+
+<p>
+Applications, wallets, exchanges, and other services interacting with a blockchain can also contain vulnerabilities even when the underlying blockchain protocol is functioning according to its rules.
+</p>
+
+<h2>The Relationship Between Nodes and Blockchain</h2>
+
+<p>
+The relationship can be summarized simply:
+</p>
+
+<ul>
+    <li><strong>Blockchain:</strong> A distributed ledger organized into blocks according to protocol rules.</li>
+    <li><strong>Node:</strong> A computer or software instance participating in the blockchain network.</li>
+    <li><strong>Transaction:</strong> An operation submitted to the network and processed according to protocol rules.</li>
+    <li><strong>Block:</strong> A structured collection of transactions and other data defined by the blockchain.</li>
+    <li><strong>Miner:</strong> A participant performing mining in Proof of Work systems.</li>
+    <li><strong>Validator:</strong> A participant performing a consensus role in networks using mechanisms such as Proof of Stake.</li>
+</ul>
+
+<h2>A Simple Example of How Nodes Work</h2>
+
+<p>
+Imagine a group of people maintaining a shared accounting book. When someone wants to add a new transaction, the group does not necessarily depend on one person to declare whether it is valid.
+</p>
+
+<p>
+Instead, multiple participants can check the transaction against agreed rules and update their records when the transaction becomes part of the accepted ledger.
+</p>
+
+<p>
+This is only an analogy and does not represent every technical detail of blockchain systems, but it illustrates the basic idea: <strong>nodes are part of the infrastructure that allows a distributed network to exchange and validate data without relying entirely on a single central server.</strong>
+</p>
+
+<h2>What Is the Relationship Between Nodes and Hash Functions?</h2>
+
+<p>
+Many blockchain networks use hash functions in different parts of their systems, including block linking, data integrity, and specific data structures.
+</p>
+
+<p>
+Learn more in:
+<a href="/academy/blockchain/what-is-hash-function">What Are Hash Functions in Blockchain?</a>
+</p>
+
+<p>
+However, nodes do not rely on hash functions alone. They are part of a broader system that can include digital signatures, consensus mechanisms, networking protocols, and data structures.
+</p>
+
+<h2>Conclusion</h2>
+
+<p>
+Blockchain nodes are fundamental components of distributed blockchain networks. They are computers or software instances that connect to the network and perform different functions depending on their type and the blockchain's architecture.
+</p>
+
+<p>
+Common concepts include Full Nodes, Light Nodes, and archival nodes, while specialized roles such as Miners and Validators are associated with particular consensus mechanisms.
+</p>
+
+<p>
+Understanding nodes helps explain how transactions move through a blockchain network, how blocks are validated, and how blockchain systems can operate as distributed networks rather than relying entirely on one central server.
+</p>
+
+<h2>Related AQL Crypto Academy Lessons</h2>
+
+<ul>
+    <li><a href="/academy/blockchain">Complete Blockchain Learning Path</a></li>
+    <li><a href="/academy/blockchain/what-is-blockchain">What Is Blockchain?</a></li>
+    <li><a href="/academy/blockchain/how-does-blockchain-work">How Does Blockchain Work?</a></li>
+    <li><a href="/academy/blockchain/what-is-a-block">What Is a Block in Blockchain?</a></li>
+    <li><a href="/academy/blockchain/what-is-hash-function">What Are Hash Functions in Blockchain?</a></li>
+    <li><a href="/academy/bitcoin/how-bitcoin-works">How Does Bitcoin Work?</a></li>
+</ul>
+HTML,
+
+    'image' => null,
+
+    'seo_title' => null,
+    'seo_title_ar' => 'ما هي العقد Nodes في البلوك تشين؟ شرح أنواع العقد ووظائفها | AQL Crypto',
+    'seo_title_en' => 'What Are Blockchain Nodes? Types, Functions, and How They Work | AQL Crypto',
+
+    'meta_description' => null,
+    'meta_description_ar' => 'تعرف على العقد Nodes في البلوك تشين، وكيف تتحقق من المعاملات والكتل، والفرق بين Full Node وLight Node وArchival Node وMiner وValidator.',
+    'meta_description_en' => 'Learn what blockchain nodes are, how they validate transactions and blocks, and the differences between full nodes, light nodes, miners, and validators.',
+
+    'faq_ar' => [
+        [
+            'question' => 'ما هي Node في البلوك تشين؟',
+            'answer' => 'العقدة Node هي جهاز كمبيوتر أو برنامج متصل بشبكة البلوك تشين ويشارك في تبادل البيانات والتحقق منها أو تخزينها وفق قواعد الشبكة.'
+        ],
+        [
+            'question' => 'ما وظيفة العقد في البلوك تشين؟',
+            'answer' => 'يمكن للعقد استقبال المعاملات والكتل والتحقق منها ونشر البيانات إلى العقد الأخرى وتخزين بيانات الشبكة، وتختلف الوظائف حسب نوع العقدة.'
+        ],
+        [
+            'question' => 'هل كل عقدة Blockchain هي Full Node؟',
+            'answer' => 'لا. توجد أنواع مختلفة من العقد، ومنها Full Nodes وLight Nodes وغيرها، وتختلف كمية البيانات والمهام التي تقوم بها كل نوع.'
+        ],
+        [
+            'question' => 'ما هي Full Node؟',
+            'answer' => 'هي عقدة تقوم عادةً بتنزيل وتخزين والتحقق من قدر كبير من بيانات البلوك تشين وفق قواعد البروتوكول.'
+        ],
+        [
+            'question' => 'ما هي Light Node؟',
+            'answer' => 'العقدة الخفيفة هي عقدة مصممة لاستخدام موارد أقل، وقد تعتمد على عقد أخرى للحصول على بعض البيانات التي تحتاج إليها.'
+        ],
+        [
+            'question' => 'ما الفرق بين Node وMiner؟',
+            'answer' => 'Node مفهوم عام لجهاز أو برنامج مشارك في الشبكة، بينما Miner هو مشارك يؤدي وظيفة التعدين في الشبكات التي تستخدم Proof of Work.'
+        ],
+        [
+            'question' => 'ما الفرق بين Node وValidator؟',
+            'answer' => 'Node هي تسمية أوسع لجهاز أو برنامج متصل بالشبكة، بينما Validator هو مشارك له دور محدد في آلية الإجماع في بعض الشبكات، خصوصًا شبكات Proof of Stake.'
+        ],
+        [
+            'question' => 'هل تشغيل Node يحتاج إلى امتلاك عملات رقمية؟',
+            'answer' => 'لا. تشغيل العقدة بحد ذاته لا يتطلب بالضرورة امتلاك عملات رقمية، ويعتمد الأمر على نوع الشبكة والدور الذي يريد المستخدم القيام به.'
+        ],
+        [
+            'question' => 'هل تشغيل Node يحقق أرباحًا؟',
+            'answer' => 'تشغيل Node عادية لا يعني الحصول على مكافآت مالية تلقائيًا. المكافآت ترتبط بأدوار محددة مثل التعدين أو التحقق في بعض الشبكات.'
+        ],
+        [
+            'question' => 'هل كل العقد تخزن البلوك تشين بالكامل؟',
+            'answer' => 'لا. Full Nodes تحتفظ بكمية كبيرة من البيانات، بينما تستخدم Light Nodes موارد أقل، وقد توجد عقد أرشيفية تحتفظ ببيانات تاريخية إضافية.'
+        ],
+        [
+            'question' => 'هل العقد تجعل البلوك تشين غير قابلة للاختراق؟',
+            'answer' => 'لا. العقد جزء من بنية الأمان والتوزيع، لكن أمن الشبكة يعتمد أيضًا على البروتوكول وآلية الإجماع والبرمجيات والمفاتيح والبنية التحتية.'
+        ],
+        [
+            'question' => 'هل تشغيل Full Node يزيد من اللامركزية؟',
+            'answer' => 'يمكن أن يساهم تشغيل العقد المستقلة في توزيع البنية التحتية والتحقق من البيانات، لكن اللامركزية تعتمد على عوامل متعددة وليس على عدد العقد وحده.'
+        ],
+    ],
+
+    'faq_en' => [
+        [
+            'question' => 'What is a blockchain node?',
+            'answer' => 'A blockchain node is a computer or software instance connected to a blockchain network and participating in data exchange, validation, storage, or other network functions.'
+        ],
+        [
+            'question' => 'What do blockchain nodes do?',
+            'answer' => 'Depending on the node type, nodes can receive and validate transactions and blocks, relay information to other nodes, and store blockchain data.'
+        ],
+        [
+            'question' => 'Is every blockchain node a full node?',
+            'answer' => 'No. Blockchain networks can have different node types, including full nodes and light clients, with different storage and validation responsibilities.'
+        ],
+        [
+            'question' => 'What is a full node?',
+            'answer' => 'A full node generally downloads, stores, and independently validates a substantial amount of blockchain data according to the network protocol.'
+        ],
+        [
+            'question' => 'What is a light node?',
+            'answer' => 'A light node or light client uses fewer local resources and may request additional blockchain data from other nodes when necessary.'
+        ],
+        [
+            'question' => 'What is the difference between a node and a miner?',
+            'answer' => 'A node is a broader concept for a computer or software instance participating in a blockchain network, while a miner performs the mining function in Proof of Work systems.'
+        ],
+        [
+            'question' => 'What is the difference between a node and a validator?',
+            'answer' => 'A node is a broad network participation concept, while a validator has a specific role in the consensus mechanism of certain blockchains, particularly Proof of Stake systems.'
+        ],
+        [
+            'question' => 'Do I need cryptocurrency to run a node?',
+            'answer' => 'Not necessarily. Running a node does not automatically require cryptocurrency ownership. Requirements depend on the blockchain and the role being performed.'
+        ],
+        [
+            'question' => 'Does running a blockchain node make money?',
+            'answer' => 'Running an ordinary node does not automatically generate financial rewards. Rewards are generally associated with specific roles such as mining or validation in certain networks.'
+        ],
+        [
+            'question' => 'Does every node store the entire blockchain?',
+            'answer' => 'No. Full nodes generally maintain substantial blockchain data, while light clients use fewer resources, and some archival nodes retain additional historical information.'
+        ],
+        [
+            'question' => 'Do blockchain nodes make a blockchain unhackable?',
+            'answer' => 'No. Nodes are an important part of blockchain infrastructure, but security also depends on protocol design, consensus, software, private keys, infrastructure, and other factors.'
+        ],
+        [
+            'question' => 'Do full nodes make blockchain networks more decentralized?',
+            'answer' => 'Independent nodes can contribute to distributed infrastructure and independent verification, but decentralization depends on many factors beyond the number of nodes.'
+        ],
+    ],
+
+    'status' => 'published',
+    'sort_order' => 5,
+    'published_at' => now(),
+],
+[
+    'title' => 'What Is Blockchain Consensus?',
+    'title_ar' => 'ما هي آلية الإجماع Consensus في البلوك تشين؟ شرح مبسط',
+    'title_en' => 'What Is Blockchain Consensus? A Beginner’s Guide to Consensus Mechanisms',
+    'slug' => 'what-is-blockchain-consensus',
+
+    'excerpt' => null,
+    'excerpt_ar' => 'تعرّف على آلية الإجماع Consensus في البلوك تشين، ولماذا تحتاج الشبكات إلى الاتفاق على حالة موحدة، وكيف تعمل Proof of Work وProof of Stake وما الفرق بين التعدين والتحقق.',
+    'excerpt_en' => 'Learn what blockchain consensus is, why distributed networks need agreement, and how Proof of Work and Proof of Stake help networks agree on valid blocks and state.',
+
+    'content' => null,
+
+    'content_ar' => <<<'HTML'
+<h2>ما هي آلية الإجماع Consensus في البلوك تشين؟</h2>
+
+<p>
+تُعد <strong>آلية الإجماع Consensus Mechanism</strong> من المفاهيم الأساسية لفهم كيفية عمل شبكات البلوك تشين.
+</p>
+
+<p>
+عندما توجد آلاف العقد Nodes موزعة حول العالم، ولا يوجد خادم مركزي واحد يقرر ما هي البيانات الصحيحة، تحتاج الشبكة إلى طريقة منظمة تجعل المشاركين يتفقون على الحالة الصحيحة للسجل الموزع.
+</p>
+
+<p>
+هنا يأتي دور آليات الإجماع. فهي مجموعة من القواعد والعمليات التي تحدد كيف تتفق الشبكة على البيانات التي يمكن قبولها، وكيف يتم اختيار الكتل أو اعتمادها وفق تصميم كل بروتوكول.
+</p>
+
+<p>
+قبل قراءة هذا الدرس، يمكنك مراجعة:
+<a href="/academy/blockchain/what-is-blockchain">ما هي تقنية البلوك تشين؟</a>
+و
+<a href="/academy/blockchain/how-does-blockchain-work">كيف تعمل تقنية البلوك تشين؟</a>
+و
+<a href="/academy/blockchain/what-are-blockchain-nodes">ما هي العقد Nodes في البلوك تشين؟</a>
+</p>
+
+<h2>لماذا تحتاج البلوك تشين إلى الإجماع؟</h2>
+
+<p>
+في النظام المركزي، يمكن لجهة واحدة مسؤولة عن قاعدة البيانات أن تحدد الحالة الصحيحة للسجل. أما في شبكة موزعة، فقد تصل المعلومات إلى المشاركين في أوقات مختلفة، وقد تظهر معاملات أو كتل متعددة في الوقت نفسه.
+</p>
+
+<p>
+لذلك تحتاج الشبكة إلى قواعد تحدد:
+</p>
+
+<ul>
+    <li>ما هي المعاملة الصالحة؟</li>
+    <li>ما هي الكتلة التي يمكن قبولها؟</li>
+    <li>من يستطيع اقتراح أو إنشاء كتلة جديدة؟</li>
+    <li>كيف تتعامل الشبكة مع الكتل المتنافسة؟</li>
+    <li>كيف تنتقل الشبكة نحو حالة متفق عليها؟</li>
+</ul>
+
+<p>
+وتختلف الإجابة عن هذه الأسئلة حسب البروتوكول المستخدم. لذلك لا توجد آلية إجماع واحدة تعمل بالطريقة نفسها في جميع شبكات البلوك تشين.
+</p>
+
+<h2>ما معنى Consensus؟</h2>
+
+<p>
+كلمة <strong>Consensus</strong> تعني الإجماع أو الوصول إلى اتفاق بين المشاركين.
+</p>
+
+<p>
+وفي سياق البلوك تشين، يشير المصطلح إلى مجموعة القواعد التي تساعد المشاركين في الشبكة على الوصول إلى حالة متفق عليها للسجل الموزع رغم عدم وجود جهة مركزية واحدة تتحكم في جميع العقد.
+</p>
+
+<p>
+ومن المهم فهم أن الإجماع في البلوك تشين ليس مجرد عملية تصويت بسيطة بين جميع المستخدمين. بل هو نظام تقني واقتصادي قد يجمع بين قواعد التحقق، واختيار المشاركين، والحوافز، والعقوبات، وآليات مقاومة محاولات الغش أو التلاعب، بحسب الشبكة.
+</p>
+
+<h2>كيف يعمل الإجماع بشكل مبسط؟</h2>
+
+<p>
+يمكن تبسيط الفكرة إلى المثال التالي:
+</p>
+
+<ol>
+    <li>يتم إنشاء معاملات جديدة وإرسالها إلى الشبكة.</li>
+    <li>تستقبل العقد المعاملات وتتحقق منها وفق قواعد البروتوكول.</li>
+    <li>يتم تجميع معاملات صالحة في كتلة وفق آلية الشبكة.</li>
+    <li>تقوم العقد الأخرى بفحص الكتلة الجديدة.</li>
+    <li>إذا كانت الكتلة متوافقة مع قواعد البروتوكول، يمكن للعقد قبولها وفق آلية الإجماع.</li>
+    <li>تستمر الشبكة في معالجة الكتل التالية وبناء السجل.</li>
+</ol>
+
+<p>
+هذه صورة مبسطة جدًا؛ لأن التفاصيل تختلف بشكل كبير بين Proof of Work وProof of Stake وغيرها من الآليات.
+</p>
+
+<h2>ما العلاقة بين Nodes وConsensus؟</h2>
+
+<p>
+العقد Nodes هي الأجهزة والبرامج التي تشارك في الشبكة، بينما آلية الإجماع تحدد القواعد التي تستخدمها الشبكة للوصول إلى اتفاق حول البيانات والحالة الصحيحة.
+</p>
+
+<p>
+لذلك يمكن التفكير في العلاقة بهذه الطريقة:
+</p>
+
+<ul>
+    <li><strong>Nodes:</strong> المشاركون الذين يشغلون برنامج الشبكة ويتبادلون البيانات.</li>
+    <li><strong>Protocol Rules:</strong> القواعد التي تحدد ما هو صالح وغير صالح.</li>
+    <li><strong>Consensus Mechanism:</strong> الطريقة التي تستخدمها الشبكة للتنسيق والوصول إلى اتفاق حول السجل.</li>
+</ul>
+
+<p>
+وهذا يعني أن وجود عدد كبير من العقد وحده لا يكفي؛ بل يجب أن تكون هناك قواعد واضحة تحدد كيفية التحقق من البيانات وكيفية التعامل مع الكتل الجديدة والمتنافسة.
+</p>
+
+<h2>ما هي أشهر آليات الإجماع؟</h2>
+
+<p>
+هناك العديد من آليات الإجماع وتصميمات البروتوكولات المختلفة، لكن من أشهر المفاهيم التي ستصادفها:
+</p>
+
+<ul>
+    <li><strong>Proof of Work (PoW)</strong></li>
+    <li><strong>Proof of Stake (PoS)</strong></li>
+    <li>وتصميمات أخرى مشتقة أو مختلفة حسب الشبكة والبروتوكول.</li>
+</ul>
+
+<p>
+في هذا الدرس سنركز على Proof of Work وProof of Stake لأنهما من أهم المفاهيم لفهم آليات الإجماع في البلوك تشين.
+</p>
+
+<h2>ما هو Proof of Work؟</h2>
+
+<p>
+<strong>Proof of Work (PoW)</strong> أو إثبات العمل هو آلية تستخدم القدرة الحاسوبية للمنافسة على إنشاء الكتل وفق قواعد الشبكة.
+</p>
+
+<p>
+في الشبكات التي تستخدم Proof of Work، يحاول المعدّنون Miners إيجاد حل لمشكلة حسابية مرتبطة بالكتلة وفق متطلبات البروتوكول.
+</p>
+
+<p>
+يتطلب ذلك إجراء عدد كبير من عمليات الحساب والتجربة، ولهذا يرتبط التعدين باستهلاك موارد حاسوبية وطاقة.
+</p>
+
+<p>
+عندما ينجح أحد المعدّنين في إنتاج إثبات صالح وفق قواعد الشبكة، يمكنه نشر الكتلة، ثم تقوم العقد الأخرى بالتحقق منها.
+</p>
+
+<h2>هل التعدين هو نفسه الإجماع؟</h2>
+
+<p>
+التعدين جزء من آلية Proof of Work، لكنه ليس مرادفًا لكل مفهوم الإجماع.
+</p>
+
+<p>
+في Proof of Work، يشارك المعدّنون في المنافسة الحسابية لإنتاج الكتل، بينما تقوم العقد الأخرى بالتحقق من الكتل وفق قواعد البروتوكول.
+</p>
+
+<p>
+لذلك من المفيد التفريق بين:
+</p>
+
+<ul>
+    <li><strong>Mining:</strong> عملية متخصصة مرتبطة بإنتاج الكتل في شبكات Proof of Work.</li>
+    <li><strong>Validation:</strong> التحقق من أن المعاملات والكتل تتوافق مع قواعد الشبكة.</li>
+    <li><strong>Consensus:</strong> النظام الأوسع الذي يحدد كيفية تنسيق المشاركين والوصول إلى حالة متفق عليها.</li>
+</ul>
+
+<h2>كيف يساهم Hash في Proof of Work؟</h2>
+
+<p>
+تستخدم شبكات Proof of Work دوال التجزئة ضمن عملية التعدين.
+</p>
+
+<p>
+يحاول المعدّن العثور على قيمة تحقق شرطًا محددًا من شروط الشبكة. ويتطلب الوصول إلى هذه النتيجة عادةً عددًا كبيرًا من المحاولات الحسابية.
+</p>
+
+<p>
+يمكنك مراجعة درس
+<a href="/academy/blockchain/what-is-hash-function">ما هي دوال التجزئة Hash Functions في البلوك تشين؟</a>
+لفهم وظيفة Hash بشكل أعمق.
+</p>
+
+<h2>ما هو Proof of Stake؟</h2>
+
+<p>
+<strong>Proof of Stake (PoS)</strong> أو إثبات الحصة هو تصميم لآلية إجماع يعتمد على امتلاك أو قفل كمية من الأصول الرقمية للمشاركة في وظائف محددة داخل الشبكة، وفق قواعد البروتوكول.
+</p>
+
+<p>
+في شبكات Proof of Stake، يتم اختيار أو تحديد المشاركين في أدوار مثل اقتراح الكتل أو التصويت أو تأكيدها باستخدام آليات تختلف من شبكة إلى أخرى.
+</p>
+
+<p>
+يُطلق على هؤلاء المشاركين عادةً اسم <strong>Validators</strong> أو المدققين.
+</p>
+
+<p>
+ولا تعمل جميع شبكات Proof of Stake بالطريقة نفسها؛ فآلية اختيار المدققين، ومتطلبات المشاركة، والمكافآت والعقوبات تختلف حسب البروتوكول.
+</p>
+
+<h2>ما هو دور Validator في Proof of Stake؟</h2>
+
+<p>
+الـ <strong>Validator</strong> هو مشارك يؤدي دورًا في آلية الإجماع في شبكة تستخدم نموذجًا مثل Proof of Stake.
+</p>
+
+<p>
+وبحسب الشبكة، قد يقوم المدقق بـ:
+</p>
+
+<ul>
+    <li>اقتراح كتلة جديدة.</li>
+    <li>التصويت أو تقديم شهادة على كتلة.</li>
+    <li>التحقق من بيانات الكتل.</li>
+    <li>المشاركة في الوصول إلى اتفاق الشبكة.</li>
+</ul>
+
+<p>
+لكن لا ينبغي تعميم هذه الوظائف على جميع شبكات Proof of Stake؛ لأن كل بروتوكول يحدد أدوار المدققين بطريقة مختلفة.
+</p>
+
+<h2>ما الفرق بين Proof of Work وProof of Stake؟</h2>
+
+<p>
+الاختلاف الأساسي يتعلق بالطريقة التي تنظم بها الشبكة المشاركة في إنتاج الكتل والوصول إلى الإجماع.
+</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>العنصر</th>
+            <th>Proof of Work</th>
+            <th>Proof of Stake</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>المشارك الأساسي</td>
+            <td>Miner</td>
+            <td>Validator</td>
+        </tr>
+        <tr>
+            <td>آلية المشاركة</td>
+            <td>قدرة حاسوبية وإثبات عمل</td>
+            <td>حصة أو Stake وفق قواعد الشبكة</td>
+        </tr>
+        <tr>
+            <td>إنتاج الكتل</td>
+            <td>منافسة حسابية</td>
+            <td>اختيار أو تنسيق Validators حسب البروتوكول</td>
+        </tr>
+        <tr>
+            <td>الموارد الأساسية</td>
+            <td>الحوسبة والطاقة والمعدات</td>
+            <td>الأصول المقفلة ومتطلبات تشغيل المدقق</td>
+        </tr>
+        <tr>
+            <td>آلية العقوبة</td>
+            <td>التكاليف الاقتصادية للتعدين والمعدات والطاقة</td>
+            <td>قد تتضمن عقوبات بروتوكولية مثل Slashing في بعض الشبكات</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>
+هذا الجدول يقدم مقارنة عامة فقط؛ فالتفاصيل الدقيقة تختلف بين الشبكات والتطبيقات.
+</p>
+
+<h2>هل Proof of Stake لا يستهلك طاقة؟</h2>
+
+<p>
+Proof of Stake لا يحتاج إلى منافسة حسابية من النوع المستخدم في Proof of Work لإنتاج الكتل، ولذلك يمكن أن تكون متطلبات الطاقة المرتبطة بآلية الإجماع مختلفة بشكل كبير.
+</p>
+
+<p>
+لكن هذا لا يعني أن شبكات Proof of Stake لا تستهلك أي طاقة؛ فالعقد والخوادم وأجهزة الشبكة تحتاج إلى الكهرباء لتعمل.
+</p>
+
+<h2>ما المقصود بـ Finality؟</h2>
+
+<p>
+يشير مصطلح <strong>Finality</strong> إلى النقطة أو الحالة التي يصبح فيها من الصعب أو غير الممكن وفق قواعد البروتوكول تغيير أو عكس معاملة أو كتلة معتمدة.
+</p>
+
+<p>
+وتختلف طريقة تحقيق Finality من شبكة إلى أخرى.
+</p>
+
+<p>
+في بعض الأنظمة، ترتبط الثقة في نهائية المعاملة بمرور عدد من الكتل أو التأكيدات. وفي أنظمة أخرى، توجد آلية بروتوكولية توفر نوعًا مختلفًا من النهائية.
+</p>
+
+<p>
+لذلك يجب عدم افتراض أن جميع شبكات البلوك تشين توفر Finality بالطريقة نفسها.
+</p>
+
+<h2>ما هي الكتل المتنافسة؟</h2>
+
+<p>
+قد تحدث في بعض الشبكات حالات تنتج فيها أكثر من كتلة محتملة في فترة زمنية متقاربة، أو تصل معلومات مختلفة إلى أجزاء الشبكة.
+</p>
+
+<p>
+تحتاج الشبكة إلى قواعد تحدد أي سلسلة أو كتلة يجب اتباعها وفق آلية الإجماع الخاصة بها.
+</p>
+
+<p>
+هذه القواعد تساعد العقد على الانتقال نحو حالة مشتركة بدلًا من استمرار الشبكة في مسارات متعارضة.
+</p>
+
+<h2>هل الإجماع يمنع الغش تمامًا؟</h2>
+
+<p>
+لا توجد آلية إجماع تجعل النظام محصنًا تلقائيًا ضد جميع أنواع الهجمات.
+</p>
+
+<p>
+الهدف من آلية الإجماع هو جعل التلاعب مكلفًا أو صعبًا وفق نموذج الأمان الخاص بالشبكة، إضافة إلى مساعدة المشاركين على الاتفاق على الحالة الصحيحة.
+</p>
+
+<p>
+وتعتمد قوة النظام على تصميم البروتوكول، وتوزيع المشاركين، والافتراضات الأمنية، والبرمجيات، والحوافز الاقتصادية، وغيرها من العوامل.
+</p>
+
+<h2>ما هو هجوم 51%؟</h2>
+
+<p>
+مصطلح <strong>51% Attack</strong> يُستخدم بشكل عام لوصف حالة يمتلك فيها طرف أو مجموعة من المشاركين قدرًا كبيرًا من القدرة المؤثرة في آلية الإجماع، بحيث يمكن أن يؤثر ذلك في ترتيب أو قبول بعض الكتل وفق خصائص الشبكة.
+</p>
+
+<p>
+في شبكات Proof of Work، يرتبط المصطلح عادةً بالسيطرة على غالبية قوة التعدين، بينما في بعض نماذج Proof of Stake توجد مفاهيم وهجمات مختلفة ترتبط بامتلاك أو التحكم في نسبة كبيرة من الحصة أو قوة التصويت.
+</p>
+
+<p>
+ولا يعني ذلك أن المهاجم يستطيع ببساطة إنشاء عملات من العدم أو تغيير أي شيء يريده؛ فالقدرات الفعلية تعتمد على قواعد الشبكة وآلية الإجماع.
+</p>
+
+<h2>هل يمكن تغيير معاملة بعد تسجيلها؟</h2>
+
+<p>
+تعتمد الإجابة على الشبكة وحالة المعاملة وآلية الإجماع.
+</p>
+
+<p>
+بعد تضمين المعاملة في كتلة واعتمادها، تصبح إعادة كتابة التاريخ أكثر صعوبة وفق نموذج أمان الشبكة، خصوصًا مع إضافة كتل أو تحقيق Finality.
+</p>
+
+<p>
+لكن مفهوم عدم قابلية التغيير في البلوك تشين لا يعني أن البيانات محمية بطريقة سحرية من كل تعديل في جميع الظروف. يجب النظر إلى آلية الإجماع وقواعد البروتوكول والتهديدات المحتملة.
+</p>
+
+<h2>ما الفرق بين Consensus وValidation؟</h2>
+
+<p>
+هناك فرق مهم بين المصطلحين.
+</p>
+
+<p>
+<strong>Validation</strong> تعني التحقق من أن المعاملة أو الكتلة تستوفي قواعد معينة.
+</p>
+
+<p>
+أما <strong>Consensus</strong> فهو النظام الأوسع الذي يحدد كيف تنسق الشبكة المشاركين للوصول إلى اتفاق حول الحالة الصحيحة والسجل الذي يجب اعتماده.
+</p>
+
+<p>
+يمكن تبسيط الفرق:
+</p>
+
+<ul>
+    <li><strong>Validation:</strong> هل هذه البيانات تتوافق مع القواعد؟</li>
+    <li><strong>Consensus:</strong> كيف تتفق الشبكة على السجل والحالة التي سيتم اعتمادها؟</li>
+</ul>
+
+<h2>هل كل Blockchain تستخدم Consensus Mechanism؟</h2>
+
+<p>
+شبكات البلوك تشين الموزعة تحتاج إلى آلية أو مجموعة من القواعد التي تنظم كيفية الاتفاق على الحالة الصحيحة، لكن تفاصيل ما يسمى "آلية الإجماع" تختلف بين الأنظمة.
+</p>
+
+<p>
+كما أن مصطلح Consensus قد يُستخدم بطرق مختلفة في الأدبيات التقنية، لذلك يجب النظر إلى تصميم البروتوكول نفسه بدل افتراض أن جميع الشبكات تتبع نموذجًا واحدًا.
+</p>
+
+<h2>ما علاقة الإجماع باللامركزية؟</h2>
+
+<p>
+الإجماع واللامركزية مرتبطان بشكل وثيق في شبكات البلوك تشين العامة.
+</p>
+
+<p>
+فكلما كان هناك عدد من المشاركين المستقلين الذين يتحققون من البيانات ويشاركون في تشغيل البروتوكول، تحتاج الشبكة إلى طريقة للتعامل مع الاختلافات والوصول إلى حالة مشتركة.
+</p>
+
+<p>
+لكن اللامركزية لا تعتمد على آلية الإجماع وحدها. فهي تتأثر أيضًا بتوزيع العقد والمدققين والمعدنين، ومتطلبات تشغيلها، وتوزيع القوة الاقتصادية والتقنية، وطبيعة الحوكمة.
+</p>
+
+<h2>مثال مبسط جدًا</h2>
+
+<p>
+تخيل مجموعة من المشاركين لديهم دفتر حسابات مشترك، لكن لا يوجد شخص واحد مسؤول عن تحديث الدفتر.
+</p>
+
+<p>
+عندما تظهر عملية جديدة، يقوم المشاركون بفحصها وفق قواعد محددة. ثم توجد آلية متفق عليها لتحديد من يستطيع إضافة مجموعة من العمليات إلى الدفتر وكيف يقبل باقي المشاركين هذه الإضافة.
+</p>
+
+<p>
+في Proof of Work تكون المنافسة الحسابية جزءًا أساسيًا من إنتاج الكتل، بينما في Proof of Stake تلعب الحصة والـ Validators دورًا أساسيًا وفق قواعد البروتوكول.
+</p>
+
+<p>
+المثال للتوضيح فقط ولا يمثل جميع التفاصيل التقنية.
+</p>
+
+<h2>الخلاصة</h2>
+
+<p>
+آلية الإجماع Consensus هي من أهم أجزاء البنية التي تسمح لشبكة البلوك تشين الموزعة بالاتفاق على الحالة الصحيحة للسجل دون الاعتماد على جهة مركزية واحدة.
+</p>
+
+<p>
+تختلف آليات الإجماع بين الشبكات. ويُعد <strong>Proof of Work</strong> نموذجًا يعتمد على القدرة الحاسوبية والتعدين، بينما يعتمد <strong>Proof of Stake</strong> على الحصة والمشاركين الذين يؤدون أدوار Validators وفق قواعد البروتوكول.
+</p>
+
+<p>
+كما يجب التمييز بين Validation وConsensus وMining وValidation by Validators؛ فكل مفهوم يشير إلى وظيفة مختلفة داخل تصميم الشبكة.
+</p>
+
+<p>
+فهم الإجماع يمهد للانتقال إلى مفاهيم أكثر تقدمًا مثل الهجمات على آليات الإجماع، والـ Forks، والـ Finality، وكيف تتعامل الشبكات مع الاختلافات بين العقد.
+</p>
+
+<h2>روابط مفيدة داخل أكاديمية AQL Crypto</h2>
+
+<ul>
+    <li><a href="/academy/blockchain">مسار Blockchain الكامل</a></li>
+    <li><a href="/academy/blockchain/what-is-blockchain">ما هي تقنية البلوك تشين؟</a></li>
+    <li><a href="/academy/blockchain/how-does-blockchain-work">كيف تعمل تقنية البلوك تشين؟</a></li>
+    <li><a href="/academy/blockchain/what-is-a-block">ما هي الكتلة Block في البلوك تشين؟</a></li>
+    <li><a href="/academy/blockchain/what-is-hash-function">ما هي دوال التجزئة Hash Functions؟</a></li>
+    <li><a href="/academy/blockchain/what-are-blockchain-nodes">ما هي العقد Nodes في البلوك تشين؟</a></li>
+    <li><a href="/academy/bitcoin/bitcoin-mining">ما هو تعدين Bitcoin؟</a></li>
+    <li><a href="/academy/bitcoin/how-bitcoin-works">كيف يعمل Bitcoin؟</a></li>
+</ul>
+HTML,
+
+    'content_en' => <<<'HTML'
+<h2>What Is Blockchain Consensus?</h2>
+
+<p>
+<strong>Consensus mechanisms</strong> are fundamental to understanding how blockchain networks operate.
+</p>
+
+<p>
+When thousands of nodes are distributed across different locations and there is no single central server deciding which data is correct, the network needs a structured way to agree on the valid state of the shared ledger.
+</p>
+
+<p>
+This is where consensus mechanisms come in. They define rules and processes for coordinating participants, selecting or accepting blocks, and moving the network toward an agreed state.
+</p>
+
+<p>
+Before reading this lesson, you can review:
+<a href="/academy/blockchain/what-is-blockchain">What Is Blockchain?</a>,
+<a href="/academy/blockchain/how-does-blockchain-work">How Does Blockchain Work?</a>,
+and
+<a href="/academy/blockchain/what-are-blockchain-nodes">What Are Blockchain Nodes?</a>
+</p>
+
+<h2>Why Does Blockchain Need Consensus?</h2>
+
+<p>
+In a centralized system, one organization or server can maintain the database and determine its current state. In a distributed network, information may reach participants at different times, and multiple transactions or blocks may appear around the same time.
+</p>
+
+<p>
+The network therefore needs rules that determine:
+</p>
+
+<ul>
+    <li>Which transactions are valid.</li>
+    <li>Which blocks can be accepted.</li>
+    <li>Who can propose or produce new blocks.</li>
+    <li>How competing blocks are handled.</li>
+    <li>How the network moves toward a shared state.</li>
+</ul>
+
+<p>
+The answers depend on the blockchain protocol. There is no single consensus mechanism that works identically across every blockchain network.
+</p>
+
+<h2>What Does Consensus Mean in Blockchain?</h2>
+
+<p>
+The word <strong>consensus</strong> means agreement among participants.
+</p>
+
+<p>
+In blockchain, consensus refers to the broader set of rules and processes that help distributed participants agree on the valid state of the shared ledger without relying entirely on one central authority.
+</p>
+
+<p>
+It is important to understand that blockchain consensus is not simply a basic vote among all users. Depending on the network, it can involve validation rules, participant selection, economic incentives, penalties, and mechanisms designed to make dishonest behavior difficult or costly.
+</p>
+
+<h2>How Does Consensus Work in Simple Terms?</h2>
+
+<p>
+The process can be simplified as follows:
+</p>
+
+<ol>
+    <li>New transactions are created and broadcast to the network.</li>
+    <li>Nodes receive and validate transactions according to protocol rules.</li>
+    <li>Valid transactions are organized into a block according to the network's design.</li>
+    <li>Other nodes receive and verify the proposed block.</li>
+    <li>If the block satisfies the protocol rules, it can be accepted according to the consensus mechanism.</li>
+    <li>The network continues processing subsequent blocks and extending the ledger.</li>
+</ol>
+
+<p>
+This is a simplified model. The exact process differs substantially between Proof of Work, Proof of Stake, and other consensus designs.
+</p>
+
+<h2>What Is the Relationship Between Nodes and Consensus?</h2>
+
+<p>
+Nodes are the computers and software instances participating in the network, while the consensus mechanism defines how the network coordinates those participants and agrees on the valid state of the ledger.
+</p>
+
+<p>
+The relationship can be summarized as:
+</p>
+
+<ul>
+    <li><strong>Nodes:</strong> Participants running network software and exchanging data.</li>
+    <li><strong>Protocol Rules:</strong> Rules that determine what is valid or invalid.</li>
+    <li><strong>Consensus Mechanism:</strong> The system used to coordinate participants and reach agreement about the network state.</li>
+</ul>
+
+<p>
+Having many nodes alone is not enough. The network also needs rules for validating data and handling new or competing blocks.
+</p>
+
+<h2>What Are the Most Common Consensus Mechanisms?</h2>
+
+<p>
+Blockchain networks use many different consensus designs. Two of the most important concepts for beginners are:
+</p>
+
+<ul>
+    <li><strong>Proof of Work (PoW)</strong></li>
+    <li><strong>Proof of Stake (PoS)</strong></li>
+</ul>
+
+<p>
+There are also many other mechanisms and protocol designs. Their details depend on the network.
+</p>
+
+<h2>What Is Proof of Work?</h2>
+
+<p>
+<strong>Proof of Work (PoW)</strong> is a consensus design that uses computational work as part of the process for producing blocks.
+</p>
+
+<p>
+In Proof of Work systems, miners compete to find a valid solution to a computational problem defined by the protocol.
+</p>
+
+<p>
+This requires many computational attempts and therefore consumes computing resources and energy.
+</p>
+
+<p>
+When a miner successfully produces a valid proof according to the network rules, the proposed block can be broadcast to the network, where other nodes verify it.
+</p>
+
+<h2>Is Mining the Same as Consensus?</h2>
+
+<p>
+Mining is a component of Proof of Work, but it is not synonymous with the entire concept of consensus.
+</p>
+
+<p>
+In Proof of Work, miners perform computational work to compete for block production, while other nodes independently verify transactions and blocks according to protocol rules.
+</p>
+
+<p>
+It is useful to distinguish:
+</p>
+
+<ul>
+    <li><strong>Mining:</strong> A specialized block-production process used by Proof of Work networks.</li>
+    <li><strong>Validation:</strong> Checking whether transactions and blocks satisfy protocol rules.</li>
+    <li><strong>Consensus:</strong> The broader system for coordinating participants and reaching agreement about the accepted ledger state.</li>
+</ul>
+
+<h2>How Are Hash Functions Used in Proof of Work?</h2>
+
+<p>
+Proof of Work systems use hash functions as part of the mining process.
+</p>
+
+<p>
+Miners search for a value that satisfies a specific condition defined by the protocol. Finding such a result generally requires a large number of computational attempts.
+</p>
+
+<p>
+For a deeper explanation of hashes, see:
+<a href="/academy/blockchain/what-is-hash-function">What Are Hash Functions in Blockchain?</a>
+</p>
+
+<h2>What Is Proof of Stake?</h2>
+
+<p>
+<strong>Proof of Stake (PoS)</strong> is a consensus design in which participants commit or lock cryptocurrency according to the protocol's rules in order to participate in specific network functions.
+</p>
+
+<p>
+In Proof of Stake systems, participants may be selected or assigned roles such as proposing blocks, attesting to blocks, or voting according to the specific protocol.
+</p>
+
+<p>
+These participants are commonly called <strong>validators</strong>.
+</p>
+
+<p>
+Not all Proof of Stake networks operate identically. Validator selection, participation requirements, rewards, penalties, and voting rules depend on the individual protocol.
+</p>
+
+<h2>What Does a Validator Do?</h2>
+
+<p>
+A <strong>validator</strong> is a participant that performs a role in the consensus mechanism of a blockchain using a model such as Proof of Stake.
+</p>
+
+<p>
+Depending on the network, validators may:
+</p>
+
+<ul>
+    <li>Propose new blocks.</li>
+    <li>Vote for or attest to blocks.</li>
+    <li>Verify blockchain data.</li>
+    <li>Participate in reaching network agreement.</li>
+</ul>
+
+<p>
+These functions should not be generalized to every Proof of Stake blockchain because each protocol defines validator responsibilities differently.
+</p>
+
+<h2>What Is the Difference Between Proof of Work and Proof of Stake?</h2>
+
+<p>
+The main difference is how the network organizes participation in block production and consensus.
+</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Feature</th>
+            <th>Proof of Work</th>
+            <th>Proof of Stake</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Primary participant</td>
+            <td>Miner</td>
+            <td>Validator</td>
+        </tr>
+        <tr>
+            <td>Participation mechanism</td>
+            <td>Computational work</td>
+            <td>Stake according to protocol rules</td>
+        </tr>
+        <tr>
+            <td>Block production</td>
+            <td>Computational competition</td>
+            <td>Validator selection or coordination</td>
+        </tr>
+        <tr>
+            <td>Main resource</td>
+            <td>Computing hardware, electricity, and operational resources</td>
+            <td>Staked assets and validator infrastructure</td>
+        </tr>
+        <tr>
+            <td>Penalties</td>
+            <td>Economic costs associated with mining resources</td>
+            <td>May include protocol penalties such as slashing in some networks</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>
+This is a high-level comparison. Exact designs vary significantly between blockchain networks.
+</p>
+
+<h2>Does Proof of Stake Use No Energy?</h2>
+
+<p>
+Proof of Stake does not require the same type of large-scale computational competition used by Proof of Work for block production, so its consensus-related energy requirements can be substantially different.
+</p>
+
+<p>
+However, Proof of Stake networks still consume electricity because validators, nodes, servers, networking equipment, and other infrastructure need energy to operate.
+</p>
+
+<h2>What Does Finality Mean?</h2>
+
+<p>
+<strong>Finality</strong> refers to a state in which a transaction or block becomes finalized according to the rules of a particular blockchain, making it difficult or impossible to reverse under the protocol's assumptions.
+</p>
+
+<p>
+Different blockchain systems achieve finality in different ways.
+</p>
+
+<p>
+In some systems, confidence in finality increases as additional blocks or confirmations are added. Other systems use protocol mechanisms that provide a different form of finality.
+</p>
+
+<p>
+Therefore, finality should not be assumed to work identically across all blockchains.
+</p>
+
+<h2>What Are Competing Blocks?</h2>
+
+<p>
+Some blockchain networks can temporarily have multiple candidate blocks produced or received by different parts of the network around the same time.
+</p>
+
+<p>
+The protocol needs rules for determining which chain or block should be followed.
+</p>
+
+<p>
+Consensus rules help nodes converge toward a shared state instead of continuing indefinitely along conflicting histories.
+</p>
+
+<h2>Does Consensus Completely Prevent Fraud?</h2>
+
+<p>
+No consensus mechanism automatically protects a blockchain against every possible attack.
+</p>
+
+<p>
+A consensus mechanism is designed to make certain forms of manipulation difficult or economically costly according to the network's security model, while allowing participants to agree on the accepted state.
+</p>
+
+<p>
+Security depends on protocol design, participant distribution, software, economic incentives, infrastructure, and the assumptions built into the consensus mechanism.
+</p>
+
+<h2>What Is a 51% Attack?</h2>
+
+<p>
+The term <strong>51% attack</strong> is commonly used to describe a situation in which one participant or coordinated group gains a sufficiently large amount of influence over a blockchain's consensus process to affect certain aspects of block ordering or acceptance, depending on the network.
+</p>
+
+<p>
+In Proof of Work systems, this concept is generally associated with controlling a majority of the network's mining power. In some Proof of Stake systems, different attack models can involve controlling a large share of stake or voting power.
+</p>
+
+<p>
+This does not mean an attacker can simply create unlimited coins or change anything they want. The actual capabilities depend on the protocol and its rules.
+</p>
+
+<h2>Can a Blockchain Transaction Be Changed After It Is Recorded?</h2>
+
+<p>
+The answer depends on the blockchain, the transaction's status, and the consensus mechanism.
+</p>
+
+<p>
+Once a transaction is included in an accepted block, rewriting that history becomes increasingly difficult under the network's security model, especially as more blocks are added or finality is reached.
+</p>
+
+<p>
+However, blockchain immutability should not be understood as a magical guarantee against every possible form of modification under every circumstance. The protocol, consensus design, and threat model must be considered.
+</p>
+
+<h2>What Is the Difference Between Consensus and Validation?</h2>
+
+<p>
+These concepts are related but not identical.
+</p>
+
+<p>
+<strong>Validation</strong> means checking whether a transaction or block satisfies specific protocol rules.
+</p>
+
+<p>
+<strong>Consensus</strong> is the broader system used to coordinate distributed participants and determine the accepted ledger state.
+</p>
+
+<p>
+In simple terms:
+</p>
+
+<ul>
+    <li><strong>Validation:</strong> Does this data follow the rules?</li>
+    <li><strong>Consensus:</strong> How does the network agree on the ledger state that should be accepted?</li>
+</ul>
+
+<h2>Does Every Blockchain Use a Consensus Mechanism?</h2>
+
+<p>
+Distributed blockchain systems need rules or mechanisms for coordinating participants and agreeing on the accepted state, but the exact design and terminology vary between systems.
+</p>
+
+<p>
+The term "consensus mechanism" can also be used differently in technical discussions, so the protocol design itself matters more than assuming that every blockchain follows one standard model.
+</p>
+
+<h2>How Is Consensus Related to Decentralization?</h2>
+
+<p>
+Consensus and decentralization are closely related in public blockchain networks.
+</p>
+
+<p>
+When independent participants validate data and operate the network, the system needs a way to handle differences and converge on a shared state.
+</p>
+
+<p>
+However, decentralization does not depend on consensus alone. It can also be affected by the distribution of nodes, validators, miners, infrastructure requirements, economic power, technical control, and governance.
+</p>
+
+<h2>A Very Simple Example</h2>
+
+<p>
+Imagine a group of participants maintaining a shared accounting book without one central person responsible for updating it.
+</p>
+
+<p>
+When a new transaction appears, participants check it against agreed rules. A defined mechanism then determines who can add a group of transactions to the ledger and how the other participants accept that addition.
+</p>
+
+<p>
+In Proof of Work, computational competition is an important part of block production. In Proof of Stake, stake and validators play central roles according to the protocol.
+</p>
+
+<p>
+This is only an analogy and does not represent all technical details.
+</p>
+
+<h2>Conclusion</h2>
+
+<p>
+Consensus is one of the key mechanisms that allows a distributed blockchain network to agree on the accepted state of its ledger without depending entirely on a single central authority.
+</p>
+
+<p>
+Consensus designs differ between networks. <strong>Proof of Work</strong> uses computational work and mining, while <strong>Proof of Stake</strong> uses stake and participants known as validators according to protocol-specific rules.
+</p>
+
+<p>
+It is also important to distinguish between validation, consensus, mining, and validator participation because each describes a different function within a blockchain design.
+</p>
+
+<p>
+Understanding consensus prepares you for more advanced topics such as consensus attacks, forks, finality, and how blockchain networks handle disagreements between participants.
+</p>
+
+<h2>Related AQL Crypto Academy Lessons</h2>
+
+<ul>
+    <li><a href="/academy/blockchain">Complete Blockchain Learning Path</a></li>
+    <li><a href="/academy/blockchain/what-is-blockchain">What Is Blockchain?</a></li>
+    <li><a href="/academy/blockchain/how-does-blockchain-work">How Does Blockchain Work?</a></li>
+    <li><a href="/academy/blockchain/what-is-a-block">What Is a Block in Blockchain?</a></li>
+    <li><a href="/academy/blockchain/what-is-hash-function">What Are Hash Functions in Blockchain?</a></li>
+    <li><a href="/academy/blockchain/what-are-blockchain-nodes">What Are Blockchain Nodes?</a></li>
+    <li><a href="/academy/bitcoin/bitcoin-mining">What Is Bitcoin Mining?</a></li>
+    <li><a href="/academy/bitcoin/how-bitcoin-works">How Does Bitcoin Work?</a></li>
+</ul>
+HTML,
+
+    'image' => null,
+
+    'seo_title' => null,
+    'seo_title_ar' => 'ما هي آلية الإجماع Consensus في البلوك تشين؟ شرح PoW وPoS | AQL Crypto',
+    'seo_title_en' => 'What Is Blockchain Consensus? PoW, PoS, and How Consensus Works | AQL Crypto',
+
+    'meta_description' => null,
+    'meta_description_ar' => 'شرح مبسط لآلية الإجماع Consensus في البلوك تشين، ولماذا تحتاج الشبكات إلى الإجماع، وكيف تعمل Proof of Work وProof of Stake والفرق بين Miner وValidator.',
+    'meta_description_en' => 'Learn what blockchain consensus is, why it is needed, and how Proof of Work and Proof of Stake work, including the roles of miners and validators.',
+
+    'faq_ar' => [
+        [
+            'question' => 'ما هي آلية الإجماع Consensus في البلوك تشين؟',
+            'answer' => 'آلية الإجماع هي مجموعة من القواعد والعمليات التي تساعد المشاركين في شبكة البلوك تشين على الاتفاق على الحالة الصحيحة للسجل الموزع دون الاعتماد على جهة مركزية واحدة.'
+        ],
+        [
+            'question' => 'لماذا تحتاج البلوك تشين إلى الإجماع؟',
+            'answer' => 'لأن الشبكة موزعة بين عدد من العقد وقد تصل البيانات في أوقات مختلفة، لذلك تحتاج إلى قواعد تحدد المعاملات والكتل التي يمكن قبولها وكيفية الوصول إلى حالة مشتركة.'
+        ],
+        [
+            'question' => 'هل Consensus يعني التصويت فقط؟',
+            'answer' => 'لا. الإجماع في البلوك تشين أوسع من التصويت البسيط، وقد يشمل التحقق وقواعد اختيار المشاركين والحوافز الاقتصادية والعقوبات وآليات التعامل مع الكتل المتنافسة.'
+        ],
+        [
+            'question' => 'ما هو Proof of Work؟',
+            'answer' => 'Proof of Work أو إثبات العمل هو تصميم لإجماع البلوك تشين يعتمد على القدرة الحاسوبية والمنافسة بين المعدنين لإنتاج كتل وفق قواعد الشبكة.'
+        ],
+        [
+            'question' => 'ما هو Proof of Stake؟',
+            'answer' => 'Proof of Stake أو إثبات الحصة هو تصميم يعتمد على الحصة أو الأصول المقفلة للمشاركة في وظائف الإجماع، ويؤدي المشاركون المعروفون باسم Validators أدوارًا مختلفة وفق البروتوكول.'
+        ],
+        [
+            'question' => 'ما الفرق بين Miner وValidator؟',
+            'answer' => 'Miner هو مشارك يؤدي وظيفة التعدين في شبكات Proof of Work، بينما Validator هو مشارك يؤدي دورًا في آلية الإجماع في شبكات مثل Proof of Stake.'
+        ],
+        [
+            'question' => 'هل التعدين هو نفسه Consensus؟',
+            'answer' => 'لا. التعدين جزء من عملية إنتاج الكتل في Proof of Work، بينما Consensus هو المفهوم الأوسع الذي يحدد كيفية تنسيق المشاركين والوصول إلى حالة متفق عليها.'
+        ],
+        [
+            'question' => 'هل Proof of Stake لا يستهلك الطاقة؟',
+            'answer' => 'لا. Proof of Stake لا يعتمد على المنافسة الحسابية المكثفة نفسها الموجودة في Proof of Work، لكنه لا يزال يحتاج إلى طاقة لتشغيل العقد والخوادم والبنية التحتية.'
+        ],
+        [
+            'question' => 'ما المقصود بـ Finality في البلوك تشين؟',
+            'answer' => 'Finality تشير إلى حالة تصبح فيها المعاملة أو الكتلة معتمدة وفق قواعد البروتوكول ويصبح تغييرها أو عكسها صعبًا أو غير ممكن وفق افتراضات الشبكة.'
+        ],
+        [
+            'question' => 'ما هو هجوم 51%؟',
+            'answer' => 'هو مصطلح يشير عمومًا إلى امتلاك طرف أو مجموعة قدرًا كبيرًا من التأثير في آلية الإجماع بما قد يسمح بالتأثير في بعض جوانب ترتيب أو قبول الكتل، وتختلف التفاصيل حسب الشبكة.'
+        ],
+        [
+            'question' => 'هل الإجماع يمنع جميع أنواع الهجمات؟',
+            'answer' => 'لا. أمان الشبكة يعتمد على تصميم البروتوكول وآلية الإجماع وتوزيع المشاركين والبرمجيات والحوافز الاقتصادية والبنية التحتية وغيرها من العوامل.'
+        ],
+        [
+            'question' => 'ما الفرق بين Validation وConsensus؟',
+            'answer' => 'Validation تعني التحقق من توافق البيانات مع القواعد، بينما Consensus هو النظام الأوسع الذي يساعد المشاركين الموزعين على الاتفاق على السجل والحالة التي سيتم اعتمادها.'
+        ],
+    ],
+
+    'faq_en' => [
+        [
+            'question' => 'What is blockchain consensus?',
+            'answer' => 'Blockchain consensus is the set of rules and processes that help distributed participants agree on the accepted state of a shared blockchain ledger without relying entirely on one central authority.'
+        ],
+        [
+            'question' => 'Why does blockchain need consensus?',
+            'answer' => 'Because blockchain networks are distributed and information can arrive at different times, the network needs rules for validating transactions, accepting blocks, handling conflicts, and reaching a shared state.'
+        ],
+        [
+            'question' => 'Is blockchain consensus just voting?',
+            'answer' => 'No. Consensus can involve validation rules, participant selection, economic incentives, penalties, and mechanisms for handling competing blocks, depending on the protocol.'
+        ],
+        [
+            'question' => 'What is Proof of Work?',
+            'answer' => 'Proof of Work is a consensus design that uses computational work and competition among miners as part of the process for producing blocks.'
+        ],
+        [
+            'question' => 'What is Proof of Stake?',
+            'answer' => 'Proof of Stake is a consensus design that uses staked assets and participants called validators to perform consensus-related roles according to protocol rules.'
+        ],
+        [
+            'question' => 'What is the difference between a miner and a validator?',
+            'answer' => 'A miner performs mining in Proof of Work systems, while a validator performs a consensus role in networks using mechanisms such as Proof of Stake.'
+        ],
+        [
+            'question' => 'Is mining the same as consensus?',
+            'answer' => 'No. Mining is a specialized block-production process in Proof of Work, while consensus is the broader system used to coordinate participants and agree on the accepted network state.'
+        ],
+        [
+            'question' => 'Does Proof of Stake use no energy?',
+            'answer' => 'No. Proof of Stake avoids the same type of intensive computational competition used by Proof of Work, but nodes, validators, servers, and network infrastructure still require electricity.'
+        ],
+        [
+            'question' => 'What does finality mean in blockchain?',
+            'answer' => 'Finality refers to a state in which a transaction or block is finalized according to the protocol and becomes difficult or impossible to reverse under the network’s assumptions.'
+        ],
+        [
+            'question' => 'What is a 51% attack?',
+            'answer' => 'A 51% attack generally refers to a situation where a participant or coordinated group gains enough influence over a blockchain consensus process to affect certain aspects of block ordering or acceptance, depending on the network.'
+        ],
+        [
+            'question' => 'Does consensus prevent all blockchain attacks?',
+            'answer' => 'No. Blockchain security also depends on protocol design, consensus assumptions, participant distribution, software security, economic incentives, and infrastructure.'
+        ],
+        [
+            'question' => 'What is the difference between validation and consensus?',
+            'answer' => 'Validation checks whether data follows protocol rules, while consensus is the broader system that coordinates distributed participants and determines the accepted ledger state.'
+        ],
+    ],
+
+    'status' => 'published',
+    'sort_order' => 6,
+    'published_at' => now(),
+],
+[
+    'title' => 'What Is a Blockchain Fork?',
+    'title_ar' => 'ما هي Forks في البلوك تشين؟ شرح Soft Fork وHard Fork',
+    'title_en' => 'What Is a Blockchain Fork? Soft Fork vs Hard Fork Explained',
+    'slug' => 'what-is-blockchain-fork',
+
+    'excerpt' => null,
+    'excerpt_ar' => 'تعرّف على مفهوم Fork في البلوك تشين، ولماذا تحدث الانقسامات، وما الفرق بين Soft Fork وHard Fork، وكيف تؤثر تغييرات البروتوكول على العقد والمعدنين والمدققين والشبكة.',
+    'excerpt_en' => 'Learn what a blockchain fork is, why forks happen, and the differences between Soft Fork and Hard Fork, including their effects on nodes, miners, validators, and blockchain networks.',
+
+    'content' => null,
+
+    'content_ar' => <<<'HTML'
+<h2>ما هي Fork في البلوك تشين؟</h2>
+
+<p>
+مصطلح <strong>Fork</strong> أو "التفرع" من المصطلحات المهمة في عالم البلوك تشين. ويُستخدم لوصف حالة يحدث فيها اختلاف في قواعد البروتوكول أو في مسار السلسلة، وقد يكون هذا الاختلاف مؤقتًا أو يؤدي إلى استمرار سلسلتين منفصلتين بحسب الحالة.
+</p>
+
+<p>
+يمكن أن تحدث الـForks لأسباب تقنية أو بسبب تحديثات في قواعد الشبكة أو نتيجة اختلاف المشاركين حول كيفية استمرار البروتوكول.
+</p>
+
+<p>
+ولفهم Forks بشكل جيد، من المفيد أولًا معرفة المفاهيم الأساسية التي شرحناها في الدروس السابقة، مثل:
+<a href="/academy/blockchain/what-is-blockchain">ما هي تقنية البلوك تشين؟</a>،
+<a href="/academy/blockchain/how-does-blockchain-work">كيف تعمل تقنية البلوك تشين؟</a>،
+<a href="/academy/blockchain/what-are-blockchain-nodes">ما هي العقد Nodes؟</a>،
+و
+<a href="/academy/blockchain/what-is-blockchain-consensus">ما هي آلية الإجماع Consensus؟</a>.
+</p>
+
+<h2>ما معنى Fork؟</h2>
+
+<p>
+في أبسط صورة، يمكن اعتبار Fork نقطة يحدث فيها اختلاف في القواعد التي تتبعها بعض أجزاء الشبكة، أو اختلاف في السلسلة التي يتم البناء عليها.
+</p>
+
+<p>
+بما أن البلوك تشين شبكة موزعة تحتوي على عدد كبير من العقد، فإن تغيير قواعد البروتوكول يحتاج إلى طريقة تجعل المشاركين يعرفون القواعد التي يجب تطبيقها.
+</p>
+
+<p>
+إذا لم تستخدم جميع العقد القواعد نفسها، فقد تظهر حالات لا تتفق فيها بعض العقد على صلاحية كتلة معينة أو على السلسلة التي يجب متابعتها.
+</p>
+
+<p>
+لهذا السبب ترتبط Forks بشكل مباشر بمفاهيم <strong>Protocol Rules</strong> و<strong>Consensus</strong> و<strong>Nodes</strong>.
+</p>
+
+<h2>لماذا تحدث Forks في البلوك تشين؟</h2>
+
+<p>
+يمكن أن تحدث Forks لأسباب متعددة، ومنها:
+</p>
+
+<ul>
+    <li>إجراء تحديثات أو تغييرات في قواعد البروتوكول.</li>
+    <li>إصلاح مشكلة تقنية أو أمنية.</li>
+    <li>إضافة خصائص جديدة إلى الشبكة.</li>
+    <li>تحسين قابلية التوسع أو الكفاءة.</li>
+    <li>وجود اختلاف بين المشاركين حول قواعد البروتوكول.</li>
+    <li>حدوث اختلاف مؤقت في السلسلة نتيجة إنتاج كتل متقاربة زمنيًا في بعض الشبكات.</li>
+</ul>
+
+<p>
+لكن ليس كل Fork يؤدي إلى إنشاء عملة رقمية جديدة أو إلى انقسام دائم في الشبكة.
+</p>
+
+<h2>ما أنواع Forks في البلوك تشين؟</h2>
+
+<p>
+من أشهر التصنيفات:
+</p>
+
+<ul>
+    <li><strong>Temporary Fork:</strong> تفرع مؤقت في السلسلة قد يحدث عندما تظهر كتل متنافسة لفترة قصيرة.</li>
+    <li><strong>Soft Fork:</strong> تغيير في قواعد البروتوكول يكون متوافقًا مع الإصدارات السابقة ضمن شروط معينة.</li>
+    <li><strong>Hard Fork:</strong> تغيير في قواعد البروتوكول يمكن أن يؤدي إلى عدم توافق بين العقد التي تتبع القواعد القديمة والعقد التي تتبع القواعد الجديدة.</li>
+</ul>
+
+<p>
+ويجب الانتباه إلى أن مصطلح Fork يمكن استخدامه في سياقات مختلفة، لذلك يجب النظر إلى سبب التفرع وطبيعته بدل افتراض أن كل Fork من النوع نفسه.
+</p>
+
+<h2>ما هو Temporary Fork؟</h2>
+
+<p>
+قد تنتج في بعض شبكات البلوك تشين أكثر من كتلة صالحة أو مرشحة في وقت متقارب، أو قد تصل الكتل إلى أجزاء مختلفة من الشبكة بترتيب مختلف.
+</p>
+
+<p>
+يمكن أن يؤدي ذلك مؤقتًا إلى وجود مسارين محتملين للسلسلة.
+</p>
+
+<p>
+تستخدم الشبكة آلية الإجماع وقواعد البروتوكول لتحديد المسار الذي يجب الاستمرار عليه، بينما يصبح المسار الآخر غير جزء من السلسلة المعتمدة وفق قواعد الشبكة.
+</p>
+
+<p>
+هذا النوع من التفرع لا يعني بالضرورة حدوث تغيير دائم في البروتوكول ولا يعني إنشاء عملة جديدة.
+</p>
+
+<h2>ما هو Soft Fork؟</h2>
+
+<p>
+<strong>Soft Fork</strong> هو تغيير في قواعد البروتوكول يجعل بعض الكتل أو المعاملات التي كانت مقبولة وفق القواعد السابقة غير مقبولة وفق القواعد الجديدة، مع بقاء نوع من التوافق مع العقد التي لم تحدث برنامجها، بحسب تفاصيل التغيير.
+</p>
+
+<p>
+الفكرة الأساسية هي أن القواعد الجديدة تكون أكثر تقييدًا في جانب معين، بحيث يمكن للعقد القديمة في بعض تصميمات Soft Fork الاستمرار في التعامل مع السلسلة الجديدة باعتبارها سلسلة صالحة، حتى إذا لم تكن قادرة على التحقق من جميع القواعد الجديدة بشكل كامل.
+</p>
+
+<p>
+لكن هذا لا يعني أن العقد القديمة تفهم جميع القواعد الجديدة. كما أن استمرار التوافق يعتمد على طبيعة التحديث وكيفية تنفيذه.
+</p>
+
+<h2>مثال مبسط على Soft Fork</h2>
+
+<p>
+تخيل أن قاعدة الشبكة كانت تسمح بمجموعة من الأنواع للبيانات داخل الكتل، ثم تم تعديل البروتوكول بحيث يسمح فقط بمجموعة أصغر وأكثر تقييدًا.
+</p>
+
+<p>
+العقد التي تستخدم القواعد الجديدة ستقبل المجموعة الجديدة فقط، بينما قد تستطيع العقد القديمة قبول هذه الكتل لأنها كانت أصلًا ضمن النطاق الذي تسمح به القواعد القديمة.
+</p>
+
+<p>
+لكن إذا أرسلت الشبكة كتلة تعتمد على قاعدة لا تفهمها العقد القديمة، فقد لا تتمكن العقد القديمة من التحقق منها بالطريقة نفسها.
+</p>
+
+<p>
+لهذا السبب يجب النظر إلى التفاصيل التقنية لكل Soft Fork على حدة.
+</p>
+
+<h2>ما هو Hard Fork؟</h2>
+
+<p>
+<strong>Hard Fork</strong> هو تغيير في قواعد البروتوكول يمكن أن يجعل الكتل التي تعتبرها القواعد الجديدة صالحة غير صالحة وفق القواعد القديمة.
+</p>
+
+<p>
+إذا قامت مجموعة من العقد بتطبيق القواعد الجديدة، بينما استمرت مجموعة أخرى في تطبيق القواعد القديمة، فقد تصبح السلسلة غير متوافقة بين المجموعتين.
+</p>
+
+<p>
+في هذه الحالة يمكن أن يستمر مساران منفصلان إذا لم يتفق المشاركون على العودة إلى مجموعة قواعد واحدة.
+</p>
+
+<h2>هل كل Hard Fork يؤدي إلى إنشاء عملة جديدة؟</h2>
+
+<p>
+لا.
+</p>
+
+<p>
+قد يؤدي Hard Fork إلى استمرار الشبكة في سلسلة واحدة بعد انتقال المشاركين إلى القواعد الجديدة، وقد يؤدي في حالات أخرى إلى استمرار سلسلتين منفصلتين.
+</p>
+
+<p>
+إنشاء أصل رقمي مستقل يعتمد على كيفية استمرار السلسلة الجديدة، وتصميم البروتوكول، وقرارات المشاركين، وليس على كلمة Hard Fork وحدها.
+</p>
+
+<h2>ما الفرق بين Soft Fork وHard Fork؟</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>العنصر</th>
+            <th>Soft Fork</th>
+            <th>Hard Fork</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>نوع التغيير</td>
+            <td>تغيير يجعل القواعد أكثر تقييدًا في جوانب معينة</td>
+            <td>تغيير يمكن أن يجعل القواعد الجديدة غير متوافقة مع القواعد القديمة</td>
+        </tr>
+        <tr>
+            <td>توافق العقد القديمة</td>
+            <td>يمكن أن تستمر في العمل ضمن حدود معينة بحسب التحديث</td>
+            <td>قد تعتبر بعض الكتل الجديدة غير صالحة</td>
+        </tr>
+        <tr>
+            <td>احتمال انقسام السلسلة</td>
+            <td>يمكن تقليله إذا تبنى المشاركون التحديث بطريقة متوافقة</td>
+            <td>يمكن أن يؤدي إلى استمرار سلسلتين إذا لم يتفق المشاركون</td>
+        </tr>
+        <tr>
+            <td>عملة جديدة</td>
+            <td>لا ينشئ عملة جديدة تلقائيًا</td>
+            <td>لا ينشئ عملة جديدة تلقائيًا</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>ما العلاقة بين Fork وNodes؟</h2>
+
+<p>
+العقد Nodes هي التي تشغّل قواعد البروتوكول وتتحقق من المعاملات والكتل وفق هذه القواعد.
+</p>
+
+<p>
+عندما يحدث تحديث في البروتوكول، تحتاج العقد إلى معرفة القواعد التي ستطبقها. وإذا قامت عقد مختلفة بتطبيق قواعد مختلفة، فقد تختلف في قبول بعض الكتل أو رفضها.
+</p>
+
+<p>
+لهذا السبب تلعب تحديثات برامج العقد دورًا مهمًا في تنفيذ Forks.
+</p>
+
+<p>
+يمكنك مراجعة درس
+<a href="/academy/blockchain/what-are-blockchain-nodes">ما هي العقد Nodes في البلوك تشين؟</a>
+لفهم هذا الجزء بشكل أعمق.
+</p>
+
+<h2>ما العلاقة بين Fork وConsensus؟</h2>
+
+<p>
+آلية الإجماع تحدد الطريقة التي تتعامل بها الشبكة مع الكتل والحالات المتنافسة وفق تصميم البروتوكول.
+</p>
+
+<p>
+عند حدوث اختلاف مؤقت بين الكتل، تساعد قواعد الإجماع على تحديد المسار الذي ستتبعه الشبكة.
+</p>
+
+<p>
+أما عند حدوث تغيير دائم في قواعد البروتوكول، فإن نجاح التحديث يعتمد أيضًا على تبني المشاركين للقواعد الجديدة.
+</p>
+
+<p>
+لذلك فإن فهم Forks يصبح أسهل عند فهم درس
+<a href="/academy/blockchain/what-is-blockchain-consensus">آلية الإجماع Consensus</a>.
+</p>
+
+<h2>ما الذي يحدث للمعدنين عند Fork؟</h2>
+
+<p>
+في شبكات Proof of Work، يحتاج المعدنون Miners إلى تشغيل برنامج يتوافق مع القواعد التي يريدون اتباعها.
+</p>
+
+<p>
+إذا حدث Hard Fork واستمرت سلسلتان بقواعد مختلفة، فقد يختار بعض المعدنين التعدين على سلسلة معينة، بينما يختار آخرون سلسلة مختلفة.
+</p>
+
+<p>
+أما في Soft Fork، فيمكن أن يستمر التعدين ضمن السلسلة نفسها مع تطبيق القواعد الجديدة، بحسب طريقة تنفيذ التحديث ودعم المشاركين له.
+</p>
+
+<p>
+ولا يمكن معرفة تأثير Fork على التعدين دون معرفة تفاصيل الشبكة والتحديث.
+</p>
+
+<h2>ما الذي يحدث للـValidators عند Fork؟</h2>
+
+<p>
+في شبكات Proof of Stake، يكون للـValidators دور في آلية الإجماع.
+</p>
+
+<p>
+إذا حدث تغيير في قواعد البروتوكول، يحتاج المدققون إلى تشغيل البرامج التي تتوافق مع القواعد التي يشاركون فيها.
+</p>
+
+<p>
+إذا انقسمت الشبكة إلى سلسلتين بقواعد مختلفة، فقد يختار المدققون المشاركة في إحدى السلاسل أو قد تتغير طريقة مشاركتهم وفق تصميم البروتوكول.
+</p>
+
+<p>
+وتختلف تفاصيل ذلك من شبكة إلى أخرى.
+</p>
+
+<h2>ما مثال مشهور على Hard Fork؟</h2>
+
+<p>
+من أشهر الأمثلة التاريخية انقسام شبكة Bitcoin في عام 2017 الذي أدى إلى ظهور <strong>Bitcoin Cash</strong>.
+</p>
+
+<p>
+حدث الانقسام نتيجة اختلافات بين المشاركين حول بعض قواعد البروتوكول، واستمرت سلسلتان منفصلتان بقواعد مختلفة.
+</p>
+
+<p>
+ومن المهم عدم استخدام هذا المثال كدليل على أن كل Hard Fork يؤدي إلى إنشاء عملة جديدة؛ فهو مثال محدد على حالة معينة من الانقسام الدائم.
+</p>
+
+<h2>هل Bitcoin Cash هي نفسها Bitcoin؟</h2>
+
+<p>
+Bitcoin Cash ليست السلسلة نفسها التي تُعرف اليوم باسم Bitcoin.
+</p>
+
+<p>
+ظهرت Bitcoin Cash كسلسلة منفصلة نتيجة Hard Fork من شبكة Bitcoin في عام 2017، وأصبحت لها قواعد وبروتوكول خاص بها.
+</p>
+
+<p>
+لذلك من المهم التمييز بين اسم الأصل الرقمي واسم السلسلة والبروتوكول الذي يعمل عليه.
+</p>
+
+<h2>هل يمكن أن تحدث Forks بدون خلاف بين المطورين؟</h2>
+
+<p>
+نعم.
+</p>
+
+<p>
+ليس كل Fork ناتجًا عن خلاف سياسي أو مجتمعي بين المشاركين.
+</p>
+
+<p>
+قد يحدث تفرع مؤقت بسبب إنتاج كتل متقاربة أو وصولها إلى أجزاء مختلفة من الشبكة في أوقات مختلفة.
+</p>
+
+<p>
+كما يمكن تنفيذ تحديثات بروتوكولية متفق عليها مسبقًا، وقد تتطلب بعض التحديثات تغيير برامج العقد.
+</p>
+
+<h2>ما الفرق بين Fork وUpgrade؟</h2>
+
+<p>
+مصطلح <strong>Upgrade</strong> يعني تحديث برنامج أو بروتوكول لإضافة خصائص أو إصلاح مشاكل أو تغيير قواعد معينة.
+</p>
+
+<p>
+أما <strong>Fork</strong> فيصف حالة التفرع أو الاختلاف في قواعد السلسلة أو مسارها.
+</p>
+
+<p>
+قد يكون الـUpgrade مصممًا بطريقة تؤدي إلى Soft Fork أو Hard Fork، لكن ليس كل تحديث برمجي يعني بالضرورة حدوث انقسام دائم في السلسلة.
+</p>
+
+<h2>ماذا يحدث للمعاملات أثناء Fork؟</h2>
+
+<p>
+يعتمد ذلك على نوع Fork وتصميم الشبكة.
+</p>
+
+<p>
+في التفرع المؤقت، قد تصبح إحدى الكتل جزءًا من المسار الذي لا تستمر عليه الشبكة وفق قواعد الإجماع، بينما تستمر المعاملات أو تتم إعادة معالجتها وفق الحالة النهائية للشبكة.
+</p>
+
+<p>
+أما في Hard Fork الذي ينتج سلسلتين، فقد توجد سجلات مشتركة قبل نقطة الانقسام ثم تبدأ السلسلتان في اتباع قواعد مختلفة بعد ذلك.
+</p>
+
+<p>
+لذلك يجب عدم افتراض أن جميع المعاملات تتعامل مع Forks بالطريقة نفسها.
+</p>
+
+<h2>ماذا يحدث للعملات عند Hard Fork؟</h2>
+
+<p>
+يعتمد ذلك على طبيعة الانقسام.
+</p>
+
+<p>
+إذا استمرت سلسلتان منفصلتان، فقد يصبح هناك أصل رقمي مرتبط بكل سلسلة، لكن هذا يعتمد على تصميم الشبكة وطريقة تنفيذ الانقسام.
+</p>
+
+<p>
+وفي بعض الحالات قد تنتقل الشبكة إلى قواعد جديدة دون إنشاء أصل مستقل ذي قيمة سوقية منفصلة.
+</p>
+
+<p>
+لهذا السبب لا ينبغي اعتبار Hard Fork مرادفًا تلقائيًا لـ "عملة مجانية جديدة".
+</p>
+
+<h2>هل Fork خطر على المستخدم؟</h2>
+
+<p>
+يمكن أن يسبب Fork تعقيدات للمستخدمين، خصوصًا إذا استمرت أكثر من سلسلة.
+</p>
+
+<p>
+قد يحتاج المستخدم إلى معرفة السلسلة التي تدعمها محفظته، وكيفية التعامل مع الأصول بعد الانقسام، وما إذا كانت الخدمة أو المنصة التي يستخدمها تدعم إحدى السلاسل أو كلتيهما.
+</p>
+
+<p>
+كما يجب الحذر من عمليات الاحتيال التي قد تستغل أحداث Fork لإقناع المستخدمين بتقديم مفاتيحهم الخاصة أو كلمات الاسترداد.
+</p>
+
+<p>
+<strong>لا تشارك أبدًا المفتاح الخاص أو عبارة الاسترداد مع أي شخص بحجة الحصول على عملات ناتجة عن Fork.</strong>
+</p>
+
+<h2>هل Fork يعني أن البلوك تشين أصبح فاشلًا؟</h2>
+
+<p>
+ليس بالضرورة.
+</p>
+
+<p>
+Fork هو وصف لحالة تقنية أو لتغيير في قواعد البروتوكول، وليس حكمًا على نجاح الشبكة أو فشلها.
+</p>
+
+<p>
+قد تكون بعض Forks جزءًا من عملية تطوير أو تحديث، بينما قد تنتج Forks أخرى عن اختلافات كبيرة تؤدي إلى استمرار شبكات منفصلة.
+</p>
+
+<p>
+لذلك يجب تحليل كل حالة وفق أسبابها ونتائجها بدل إطلاق حكم عام على جميع Forks.
+</p>
+
+<h2>كيف نفهم Fork بطريقة بسيطة؟</h2>
+
+<p>
+تخيل أن مجموعة من الأشخاص تستخدم كتابًا يحتوي على قواعد مشتركة. إذا قرر جزء من المجموعة تغيير إحدى القواعد، فقد يستمر الجميع في استخدام القواعد القديمة، أو يتبنى الجميع القواعد الجديدة، أو تنقسم المجموعة إلى مجموعتين تستخدم كل منهما مجموعة مختلفة من القواعد.
+</p>
+
+<p>
+في البلوك تشين، تكون هذه القواعد موجودة داخل البروتوكول والبرامج التي تشغلها العقد والمشاركون.
+</p>
+
+<p>
+إذا كانت القواعد الجديدة متوافقة مع القواعد السابقة بطريقة معينة، يمكن أن يكون التغيير Soft Fork. وإذا كانت غير متوافقة مع القواعد القديمة في حالات معينة، فقد يكون Hard Fork.
+</p>
+
+<h2>الخلاصة</h2>
+
+<p>
+Fork هو مفهوم أساسي في البلوك تشين ويشير إلى حالة من التفرع أو الاختلاف في قواعد البروتوكول أو مسار السلسلة.
+</p>
+
+<p>
+يمكن أن يكون التفرع مؤقتًا بسبب وجود كتل متنافسة، أو يمكن أن ينتج عن تغيير في قواعد البروتوكول مثل Soft Fork أو Hard Fork.
+</p>
+
+<p>
+يتميز Soft Fork بإمكانية الحفاظ على قدر من التوافق مع القواعد السابقة بحسب طبيعة التحديث، بينما يمكن أن يؤدي Hard Fork إلى عدم توافق بين العقد التي تستخدم القواعد القديمة والعقد التي تستخدم القواعد الجديدة.
+</p>
+
+<p>
+ولا يعني كل Fork إنشاء عملة جديدة. فقد يستمر التحديث ضمن سلسلة واحدة، أو قد تستمر سلسلتان منفصلتان بحسب طبيعة التغيير وقرارات المشاركين.
+</p>
+
+<p>
+فهم Forks يساعدك على الانتقال إلى مفاهيم أكثر تقدمًا في البلوك تشين، مثل Chain Reorganizations وFinality والحوكمة والتحديثات البروتوكولية.
+</p>
+
+<h2>روابط مفيدة داخل أكاديمية AQL Crypto</h2>
+
+<ul>
+    <li><a href="/academy/blockchain">مسار Blockchain الكامل</a></li>
+    <li><a href="/academy/blockchain/what-is-blockchain">ما هي تقنية البلوك تشين؟</a></li>
+    <li><a href="/academy/blockchain/how-does-blockchain-work">كيف تعمل تقنية البلوك تشين؟</a></li>
+    <li><a href="/academy/blockchain/what-is-a-block">ما هي الكتلة Block في البلوك تشين؟</a></li>
+    <li><a href="/academy/blockchain/what-is-hash-function">ما هي دوال التجزئة Hash Functions؟</a></li>
+    <li><a href="/academy/blockchain/what-are-blockchain-nodes">ما هي العقد Nodes في البلوك تشين؟</a></li>
+    <li><a href="/academy/blockchain/what-is-blockchain-consensus">ما هي آلية الإجماع Consensus؟</a></li>
+    <li><a href="/academy/bitcoin/how-bitcoin-works">كيف يعمل Bitcoin؟</a></li>
+    <li><a href="/academy/bitcoin/bitcoin-mining">ما هو تعدين Bitcoin؟</a></li>
+</ul>
+HTML,
+
+    'content_en' => <<<'HTML'
+<h2>What Is a Blockchain Fork?</h2>
+
+<p>
+A <strong>fork</strong> is an important concept in blockchain technology. It describes a situation where there is a divergence in protocol rules or in the chain being followed by network participants.
+</p>
+
+<p>
+A fork can be temporary or can result in separate chains, depending on the circumstances and the protocol design.
+</p>
+
+<p>
+Forks can happen because of technical events, protocol upgrades, or disagreements about how a blockchain should evolve.
+</p>
+
+<p>
+To understand forks, it helps to review:
+<a href="/academy/blockchain/what-is-blockchain">What Is Blockchain?</a>,
+<a href="/academy/blockchain/how-does-blockchain-work">How Does Blockchain Work?</a>,
+<a href="/academy/blockchain/what-are-blockchain-nodes">What Are Blockchain Nodes?</a>,
+and
+<a href="/academy/blockchain/what-is-blockchain-consensus">What Is Blockchain Consensus?</a>.
+</p>
+
+<h2>What Does Fork Mean in Blockchain?</h2>
+
+<p>
+At a basic level, a fork occurs when there is a divergence in the rules followed by parts of a blockchain network or a divergence in the chain that participants are building on.
+</p>
+
+<p>
+Because blockchain networks are distributed across many nodes, protocol changes need a mechanism for participants to know which rules they are expected to follow.
+</p>
+
+<p>
+If different nodes follow different rules, they may disagree about whether a particular block is valid or which chain should be followed.
+</p>
+
+<p>
+This is why forks are closely connected to <strong>protocol rules</strong>, <strong>consensus</strong>, and <strong>nodes</strong>.
+</p>
+
+<h2>Why Do Blockchain Forks Happen?</h2>
+
+<p>
+Forks can occur for several reasons, including:
+</p>
+
+<ul>
+    <li>Protocol rule changes or upgrades.</li>
+    <li>Technical or security fixes.</li>
+    <li>Adding new functionality.</li>
+    <li>Changes intended to improve scalability or efficiency.</li>
+    <li>Disagreements among participants about protocol rules.</li>
+    <li>Temporary chain divergence caused by competing blocks in some blockchain systems.</li>
+</ul>
+
+<p>
+However, not every fork creates a new cryptocurrency or permanently splits a blockchain.
+</p>
+
+<h2>What Are the Main Types of Blockchain Forks?</h2>
+
+<p>
+Common categories include:
+</p>
+
+<ul>
+    <li><strong>Temporary Fork:</strong> A short-lived chain divergence that can occur when competing blocks appear.</li>
+    <li><strong>Soft Fork:</strong> A protocol rule change that can remain compatible with previous rules under certain conditions.</li>
+    <li><strong>Hard Fork:</strong> A protocol rule change that can make blocks valid under the new rules invalid under the old rules.</li>
+</ul>
+
+<p>
+The term fork can be used in different contexts, so the specific cause and behavior of the fork matter.
+</p>
+
+<h2>What Is a Temporary Fork?</h2>
+
+<p>
+Some blockchain networks can temporarily have more than one valid candidate block produced or received around the same time, or different parts of the network may receive blocks in different orders.
+</p>
+
+<p>
+This can temporarily create multiple possible chain paths.
+</p>
+
+<p>
+The network's consensus rules determine which path should continue according to the protocol, while another path may no longer be part of the accepted chain.
+</p>
+
+<p>
+A temporary fork does not necessarily represent a permanent protocol change and does not necessarily create a new cryptocurrency.
+</p>
+
+<h2>What Is a Soft Fork?</h2>
+
+<p>
+A <strong>Soft Fork</strong> is a protocol change that can make some transactions or blocks that were valid under previous rules invalid under the new rules, while maintaining a degree of compatibility with nodes that have not upgraded, depending on the exact design.
+</p>
+
+<p>
+The key idea is that the new rules are more restrictive in a particular area. In certain Soft Fork designs, older nodes may continue to recognize the resulting chain as valid even though they do not fully enforce every new rule.
+</p>
+
+<p>
+This does not mean that old nodes understand every new rule. Compatibility depends on the exact implementation and the type of protocol change.
+</p>
+
+<h2>A Simple Soft Fork Example</h2>
+
+<p>
+Imagine a network that previously allowed several types of data inside blocks. A protocol update then restricts the allowed set to a smaller subset.
+</p>
+
+<p>
+Nodes using the new rules accept only the restricted set, while older nodes may still recognize those blocks as valid because the new blocks remain within the broader range allowed by the old rules.
+</p>
+
+<p>
+However, if a block relies on rules that older nodes cannot interpret correctly, those nodes may not be able to validate it in the same way.
+</p>
+
+<p>
+That is why the technical details of each Soft Fork matter.
+</p>
+
+<h2>What Is a Hard Fork?</h2>
+
+<p>
+A <strong>Hard Fork</strong> is a protocol change that can make blocks considered valid under the new rules invalid under the old rules.
+</p>
+
+<p>
+If some nodes adopt the new rules while others continue following the old rules, the two groups may become incompatible.
+</p>
+
+<p>
+In such cases, two separate chains can continue if participants do not converge on one set of rules.
+</p>
+
+<h2>Does Every Hard Fork Create a New Cryptocurrency?</h2>
+
+<p>
+No.
+</p>
+
+<p>
+A Hard Fork can result in the network continuing as one chain after participants adopt the new rules. In other cases, two separate chains may continue.
+</p>
+
+<p>
+Whether a new digital asset emerges as a separate market asset depends on how the new chain continues, the protocol design, and the decisions of network participants.
+</p>
+
+<h2>What Is the Difference Between a Soft Fork and a Hard Fork?</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Feature</th>
+            <th>Soft Fork</th>
+            <th>Hard Fork</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Type of change</td>
+            <td>Rules become more restrictive in certain areas</td>
+            <td>New rules can become incompatible with old rules</td>
+        </tr>
+        <tr>
+            <td>Compatibility with old nodes</td>
+            <td>Can remain possible within certain limits, depending on the update</td>
+            <td>Old nodes may reject blocks valid under the new rules</td>
+        </tr>
+        <tr>
+            <td>Chain split</td>
+            <td>Can be avoided when participants adopt the update compatibly</td>
+            <td>Can result in two continuing chains if participants do not converge</td>
+        </tr>
+        <tr>
+            <td>New cryptocurrency</td>
+            <td>Does not automatically create one</td>
+            <td>Does not automatically create one</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>What Is the Relationship Between Forks and Nodes?</h2>
+
+<p>
+Nodes run protocol rules and validate transactions and blocks according to those rules.
+</p>
+
+<p>
+When the protocol is upgraded, nodes need to know which rules they are expected to enforce. If different groups of nodes run different rules, they may disagree about whether certain blocks are valid.
+</p>
+
+<p>
+This is why node software updates are important during protocol forks.
+</p>
+
+<p>
+See
+<a href="/academy/blockchain/what-are-blockchain-nodes">What Are Blockchain Nodes?</a>
+for a deeper explanation of nodes.
+</p>
+
+<h2>What Is the Relationship Between Forks and Consensus?</h2>
+
+<p>
+Consensus mechanisms define how a blockchain handles competing blocks and states according to its protocol.
+</p>
+
+<p>
+When a temporary divergence occurs, consensus rules help determine which chain path participants should follow.
+</p>
+
+<p>
+When protocol rules are changed permanently, the success of the update also depends on participants adopting the new rules.
+</p>
+
+<p>
+This is why understanding
+<a href="/academy/blockchain/what-is-blockchain-consensus">blockchain consensus</a>
+makes forks easier to understand.
+</p>
+
+<h2>What Happens to Miners During a Fork?</h2>
+
+<p>
+In Proof of Work networks, miners need to run software that follows the rules of the chain they want to mine on.
+</p>
+
+<p>
+If a Hard Fork results in two chains with different rules, some miners may choose one chain while others choose the other.
+</p>
+
+<p>
+With a Soft Fork, mining can continue on the same chain while miners adopt the new rules, depending on how the upgrade is implemented and supported.
+</p>
+
+<p>
+The exact impact on mining depends on the blockchain and the specific fork.
+</p>
+
+<h2>What Happens to Validators During a Fork?</h2>
+
+<p>
+In Proof of Stake networks, validators have roles in the consensus mechanism.
+</p>
+
+<p>
+When protocol rules change, validators need to run software compatible with the rules they are participating under.
+</p>
+
+<p>
+If a network splits into two chains with different rules, validators may choose to participate in one chain, or their roles may change according to the protocol design.
+</p>
+
+<p>
+The exact behavior differs between blockchain networks.
+</p>
+
+<h2>What Is a Famous Example of a Hard Fork?</h2>
+
+<p>
+One well-known historical example is the 2017 split of the Bitcoin network that resulted in <strong>Bitcoin Cash</strong>.
+</p>
+
+<p>
+The split followed disagreements among participants about certain protocol rules, and two separate chains continued with different rules.
+</p>
+
+<p>
+This example should not be used to conclude that every Hard Fork creates a new cryptocurrency. It is a specific example of a permanent chain split.
+</p>
+
+<h2>Is Bitcoin Cash the Same as Bitcoin?</h2>
+
+<p>
+Bitcoin Cash is not the same blockchain as the chain known today as Bitcoin.
+</p>
+
+<p>
+Bitcoin Cash emerged as a separate chain following a Hard Fork of the Bitcoin network in 2017 and developed its own protocol and rules.
+</p>
+
+<p>
+This illustrates why it is important to distinguish between an asset's name, its blockchain, and the protocol on which it operates.
+</p>
+
+<h2>Can Forks Happen Without Developer Disagreements?</h2>
+
+<p>
+Yes.
+</p>
+
+<p>
+Not every fork is caused by a political or community disagreement.
+</p>
+
+<p>
+A temporary fork can occur because competing blocks are produced or reach different parts of the network at slightly different times.
+</p>
+
+<p>
+Protocol upgrades can also be planned and broadly coordinated, even though some upgrades require node software changes.
+</p>
+
+<h2>What Is the Difference Between a Fork and an Upgrade?</h2>
+
+<p>
+An <strong>Upgrade</strong> is a software or protocol update intended to add features, fix problems, or change certain rules.
+</p>
+
+<p>
+A <strong>Fork</strong> describes a divergence in chain history or protocol rules.
+</p>
+
+<p>
+An upgrade can be designed as a Soft Fork or Hard Fork, but not every software update necessarily creates a permanent chain split.
+</p>
+
+<h2>What Happens to Transactions During a Fork?</h2>
+
+<p>
+The answer depends on the fork type and the blockchain design.
+</p>
+
+<p>
+During a temporary divergence, one candidate block may eventually become part of the chain accepted by the network, while another is no longer part of the canonical history according to the consensus rules.
+</p>
+
+<p>
+In a Hard Fork that results in two chains, the chains may share a common history before the fork point and then follow different rules afterward.
+</p>
+
+<p>
+Therefore, transaction handling should not be assumed to be identical for every fork.
+</p>
+
+<h2>What Happens to Coins During a Hard Fork?</h2>
+
+<p>
+It depends on the nature of the split.
+</p>
+
+<p>
+If two separate chains continue, there may be an asset associated with each chain, but this depends on the protocol design and how the fork is implemented.
+</p>
+
+<p>
+In other cases, the network may transition to new rules without producing an independent asset with a separate market identity.
+</p>
+
+<p>
+A Hard Fork should therefore not automatically be understood as a guaranteed "free new coin."
+</p>
+
+<h2>Can a Fork Be Risky for Users?</h2>
+
+<p>
+Forks can create practical complications for users, especially when more than one chain continues.
+</p>
+
+<p>
+Users may need to understand which chain their wallet supports, how assets are handled after the split, and whether a platform or service supports one chain or multiple chains.
+</p>
+
+<p>
+Users should also be careful about scams that exploit fork events to request private keys or recovery phrases.
+</p>
+
+<p>
+<strong>Never share your private key or recovery phrase with anyone claiming that it is required to receive coins created by a fork.</strong>
+</p>
+
+<h2>Does a Fork Mean the Blockchain Has Failed?</h2>
+
+<p>
+Not necessarily.
+</p>
+
+<p>
+A fork is a technical description of a chain or protocol divergence, not a judgment about whether a blockchain has succeeded or failed.
+</p>
+
+<p>
+Some forks can be part of development or planned upgrades, while others can result from major disagreements and lead to separate networks.
+</p>
+
+<p>
+Each fork should therefore be understood according to its specific causes and consequences.
+</p>
+
+<h2>A Simple Way to Understand Forks</h2>
+
+<p>
+Imagine a group of people using a shared book of rules. If part of the group decides to change one rule, everyone might adopt the new rule, everyone might keep the old rule, or the group might split into two groups using different rules.
+</p>
+
+<p>
+In blockchain networks, these rules are implemented through the protocol and the software operated by nodes and other participants.
+</p>
+
+<p>
+If new rules remain compatible with previous rules in a particular way, the change can be a Soft Fork. If the new rules become incompatible with old rules in certain cases, it can be a Hard Fork.
+</p>
+
+<h2>Conclusion</h2>
+
+<p>
+A blockchain fork is an important concept describing a divergence in protocol rules or blockchain history.
+</p>
+
+<p>
+A fork can be temporary because of competing blocks, or it can result from protocol changes such as Soft Forks and Hard Forks.
+</p>
+
+<p>
+A Soft Fork can preserve a degree of compatibility with previous rules depending on the update design, while a Hard Fork can make new rules incompatible with older rules.
+</p>
+
+<p>
+Not every fork creates a new cryptocurrency. A network can continue as one chain after an upgrade, or multiple chains can continue depending on the nature of the change and the decisions of participants.
+</p>
+
+<p>
+Understanding forks prepares you for more advanced blockchain concepts such as chain reorganizations, finality, governance, and protocol upgrades.
+</p>
+
+<h2>Related AQL Crypto Academy Lessons</h2>
+
+<ul>
+    <li><a href="/academy/blockchain">Complete Blockchain Learning Path</a></li>
+    <li><a href="/academy/blockchain/what-is-blockchain">What Is Blockchain?</a></li>
+    <li><a href="/academy/blockchain/how-does-blockchain-work">How Does Blockchain Work?</a></li>
+    <li><a href="/academy/blockchain/what-is-a-block">What Is a Block in Blockchain?</a></li>
+    <li><a href="/academy/blockchain/what-is-hash-function">What Are Hash Functions in Blockchain?</a></li>
+    <li><a href="/academy/blockchain/what-are-blockchain-nodes">What Are Blockchain Nodes?</a></li>
+    <li><a href="/academy/blockchain/what-is-blockchain-consensus">What Is Blockchain Consensus?</a></li>
+    <li><a href="/academy/bitcoin/how-bitcoin-works">How Does Bitcoin Work?</a></li>
+    <li><a href="/academy/bitcoin/bitcoin-mining">What Is Bitcoin Mining?</a></li>
+</ul>
+HTML,
+
+    'image' => null,
+
+    'seo_title' => null,
+    'seo_title_ar' => 'ما هي Forks في البلوك تشين؟ الفرق بين Soft Fork وHard Fork | AQL Crypto',
+    'seo_title_en' => 'What Is a Blockchain Fork? Soft Fork vs Hard Fork Explained | AQL Crypto',
+
+    'meta_description' => null,
+    'meta_description_ar' => 'شرح مبسط لـ Fork في البلوك تشين، وأسباب حدوث التفرعات، والفرق بين Soft Fork وHard Fork، وتأثيرها على العقد والمعدنين والمدققين والعملات.',
+    'meta_description_en' => 'Learn what a blockchain fork is, why forks happen, and the difference between Soft Fork and Hard Fork and their impact on nodes, miners, validators, and digital assets.',
+
+    'faq_ar' => [
+        [
+            'question' => 'ما هي Fork في البلوك تشين؟',
+            'answer' => 'Fork هي حالة يحدث فيها اختلاف في قواعد بروتوكول البلوك تشين أو في مسار السلسلة، وقد يكون التفرع مؤقتًا أو يؤدي إلى استمرار سلاسل منفصلة.'
+        ],
+        [
+            'question' => 'لماذا تحدث Forks في البلوك تشين؟',
+            'answer' => 'يمكن أن تحدث Forks بسبب تحديثات البروتوكول أو إصلاحات تقنية أو أمنية أو إضافة خصائص جديدة أو اختلافات بين المشاركين أو بسبب تفرع مؤقت ناتج عن كتل متنافسة.'
+        ],
+        [
+            'question' => 'ما هو Soft Fork؟',
+            'answer' => 'Soft Fork هو تغيير في قواعد البروتوكول يجعل القواعد أكثر تقييدًا في جوانب معينة، ويمكن أن يحافظ على قدر من التوافق مع العقد القديمة بحسب طريقة تنفيذ التحديث.'
+        ],
+        [
+            'question' => 'ما هو Hard Fork؟',
+            'answer' => 'Hard Fork هو تغيير في قواعد البروتوكول يمكن أن يجعل الكتل الصالحة وفق القواعد الجديدة غير صالحة وفق القواعد القديمة، وقد يؤدي إلى استمرار سلسلتين منفصلتين.'
+        ],
+        [
+            'question' => 'ما الفرق بين Soft Fork وHard Fork؟',
+            'answer' => 'Soft Fork يمكن أن يحافظ على قدر من التوافق مع القواعد القديمة، بينما Hard Fork يمكن أن يجعل القواعد الجديدة غير متوافقة مع القواعد القديمة.'
+        ],
+        [
+            'question' => 'هل كل Hard Fork ينشئ عملة جديدة؟',
+            'answer' => 'لا. قد يستمر التحديث ضمن سلسلة واحدة، وقد تستمر سلسلتان منفصلتان، ويعتمد ظهور أصل رقمي مستقل على تصميم الانقسام وكيفية استمرار السلسلة.'
+        ],
+        [
+            'question' => 'ما هو Temporary Fork؟',
+            'answer' => 'هو تفرع مؤقت يمكن أن يحدث عندما تظهر كتل متنافسة أو تصل الكتل إلى أجزاء مختلفة من الشبكة بترتيب مختلف، ثم تحدد قواعد الإجماع المسار الذي يستمر.'
+        ],
+        [
+            'question' => 'هل Fork يعني فشل البلوك تشين؟',
+            'answer' => 'لا. Fork وصف لحالة تقنية أو تغيير في قواعد البروتوكول، وقد يكون جزءًا من تحديث أو تطوير أو ينتج عن اختلافات تؤدي إلى سلاسل منفصلة.'
+        ],
+        [
+            'question' => 'ما العلاقة بين Fork وNodes؟',
+            'answer' => 'العقد تشغل برامج تطبق قواعد البروتوكول. وإذا طبقت مجموعات مختلفة من العقد قواعد مختلفة، فقد تختلف في قبول بعض الكتل، وهذا قد يؤدي إلى تفرع.'
+        ],
+        [
+            'question' => 'ما العلاقة بين Fork وConsensus؟',
+            'answer' => 'آلية الإجماع تحدد كيفية تعامل الشبكة مع الكتل أو الحالات المتنافسة، وتساعد العقد على تحديد المسار الذي يجب اتباعه وفق قواعد البروتوكول.'
+        ],
+        [
+            'question' => 'ما هو أشهر مثال على Hard Fork؟',
+            'answer' => 'من أشهر الأمثلة انقسام شبكة Bitcoin في عام 2017 الذي أدى إلى استمرار Bitcoin Cash كسلسلة منفصلة بقواعد وبروتوكول خاصين بها.'
+        ],
+        [
+            'question' => 'هل Fork خطير على المستخدمين؟',
+            'answer' => 'قد يسبب Fork تعقيدات للمستخدمين عند استمرار أكثر من سلسلة، ويجب الانتباه إلى دعم المحافظ والمنصات وتجنب مشاركة المفاتيح الخاصة أو عبارات الاسترداد مع أي جهة.'
+        ],
+    ],
+
+    'faq_en' => [
+        [
+            'question' => 'What is a blockchain fork?',
+            'answer' => 'A blockchain fork is a divergence in protocol rules or blockchain history. It can be temporary or can result in separate chains depending on the situation.'
+        ],
+        [
+            'question' => 'Why do blockchain forks happen?',
+            'answer' => 'Forks can happen because of protocol upgrades, technical or security changes, new features, disagreements about rules, or temporary competing blocks.'
+        ],
+        [
+            'question' => 'What is a Soft Fork?',
+            'answer' => 'A Soft Fork is a protocol rule change that makes the rules more restrictive in certain areas while potentially maintaining compatibility with older nodes depending on the implementation.'
+        ],
+        [
+            'question' => 'What is a Hard Fork?',
+            'answer' => 'A Hard Fork is a protocol change that can make blocks valid under new rules invalid under old rules and may result in two separate chains.'
+        ],
+        [
+            'question' => 'What is the difference between a Soft Fork and a Hard Fork?',
+            'answer' => 'A Soft Fork can preserve a degree of compatibility with previous rules, while a Hard Fork can make the new rules incompatible with the old rules.'
+        ],
+        [
+            'question' => 'Does every Hard Fork create a new cryptocurrency?',
+            'answer' => 'No. A network can continue as one chain after adopting new rules, or multiple chains can continue. A separate asset depends on the specific fork design and outcome.'
+        ],
+        [
+            'question' => 'What is a temporary fork?',
+            'answer' => 'A temporary fork can occur when competing blocks appear or reach different parts of the network at different times. Consensus rules eventually determine which chain path continues.'
+        ],
+        [
+            'question' => 'Does a fork mean that a blockchain has failed?',
+            'answer' => 'No. A fork is a technical description of a protocol or chain divergence and can occur during upgrades, development, or disagreements that lead to separate chains.'
+        ],
+        [
+            'question' => 'What is the relationship between forks and nodes?',
+            'answer' => 'Nodes run protocol software and apply protocol rules. If different groups of nodes follow different rules, they may disagree about block validity and follow different chain paths.'
+        ],
+        [
+            'question' => 'What is the relationship between forks and consensus?',
+            'answer' => 'Consensus rules determine how the network handles competing blocks or states and help nodes determine which chain path should be followed.'
+        ],
+        [
+            'question' => 'What is a famous example of a Hard Fork?',
+            'answer' => 'A well-known example is the 2017 split of the Bitcoin network that resulted in Bitcoin Cash continuing as a separate blockchain with its own protocol rules.'
+        ],
+        [
+            'question' => 'Can a fork be risky for users?',
+            'answer' => 'A fork can create complications when multiple chains continue. Users should understand wallet and platform support and never share private keys or recovery phrases to claim fork-related assets.'
+        ],
+    ],
+
+    'status' => 'published',
+    'sort_order' => 7,
+    'published_at' => now(),
+],
+[
+    'title' => 'What Is Blockchain Finality?',
+    'title_ar' => 'ما هي Finality في البلوك تشين؟ شرح نهائية المعاملات والكتل',
+    'title_en' => 'What Is Blockchain Finality? A Beginner’s Guide to Finality',
+    'slug' => 'what-is-blockchain-finality',
+
+    'excerpt' => null,
+    'excerpt_ar' => 'تعرف على مفهوم Finality أو نهائية المعاملات والكتل في البلوك تشين، والفرق بين Confirmation وFinality، وكيف تختلف النهائية بين Bitcoin وشبكات Proof of Stake.',
+    'excerpt_en' => 'Learn what blockchain finality means, the difference between confirmations and finality, and how finality works differently in Bitcoin and Proof of Stake networks.',
+
+    'content' => null,
+
+    'content_ar' => <<<'HTML'
+<h2>ما هي Finality في البلوك تشين؟</h2>
+
+<p>
+مصطلح <strong>Finality</strong> أو "النهائية" يشير إلى درجة اليقين بأن معاملة أو كتلة تم قبولها في تاريخ البلوك تشين ولن يتم استبدالها أو التراجع عنها وفق قواعد الشبكة.
+</p>
+
+<p>
+يُعد مفهوم Finality من المفاهيم المهمة لفهم كيفية انتقال المعاملات من حالة "تم بثها إلى الشبكة" إلى حالة تصبح فيها جزءًا أكثر ثباتًا من سجل البلوك تشين.
+</p>
+
+<p>
+لفهم Finality بشكل جيد، من المفيد معرفة المفاهيم التي تناولناها في الدروس السابقة، مثل
+<a href="/academy/blockchain/what-is-blockchain">ما هي تقنية البلوك تشين؟</a>،
+<a href="/academy/blockchain/how-does-blockchain-work">كيف تعمل البلوك تشين؟</a>،
+<a href="/academy/blockchain/what-is-a-block">ما هي الكتلة Block؟</a>،
+<a href="/academy/blockchain/what-are-blockchain-nodes">ما هي العقد Nodes؟</a>،
+<a href="/academy/blockchain/what-is-blockchain-consensus">ما هي آلية الإجماع Consensus؟</a>
+و
+<a href="/academy/blockchain/what-is-blockchain-fork">ما هي Forks في البلوك تشين؟</a>.
+</p>
+
+<h2>لماذا تحتاج البلوك تشين إلى Finality؟</h2>
+
+<p>
+عندما يرسل المستخدم معاملة، فإنها لا تصبح بالضرورة نهائية في اللحظة نفسها.
+</p>
+
+<p>
+قد تحتاج المعاملة إلى أن يتم تضمينها في كتلة، ثم قبول هذه الكتلة من الشبكة، وقد تحتاج بعد ذلك إلى مزيد من التأكيدات أو الوصول إلى مرحلة نهائية وفق آلية الإجماع المستخدمة.
+</p>
+
+<p>
+هذا مهم لأن بعض شبكات البلوك تشين يمكن أن تمر بحالات مؤقتة توجد فيها أكثر من كتلة محتملة في جزء معين من تاريخ السلسلة.
+</p>
+
+<p>
+لذلك تساعد Finality المستخدمين والتطبيقات والمنصات على تحديد مدى إمكانية اعتبار المعاملة مستقرة وغير قابلة للتراجع وفق قواعد الشبكة.
+</p>
+
+<h2>ما الفرق بين Confirmation وFinality؟</h2>
+
+<p>
+غالبًا ما يتم استخدام المصطلحين بشكل متقارب، لكنهما ليسا متطابقين.
+</p>
+
+<p>
+<strong>Confirmation</strong> أو التأكيد يشير عادةً إلى عدد الكتل التي تمت إضافتها بعد الكتلة التي تحتوي على المعاملة.
+</p>
+
+<p>
+كلما أضيفت كتل جديدة فوق كتلتك، يزداد عمق المعاملة داخل السلسلة، وفي بعض الشبكات يقل احتمال أن يتم استبدال تاريخها وفق قواعد الإجماع.
+</p>
+
+<p>
+أما <strong>Finality</strong> فتشير إلى مرحلة أو خاصية تجعل تغيير ذلك التاريخ غير ممكن أو غير متوقع وفق نموذج النهائية الخاص بالشبكة.
+</p>
+
+<p>
+بالتالي، يمكن أن تكون هناك شبكة تعتمد على زيادة التأكيدات للوصول إلى درجة أعلى من الثقة، بينما تستخدم شبكة أخرى آلية توفر نهائية أقوى بعد تحقق شروط معينة.
+</p>
+
+<h2>هل تصبح المعاملة نهائية فورًا؟</h2>
+
+<p>
+ليس بالضرورة.
+</p>
+
+<p>
+الأمر يعتمد على تصميم البلوك تشين وآلية الإجماع المستخدمة.
+</p>
+
+<p>
+في بعض الشبكات، تحتاج المعاملة إلى عدد من التأكيدات قبل أن يعتبرها المستخدم أو التطبيق منخفضة المخاطر من ناحية إعادة التنظيم.
+</p>
+
+<p>
+وفي شبكات أخرى، قد توجد آلية نهائية صريحة تجعل حالة معينة نهائية بعد تحقق شروط محددة.
+</p>
+
+<p>
+لذلك لا توجد مدة واحدة للنهائية تنطبق على جميع شبكات البلوك تشين.
+</p>
+
+<h2>ما هي Probabilistic Finality؟</h2>
+
+<p>
+<strong>Probabilistic Finality</strong> تعني أن درجة الثقة في نهائية المعاملة تزداد مع مرور الوقت أو إضافة كتل جديدة، بدل وجود لحظة واحدة تكون فيها المعاملة نهائية بشكل مطلق منذ البداية.
+</p>
+
+<p>
+كل كتلة جديدة يتم بناؤها فوق الكتلة التي تحتوي على المعاملة تزيد عادةً من عمق المعاملة داخل السلسلة.
+</p>
+
+<p>
+في نماذج مثل Bitcoin، لا يتم التعبير عن النهائية بالطريقة نفسها المستخدمة في بعض شبكات Proof of Stake التي تمتلك آلية Finality صريحة.
+</p>
+
+<p>
+ولهذا السبب تستخدم المنصات عادةً عددًا من التأكيدات كإحدى طرق قياس مدى استقرار المعاملة.
+</p>
+
+<h2>كيف تعمل Finality في Bitcoin؟</h2>
+
+<p>
+Bitcoin تستخدم <strong>Proof of Work</strong> وآلية مبنية على سلسلة الكتل والقواعد التي تتبعها العقد.
+</p>
+
+<p>
+عندما تدخل معاملة في كتلة ويتم بناء كتل أخرى فوقها، تصبح المعاملة أعمق داخل السلسلة.
+</p>
+
+<p>
+إذا ظهرت سلسلة منافسة، فإن قواعد Bitcoin تحدد السلسلة التي يجب أن تتبعها العقد وفق قواعد البروتوكول.
+</p>
+
+<p>
+لذلك لا توجد في Bitcoin نقطة زمنية بسيطة يمكن القول عندها إن كل معاملة أصبحت "نهائية رياضيًا إلى الأبد" بمجرد إدخالها في كتلة.
+</p>
+
+<p>
+بدلًا من ذلك، تزداد قوة التأكيد بمرور الوقت وإضافة المزيد من العمل الحسابي إلى السلسلة.
+</p>
+
+<p>
+ولهذا السبب قد تطلب بعض المنصات عددًا معينًا من تأكيدات Bitcoin قبل اعتبار الإيداع مستقرًا.
+</p>
+
+<h2>هل عدد التأكيدات يعني Finality مطلقة؟</h2>
+
+<p>
+لا.
+</p>
+
+<p>
+زيادة عدد التأكيدات تزيد من صعوبة تغيير تاريخ المعاملة وفق افتراضات نموذج Bitcoin، لكنها لا تعني وجود ضمان رياضي مطلق بأن إعادة التنظيم مستحيلة في جميع الظروف.
+</p>
+
+<p>
+على سبيل المثال، يمكن أن تؤثر قوة التعدين، وسلوك المشاركين، وظروف الشبكة، وبعض الهجمات المحتملة في درجة الأمان الفعلية.
+</p>
+
+<p>
+لذلك من الأدق اعتبار التأكيدات مقياسًا متزايدًا لقوة ثبات المعاملة في نموذج الشبكة، وليس وعدًا مطلقًا بعدم إمكانية حدوث أي تغيير.
+</p>
+
+<h2>ما هي Deterministic Finality؟</h2>
+
+<p>
+<strong>Deterministic Finality</strong> تشير إلى نموذج تكون فيه هناك قواعد واضحة يمكن بموجبها اعتبار حالة أو مجموعة من الكتل نهائية بعد تحقق شروط محددة.
+</p>
+
+<p>
+في هذا النوع من النماذج، لا يعتمد مفهوم النهائية فقط على زيادة عدد الكتل مثلما يحدث في النماذج الاحتمالية.
+</p>
+
+<p>
+قد تستخدم الشبكة آلية إجماع تحتوي على تصويت أو التزام من Validators للوصول إلى حالة نهائية وفق قواعد البروتوكول.
+</p>
+
+<p>
+لكن تفاصيل النهائية تختلف بين الشبكات، ولذلك لا ينبغي افتراض أن جميع شبكات Proof of Stake تستخدم الآلية نفسها.
+</p>
+
+<h2>ما هي Economic Finality؟</h2>
+
+<p>
+بعض شبكات Proof of Stake تربط النهائية بالتزامات اقتصادية يقوم بها المدققون.
+</p>
+
+<p>
+إذا صوّت Validator أو تصرف بطريقة تخالف قواعد معينة، فقد يتعرض لعقوبة اقتصادية وفق تصميم الشبكة.
+</p>
+
+<p>
+هذا النوع من الحوافز يجعل التراجع عن حالات نهائية أكثر تكلفة اقتصاديًا، ولذلك يستخدم مصطلح <strong>Economic Finality</strong> لوصف هذا الجانب من تصميم بعض أنظمة الإجماع.
+</p>
+
+<p>
+ويختلف مستوى وشكل هذه العقوبات وشروط النهائية من شبكة إلى أخرى.
+</p>
+
+<h2>كيف تعمل Finality في Proof of Stake؟</h2>
+
+<p>
+في شبكات <strong>Proof of Stake</strong>، يمكن أن تعتمد النهائية على Validators الذين يشاركون في آلية الإجماع والتصويت على الحالات أو الكتل وفق قواعد الشبكة.
+</p>
+
+<p>
+عندما تتحقق الشروط التي يحددها البروتوكول، يمكن أن تنتقل كتلة أو حالة معينة إلى مرحلة نهائية.
+</p>
+
+<p>
+في بعض الأنظمة تكون النهائية صريحة ومبنية على أصوات Validators، بينما تستخدم أنظمة أخرى نماذج مختلفة.
+</p>
+
+<p>
+لذلك فإن عبارة "Proof of Stake لديه Finality فورية" ليست قاعدة عامة تنطبق على جميع الشبكات.
+</p>
+
+<h2>ما دور Validators في Finality؟</h2>
+
+<p>
+الـValidators مسؤولون عن المشاركة في آلية الإجماع في شبكات Proof of Stake التي تعتمد عليهم.
+</p>
+
+<p>
+بحسب تصميم الشبكة، قد يقومون باقتراح كتل أو التصويت على كتل أو حالات معينة.
+</p>
+
+<p>
+عندما تحقق أصوات المشاركين الشروط التي يحددها البروتوكول، قد تصبح الحالة نهائية وفق آلية الشبكة.
+</p>
+
+<p>
+وقد تفرض البروتوكولات عقوبات على بعض التصرفات التي تهدد سلامة الإجماع، مثل التصويت المتعارض، بحسب قواعد كل شبكة.
+</p>
+
+<h2>ما العلاقة بين Finality وConsensus؟</h2>
+
+<p>
+هناك علاقة مباشرة بين المفهومين.
+</p>
+
+<p>
+آلية الإجماع تحدد كيف تتفق الشبكة على الحالة التي يجب اتباعها، بينما Finality تحدد متى يمكن اعتبار هذه الحالة أو جزء من تاريخ السلسلة نهائيًا وفق قواعد الشبكة.
+</p>
+
+<p>
+ولهذا السبب فإن فهم
+<a href="/academy/blockchain/what-is-blockchain-consensus">آلية الإجماع Consensus</a>
+يساعد على فهم كيفية الوصول إلى Finality.
+</p>
+
+<h2>ما العلاقة بين Finality وFork؟</h2>
+
+<p>
+يمكن أن تساعد Finality في تحديد ما إذا كان تغيير جزء معين من السلسلة ما زال ممكنًا وفق قواعد الشبكة.
+</p>
+
+<p>
+في حالة وجود Fork مؤقت، قد تكون هناك كتل متنافسة قبل أن تستقر الشبكة على مسار معين.
+</p>
+
+<p>
+أما إذا وصلت حالة معينة إلى Finality وفق آلية توفر نهائية صريحة، فإن تغييرها يصبح مقيدًا بقواعد أقوى وقد يتطلب ظروفًا أو خروقات كبيرة لافتراضات البروتوكول.
+</p>
+
+<p>
+يمكنك مراجعة درس
+<a href="/academy/blockchain/what-is-blockchain-fork">ما هي Forks في البلوك تشين؟</a>
+لفهم التفرعات وعلاقتها بتاريخ السلسلة.
+</p>
+
+<h2>ما هو Chain Reorganization؟</h2>
+
+<p>
+<strong>Chain Reorganization</strong> أو إعادة تنظيم السلسلة هي حالة تتغير فيها السلسلة التي تعتبرها العقد السلسلة المعتمدة وفق قواعد البروتوكول، وقد يؤدي ذلك إلى إزالة كتلة كانت جزءًا من السلسلة السابقة من التاريخ المعتمد.
+</p>
+
+<p>
+في بعض نماذج البلوك تشين، يمكن أن تحدث إعادة التنظيم قبل أن تصبح المعاملات عميقة بما يكفي داخل السلسلة.
+</p>
+
+<p>
+وهذا أحد الأسباب التي تجعل عدد التأكيدات مهمًا في شبكات تعتمد على نموذج نهائية احتمالية.
+</p>
+
+<p>
+يمكن أن تساعد Finality الأقوى في الحد من إمكانية إعادة كتابة الحالات التي وصلت بالفعل إلى مرحلة نهائية وفق البروتوكول.
+</p>
+
+<h2>ما الفرق بين Finality وImmutability؟</h2>
+
+<p>
+قد يبدو المصطلحان متشابهين، لكنهما ليسا الشيء نفسه.
+</p>
+
+<p>
+<strong>Finality</strong> تتعلق بوضع الكتلة أو الحالة وفق آلية الإجماع والقواعد التي تحدد متى تصبح نهائية.
+</p>
+
+<p>
+أما <strong>Immutability</strong> فتشير إلى صعوبة تغيير البيانات السابقة بعد قبولها وتراكم المزيد من الضمانات حولها.
+</p>
+
+<p>
+وفي الواقع، لا ينبغي فهم كلمة "Immutable" على أنها تعني أن البيانات الموجودة على البلوك تشين لا يمكن تغييرها بأي ظرف.
+</p>
+
+<p>
+درجة الثبات تعتمد على تصميم الشبكة وآلية الإجماع والافتراضات الأمنية التي تقوم عليها.
+</p>
+
+<h2>لماذا تختلف Finality بين شبكات البلوك تشين؟</h2>
+
+<p>
+تختلف شبكات البلوك تشين في عدة عناصر، منها:
+</p>
+
+<ul>
+    <li>آلية الإجماع المستخدمة.</li>
+    <li>طريقة اختيار المنتج أو المقترح للكتلة.</li>
+    <li>طريقة التعامل مع الكتل المتنافسة.</li>
+    <li>طريقة التصويت أو التحقق.</li>
+    <li>عدد المشاركين المطلوب للوصول إلى النهائية.</li>
+    <li>الافتراضات الأمنية الخاصة بالشبكة.</li>
+    <li>تصميم العقوبات والحوافز الاقتصادية.</li>
+</ul>
+
+<p>
+لهذا السبب لا يمكن مقارنة Finality بين شبكتين باستخدام الزمن فقط دون معرفة كيفية تعريف النهائية في كل منهما.
+</p>
+
+<h2>ماذا تعني Finality للمستخدم العادي؟</h2>
+
+<p>
+بالنسبة للمستخدم، تعني Finality معرفة مدى استقرار المعاملة بعد إدخالها في الشبكة.
+</p>
+
+<p>
+فعند إرسال عملات رقمية إلى منصة أو محفظة أخرى، قد تظهر المعاملة أولًا كـPending، ثم تصبح Confirmed، ثم تعتبر المنصة أنها وصلت إلى العدد المطلوب من التأكيدات أو إلى حالة نهائية مناسبة لها.
+</p>
+
+<p>
+وهذا هو السبب في أن بعض المنصات لا تجعل الأموال متاحة للاستخدام مباشرة بعد ظهور المعاملة في أول كتلة.
+</p>
+
+<h2>هل يمكن إلغاء معاملة بعد Finality؟</h2>
+
+<p>
+في الحالة الطبيعية، إذا وصلت المعاملة إلى Finality وفق قواعد الشبكة، فإن التراجع عنها من خلال تغيير تاريخ البلوك تشين يصبح غير متاح بالطريقة العادية.
+</p>
+
+<p>
+لكن معنى ذلك يعتمد على نموذج النهائية الخاص بالشبكة.
+</p>
+
+<p>
+كما يجب التفريق بين تغيير المعاملة على البلوك تشين وبين قيام جهة مركزية، مثل منصة تداول، بعكس عملية داخل نظامها الخاص.
+</p>
+
+<h2>هل يمكن أن تفشل Finality؟</h2>
+
+<p>
+يعتمد ذلك على آلية الإجماع وافتراضات الشبكة.
+</p>
+
+<p>
+أنظمة النهائية المختلفة لديها شروط مختلفة للحفاظ على سلامة الإجماع.
+</p>
+
+<p>
+في بعض الأنظمة، يمكن أن تؤدي هجمات أو أخطاء كبيرة أو ظروف استثنائية إلى تعطيل التقدم نحو Finality أو إلى مشكلات في الشبكة.
+</p>
+
+<p>
+ولهذا فإن Finality ليست خاصية منفصلة عن أمن الشبكة، بل هي جزء من تصميم آلية الإجماع والافتراضات التي تعتمد عليها.
+</p>
+
+<h2>مثال مبسط لفهم Finality</h2>
+
+<p>
+تخيل أنك كتبت معاملة في دفتر مشترك بين مجموعة كبيرة من الأشخاص.
+</p>
+
+<p>
+في البداية، كتب أحدهم المعاملة في صفحة جديدة، لكن المجموعة لم تضف صفحات كثيرة بعدها.
+</p>
+
+<p>
+كلما أضافت المجموعة صفحات جديدة واتفق المشاركون على استمرار الدفتر من تلك الصفحة، يصبح من الأصعب عمليًا تغيير ما كتبته.
+</p>
+
+<p>
+هذا يشبه بشكل مبسط فكرة التأكيدات في بعض الشبكات.
+</p>
+
+<p>
+أما إذا كانت المجموعة تستخدم نظامًا يقرر أن الصفحة أصبحت نهائية بعد تحقق عدد محدد من المشاركين وتصويتهم عليها، فهذه صورة مبسطة لفكرة Finality الصريحة.
+</p>
+
+<h2>Finality في Bitcoin مقابل Proof of Stake</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>العنصر</th>
+            <th>Bitcoin</th>
+            <th>بعض شبكات Proof of Stake</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>النموذج الأساسي</td>
+            <td>Proof of Work</td>
+            <td>Proof of Stake أو تصميمات مبنية عليه</td>
+        </tr>
+        <tr>
+            <td>طريقة زيادة الثبات</td>
+            <td>زيادة عدد الكتل والعمل الحسابي المتراكم</td>
+            <td>قد تعتمد على أصوات Validators وشروط Finality وفق البروتوكول</td>
+        </tr>
+        <tr>
+            <td>النهائية</td>
+            <td>احتمالية بشكل أساسي</td>
+            <td>قد تكون صريحة أو اقتصادية أو تعتمد على نموذج آخر</td>
+        </tr>
+        <tr>
+            <td>إعادة التنظيم</td>
+            <td>ممكنة وفق قواعد الشبكة قبل الوصول إلى مستويات عالية من الثبات</td>
+            <td>تختلف حسب البروتوكول وشروط النهائية</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>
+هذا الجدول تبسيطي، لأن تصميمات Proof of Stake تختلف بشكل كبير من شبكة إلى أخرى.
+</p>
+
+<h2>هل Finality تعني أن البلوك تشين غير قابل للاختراق؟</h2>
+
+<p>
+لا.
+</p>
+
+<p>
+Finality لا تعني أن الشبكة محمية من جميع أنواع الهجمات أو الأخطاء.
+</p>
+
+<p>
+هي جزء من تصميم الإجماع يحدد متى تصبح حالة معينة نهائية وفق قواعد البروتوكول.
+</p>
+
+<p>
+أما الأمن الكامل للشبكة فيعتمد على مجموعة واسعة من العوامل، مثل تصميم الإجماع، وتوزيع المشاركين، وأمن البرامج، والحوافز الاقتصادية، والبنية التحتية للشبكة.
+</p>
+
+<h2>الخلاصة</h2>
+
+<p>
+Finality أو نهائية البلوك تشين هي مفهوم يحدد متى يمكن اعتبار معاملة أو كتلة أو حالة معينة نهائية وفق قواعد الشبكة.
+</p>
+
+<p>
+الفرق بين Confirmation وFinality مهم؛ فزيادة التأكيدات قد تزيد من ثبات المعاملة في الشبكات ذات النهائية الاحتمالية، بينما تستخدم بعض الشبكات آليات صريحة للوصول إلى Finality بعد تحقق شروط معينة.
+</p>
+
+<p>
+Bitcoin تعتمد على Proof of Work، ولذلك تزداد قوة التأكيد مع إضافة المزيد من الكتل والعمل الحسابي. أما شبكات Proof of Stake فقد تستخدم نماذج مختلفة من النهائية تعتمد على Validators والتصويت والحوافز الاقتصادية، بحسب تصميم كل شبكة.
+</p>
+
+<p>
+كما أن Finality تختلف عن Immutability، ولا تعني أن البلوك تشين غير قابل للاختراق في جميع الظروف.
+</p>
+
+<p>
+فهم Finality يكمل المفاهيم السابقة المتعلقة بـ
+<a href="/academy/blockchain/what-is-blockchain-consensus">Consensus</a>
+و
+<a href="/academy/blockchain/what-is-blockchain-fork">Forks</a>
+ويساعد على الانتقال إلى مفاهيم أكثر تقدمًا مثل Chain Reorganization وأمن الشبكات اللامركزية.
+</p>
+
+<h2>روابط مفيدة داخل أكاديمية AQL Crypto</h2>
+
+<ul>
+    <li><a href="/academy/blockchain">مسار Blockchain الكامل</a></li>
+    <li><a href="/academy/blockchain/what-is-blockchain">ما هي تقنية البلوك تشين؟</a></li>
+    <li><a href="/academy/blockchain/how-does-blockchain-work">كيف تعمل تقنية البلوك تشين؟</a></li>
+    <li><a href="/academy/blockchain/what-is-a-block">ما هي الكتلة Block؟</a></li>
+    <li><a href="/academy/blockchain/what-is-hash-function">ما هي دوال التجزئة Hash Functions؟</a></li>
+    <li><a href="/academy/blockchain/what-are-blockchain-nodes">ما هي العقد Nodes؟</a></li>
+    <li><a href="/academy/blockchain/what-is-blockchain-consensus">ما هي آلية الإجماع Consensus؟</a></li>
+    <li><a href="/academy/blockchain/what-is-blockchain-fork">ما هي Forks في البلوك تشين؟</a></li>
+    <li><a href="/academy/bitcoin/how-bitcoin-works">كيف يعمل Bitcoin؟</a></li>
+    <li><a href="/academy/bitcoin/bitcoin-mining">ما هو تعدين Bitcoin؟</a></li>
+</ul>
+HTML,
+
+    'content_en' => <<<'HTML'
+<h2>What Is Blockchain Finality?</h2>
+
+<p>
+<strong>Finality</strong> refers to the degree of certainty that a transaction or block has been accepted into a blockchain's history and will not be replaced or reverted according to the network's rules.
+</p>
+
+<p>
+Finality is an important concept for understanding how transactions move from being broadcast to the network to becoming increasingly stable parts of the blockchain's history.
+</p>
+
+<p>
+To understand finality, it is useful to review:
+<a href="/academy/blockchain/what-is-blockchain">What Is Blockchain?</a>,
+<a href="/academy/blockchain/how-does-blockchain-work">How Does Blockchain Work?</a>,
+<a href="/academy/blockchain/what-is-a-block">What Is a Block?</a>,
+<a href="/academy/blockchain/what-are-blockchain-nodes">What Are Blockchain Nodes?</a>,
+<a href="/academy/blockchain/what-is-blockchain-consensus">What Is Blockchain Consensus?</a>,
+and
+<a href="/academy/blockchain/what-is-blockchain-fork">What Is a Blockchain Fork?</a>.
+</p>
+
+<h2>Why Does Blockchain Need Finality?</h2>
+
+<p>
+When a user broadcasts a transaction, it does not necessarily become final immediately.
+</p>
+
+<p>
+The transaction may need to be included in a block, accepted by the network, and then receive additional confirmations or reach a final state according to the blockchain's consensus mechanism.
+</p>
+
+<p>
+This matters because some blockchains can temporarily have competing blocks or alternative chain paths.
+</p>
+
+<p>
+Finality therefore helps users, applications, and platforms determine how stable a transaction is and whether it can be considered settled according to the network's rules.
+</p>
+
+<h2>What Is the Difference Between Confirmation and Finality?</h2>
+
+<p>
+The two terms are often used together, but they are not identical.
+</p>
+
+<p>
+A <strong>confirmation</strong> generally refers to the number of blocks added after the block containing a transaction.
+</p>
+
+<p>
+As more blocks are added on top of a transaction, its depth in the chain increases. In some networks, this reduces the probability that its history will be replaced through a chain reorganization.
+</p>
+
+<p>
+<strong>Finality</strong>, on the other hand, refers to a state or property where changing that history is no longer possible or is strongly prevented according to the blockchain's finality model.
+</p>
+
+<p>
+Some networks therefore rely on increasing confirmations as a measure of growing confidence, while others use explicit finality mechanisms after specific conditions are met.
+</p>
+
+<h2>Does a Transaction Become Final Immediately?</h2>
+
+<p>
+Not necessarily.
+</p>
+
+<p>
+It depends on the blockchain's design and consensus mechanism.
+</p>
+
+<p>
+Some networks require a number of confirmations before users or applications consider a transaction sufficiently stable against reorganizations.
+</p>
+
+<p>
+Other networks may have an explicit finality mechanism that makes a state final after defined conditions are satisfied.
+</p>
+
+<p>
+There is therefore no single finality time that applies to every blockchain.
+</p>
+
+<h2>What Is Probabilistic Finality?</h2>
+
+<p>
+<strong>Probabilistic Finality</strong> means that confidence in the stability of a transaction increases over time or as additional blocks are added, rather than there necessarily being one immediate point at which the transaction becomes absolutely final.
+</p>
+
+<p>
+Each new block built on top of the block containing the transaction increases its depth in the chain.
+</p>
+
+<p>
+Bitcoin uses Proof of Work and does not express finality in exactly the same way as some Proof of Stake networks that have an explicit finality mechanism.
+</p>
+
+<p>
+This is why platforms often use a required number of Bitcoin confirmations as one measure of transaction stability.
+</p>
+
+<h2>How Does Finality Work in Bitcoin?</h2>
+
+<p>
+Bitcoin uses <strong>Proof of Work</strong> and a blockchain structure governed by protocol rules enforced by nodes.
+</p>
+
+<p>
+When a transaction is included in a block and additional blocks are built on top of it, the transaction becomes deeper in the chain.
+</p>
+
+<p>
+If a competing chain appears, Bitcoin's protocol rules determine which chain nodes should follow.
+</p>
+
+<p>
+Therefore, Bitcoin does not have a simple moment at which every transaction becomes "mathematically final forever" immediately after being included in a block.
+</p>
+
+<p>
+Instead, confidence in the transaction increases as more blocks are added and more computational work accumulates on the chain.
+</p>
+
+<p>
+This is why some platforms require a certain number of Bitcoin confirmations before considering a deposit sufficiently settled.
+</p>
+
+<h2>Does a Confirmation Count Mean Absolute Finality?</h2>
+
+<p>
+No.
+</p>
+
+<p>
+More confirmations make it increasingly difficult to reorganize the transaction's history under Bitcoin's security assumptions, but they do not provide an absolute mathematical guarantee that reorganization is impossible under every circumstance.
+</p>
+
+<p>
+Mining power, participant behavior, network conditions, and certain attack scenarios can affect the practical security of the chain.
+</p>
+
+<p>
+It is therefore more accurate to view confirmations as an increasing measure of transaction stability under the network's model rather than an absolute promise that the history can never change.
+</p>
+
+<h2>What Is Deterministic Finality?</h2>
+
+<p>
+<strong>Deterministic Finality</strong> refers to a model in which clear protocol rules define when a block or state can be considered final after specified conditions are satisfied.
+</p>
+
+<p>
+In such a model, finality does not depend only on adding more blocks and waiting for probability to increase.
+</p>
+
+<p>
+A network may use validator votes or commitments to reach a final state according to its consensus rules.
+</p>
+
+<p>
+However, finality mechanisms vary between networks, so it should not be assumed that every Proof of Stake blockchain uses the same model.
+</p>
+
+<h2>What Is Economic Finality?</h2>
+
+<p>
+Some Proof of Stake networks connect finality with economic commitments made by validators.
+</p>
+
+<p>
+If a validator votes or behaves in a way that violates certain protocol rules, the validator may face an economic penalty depending on the network's design.
+</p>
+
+<p>
+These incentives can make reverting finalized states economically costly, which is why the term <strong>Economic Finality</strong> is sometimes used to describe this aspect of certain consensus systems.
+</p>
+
+<p>
+The size, conditions, and implementation of such penalties vary from one blockchain to another.
+</p>
+
+<h2>How Does Finality Work in Proof of Stake?</h2>
+
+<p>
+In <strong>Proof of Stake</strong> networks, finality can depend on validators participating in the consensus process and voting on blocks or states according to the protocol.
+</p>
+
+<p>
+Once the conditions defined by the protocol are satisfied, a block or state may become final.
+</p>
+
+<p>
+Some systems have explicit validator-based finality, while others use different models.
+</p>
+
+<p>
+Therefore, saying that "Proof of Stake has instant finality" is not a rule that applies to every Proof of Stake network.
+</p>
+
+<h2>What Role Do Validators Play in Finality?</h2>
+
+<p>
+Validators participate in the consensus mechanism of Proof of Stake networks that use validators.
+</p>
+
+<p>
+Depending on the protocol, they may propose blocks, vote on blocks, or participate in state agreement.
+</p>
+
+<p>
+When validator participation satisfies the conditions defined by the protocol, a state may reach finality.
+</p>
+
+<p>
+Some protocols also penalize certain behaviors that threaten consensus, such as conflicting votes, depending on their specific rules.
+</p>
+
+<h2>What Is the Relationship Between Finality and Consensus?</h2>
+
+<p>
+The two concepts are directly connected.
+</p>
+
+<p>
+The consensus mechanism determines how participants agree on the state the network should follow, while finality defines when that state or part of the chain history can be considered final according to the protocol.
+</p>
+
+<p>
+This is why understanding
+<a href="/academy/blockchain/what-is-blockchain-consensus">blockchain consensus</a>
+helps explain how finality is achieved.
+</p>
+
+<h2>What Is the Relationship Between Finality and Forks?</h2>
+
+<p>
+Finality can help determine whether changing a particular part of the chain remains possible under the network's rules.
+</p>
+
+<p>
+During a temporary fork, competing blocks may exist before the network settles on one chain path.
+</p>
+
+<p>
+Once a state reaches finality under a mechanism that provides explicit finality, changing it becomes more constrained and may require conditions that violate major assumptions of the protocol.
+</p>
+
+<p>
+See
+<a href="/academy/blockchain/what-is-blockchain-fork">What Is a Blockchain Fork?</a>
+for a deeper explanation of chain and protocol divergence.
+</p>
+
+<h2>What Is a Chain Reorganization?</h2>
+
+<p>
+A <strong>Chain Reorganization</strong> is a situation where the chain considered canonical by nodes changes according to the protocol rules, potentially removing a block from the previously accepted chain history.
+</p>
+
+<p>
+In some blockchain models, reorganizations can occur before a transaction becomes sufficiently deep in the chain.
+</p>
+
+<p>
+This is one reason confirmations are important in networks that rely on probabilistic finality.
+</p>
+
+<p>
+Stronger finality mechanisms can limit the ability to change states that have already reached finality under the protocol.
+</p>
+
+<h2>What Is the Difference Between Finality and Immutability?</h2>
+
+<p>
+The concepts are related but not identical.
+</p>
+
+<p>
+<strong>Finality</strong> concerns the status of a block or state under the consensus mechanism and the rules defining when it becomes final.
+</p>
+
+<p>
+<strong>Immutability</strong> describes the difficulty of changing previously accepted data after additional security has accumulated around it.
+</p>
+
+<p>
+The term "immutable" should not be interpreted as meaning that blockchain data can never be changed under any circumstances.
+</p>
+
+<p>
+The practical level of resistance to change depends on the blockchain's design, consensus mechanism, and security assumptions.
+</p>
+
+<h2>Why Does Finality Differ Between Blockchains?</h2>
+
+<p>
+Blockchain networks differ in several areas, including:
+</p>
+
+<ul>
+    <li>The consensus mechanism they use.</li>
+    <li>How block proposers are selected.</li>
+    <li>How competing blocks are handled.</li>
+    <li>How voting and validation work.</li>
+    <li>How many participants are required for finality.</li>
+    <li>The network's security assumptions.</li>
+    <li>The design of economic incentives and penalties.</li>
+</ul>
+
+<p>
+For this reason, finality should not be compared between two networks using time alone without understanding how each network defines and achieves finality.
+</p>
+
+<h2>What Does Finality Mean for an Ordinary User?</h2>
+
+<p>
+For users, finality provides a way to understand how stable a transaction is after it enters the blockchain.
+</p>
+
+<p>
+When sending cryptocurrency to an exchange or another wallet, a transaction may first appear as Pending, then become Confirmed, and eventually reach the number of confirmations or the final state required by the platform.
+</p>
+
+<p>
+This is why some platforms do not make deposited funds immediately available after the transaction appears in the first block.
+</p>
+
+<h2>Can a Transaction Be Reversed After Finality?</h2>
+
+<p>
+Under normal operation, once a transaction reaches finality according to the blockchain's rules, reversing it by changing the blockchain history is no longer available through ordinary means.
+</p>
+
+<p>
+However, what this means depends on the network's finality model.
+</p>
+
+<p>
+It is also important to distinguish between changing a blockchain transaction and a centralized platform reversing an operation inside its own internal system.
+</p>
+
+<h2>Can Finality Fail?</h2>
+
+<p>
+That depends on the consensus mechanism and the network's assumptions.
+</p>
+
+<p>
+Different finality systems have different conditions for maintaining consensus safety and liveness.
+</p>
+
+<p>
+In some systems, major attacks, failures, or exceptional network conditions can prevent progress toward finality or create serious consensus problems.
+</p>
+
+<p>
+Finality is therefore not separate from blockchain security. It is part of the design of the consensus mechanism and the assumptions on which the network relies.
+</p>
+
+<h2>A Simple Example of Finality</h2>
+
+<p>
+Imagine that you write a transaction in a shared notebook used by a large group of people.
+</p>
+
+<p>
+At first, someone writes your transaction on a new page, but the group has not yet added many pages after it.
+</p>
+
+<p>
+As the group adds more pages and continues the notebook from that point, changing your transaction becomes increasingly difficult.
+</p>
+
+<p>
+This is a simplified analogy for confirmations in some blockchain networks.
+</p>
+
+<p>
+If the group instead uses a system where a page becomes final after a defined number of participants validate or vote for it, that is a simplified analogy for explicit finality.
+</p>
+
+<h2>Finality in Bitcoin vs Proof of Stake</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Feature</th>
+            <th>Bitcoin</th>
+            <th>Some Proof of Stake Networks</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Core model</td>
+            <td>Proof of Work</td>
+            <td>Proof of Stake or related designs</td>
+        </tr>
+        <tr>
+            <td>How stability increases</td>
+            <td>More blocks and accumulated computational work</td>
+            <td>May depend on validator votes and protocol-defined finality conditions</td>
+        </tr>
+        <tr>
+            <td>Finality model</td>
+            <td>Primarily probabilistic</td>
+            <td>May be explicit, economic, or based on another model</td>
+        </tr>
+        <tr>
+            <td>Reorganizations</td>
+            <td>Possible according to network rules before high levels of stability</td>
+            <td>Depends on the protocol and its finality conditions</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>
+This table is a simplified overview because Proof of Stake designs differ significantly between networks.
+</p>
+
+<h2>Does Finality Mean a Blockchain Cannot Be Hacked?</h2>
+
+<p>
+No.
+</p>
+
+<p>
+Finality does not mean that a blockchain is protected against every possible attack or failure.
+</p>
+
+<p>
+It is a component of the consensus design that determines when a state becomes final according to protocol rules.
+</p>
+
+<p>
+Overall blockchain security also depends on many other factors, including consensus design, participant distribution, software security, economic incentives, and network infrastructure.
+</p>
+
+<h2>Conclusion</h2>
+
+<p>
+Blockchain finality is the concept that defines when a transaction, block, or state can be considered final according to a network's rules.
+</p>
+
+<p>
+The difference between confirmations and finality is important. More confirmations can increase transaction stability in networks with probabilistic finality, while some networks use explicit mechanisms that provide finality after defined conditions are satisfied.
+</p>
+
+<p>
+Bitcoin uses Proof of Work, so confirmation strength increases as additional blocks and computational work accumulate. Proof of Stake networks can use different finality models involving validators, voting, and economic incentives depending on their protocol design.
+</p>
+
+<p>
+Finality is also different from immutability and does not mean that a blockchain is impossible to attack under every circumstance.
+</p>
+
+<p>
+Understanding finality completes the concepts covered in
+<a href="/academy/blockchain/what-is-blockchain-consensus">Consensus</a>
+and
+<a href="/academy/blockchain/what-is-blockchain-fork">Forks</a>,
+and prepares learners for more advanced topics such as chain reorganizations and decentralized network security.
+</p>
+
+<h2>Related AQL Crypto Academy Lessons</h2>
+
+<ul>
+    <li><a href="/academy/blockchain">Complete Blockchain Learning Path</a></li>
+    <li><a href="/academy/blockchain/what-is-blockchain">What Is Blockchain?</a></li>
+    <li><a href="/academy/blockchain/how-does-blockchain-work">How Does Blockchain Work?</a></li>
+    <li><a href="/academy/blockchain/what-is-a-block">What Is a Block?</a></li>
+    <li><a href="/academy/blockchain/what-is-hash-function">What Are Hash Functions?</a></li>
+    <li><a href="/academy/blockchain/what-are-blockchain-nodes">What Are Blockchain Nodes?</a></li>
+    <li><a href="/academy/blockchain/what-is-blockchain-consensus">What Is Blockchain Consensus?</a></li>
+    <li><a href="/academy/blockchain/what-is-blockchain-fork">What Is a Blockchain Fork?</a></li>
+    <li><a href="/academy/bitcoin/how-bitcoin-works">How Does Bitcoin Work?</a></li>
+    <li><a href="/academy/bitcoin/bitcoin-mining">What Is Bitcoin Mining?</a></li>
+</ul>
+HTML,
+
+    'image' => null,
+
+    'seo_title' => null,
+    'seo_title_ar' => 'ما هي Finality في البلوك تشين؟ شرح نهائية المعاملات والكتل | AQL Crypto',
+    'seo_title_en' => 'What Is Blockchain Finality? A Beginner’s Guide | AQL Crypto',
+
+    'meta_description' => null,
+    'meta_description_ar' => 'شرح مبسط لمفهوم Finality في البلوك تشين، والفرق بين Confirmation وFinality، والنهائية الاحتمالية والصريحة، وكيف تعمل في Bitcoin وProof of Stake.',
+    'meta_description_en' => 'Learn what blockchain finality means, the difference between confirmations and finality, and how probabilistic and explicit finality work in Bitcoin and Proof of Stake networks.',
+
+    'faq_ar' => [
+        [
+            'question' => 'ما هي Finality في البلوك تشين؟',
+            'answer' => 'Finality هي الحالة التي يمكن فيها اعتبار معاملة أو كتلة أو حالة معينة نهائية وفق قواعد وآلية الإجماع الخاصة بشبكة البلوك تشين.'
+        ],
+        [
+            'question' => 'ما الفرق بين Confirmation وFinality؟',
+            'answer' => 'Confirmation يشير عادةً إلى عدد الكتل التي تمت إضافتها بعد الكتلة التي تحتوي على المعاملة، بينما Finality تشير إلى وصول المعاملة أو الحالة إلى مستوى نهائية وفق قواعد الشبكة.'
+        ],
+        [
+            'question' => 'هل تصبح المعاملة نهائية فور دخولها في كتلة؟',
+            'answer' => 'ليس بالضرورة. يعتمد ذلك على تصميم الشبكة وآلية الإجماع. بعض الشبكات تحتاج إلى تأكيدات إضافية، بينما تستخدم شبكات أخرى آليات نهائية صريحة.'
+        ],
+        [
+            'question' => 'ما هي Probabilistic Finality؟',
+            'answer' => 'هي نموذج تزداد فيه درجة الثقة في ثبات المعاملة مع إضافة المزيد من الكتل، بدل وجود نقطة واحدة تصبح عندها المعاملة نهائية بشكل فوري ومطلق.'
+        ],
+        [
+            'question' => 'كيف تعمل Finality في Bitcoin؟',
+            'answer' => 'Bitcoin تعتمد على Proof of Work، وتزداد قوة التأكيد كلما تمت إضافة المزيد من الكتل والعمل الحسابي فوق الكتلة التي تحتوي على المعاملة.'
+        ],
+        [
+            'question' => 'هل عدد التأكيدات يعني نهائية مطلقة في Bitcoin؟',
+            'answer' => 'لا. زيادة التأكيدات تجعل تغيير تاريخ المعاملة أكثر صعوبة وفق افتراضات أمان الشبكة، لكنها لا تمثل ضمانًا رياضيًا مطلقًا ضد كل الظروف المحتملة.'
+        ],
+        [
+            'question' => 'ما هي Deterministic Finality؟',
+            'answer' => 'هي نموذج تكون فيه هناك قواعد محددة تسمح باعتبار كتلة أو حالة نهائية بعد تحقق شروط معينة، بدل الاعتماد فقط على زيادة عدد الكتل.'
+        ],
+        [
+            'question' => 'ما هي Economic Finality؟',
+            'answer' => 'هي جانب من بعض أنظمة Proof of Stake حيث ترتبط النهائية بالتزامات وحوافز اقتصادية للمدققين، وقد يتعرض من يخالف قواعد معينة لعقوبات اقتصادية.'
+        ],
+        [
+            'question' => 'كيف تختلف Finality في Proof of Stake؟',
+            'answer' => 'تختلف حسب الشبكة. قد تعتمد على تصويت Validators أو شروط محددة في البروتوكول، ولا تستخدم جميع شبكات Proof of Stake آلية Finality واحدة.'
+        ],
+        [
+            'question' => 'ما العلاقة بين Finality وFork؟',
+            'answer' => 'Fork قد ينتج عنه وجود مسارات متنافسة قبل استقرار الشبكة، بينما تساعد Finality على تحديد متى تصبح حالة معينة ثابتة وفق قواعد الإجماع بحيث يصبح تغييرها أكثر تقييدًا.'
+        ],
+        [
+            'question' => 'ما الفرق بين Finality وImmutability؟',
+            'answer' => 'Finality تتعلق بالحالة النهائية وفق آلية الإجماع، بينما Immutability تصف صعوبة تغيير البيانات السابقة بعد تراكم الضمانات الأمنية حولها.'
+        ],
+        [
+            'question' => 'هل Finality تعني أن البلوك تشين غير قابل للاختراق؟',
+            'answer' => 'لا. Finality جزء من تصميم الإجماع ولا تعني أن الشبكة محمية من جميع أنواع الهجمات أو الأخطاء أو الظروف الاستثنائية.'
+        ],
+    ],
+
+    'faq_en' => [
+        [
+            'question' => 'What is blockchain finality?',
+            'answer' => 'Blockchain finality is the state in which a transaction, block, or blockchain state can be considered final according to the network’s protocol and consensus rules.'
+        ],
+        [
+            'question' => 'What is the difference between confirmation and finality?',
+            'answer' => 'A confirmation usually refers to blocks added after the block containing a transaction, while finality refers to reaching a state where the transaction or state is considered final under the network’s rules.'
+        ],
+        [
+            'question' => 'Does a transaction become final immediately after entering a block?',
+            'answer' => 'Not necessarily. It depends on the blockchain design and consensus mechanism. Some networks require additional confirmations, while others use explicit finality mechanisms.'
+        ],
+        [
+            'question' => 'What is probabilistic finality?',
+            'answer' => 'Probabilistic finality means that confidence in a transaction’s stability increases as more blocks are added, rather than the transaction becoming immediately and absolutely final at one specific moment.'
+        ],
+        [
+            'question' => 'How does finality work in Bitcoin?',
+            'answer' => 'Bitcoin uses Proof of Work, and transaction confidence increases as additional blocks and computational work are built on top of the block containing the transaction.'
+        ],
+        [
+            'question' => 'Do Bitcoin confirmations provide absolute finality?',
+            'answer' => 'No. More confirmations make changing the transaction history increasingly difficult under Bitcoin’s security assumptions, but they do not provide an absolute mathematical guarantee against every possible condition.'
+        ],
+        [
+            'question' => 'What is deterministic finality?',
+            'answer' => 'Deterministic finality is a model where protocol rules define when a block or state becomes final after specific conditions are satisfied.'
+        ],
+        [
+            'question' => 'What is economic finality?',
+            'answer' => 'Economic finality describes systems where finality is supported by economic commitments and incentives, with validators potentially facing financial penalties for certain protocol violations.'
+        ],
+        [
+            'question' => 'How does finality work in Proof of Stake?',
+            'answer' => 'It varies between networks. Some Proof of Stake systems use validator votes and specific protocol conditions to reach finality, while others use different mechanisms.'
+        ],
+        [
+            'question' => 'What is the relationship between finality and forks?',
+            'answer' => 'A fork can create competing chain paths before the network settles, while finality helps determine when a state has reached a stable final condition under the consensus rules.'
+        ],
+        [
+            'question' => 'What is the difference between finality and immutability?',
+            'answer' => 'Finality concerns the final status of a state under consensus rules, while immutability describes the difficulty of changing previously accepted data after additional security has accumulated.'
+        ],
+        [
+            'question' => 'Does finality mean that a blockchain cannot be hacked?',
+            'answer' => 'No. Finality is part of the consensus design and does not mean that a blockchain is protected against every possible attack, failure, or exceptional condition.'
+        ],
+    ],
+
+    'status' => 'published',
+    'sort_order' => 8,
+    'published_at' => now(),
+],
+[
+    'title' => 'What Is a Blockchain Chain Reorganization?',
+    'title_ar' => 'ما هي Chain Reorganization في البلوك تشين؟ شرح إعادة تنظيم السلسلة',
+    'title_en' => 'What Is a Blockchain Chain Reorganization? A Beginner’s Guide',
+    'slug' => 'what-is-chain-reorganization',
+
+    'excerpt' => null,
+    'excerpt_ar' => 'تعرف على مفهوم Chain Reorganization أو إعادة تنظيم سلسلة البلوك تشين، ولماذا تحدث، وما علاقتها بالـForks والتأكيدات وFinality، وماذا يحدث للكتل والمعاملات أثناء إعادة التنظيم.',
+    'excerpt_en' => 'Learn what a blockchain chain reorganization is, why it happens, and how it relates to forks, confirmations, finality, blocks, and transactions.',
+
+    'content' => null,
+
+    'content_ar' => <<<'HTML'
+<h2>ما هي Chain Reorganization في البلوك تشين؟</h2>
+
+<p>
+مصطلح <strong>Chain Reorganization</strong> أو <strong>Chain Reorg</strong> يشير إلى حالة تتغير فيها السلسلة التي تعتبرها العقد المسار المعتمد وفق قواعد البروتوكول، بعد أن كانت قد اتبعت مسارًا آخر مؤقتًا.
+</p>
+
+<p>
+بمعنى مبسط، قد توجد في لحظة معينة أكثر من سلسلة أو مسار محتمل للكتل، ثم تحدد قواعد الشبكة أي مسار يجب أن يستمر. إذا انتقلت العقد من مسار إلى مسار آخر، يمكن وصف ذلك بأنه إعادة تنظيم للسلسلة.
+</p>
+
+<p>
+لفهم هذا المفهوم بشكل جيد، من المفيد مراجعة الدروس السابقة:
+<a href="/academy/blockchain/what-is-blockchain">ما هي تقنية البلوك تشين؟</a>،
+<a href="/academy/blockchain/how-does-blockchain-work">كيف تعمل البلوك تشين؟</a>،
+<a href="/academy/blockchain/what-is-a-block">ما هي الكتلة Block؟</a>،
+<a href="/academy/blockchain/what-are-blockchain-nodes">ما هي العقد Nodes؟</a>،
+<a href="/academy/blockchain/what-is-blockchain-consensus">ما هي آلية الإجماع Consensus؟</a>،
+<a href="/academy/blockchain/what-is-blockchain-fork">ما هي Forks؟</a>
+و
+<a href="/academy/blockchain/what-is-blockchain-finality">ما هي Finality؟</a>.
+</p>
+
+<h2>ماذا يعني Reorganization؟</h2>
+
+<p>
+عندما تضيف شبكة البلوك تشين كتلًا جديدة، تتعامل العقد مع تاريخ متسلسل للكتل وفق قواعد البروتوكول.
+</p>
+
+<p>
+لكن في بعض الظروف يمكن أن تظهر كتلتان متنافستان أو أكثر، وقد تتعامل أجزاء مختلفة من الشبكة مؤقتًا مع مسارات مختلفة.
+</p>
+
+<p>
+عندما تتلقى العقد لاحقًا معلومات تجعلها تنتقل إلى مسار آخر يعتبره البروتوكول المسار الصحيح أو المعتمد، يتم استبعاد بعض الكتل من السلسلة التي تتبعها العقد.
+</p>
+
+<p>
+هذا الانتقال هو ما يُعرف بإعادة تنظيم السلسلة أو <strong>Chain Reorganization</strong>.
+</p>
+
+<h2>لماذا تحدث Chain Reorganization؟</h2>
+
+<p>
+يمكن أن تحدث إعادة التنظيم لأسباب مختلفة حسب تصميم الشبكة، ومن أبرزها:
+</p>
+
+<ul>
+    <li>إنتاج كتل متنافسة في وقت متقارب.</li>
+    <li>تأخر انتشار كتلة إلى بعض أجزاء الشبكة.</li>
+    <li>وجود مسارين مؤقتين للسلسلة.</li>
+    <li>اختلاف مؤقت في المعلومات التي تمتلكها العقد.</li>
+    <li>تطبيق قواعد الإجماع التي تجعل مسارًا معينًا هو المسار الذي يجب متابعته.</li>
+    <li>في بعض الحالات غير الطبيعية، قد ترتبط إعادة التنظيم بمحاولة مهاجم تغيير ترتيب أو تاريخ بعض المعاملات.</li>
+</ul>
+
+<p>
+لذلك فإن حدوث Reorg لا يعني تلقائيًا وجود هجوم أو اختراق.
+</p>
+
+<h2>كيف تحدث Reorg بشكل مبسط؟</h2>
+
+<p>
+لنفترض أن آخر كتلة معتمدة في الشبكة هي Block A.
+</p>
+
+<p>
+بعد ذلك تم إنتاج كتلتين مختلفتين هما Block B1 وBlock B2، وكلتاهما ترتبطان بـBlock A.
+</p>
+
+<p>
+قد تصل B1 إلى جزء من الشبكة أولًا، بينما تصل B2 إلى جزء آخر.
+</p>
+
+<p>
+في هذه اللحظة قد ترى بعض العقد مسارًا:
+</p>
+
+<p>
+<strong>A → B1</strong>
+</p>
+
+<p>
+بينما ترى عقد أخرى:
+</p>
+
+<p>
+<strong>A → B2</strong>
+</p>
+
+<p>
+بعد ذلك تستمر الشبكة في بناء كتل جديدة فوق أحد المسارين وفق قواعد البروتوكول.
+</p>
+
+<p>
+إذا أصبح أحد المسارين هو المسار الذي يجب اتباعه، تنتقل العقد التي كانت تتبع المسار الآخر إليه.
+</p>
+
+<p>
+هذا مثال مبسط على Chain Reorganization.
+</p>
+
+<h2>ما العلاقة بين Reorg وFork؟</h2>
+
+<p>
+هناك علاقة وثيقة بين المصطلحين، لكنهما ليسا متطابقين.
+</p>
+
+<p>
+<strong>Fork</strong> يصف وجود تفرع أو اختلاف في مسار السلسلة أو قواعد البروتوكول.
+</p>
+
+<p>
+أما <strong>Chain Reorganization</strong> فتصف انتقال العقد من سلسلة أو مسار كانت تتبعه إلى مسار آخر وفق قواعد الشبكة.
+</p>
+
+<p>
+يمكن أن يحدث Fork مؤقت ثم تقوم الشبكة بحسمه، ويكون الانتقال من المسار المؤقت إلى المسار المعتمد جزءًا من Reorganization.
+</p>
+
+<p>
+أما Hard Fork الناتج عن تغيير دائم في قواعد البروتوكول فقد يؤدي إلى استمرار سلسلتين منفصلتين، وهذا ليس مجرد Reorg عادي داخل سلسلة واحدة.
+</p>
+
+<h2>ماذا يحدث للكتل المستبعدة؟</h2>
+
+<p>
+عندما تحدث Reorganization، قد تصبح بعض الكتل التي كانت موجودة في المسار السابق غير جزء من السلسلة التي تعتبرها العقد المسار المعتمد.
+</p>
+
+<p>
+في شبكات Proof of Work، يمكن أن تُعرف هذه الكتل في بعض السياقات باسم <strong>Stale Blocks</strong> أو تسميات أخرى بحسب الشبكة.
+</p>
+
+<p>
+وجود الكتلة في هذه الحالة لا يعني بالضرورة أنها كانت "مزورة". قد تكون الكتلة صالحة وفق قواعد الشبكة، لكنها لم تعد جزءًا من السلسلة التي اختارتها العقد.
+</p>
+
+<p>
+تختلف المصطلحات الدقيقة وطريقة التعامل مع هذه الكتل بين البروتوكولات.
+</p>
+
+<h2>ماذا يحدث للمعاملات داخل الكتل المستبعدة؟</h2>
+
+<p>
+المعاملة الموجودة داخل كتلة تم استبعادها من السلسلة المعتمدة لا تعني بالضرورة أنها فقدت إلى الأبد.
+</p>
+
+<p>
+إذا كانت المعاملة صالحة ولم تصبح جزءًا من كتلة أخرى، فقد تعود إلى مجموعة المعاملات التي تنتظر الإدراج، بحسب قواعد الشبكة وحالة المعاملة.
+</p>
+
+<p>
+أما إذا كانت المعاملة قد أصبحت جزءًا من السلسلة المعتمدة في مكان آخر، فلا يتم تنفيذها مرة ثانية باعتبارها معاملة جديدة.
+</p>
+
+<p>
+ويعتمد التعامل الدقيق مع المعاملات على قواعد كل بروتوكول.
+</p>
+
+<h2>هل Reorg تلغي المعاملة؟</h2>
+
+<p>
+ليس بالضرورة.
+</p>
+
+<p>
+إذا كانت المعاملة موجودة في كتلة تم استبعادها بسبب Reorg، فقد تحتاج الشبكة إلى تضمينها مرة أخرى في كتلة ضمن السلسلة المعتمدة إذا كانت لا تزال صالحة ولم تتعارض مع حالة الشبكة الجديدة.
+</p>
+
+<p>
+لذلك يجب التمييز بين:
+</p>
+
+<ul>
+    <li>إزالة الكتلة من السلسلة المعتمدة.</li>
+    <li>إلغاء المعاملة نفسها.</li>
+    <li>إعادة إدراج المعاملة في كتلة أخرى.</li>
+</ul>
+
+<h2>ما العلاقة بين Reorg وConfirmations؟</h2>
+
+<p>
+التأكيدات تساعد المستخدمين على قياس مدى عمق المعاملة داخل السلسلة.
+</p>
+
+<p>
+في شبكات تعتمد على نهائية احتمالية، كلما أضيفت كتل جديدة فوق الكتلة التي تحتوي على المعاملة، أصبح تغيير هذا التاريخ أكثر صعوبة وفق افتراضات الشبكة.
+</p>
+
+<p>
+لذلك تكون المعاملة ذات تأكيد واحد أكثر عرضة لإعادة التنظيم من معاملة أصبحت أعمق بكثير في السلسلة، مع اختلاف مستوى الأمان الفعلي حسب الشبكة.
+</p>
+
+<p>
+وهذا أحد الأسباب التي تجعل بعض المنصات تنتظر عدة تأكيدات قبل إتاحة الإيداعات للمستخدم.
+</p>
+
+<h2>ما العلاقة بين Reorg وFinality؟</h2>
+
+<p>
+هناك علاقة مباشرة بين المفهومين.
+</p>
+
+<p>
+قبل وصول حالة معينة إلى Finality وفق نموذج الشبكة، قد يكون تغيير المسار أو إعادة التنظيم ممكنًا ضمن ظروف معينة.
+</p>
+
+<p>
+أما عندما تصل حالة إلى نهائية صريحة وفق قواعد البروتوكول، فإن إعادة تنظيمها تصبح أكثر تقييدًا وقد تتطلب خرقًا لافتراضات أمان مهمة في النظام.
+</p>
+
+<p>
+ولهذا فإن فهم
+<a href="/academy/blockchain/what-is-blockchain-finality">Finality</a>
+يساعد على فهم سبب اختلاف احتمالية Reorg بين مراحل مختلفة من عمر المعاملة أو الكتلة.
+</p>
+
+<h2>Reorg في Bitcoin وProof of Work</h2>
+
+<p>
+Bitcoin تستخدم Proof of Work، وتستخدم العقد قواعد البروتوكول لتحديد السلسلة التي يجب اتباعها عند وجود سلاسل متنافسة.
+</p>
+
+<p>
+إذا تم تعدين كتلتين متنافستين، فقد تتلقى أجزاء مختلفة من الشبكة كل واحدة منهما أولًا.
+</p>
+
+<p>
+قد يستمر التعدين بعد ذلك فوق إحدى الكتلتين، وعندما يصبح أحد المسارين هو المسار الذي تحدده قواعد Bitcoin، تنتقل العقد إلى هذا المسار.
+</p>
+
+<p>
+هذا النوع من إعادة التنظيم القصيرة يمكن أن يحدث دون أن يكون هناك مهاجم أو خلل أمني.
+</p>
+
+<p>
+لكن إعادة التنظيمات العميقة أو غير المعتادة قد تكون أكثر أهمية من ناحية تحليل أمن الشبكة.
+</p>
+
+<h2>Reorg في Proof of Stake</h2>
+
+<p>
+يمكن أن تحدث حالات إعادة التنظيم أيضًا في شبكات Proof of Stake، لكن طريقة حدوثها والتعامل معها تعتمد على تصميم كل بروتوكول.
+</p>
+
+<p>
+في هذه الشبكات يشارك Validators في آلية الإجماع، وقد تحدد قواعد البروتوكول كيفية التعامل مع الكتل المتنافسة والحالات المختلفة.
+</p>
+
+<p>
+بعض شبكات Proof of Stake تمتلك آليات Finality صريحة، وقد يؤدي وصول كتلة أو حالة إلى Finality إلى تقييد إمكانية إعادة تنظيمها بشكل كبير.
+</p>
+
+<p>
+لكن لا توجد قاعدة واحدة تنطبق على جميع شبكات Proof of Stake.
+</p>
+
+<h2>ما هي Deep Reorganization؟</h2>
+
+<p>
+<strong>Deep Reorganization</strong> تشير إلى إعادة تنظيم تمتد إلى عدد كبير نسبيًا من الكتل السابقة بدل تغيير آخر كتلة أو عدد صغير من الكتل.
+</p>
+
+<p>
+كلما كانت إعادة التنظيم أعمق، زادت أهميتها من ناحية تحليل حالة الشبكة، لأنها قد تؤثر في عدد أكبر من المعاملات والتاريخ السابق للسلسلة.
+</p>
+
+<p>
+لكن كلمة "عميقة" لا تملك رقمًا عالميًا ثابتًا ينطبق على جميع البلوك تشين؛ فمعناها يعتمد على الشبكة والسياق.
+</p>
+
+<h2>هل يمكن أن تسبب Reorg مشكلة في Double Spending؟</h2>
+
+<p>
+نعم، يمكن أن ترتبط إعادة التنظيمات بمخاطر <strong>Double Spending</strong> في بعض الظروف، خصوصًا إذا تمكن طرف ما من جعل معاملة معينة جزءًا من مسار مؤقت ثم استبدال ذلك المسار بمسار آخر يحتوي على معاملة متعارضة.
+</p>
+
+<p>
+لكن حدوث Reorg عادي بسبب كتل متنافسة لا يعني تلقائيًا وجود Double Spending متعمد.
+</p>
+
+<p>
+تعتمد قدرة المهاجم على تنفيذ هجوم ناجح على تفاصيل الشبكة، وقوة المشاركين، وآلية الإجماع، وعمق إعادة التنظيم، وعدة عوامل أخرى.
+</p>
+
+<p>
+سنخصص درسًا مستقلًا لاحقًا لمفهوم Double Spending وطرق التعامل معه.
+</p>
+
+<h2>ما هو تأثير Reorg على منصات التداول؟</h2>
+
+<p>
+تهتم منصات التداول وإدارة المدفوعات بإعادة التنظيم لأنها قد تؤثر في حالة الإيداعات التي لم تصل بعد إلى مستوى كافٍ من التأكيد أو النهائية.
+</p>
+
+<p>
+لذلك قد تطلب المنصة عددًا محددًا من التأكيدات قبل اعتبار الإيداع مستقرًا وقابلًا للاستخدام داخل النظام.
+</p>
+
+<p>
+العدد المطلوب ليس موحدًا بين جميع المنصات أو العملات، وقد يختلف بحسب سياسة المنصة وتصميم الشبكة وتقييم المخاطر.
+</p>
+
+<h2>هل Reorg تعني أن البلوك تشين تم اختراقه؟</h2>
+
+<p>
+لا.
+</p>
+
+<p>
+إعادة التنظيم القصيرة يمكن أن تكون جزءًا طبيعيًا من عمل بعض شبكات البلوك تشين.
+</p>
+
+<p>
+أما إعادة التنظيم الكبيرة أو غير المعتادة فقد تستحق تحليلًا إضافيًا لمعرفة سببها.
+</p>
+
+<p>
+قد تكون الأسباب تقنية أو مرتبطة بظروف الشبكة، وقد ترتبط في بعض الحالات بمحاولات مهاجمة آلية الإجماع.
+</p>
+
+<p>
+لذلك لا يمكن الحكم على سبب Reorg من مجرد حدوثها دون فحص البيانات والظروف المحيطة بها.
+</p>
+
+<h2>مثال بسيط لفهم Chain Reorganization</h2>
+
+<p>
+تخيل طريقًا له مساران مؤقتان.
+</p>
+
+<p>
+في البداية، يعتقد بعض السائقين أن المسار الأول هو الطريق الرئيسي، بينما يعتقد آخرون أن المسار الثاني هو الطريق الرئيسي.
+</p>
+
+<p>
+بعد وصول معلومات إضافية، يتضح وفق القواعد المتفق عليها أن المسار الثاني هو الذي يجب الاستمرار فيه.
+</p>
+
+<p>
+السائقون الذين كانوا على المسار الأول ينتقلون إلى المسار الثاني.
+</p>
+
+<p>
+هذا مجرد تشبيه لتوضيح الفكرة؛ في البلوك تشين يتم تحديد المسار وفق قواعد البروتوكول وآلية الإجماع، وليس بقرار بشري مباشر.
+</p>
+
+<h2>ما الفرق بين Reorg وHard Fork؟</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>العنصر</th>
+            <th>Chain Reorganization</th>
+            <th>Hard Fork</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>الفكرة الأساسية</td>
+            <td>انتقال السلسلة المعتمدة من مسار إلى مسار آخر وفق قواعد الشبكة</td>
+            <td>تغيير في قواعد البروتوكول قد يجعل القواعد الجديدة غير متوافقة مع القديمة</td>
+        </tr>
+        <tr>
+            <td>المدة</td>
+            <td>غالبًا مؤقتة أو محدودة في الحالات الطبيعية</td>
+            <td>قد ينتج عنه تغيير دائم في قواعد الشبكة</td>
+        </tr>
+        <tr>
+            <td>تغيير البروتوكول</td>
+            <td>ليس شرطًا</td>
+            <td>نعم، يرتبط بتغيير في قواعد البروتوكول</td>
+        </tr>
+        <tr>
+            <td>سلسلتان دائمتان</td>
+            <td>لا يلزم</td>
+            <td>يمكن أن يحدث إذا استمرت مجموعتان بقواعد مختلفة</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>كيف تقلل الشبكات من مخاطر Reorg؟</h2>
+
+<p>
+تستخدم الشبكات المختلفة مجموعة من الآليات والقواعد لتحقيق استقرار السلسلة، ويعتمد ذلك على تصميم البروتوكول.
+</p>
+
+<p>
+ومن الأمثلة:
+</p>
+
+<ul>
+    <li>استخدام آلية إجماع تحدد طريقة اختيار السلسلة أو الحالة المعتمدة.</li>
+    <li>زيادة عدد التأكيدات في الشبكات ذات النهائية الاحتمالية.</li>
+    <li>استخدام آليات Finality صريحة في بعض الشبكات.</li>
+    <li>تصميم حوافز وعقوبات للمشاركين وفق نموذج الشبكة.</li>
+    <li>تحسين سرعة انتشار المعلومات بين العقد.</li>
+</ul>
+
+<p>
+لا توجد آلية واحدة تمنع جميع عمليات Reorg في جميع أنواع البلوك تشين.
+</p>
+
+<h2>الخلاصة</h2>
+
+<p>
+Chain Reorganization هي عملية تتغير فيها السلسلة التي تعتبرها العقد المسار المعتمد بعد وجود مسارات أو كتل متنافسة، وفق قواعد البروتوكول.
+</p>
+
+<p>
+يمكن أن تحدث إعادة التنظيم بشكل طبيعي في بعض الشبكات، ولا تعني تلقائيًا وجود اختراق أو هجوم.
+</p>
+
+<p>
+ترتبط Reorg بشكل وثيق بمفاهيم Fork وConfirmations وFinality. وكلما أصبحت المعاملة أعمق في السلسلة أو وصلت إلى Finality وفق نموذج الشبكة، تصبح إعادة تنظيم تاريخها أكثر تقييدًا.
+</p>
+
+<p>
+قد تصبح بعض الكتل خارج السلسلة المعتمدة بعد Reorg، وقد تحتاج بعض المعاملات الموجودة فيها إلى إعادة إدراجها إذا بقيت صالحة.
+</p>
+
+<p>
+أما إعادة التنظيمات العميقة أو غير المعتادة فقد تحتاج إلى تحليل أكثر تفصيلًا، خصوصًا إذا ارتبطت بمحاولات تغيير تاريخ المعاملات أو Double Spending.
+</p>
+
+<p>
+وبهذا أصبح لدينا أساس جيد لفهم أحد أهم المخاطر النظرية في البلوك تشين، وهو
+<strong>Double Spending</strong>.
+</p>
+
+<h2>روابط مفيدة داخل أكاديمية AQL Crypto</h2>
+
+<ul>
+    <li><a href="/academy/blockchain">مسار Blockchain الكامل</a></li>
+    <li><a href="/academy/blockchain/what-is-blockchain">ما هي تقنية البلوك تشين؟</a></li>
+    <li><a href="/academy/blockchain/how-does-blockchain-work">كيف تعمل تقنية البلوك تشين؟</a></li>
+    <li><a href="/academy/blockchain/what-is-a-block">ما هي الكتلة Block؟</a></li>
+    <li><a href="/academy/blockchain/what-is-hash-function">ما هي دوال التجزئة Hash Functions؟</a></li>
+    <li><a href="/academy/blockchain/what-are-blockchain-nodes">ما هي العقد Nodes؟</a></li>
+    <li><a href="/academy/blockchain/what-is-blockchain-consensus">ما هي آلية الإجماع Consensus؟</a></li>
+    <li><a href="/academy/blockchain/what-is-blockchain-fork">ما هي Forks في البلوك تشين؟</a></li>
+    <li><a href="/academy/blockchain/what-is-blockchain-finality">ما هي Finality في البلوك تشين؟</a></li>
+    <li><a href="/academy/bitcoin/how-bitcoin-works">كيف يعمل Bitcoin؟</a></li>
+    <li><a href="/academy/bitcoin/bitcoin-mining">ما هو تعدين Bitcoin؟</a></li>
+</ul>
+HTML,
+
+    'content_en' => <<<'HTML'
+<h2>What Is a Blockchain Chain Reorganization?</h2>
+
+<p>
+A <strong>Chain Reorganization</strong>, often called a <strong>Chain Reorg</strong>, occurs when nodes change the chain path they consider canonical according to the protocol rules after temporarily following another path.
+</p>
+
+<p>
+In simple terms, there may temporarily be more than one possible chain path. The network rules determine which path should continue. When nodes move from one previously followed path to another, this can be described as a chain reorganization.
+</p>
+
+<p>
+To understand this concept, it is useful to review:
+<a href="/academy/blockchain/what-is-blockchain">What Is Blockchain?</a>,
+<a href="/academy/blockchain/how-does-blockchain-work">How Does Blockchain Work?</a>,
+<a href="/academy/blockchain/what-is-a-block">What Is a Block?</a>,
+<a href="/academy/blockchain/what-are-blockchain-nodes">What Are Blockchain Nodes?</a>,
+<a href="/academy/blockchain/what-is-blockchain-consensus">What Is Blockchain Consensus?</a>,
+<a href="/academy/blockchain/what-is-blockchain-fork">What Is a Blockchain Fork?</a>,
+and
+<a href="/academy/blockchain/what-is-blockchain-finality">What Is Blockchain Finality?</a>.
+</p>
+
+<h2>What Does Reorganization Mean?</h2>
+
+<p>
+As a blockchain grows, nodes follow a sequence of blocks according to the protocol rules.
+</p>
+
+<p>
+Under some circumstances, two or more competing blocks can appear, and different parts of the network may temporarily follow different chain paths.
+</p>
+
+<p>
+When nodes later receive information that causes them to switch to another path that the protocol considers the canonical chain, some blocks from the previously followed path are no longer part of that chain.
+</p>
+
+<p>
+This transition is known as a <strong>Chain Reorganization</strong>.
+</p>
+
+<h2>Why Do Chain Reorganizations Happen?</h2>
+
+<p>
+Reorganizations can happen for different reasons depending on the blockchain design, including:
+</p>
+
+<ul>
+    <li>Competing blocks being produced at nearly the same time.</li>
+    <li>Delays in propagating a block across the network.</li>
+    <li>Temporary competing chain paths.</li>
+    <li>Temporary differences in the information available to nodes.</li>
+    <li>Consensus rules selecting one chain path over another.</li>
+    <li>In unusual cases, attempts to alter transaction history may be associated with reorganizations.</li>
+</ul>
+
+<p>
+Therefore, a reorganization does not automatically mean that a blockchain has been attacked or compromised.
+</p>
+
+<h2>How Does a Reorg Happen?</h2>
+
+<p>
+Suppose the latest accepted block is Block A.
+</p>
+
+<p>
+Two different blocks, B1 and B2, are then produced, and both reference Block A.
+</p>
+
+<p>
+B1 may reach one part of the network first, while B2 reaches another part first.
+</p>
+
+<p>
+At that point, some nodes may see:
+</p>
+
+<p>
+<strong>A → B1</strong>
+</p>
+
+<p>
+while other nodes see:
+</p>
+
+<p>
+<strong>A → B2</strong>
+</p>
+
+<p>
+The network then continues building on one of the competing paths according to its protocol rules.
+</p>
+
+<p>
+If one path becomes the path the protocol says nodes should follow, nodes that were following the other path switch to it.
+</p>
+
+<p>
+This is a simplified example of a Chain Reorganization.
+</p>
+
+<h2>What Is the Relationship Between Reorgs and Forks?</h2>
+
+<p>
+The two concepts are closely related, but they are not identical.
+</p>
+
+<p>
+A <strong>Fork</strong> describes a divergence in the chain path or protocol rules.
+</p>
+
+<p>
+A <strong>Chain Reorganization</strong> describes nodes switching from one previously followed chain path to another according to the network rules.
+</p>
+
+<p>
+A temporary fork can be resolved by the network, and the transition from the temporary path to the accepted path can be part of a reorganization.
+</p>
+
+<p>
+A Hard Fork caused by a permanent protocol rule change can result in two separate chains continuing under different rules. That is not simply an ordinary reorganization within one chain.
+</p>
+
+<h2>What Happens to Rejected Blocks?</h2>
+
+<p>
+During a reorganization, some blocks that were previously part of a node's followed path may no longer be part of the canonical chain.
+</p>
+
+<p>
+In Proof of Work networks, such blocks may be called <strong>stale blocks</strong> or other protocol-specific terms.
+</p>
+
+<p>
+This does not necessarily mean that the block was "fake." It may have been valid according to the network rules but was not ultimately included in the chain selected by the protocol.
+</p>
+
+<p>
+The exact terminology and treatment vary between blockchain protocols.
+</p>
+
+<h2>What Happens to Transactions Inside Rejected Blocks?</h2>
+
+<p>
+A transaction included in a block that is removed from the canonical chain is not necessarily lost permanently.
+</p>
+
+<p>
+If the transaction remains valid and has not been included elsewhere, it may return to a pool of transactions waiting for inclusion, depending on the blockchain's rules and current state.
+</p>
+
+<p>
+If the transaction has already been included in the accepted chain elsewhere, it is not simply executed again as a new transaction.
+</p>
+
+<p>
+The exact behavior depends on the protocol.
+</p>
+
+<h2>Does a Reorg Cancel a Transaction?</h2>
+
+<p>
+Not necessarily.
+</p>
+
+<p>
+If a transaction was included in a block removed during a reorganization, the network may need to include it again in another block if it remains valid and does not conflict with the new chain state.
+</p>
+
+<p>
+It is therefore important to distinguish between:
+</p>
+
+<ul>
+    <li>Removing a block from the canonical chain.</li>
+    <li>Invalidating a transaction itself.</li>
+    <li>Re-including a transaction in another block.</li>
+</ul>
+
+<h2>What Is the Relationship Between Reorgs and Confirmations?</h2>
+
+<p>
+Confirmations help users measure how deeply a transaction is embedded in the chain.
+</p>
+
+<p>
+In networks that rely on probabilistic finality, each additional block built on top of a transaction generally makes changing its history more difficult under the network's security assumptions.
+</p>
+
+<p>
+A transaction with one confirmation is therefore generally more exposed to reorganization than a transaction that has many blocks built on top of it, although the actual security level depends on the network.
+</p>
+
+<p>
+This is one reason some platforms wait for multiple confirmations before making deposits available.
+</p>
+
+<h2>What Is the Relationship Between Reorgs and Finality?</h2>
+
+<p>
+The two concepts are directly connected.
+</p>
+
+<p>
+Before a state reaches finality under a network's model, changing the chain path or reorganizing the history may remain possible under certain conditions.
+</p>
+
+<p>
+Once a state reaches explicit finality under the protocol, reorganizing it becomes much more constrained and may require violating important security assumptions of the system.
+</p>
+
+<p>
+Understanding
+<a href="/academy/blockchain/what-is-blockchain-finality">Finality</a>
+therefore helps explain why reorganization risk differs at different stages of a transaction's history.
+</p>
+
+<h2>Reorgs in Bitcoin and Proof of Work</h2>
+
+<p>
+Bitcoin uses Proof of Work, and nodes follow protocol rules to determine which chain they should follow when competing chains exist.
+</p>
+
+<p>
+If two competing blocks are mined, different parts of the network may receive each one first.
+</p>
+
+<p>
+Mining can then continue on top of one of the competing blocks. When one chain becomes the path selected by Bitcoin's protocol rules, nodes switch to that chain.
+</p>
+
+<p>
+A short reorganization of this kind can happen without an attacker or a security failure.
+</p>
+
+<p>
+Deep or unusual reorganizations can be more significant when analyzing the security of a blockchain network.
+</p>
+
+<h2>Reorgs in Proof of Stake</h2>
+
+<p>
+Reorganizations can also occur in Proof of Stake networks, but their behavior and handling depend on the protocol design.
+</p>
+
+<p>
+Validators participate in the consensus process, and the protocol determines how competing blocks and states are handled.
+</p>
+
+<p>
+Some Proof of Stake networks have explicit finality mechanisms, and reaching finality can significantly restrict the possibility of reorganizing a finalized block or state.
+</p>
+
+<p>
+However, there is no single rule that applies to every Proof of Stake blockchain.
+</p>
+
+<h2>What Is a Deep Reorganization?</h2>
+
+<p>
+A <strong>Deep Reorganization</strong> refers to a reorganization that reaches back through a relatively large number of previous blocks rather than affecting only the most recent block or a small number of blocks.
+</p>
+
+<p>
+The deeper the reorganization, the more significant it can be for analyzing the network because it may affect more transactions and a larger portion of the chain's history.
+</p>
+
+<p>
+There is no universal number of blocks that defines a "deep" reorganization. Its meaning depends on the blockchain and the context.
+</p>
+
+<h2>Can a Reorg Cause Double Spending?</h2>
+
+<p>
+Yes, reorganizations can be related to <strong>Double Spending</strong> risks in certain circumstances, particularly if an attacker can cause a transaction to appear in a temporary chain and later replace that chain with another path containing a conflicting transaction.
+</p>
+
+<p>
+However, a normal reorganization caused by competing blocks does not automatically mean that intentional double spending occurred.
+</p>
+
+<p>
+An attacker's ability to perform a successful double-spending attack depends on the network's design, participant power, consensus mechanism, reorganization depth, and other factors.
+</p>
+
+<p>
+A later lesson will examine Double Spending and the mechanisms designed to address it in more detail.
+</p>
+
+<h2>How Do Reorgs Affect Exchanges?</h2>
+
+<p>
+Exchanges and payment systems care about reorganizations because they can affect deposits that have not yet reached a sufficient level of confirmation or finality.
+</p>
+
+<p>
+As a result, an exchange may require a specific number of confirmations before considering a deposit sufficiently settled for use within its system.
+</p>
+
+<p>
+The required number is not universal. It can vary by exchange, asset, blockchain design, and risk policy.
+</p>
+
+<h2>Does a Reorg Mean the Blockchain Was Hacked?</h2>
+
+<p>
+No.
+</p>
+
+<p>
+Short reorganizations can be a normal part of how some blockchain networks operate.
+</p>
+
+<p>
+Large or unusual reorganizations may require additional investigation to determine their cause.
+</p>
+
+<p>
+They may result from technical or network conditions, while in some cases they can be associated with attempts to attack the consensus mechanism.
+</p>
+
+<p>
+The cause of a reorganization cannot be determined simply from the fact that a reorg occurred; the surrounding data and conditions must be analyzed.
+</p>
+
+<h2>A Simple Example of Chain Reorganization</h2>
+
+<p>
+Imagine a road with two temporary routes.
+</p>
+
+<p>
+At first, some drivers believe the first route is the main route, while others believe the second route is the main route.
+</p>
+
+<p>
+After additional information becomes available, the agreed rules determine that the second route should continue.
+</p>
+
+<p>
+Drivers who were following the first route switch to the second route.
+</p>
+
+<p>
+This is only an analogy. In a blockchain, the chain path is determined by protocol rules and consensus mechanisms rather than by a direct human decision.
+</p>
+
+<h2>What Is the Difference Between a Reorg and a Hard Fork?</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Feature</th>
+            <th>Chain Reorganization</th>
+            <th>Hard Fork</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Core idea</td>
+            <td>The canonical chain path changes according to network rules</td>
+            <td>Protocol rules change and may become incompatible with old rules</td>
+        </tr>
+        <tr>
+            <td>Duration</td>
+            <td>Often temporary or limited in normal cases</td>
+            <td>Can represent a permanent protocol change</td>
+        </tr>
+        <tr>
+            <td>Protocol rule change</td>
+            <td>Not required</td>
+            <td>Yes, it involves a protocol rule change</td>
+        </tr>
+        <tr>
+            <td>Permanent separate chains</td>
+            <td>Not required</td>
+            <td>Can occur if groups continue under different rules</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>How Can Networks Reduce Reorg Risks?</h2>
+
+<p>
+Different blockchain networks use different mechanisms and rules to improve chain stability.
+</p>
+
+<p>
+Examples include:
+</p>
+
+<ul>
+    <li>Consensus mechanisms that define how the accepted chain or state is selected.</li>
+    <li>Additional confirmations in networks with probabilistic finality.</li>
+    <li>Explicit finality mechanisms in some blockchain systems.</li>
+    <li>Economic incentives and penalties designed for the network's participants.</li>
+    <li>Improved information propagation between nodes.</li>
+</ul>
+
+<p>
+There is no single mechanism that prevents every possible reorganization across all blockchain designs.
+</p>
+
+<h2>Conclusion</h2>
+
+<p>
+A Chain Reorganization is a process in which nodes change the chain path they consider canonical after competing blocks or paths have existed, according to the protocol rules.
+</p>
+
+<p>
+Short reorganizations can occur naturally in some blockchain networks and do not automatically indicate an attack or security breach.
+</p>
+
+<p>
+Reorganizations are closely related to forks, confirmations, and finality. As a transaction becomes deeper in the chain or reaches finality under the network's model, reorganizing its history generally becomes more constrained.
+</p>
+
+<p>
+Some blocks may become excluded from the canonical chain after a reorganization, and transactions inside them may need to be re-included if they remain valid.
+</p>
+
+<p>
+Deep or unusual reorganizations require more detailed analysis, especially when they are associated with attempts to alter transaction history or perform double spending.
+</p>
+
+<p>
+This provides the foundation for understanding one of the important theoretical risks in blockchain systems:
+<strong>Double Spending</strong>.
+</p>
+
+<h2>Related AQL Crypto Academy Lessons</h2>
+
+<ul>
+    <li><a href="/academy/blockchain">Complete Blockchain Learning Path</a></li>
+    <li><a href="/academy/blockchain/what-is-blockchain">What Is Blockchain?</a></li>
+    <li><a href="/academy/blockchain/how-does-blockchain-work">How Does Blockchain Work?</a></li>
+    <li><a href="/academy/blockchain/what-is-a-block">What Is a Block?</a></li>
+    <li><a href="/academy/blockchain/what-is-hash-function">What Are Hash Functions?</a></li>
+    <li><a href="/academy/blockchain/what-are-blockchain-nodes">What Are Blockchain Nodes?</a></li>
+    <li><a href="/academy/blockchain/what-is-blockchain-consensus">What Is Blockchain Consensus?</a></li>
+    <li><a href="/academy/blockchain/what-is-blockchain-fork">What Is a Blockchain Fork?</a></li>
+    <li><a href="/academy/blockchain/what-is-blockchain-finality">What Is Blockchain Finality?</a></li>
+    <li><a href="/academy/bitcoin/how-bitcoin-works">How Does Bitcoin Work?</a></li>
+    <li><a href="/academy/bitcoin/bitcoin-mining">What Is Bitcoin Mining?</a></li>
+</ul>
+HTML,
+
+    'image' => null,
+
+    'seo_title' => null,
+    'seo_title_ar' => 'ما هي Chain Reorganization في البلوك تشين؟ شرح Reorg | AQL Crypto',
+    'seo_title_en' => 'What Is a Blockchain Chain Reorganization? A Beginner’s Guide | AQL Crypto',
+
+    'meta_description' => null,
+    'meta_description_ar' => 'شرح مبسط لـ Chain Reorganization أو Reorg في البلوك تشين، وأسباب حدوثها، وتأثيرها على الكتل والمعاملات، وعلاقتها بـFork وConfirmations وFinality.',
+    'meta_description_en' => 'Learn what a blockchain chain reorganization or Reorg is, why it happens, how it affects blocks and transactions, and its relationship with forks, confirmations, and finality.',
+
+    'faq_ar' => [
+        [
+            'question' => 'ما هي Chain Reorganization في البلوك تشين؟',
+            'answer' => 'هي عملية تتغير فيها السلسلة التي تعتبرها العقد المسار المعتمد بعد وجود كتل أو مسارات متنافسة، وفق قواعد البروتوكول وآلية الإجماع.'
+        ],
+        [
+            'question' => 'لماذا تحدث Chain Reorganization؟',
+            'answer' => 'قد تحدث بسبب إنتاج كتل متنافسة في وقت متقارب، أو تأخر انتشار الكتل، أو وجود مسارات مؤقتة مختلفة، أو بسبب ظروف أخرى تعتمد على تصميم الشبكة.'
+        ],
+        [
+            'question' => 'هل Reorg تعني أن البلوك تشين تم اختراقه؟',
+            'answer' => 'لا. إعادة التنظيم القصيرة يمكن أن تكون جزءًا طبيعيًا من عمل بعض الشبكات، بينما تحتاج إعادة التنظيمات الكبيرة أو غير المعتادة إلى تحليل لمعرفة سببها.'
+        ],
+        [
+            'question' => 'ما العلاقة بين Reorg وFork؟',
+            'answer' => 'Fork يصف التفرع أو الاختلاف في مسار السلسلة أو قواعد البروتوكول، بينما Reorg تصف انتقال العقد من مسار كانت تتبعه إلى مسار آخر وفق قواعد الشبكة.'
+        ],
+        [
+            'question' => 'ماذا يحدث للكتل المستبعدة بعد Reorg؟',
+            'answer' => 'قد تصبح بعض الكتل خارج السلسلة المعتمدة. وقد تسمى في بعض شبكات Proof of Work بالكتل القديمة أو Stale Blocks، بحسب المصطلحات المستخدمة في البروتوكول.'
+        ],
+        [
+            'question' => 'ماذا يحدث للمعاملات داخل الكتل المستبعدة؟',
+            'answer' => 'إذا بقيت المعاملة صالحة ولم يتم تضمينها في مكان آخر، فقد تعود إلى مجموعة المعاملات المنتظرة للإدراج، وفق قواعد الشبكة وحالتها الجديدة.'
+        ],
+        [
+            'question' => 'هل Reorg تلغي المعاملة؟',
+            'answer' => 'ليس بالضرورة. قد تتم إزالة الكتلة التي تحتوي على المعاملة من السلسلة المعتمدة، ثم يمكن إعادة إدراج المعاملة في كتلة أخرى إذا بقيت صالحة.'
+        ],
+        [
+            'question' => 'ما العلاقة بين Reorg وConfirmations؟',
+            'answer' => 'كلما زادت التأكيدات وأصبحت المعاملة أعمق في السلسلة، يصبح تغيير تاريخها أكثر صعوبة في الشبكات ذات النهائية الاحتمالية، وفق افتراضات الشبكة.'
+        ],
+        [
+            'question' => 'ما العلاقة بين Reorg وFinality؟',
+            'answer' => 'قبل الوصول إلى Finality قد تكون إعادة التنظيم ممكنة وفق ظروف معينة، بينما تجعل النهائية الصريحة تغيير الحالة أكثر تقييدًا وفق قواعد البروتوكول.'
+        ],
+        [
+            'question' => 'هل يمكن أن تسبب Reorg مشكلة Double Spending؟',
+            'answer' => 'يمكن أن ترتبط Reorg بمخاطر Double Spending في ظروف معينة، خصوصًا إذا تم استبدال مسار يحتوي على معاملة بمسار آخر يحتوي على معاملة متعارضة.'
+        ],
+        [
+            'question' => 'ما هي Deep Reorganization؟',
+            'answer' => 'هي إعادة تنظيم تمتد إلى عدد كبير نسبيًا من الكتل السابقة. ولا يوجد رقم عالمي ثابت يحدد متى تصبح Reorg عميقة، لأن ذلك يعتمد على الشبكة والسياق.'
+        ],
+        [
+            'question' => 'لماذا تنتظر منصات التداول عدة تأكيدات؟',
+            'answer' => 'لأن زيادة التأكيدات يمكن أن تقلل من مخاطر إعادة تنظيم تاريخ المعاملة في الشبكات ذات النهائية الاحتمالية، ولذلك قد تنتظر المنصة قبل اعتبار الإيداع مستقرًا.'
+        ],
+    ],
+
+    'faq_en' => [
+        [
+            'question' => 'What is a blockchain chain reorganization?',
+            'answer' => 'A chain reorganization occurs when nodes change the chain path they consider canonical after competing blocks or paths have existed, according to the protocol and consensus rules.'
+        ],
+        [
+            'question' => 'Why do chain reorganizations happen?',
+            'answer' => 'They can happen because competing blocks are produced close together, block propagation is delayed, temporary chain paths appear, or because of other conditions related to the blockchain design.'
+        ],
+        [
+            'question' => 'Does a reorg mean that a blockchain was hacked?',
+            'answer' => 'No. Short reorganizations can be a normal part of some blockchain networks, while large or unusual reorganizations require analysis to determine their cause.'
+        ],
+        [
+            'question' => 'What is the relationship between a reorg and a fork?',
+            'answer' => 'A fork describes a divergence in chain history or protocol rules, while a reorg describes nodes switching from one previously followed chain path to another according to network rules.'
+        ],
+        [
+            'question' => 'What happens to blocks removed during a reorg?',
+            'answer' => 'Some blocks may no longer be part of the canonical chain. In some Proof of Work networks they may be described as stale blocks or using other protocol-specific terminology.'
+        ],
+        [
+            'question' => 'What happens to transactions inside removed blocks?',
+            'answer' => 'If a transaction remains valid and has not been included elsewhere, it may return to a pool of pending transactions and can potentially be included in another block, depending on the network.'
+        ],
+        [
+            'question' => 'Does a reorg cancel a transaction?',
+            'answer' => 'Not necessarily. A block containing the transaction may be removed from the canonical chain, while the transaction itself may later be included in another block if it remains valid.'
+        ],
+        [
+            'question' => 'What is the relationship between reorgs and confirmations?',
+            'answer' => 'As a transaction receives more confirmations and becomes deeper in the chain, changing its history generally becomes more difficult in networks with probabilistic finality, under their security assumptions.'
+        ],
+        [
+            'question' => 'What is the relationship between reorgs and finality?',
+            'answer' => 'Before finality is reached, reorganization may remain possible under certain conditions. Explicit finality mechanisms can make changing a finalized state much more constrained.'
+        ],
+        [
+            'question' => 'Can a reorg cause double spending?',
+            'answer' => 'A reorg can be related to double-spending risks in certain circumstances, especially when a chain containing one transaction is replaced by another chain containing a conflicting transaction.'
+        ],
+        [
+            'question' => 'What is a deep reorganization?',
+            'answer' => 'A deep reorganization reaches back through a relatively large number of previous blocks. There is no universal block count that defines a deep reorg because the meaning depends on the blockchain and context.'
+        ],
+        [
+            'question' => 'Why do exchanges wait for multiple confirmations?',
+            'answer' => 'Additional confirmations can reduce the risk of a transaction being affected by a chain reorganization in networks with probabilistic finality, so exchanges may wait before considering deposits settled.'
+        ],
+    ],
+
+    'status' => 'published',
+    'sort_order' => 9,
+    'published_at' => now(),
+],
+[
+    'title' => 'What Is Double Spending in Blockchain?',
+    'title_ar' => 'ما هو Double Spending في البلوك تشين؟ شرح الإنفاق المزدوج',
+    'title_en' => 'What Is Double Spending in Blockchain? A Beginner’s Guide',
+    'slug' => 'what-is-double-spending',
+
+    'excerpt' => null,
+    'excerpt_ar' => 'تعرف على مفهوم Double Spending أو الإنفاق المزدوج في العملات الرقمية، وكيف يمكن محاولة إنفاق الرصيد نفسه أكثر من مرة، وكيف تمنع البلوك تشين هذه المشكلة باستخدام التحقق والإجماع والتأكيدات والنهائية.',
+    'excerpt_en' => 'Learn what Double Spending means in blockchain, how the same digital balance could be attempted to be spent more than once, and how blockchain networks prevent it using validation, consensus, confirmations, and finality.',
+
+    'content' => null,
+
+    'content_ar' => <<<'HTML'
+<h2>ما هو Double Spending في البلوك تشين؟</h2>
+
+<p>
+<strong>Double Spending</strong> أو <strong>الإنفاق المزدوج</strong> هو محاولة استخدام الرصيد الرقمي نفسه في أكثر من معاملة، بحيث يحاول صاحب الرصيد إنفاقه مرة ثم استخدام الرصيد نفسه في معاملة أخرى.
+</p>
+
+<p>
+تُعد هذه المشكلة من أهم التحديات التي يجب أن تعالجها أنظمة العملات الرقمية، لأن الأصول الرقمية يمكن تمثيلها ومعالجتها بواسطة البيانات البرمجية.
+</p>
+
+<p>
+في النظام المالي التقليدي توجد جهة مركزية مثل البنك تستطيع تسجيل الرصيد ومنع استخدام الأموال نفسها مرتين. أما في البلوك تشين، فيجب على الشبكة الموزعة أن تصل إلى حالة متفق عليها بشأن المعاملات والرصيد دون الاعتماد بالضرورة على جهة مركزية واحدة.
+</p>
+
+<p>
+لفهم Double Spending بشكل أفضل، من المفيد مراجعة الدروس السابقة:
+<a href="/academy/blockchain/what-is-blockchain">ما هي تقنية البلوك تشين؟</a>،
+<a href="/academy/blockchain/how-does-blockchain-work">كيف تعمل البلوك تشين؟</a>،
+<a href="/academy/blockchain/what-are-blockchain-nodes">ما هي العقد Nodes؟</a>،
+<a href="/academy/blockchain/what-is-blockchain-consensus">ما هي آلية الإجماع Consensus؟</a>،
+<a href="/academy/blockchain/what-is-blockchain-fork">ما هي Forks؟</a>،
+<a href="/academy/blockchain/what-is-blockchain-finality">ما هي Finality؟</a>
+و
+<a href="/academy/blockchain/what-is-chain-reorganization">ما هي Chain Reorganization؟</a>.
+</p>
+
+<h2>ما المشكلة في الإنفاق المزدوج؟</h2>
+
+<p>
+تخيل أن شخصًا يمتلك وحدة واحدة من عملة رقمية.
+</p>
+
+<p>
+إذا استطاع إرسال الوحدة نفسها إلى شخص أول، ثم إرسالها مرة أخرى إلى شخص ثانٍ، فقد حصل شخصان على معاملات تدعي استخدام الرصيد نفسه.
+</p>
+
+<p>
+إذا قبلت الشبكة المعاملتين باعتبارهما نهائيتين، فسيؤدي ذلك إلى إنشاء مشكلة أساسية في نظام الملكية الرقمية.
+</p>
+
+<p>
+لذلك يجب أن تحدد الشبكة أي معاملة يمكن اعتمادها وأي معاملة متعارضة يجب رفضها أو عدم تضمينها في السلسلة المعتمدة.
+</p>
+
+<h2>هل العملات الرقمية تُنسخ عند Double Spending؟</h2>
+
+<p>
+لا.
+</p>
+
+<p>
+Double Spending لا يعني أن المستخدم قام بإنشاء نسخة مادية من العملة أو أن البلوك تشين نسخ العملة نفسها.
+</p>
+
+<p>
+المشكلة تتعلق باستخدام الرصيد أو الحالة الرقمية نفسها في معاملات متعارضة.
+</p>
+
+<p>
+على سبيل المثال، إذا كان لدى المستخدم رصيد يسمح له بإنفاق 1 BTC، فلا يمكنه بشكل طبيعي إنشاء معاملتين مستقلتين نهائيتين تنفقان نفس الـ1 BTC إذا كانت قواعد الشبكة تمنع ذلك.
+</p>
+
+<h2>كيف تمنع البلوك تشين Double Spending؟</h2>
+
+<p>
+تستخدم شبكات البلوك تشين مجموعة من الآليات لمنع أو تقليل مخاطر الإنفاق المزدوج، وتختلف التفاصيل حسب تصميم كل شبكة.
+</p>
+
+<p>
+من أهم العناصر:
+</p>
+
+<ul>
+    <li>التحقق من صحة المعاملات.</li>
+    <li>العقد Nodes التي تتحقق من القواعد.</li>
+    <li>آلية الإجماع Consensus.</li>
+    <li>ترتيب المعاملات داخل السلسلة.</li>
+    <li>التأكيدات Confirmations في الشبكات ذات النهائية الاحتمالية.</li>
+    <li>آليات Finality في بعض الشبكات.</li>
+</ul>
+
+<p>
+الفكرة الأساسية هي أن الشبكة يجب أن تصل إلى حالة متسقة تحدد أي معاملة صالحة وأي معاملة متعارضة لا يمكن اعتمادها في الحالة نفسها.
+</p>
+
+<h2>دور Nodes في منع Double Spending</h2>
+
+<p>
+تلعب العقد <strong>Nodes</strong> دورًا مهمًا في التحقق من المعاملات والكتل وفق قواعد البروتوكول.
+</p>
+
+<p>
+عندما تصل معاملة جديدة إلى الشبكة، يمكن للعقد التحقق من مجموعة من الشروط، مثل:
+</p>
+
+<ul>
+    <li>صحة التوقيع أو بيانات المصادقة المطلوبة.</li>
+    <li>صلاحية المعاملة وفق قواعد البروتوكول.</li>
+    <li>عدم محاولة إنفاق رصيد غير متاح.</li>
+    <li>عدم تعارض المعاملة مع الحالة الحالية للشبكة.</li>
+</ul>
+
+<p>
+إذا كانت هناك معاملتان متعارضتان تستخدمان الرصيد نفسه، فلا يمكن اعتبارهما معًا معاملات صحيحة في الحالة النهائية نفسها.
+</p>
+
+<p>
+لمزيد من التفاصيل، راجع درس
+<a href="/academy/blockchain/what-are-blockchain-nodes">ما هي العقد Nodes في البلوك تشين؟</a>.
+</p>
+
+<h2>دور Consensus في منع الإنفاق المزدوج</h2>
+
+<p>
+التحقق من المعاملة وحده لا يكفي دائمًا، لأن الشبكة موزعة وقد تصل معاملات مختلفة إلى العقد في أوقات مختلفة.
+</p>
+
+<p>
+هنا تأتي أهمية <strong>Consensus</strong>.
+</p>
+
+<p>
+آلية الإجماع تساعد المشاركين في الشبكة على الاتفاق على الحالة التي يجب اعتمادها، بما في ذلك ترتيب الكتل والمعاملات وفق قواعد البروتوكول.
+</p>
+
+<p>
+في Bitcoin مثلًا، يستخدم النظام Proof of Work لتحديد السلسلة التي تتبعها العقد وفق قواعد البروتوكول.
+</p>
+
+<p>
+في شبكات Proof of Stake، تستخدم الشبكات آليات مختلفة تعتمد على Validators وقواعد الإجماع الخاصة بكل بروتوكول.
+</p>
+
+<p>
+لا تستخدم جميع شبكات البلوك تشين الطريقة نفسها، ولذلك يجب فهم آلية الإجماع الخاصة بالشبكة محل الدراسة.
+</p>
+
+<h2>ما العلاقة بين Double Spending وConfirmations؟</h2>
+
+<p>
+التأكيدات مهمة خصوصًا في الشبكات التي تعتمد على <strong>Probabilistic Finality</strong>.
+</p>
+
+<p>
+عندما تدخل المعاملة في كتلة، يكون لديها تأكيد واحد وفق طريقة العد الشائعة. وكلما أضيفت كتل جديدة فوقها، زاد عمق المعاملة في السلسلة.
+</p>
+
+<p>
+في نموذج Proof of Work مثل Bitcoin، تجعل زيادة العمق إعادة كتابة ذلك الجزء من السلسلة أكثر صعوبة وفق افتراضات أمان الشبكة.
+</p>
+
+<p>
+لذلك قد تنتظر منصات التداول أو الخدمات المالية عددًا معينًا من التأكيدات قبل اعتبار الإيداع مستقرًا.
+</p>
+
+<p>
+عدد التأكيدات المطلوب ليس قاعدة موحدة لجميع العملات أو المنصات.
+</p>
+
+<h2>ما العلاقة بين Double Spending وFinality؟</h2>
+
+<p>
+<strong>Finality</strong> تحدد درجة أو حالة تصبح عندها المعاملة أو الحالة أقل قابلية للتغيير وفق نموذج الشبكة.
+</p>
+
+<p>
+في الشبكات التي تمتلك آلية Finality صريحة، قد تصبح إعادة تنظيم حالة تم الوصول إلى نهائيتها أكثر تقييدًا وفق قواعد البروتوكول.
+</p>
+
+<p>
+أما في Bitcoin، فالتأكيدات توفر زيادة تدريجية في الثقة بأن المعاملة ستبقى ضمن التاريخ المعتمد، بدل وجود لحظة واحدة بسيطة يمكن وصفها بأنها نهائية مطلقة لجميع الحالات.
+</p>
+
+<p>
+لهذا فإن فهم
+<a href="/academy/blockchain/what-is-blockchain-finality">Finality</a>
+يساعد على فهم سبب اختلاف مخاطر Double Spending بين شبكات البلوك تشين المختلفة.
+</p>
+
+<h2>ما علاقة Chain Reorganization بالإنفاق المزدوج؟</h2>
+
+<p>
+ترتبط <strong>Chain Reorganization</strong> بمشكلة Double Spending لأن إعادة تنظيم السلسلة قد تؤدي إلى استبعاد كتلة كانت تحتوي على معاملة معينة من السلسلة المعتمدة.
+</p>
+
+<p>
+في سيناريو طبيعي، قد تكون المعاملة في الكتلة المستبعدة ثم تعود إلى حالة الانتظار ويتم تضمينها لاحقًا.
+</p>
+
+<p>
+أما في سيناريو هجوم، فقد يحاول مهاجم استغلال إعادة التنظيم لاستبدال تاريخ يحتوي على معاملة بمعاملة متعارضة.
+</p>
+
+<p>
+هذا لا يعني أن كل Reorg هو Double Spending أو أن كل Reorg ناتج عن هجوم.
+</p>
+
+<p>
+لمزيد من التفاصيل، راجع:
+<a href="/academy/blockchain/what-is-chain-reorganization">ما هي Chain Reorganization؟</a>.
+</p>
+
+<h2>ما هو Race Attack؟</h2>
+
+<p>
+<strong>Race Attack</strong> هو نوع من السيناريوهات التي يحاول فيها المهاجم إرسال معاملتين متعارضتين بسرعة، على أمل أن تقبل بعض العقد معاملة معينة بينما تصل المعاملة الأخرى إلى أطراف مختلفة.
+</p>
+
+<p>
+قد يحاول المهاجم مثلًا إرسال معاملة إلى تاجر، ثم محاولة إرسال معاملة متعارضة تنفق الرصيد نفسه.
+</p>
+
+<p>
+إذا قبل التاجر المعاملة الأولى قبل وجود تأكيدات كافية، فقد يكون معرضًا لخطر قبول معاملة يمكن استبدالها لاحقًا وفق ظروف الهجوم وقواعد الشبكة.
+</p>
+
+<p>
+تختلف التفاصيل والجدوى العملية لهذا النوع من الهجمات حسب الشبكة وطريقة قبول المعاملات.
+</p>
+
+<h2>ما هو Finney Attack؟</h2>
+
+<p>
+<strong>Finney Attack</strong> هو سيناريو معروف في سياق Proof of Work، يرتبط بمهاجم يقوم بتعدين كتلة تحتوي على معاملة تنفق رصيدًا، ثم يحاول استخدام الرصيد نفسه في معاملة أخرى قبل نشر الكتلة المعدّنة بطريقة معينة.
+</p>
+
+<p>
+الفكرة تعتمد على قدرة المهاجم على التحكم في ترتيب نشر الكتلة والمعاملة والاستفادة من عدم وجود تأكيدات كافية لدى الطرف المستقبل.
+</p>
+
+<p>
+هذا النوع من السيناريوهات يوضح لماذا لا ينبغي افتراض أن معاملة غير مؤكدة تتمتع بنفس مستوى الأمان الذي تتمتع به معاملة أضيفت إلى سلسلة أعمق.
+</p>
+
+<h2>ما هو 51% Attack؟</h2>
+
+<p>
+يُستخدم مصطلح <strong>51% Attack</strong> لوصف حالة يمتلك فيها طرف أو مجموعة سيطرة كافية على مورد الإجماع في شبكة معينة، مثل نسبة كبيرة من قوة التعدين في بعض شبكات Proof of Work، بما قد يسمح لهم بالتأثير في اختيار السلسلة.
+</p>
+
+<p>
+في Proof of Work، قد تمنح السيطرة الكبيرة على قوة التعدين المهاجم قدرة أكبر على إعادة تنظيم أجزاء من السلسلة أو تنفيذ سيناريوهات Double Spending ضد أطراف تقبل المعاملات قبل تأكيدات كافية.
+</p>
+
+<p>
+لكن هذا لا يعني أن المهاجم يستطيع فعل أي شيء يريده داخل الشبكة.
+</p>
+
+<p>
+مثلًا، لا تعني السيطرة على نسبة كبيرة من قوة التعدين تلقائيًا إمكانية إنشاء عملات بلا حدود أو تجاوز كل قواعد التحقق.
+</p>
+
+<p>
+تعتمد القدرات الفعلية على تصميم البروتوكول وطبيعة الهجوم.
+</p>
+
+<h2>هل 51% Attack ممكن في Proof of Stake؟</h2>
+
+<p>
+يختلف الأمر في Proof of Stake لأن مورد الإجماع ليس قوة الحوسبة كما هو الحال في Proof of Work، وإنما يعتمد على آلية المشاركة والحصة وقواعد البروتوكول.
+</p>
+
+<p>
+قد تستخدم بعض شبكات Proof of Stake مصطلحات مختلفة لوصف هجمات السيطرة على الإجماع، وقد توجد آليات مثل العقوبات أو Slashing لمواجهة بعض السلوكيات الضارة.
+</p>
+
+<p>
+لذلك لا ينبغي نقل تفاصيل 51% في Proof of Work حرفيًا إلى كل شبكة Proof of Stake.
+</p>
+
+<h2>ما الفرق بين Double Spending وسرقة العملات؟</h2>
+
+<p>
+هناك فرق مهم بين المفهومين.
+</p>
+
+<p>
+<strong>Double Spending</strong> يتعلق بمحاولة استخدام الرصيد نفسه في معاملات متعارضة أو محاولة جعل أكثر من إنفاق متعارض مقبولًا.
+</p>
+
+<p>
+أما <strong>سرقة العملات</strong> فتتعلق بالحصول على القدرة على التصرف في أصول شخص آخر دون إذنه، مثل الحصول على المفتاح الخاص أو اختراق نظام يحتفظ بمفاتيح المستخدم.
+</p>
+
+<p>
+قد تكون هناك علاقة بين الأمنين في بعض الهجمات، لكنهما ليسا المشكلة نفسها.
+</p>
+
+<h2>هل يمكن منع Double Spending بنسبة 100%؟</h2>
+
+<p>
+لا توجد عبارة واحدة تصلح لجميع شبكات البلوك تشين بمعنى "منع مطلق في كل ظرف".
+</p>
+
+<p>
+تعمل البروتوكولات على جعل الإنفاق المزدوج غير ممكن أو شديد الصعوبة وفق افتراضات الأمان الخاصة بها.
+</p>
+
+<p>
+إذا تمكن مهاجم من السيطرة على موارد إجماع مهمة أو استغلال ثغرة في البروتوكول أو النظام المحيط به، فقد تظهر مخاطر مختلفة.
+</p>
+
+<p>
+لذلك يجب فهم الأمان دائمًا ضمن افتراضات الشبكة وآلية الإجماع المستخدمة.
+</p>
+
+<h2>لماذا لا تقبل المنصات دائمًا المعاملات غير المؤكدة؟</h2>
+
+<p>
+المعاملة غير المؤكدة لم تدخل بعد في كتلة ضمن السلسلة المعتمدة.
+</p>
+
+<p>
+وقد توجد معاملات متعارضة أو تغيرات في حالة الشبكة قبل وصولها إلى مستوى أعلى من الثقة.
+</p>
+
+<p>
+لذلك قد تنتظر منصات التداول عددًا من التأكيدات قبل السماح باستخدام الإيداع.
+</p>
+
+<p>
+الهدف هو تقليل المخاطر المرتبطة بإعادة التنظيم والإنفاق المزدوج وغيرها من الحالات التي قد تؤثر في حالة المعاملة.
+</p>
+
+<h2>مثال مبسط على Double Spending</h2>
+
+<p>
+لنفترض أن أحمد يمتلك 1 وحدة من عملة رقمية.
+</p>
+
+<p>
+يرسل أحمد المعاملة الأولى إلى متجر لشراء منتج.
+</p>
+
+<p>
+في الوقت نفسه، يحاول إرسال معاملة ثانية تنفق الوحدة نفسها إلى عنوان آخر يملكه.
+</p>
+
+<p>
+أصبح لدينا الآن معاملتان متعارضتان تستخدمان الرصيد نفسه.
+</p>
+
+<p>
+لا تستطيع السلسلة النهائية الطبيعية اعتبار المعاملتين معًا إنفاقًا صحيحًا لنفس الرصيد.
+</p>
+
+<p>
+تحدد قواعد الشبكة وآلية الإجماع أي مسار ومعاملة يتم اعتمادهما، بينما يتم رفض أو استبعاد المعاملة المتعارضة وفق قواعد البروتوكول.
+</p>
+
+<h2>مثال على Double Spending باستخدام Reorg</h2>
+
+<p>
+لنفترض أن معاملة الدفع للمتجر دخلت في كتلة على السلسلة الحالية.
+</p>
+
+<p>
+إذا تمكن طرف ما في سيناريو هجومي من إنتاج أو فرض مسار بديل يحتوي على معاملة متعارضة، ثم أصبح المسار البديل هو المسار الذي تتبعه الشبكة وفق ظروف الهجوم، فقد يتم استبعاد الكتلة التي تحتوي على الدفع الأول.
+</p>
+
+<p>
+هذا هو السبب في أن إعادة التنظيمات العميقة قد تكون ذات أهمية كبيرة عند تحليل أمن الشبكة.
+</p>
+
+<p>
+لكن نجاح مثل هذا السيناريو يعتمد على تصميم الشبكة وموارد المهاجم وقواعد الإجماع وعمق إعادة التنظيم وعدة عوامل أخرى.
+</p>
+
+<h2>كيف تحمي الشركات نفسها من Double Spending؟</h2>
+
+<p>
+يمكن للخدمات التي تستقبل العملات الرقمية تقليل المخاطر من خلال اتباع إجراءات مناسبة، مثل:
+</p>
+
+<ul>
+    <li>عدم اعتبار المعاملات غير المؤكدة نهائية في الحالات عالية المخاطر.</li>
+    <li>انتظار عدد مناسب من التأكيدات حسب الشبكة والأصل.</li>
+    <li>استخدام آليات مراقبة للشبكة.</li>
+    <li>الاهتمام بحالات Reorganization.</li>
+    <li>فهم نموذج Finality الخاص بكل أصل.</li>
+    <li>عدم استخدام سياسة واحدة لجميع البلوك تشين.</li>
+</ul>
+
+<p>
+يجب أن تحدد كل خدمة سياسة التأكيدات والمخاطر بناءً على الأصل والشبكة وحالة الاستخدام.
+</p>
+
+<h2>هل Bitcoin تمنع Double Spending؟</h2>
+
+<p>
+تصميم Bitcoin يهدف إلى منع اعتماد معاملات متعارضة لنفس الرصيد في السلسلة المعتمدة، باستخدام التحقق والعقد وآلية Proof of Work وقواعد اختيار السلسلة والتأكيدات المتراكمة.
+</p>
+
+<p>
+لكن هذا لا يعني أن أي هجوم نظري أو عملي مستحيل تحت جميع الظروف.
+</p>
+
+<p>
+الأمان في Bitcoin يعتمد على افتراضات النظام، ومن بينها توزيع موارد التعدين وقواعد البروتوكول وصحة تنفيذ البرمجيات.
+</p>
+
+<p>
+يمكنك مراجعة:
+<a href="/academy/bitcoin/how-bitcoin-works">كيف يعمل Bitcoin؟</a>
+و
+<a href="/academy/bitcoin/bitcoin-mining">ما هو تعدين Bitcoin؟</a>
+لفهم هذه الجوانب بشكل أعمق.
+</p>
+
+<h2>Double Spending ليس هو Blockchain Fork</h2>
+
+<p>
+قد يظهر Fork مؤقت عندما توجد كتل متنافسة، لكن ذلك لا يعني بالضرورة وجود Double Spending.
+</p>
+
+<p>
+يمكن أن يحدث Fork طبيعي نتيجة إنتاج كتل متنافسة في وقت متقارب دون وجود محاولة لإنفاق الرصيد مرتين.
+</p>
+
+<p>
+أما Double Spending فهو يتعلق تحديدًا بوجود معاملات متعارضة تحاول استخدام الرصيد نفسه.
+</p>
+
+<p>
+يمكن أن ترتبط الحالتان في بعض السيناريوهات، خصوصًا عندما يتم استغلال إعادة تنظيم السلسلة، لكن المصطلحين لا يعنيان الشيء نفسه.
+</p>
+
+<h2>Double Spending وFinality في الأنظمة الحديثة</h2>
+
+<p>
+تختلف طريقة الوصول إلى Finality بين البلوك تشين.
+</p>
+
+<p>
+بعض الشبكات تعتمد على تأكيدات متراكمة توفر ثقة احتمالية متزايدة، بينما تستخدم شبكات أخرى آليات Finality أكثر صراحة.
+</p>
+
+<p>
+لذلك فإن مستوى المخاطر عند قبول معاملة يعتمد على الشبكة نفسها، وليس على كلمة "Blockchain" وحدها.
+</p>
+
+<p>
+هذه نقطة مهمة جدًا عند بناء منصات تداول أو خدمات دفع تتعامل مع أكثر من أصل رقمي.
+</p>
+
+<h2>الخلاصة</h2>
+
+<p>
+Double Spending هو محاولة استخدام الرصيد الرقمي نفسه في أكثر من معاملة متعارضة.
+</p>
+
+<p>
+تتعامل شبكات البلوك تشين مع هذه المشكلة من خلال التحقق من المعاملات، والعقد، وآليات الإجماع، وترتيب المعاملات، والتأكيدات أو آليات Finality بحسب تصميم الشبكة.
+</p>
+
+<p>
+يمكن أن ترتبط مخاطر Double Spending بـChain Reorganization، خصوصًا عندما يحاول مهاجم استبدال مسار من السلسلة يحتوي على معاملة بمسار آخر يحتوي على معاملة متعارضة.
+</p>
+
+<p>
+لكن Reorg الطبيعي لا يعني تلقائيًا وجود Double Spending أو هجوم.
+</p>
+
+<p>
+كما أن هجمات مثل Race Attack وFinney Attack وبعض سيناريوهات Majority Attack توضح لماذا يجب عدم التعامل مع المعاملات غير المؤكدة على أنها تتمتع دائمًا بنفس مستوى الأمان.
+</p>
+
+<p>
+وبعد فهم Double Spending، أصبح لدينا أساس جيد للانتقال إلى موضوعات أعمق في أمن البلوك تشين، مثل هجمات 51% وآليات حماية الشبكات والمفاهيم المرتبطة بالأمان الاقتصادي.
+</p>
+
+<h2>روابط مفيدة داخل أكاديمية AQL Crypto</h2>
+
+<ul>
+    <li><a href="/academy/blockchain">مسار Blockchain الكامل</a></li>
+    <li><a href="/academy/blockchain/what-is-blockchain">ما هي تقنية البلوك تشين؟</a></li>
+    <li><a href="/academy/blockchain/how-does-blockchain-work">كيف تعمل البلوك تشين؟</a></li>
+    <li><a href="/academy/blockchain/what-is-a-block">ما هي الكتلة Block؟</a></li>
+    <li><a href="/academy/blockchain/what-is-hash-function">ما هي دوال التجزئة Hash Functions؟</a></li>
+    <li><a href="/academy/blockchain/what-are-blockchain-nodes">ما هي العقد Nodes؟</a></li>
+    <li><a href="/academy/blockchain/what-is-blockchain-consensus">ما هي آلية الإجماع Consensus؟</a></li>
+    <li><a href="/academy/blockchain/what-is-blockchain-fork">ما هي Forks في البلوك تشين؟</a></li>
+    <li><a href="/academy/blockchain/what-is-blockchain-finality">ما هي Finality في البلوك تشين؟</a></li>
+    <li><a href="/academy/blockchain/what-is-chain-reorganization">ما هي Chain Reorganization؟</a></li>
+    <li><a href="/academy/bitcoin/how-bitcoin-works">كيف يعمل Bitcoin؟</a></li>
+    <li><a href="/academy/bitcoin/bitcoin-mining">ما هو تعدين Bitcoin؟</a></li>
+</ul>
+HTML,
+
+    'content_en' => <<<'HTML'
+<h2>What Is Double Spending in Blockchain?</h2>
+
+<p>
+<strong>Double Spending</strong> is an attempt to use the same digital balance in more than one conflicting transaction.
+</p>
+
+<p>
+This is one of the fundamental problems that cryptocurrency systems need to address because digital assets are represented and processed as data.
+</p>
+
+<p>
+In a traditional financial system, a central institution such as a bank can maintain account balances and prevent the same funds from being spent twice. In a blockchain, a distributed network must establish a consistent state of transactions without necessarily relying on one central authority.
+</p>
+
+<p>
+To understand Double Spending, it is useful to review:
+<a href="/academy/blockchain/what-is-blockchain">What Is Blockchain?</a>,
+<a href="/academy/blockchain/how-does-blockchain-work">How Does Blockchain Work?</a>,
+<a href="/academy/blockchain/what-are-blockchain-nodes">What Are Blockchain Nodes?</a>,
+<a href="/academy/blockchain/what-is-blockchain-consensus">What Is Blockchain Consensus?</a>,
+<a href="/academy/blockchain/what-is-blockchain-fork">What Is a Blockchain Fork?</a>,
+<a href="/academy/blockchain/what-is-blockchain-finality">What Is Blockchain Finality?</a>,
+and
+<a href="/academy/blockchain/what-is-chain-reorganization">What Is Chain Reorganization?</a>.
+</p>
+
+<h2>Why Is Double Spending a Problem?</h2>
+
+<p>
+Imagine that someone owns one unit of a digital currency.
+</p>
+
+<p>
+If the same unit could be sent to one person and then sent again to another person, two conflicting transactions would claim the same balance.
+</p>
+
+<p>
+If a network accepted both transactions as final, it would create a fundamental problem for digital ownership.
+</p>
+
+<p>
+The network therefore needs rules that determine which transaction can be accepted and which conflicting transaction cannot become part of the same final state.
+</p>
+
+<h2>Are Cryptocurrencies Copied During Double Spending?</h2>
+
+<p>
+No.
+</p>
+
+<p>
+Double Spending does not mean that someone physically copied a coin or that the blockchain simply duplicated the asset.
+</p>
+
+<p>
+The issue concerns using the same digital balance or state in conflicting transactions.
+</p>
+
+<p>
+For example, if a user has a balance that allows spending 1 BTC, the protocol does not normally allow two independent final transactions to spend that same BTC under the same state.
+</p>
+
+<h2>How Does Blockchain Prevent Double Spending?</h2>
+
+<p>
+Blockchain networks use a combination of mechanisms to prevent or reduce Double Spending risks. The exact mechanisms vary by network.
+</p>
+
+<p>
+Important elements include:
+</p>
+
+<ul>
+    <li>Transaction validation.</li>
+    <li>Nodes that enforce protocol rules.</li>
+    <li>Consensus mechanisms.</li>
+    <li>Transaction ordering within the chain.</li>
+    <li>Confirmations in networks with probabilistic finality.</li>
+    <li>Finality mechanisms in some blockchain systems.</li>
+</ul>
+
+<p>
+The central idea is that the network must reach a consistent state that determines which transaction is valid and which conflicting transaction cannot be accepted in that same state.
+</p>
+
+<h2>The Role of Nodes in Preventing Double Spending</h2>
+
+<p>
+<strong>Nodes</strong> play an important role in validating transactions and blocks according to protocol rules.
+</p>
+
+<p>
+When a new transaction reaches the network, nodes can check conditions such as:
+</p>
+
+<ul>
+    <li>Valid signatures or required authentication data.</li>
+    <li>Whether the transaction follows protocol rules.</li>
+    <li>Whether the transaction attempts to spend unavailable funds.</li>
+    <li>Whether the transaction conflicts with the current network state.</li>
+</ul>
+
+<p>
+If two conflicting transactions attempt to spend the same balance, they cannot both represent valid spending of that balance in the same final state.
+</p>
+
+<p>
+For more details, see
+<a href="/academy/blockchain/what-are-blockchain-nodes">What Are Blockchain Nodes?</a>.
+</p>
+
+<h2>The Role of Consensus in Preventing Double Spending</h2>
+
+<p>
+Transaction validation alone is not always enough because a distributed network may receive different transactions at different times.
+</p>
+
+<p>
+This is where <strong>Consensus</strong> becomes important.
+</p>
+
+<p>
+A consensus mechanism helps network participants agree on the state that should be accepted, including the ordering of blocks and transactions according to protocol rules.
+</p>
+
+<p>
+Bitcoin, for example, uses Proof of Work and protocol rules to determine which chain nodes should follow.
+</p>
+
+<p>
+Proof of Stake networks use different mechanisms involving validators and protocol-specific consensus rules.
+</p>
+
+<p>
+Not every blockchain uses the same method, so the consensus design of the specific network must be understood.
+</p>
+
+<h2>What Is the Relationship Between Double Spending and Confirmations?</h2>
+
+<p>
+Confirmations are particularly important in networks that rely on <strong>Probabilistic Finality</strong>.
+</p>
+
+<p>
+When a transaction is included in a block, it commonly has one confirmation. As additional blocks are added on top of it, the transaction becomes deeper in the chain.
+</p>
+
+<p>
+In a Proof of Work model such as Bitcoin, greater depth makes rewriting that part of the chain more difficult under the network's security assumptions.
+</p>
+
+<p>
+This is why exchanges and financial services may wait for a certain number of confirmations before treating a deposit as settled.
+</p>
+
+<p>
+The required number of confirmations is not universal across all assets or platforms.
+</p>
+
+<h2>What Is the Relationship Between Double Spending and Finality?</h2>
+
+<p>
+<strong>Finality</strong> describes a state in which a transaction or blockchain state becomes less subject to change under the network's finality model.
+</p>
+
+<p>
+In networks with explicit finality mechanisms, reorganizing a finalized state may be significantly more constrained under the protocol rules.
+</p>
+
+<p>
+Bitcoin instead provides increasing confidence through accumulated confirmations rather than relying on one simple finality moment for every situation.
+</p>
+
+<p>
+Understanding
+<a href="/academy/blockchain/what-is-blockchain-finality">Finality</a>
+therefore helps explain why Double Spending risks differ across blockchain networks.
+</p>
+
+<h2>What Is the Relationship Between Chain Reorganization and Double Spending?</h2>
+
+<p>
+<strong>Chain Reorganization</strong> is related to Double Spending because a reorganization can remove a block containing a transaction from the canonical chain.
+</p>
+
+<p>
+In a normal situation, the transaction may return to a pending state and potentially be included later.
+</p>
+
+<p>
+In an attack scenario, an attacker may attempt to exploit a reorganization by replacing a chain history containing one transaction with another history containing a conflicting transaction.
+</p>
+
+<p>
+This does not mean that every reorganization is Double Spending or that every reorganization is caused by an attack.
+</p>
+
+<p>
+For more details, see:
+<a href="/academy/blockchain/what-is-chain-reorganization">What Is Chain Reorganization?</a>.
+</p>
+
+<h2>What Is a Race Attack?</h2>
+
+<p>
+A <strong>Race Attack</strong> is a scenario in which an attacker attempts to broadcast two conflicting transactions quickly, hoping that different participants will see different transactions first.
+</p>
+
+<p>
+For example, an attacker may send one transaction to a merchant while attempting to send a conflicting transaction that spends the same balance elsewhere.
+</p>
+
+<p>
+If the merchant accepts the first transaction before sufficient confirmation, it may face a risk that the transaction is later replaced under the conditions of the attack and the network's rules.
+</p>
+
+<p>
+The practical feasibility of such attacks varies by network and by how transactions are accepted.
+</p>
+
+<h2>What Is a Finney Attack?</h2>
+
+<p>
+A <strong>Finney Attack</strong> is a known Proof of Work scenario involving an attacker who mines a block containing a transaction that spends funds and then attempts to use the same funds in another transaction before publishing the mined block in a particular way.
+</p>
+
+<p>
+The scenario relies on the attacker's ability to control the timing and ordering of the block and transaction and on the recipient accepting a transaction without sufficient confirmations.
+</p>
+
+<p>
+This illustrates why an unconfirmed transaction should not automatically be treated as having the same security level as a transaction buried deeper in the chain.
+</p>
+
+<h2>What Is a 51% Attack?</h2>
+
+<p>
+A <strong>51% Attack</strong> generally describes a situation in which a party or group controls enough of a blockchain's consensus resource—such as a large share of mining power in some Proof of Work networks—to influence chain selection.
+</p>
+
+<p>
+In Proof of Work, significant control over mining power can give an attacker greater ability to reorganize parts of the chain or carry out certain Double Spending scenarios against parties that accept transactions before sufficient confirmation.
+</p>
+
+<p>
+However, this does not mean that the attacker can do anything they want on the network.
+</p>
+
+<p>
+For example, controlling a large share of mining power does not automatically allow unlimited creation of coins or bypass every validation rule.
+</p>
+
+<p>
+The actual capabilities depend on the protocol and the specific attack.
+</p>
+
+<h2>Is a 51% Attack Possible in Proof of Stake?</h2>
+
+<p>
+Proof of Stake works differently because its consensus resource is not computational mining power. It is based on stake, validator participation, and protocol-specific rules.
+</p>
+
+<p>
+Some Proof of Stake networks use different terminology for consensus-control attacks and may have mechanisms such as penalties or slashing for certain malicious behavior.
+</p>
+
+<p>
+Therefore, Proof of Work assumptions about a 51% attack should not simply be transferred to every Proof of Stake network.
+</p>
+
+<h2>What Is the Difference Between Double Spending and Theft?</h2>
+
+<p>
+The two concepts are different.
+</p>
+
+<p>
+<strong>Double Spending</strong> concerns attempting to use the same balance in conflicting transactions or attempting to make multiple conflicting spends accepted.
+</p>
+
+<p>
+<strong>Theft</strong> involves obtaining the ability to control another person's assets without authorization, such as by obtaining a private key or compromising a system that controls user funds.
+</p>
+
+<p>
+The two security problems can interact in some situations, but they are not the same problem.
+</p>
+
+<h2>Can Double Spending Be Prevented 100%?</h2>
+
+<p>
+There is no single statement that means every blockchain can prevent every possible Double Spending scenario under every condition.
+</p>
+
+<p>
+Protocols are designed to make conflicting spending impossible or extremely difficult under their specific security assumptions.
+</p>
+
+<p>
+If an attacker gains significant control over consensus resources, exploits a protocol vulnerability, or compromises surrounding infrastructure, different risks may arise.
+</p>
+
+<p>
+Blockchain security should therefore always be understood in the context of the network's design and assumptions.
+</p>
+
+<h2>Why Don't Platforms Always Accept Unconfirmed Transactions?</h2>
+
+<p>
+An unconfirmed transaction has not yet been included in a block on the canonical chain.
+</p>
+
+<p>
+Conflicting transactions or changes in the network state may still occur before the transaction reaches a higher level of confidence.
+</p>
+
+<p>
+For this reason, exchanges may wait for multiple confirmations before allowing a deposit to be used.
+</p>
+
+<p>
+The goal is to reduce risks related to reorganizations, Double Spending, and other events that may affect transaction state.
+</p>
+
+<h2>A Simple Example of Double Spending</h2>
+
+<p>
+Suppose Ahmed owns one unit of a digital currency.
+</p>
+
+<p>
+Ahmed sends one transaction to a store to purchase a product.
+</p>
+
+<p>
+At the same time, he attempts to send a second transaction that spends the same unit to another address he controls.
+</p>
+
+<p>
+There are now two conflicting transactions attempting to spend the same balance.
+</p>
+
+<p>
+The final canonical chain cannot normally treat both as valid spending of the same balance.
+</p>
+
+<p>
+Network rules and the consensus mechanism determine which transaction and chain state are accepted, while the conflicting transaction is rejected or excluded according to protocol rules.
+</p>
+
+<h2>An Example of Double Spending Through a Reorg</h2>
+
+<p>
+Suppose a payment to a merchant is included in a block on the current chain.
+</p>
+
+<p>
+If an attacker, under an attack scenario, can produce or enforce an alternative chain containing a conflicting transaction and cause that alternative chain to become the one followed by the network, the block containing the original payment could be excluded.
+</p>
+
+<p>
+This is why deep reorganizations can be important when analyzing blockchain security.
+</p>
+
+<p>
+However, the success of such a scenario depends on the network design, attacker resources, consensus rules, reorganization depth, and other factors.
+</p>
+
+<h2>How Can Businesses Reduce Double Spending Risks?</h2>
+
+<p>
+Services that accept cryptocurrency can reduce risks through appropriate procedures, such as:
+</p>
+
+<ul>
+    <li>Not treating unconfirmed transactions as final for high-risk situations.</li>
+    <li>Waiting for an appropriate number of confirmations based on the asset and network.</li>
+    <li>Monitoring blockchain activity.</li>
+    <li>Monitoring for chain reorganizations.</li>
+    <li>Understanding the finality model of each asset.</li>
+    <li>Avoiding one confirmation policy for every blockchain.</li>
+</ul>
+
+<p>
+Each service should establish confirmation and risk policies based on the asset, network, and use case.
+</p>
+
+<h2>Does Bitcoin Prevent Double Spending?</h2>
+
+<p>
+Bitcoin is designed to prevent conflicting transactions from both becoming accepted spending of the same funds in the canonical chain, using transaction validation, nodes, Proof of Work, chain-selection rules, and accumulated confirmations.
+</p>
+
+<p>
+This does not mean that every theoretical or practical attack is impossible under all circumstances.
+</p>
+
+<p>
+Bitcoin's security depends on system assumptions, including the distribution of mining resources, protocol rules, and correct software implementation.
+</p>
+
+<p>
+You can review:
+<a href="/academy/bitcoin/how-bitcoin-works">How Does Bitcoin Work?</a>
+and
+<a href="/academy/bitcoin/bitcoin-mining">What Is Bitcoin Mining?</a>
+for more background.
+</p>
+
+<h2>Double Spending Is Not the Same as a Blockchain Fork</h2>
+
+<p>
+A temporary Fork can occur when competing blocks exist, but that does not necessarily mean Double Spending occurred.
+</p>
+
+<p>
+A normal temporary fork can result from competing blocks being produced close together without anyone attempting to spend the same balance twice.
+</p>
+
+<p>
+Double Spending specifically concerns conflicting transactions that attempt to use the same balance.
+</p>
+
+<p>
+The two concepts can be related in some scenarios, especially when a chain reorganization is exploited, but they are not synonymous.
+</p>
+
+<h2>Double Spending and Finality in Modern Blockchain Systems</h2>
+
+<p>
+Blockchain networks differ in how they achieve Finality.
+</p>
+
+<p>
+Some rely on accumulated confirmations that provide increasing probabilistic confidence, while others use more explicit finality mechanisms.
+</p>
+
+<p>
+Therefore, the risk level associated with accepting a transaction depends on the specific blockchain rather than on the word "Blockchain" alone.
+</p>
+
+<p>
+This distinction is particularly important when building exchanges or payment services that support multiple digital assets.
+</p>
+
+<h2>Conclusion</h2>
+
+<p>
+Double Spending is an attempt to use the same digital balance in more than one conflicting transaction.
+</p>
+
+<p>
+Blockchain networks address this problem through transaction validation, nodes, consensus mechanisms, transaction ordering, confirmations, or finality mechanisms depending on the network design.
+</p>
+
+<p>
+Double Spending risks can be related to Chain Reorganization, especially when an attacker attempts to replace a chain history containing one transaction with another history containing a conflicting transaction.
+</p>
+
+<p>
+However, a normal reorganization does not automatically mean that Double Spending occurred or that the network was attacked.
+</p>
+
+<p>
+Attacks such as Race Attacks, Finney Attacks, and certain majority-control scenarios demonstrate why unconfirmed transactions should not always be treated as having the same security level as transactions buried deeper in the chain.
+</p>
+
+<p>
+After understanding Double Spending, we have a strong foundation for studying deeper blockchain security topics, including 51% attacks, economic security, and mechanisms used to protect decentralized networks.
+</p>
+
+<h2>Related AQL Crypto Academy Lessons</h2>
+
+<ul>
+    <li><a href="/academy/blockchain">Complete Blockchain Learning Path</a></li>
+    <li><a href="/academy/blockchain/what-is-blockchain">What Is Blockchain?</a></li>
+    <li><a href="/academy/blockchain/how-does-blockchain-work">How Does Blockchain Work?</a></li>
+    <li><a href="/academy/blockchain/what-is-a-block">What Is a Block?</a></li>
+    <li><a href="/academy/blockchain/what-is-hash-function">What Are Hash Functions?</a></li>
+    <li><a href="/academy/blockchain/what-are-blockchain-nodes">What Are Blockchain Nodes?</a></li>
+    <li><a href="/academy/blockchain/what-is-blockchain-consensus">What Is Blockchain Consensus?</a></li>
+    <li><a href="/academy/blockchain/what-is-blockchain-fork">What Is a Blockchain Fork?</a></li>
+    <li><a href="/academy/blockchain/what-is-blockchain-finality">What Is Blockchain Finality?</a></li>
+    <li><a href="/academy/blockchain/what-is-chain-reorganization">What Is Chain Reorganization?</a></li>
+    <li><a href="/academy/bitcoin/how-bitcoin-works">How Does Bitcoin Work?</a></li>
+    <li><a href="/academy/bitcoin/bitcoin-mining">What Is Bitcoin Mining?</a></li>
+</ul>
+HTML,
+
+    'image' => null,
+
+    'seo_title' => null,
+    'seo_title_ar' => 'ما هو Double Spending في البلوك تشين؟ شرح الإنفاق المزدوج | AQL Crypto',
+    'seo_title_en' => 'What Is Double Spending in Blockchain? A Beginner’s Guide | AQL Crypto',
+
+    'meta_description' => null,
+    'meta_description_ar' => 'شرح مبسط لمفهوم Double Spending أو الإنفاق المزدوج في البلوك تشين، وكيف تمنعه العقد والإجماع والتأكيدات وFinality، مع شرح Race Attack وFinney Attack و51% Attack.',
+    'meta_description_en' => 'Learn what Double Spending means in blockchain, how nodes, consensus, confirmations, and finality help prevent it, plus Race Attacks, Finney Attacks, and 51% attacks.',
+
+    'faq_ar' => [
+        [
+            'question' => 'ما هو Double Spending في البلوك تشين؟',
+            'answer' => 'هو محاولة استخدام الرصيد الرقمي نفسه في أكثر من معاملة متعارضة، بحيث يحاول المستخدم إنفاق الرصيد نفسه مرتين.'
+        ],
+        [
+            'question' => 'هل Double Spending يعني نسخ العملات الرقمية؟',
+            'answer' => 'لا. المشكلة لا تتعلق بنسخ العملة نفسها، وإنما بمحاولة استخدام الرصيد أو الحالة الرقمية نفسها في معاملات متعارضة.'
+        ],
+        [
+            'question' => 'كيف تمنع البلوك تشين Double Spending؟',
+            'answer' => 'تعتمد الشبكات على التحقق من المعاملات، والعقد Nodes، وآلية الإجماع، وترتيب المعاملات، والتأكيدات أو آليات Finality بحسب تصميم الشبكة.'
+        ],
+        [
+            'question' => 'ما دور Nodes في منع الإنفاق المزدوج؟',
+            'answer' => 'تتحقق العقد من المعاملات والكتل وفق قواعد البروتوكول، بما في ذلك التحقق من صلاحية المعاملة وعدم تعارضها مع حالة الشبكة.'
+        ],
+        [
+            'question' => 'ما دور Consensus في منع Double Spending؟',
+            'answer' => 'يساعد الإجماع المشاركين في الشبكة على الاتفاق على الحالة التي يجب اعتمادها وترتيب الكتل والمعاملات وفق قواعد البروتوكول.'
+        ],
+        [
+            'question' => 'ما علاقة Confirmations بالإنفاق المزدوج؟',
+            'answer' => 'في الشبكات ذات النهائية الاحتمالية، تؤدي زيادة التأكيدات إلى زيادة عمق المعاملة في السلسلة، ما يجعل تغيير تاريخها أكثر صعوبة وفق افتراضات أمان الشبكة.'
+        ],
+        [
+            'question' => 'ما علاقة Finality بـ Double Spending؟',
+            'answer' => 'تحدد Finality درجة أو حالة تصبح عندها المعاملة أو الحالة أقل قابلية للتغيير وفق نموذج الشبكة، وتختلف آليات النهائية بين البلوك تشين.'
+        ],
+        [
+            'question' => 'هل كل Chain Reorganization تعني Double Spending؟',
+            'answer' => 'لا. يمكن أن تحدث Reorg بشكل طبيعي بسبب كتل متنافسة، بينما Double Spending يتعلق تحديدًا بمحاولة استخدام الرصيد نفسه في معاملات متعارضة.'
+        ],
+        [
+            'question' => 'ما هو Race Attack؟',
+            'answer' => 'هو سيناريو يحاول فيه المهاجم إرسال معاملات متعارضة بسرعة، على أمل أن يقبل طرف معين معاملة قبل وجود تأكيدات كافية.'
+        ],
+        [
+            'question' => 'ما هو Finney Attack؟',
+            'answer' => 'هو سيناريو معروف في Proof of Work يعتمد على تعدين كتلة تحتوي على معاملة ثم محاولة استخدام الرصيد نفسه في معاملة أخرى قبل نشر الكتلة بطريقة معينة.'
+        ],
+        [
+            'question' => 'ما هو 51% Attack؟',
+            'answer' => 'هو سيناريو يمتلك فيه طرف أو مجموعة سيطرة كبيرة على مورد الإجماع في شبكة معينة، مثل نسبة كبيرة من قوة التعدين في بعض شبكات Proof of Work، ما قد يمنحهم قدرة أكبر على التأثير في السلسلة.'
+        ],
+        [
+            'question' => 'هل يمكن منع Double Spending بشكل مطلق؟',
+            'answer' => 'البروتوكولات مصممة لجعل الإنفاق المزدوج غير ممكن أو شديد الصعوبة وفق افتراضات الأمان الخاصة بها، لكن مستوى الحماية يعتمد على تصميم الشبكة وآلية الإجماع والظروف المحيطة بها.'
+        ],
+    ],
+
+    'faq_en' => [
+        [
+            'question' => 'What is Double Spending in blockchain?',
+            'answer' => 'Double Spending is an attempt to use the same digital balance in more than one conflicting transaction.'
+        ],
+        [
+            'question' => 'Does Double Spending mean that cryptocurrencies are copied?',
+            'answer' => 'No. The issue is not physically copying a coin. It concerns attempting to use the same digital balance or state in conflicting transactions.'
+        ],
+        [
+            'question' => 'How does blockchain prevent Double Spending?',
+            'answer' => 'Blockchain networks use transaction validation, nodes, consensus mechanisms, transaction ordering, confirmations, and sometimes explicit finality mechanisms depending on the network.'
+        ],
+        [
+            'question' => 'What is the role of nodes in preventing Double Spending?',
+            'answer' => 'Nodes validate transactions and blocks according to protocol rules, including checking transaction validity and whether transactions conflict with the network state.'
+        ],
+        [
+            'question' => 'What is the role of consensus in preventing Double Spending?',
+            'answer' => 'Consensus helps network participants agree on the state that should be accepted and on the ordering of blocks and transactions according to protocol rules.'
+        ],
+        [
+            'question' => 'What is the relationship between confirmations and Double Spending?',
+            'answer' => 'In networks with probabilistic finality, additional confirmations increase transaction depth and generally make changing its history more difficult under the network’s security assumptions.'
+        ],
+        [
+            'question' => 'What is the relationship between Finality and Double Spending?',
+            'answer' => 'Finality describes a state in which a transaction or blockchain state becomes less subject to change under the network’s finality model. Finality mechanisms vary between blockchains.'
+        ],
+        [
+            'question' => 'Does every Chain Reorganization mean Double Spending occurred?',
+            'answer' => 'No. Reorganizations can happen naturally because of competing blocks, while Double Spending specifically concerns conflicting attempts to spend the same balance.'
+        ],
+        [
+            'question' => 'What is a Race Attack?',
+            'answer' => 'A Race Attack is a scenario where an attacker quickly broadcasts conflicting transactions and hopes a recipient accepts one before sufficient confirmation.'
+        ],
+        [
+            'question' => 'What is a Finney Attack?',
+            'answer' => 'A Finney Attack is a known Proof of Work scenario involving a privately mined block and an attempt to spend the same funds in another transaction before publishing the block under specific conditions.'
+        ],
+        [
+            'question' => 'What is a 51% Attack?',
+            'answer' => 'It generally describes a situation where a party or group controls enough of a network’s consensus resource, such as significant mining power in some Proof of Work networks, to gain greater influence over chain selection.'
+        ],
+        [
+            'question' => 'Can Double Spending be prevented absolutely?',
+            'answer' => 'Protocols are designed to make Double Spending impossible or extremely difficult under their security assumptions, but the level of protection depends on the network design, consensus mechanism, and surrounding conditions.'
+        ],
+    ],
+
+    'status' => 'published',
+    'sort_order' => 10,
+    'published_at' => now(),
+],
 ];
 
 foreach ($blockchainArticles as $article) {
