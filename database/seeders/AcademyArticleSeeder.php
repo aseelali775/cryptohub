@@ -21850,6 +21850,10298 @@ HTML,
     'sort_order' => 1,
     'published_at' => now(),
 ],
+
+[
+    'title' => 'كيف يعمل DeFi؟ شرح التمويل اللامركزي والعقود الذكية',
+    'title_ar' => 'كيف يعمل DeFi؟ شرح التمويل اللامركزي والعقود الذكية',
+    'title_en' => 'How Does DeFi Work? A Beginner’s Guide to Decentralized Finance',
+
+    'slug' => 'how-does-defi-work',
+
+    'excerpt' => 'شرح مبسط لكيفية عمل التمويل اللامركزي DeFi، ودور البلوك تشين والعقود الذكية والمحافظ والتطبيقات اللامركزية في تنفيذ الخدمات المالية.',
+    'excerpt_ar' => 'شرح مبسط لكيفية عمل التمويل اللامركزي DeFi، ودور البلوك تشين والعقود الذكية والمحافظ والتطبيقات اللامركزية في تنفيذ الخدمات المالية.',
+    'excerpt_en' => 'Learn how DeFi works through blockchains, smart contracts, wallets, decentralized applications, liquidity pools, and on-chain transactions.',
+
+    'content' => null,
+
+    'content_ar' => <<<'HTML'
+<h2>مقدمة: كيف يعمل DeFi؟</h2>
+
+<p>
+بعد أن تعرفنا في المقال السابق على <a href="/academy/defi">ما هو DeFi والتمويل اللامركزي</a>،
+تأتي الخطوة التالية لفهم الطريقة التي تعمل بها هذه المنظومة على أرض الواقع.
+</p>
+
+<p>
+التمويل اللامركزي، أو <strong>DeFi</strong>، ليس تطبيقاً واحداً ولا شبكة بلوك تشين مستقلة بالضرورة،
+بل هو مجموعة من البروتوكولات والتطبيقات والخدمات التي تستخدم تقنيات البلوك تشين والعقود الذكية
+لتوفير وظائف مالية بطريقة مختلفة عن الأنظمة المالية التقليدية.
+</p>
+
+<p>
+تعتمد طريقة عمل DeFi على عدة مكونات مترابطة، من أهمها:
+<strong>البلوك تشين، العقود الذكية، المحافظ الرقمية، التطبيقات اللامركزية DApps،
+والأصول الرقمية والبروتوكولات المالية.</strong>
+</p>
+
+<p>
+وفي هذا الدليل من <strong>AQL Crypto Academy</strong> سنشرح هذه المكونات خطوة بخطوة،
+وكيف يمكن لمستخدم أن يتفاعل مع بروتوكول DeFi دون الحاجة إلى المرور بالطريقة التقليدية
+التي تعتمد على مؤسسة مالية مركزية لتنفيذ كل عملية.
+</p>
+
+<h2>ما المكونات الأساسية التي يعتمد عليها DeFi؟</h2>
+
+<p>
+لفهم DeFi بشكل صحيح، من المفيد النظر إليه كمنظومة تتكون من عدة طبقات تعمل معاً.
+ولا يعني ذلك أن كل بروتوكول DeFi يستخدم المكونات نفسها أو يعمل بالطريقة نفسها،
+لكن معظم التطبيقات تعتمد على مجموعة من العناصر الأساسية.
+</p>
+
+<ul>
+    <li><strong>البلوك تشين:</strong> توفر البنية التحتية التي تسجل المعاملات والبيانات.</li>
+    <li><strong>العقود الذكية:</strong> تنفذ القواعد البرمجية للبروتوكول.</li>
+    <li><strong>المحافظ:</strong> تسمح للمستخدمين بالتحكم في مفاتيحهم والتفاعل مع التطبيقات.</li>
+    <li><strong>التطبيقات اللامركزية DApps:</strong> توفر واجهة للمستخدم للتعامل مع البروتوكولات.</li>
+    <li><strong>الأصول الرقمية:</strong> تستخدم للدفع أو التداول أو الإقراض أو توفير السيولة حسب البروتوكول.</li>
+    <li><strong>الأوراكل Oracles:</strong> قد توفر بيانات خارج البلوك تشين تحتاج إليها بعض التطبيقات.</li>
+    <li><strong>الحوكمة:</strong> تستخدم في بعض البروتوكولات لاتخاذ قرارات بشأن قواعد أو تطوير النظام.</li>
+</ul>
+
+<h2>1. دور البلوك تشين في DeFi</h2>
+
+<p>
+البلوك تشين هي إحدى أهم طبقات البنية التحتية التي تعتمد عليها تطبيقات DeFi.
+فهي شبكة موزعة تحتفظ بسجل للمعاملات والعمليات التي تحدث عليها.
+</p>
+
+<p>
+إذا كنت تريد فهم هذه الطبقة بشكل أعمق، يمكنك الرجوع إلى درس
+<a href="/academy/blockchain/what-is-blockchain">ما هي البلوك تشين</a>
+ثم متابعة درس
+<a href="/academy/blockchain/how-does-blockchain-work">كيف تعمل البلوك تشين</a>.
+</p>
+
+<p>
+عندما يتفاعل المستخدم مع بروتوكول DeFi، فإن بعض العمليات الناتجة عن هذا التفاعل
+قد يتم تسجيلها على البلوك تشين، بحسب تصميم البروتوكول ونوع العملية.
+</p>
+
+<p>
+وهذا يختلف عن قاعدة البيانات الداخلية التقليدية لمؤسسة مالية، لأن بيانات البلوك تشين
+يمكن التحقق منها باستخدام أدوات الشبكة العامة عندما تكون المعاملات والبيانات مكشوفة على السلسلة.
+</p>
+
+<h2>2. ما دور العقود الذكية؟</h2>
+
+<p>
+<strong>العقد الذكي Smart Contract</strong> هو برنامج يتم نشره على شبكة بلوك تشين،
+ويحتوي على مجموعة من القواعد والتعليمات البرمجية التي تحدد كيفية التعامل مع العمليات
+والأصول وفقاً لما يسمح به تصميم البروتوكول.
+</p>
+
+<p>
+في الأنظمة المالية التقليدية، قد تقوم مؤسسة أو شركة أو وسيط بتنفيذ قواعد العملية
+والتحقق من الشروط واتخاذ الإجراءات المطلوبة.
+أما في بعض تطبيقات DeFi، فيتم تحويل جزء من هذه الوظائف إلى منطق برمجي
+يعمل على البلوك تشين.
+</p>
+
+<p>
+لكن من المهم عدم فهم ذلك على أنه يعني أن العقد الذكي معصوم من الأخطاء.
+فالعقد الذكي هو برنامج، والبرامج يمكن أن تحتوي على أخطاء أو ثغرات أو تصميمات غير آمنة.
+</p>
+
+<h2>مثال مبسط على العقد الذكي</h2>
+
+<p>
+تخيل بروتوكولاً يسمح للمستخدمين بإيداع أصل رقمي وفق شروط محددة.
+يمكن أن يحتوي العقد الذكي على قواعد تحدد:
+</p>
+
+<ul>
+    <li>ما الأصول المقبولة.</li>
+    <li>كيفية تسجيل الإيداعات.</li>
+    <li>كيفية حساب بعض الرسوم أو الفوائد وفق تصميم البروتوكول.</li>
+    <li>الشروط المطلوبة للسحب.</li>
+    <li>كيفية التعامل مع بعض حالات المخاطر أو التصفية.</li>
+</ul>
+
+<p>
+عندما يرسل المستخدم معاملة مستوفية للشروط، يقوم العقد الذكي بتنفيذ المنطق البرمجي
+الذي صُمم من أجله، بدلاً من أن يقوم موظف في مؤسسة مالية بتنفيذ العملية يدوياً.
+</p>
+
+<h2>3. كيف تتفاعل المحفظة مع DeFi؟</h2>
+
+<p>
+تستخدم المحافظ الرقمية عادةً كوسيلة للمستخدم لإدارة مفاتيحه والتوقيع على المعاملات
+والتفاعل مع تطبيقات البلوك تشين.
+</p>
+
+<p>
+في نموذج الحفظ الذاتي <strong>Self-Custody</strong>، يحتفظ المستخدم بمفاتيح التحكم في أصوله
+بدلاً من تسليمها إلى منصة مركزية.
+</p>
+
+<p>
+وتختلف المحافظ في تصميمها وخصائصها ومستوى الأمان الذي توفره، لذلك يجب على المستخدم
+فهم كيفية حماية المفاتيح والعبارات السرية قبل التفاعل مع أي بروتوكول.
+</p>
+
+<p>
+ولفهم مفهوم المحافظ بصورة عامة، يمكنك قراءة درس
+<a href="/academy/bitcoin/bitcoin-wallets">محافظ البيتكوين</a>.
+ورغم أن المثال يتعلق بالبيتكوين، فإن المفاهيم الأساسية المتعلقة بالمفاتيح والمحافظ
+مهمة أيضاً عند التعامل مع شبكات وتطبيقات أخرى.
+</p>
+
+<h2>4. ما هي التطبيقات اللامركزية DApps؟</h2>
+
+<p>
+<strong>DApp</strong> اختصار لـ <strong>Decentralized Application</strong>،
+أي تطبيق لامركزي يتفاعل عادةً مع عقود ذكية أو خدمات تعمل على شبكة بلوك تشين.
+</p>
+
+<p>
+قد تبدو واجهة التطبيق للمستخدم مثل أي موقع ويب عادي، لكن العمليات التي تتم خلف الواجهة
+قد تتضمن التفاعل مباشرةً مع عقود ذكية على البلوك تشين.
+</p>
+
+<p>
+وهنا يجب التفريق بين <strong>واجهة التطبيق</strong> وبين <strong>البروتوكول نفسه</strong>.
+فقد تكون واجهة المستخدم مستضافة بطريقة مركزية، بينما تكون بعض وظائف البروتوكول
+منفذة بواسطة عقود ذكية على البلوك تشين.
+</p>
+
+<h2>5. ماذا يحدث عندما يتصل المستخدم بتطبيق DeFi؟</h2>
+
+<p>
+يمكن تبسيط العملية في عدة خطوات عامة:
+</p>
+
+<ol>
+    <li>يفتح المستخدم واجهة تطبيق DeFi.</li>
+    <li>يقوم بربط محفظته إذا كان التطبيق يتطلب ذلك.</li>
+    <li>يختار العملية التي يريد تنفيذها.</li>
+    <li>تقوم الواجهة بإعداد معاملة أو مجموعة من التعليمات المناسبة.</li>
+    <li>يوقع المستخدم على المعاملة باستخدام محفظته عندما تكون التوقيعات مطلوبة.</li>
+    <li>تُرسل المعاملة إلى شبكة البلوك تشين.</li>
+    <li>تقوم الشبكة بمعالجة المعاملة وفق قواعدها.</li>
+    <li>إذا تم قبول المعاملة وتنفيذها، يتم تسجيل النتيجة على الشبكة بحسب تصميم البروتوكول.</li>
+</ol>
+
+<p>
+هذه صورة مبسطة؛ فبعض العمليات قد تتضمن عدة معاملات أو عقود ذكية أو مصادر بيانات خارجية،
+وقد تختلف التفاصيل كثيراً من بروتوكول إلى آخر.
+</p>
+
+<h2>6. كيف تعمل منصات التداول اللامركزي DEXs؟</h2>
+
+<p>
+من أشهر تطبيقات DeFi ما يعرف باسم <strong>البورصات اللامركزية DEXs</strong>.
+وهي بروتوكولات تسمح للمستخدمين بتبادل بعض الأصول الرقمية وفق آلية التداول التي يعتمدها البروتوكول.
+</p>
+
+<p>
+في بعض نماذج DEX، لا يعتمد التداول على دفتر أوامر تقليدي تديره شركة مركزية،
+بل تستخدم المنصة نموذجاً يعتمد على <strong>مجموعات السيولة Liquidity Pools</strong>
+وخوارزميات تحدد أسعار التبادل وفق قواعد معينة.
+</p>
+
+<p>
+لكن ليس كل DEX يعمل بالطريقة نفسها؛ فهناك نماذج مختلفة لدفاتر الأوامر،
+وصناع السوق الآليين AMMs، وآليات أخرى.
+</p>
+
+<h2>7. ما هي مجموعات السيولة Liquidity Pools؟</h2>
+
+<p>
+مجموعة السيولة هي مجموعة من الأصول يتم توفيرها لبروتوكول وفق قواعد محددة،
+ويمكن أن تستخدمها بعض الأنظمة لتسهيل عمليات التداول أو غيرها من الوظائف.
+</p>
+
+<p>
+في نماذج معينة، يقوم مزودو السيولة بإيداع أصول في عقد ذكي، ويستخدم البروتوكول
+هذه السيولة لتنفيذ عمليات المبادلة بين المستخدمين.
+</p>
+
+<p>
+قد يحصل مزودو السيولة على جزء من الرسوم وفق قواعد البروتوكول، لكن توفير السيولة
+ليس خالياً من المخاطر. من المخاطر المعروفة في بعض النماذج
+<strong>الخسارة غير الدائمة Impermanent Loss</strong>، إضافة إلى مخاطر العقود الذكية
+وتغير أسعار الأصول والسيولة وغيرها.
+</p>
+
+<h2>8. كيف يعمل الإقراض والاقتراض في DeFi؟</h2>
+
+<p>
+توجد بروتوكولات DeFi تتيح وظائف مرتبطة بالإقراض والاقتراض.
+وفي بعض هذه النماذج، يستطيع المستخدم إيداع أصل رقمي في البروتوكول،
+بينما يمكن لمستخدم آخر الاقتراض وفق شروط وآليات يحددها البروتوكول.
+</p>
+
+<p>
+قد تعتمد هذه الأنظمة على الضمانات، ونسب معينة للقرض إلى قيمة الضمان،
+وآليات للتصفية عندما لا يعود الضمان كافياً وفق قواعد النظام.
+</p>
+
+<p>
+وهذه الآلية تختلف عن القرض البنكي التقليدي، لكن ذلك لا يعني أنها خالية من المخاطر
+أو أنها تضمن للمستخدم نتيجة مالية معينة.
+</p>
+
+<h2>9. ما دور الـ Oracles في DeFi؟</h2>
+
+<p>
+بعض بروتوكولات DeFi تحتاج إلى بيانات لا توجد أصلاً داخل البلوك تشين،
+مثل أسعار بعض الأصول أو معلومات خارجية أخرى.
+</p>
+
+<p>
+هنا يمكن استخدام <strong>Oracles</strong> أو خدمات توفير البيانات لتمرير معلومات
+إلى العقود الذكية وفق آلية محددة.
+</p>
+
+<p>
+وتعتبر الأوراكل جزءاً مهماً من بعض تطبيقات DeFi لأن العقد الذكي لا يستطيع ببساطة
+الوصول إلى كل البيانات الخارجية كما يفعل برنامج يعمل على الإنترنت التقليدي.
+</p>
+
+<p>
+ولهذا فإن وجود مشكلة في مصدر البيانات أو طريقة إدخالها إلى البروتوكول
+يمكن أن يؤثر في بعض العمليات التي تعتمد عليها.
+</p>
+
+<h2>10. كيف تتم معاملة DeFi على البلوك تشين؟</h2>
+
+<p>
+عندما يقوم المستخدم بعملية تتطلب معاملة على الشبكة، فإن المعاملة تحتاج عادةً إلى توقيع
+من المحفظة وإرسالها إلى الشبكة.
+</p>
+
+<p>
+بعد ذلك تمر المعاملة بعملية التحقق والمعالجة وفق قواعد الشبكة.
+ولفهم المفاهيم المتعلقة بالمعاملات والشبكة، من المفيد دراسة:
+<a href="/academy/blockchain/what-are-blockchain-nodes">عقد البلوك تشين</a>
+و
+<a href="/academy/blockchain/what-is-blockchain-consensus">آليات الإجماع</a>.
+</p>
+
+<p>
+وبحسب الشبكة، قد تحتاج المعاملة إلى دفع رسوم للشبكة، وغالباً ما ترتبط هذه الرسوم
+بموارد الشبكة المطلوبة لمعالجة المعاملة.
+</p>
+
+<h2>11. هل كل شيء في DeFi يحدث على البلوك تشين؟</h2>
+
+<p>
+ليس بالضرورة.
+</p>
+
+<p>
+مصطلح DeFi يشير إلى منظومة واسعة، وقد تستخدم بعض البروتوكولات مكونات تعمل على السلسلة
+وأخرى خارجها أو تعتمد على خدمات مساعدة.
+</p>
+
+<p>
+كما قد تحتوي بعض المشاريع على واجهات مركزية، أو خدمات بيانات، أو أنظمة حوكمة،
+أو مفاتيح إدارية، أو جسور بين الشبكات، أو مكونات أخرى.
+</p>
+
+<p>
+لذلك فإن وصف مشروع بأنه "DeFi" لا يعني تلقائياً أن كل جزء منه لامركزي بالكامل.
+يجب النظر إلى التصميم الفعلي لكل بروتوكول.
+</p>
+
+<h2>12. ماذا تعني الشفافية في DeFi؟</h2>
+
+<p>
+من مزايا العديد من شبكات البلوك تشين أن البيانات المسجلة على السلسلة يمكن فحصها
+باستخدام مستكشفات الشبكة وأدوات تحليل البلوك تشين.
+</p>
+
+<p>
+وهذا يمكن أن يمنح المستخدمين والباحثين قدرة أكبر على فحص بعض المعاملات والأرصدة
+والعمليات مقارنة بأنظمة تعتمد بالكامل على قواعد بيانات خاصة.
+</p>
+
+<p>
+لكن الشفافية لا تعني بالضرورة أن كل معلومة متاحة، ولا تعني أن فهم البيانات على السلسلة
+أمر بسيط دائماً. كما أن هوية الشخص الحقيقي خلف عنوان المحفظة ليست بالضرورة ظاهرة
+بشكل مباشر من العنوان نفسه.
+</p>
+
+<h2>13. ما معنى Composability في DeFi؟</h2>
+
+<p>
+من المفاهيم المهمة في DeFi مفهوم <strong>Composability</strong>،
+والذي يشير بصورة مبسطة إلى إمكانية بناء تطبيق أو بروتوكول باستخدام مكونات وبروتوكولات
+أخرى موجودة بالفعل على البنية التحتية نفسها.
+</p>
+
+<p>
+لهذا السبب يستخدم أحياناً تعبير <strong>Money Legos</strong> لوصف بعض منظومات DeFi،
+حيث يمكن تركيب خدمات مختلفة معاً لإنشاء وظائف جديدة.
+</p>
+
+<p>
+لكن هذه المرونة قد تضيف أيضاً مخاطر؛ فإذا كان بروتوكول يعتمد على بروتوكول آخر،
+فإن مشكلة في المكون الأساسي قد تنتقل آثارها إلى التطبيقات التي تعتمد عليه.
+</p>
+
+<h2>مثال مبسط: تبديل أصل رقمي عبر DEX</h2>
+
+<p>
+لنفترض أن مستخدماً يريد تبديل أصل رقمي بآخر باستخدام بروتوكول تداول لامركزي.
+يمكن تبسيط العملية بالشكل التالي:
+</p>
+
+<ol>
+    <li>يدخل المستخدم إلى واجهة DEX.</li>
+    <li>يربط محفظته بالتطبيق.</li>
+    <li>يحدد الأصل الذي يريد مبادلته والأصل الذي يريد الحصول عليه.</li>
+    <li>تعرض الواجهة تفاصيل العملية المتوقعة وفق حالة السوق والبروتوكول.</li>
+    <li>يوافق المستخدم على العملية أو على السماح للعقد باستخدام أصل معين إذا كان ذلك مطلوباً.</li>
+    <li>يوقع المعاملة.</li>
+    <li>تُرسل المعاملة إلى البلوك تشين.</li>
+    <li>ينفذ العقد الذكي العملية وفق شروط البروتوكول.</li>
+    <li>بعد تأكيد المعاملة، تظهر النتيجة في المحفظة أو على الشبكة.</li>
+</ol>
+
+<p>
+هذا مثال تعليمي مبسط، وقد تختلف الخطوات والرسوم وطريقة التسعير وحماية المستخدم
+من الانزلاق السعري وغيرها من التفاصيل بين بروتوكول وآخر.
+</p>
+
+<h2>DeFi مقابل CeFi: ما الفرق في طريقة العمل؟</h2>
+
+<p>
+<strong>CeFi</strong> أو التمويل المركزي يعتمد عادةً على مؤسسات أو شركات مركزية
+تقوم بدور الوسيط أو الحافظ أو المشغل للخدمة.
+</p>
+
+<p>
+أما DeFi فيحاول نقل جزء من وظائف هذه الخدمات إلى بروتوكولات تعتمد على العقود الذكية
+والبلوك تشين.
+</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>العنصر</th>
+            <th>DeFi</th>
+            <th>CeFi</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>تنفيذ بعض القواعد</td>
+            <td>قد يتم بواسطة عقود ذكية</td>
+            <td>عادةً تديره مؤسسة أو شركة</td>
+        </tr>
+        <tr>
+            <td>حفظ الأصول</td>
+            <td>قد يكون ذاتي الحفظ حسب التصميم</td>
+            <td>قد تتولى المنصة أو المؤسسة الحفظ</td>
+        </tr>
+        <tr>
+            <td>الوصول إلى الخدمة</td>
+            <td>قد يكون مفتوحاً بحسب البروتوكول</td>
+            <td>قد يتطلب حساباً وإجراءات محددة</td>
+        </tr>
+        <tr>
+            <td>الشفافية</td>
+            <td>قد تكون بعض البيانات والعمليات على السلسلة</td>
+            <td>تعتمد بدرجة أكبر على أنظمة المؤسسة الداخلية</td>
+        </tr>
+        <tr>
+            <td>نقطة التحكم</td>
+            <td>تختلف حسب مستوى اللامركزية في البروتوكول</td>
+            <td>توجد جهة مركزية واضحة عادةً</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>
+هذا الجدول يوضح الفكرة العامة فقط، لأن تصميمات DeFi وCeFi تختلف كثيراً من مشروع إلى آخر.
+</p>
+
+<h2>هل DeFi يعني عدم وجود أي وسيط؟</h2>
+
+<p>
+ليس بالضرورة.
+</p>
+
+<p>
+قد يقلل DeFi من الاعتماد على بعض الوسطاء التقليديين، لكنه لا يلغي جميع مصادر الثقة
+أو الأطراف والخدمات المساعدة.
+</p>
+
+<p>
+قد يعتمد البروتوكول، على سبيل المثال، على أوراكل للأسعار، أو واجهة مستخدم،
+أو جسور بين الشبكات، أو نظام حوكمة، أو مفاتيح إدارية، أو خدمات خارجية.
+</p>
+
+<p>
+لذلك يجب تقييم بنية كل بروتوكول بدلاً من افتراض أن كلمة "لامركزي" تعني عدم وجود
+أي جهة أو مكون مركزي على الإطلاق.
+</p>
+
+<h2>هل DeFi آمن تلقائياً لأن العقود الذكية تعمل على البلوك تشين؟</h2>
+
+<p>
+لا.
+</p>
+
+<p>
+البلوك تشين قد توفر خصائص أمنية مهمة، لكن العقد الذكي نفسه يمكن أن يحتوي على أخطاء برمجية
+أو ثغرات في التصميم.
+</p>
+
+<p>
+كما يمكن أن تظهر مخاطر في الأوراكل، أو إدارة المفاتيح، أو الحوكمة، أو الجسور،
+أو السيولة، أو واجهة المستخدم، أو طريقة تعامل المستخدم مع محفظته.
+</p>
+
+<p>
+ولهذا فإن استخدام بروتوكول DeFi يتطلب فهم المخاطر المرتبطة به، وعدم اعتبار وجود عقد ذكي
+دليلاً تلقائياً على الأمان.
+</p>
+
+<h2>أهم المخاطر في طريقة عمل DeFi</h2>
+
+<h3>1. مخاطر العقود الذكية</h3>
+
+<p>
+قد تحتوي العقود الذكية على أخطاء أو ثغرات يمكن استغلالها أو قد تؤدي إلى نتائج غير متوقعة.
+</p>
+
+<h3>2. مخاطر الأوراكل</h3>
+
+<p>
+إذا اعتمد البروتوكول على بيانات خارجية، فإن جودة وآلية توفير هذه البيانات قد تكون عاملاً مهماً
+في سلامة بعض العمليات.
+</p>
+
+<h3>3. مخاطر المفاتيح والإدارة</h3>
+
+<p>
+قد تحتوي بعض البروتوكولات على صلاحيات إدارية أو مفاتيح يمكنها تنفيذ وظائف معينة.
+ويختلف مستوى هذه الصلاحيات وآليات حمايتها بين المشاريع.
+</p>
+
+<h3>4. مخاطر السيولة</h3>
+
+<p>
+قد تصبح بعض الأصول أو الأسواق أقل سيولة، مما قد يؤثر في قدرة المستخدم على تنفيذ عملية
+بالسعر المتوقع.
+</p>
+
+<h3>5. مخاطر التصفية</h3>
+
+<p>
+في بعض بروتوكولات الاقتراض، يمكن تصفية الضمان عندما لا يفي المستخدم بالشروط المحددة
+وفق آلية البروتوكول.
+</p>
+
+<h3>6. الخسارة غير الدائمة</h3>
+
+<p>
+قد يتعرض بعض مزودي السيولة إلى خسارة غير دائمة مقارنة بمجرد الاحتفاظ بالأصول،
+وذلك نتيجة تغير الأسعار ونموذج مجموعة السيولة.
+</p>
+
+<h3>7. التصيد والاحتيال</h3>
+
+<p>
+قد يحاول المحتالون إنشاء مواقع أو عقود مزيفة أو روابط ضارة لخداع المستخدم وسرقة أصوله
+أو مفاتيحه.
+</p>
+
+<h3>8. مخاطر الجسور بين الشبكات</h3>
+
+<p>
+عند نقل الأصول أو البيانات بين شبكات مختلفة باستخدام جسور، قد تظهر مخاطر إضافية مرتبطة
+بتصميم الجسر والعقود والجهات أو المكونات التي يعتمد عليها.
+</p>
+
+<h3>9. المخاطر التنظيمية</h3>
+
+<p>
+القوانين واللوائح المتعلقة بالأصول الرقمية والخدمات المالية تختلف بين الدول وقد تتغير مع الوقت،
+وقد تؤثر في بعض البروتوكولات والخدمات والمستخدمين.
+</p>
+
+<h2>هل يحتاج DeFi إلى العملات الرقمية؟</h2>
+
+<p>
+غالباً ما تعتمد تطبيقات DeFi على أصول رقمية أو رموز تعمل على شبكات البلوك تشين،
+لكن طبيعة الأصول واستخداماتها تختلف حسب البروتوكول.
+</p>
+
+<p>
+فقد تستخدم الأصول كوسيلة للتبادل أو كضمان أو لتوفير السيولة أو للوصول إلى وظائف معينة.
+ولا يعني ذلك أن كل مشروع DeFi يستخدم النوع نفسه من الأصول أو النموذج الاقتصادي نفسه.
+</p>
+
+<h2>هل DeFi مجهول الهوية؟</h2>
+
+<p>
+لا ينبغي وصف DeFi بأنه مجهول الهوية بشكل مطلق.
+</p>
+
+<p>
+في كثير من شبكات البلوك تشين العامة، تكون المعاملات مرتبطة بعناوين يمكن رؤيتها وفحصها،
+لكن العنوان لا يكشف بالضرورة هوية الشخص الحقيقية بصورة مباشرة.
+</p>
+
+<p>
+كما يمكن استخدام تقنيات وأدوات تحليل مختلفة لربط بعض الأنماط والعناوين بمعلومات خارج السلسلة.
+لذلك من الأدق الحديث عن <strong>شفافية على السلسلة وخصوصية متفاوتة</strong> بدلاً من افتراض
+وجود إخفاء كامل للهوية.
+</p>
+
+<h2>الخلاصة</h2>
+
+<p>
+يعمل DeFi من خلال مجموعة من المكونات التي تتكامل معاً، وأهمها البلوك تشين والعقود الذكية
+والمحافظ والتطبيقات اللامركزية والأصول الرقمية ومصادر البيانات المساعدة.
+</p>
+
+<p>
+الفكرة الأساسية هي أن جزءاً من القواعد والعمليات التي كانت تنفذ تقليدياً من خلال مؤسسات مركزية
+يمكن تنفيذها أو تنسيقها بواسطة برمجيات تعمل على شبكات البلوك تشين.
+</p>
+
+<p>
+لكن مستوى اللامركزية والشفافية والأمان يختلف من بروتوكول إلى آخر، ولا ينبغي افتراض أن جميع
+مشاريع DeFi متساوية في التصميم أو المخاطر.
+</p>
+
+<p>
+إذا كنت تريد فهم الأساس التقني الذي تعتمد عليه هذه التطبيقات، ننصح بمتابعة دروس
+<a href="/academy/blockchain/what-is-blockchain">ما هي البلوك تشين</a>،
+و<a href="/academy/blockchain/how-does-blockchain-work">كيف تعمل البلوك تشين</a>،
+و<a href="/academy/blockchain/what-are-blockchain-nodes">عقد البلوك تشين</a>،
+و<a href="/academy/blockchain/what-is-blockchain-consensus">آليات الإجماع</a>.
+</p>
+
+<div class="academy-note">
+    <strong>تنبيه تعليمي:</strong>
+    هذا المحتوى مقدم لأغراض تعليمية فقط، ولا يُعد نصيحة مالية أو استثمارية أو قانونية.
+    استخدام بروتوكولات DeFi قد ينطوي على مخاطر كبيرة، ويجب فهم آلية كل بروتوكول
+    وشروطه ومخاطره قبل استخدامه.
+</div>
+
+
+HTML,
+
+    'content_en' => <<<'HTML'
+<h2>Introduction: How Does DeFi Work?</h2>
+
+<p>
+After learning <a href="/academy/defi">what DeFi is and what decentralized finance means</a>,
+the next step is to understand how these systems actually work.
+</p>
+
+<p>
+<strong>DeFi</strong>, short for <strong>Decentralized Finance</strong>, is not a single application
+or necessarily a single blockchain network. It is a broad ecosystem of protocols, applications,
+and financial services that use blockchain networks and smart contracts to provide financial
+functions in ways that differ from traditional financial systems.
+</p>
+
+<p>
+At a high level, DeFi combines several components, including
+<strong>blockchains, smart contracts, wallets, decentralized applications (DApps),
+digital assets, and supporting protocols and data services.</strong>
+</p>
+
+<p>
+In this AQL Crypto Academy guide, we will explain these components step by step
+and show how a user can interact with a DeFi protocol without relying on the traditional
+process in which a centralized financial institution handles every part of the transaction.
+</p>
+
+<h2>What Are the Main Components of DeFi?</h2>
+
+<p>
+A useful way to understand DeFi is to think of it as a system made up of several connected layers.
+Not every DeFi protocol uses exactly the same components, but many rely on a combination
+of the following:
+</p>
+
+<ul>
+    <li><strong>Blockchain:</strong> provides the infrastructure where transactions and data can be recorded.</li>
+    <li><strong>Smart contracts:</strong> execute the protocol's programmed rules.</li>
+    <li><strong>Wallets:</strong> allow users to control keys and interact with blockchain applications.</li>
+    <li><strong>DApps:</strong> provide interfaces through which users interact with protocols.</li>
+    <li><strong>Digital assets:</strong> can be used for trading, collateral, liquidity, payments, or other functions.</li>
+    <li><strong>Oracles:</strong> may provide external data that some protocols need.</li>
+    <li><strong>Governance:</strong> may be used by some protocols to make decisions about rules or development.</li>
+</ul>
+
+<h2>1. The Role of Blockchain in DeFi</h2>
+
+<p>
+Blockchain networks are one of the main infrastructure layers behind many DeFi applications.
+A blockchain maintains a distributed record of transactions and other network activity.
+</p>
+
+<p>
+If you want to understand this layer in more detail, start with
+<a href="/academy/blockchain/what-is-blockchain">what blockchain is</a>
+and then continue with
+<a href="/academy/blockchain/how-does-blockchain-work">how blockchain works</a>.
+</p>
+
+<p>
+When a user interacts with a DeFi protocol, some of the resulting operations may be recorded
+on the blockchain, depending on the protocol's architecture and the type of operation involved.
+</p>
+
+<p>
+This differs from a traditional private database maintained by a financial institution because
+blockchain data can often be independently inspected through public network tools when the
+relevant information is available on-chain.
+</p>
+
+<h2>2. What Is the Role of Smart Contracts?</h2>
+
+<p>
+A <strong>smart contract</strong> is a program deployed on a blockchain network.
+It contains programmed rules and instructions that determine how certain operations
+are processed according to the protocol's design.
+</p>
+
+<p>
+In traditional financial systems, an institution, company, or intermediary may execute rules,
+verify conditions, and process transactions.
+In some DeFi applications, part of these functions can instead be implemented through
+software running on a blockchain.
+</p>
+
+<p>
+However, this does not mean that smart contracts are automatically secure.
+A smart contract is software, and software can contain bugs, vulnerabilities, or design flaws.
+</p>
+
+<h2>A Simple Smart Contract Example</h2>
+
+<p>
+Imagine a protocol that allows users to deposit a digital asset under predefined conditions.
+Its smart contract might contain rules defining:
+</p>
+
+<ul>
+    <li>which assets are accepted;</li>
+    <li>how deposits are recorded;</li>
+    <li>how certain fees or returns are calculated according to the protocol design;</li>
+    <li>which conditions are required for withdrawals;</li>
+    <li>how certain risk or liquidation conditions are handled.</li>
+</ul>
+
+<p>
+When a user submits a transaction that satisfies the contract's rules,
+the smart contract executes its programmed logic rather than requiring a traditional
+financial employee to manually process the operation.
+</p>
+
+<h2>3. How Does a Wallet Interact With DeFi?</h2>
+
+<p>
+Digital wallets are commonly used to manage keys, sign transactions, and interact
+with blockchain applications.
+</p>
+
+<p>
+In a <strong>self-custody</strong> model, users control the keys that authorize access
+to their assets instead of handing custody to a centralized platform.
+</p>
+
+<p>
+Wallets differ in their design, security features, and risks. Users should understand
+how private keys and recovery phrases work before interacting with DeFi applications.
+</p>
+
+<p>
+For a general introduction to wallet concepts, see
+<a href="/academy/bitcoin/bitcoin-wallets">Bitcoin wallets</a>.
+Although that lesson uses Bitcoin as its example, many of the basic concepts
+around keys and wallet security are also relevant to other blockchain ecosystems.
+</p>
+
+<h2>4. What Are DApps?</h2>
+
+<p>
+<strong>DApp</strong> stands for <strong>Decentralized Application</strong>.
+A DApp typically provides a user interface that interacts with smart contracts
+or other blockchain-based services.
+</p>
+
+<p>
+To the user, a DApp may look similar to an ordinary website. However, some of the
+operations performed through its interface may directly interact with smart contracts
+on a blockchain.
+</p>
+
+<p>
+It is important to distinguish the <strong>application interface</strong> from
+the <strong>underlying protocol</strong>. A user interface may be hosted in a centralized
+environment while some protocol functions are executed through smart contracts on-chain.
+</p>
+
+<h2>5. What Happens When a User Connects to a DeFi Application?</h2>
+
+<p>
+The general process can be simplified into several steps:
+</p>
+
+<ol>
+    <li>The user opens a DeFi application interface.</li>
+    <li>The user connects a wallet when the application requires it.</li>
+    <li>The user selects the desired operation.</li>
+    <li>The interface prepares a transaction or set of instructions.</li>
+    <li>The user signs the transaction with the wallet when a signature is required.</li>
+    <li>The transaction is submitted to the blockchain network.</li>
+    <li>The network processes the transaction according to its rules.</li>
+    <li>If accepted and executed, the result is recorded on-chain according to the protocol design.</li>
+</ol>
+
+<p>
+This is a simplified model. Some operations may involve multiple transactions,
+multiple smart contracts, external data sources, or additional infrastructure.
+</p>
+
+<h2>6. How Do Decentralized Exchanges (DEXs) Work?</h2>
+
+<p>
+One of the most common DeFi applications is the <strong>decentralized exchange (DEX)</strong>.
+DEX protocols allow users to exchange certain digital assets according to the trading mechanism
+implemented by the protocol.
+</p>
+
+<p>
+Some DEX designs do not rely on a traditional order book operated by a centralized company.
+Instead, they may use <strong>liquidity pools</strong> and automated market maker (AMM)
+mechanisms to facilitate swaps and determine prices according to programmed rules.
+</p>
+
+<p>
+Not every DEX works the same way. Different protocols may use order books, AMMs,
+or other liquidity and trading mechanisms.
+</p>
+
+<h2>7. What Are Liquidity Pools?</h2>
+
+<p>
+A liquidity pool is a collection of assets supplied to a protocol under predefined rules.
+Depending on the design, the pool can be used to facilitate trading or other protocol functions.
+</p>
+
+<p>
+In some models, liquidity providers deposit assets into a smart contract,
+and the protocol uses that liquidity to facilitate swaps between users.
+</p>
+
+<p>
+Liquidity providers may receive a portion of protocol fees according to the rules of the system,
+but providing liquidity involves risks. These can include
+<strong>impermanent loss</strong>, smart contract risk, asset price changes,
+liquidity risk, and other protocol-specific risks.
+</p>
+
+<h2>8. How Does DeFi Lending and Borrowing Work?</h2>
+
+<p>
+Some DeFi protocols provide lending and borrowing functions.
+In certain models, users can deposit digital assets into a protocol,
+while other users can borrow according to rules defined by the protocol.
+</p>
+
+<p>
+These systems may use collateral, loan-to-value requirements, and liquidation mechanisms
+when the collateral no longer satisfies the required conditions.
+</p>
+
+<p>
+This structure differs from traditional bank lending, but that does not make it risk-free
+or guarantee a particular financial outcome.
+</p>
+
+<h2>9. What Is the Role of Oracles in DeFi?</h2>
+
+<p>
+Some DeFi protocols need information that does not originate directly from the blockchain,
+such as asset prices or other external data.
+</p>
+
+<p>
+<strong>Oracles</strong> or data-provider systems can be used to deliver external information
+to smart contracts through a specific mechanism.
+</p>
+
+<p>
+Oracles are important in some DeFi systems because a smart contract cannot simply access
+every external internet data source in the same way that a traditional web application can.
+</p>
+
+<p>
+As a result, problems with a data source or with the mechanism used to deliver the data
+can affect operations that depend on it.
+</p>
+
+<h2>10. How Is a DeFi Transaction Processed on a Blockchain?</h2>
+
+<p>
+When a user performs an operation that requires an on-chain transaction,
+the transaction normally needs to be signed by the wallet and submitted to the network.
+</p>
+
+<p>
+The transaction then goes through the network's validation and processing mechanisms.
+To understand the underlying infrastructure, you can study
+<a href="/academy/blockchain/what-are-blockchain-nodes">blockchain nodes</a>
+and
+<a href="/academy/blockchain/what-is-blockchain-consensus">blockchain consensus</a>.
+</p>
+
+<p>
+Depending on the blockchain, the transaction may require a network fee.
+Such fees are generally related to the resources required to process transactions
+under that network's fee mechanism.
+</p>
+
+<h2>11. Does Everything in DeFi Happen On-Chain?</h2>
+
+<p>
+Not necessarily.
+</p>
+
+<p>
+DeFi is a broad category, and some protocols may combine on-chain components
+with off-chain services or supporting infrastructure.
+</p>
+
+<p>
+Projects may also use centralized interfaces, data services, governance systems,
+administrative keys, cross-chain bridges, or other supporting components.
+</p>
+
+<p>
+Therefore, calling a project "DeFi" does not automatically mean that every component
+is fully decentralized. The actual architecture of each protocol matters.
+</p>
+
+<h2>12. What Does Transparency Mean in DeFi?</h2>
+
+<p>
+One of the characteristics of many public blockchains is that on-chain transactions
+and data can be inspected through blockchain explorers and analytical tools.
+</p>
+
+<p>
+This can give users and researchers greater ability to inspect certain transactions,
+balances, and protocol activity than systems that rely entirely on private databases.
+</p>
+
+<p>
+However, transparency does not mean that every piece of information is public,
+nor does it mean that on-chain data is always easy to interpret.
+The real-world identity behind a wallet address is also not necessarily visible directly
+from the address itself.
+</p>
+
+<h2>13. What Does Composability Mean in DeFi?</h2>
+
+<p>
+An important DeFi concept is <strong>composability</strong>.
+In simple terms, it refers to the ability to build applications or protocols
+using existing components and protocols within the same blockchain ecosystem.
+</p>
+
+<p>
+This is why the phrase <strong>money legos</strong> is sometimes used to describe
+parts of the DeFi ecosystem: different services can potentially be combined
+to create new functionality.
+</p>
+
+<p>
+However, this flexibility can also create additional risk.
+If one protocol depends on another, a problem in the underlying component
+may affect applications that depend on it.
+</p>
+
+<h2>A Simple Example: Swapping Tokens Through a DEX</h2>
+
+<p>
+Suppose a user wants to exchange one digital asset for another through a decentralized exchange.
+The process can be simplified as follows:
+</p>
+
+<ol>
+    <li>The user opens a DEX interface.</li>
+    <li>The user connects a wallet.</li>
+    <li>The user selects the asset to exchange and the asset to receive.</li>
+    <li>The interface displays expected transaction details based on the protocol and market conditions.</li>
+    <li>The user approves the operation or grants token permission when required.</li>
+    <li>The user signs the transaction.</li>
+    <li>The transaction is submitted to the blockchain.</li>
+    <li>The smart contract executes the operation according to the protocol rules.</li>
+    <li>After confirmation, the result can be reflected in the wallet and on-chain records.</li>
+</ol>
+
+<p>
+This is only an educational example. Actual steps, fees, pricing mechanisms,
+slippage protection, and other details vary between protocols.
+</p>
+
+<h2>DeFi vs. CeFi: How Are They Different?</h2>
+
+<p>
+<strong>CeFi</strong>, or centralized finance, generally relies on centralized companies
+or institutions that perform roles such as intermediaries, custodians, or service operators.
+</p>
+
+<p>
+DeFi attempts to move some of these functions into blockchain-based protocols
+and smart contracts.
+</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Element</th>
+            <th>DeFi</th>
+            <th>CeFi</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Execution of some rules</td>
+            <td>May be handled by smart contracts</td>
+            <td>Usually handled by a centralized institution</td>
+        </tr>
+        <tr>
+            <td>Asset custody</td>
+            <td>May be self-custodied depending on the design</td>
+            <td>May be held by the platform or institution</td>
+        </tr>
+        <tr>
+            <td>Access</td>
+            <td>May be open depending on the protocol</td>
+            <td>May require an account and specific procedures</td>
+        </tr>
+        <tr>
+            <td>Transparency</td>
+            <td>Some activity may be recorded on-chain</td>
+            <td>More activity may depend on internal institutional systems</td>
+        </tr>
+        <tr>
+            <td>Control structure</td>
+            <td>Varies according to the protocol's level of decentralization</td>
+            <td>Usually has a clearly identifiable central operator</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>
+This table provides a general comparison only. Actual DeFi and CeFi designs vary significantly.
+</p>
+
+<h2>Does DeFi Eliminate Every Intermediary?</h2>
+
+<p>
+Not necessarily.
+</p>
+
+<p>
+DeFi may reduce reliance on some traditional intermediaries, but it does not eliminate
+every source of trust or every supporting party.
+</p>
+
+<p>
+A protocol may depend on an oracle, user interface, cross-chain bridge,
+governance system, administrative keys, or other external services.
+</p>
+
+<p>
+For this reason, each protocol should be evaluated according to its actual architecture
+rather than assuming that the word "decentralized" means that every component is
+completely decentralized.
+</p>
+
+<h2>Is DeFi Automatically Secure Because It Uses Smart Contracts?</h2>
+
+<p>
+No.
+</p>
+
+<p>
+A blockchain can provide important security properties, but the smart contracts themselves
+can contain software bugs, vulnerabilities, or design flaws.
+</p>
+
+<p>
+Risks can also arise from oracles, key management, governance, bridges, liquidity,
+interfaces, or user behavior.
+</p>
+
+<p>
+Using a smart contract should therefore never be treated as automatic proof that
+a protocol is safe.
+</p>
+
+<h2>Main Risks in DeFi</h2>
+
+<h3>1. Smart Contract Risk</h3>
+
+<p>
+Smart contracts can contain coding errors or vulnerabilities that may be exploited
+or produce unexpected outcomes.
+</p>
+
+<h3>2. Oracle Risk</h3>
+
+<p>
+When a protocol relies on external data, the quality and delivery mechanism
+of that data can affect the safety of certain operations.
+</p>
+
+<h3>3. Administrative and Key Risks</h3>
+
+<p>
+Some protocols have administrative privileges or keys that can perform specific functions.
+The scope and security of these privileges differ between projects.
+</p>
+
+<h3>4. Liquidity Risk</h3>
+
+<p>
+Some assets or markets may become less liquid, affecting a user's ability to execute
+transactions at an expected price.
+</p>
+
+<h3>5. Liquidation Risk</h3>
+
+<p>
+In some lending protocols, collateral can be liquidated when a user's position
+no longer meets the required conditions.
+</p>
+
+<h3>6. Impermanent Loss</h3>
+
+<p>
+Some liquidity providers can experience impermanent loss compared with simply holding
+the underlying assets, depending on price movements and the design of the liquidity pool.
+</p>
+
+<h3>7. Phishing and Scams</h3>
+
+<p>
+Attackers may create fake websites, malicious contracts, or deceptive links
+to trick users into giving away assets, permissions, or sensitive wallet information.
+</p>
+
+<h3>8. Cross-Chain Bridge Risk</h3>
+
+<p>
+Moving assets or information between different blockchain networks through bridges
+can introduce additional risks related to bridge design, contracts, and supporting components.
+</p>
+
+<h3>9. Regulatory Risk</h3>
+
+<p>
+Digital-asset and financial regulations differ across jurisdictions and can change over time,
+potentially affecting some protocols, services, and users.
+</p>
+
+<h2>Does DeFi Require Cryptocurrency?</h2>
+
+<p>
+DeFi applications generally use blockchain-native digital assets or tokens,
+but the exact assets and their functions vary by protocol.
+</p>
+
+<p>
+Assets may be used for exchange, collateral, liquidity, payments, governance,
+or access to particular functions.
+</p>
+
+<p>
+This does not mean that every DeFi project uses the same assets or economic model.
+</p>
+
+<h2>Is DeFi Anonymous?</h2>
+
+<p>
+DeFi should not be described as completely anonymous.
+</p>
+
+<p>
+On many public blockchains, transactions are associated with addresses that can be viewed
+and analyzed, but an address does not necessarily reveal the real-world identity
+of the person controlling it.
+</p>
+
+<p>
+Blockchain analytics and other information sources can sometimes connect addresses
+or transaction patterns with information outside the blockchain.
+It is therefore more accurate to discuss <strong>on-chain transparency and varying degrees
+of privacy</strong> rather than assuming complete anonymity.
+</p>
+
+<h2>Conclusion</h2>
+
+<p>
+DeFi works through a combination of blockchain networks, smart contracts, wallets,
+decentralized applications, digital assets, and supporting data and infrastructure.
+</p>
+
+<p>
+The core idea is that some functions traditionally handled by centralized financial
+institutions can be implemented or coordinated through software operating on blockchain networks.
+</p>
+
+<p>
+However, decentralization, transparency, and security vary significantly between protocols.
+Users should not assume that all DeFi projects have the same architecture or risk profile.
+</p>
+
+<p>
+To understand the technical foundations behind these applications, continue with
+<a href="/academy/blockchain/what-is-blockchain">what blockchain is</a>,
+<a href="/academy/blockchain/how-does-blockchain-work">how blockchain works</a>,
+<a href="/academy/blockchain/what-are-blockchain-nodes">blockchain nodes</a>,
+and <a href="/academy/blockchain/what-is-blockchain-consensus">blockchain consensus</a>.
+</p>
+
+<div class="academy-note">
+    <strong>Educational disclaimer:</strong>
+    This content is provided for educational purposes only and does not constitute
+    financial, investment, or legal advice. DeFi protocols can involve significant risks.
+    Users should understand the mechanics, terms, and risks of a protocol before using it.
+</div>
+
+
+HTML,
+
+    'image' => null,
+
+    'seo_title' => null,
+    'seo_title_ar' => 'كيف يعمل DeFi؟ شرح التمويل اللامركزي والعقود الذكية | AQL Crypto Academy',
+    'seo_title_en' => 'How Does DeFi Work? Smart Contracts & DApps | AQL Crypto Academy',
+
+    'meta_description' => null,
+    'meta_description_ar' => 'تعرف على كيفية عمل DeFi والتمويل اللامركزي، ودور البلوك تشين والعقود الذكية والمحافظ وDApps وDEXs ومجموعات السيولة، مع شرح أهم المخاطر.',
+    'meta_description_en' => 'Learn how DeFi works, including blockchains, smart contracts, wallets, DApps, DEXs, liquidity pools, oracles, and the main risks of decentralized finance.',
+
+    'faq_ar' => [
+        [
+            'question' => 'كيف يعمل DeFi بشكل مبسط؟',
+            'answer' => 'يعتمد DeFi على البلوك تشين والعقود الذكية والمحافظ والتطبيقات اللامركزية لتنفيذ بعض الوظائف المالية وفق قواعد برمجية مسجلة أو منفذة على الشبكة.'
+        ],
+        [
+            'question' => 'ما دور العقود الذكية في DeFi؟',
+            'answer' => 'العقود الذكية هي برامج تعمل على البلوك تشين وتنفذ القواعد التي صمم البروتوكول للعمل وفقها، مثل تسجيل الإيداعات أو تنفيذ عمليات المبادلة أو إدارة بعض وظائف الإقراض.'
+        ],
+        [
+            'question' => 'هل كل DeFi لامركزي بالكامل؟',
+            'answer' => 'لا. مستوى اللامركزية يختلف بين البروتوكولات، وقد يعتمد المشروع على واجهات مركزية أو أوراكل أو مفاتيح إدارية أو جسور أو خدمات أخرى.'
+        ],
+        [
+            'question' => 'هل DeFi آمن؟',
+            'answer' => 'لا يمكن اعتبار DeFi آمناً تلقائياً. توجد مخاطر مرتبطة بالعقود الذكية والأوراكل والسيولة والمفاتيح الإدارية والتصفية والتصيد وغيرها، وتختلف المخاطر من بروتوكول إلى آخر.'
+        ],
+        [
+            'question' => 'ما هي DApps في DeFi؟',
+            'answer' => 'DApps هي تطبيقات لامركزية توفر واجهة يمكن للمستخدم من خلالها التفاعل مع العقود الذكية أو الخدمات القائمة على البلوك تشين.'
+        ],
+        [
+            'question' => 'ما هي مجموعات السيولة؟',
+            'answer' => 'مجموعات السيولة هي مجموعات من الأصول يوفرها المستخدمون للبروتوكول وفق قواعد محددة، ويمكن استخدامها في بعض أنظمة DeFi لتسهيل عمليات التداول أو وظائف أخرى.'
+        ],
+        [
+            'question' => 'هل DeFi مجهول الهوية؟',
+            'answer' => 'ليس بالضرورة. كثير من شبكات البلوك تشين العامة تعرض عناوين ومعاملات يمكن تحليلها، لكن العنوان لا يكشف بالضرورة هوية صاحبه الحقيقية مباشرة.'
+        ],
+        [
+            'question' => 'هل يحتاج DeFi إلى العملات الرقمية؟',
+            'answer' => 'تعتمد معظم تطبيقات DeFi على أصول رقمية أو رموز تعمل على شبكات البلوك تشين، لكن نوع الأصول واستخداماتها تختلف حسب البروتوكول.'
+        ]
+    ],
+
+    'faq_en' => [
+        [
+            'question' => 'How does DeFi work in simple terms?',
+            'answer' => 'DeFi uses blockchains, smart contracts, wallets, and decentralized applications to provide certain financial functions according to programmed rules executed or recorded on blockchain networks.'
+        ],
+        [
+            'question' => 'What is the role of smart contracts in DeFi?',
+            'answer' => 'Smart contracts are blockchain-based programs that execute the rules defined by a protocol, such as recording deposits, processing swaps, or managing certain lending functions.'
+        ],
+        [
+            'question' => 'Is all DeFi fully decentralized?',
+            'answer' => 'No. The level of decentralization varies between protocols, and some projects may rely on centralized interfaces, oracles, administrative keys, bridges, or other supporting services.'
+        ],
+        [
+            'question' => 'Is DeFi safe?',
+            'answer' => 'DeFi is not automatically safe. Risks can involve smart contracts, oracles, liquidity, administrative keys, liquidations, phishing, and other protocol-specific factors.'
+        ],
+        [
+            'question' => 'What are DApps in DeFi?',
+            'answer' => 'DApps are decentralized applications that provide interfaces through which users can interact with smart contracts or other blockchain-based services.'
+        ],
+        [
+            'question' => 'What are liquidity pools?',
+            'answer' => 'Liquidity pools are collections of assets supplied to a protocol under predefined rules and can be used by some DeFi systems to facilitate trading or other functions.'
+        ],
+        [
+            'question' => 'Is DeFi anonymous?',
+            'answer' => 'Not necessarily. Many public blockchains expose addresses and transactions that can be analyzed, although a wallet address does not necessarily reveal the real-world identity of its owner directly.'
+        ],
+        [
+            'question' => 'Does DeFi require cryptocurrency?',
+            'answer' => 'Most DeFi applications use digital assets or tokens on blockchain networks, but the specific assets and their functions vary by protocol.'
+        ]
+    ],
+
+    'status' => 'published',
+    'sort_order' => 2,
+    'published_at' => now(),
+],
+[
+    'title' => 'ما هي منصات التداول اللامركزي (DEX)؟ شرح DEX وعمليات Swap للمبتدئين',
+    'title_ar' => 'ما هي منصات التداول اللامركزي (DEX)؟ شرح DEX وعمليات Swap للمبتدئين',
+    'title_en' => 'What Is a Decentralized Exchange (DEX)? A Beginner’s Guide to DEXs and Swaps',
+
+    'slug' => 'what-is-a-decentralized-exchange-dex',
+
+    'excerpt' => 'تعرف على منصات التداول اللامركزي DEX، وكيف تعمل عمليات Swap ومجمعات السيولة والعقود الذكية، وما الفرق بينها وبين منصات التداول المركزية.',
+    'excerpt_ar' => 'تعرف على منصات التداول اللامركزي DEX، وكيف تعمل عمليات Swap ومجمعات السيولة والعقود الذكية، وما الفرق بينها وبين منصات التداول المركزية.',
+    'excerpt_en' => 'Learn what decentralized exchanges (DEXs) are, how swaps, liquidity pools, and smart contracts work, and how DEXs differ from centralized exchanges.',
+
+    'content' => null,
+
+    'content_ar' => <<<'HTML'
+<p>
+تُعد <strong>منصات التداول اللامركزي (DEX)</strong> من أهم التطبيقات في عالم التمويل اللامركزي (DeFi). فهي تتيح للمستخدمين تداول بعض الأصول الرقمية والتفاعل مع السيولة الموجودة على شبكات البلوكشين من خلال العقود الذكية، بدلًا من الاعتماد على منصة تداول مركزية تحتفظ بالأصول وتنفذ عمليات التداول نيابةً عن المستخدم.
+</p>
+
+<p>
+لكن وصف منصة ما بأنها "لامركزية" لا يعني بالضرورة أنها خالية تمامًا من الوسطاء أو أنها تعمل بالطريقة نفسها التي تعمل بها جميع منصات DEX الأخرى. فهناك اختلافات كبيرة في تصميم هذه المنصات، وآليات التسعير، ومصادر السيولة، ومستوى التحكم الذي يحتفظ به المطورون أو مشغلو البروتوكول.
+</p>
+
+<p>
+في هذا الدرس من <strong>AQL Crypto Academy</strong>، سنشرح مفهوم DEX من البداية، وكيف تتم عملية التداول، وما هي مجمعات السيولة، وكيف تعمل نماذج مثل Automated Market Maker (AMM)، وما المخاطر التي ينبغي فهمها قبل استخدام هذه المنصات.
+</p>
+
+<h2>ما هي منصة التداول اللامركزي DEX؟</h2>
+
+<p>
+منصة التداول اللامركزي أو <strong>Decentralized Exchange (DEX)</strong> هي تطبيق يعتمد على البلوكشين والعقود الذكية للسماح للمستخدمين بإجراء عمليات تداول أو مبادلة بين أصول رقمية دون الحاجة إلى نموذج التداول المركزي التقليدي الذي يعتمد على دفتر أوامر تديره شركة واحدة.
+</p>
+
+<p>
+في المنصة المركزية، عادةً ما يودع المستخدم أصوله في حساب لدى المنصة، ثم تقوم المنصة بإدارة التداول والتسوية داخل أنظمتها. أما في كثير من منصات DEX، فيحتفظ المستخدم بأصوله في محفظته ويتفاعل مباشرة مع عقد ذكي عند تنفيذ عملية المبادلة.
+</p>
+
+<p>
+وهذا يغيّر طبيعة العلاقة بين المستخدم والمنصة، لكنه لا يعني أن جميع عناصر النظام أصبحت لامركزية بالكامل.
+</p>
+
+<h2>كيف تعمل منصات DEX؟</h2>
+
+<p>
+لفهم DEX، من المفيد تصور العملية في صورة مبسطة. لنفترض أن مستخدمًا يريد مبادلة أصل رقمي بآخر.
+</p>
+
+<ol>
+    <li>يتصل المستخدم بمنصة DEX باستخدام محفظة متوافقة.</li>
+    <li>يحدد الأصل الذي يريد بيعه والأصل الذي يريد الحصول عليه.</li>
+    <li>تحدد المنصة مسار التداول والسعر المتوقع وفق تصميمها ومصادر السيولة المتاحة.</li>
+    <li>يوافق المستخدم على العملية من خلال محفظته.</li>
+    <li>يتم إرسال المعاملة إلى شبكة البلوكشين.</li>
+    <li>ينفذ العقد الذكي الشروط المحددة للعملية.</li>
+    <li>بعد تأكيد المعاملة على الشبكة، تصل الأصول الناتجة إلى محفظة المستخدم وفق قواعد البروتوكول.</li>
+</ol>
+
+<p>
+هذه العملية قد تختلف من منصة إلى أخرى. فبعض المنصات تعتمد على مجمعات السيولة، وبعضها يستخدم دفاتر أوامر على السلسلة أو خارجها، وبعضها يجمع السيولة من مصادر متعددة للحصول على تنفيذ أفضل.
+</p>
+
+<h2>ما المقصود بعملية Swap؟</h2>
+
+<p>
+مصطلح <strong>Swap</strong> في DeFi يشير عادةً إلى مبادلة أصل رقمي بأصل آخر من خلال بروتوكول أو عقد ذكي.
+</p>
+
+<p>
+على سبيل المثال، يمكن للمستخدم اختيار مبادلة جزء من أصل رقمي معين مقابل أصل آخر. بدلًا من قيام شركة بشراء الأصل المقابل للمستخدم، يتولى البروتوكول تنفيذ المبادلة وفق الآلية التي صُممت بها المنصة.
+</p>
+
+<p>
+قد تظهر للمستخدم قبل تأكيد العملية معلومات مثل:
+</p>
+
+<ul>
+    <li>السعر المتوقع.</li>
+    <li>كمية الأصول التي سيحصل عليها.</li>
+    <li>الرسوم.</li>
+    <li>الانزلاق السعري المتوقع.</li>
+    <li>الحد الأدنى المقبول من الأصول الناتجة.</li>
+    <li>الشبكة التي ستنفذ عليها المعاملة.</li>
+</ul>
+
+<p>
+هذه المعلومات مهمة لأن السعر النهائي قد يختلف عن السعر الظاهر قبل التنفيذ، خصوصًا عندما تكون السيولة محدودة أو تتغير الأسعار أثناء تأكيد المعاملة.
+</p>
+
+<h2>ما هو مجمع السيولة Liquidity Pool؟</h2>
+
+<p>
+<strong>مجمع السيولة (Liquidity Pool)</strong> هو مجموعة من الأصول الرقمية يتم توفيرها داخل عقد ذكي وفق قواعد بروتوكول معين، بهدف توفير السيولة اللازمة لبعض عمليات التداول.
+</p>
+
+<p>
+في نموذج شائع، يتكون المجمع من أصلين أو أكثر. ويقوم مزودو السيولة بإيداع الأصول في المجمع وفق الشروط التي يحددها البروتوكول.
+</p>
+
+<p>
+عندما يقوم مستخدم بعملية Swap، لا يحتاج بالضرورة إلى العثور على مستخدم آخر يريد تنفيذ العملية المعاكسة في اللحظة نفسها. بدلًا من ذلك، يمكن تنفيذ المبادلة مقابل السيولة الموجودة في المجمع وفق خوارزمية التسعير المستخدمة.
+</p>
+
+<h2>من هم مزودو السيولة؟</h2>
+
+<p>
+<strong>مزود السيولة (Liquidity Provider)</strong> هو مستخدم يودع أصولًا في مجمع سيولة بهدف المساهمة في توفير السيولة للبروتوكول.
+</p>
+
+<p>
+في بعض البروتوكولات، يحصل مزودو السيولة على جزء من الرسوم الناتجة عن عمليات التداول المرتبطة بالمجمع، وقد توجد مكافآت إضافية وفق تصميم البروتوكول.
+</p>
+
+<p>
+لكن توفير السيولة ليس استثمارًا خاليًا من المخاطر. فقيمة الأصول الموجودة في المجمع قد تتغير، وقد يتعرض مزود السيولة لما يعرف باسم <strong>الخسارة غير الدائمة (Impermanent Loss)</strong>، إضافة إلى مخاطر العقود الذكية والبروتوكول والسيولة والسوق.
+</p>
+
+<h2>ما هو AMM؟</h2>
+
+<p>
+<strong>Automated Market Maker (AMM)</strong> أو صانع السوق الآلي هو نموذج تستخدمه بعض منصات DEX لتحديد أسعار التداول وتنفيذ عمليات المبادلة اعتمادًا على معادلات وآليات برمجية بدلًا من الاعتماد على دفتر أوامر تقليدي تديره جهة مركزية.
+</p>
+
+<p>
+في أحد النماذج الكلاسيكية المبسطة، يمكن أن تعتمد العلاقة بين رصيدي أصلين داخل مجمع على صيغة رياضية مثل:
+</p>
+
+<p>
+<strong>x × y = k</strong>
+</p>
+
+<p>
+حيث تمثل <strong>x</strong> و<strong>y</strong> كميات أصلين داخل المجمع، بينما يمثل <strong>k</strong> ثابتًا وفق نموذج التسعير المحدد.
+</p>
+
+<p>
+لكن هذه الصيغة ليست قاعدة لجميع منصات DEX. فهناك نماذج مختلفة للتسعير وإدارة السيولة، وقد تستخدم بعض البروتوكولات منحنيات أو آليات أكثر تعقيدًا.
+</p>
+
+<h2>كيف يحدد AMM سعر المبادلة؟</h2>
+
+<p>
+في نموذج AMM، يؤثر حجم الأصول الموجودة في المجمع وحجم الصفقة على السعر الناتج عن عملية Swap.
+</p>
+
+<p>
+إذا كانت الصفقة كبيرة مقارنة بحجم السيولة المتاحة، فقد يتحرك السعر داخل المجمع بدرجة أكبر، ويظهر ما يسمى <strong>Price Impact</strong> أو تأثير السعر.
+</p>
+
+<p>
+لهذا السبب قد لا يحصل المستخدم على السعر النظري نفسه الذي كان يراه قبل تنفيذ العملية.
+</p>
+
+<p>
+ومن المهم التمييز بين <strong>Price Impact</strong> و<strong>Slippage</strong>:
+</p>
+
+<ul>
+    <li><strong>Price Impact:</strong> تأثير حجم الصفقة والسيولة المتاحة على السعر الذي يقدمه المجمع.</li>
+    <li><strong>Slippage:</strong> الفرق بين السعر المتوقع والسعر الفعلي الذي يتم به التنفيذ، وقد يحدث بسبب تغيرات السوق أو تأخر التنفيذ أو ظروف أخرى.</li>
+</ul>
+
+<h2>ما معنى Slippage في منصات DEX؟</h2>
+
+<p>
+<strong>Slippage</strong> أو الانزلاق السعري هو مقدار الاختلاف المقبول بين السعر المتوقع عند إعداد المعاملة والسعر الذي يمكن تنفيذ المعاملة عنده.
+</p>
+
+<p>
+في بعض واجهات DEX يستطيع المستخدم تحديد نسبة الانزلاق المقبولة. إذا تغير السعر خارج الحد المسموح به، قد تفشل المعاملة بدلًا من تنفيذها بالسعر غير المرغوب.
+</p>
+
+<p>
+لكن تحديد نسبة انزلاق مرتفعة جدًا قد يسمح بتنفيذ الصفقة بسعر أسوأ من المتوقع، بينما تحديد نسبة منخفضة جدًا قد يؤدي إلى فشل المعاملة في ظروف السوق المتحركة.
+</p>
+
+<p>
+لذلك يجب فهم هذه الخاصية قبل تأكيد أي معاملة بدلًا من اعتبارها مجرد إعداد تقني غير مهم.
+</p>
+
+<h2>ما الفرق بين DEX والمنصة المركزية CEX؟</h2>
+
+<p>
+الفرق الأساسي يتعلق بكيفية إدارة الأصول وتنفيذ عمليات التداول والبنية التي تقف خلف المنصة.
+</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>العنصر</th>
+            <th>DEX</th>
+            <th>CEX</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>حفظ الأصول</td>
+            <td>غالبًا يحتفظ المستخدم بالأصول في محفظته أثناء التفاعل مع البروتوكول</td>
+            <td>غالبًا تُحفظ الأصول لدى المنصة وفق نموذج الحفظ الخاص بها</td>
+        </tr>
+        <tr>
+            <td>التنفيذ</td>
+            <td>يمكن أن يعتمد على عقود ذكية وآليات on-chain أو بنية هجينة</td>
+            <td>عادةً يعتمد على أنظمة داخلية تديرها الشركة</td>
+        </tr>
+        <tr>
+            <td>الحساب</td>
+            <td>يتفاعل المستخدم غالبًا من خلال محفظة</td>
+            <td>عادةً من خلال حساب مستخدم لدى المنصة</td>
+        </tr>
+        <tr>
+            <td>الرسوم</td>
+            <td>قد تشمل رسوم البروتوكول ورسوم شبكة البلوكشين</td>
+            <td>تحددها المنصة وقد تختلف حسب نوع العملية</td>
+        </tr>
+        <tr>
+            <td>السيولة</td>
+            <td>قد تأتي من مجمعات سيولة أو مصادر أخرى وفق تصميم المنصة</td>
+            <td>قد تعتمد على دفتر أوامر ومزودي سيولة وبنية تشغيلية مركزية</td>
+        </tr>
+        <tr>
+            <td>التحكم</td>
+            <td>قد يكون موزعًا بدرجات مختلفة حسب البروتوكول</td>
+            <td>توجد جهة تشغيلية مركزية مسؤولة عن المنصة</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>
+هذا الجدول يقدم مقارنة عامة فقط، لأن بنية DEX وCEX تختلف من مشروع إلى آخر.
+</p>
+
+<h2>هل DEX يعني أن المنصة لا تحتاج إلى وسيط؟</h2>
+
+<p>
+ليس بالضرورة.
+</p>
+
+<p>
+قد تقلل منصات DEX من الاعتماد على بعض الوظائف التي تؤديها المنصات المركزية، لكن النظام لا يعمل في فراغ. فقد يعتمد على مطوري العقود الذكية، ومزودي السيولة، وأوراكل الأسعار، والبنية التحتية للشبكة، وواجهات المستخدم، أو جهات أخرى بحسب تصميم البروتوكول.
+</p>
+
+<p>
+كما أن بعض البروتوكولات تحتفظ بمفاتيح إدارية أو آليات للترقية أو التجميد أو تغيير بعض الإعدادات. لذلك يجب تقييم درجة اللامركزية الفعلية لكل بروتوكول بشكل مستقل.
+</p>
+
+<h2>هل التداول على DEX يتم بالكامل على البلوكشين؟</h2>
+
+<p>
+ليس بالضرورة أن تكون كل مكونات منصة DEX على السلسلة.
+</p>
+
+<p>
+عملية المبادلة نفسها قد تتطلب معاملة على البلوكشين، لكن واجهة المستخدم، وبعض خدمات اكتشاف السيولة أو حساب المسارات أو عرض البيانات قد تعتمد على خدمات خارج السلسلة.
+</p>
+
+<p>
+لهذا السبب يجب التمييز بين <strong>تنفيذ المعاملة على السلسلة</strong> وبين جميع المكونات البرمجية التي توفر تجربة استخدام المنصة.
+</p>
+
+<h2>ما هي رسوم الغاز عند استخدام DEX؟</h2>
+
+<p>
+عند تنفيذ معاملة على شبكة بلوكشين تدعم العقود الذكية، قد يحتاج المستخدم إلى دفع <strong>رسوم شبكة (Gas Fee)</strong> لمعالجة المعاملة.
+</p>
+
+<p>
+هذه الرسوم ليست بالضرورة نفس رسوم البروتوكول. فقد توجد رسوم منفصلة يفرضها البروتوكول أو واجهة معينة، بينما تذهب رسوم الشبكة إلى آلية معالجة المعاملات الخاصة بالبلوكشين.
+</p>
+
+<p>
+تختلف رسوم الشبكة حسب البلوكشين وحالة ازدحام الشبكة ونوع المعاملة.
+</p>
+
+<h2>ما المقصود بـ Token Approval؟</h2>
+
+<p>
+عند التعامل مع بعض الرموز الرقمية، قد تحتاج المحفظة إلى تنفيذ معاملة <strong>Approval</strong> تسمح لعقد ذكي معين باستخدام كمية محددة من الرمز نيابةً عن المستخدم وفق معيار التوكن وآلية البروتوكول.
+</p>
+
+<p>
+وهذه الخطوة قد تكون منفصلة عن عملية Swap نفسها.
+</p>
+
+<p>
+من المهم قراءة طلبات المحفظة بعناية قبل الموافقة عليها، والتأكد من العقد الذي يتم منحه الصلاحية. فالموافقة على عقد غير موثوق قد تعرض الأصول للخطر وفق الصلاحيات التي يتم منحها.
+</p>
+
+<h2>ما هي مخاطر استخدام منصات DEX؟</h2>
+
+<p>
+رغم أن منصات DEX توفر نموذجًا مختلفًا للتداول والتفاعل مع الأصول الرقمية، فإن استخدامها ينطوي على مخاطر متعددة.
+</p>
+
+<h3>1. مخاطر العقود الذكية</h3>
+
+<p>
+قد تحتوي العقود الذكية على أخطاء برمجية أو ثغرات أمنية يمكن استغلالها. وجود العقد على البلوكشين لا يعني تلقائيًا أنه آمن أو خالٍ من الأخطاء.
+</p>
+
+<h3>2. مخاطر السيولة</h3>
+
+<p>
+عندما تكون السيولة منخفضة، قد يكون تنفيذ الصفقات الكبيرة أكثر صعوبة، وقد يرتفع تأثير السعر أو يتسع الفرق بين السعر المتوقع والفعلي.
+</p>
+
+<h3>3. مخاطر الخسارة غير الدائمة</h3>
+
+<p>
+قد يتعرض مزودو السيولة إلى اختلاف في القيمة مقارنة بمجرد الاحتفاظ بالأصول خارج المجمع، نتيجة تغير أسعار الأصول ونسبها داخل المجمع.
+</p>
+
+<h3>4. مخاطر الأوراكل</h3>
+
+<p>
+بعض بروتوكولات DeFi تعتمد على مصادر خارجية أو آليات أوراكل للحصول على بيانات الأسعار. وإذا كانت هذه البيانات غير دقيقة أو تعرضت للتلاعب، فقد تؤثر في سلوك البروتوكول.
+</p>
+
+<h3>5. مخاطر المفاتيح الإدارية</h3>
+
+<p>
+قد يحتفظ بعض البروتوكولات بمفاتيح أو صلاحيات إدارية تسمح بتغيير بعض أجزاء النظام. مستوى هذه الصلاحيات يختلف من مشروع إلى آخر.
+</p>
+
+<h3>6. مخاطر الواجهات والتصيد الاحتيالي</h3>
+
+<p>
+حتى إذا كان العقد الذكي الأساسي مصممًا بطريقة سليمة، فقد يتعرض المستخدم لخطر مواقع مزيفة أو روابط تصيد أو واجهات تحاول خداعه للتوقيع على معاملات ضارة.
+</p>
+
+<h3>7. مخاطر الشبكات والجسور</h3>
+
+<p>
+قد يعتمد بعض المستخدمين على جسور لنقل الأصول بين شبكات مختلفة. وتضيف الجسور طبقة أخرى من المخاطر التقنية والأمنية.
+</p>
+
+<h2>هل DEX أكثر أمانًا من CEX؟</h2>
+
+<p>
+لا توجد إجابة عامة تصلح لكل الحالات.
+</p>
+
+<p>
+منصات DEX وCEX تعرض المستخدم لأنواع مختلفة من المخاطر. في DEX قد يكون المستخدم مسؤولًا بدرجة أكبر عن محفظته ومفاتيحه ومعاملاته والتأكد من العقود والواجهات التي يتفاعل معها. وفي CEX يعتمد المستخدم بدرجة أكبر على الجهة التي تدير المنصة في حفظ الأصول وتنفيذ العمليات وإدارة الحساب.
+</p>
+
+<p>
+لذلك يجب فهم نموذج المخاطر لكل منصة بدلًا من افتراض أن وصف "لامركزي" أو "مركزي" وحده يحدد مستوى الأمان.
+</p>
+
+<h2>هل يمكن استخدام DEX بدون حساب تقليدي؟</h2>
+
+<p>
+في كثير من الحالات، لا يحتاج المستخدم إلى إنشاء حساب تقليدي باستخدام اسم مستخدم وكلمة مرور كما يحدث في المنصات المركزية. وبدلًا من ذلك، يمكنه الاتصال باستخدام محفظة متوافقة.
+</p>
+
+<p>
+لكن هذا لا يعني أن جميع منصات DEX تعمل بالطريقة نفسها، كما أن بعض الواجهات أو الخدمات المحيطة بالبروتوكول قد تفرض متطلبات إضافية.
+</p>
+
+<h2>ما الذي يحتاجه المبتدئ لفهم DEX؟</h2>
+
+<p>
+قبل استخدام أي منصة تداول لامركزي، من المفيد فهم مجموعة من المفاهيم الأساسية:
+</p>
+
+<ul>
+    <li>المحافظ الرقمية وحفظ المفاتيح الخاصة.</li>
+    <li>العقود الذكية.</li>
+    <li>رسوم الشبكة.</li>
+    <li>معاملات البلوكشين وتأكيداتها.</li>
+    <li>مجمعات السيولة.</li>
+    <li>AMM وآليات التسعير.</li>
+    <li>Price Impact.</li>
+    <li>Slippage.</li>
+    <li>Token Approval.</li>
+    <li>مخاطر العقود الذكية والتصيد الاحتيالي.</li>
+</ul>
+
+<p>
+كلما فهم المستخدم هذه المفاهيم، أصبح من الأسهل عليه قراءة تفاصيل المعاملة قبل توقيعها وفهم ما يحدث بدلًا من الاعتماد على الواجهة وحدها.
+</p>
+
+<h2>مثال مبسط لعملية Swap</h2>
+
+<p>
+لنفترض أن مستخدمًا يريد مبادلة أصل رقمي "A" بأصل رقمي "B".
+</p>
+
+<ol>
+    <li>يفتح المستخدم واجهة DEX.</li>
+    <li>يتصل بمحفظته.</li>
+    <li>يحدد الأصل A كأصل يريد إرساله.</li>
+    <li>يحدد الأصل B كأصل يريد استلامه.</li>
+    <li>تعرض الواجهة السعر المتوقع والرسوم ومعلومات التنفيذ.</li>
+    <li>يوافق المستخدم على صلاحية استخدام الأصل إذا كانت مطلوبة.</li>
+    <li>يؤكد عملية Swap.</li>
+    <li>ترسل المعاملة إلى الشبكة.</li>
+    <li>ينفذ العقد الذكي العملية وفق قواعد البروتوكول.</li>
+    <li>بعد تأكيد المعاملة، يظهر الأصل الناتج في المحفظة وفق نتيجة التنفيذ.</li>
+</ol>
+
+<p>
+هذا المثال مبسط جدًا، وقد تتضمن العملية الفعلية معاملات أو خطوات إضافية بحسب الشبكة والبروتوكول ونوع الأصل.
+</p>
+
+<h2>ما علاقة DEX بمفهوم DeFi؟</h2>
+
+<p>
+تُعد منصات DEX أحد الأمثلة الواضحة على تطبيقات <strong>DeFi</strong>. فهي تستخدم البلوكشين والعقود الذكية لبناء خدمات مالية يمكن للمستخدم التفاعل معها مباشرة من خلال محفظته في بعض الحالات.
+</p>
+
+<p>
+لكن DEX ليست سوى جزء واحد من منظومة DeFi. فهناك أيضًا بروتوكولات الإقراض والاقتراض، والبروتوكولات المتعلقة بالمشتقات، والـ Staking، وإدارة الأصول، وغيرها.
+</p>
+
+<p>
+يمكنك العودة إلى الدرس السابق لفهم الصورة الأوسع:
+<a href="/academy/defi/what-is-defi">ما هو DeFi؟ شرح التمويل اللامركزي للمبتدئين</a>.
+</p>
+
+<p>
+ويمكنك أيضًا قراءة:
+<a href="/academy/defi/how-does-defi-work">كيف يعمل DeFi؟ شرح التمويل اللامركزي والعقود الذكية</a>
+لفهم العلاقة بين العقود الذكية وتطبيقات DeFi.
+</p>
+
+<h2>العلاقة بين DEX والبلوكشين</h2>
+
+<p>
+تعتمد كثير من منصات DEX على خصائص البلوكشين مثل تنفيذ المعاملات بطريقة قابلة للتحقق، وتسجيل العمليات على دفتر أستاذ موزع، واستخدام العقود الذكية لتنفيذ قواعد البروتوكول.
+</p>
+
+<p>
+إذا كنت تريد فهم البنية الأساسية التي تعمل فوقها تطبيقات DeFi، يمكنك قراءة:
+<a href="/academy/blockchain/what-is-blockchain">ما هو البلوكشين؟</a>
+</p>
+
+<p>
+ولفهم كيفية تنفيذ المعاملات وتسجيلها داخل الشبكة، يمكنك متابعة:
+<a href="/academy/blockchain/how-does-blockchain-work">كيف يعمل البلوكشين؟</a>.
+</p>
+
+<p>
+كما أن فهم العقد الذكية يتطلب فهمًا جيدًا لمفهوم العقد والعمليات التي يتم تنفيذها على الشبكة.
+</p>
+
+<h2>هل استخدام DEX يعني أن التداول مجهول؟</h2>
+
+<p>
+ليس بالضرورة.
+</p>
+
+<p>
+قد لا يتطلب بعض بروتوكولات DEX إنشاء حساب تقليدي، لكن معاملات البلوكشين العامة يمكن أن تكون قابلة للتتبع والتحليل بحسب طبيعة الشبكة.
+</p>
+
+<p>
+لذلك فإن عدم إدخال اسم المستخدم في واجهة DEX لا يعني تلقائيًا أن النشاط أصبح مجهولًا أو غير قابل للتتبع.
+</p>
+
+<h2>الخلاصة</h2>
+
+<p>
+منصات التداول اللامركزي <strong>DEX</strong> هي تطبيقات تسمح للمستخدمين بالتفاعل مع أسواق الأصول الرقمية من خلال البلوكشين والعقود الذكية وفق نماذج مختلفة للتداول والسيولة.
+</p>
+
+<p>
+ومن أشهر النماذج مجمعات السيولة وصناع السوق الآليين AMMs، حيث يمكن تنفيذ عمليات Swap مقابل السيولة المتوفرة في البروتوكول بدلًا من الاعتماد فقط على دفتر أوامر مركزي.
+</p>
+
+<p>
+ومع ذلك، فإن DEX لا تعني بالضرورة اللامركزية الكاملة أو الأمان التلقائي. يجب فهم العقود الذكية، والسيولة، ورسوم الشبكة، والانزلاق السعري، والصلاحيات الإدارية، ومخاطر التصيد والواجهات المزيفة قبل التفاعل مع أي بروتوكول.
+</p>
+
+<p>
+<strong>المعلومة التعليمية:</strong> هذا المقال لأغراض تعليمية فقط، ولا يمثل نصيحة مالية أو استثمارية أو توصية باستخدام منصة أو بروتوكول معين. الأصول الرقمية وتطبيقات DeFi تنطوي على مخاطر تقنية وسوقية ومالية، ويجب إجراء البحث المستقل وفهم المخاطر قبل اتخاذ أي قرار.
+</p>
+HTML,
+
+    'content_en' => <<<'HTML'
+<p>
+<strong>Decentralized exchanges (DEXs)</strong> are among the most important applications in decentralized finance (DeFi). They allow users to trade certain digital assets and interact with blockchain-based liquidity through smart contracts rather than relying entirely on a centralized exchange that holds assets and executes trades on behalf of its customers.
+</p>
+
+<p>
+However, calling a platform "decentralized" does not necessarily mean that every part of the system is fully decentralized or that all DEXs work in the same way. There are major differences in exchange design, pricing mechanisms, liquidity sources, governance, and the amount of control retained by developers or protocol operators.
+</p>
+
+<p>
+In this <strong>AQL Crypto Academy</strong> lesson, we will explain DEXs from the ground up, including how swaps work, what liquidity pools are, how Automated Market Makers (AMMs) determine prices, how DEXs differ from centralized exchanges, and what risks users should understand.
+</p>
+
+<h2>What Is a Decentralized Exchange (DEX)?</h2>
+
+<p>
+A <strong>Decentralized Exchange (DEX)</strong> is an application that uses blockchain technology and smart contracts to enable users to trade or swap digital assets without relying on the traditional centralized exchange model operated by a single company.
+</p>
+
+<p>
+On a centralized exchange, users typically deposit assets into an account controlled by the exchange. The platform then manages trading and settlement through its internal systems. On many DEXs, users instead keep control of their assets in a compatible wallet and interact with smart contracts when executing transactions.
+</p>
+
+<p>
+This changes the relationship between the user and the trading system, but it does not automatically mean that every component is fully decentralized.
+</p>
+
+<h2>How Does a DEX Work?</h2>
+
+<p>
+A simple way to understand a DEX is to follow a typical swap process.
+</p>
+
+<ol>
+    <li>The user connects a compatible wallet to the DEX interface.</li>
+    <li>The user selects the asset to sell and the asset to receive.</li>
+    <li>The interface determines an expected route and price based on the protocol's design and available liquidity.</li>
+    <li>The user reviews and approves the transaction through the wallet.</li>
+    <li>The transaction is submitted to the blockchain.</li>
+    <li>The relevant smart contract executes the transaction according to its programmed rules.</li>
+    <li>After confirmation, the resulting assets are delivered to the user's wallet according to the protocol's execution.</li>
+</ol>
+
+<p>
+The exact process varies between protocols. Some DEXs use liquidity pools, others use on-chain or hybrid order-book models, and some aggregate liquidity from multiple sources.
+</p>
+
+<h2>What Is a Swap?</h2>
+
+<p>
+In DeFi, a <strong>swap</strong> generally refers to exchanging one digital asset for another through a protocol or smart contract.
+</p>
+
+<p>
+For example, a user may choose to exchange part of one digital asset for another. Instead of a centralized company matching the user with another trader, the protocol can execute the transaction according to its liquidity and pricing mechanism.
+</p>
+
+<p>
+Before confirming a swap, the interface may display information such as:
+</p>
+
+<ul>
+    <li>Expected price.</li>
+    <li>Expected output amount.</li>
+    <li>Fees.</li>
+    <li>Estimated price impact.</li>
+    <li>Minimum acceptable output.</li>
+    <li>The blockchain network used for the transaction.</li>
+</ul>
+
+<p>
+These details matter because the final execution price may differ from the price displayed before confirmation, especially when liquidity is limited or market conditions change during execution.
+</p>
+
+<h2>What Is a Liquidity Pool?</h2>
+
+<p>
+A <strong>Liquidity Pool</strong> is a collection of digital assets deposited into a smart contract according to the rules of a particular protocol. The pool is designed to provide liquidity for certain trading activities.
+</p>
+
+<p>
+In a common model, a pool contains two or more assets. Liquidity providers deposit assets into the pool according to the protocol's requirements.
+</p>
+
+<p>
+When a user performs a swap, the user does not necessarily need to find another trader willing to make the opposite trade at the same moment. Instead, the swap can be executed against liquidity held in the pool according to the protocol's pricing mechanism.
+</p>
+
+<h2>Who Are Liquidity Providers?</h2>
+
+<p>
+A <strong>Liquidity Provider (LP)</strong> is a user who deposits assets into a liquidity pool to help provide liquidity to a protocol.
+</p>
+
+<p>
+Depending on the protocol, liquidity providers may receive a share of trading fees generated by the pool. Some protocols may also offer additional incentives.
+</p>
+
+<p>
+However, providing liquidity is not risk-free. Asset prices and pool balances can change, and liquidity providers may experience what is commonly called <strong>impermanent loss</strong>. Additional risks can include smart-contract vulnerabilities, protocol risks, liquidity risks, and broader market risks.
+</p>
+
+<h2>What Is an AMM?</h2>
+
+<p>
+An <strong>Automated Market Maker (AMM)</strong> is a model used by some DEXs to determine trading prices and execute swaps using programmed formulas and mechanisms instead of relying on a traditional order book operated by a centralized entity.
+</p>
+
+<p>
+In one classic simplified model, the relationship between the balances of two assets in a pool can follow a formula such as:
+</p>
+
+<p>
+<strong>x × y = k</strong>
+</p>
+
+<p>
+Here, <strong>x</strong> and <strong>y</strong> represent the quantities of two assets in the pool, while <strong>k</strong> represents a constant under that particular pricing model.
+</p>
+
+<p>
+This formula is not a universal rule for all DEXs. Different protocols can use different pricing mechanisms, curves, and liquidity-management designs.
+</p>
+
+<h2>How Does an AMM Determine the Swap Price?</h2>
+
+<p>
+In an AMM model, the amount of liquidity in a pool and the size of a trade can affect the resulting execution price.
+</p>
+
+<p>
+If a trade is large compared with the available liquidity, the price inside the pool may move more significantly. This is commonly referred to as <strong>price impact</strong>.
+</p>
+
+<p>
+As a result, the theoretical market price shown before a trade may not be the same as the final execution price.
+</p>
+
+<p>
+It is useful to distinguish between <strong>price impact</strong> and <strong>slippage</strong>:
+</p>
+
+<ul>
+    <li><strong>Price Impact:</strong> The effect of trade size and available liquidity on the execution price.</li>
+    <li><strong>Slippage:</strong> The difference between the expected execution price and the actual execution price, which can result from market movement, execution delays, or other conditions.</li>
+</ul>
+
+<h2>What Does Slippage Mean on a DEX?</h2>
+
+<p>
+<strong>Slippage</strong> is the amount of price difference a user is willing to accept between the expected price when preparing a transaction and the price at which the transaction can actually execute.
+</p>
+
+<p>
+Some DEX interfaces allow users to specify a maximum acceptable slippage level. If the price moves beyond that limit, the transaction may fail instead of executing at an unwanted price.
+</p>
+
+<p>
+A very high slippage tolerance can allow a transaction to execute at a worse price than expected, while an extremely low tolerance may cause transactions to fail when markets are moving quickly.
+</p>
+
+<p>
+Understanding this setting is therefore important before confirming a transaction.
+</p>
+
+<h2>DEX vs. CEX: What Is the Difference?</h2>
+
+<p>
+The main difference concerns how assets are managed, how trades are executed, and which infrastructure controls the exchange.
+</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Feature</th>
+            <th>DEX</th>
+            <th>CEX</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Asset custody</td>
+            <td>Users often keep assets in their own wallets while interacting with the protocol</td>
+            <td>Assets are typically held by the exchange under its custody model</td>
+        </tr>
+        <tr>
+            <td>Execution</td>
+            <td>May rely on smart contracts and on-chain or hybrid mechanisms</td>
+            <td>Usually relies on internal systems operated by the company</td>
+        </tr>
+        <tr>
+            <td>Account model</td>
+            <td>Users often interact through a wallet</td>
+            <td>Users typically operate through an exchange account</td>
+        </tr>
+        <tr>
+            <td>Fees</td>
+            <td>May include protocol fees and blockchain network fees</td>
+            <td>Fees are determined by the exchange and may vary by transaction type</td>
+        </tr>
+        <tr>
+            <td>Liquidity</td>
+            <td>May come from liquidity pools or other sources depending on the design</td>
+            <td>May rely on order books, liquidity providers, and centralized infrastructure</td>
+        </tr>
+        <tr>
+            <td>Control</td>
+            <td>Can be distributed to different degrees depending on the protocol</td>
+            <td>A central operating entity is responsible for the platform</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>
+This is a general comparison. Actual DEX and CEX architectures can differ significantly from one platform to another.
+</p>
+
+<h2>Does a DEX Eliminate the Need for Intermediaries?</h2>
+
+<p>
+Not necessarily.
+</p>
+
+<p>
+A DEX may reduce reliance on some functions traditionally performed by centralized exchanges, but it still operates within a broader technical ecosystem. Depending on the protocol, it may involve smart-contract developers, liquidity providers, price oracles, blockchain infrastructure, user interfaces, and other components.
+</p>
+
+<p>
+Some protocols may also retain administrative keys or upgrade mechanisms that allow certain system parameters or contracts to be changed. The level of administrative control varies from one project to another.
+</p>
+
+<h2>Does Everything on a DEX Happen On-Chain?</h2>
+
+<p>
+Not necessarily.
+</p>
+
+<p>
+The swap itself may require an on-chain blockchain transaction, while the user interface, liquidity discovery services, routing calculations, analytics, or other supporting components may rely on off-chain infrastructure.
+</p>
+
+<p>
+It is therefore important to distinguish between <strong>on-chain transaction execution</strong> and all of the software components that provide the complete DEX experience.
+</p>
+
+<h2>What Are Gas Fees When Using a DEX?</h2>
+
+<p>
+When interacting with smart contracts on a blockchain, users may need to pay a <strong>network fee, often called a gas fee</strong>, to have the transaction processed.
+</p>
+
+<p>
+This is not necessarily the same as a protocol fee. A protocol may charge its own fee, while the blockchain network charges a separate transaction fee according to its own rules.
+</p>
+
+<p>
+Network fees vary depending on the blockchain, network congestion, and transaction type.
+</p>
+
+<h2>What Is Token Approval?</h2>
+
+<p>
+When interacting with certain tokens, a user may first need to submit an <strong>approval transaction</strong> that allows a particular smart contract to spend a specified amount of the token according to the token standard and protocol design.
+</p>
+
+<p>
+This approval can be a separate transaction from the actual swap.
+</p>
+
+<p>
+Users should carefully review wallet requests and verify the contract receiving the approval. Approving an untrusted contract can expose assets to risk depending on the permissions granted.
+</p>
+
+<h2>What Are the Risks of Using DEXs?</h2>
+
+<p>
+Although DEXs provide a different model for trading and interacting with digital assets, they involve several categories of risk.
+</p>
+
+<h3>1. Smart-Contract Risk</h3>
+
+<p>
+Smart contracts can contain programming errors or vulnerabilities that attackers may exploit. Being deployed on a blockchain does not automatically make a smart contract secure or free from bugs.
+</p>
+
+<h3>2. Liquidity Risk</h3>
+
+<p>
+When liquidity is low, large trades may be more difficult to execute efficiently, potentially increasing price impact or the difference between expected and actual execution.
+</p>
+
+<h3>3. Impermanent Loss</h3>
+
+<p>
+Liquidity providers can experience a difference in value compared with simply holding the assets outside the pool, particularly when the relative prices of the assets change.
+</p>
+
+<h3>4. Oracle Risk</h3>
+
+<p>
+Some DeFi protocols rely on external data sources or oracle mechanisms to obtain price information. If those data sources are inaccurate or manipulated, protocol behavior may be affected.
+</p>
+
+<h3>5. Administrative-Key Risk</h3>
+
+<p>
+Some protocols retain administrative keys or permissions that can be used to modify parts of the system. The extent of these permissions varies between projects.
+</p>
+
+<h3>6. Interface and Phishing Risk</h3>
+
+<p>
+Even if the underlying smart contract is designed correctly, users can still be exposed to fake websites, phishing links, or interfaces that attempt to trick them into signing malicious transactions.
+</p>
+
+<h3>7. Network and Bridge Risk</h3>
+
+<p>
+Users may sometimes rely on bridges to move assets between different blockchain networks. Bridges introduce another layer of technical and security risk.
+</p>
+
+<h2>Are DEXs Safer Than CEXs?</h2>
+
+<p>
+There is no universal answer.
+</p>
+
+<p>
+DEXs and CEXs expose users to different types of risks. With a DEX, users may have greater responsibility for their wallets, private keys, transaction approvals, and verification of the contracts and interfaces they use. With a CEX, users rely more heavily on the company operating the platform for custody, account management, and execution.
+</p>
+
+<p>
+The appropriate way to understand the difference is therefore to evaluate the specific risk model of each platform rather than assuming that the words "decentralized" or "centralized" alone determine security.
+</p>
+
+<h2>Can You Use a DEX Without a Traditional Account?</h2>
+
+<p>
+In many cases, users do not need to create a traditional account with a username and password. Instead, they can connect a compatible wallet directly to the application.
+</p>
+
+<p>
+However, not every DEX or interface follows exactly the same model, and services surrounding a protocol may impose additional requirements.
+</p>
+
+<h2>What Should Beginners Understand Before Using a DEX?</h2>
+
+<p>
+Before interacting with a decentralized exchange, it is useful to understand:
+</p>
+
+<ul>
+    <li>Digital wallets and private-key custody.</li>
+    <li>Smart contracts.</li>
+    <li>Blockchain network fees.</li>
+    <li>Blockchain transactions and confirmations.</li>
+    <li>Liquidity pools.</li>
+    <li>AMMs and pricing mechanisms.</li>
+    <li>Price impact.</li>
+    <li>Slippage.</li>
+    <li>Token approvals.</li>
+    <li>Smart-contract and phishing risks.</li>
+</ul>
+
+<p>
+Understanding these concepts helps users review transaction details before signing instead of relying solely on the interface.
+</p>
+
+<h2>A Simple Example of a DEX Swap</h2>
+
+<p>
+Suppose a user wants to exchange digital asset A for digital asset B.
+</p>
+
+<ol>
+    <li>The user opens a DEX interface.</li>
+    <li>The user connects a wallet.</li>
+    <li>Asset A is selected as the input asset.</li>
+    <li>Asset B is selected as the output asset.</li>
+    <li>The interface displays the expected price, fees, and execution information.</li>
+    <li>The user approves token spending if an approval is required.</li>
+    <li>The user confirms the swap.</li>
+    <li>The transaction is submitted to the blockchain.</li>
+    <li>The smart contract executes the swap according to the protocol rules.</li>
+    <li>After confirmation, the resulting asset appears in the user's wallet according to the transaction outcome.</li>
+</ol>
+
+<p>
+This is a simplified example. Actual transactions may involve additional steps depending on the network, protocol, token, and routing mechanism.
+</p>
+
+<h2>How Are DEXs Related to DeFi?</h2>
+
+<p>
+DEXs are one of the clearest examples of <strong>DeFi</strong> applications. They use blockchain technology and smart contracts to create systems that users can interact with directly through wallets in many cases.
+</p>
+
+<p>
+However, DEXs are only one part of DeFi. Other categories include lending and borrowing protocols, derivatives, staking-related applications, asset-management protocols, and other decentralized financial services.
+</p>
+
+<p>
+You can return to the previous lesson for a broader introduction:
+<a href="/academy/defi/what-is-defi">What Is DeFi? A Beginner’s Guide to Decentralized Finance</a>.
+</p>
+
+<p>
+You can also read:
+<a href="/academy/defi/how-does-defi-work">How Does DeFi Work? A Beginner’s Guide to Decentralized Finance</a>
+to understand how smart contracts and decentralized applications work together.
+</p>
+
+<h2>How Are DEXs Related to Blockchain?</h2>
+
+<p>
+Many DEXs rely on blockchain characteristics such as verifiable transactions, distributed ledgers, and smart contracts that execute protocol rules.
+</p>
+
+<p>
+If you want to understand the foundation on which many DeFi applications are built, read:
+<a href="/academy/blockchain/what-is-blockchain">What Is Blockchain?</a>
+</p>
+
+<p>
+To understand how blockchain transactions are processed and recorded, continue with:
+<a href="/academy/blockchain/how-does-blockchain-work">How Does Blockchain Work?</a>.
+</p>
+
+<p>
+A deeper understanding of blockchain concepts also makes it easier to understand how decentralized applications interact with the network.
+</p>
+
+<h2>Does Using a DEX Mean Trading Is Anonymous?</h2>
+
+<p>
+Not necessarily.
+</p>
+
+<p>
+Some DEX protocols may not require a traditional account, but public blockchain transactions can often be tracked and analyzed depending on the network and available data.
+</p>
+
+<p>
+Therefore, not entering a username into a DEX interface does not automatically mean that activity is anonymous or impossible to trace.
+</p>
+
+<h2>Conclusion</h2>
+
+<p>
+<strong>Decentralized exchanges (DEXs)</strong> are applications that allow users to interact with digital-asset markets through blockchain networks and smart contracts using different trading and liquidity models.
+</p>
+
+<p>
+Liquidity pools and Automated Market Makers (AMMs) are among the best-known models. They can allow swaps to execute against protocol liquidity rather than relying exclusively on a centralized order book.
+</p>
+
+<p>
+However, DEX does not automatically mean complete decentralization or automatic security. Users should understand smart contracts, liquidity, network fees, price impact, slippage, administrative permissions, token approvals, and phishing risks before interacting with a protocol.
+</p>
+
+<p>
+<strong>Educational disclaimer:</strong> This article is provided for educational purposes only and does not constitute financial, investment, or trading advice, nor does it recommend any particular exchange or protocol. Digital assets and DeFi applications involve technical, market, and financial risks. Conduct independent research and understand the risks before making decisions.
+</p>
+HTML,
+
+    'image' => null,
+
+    'seo_title' => 'ما هي منصات التداول اللامركزي DEX؟ شرح Swap وAMM للمبتدئين | AQL Crypto Academy',
+    'seo_title_ar' => 'ما هي منصات التداول اللامركزي DEX؟ شرح Swap وAMM للمبتدئين | AQL Crypto Academy',
+    'seo_title_en' => 'What Is a Decentralized Exchange (DEX)? Swaps and AMMs Explained | AQL Crypto Academy',
+
+    'meta_description' => 'شرح مبسط لمنصات التداول اللامركزي DEX، وكيف تعمل عمليات Swap ومجمعات السيولة وAMM، والفرق بين DEX وCEX وأهم المخاطر التي يجب فهمها.',
+    'meta_description_ar' => 'شرح مبسط لمنصات التداول اللامركزي DEX، وكيف تعمل عمليات Swap ومجمعات السيولة وAMM، والفرق بين DEX وCEX وأهم المخاطر التي يجب فهمها.',
+    'meta_description_en' => 'Learn how decentralized exchanges (DEXs) work, including swaps, liquidity pools, AMMs, DEX vs CEX, fees, slippage, and key risks.',
+
+    'faq_ar' => [
+        [
+            'question' => 'ما هي منصة DEX؟',
+            'answer' => 'منصة DEX أو منصة التداول اللامركزي هي تطبيق يستخدم البلوكشين والعقود الذكية للسماح للمستخدمين بتداول أو مبادلة بعض الأصول الرقمية وفق آلية البروتوكول دون الاعتماد بالكامل على منصة مركزية.'
+        ],
+        [
+            'question' => 'ما معنى Swap في DeFi؟',
+            'answer' => 'Swap هو عملية مبادلة أصل رقمي بأصل آخر من خلال بروتوكول أو عقد ذكي. تختلف آلية التنفيذ حسب تصميم منصة DEX ومصادر السيولة التي تستخدمها.'
+        ],
+        [
+            'question' => 'ما هو مجمع السيولة Liquidity Pool؟',
+            'answer' => 'مجمع السيولة هو مجموعة من الأصول الرقمية يتم إيداعها في عقد ذكي وفق قواعد بروتوكول معين لتوفير السيولة اللازمة لبعض عمليات التداول.'
+        ],
+        [
+            'question' => 'ما هو AMM؟',
+            'answer' => 'AMM أو Automated Market Maker هو نموذج تستخدمه بعض منصات DEX لتحديد أسعار المبادلات وتنفيذها باستخدام خوارزميات وقواعد برمجية بدلًا من الاعتماد على دفتر أوامر مركزي تقليدي.'
+        ],
+        [
+            'question' => 'ما الفرق بين DEX وCEX؟',
+            'answer' => 'DEX تعتمد بدرجات مختلفة على العقود الذكية والبنية اللامركزية، بينما CEX تديرها جهة مركزية وتستخدم عادة أنظمة داخلية لإدارة الحسابات والتداول والحفظ. وتختلف التفاصيل من منصة إلى أخرى.'
+        ],
+        [
+            'question' => 'هل استخدام DEX مجهول؟',
+            'answer' => 'ليس بالضرورة. قد لا تحتاج بعض منصات DEX إلى حساب تقليدي، لكن معاملات البلوكشين العامة قد تكون قابلة للتتبع والتحليل بحسب الشبكة والبيانات المتاحة.'
+        ],
+        [
+            'question' => 'ما هو Slippage في DEX؟',
+            'answer' => 'Slippage هو الفرق بين السعر المتوقع عند إعداد المعاملة والسعر الفعلي الذي يتم به تنفيذها. ويمكن أن يتأثر بحركة السوق والسيولة وتأخر تنفيذ المعاملة.'
+        ],
+        [
+            'question' => 'هل منصات DEX آمنة؟',
+            'answer' => 'لا يمكن اعتبار جميع منصات DEX آمنة تلقائيًا. توجد مخاطر مرتبطة بالعقود الذكية والسيولة والأوراكل والمفاتيح الإدارية والتصيد الاحتيالي والجسور وغيرها، ويجب تقييم كل بروتوكول بشكل مستقل.'
+        ]
+    ],
+
+    'faq_en' => [
+        [
+            'question' => 'What is a DEX?',
+            'answer' => 'A DEX, or decentralized exchange, is an application that uses blockchain technology and smart contracts to enable users to trade or swap certain digital assets according to the protocol rules without relying entirely on a centralized exchange.'
+        ],
+        [
+            'question' => 'What does Swap mean in DeFi?',
+            'answer' => 'A swap is the exchange of one digital asset for another through a protocol or smart contract. The exact execution mechanism depends on the DEX design and its available liquidity sources.'
+        ],
+        [
+            'question' => 'What is a Liquidity Pool?',
+            'answer' => 'A liquidity pool is a collection of digital assets deposited into a smart contract according to a protocol’s rules to provide liquidity for certain trading activities.'
+        ],
+        [
+            'question' => 'What is an AMM?',
+            'answer' => 'An AMM, or Automated Market Maker, is a model used by some DEXs to determine swap prices and execute trades through programmed algorithms and rules instead of relying on a traditional centralized order book.'
+        ],
+        [
+            'question' => 'What is the difference between a DEX and a CEX?',
+            'answer' => 'DEXs rely to varying degrees on smart contracts and decentralized infrastructure, while CEXs are operated by centralized entities and typically use internal systems for accounts, trading, and custody. Exact designs vary between platforms.'
+        ],
+        [
+            'question' => 'Does using a DEX make trading anonymous?',
+            'answer' => 'Not necessarily. Some DEXs may not require a traditional account, but public blockchain transactions can often be tracked and analyzed depending on the network and available data.'
+        ],
+        [
+            'question' => 'What is slippage on a DEX?',
+            'answer' => 'Slippage is the difference between the expected price when preparing a transaction and the actual execution price. It can be affected by market movement, liquidity, and transaction timing.'
+        ],
+        [
+            'question' => 'Are DEXs safe?',
+            'answer' => 'DEXs are not automatically safe. Risks can involve smart contracts, liquidity, oracles, administrative keys, phishing, bridges, and other technical or market factors. Each protocol should be evaluated independently.'
+        ]
+    ],
+
+    'status' => 'published',
+    'sort_order' => 3,
+    'published_at' => now(),
+],
+[
+    'title' => 'ما هي مجمعات السيولة في DeFi؟ شرح Liquidity Pools والخسارة غير الدائمة',
+    'title_ar' => 'ما هي مجمعات السيولة في DeFi؟ شرح Liquidity Pools والخسارة غير الدائمة',
+    'title_en' => 'What Are Liquidity Pools in DeFi? A Beginner’s Guide to Liquidity Pools and Impermanent Loss',
+
+    'slug' => 'what-are-defi-liquidity-pools',
+
+    'excerpt' => 'شرح مبسط لمجمعات السيولة Liquidity Pools في DeFi، وكيف تعمل، ودور مزودي السيولة، وآلية AMM، والرسوم، والخسارة غير الدائمة والمخاطر الأساسية.',
+    'excerpt_ar' => 'شرح مبسط لمجمعات السيولة Liquidity Pools في DeFi، وكيف تعمل، ودور مزودي السيولة، وآلية AMM، والرسوم، والخسارة غير الدائمة والمخاطر الأساسية.',
+    'excerpt_en' => 'Learn how DeFi liquidity pools work, what liquidity providers do, how AMMs use pools, how trading fees are generated, and what impermanent loss means.',
+
+    'content' => null,
+
+    'content_ar' => <<<'HTML'
+<p>
+تُعد <strong>مجمعات السيولة (Liquidity Pools)</strong> من أهم المكونات التي تعتمد عليها العديد من تطبيقات التمويل اللامركزي (DeFi)، وخصوصًا منصات التداول اللامركزي (DEX) التي تستخدم نماذج صناع السوق الآليين (AMM).
+</p>
+
+<p>
+بدلًا من الاعتماد فقط على دفتر أوامر تقليدي يحتاج إلى وجود مشترٍ وبائع في الوقت نفسه، يمكن لبعض بروتوكولات DeFi استخدام مجموعة من الأصول المودعة داخل عقد ذكي لتوفير السيولة التي تتم من خلالها عمليات المبادلة.
+</p>
+
+<p>
+لكن توفير السيولة ليس مجرد إيداع أموال والحصول على رسوم. فهناك آليات مختلفة لتسعير الأصول، وقواعد خاصة بكل بروتوكول، ومخاطر تتعلق بالعقود الذكية والأسعار والسيولة، ومن أهم المفاهيم التي يجب فهمها <strong>الخسارة غير الدائمة (Impermanent Loss)</strong>.
+</p>
+
+<p>
+في هذا الدرس من <strong>AQL Crypto Academy</strong>، سنشرح مجمعات السيولة من البداية، وكيف تعمل، وما الذي يفعله مزود السيولة، وكيف ترتبط المجمعات بـ AMM وعمليات Swap، ولماذا يمكن أن تحدث الخسارة غير الدائمة، وما المخاطر الأخرى التي يجب الانتباه إليها.
+</p>
+
+<h2>ما هو مجمع السيولة Liquidity Pool؟</h2>
+
+<p>
+مجمع السيولة هو مجموعة من الأصول الرقمية يتم إيداعها داخل <strong>عقد ذكي</strong> وفق قواعد بروتوكول معين، بحيث يمكن استخدام هذه الأصول لتوفير السيولة لعمليات محددة مثل تداول أو مبادلة الأصول.
+</p>
+
+<p>
+في نموذج شائع، يحتوي المجمع على أصلين. ويمكن لمستخدمي البروتوكول توفير هذه الأصول للمجمع، بينما يستخدم متداولو DEX السيولة الموجودة فيه لتنفيذ عمليات Swap.
+</p>
+
+<p>
+المجمع لا يمثل حسابًا مصرفيًا تقليديًا، ولا توجد قاعدة واحدة تنطبق على جميع مجمعات السيولة. فطريقة إنشاء المجمع وتسعير الأصول وتوزيع الرسوم وآلية السحب تختلف حسب البروتوكول.
+</p>
+
+<h2>لماذا تحتاج منصات DEX إلى مجمعات السيولة؟</h2>
+
+<p>
+تحتاج بعض نماذج DEX إلى مصدر للسيولة يمكن للمتداولين التفاعل معه. وهنا يأتي دور مجمعات السيولة.
+</p>
+
+<p>
+بدلًا من الاعتماد على وجود طرف مقابل لكل صفقة، يمكن للمستخدم تنفيذ Swap مقابل الأصول الموجودة في المجمع وفق آلية التسعير التي يستخدمها البروتوكول.
+</p>
+
+<p>
+وهذا يساعد على إنشاء سوق آلي يمكن أن يستمر في تقديم عمليات مبادلة طالما أن هناك سيولة متاحة وفق شروط البروتوكول.
+</p>
+
+<p>
+ومع ذلك، فإن وجود مجمع سيولة لا يعني أن التداول يمكن أن يتم بأي حجم وبأي سعر. فحجم السيولة ونوع نموذج التسعير وحجم الصفقة كلها عوامل يمكن أن تؤثر في السعر النهائي.
+</p>
+
+<h2>كيف يعمل مجمع السيولة؟</h2>
+
+<p>
+لنفترض وجود مجمع يحتوي على أصلين رقميين، يُشار إليهما هنا باسم <strong>Token A</strong> و<strong>Token B</strong>.
+</p>
+
+<p>
+يقوم مزودو السيولة بإيداع الأصول في المجمع وفق النسبة والقواعد التي يحددها البروتوكول. بعد ذلك يستطيع المتداولون استخدام السيولة لإجراء عمليات Swap.
+</p>
+
+<p>
+عندما يدخل أحد المتداولين أصلًا إلى المجمع ويخرج أصلًا آخر، تتغير أرصدة الأصول داخل المجمع. ويؤثر هذا التغير في السعر وفق نموذج التسعير المستخدم.
+</p>
+
+<p>
+في نموذج AMM تقليدي مبسط، يمكن تمثيل العلاقة بين رصيدي أصلين بالصيغة:
+</p>
+
+<p>
+<strong>x × y = k</strong>
+</p>
+
+<p>
+حيث تمثل <strong>x</strong> و<strong>y</strong> أرصدة أصلين، بينما يمثل <strong>k</strong> قيمة ثابتة وفق النموذج المستخدم.
+</p>
+
+<p>
+هذه الصيغة مثال تعليمي على أحد النماذج المعروفة وليست قاعدة عامة لجميع بروتوكولات DeFi. توجد نماذج أخرى تستخدم منحنيات وآليات مختلفة لإدارة السيولة والتسعير.
+</p>
+
+<h2>من هو مزود السيولة Liquidity Provider؟</h2>
+
+<p>
+<strong>مزود السيولة (Liquidity Provider أو LP)</strong> هو المستخدم الذي يودع أصولًا في مجمع سيولة وفق قواعد البروتوكول بهدف المساهمة في توفير السيولة.
+</p>
+
+<p>
+في بعض البروتوكولات، يحصل مزودو السيولة على جزء من رسوم التداول التي تنتج عن عمليات Swap المرتبطة بالمجمع.
+</p>
+
+<p>
+وقد توجد في بعض الأنظمة مكافآت إضافية، لكن وجود المكافآت أو الرسوم لا يعني أن توفير السيولة يحقق عائدًا مضمونًا.
+</p>
+
+<p>
+فالقيمة التي يمتلكها مزود السيولة تتأثر بتغير أسعار الأصول، ونسبة الأصول داخل المجمع، ورسوم البروتوكول، وتصميم النظام، والمخاطر التقنية.
+</p>
+
+<h2>هل يحتاج مزود السيولة إلى إيداع أصل واحد فقط؟</h2>
+
+<p>
+يعتمد ذلك على تصميم البروتوكول.
+</p>
+
+<p>
+في العديد من المجمعات التقليدية، يحتاج مزود السيولة إلى توفير أصلين بنسب محددة أو تقريبية. وفي نماذج أخرى قد توجد مجمعات تسمح بتوفير أصل واحد، أو مجمعات تحتوي على عدة أصول، أو تصميمات أكثر تعقيدًا.
+</p>
+
+<p>
+لذلك يجب دائمًا قراءة شروط البروتوكول المحدد بدلًا من افتراض أن جميع مجمعات السيولة تعمل بالطريقة نفسها.
+</p>
+
+<h2>ما علاقة مجمع السيولة بعملية Swap؟</h2>
+
+<p>
+عندما يقوم مستخدم بعملية <strong>Swap</strong>، يمكن للبروتوكول أن يستخدم السيولة الموجودة في المجمع لتنفيذ المبادلة.
+</p>
+
+<p>
+على سبيل المثال، إذا أرسل المستخدم كمية من Token A مقابل Token B، فإن العملية قد تؤدي إلى زيادة رصيد Token A في المجمع وانخفاض رصيد Token B.
+</p>
+
+<p>
+هذا التغير في الأرصدة يمكن أن يؤثر في السعر وفق آلية التسعير. ولذلك فإن تنفيذ صفقة كبيرة في مجمع صغير قد يؤدي إلى تأثير سعري أكبر من تنفيذ صفقة صغيرة في مجمع يتمتع بسيولة كبيرة.
+</p>
+
+<p>
+لمراجعة مفهوم Swap وآلية منصات DEX بشكل كامل، يمكنك الرجوع إلى المقال السابق:
+<a href="/academy/defi/what-is-a-decentralized-exchange-dex">ما هي منصات التداول اللامركزي DEX؟ شرح DEX وعمليات Swap للمبتدئين</a>.
+</p>
+
+<h2>ما هي رسوم التداول في مجمع السيولة؟</h2>
+
+<p>
+قد يفرض البروتوكول رسومًا على عمليات التداول التي تتم من خلال مجمع السيولة.
+</p>
+
+<p>
+في بعض النماذج، يتم توزيع جزء من رسوم التداول على مزودي السيولة بحسب القواعد التي يحددها البروتوكول ومقدار مساهمتهم في المجمع أو الفترة التي شاركوا خلالها.
+</p>
+
+<p>
+لكن يجب الانتباه إلى أن <strong>إيرادات الرسوم لا تساوي بالضرورة الربح الصافي</strong>.
+</p>
+
+<p>
+فحتى إذا حصل مزود السيولة على رسوم، قد تتغير قيمة الأصول التي يملكها أو يتعرض لخسائر مرتبطة بحركة الأسعار أو مخاطر البروتوكول.
+</p>
+
+<h2>ما هي الخسارة غير الدائمة Impermanent Loss؟</h2>
+
+<p>
+<strong>الخسارة غير الدائمة (Impermanent Loss)</strong> هي مفهوم مهم في مجمعات السيولة، ويشير بصورة مبسطة إلى انخفاض قيمة مركز مزود السيولة مقارنة بما كان يمكن أن تكون عليه قيمة الأصول لو احتفظ بها خارج المجمع، وذلك نتيجة تغير الأسعار النسبية للأصول.
+</p>
+
+<p>
+هذه الخسارة تسمى "غير دائمة" لأن الفرق قد يتغير مع تغير الأسعار، وقد يقل أو يختفي في بعض الظروف إذا عادت الأسعار النسبية إلى مستويات معينة.
+</p>
+
+<p>
+لكن هذا لا يعني أن الخسارة ستختفي حتمًا. فإذا سحب مزود السيولة أصوله بينما بقي الفرق السعري قائمًا، فقد تتحول الخسارة المقارنة إلى نتيجة فعلية بالنسبة لمركزه.
+</p>
+
+<h2>لماذا تحدث الخسارة غير الدائمة؟</h2>
+
+<p>
+لفهم الفكرة، تخيل مجمعًا يحتوي على أصلين تتغير أسعارهما في السوق.
+</p>
+
+<p>
+عندما يرتفع سعر أحد الأصلين أو ينخفض مقارنة بالآخر، تقوم آلية المجمع بتغيير نسب الأصول داخله نتيجة عمليات التداول والمراجحة السعرية.
+</p>
+
+<p>
+نتيجة لذلك، قد ينتهي مزود السيولة بكمية مختلفة من الأصلين عما كان سيحتفظ به لو ترك الأصول في محفظته دون توفير سيولة.
+</p>
+
+<p>
+إذا كانت حركة الأسعار كبيرة، فقد يصبح الفرق بين قيمة مركز السيولة وقيمة الاحتفاظ بالأصول خارج المجمع أكثر وضوحًا.
+</p>
+
+<h2>مثال مبسط على الخسارة غير الدائمة</h2>
+
+<p>
+لنفترض، لأغراض تعليمية فقط، أن مزود سيولة أودع أصلين في مجمع بنسبة متساوية من حيث القيمة.
+</p>
+
+<p>
+إذا تغير سعر أحد الأصلين بشكل كبير مقارنة بالآخر، فإن المتداولين والمراجحين يقومون بعمليات تداول تؤدي إلى تعديل أرصدة الأصول داخل المجمع وفق نموذج التسعير.
+</p>
+
+<p>
+نتيجة لذلك، قد يصبح مركز مزود السيولة أكثر تعرضًا للأصل الذي انخفضت قيمته النسبية وأقل تعرضًا للأصل الذي ارتفعت قيمته.
+</p>
+
+<p>
+عند مقارنة قيمة هذا المركز بقيمة الاحتفاظ بالأصلين دون توفير السيولة، قد يظهر فرق يسمى الخسارة غير الدائمة.
+</p>
+
+<p>
+هذا المثال يوضح الفكرة فقط، بينما الحساب الفعلي يعتمد على نموذج المجمع وحركة الأسعار والرسوم وتوقيت الإيداع والسحب.
+</p>
+
+<h2>هل الخسارة غير الدائمة تعني أن مزود السيولة خسر أموالًا بالتأكيد؟</h2>
+
+<p>
+ليس بالضرورة.
+</p>
+
+<p>
+مصطلح الخسارة غير الدائمة يشير إلى <strong>فرق مقارن في القيمة</strong> بين توفير السيولة والاحتفاظ بالأصول خارج المجمع في ظل تغير الأسعار.
+</p>
+
+<p>
+كما أن الرسوم التي يحصل عليها مزود السيولة قد تعوض جزءًا من هذا الفرق أو قد لا تعوضه، بحسب حجم الرسوم وحركة الأسعار والمدة وبقية الظروف.
+</p>
+
+<p>
+لذلك لا يمكن الحكم على نتيجة توفير السيولة من خلال الخسارة غير الدائمة وحدها.
+</p>
+
+<h2>ما الفرق بين Impermanent Loss والخسارة المحققة؟</h2>
+
+<p>
+الخسارة غير الدائمة مفهوم مقارن يتغير مع الأسعار، بينما الخسارة المحققة ترتبط بالنتيجة الفعلية عند بيع أو سحب المركز أو إغلاقه وفق الحالة المحددة.
+</p>
+
+<p>
+إذا تغيرت الأسعار أثناء وجود السيولة، فقد يظهر فرق مقارن في قيمة المركز. وإذا استمر هذا الفرق عند سحب السيولة، فقد يصبح جزءًا من النتيجة الفعلية للمستخدم.
+</p>
+
+<p>
+لذلك يجب عدم فهم كلمة "غير دائمة" على أنها ضمان بأن الخسارة ستختفي.
+</p>
+
+<h2>ما دور المراجحة Arbitrage في مجمعات السيولة؟</h2>
+
+<p>
+<strong>المراجحة (Arbitrage)</strong> هي عمليات يستفيد فيها المتداول من فروق الأسعار بين أسواق أو منصات مختلفة.
+</p>
+
+<p>
+إذا أصبح سعر أصل داخل مجمع سيولة مختلفًا عن سعره في سوق أخرى، فقد يقوم المراجحون بالتداول للاستفادة من الفرق.
+</p>
+
+<p>
+تؤدي هذه العمليات في كثير من الحالات إلى دفع سعر المجمع نحو الأسعار الموجودة في الأسواق الأخرى، لكنها في الوقت نفسه تغير أرصدة الأصول داخل المجمع.
+</p>
+
+<p>
+وهذا أحد الأسباب التي تساعد على فهم العلاقة بين تغير الأسعار والخسارة غير الدائمة لمزودي السيولة.
+</p>
+
+<h2>ما هو Price Impact في مجمع السيولة؟</h2>
+
+<p>
+<strong>Price Impact</strong> هو تأثير حجم الصفقة مقارنة بالسيولة المتاحة على السعر الذي يحصل عليه المتداول.
+</p>
+
+<p>
+إذا كان المجمع كبيرًا والسيولة المتاحة مرتفعة مقارنة بحجم الصفقة، فقد يكون تأثير الصفقة على السعر أقل في النموذج نفسه.
+</p>
+
+<p>
+أما إذا كانت الصفقة كبيرة بالنسبة إلى حجم المجمع، فقد يؤدي تنفيذها إلى تحريك السعر بدرجة أكبر.
+</p>
+
+<p>
+ولهذا يجب النظر إلى حجم السيولة قبل تنفيذ الصفقات، خصوصًا عندما تكون الصفقة كبيرة.
+</p>
+
+<h2>هل Price Impact هو نفسه Slippage؟</h2>
+
+<p>
+لا، رغم أن المفهومين مرتبطان.
+</p>
+
+<p>
+<strong>Price Impact</strong> يتعلق بتأثير حجم الصفقة والسيولة الموجودة في المجمع على سعر التنفيذ.
+</p>
+
+<p>
+أما <strong>Slippage</strong> فيشير إلى الفرق بين السعر المتوقع والسعر الفعلي الذي يتم به تنفيذ المعاملة، وقد يتأثر بحركة السوق وتغير السعر أثناء تنفيذ المعاملة وعوامل أخرى.
+</p>
+
+<p>
+لذلك قد يرى المستخدم كلا المفهومين في واجهة DEX، لكنهما لا يعنيان الشيء نفسه.
+</p>
+
+<h2>ما هي مخاطر توفير السيولة؟</h2>
+
+<p>
+توفير السيولة في DeFi يمكن أن يكون نشاطًا تقنيًا معقدًا، وتوجد عدة فئات من المخاطر يجب فهمها.
+</p>
+
+<h3>1. مخاطر العقود الذكية</h3>
+
+<p>
+يعتمد المجمع عادةً على عقد ذكي أو مجموعة من العقود. وإذا احتوت العقود على ثغرة أو خطأ، فقد تتعرض الأصول للخطر.
+</p>
+
+<p>
+وجود العقد على البلوكشين لا يعني تلقائيًا أنه خالٍ من الأخطاء أو الثغرات.
+</p>
+
+<h3>2. مخاطر تغير الأسعار</h3>
+
+<p>
+تغير أسعار الأصول يمكن أن يؤدي إلى اختلاف كبير في نسب الأصول داخل المجمع، وقد يساهم في ظهور الخسارة غير الدائمة.
+</p>
+
+<h3>3. مخاطر السيولة</h3>
+
+<p>
+قد تكون بعض المجمعات صغيرة أو قليلة السيولة. وهذا قد يؤثر في قدرة المتداولين على تنفيذ الصفقات بكفاءة وقد يزيد تأثير السعر.
+</p>
+
+<h3>4. مخاطر البروتوكول</h3>
+
+<p>
+قد يعتمد البروتوكول على تصميمات أو آليات معقدة، وقد تحدث أخطاء في الحوافز أو التسعير أو إدارة السيولة.
+</p>
+
+<h3>5. مخاطر الأوراكل</h3>
+
+<p>
+إذا كان النظام يعتمد على بيانات أسعار خارجية، فإن جودة هذه البيانات وآلية تحديثها قد تكون مهمة جدًا. البيانات غير الدقيقة أو المتلاعب بها قد تؤثر في سلوك البروتوكول.
+</p>
+
+<h3>6. المخاطر الإدارية</h3>
+
+<p>
+قد تحتفظ بعض البروتوكولات بصلاحيات إدارية أو مفاتيح تسمح بتغيير بعض الإعدادات أو العقود. ويختلف مستوى هذه الصلاحيات من مشروع إلى آخر.
+</p>
+
+<h3>7. مخاطر الواجهات والتصيد</h3>
+
+<p>
+قد يتعرض المستخدم لمواقع مزيفة أو روابط تصيد تحاول دفعه إلى توقيع معاملات ضارة أو منح صلاحيات غير مرغوبة.
+</p>
+
+<h3>8. مخاطر الأصول نفسها</h3>
+
+<p>
+قد يكون أحد الأصول داخل المجمع ضعيف السيولة أو عالي التقلب أو مصممًا بطريقة تجعل تقييمه أكثر تعقيدًا. لذلك لا يكفي تقييم المجمع وحده دون فهم الأصول الموجودة فيه.
+</p>
+
+<h2>ما علاقة Liquidity Pools بـ AMM؟</h2>
+
+<p>
+في العديد من منصات DEX، ترتبط مجمعات السيولة ارتباطًا مباشرًا بنموذج <strong>Automated Market Maker (AMM)</strong>.
+</p>
+
+<p>
+المجمع يوفر الأصول التي يمكن التداول مقابلها، بينما تستخدم آلية AMM نموذجًا برمجيًا لتحديد أسعار المبادلات وفق حالة المجمع.
+</p>
+
+<p>
+وهذا يوضح أن <strong>Liquidity Pool وAMM ليسا المصطلح نفسه</strong>:
+</p>
+
+<ul>
+    <li><strong>Liquidity Pool:</strong> مجموعة الأصول المتاحة داخل المجمع وفق قواعد البروتوكول.</li>
+    <li><strong>AMM:</strong> آلية أو نموذج يستخدم قواعد رياضية وبرمجية لتسعير وتنفيذ المبادلات في بعض أنظمة DEX.</li>
+</ul>
+
+<p>
+وقد توجد تصميمات مختلفة تجعل العلاقة بين السيولة وآلية التسعير أكثر تعقيدًا من هذا النموذج المبسط.
+</p>
+
+<h2>هل جميع مجمعات السيولة متشابهة؟</h2>
+
+<p>
+لا.
+</p>
+
+<p>
+تختلف المجمعات في عدد الأصول، وطريقة توزيع السيولة، وآلية التسعير، والرسوم، ومكافآت مزودي السيولة، وآليات الحوكمة، والصلاحيات الإدارية، وحتى طريقة إدارة نطاقات الأسعار في بعض التصميمات.
+</p>
+
+<p>
+لذلك فإن معرفة أن بروتوكولًا ما يستخدم "Liquidity Pools" لا تكفي وحدها لفهم المخاطر أو طريقة العمل.
+</p>
+
+<h2>ما المقصود بـ Liquidity Mining؟</h2>
+
+<p>
+<strong>Liquidity Mining</strong> هو مصطلح يستخدم لوصف برامج أو آليات تمنح مزودي السيولة مكافآت إضافية مقابل توفير السيولة لبروتوكول معين.
+</p>
+
+<p>
+قد تكون المكافآت على شكل رموز رقمية أو آليات أخرى يحددها البروتوكول.
+</p>
+
+<p>
+لكن ارتفاع المكافأة المعلنة لا يعني بالضرورة ارتفاع العائد الفعلي أو انخفاض المخاطر. فقد تتأثر قيمة المكافآت نفسها بالسوق، وقد توجد مخاطر إضافية مرتبطة بالرمز أو البروتوكول.
+</p>
+
+<h2>هل توفير السيولة يحقق عائدًا مضمونًا؟</h2>
+
+<p>
+لا.
+</p>
+
+<p>
+قد يحصل مزود السيولة على رسوم أو مكافآت، لكن النتيجة النهائية تعتمد على عدة عوامل، منها تغير أسعار الأصول، والخسارة غير الدائمة، والرسوم، والسيولة، وأداء البروتوكول، والمخاطر التقنية.
+</p>
+
+<p>
+لذلك لا ينبغي اعتبار النسبة المعلنة للرسوم أو المكافآت بمفردها ضمانًا لتحقيق ربح.
+</p>
+
+<h2>ما الذي يجب فحصه قبل توفير السيولة؟</h2>
+
+<p>
+قبل التفاعل مع أي مجمع سيولة، من المفيد مراجعة مجموعة من العناصر:
+</p>
+
+<ul>
+    <li>العقود الذكية المستخدمة.</li>
+    <li>الأصول الموجودة داخل المجمع.</li>
+    <li>حجم السيولة.</li>
+    <li>حجم التداول.</li>
+    <li>آلية التسعير.</li>
+    <li>الرسوم.</li>
+    <li>آلية توزيع الرسوم.</li>
+    <li>وجود مكافآت إضافية وشروطها.</li>
+    <li>الصلاحيات الإدارية.</li>
+    <li>آلية الترقية إن وجدت.</li>
+    <li>مخاطر الأوراكل أو الجسور إن كانت مستخدمة.</li>
+    <li>احتمال الخسارة غير الدائمة.</li>
+</ul>
+
+<p>
+كما ينبغي التأكد من أنك تتفاعل مع الموقع أو العقد الصحيح، لأن واجهات DeFi المزيفة والتصيد الاحتيالي يمكن أن يؤدي إلى فقدان الأصول.
+</p>
+
+<h2>كيف ترتبط مجمعات السيولة بمنظومة DeFi؟</h2>
+
+<p>
+مجمعات السيولة ليست نظامًا مستقلًا عن بقية DeFi. فهي جزء من البنية التي تعتمد عليها بعض تطبيقات التداول، ويمكن أن تتصل بتطبيقات أخرى داخل النظام المالي اللامركزي.
+</p>
+
+<p>
+ولهذا السبب يمكن النظر إلى DeFi باعتباره مجموعة من البروتوكولات والتطبيقات التي يمكن أن تتفاعل مع بعضها وفق تصميم كل نظام.
+</p>
+
+<p>
+للحصول على الصورة العامة، يمكنك العودة إلى:
+<a href="/academy/defi/what-is-defi">ما هو DeFi؟ شرح التمويل اللامركزي للمبتدئين</a>.
+</p>
+
+<p>
+ولفهم البنية التي تعتمد عليها هذه التطبيقات، يمكنك أيضًا قراءة:
+<a href="/academy/blockchain/what-is-blockchain">ما هو البلوكشين؟</a>
+و
+<a href="/academy/blockchain/how-does-blockchain-work">كيف يعمل البلوكشين؟</a>.
+</p>
+
+<h2>الخلاصة</h2>
+
+<p>
+<strong>مجمعات السيولة (Liquidity Pools)</strong> هي أحد المكونات الأساسية في العديد من بروتوكولات DeFi، وخصوصًا منصات DEX التي تستخدم نماذج AMM.
+</p>
+
+<p>
+يقوم مزودو السيولة بإيداع الأصول في المجمع وفق قواعد البروتوكول، بينما يستخدم المتداولون السيولة المتاحة لإجراء عمليات Swap. وقد يحصل مزودو السيولة على جزء من رسوم التداول أو مكافآت أخرى بحسب تصميم البروتوكول.
+</p>
+
+<p>
+لكن توفير السيولة لا يخلو من المخاطر. ومن أهم المفاهيم التي يجب فهمها <strong>الخسارة غير الدائمة</strong>، والتي تنتج عن تغير الأسعار النسبية للأصول ويمكن أن تؤثر في قيمة مركز مزود السيولة مقارنة بالاحتفاظ بالأصول خارج المجمع.
+</p>
+
+<p>
+كما توجد مخاطر أخرى مرتبطة بالعقود الذكية، والسيولة، والأوراكل، والصلاحيات الإدارية، والتصيد الاحتيالي، وتقلب أسعار الأصول.
+</p>
+
+<p>
+<strong>المعلومة التعليمية:</strong> هذا المقال لأغراض تعليمية فقط، ولا يمثل نصيحة مالية أو استثمارية أو توصية بتوفير السيولة أو استخدام بروتوكول معين. الأصول الرقمية وبروتوكولات DeFi تنطوي على مخاطر تقنية وسوقية ومالية، ويجب إجراء البحث المستقل وفهم المخاطر قبل اتخاذ أي قرار.
+</p>
+HTML,
+
+    'content_en' => <<<'HTML'
+<p>
+<strong>Liquidity pools</strong> are among the most important components used by many decentralized finance (DeFi) applications, particularly decentralized exchanges (DEXs) that use Automated Market Maker (AMM) models.
+</p>
+
+<p>
+Instead of relying exclusively on a traditional order book that requires buyers and sellers to match, some DeFi protocols use pools of assets held in smart contracts to provide liquidity for trading and swaps.
+</p>
+
+<p>
+However, providing liquidity is not simply a matter of depositing assets and collecting fees. Different protocols use different pricing mechanisms, liquidity designs, fee structures, and risk models. One of the most important concepts for liquidity providers to understand is <strong>impermanent loss</strong>.
+</p>
+
+<p>
+In this <strong>AQL Crypto Academy</strong> lesson, we will explain liquidity pools from the ground up, how they work, what liquidity providers do, how pools interact with AMMs and swaps, why impermanent loss can occur, and what other risks users should understand.
+</p>
+
+<h2>What Is a Liquidity Pool?</h2>
+
+<p>
+A <strong>liquidity pool</strong> is a collection of digital assets deposited into a smart contract according to the rules of a particular protocol. These assets can then be used to provide liquidity for activities such as trading or swapping digital assets.
+</p>
+
+<p>
+In a common model, a pool contains two assets. Liquidity providers contribute those assets to the pool, while DEX traders use the available liquidity to execute swaps.
+</p>
+
+<p>
+A liquidity pool is not the same as a traditional bank account, and there is no single design that applies to every liquidity pool. Pool creation, asset pricing, fee distribution, and withdrawal rules vary between protocols.
+</p>
+
+<h2>Why Do Some DEXs Need Liquidity Pools?</h2>
+
+<p>
+Some DEX designs need a source of liquidity that traders can interact with. Liquidity pools can provide that source.
+</p>
+
+<p>
+Instead of requiring a direct counterparty for every trade, a user may execute a swap against assets held in the pool according to the protocol's pricing mechanism.
+</p>
+
+<p>
+This can create an automated market that continues to offer swaps as long as sufficient liquidity is available under the protocol's rules.
+</p>
+
+<p>
+However, having a liquidity pool does not mean that trades can be executed at any size or price. Liquidity depth, trade size, and the pricing model all affect execution.
+</p>
+
+<h2>How Does a Liquidity Pool Work?</h2>
+
+<p>
+Suppose a pool contains two digital assets, which we will call <strong>Token A</strong> and <strong>Token B</strong>.
+</p>
+
+<p>
+Liquidity providers deposit the assets according to the ratio and rules specified by the protocol. Traders can then use the pool's liquidity to execute swaps.
+</p>
+
+<p>
+When a trader sends one asset into the pool and receives another, the balances of the assets inside the pool change. That balance change can affect the price according to the pricing mechanism being used.
+</p>
+
+<p>
+In a simplified traditional AMM model, the relationship between two asset balances can be represented by:
+</p>
+
+<p>
+<strong>x × y = k</strong>
+</p>
+
+<p>
+Here, <strong>x</strong> and <strong>y</strong> represent the balances of two assets, while <strong>k</strong> represents a constant under that particular model.
+</p>
+
+<p>
+This formula is an educational example of one well-known model and is not a universal rule for all DeFi protocols. Other designs use different curves and mechanisms for pricing and liquidity management.
+</p>
+
+<h2>Who Is a Liquidity Provider?</h2>
+
+<p>
+A <strong>Liquidity Provider (LP)</strong> is a user who deposits assets into a liquidity pool according to the protocol's rules in order to contribute liquidity.
+</p>
+
+<p>
+Depending on the protocol, liquidity providers may receive a share of trading fees generated by swaps associated with the pool.
+</p>
+
+<p>
+Some systems may also provide additional incentives, but fees or incentives do not guarantee a positive return.
+</p>
+
+<p>
+The value of a liquidity provider's position can be affected by asset prices, pool balances, fees, protocol design, and technical risks.
+</p>
+
+<h2>Does a Liquidity Provider Have to Deposit Only One Asset?</h2>
+
+<p>
+It depends on the protocol design.
+</p>
+
+<p>
+Many traditional liquidity pools require providers to supply two assets according to a specified or approximate value ratio. Other models may allow single-asset deposits, multi-asset pools, or more sophisticated liquidity structures.
+</p>
+
+<p>
+For this reason, users should review the rules of the specific protocol instead of assuming that all liquidity pools work in the same way.
+</p>
+
+<h2>How Is a Liquidity Pool Related to a Swap?</h2>
+
+<p>
+When a user performs a <strong>swap</strong>, the protocol may use liquidity held in a pool to execute the exchange.
+</p>
+
+<p>
+For example, if a user sends Token A in exchange for Token B, the transaction may increase the amount of Token A in the pool and decrease the amount of Token B.
+</p>
+
+<p>
+This change in balances can affect the price according to the pool's pricing mechanism. As a result, a large trade in a small pool can have a greater price impact than a small trade in a pool with substantial liquidity.
+</p>
+
+<p>
+For a broader explanation of swaps and decentralized exchanges, read the previous lesson:
+<a href="/academy/defi/what-is-a-decentralized-exchange-dex">What Is a Decentralized Exchange (DEX)? A Beginner’s Guide to DEXs and Swaps</a>.
+</p>
+
+<h2>What Are Trading Fees in a Liquidity Pool?</h2>
+
+<p>
+A protocol may charge fees on trades executed through a liquidity pool.
+</p>
+
+<p>
+In some models, part of those trading fees is distributed to liquidity providers according to the protocol's rules and their contribution or participation.
+</p>
+
+<p>
+However, <strong>fee revenue is not necessarily the same as net profit</strong>.
+</p>
+
+<p>
+Even if a liquidity provider earns fees, the value of the assets in the position can change, and the provider may experience effects related to price movements, impermanent loss, or protocol risks.
+</p>
+
+<h2>What Is Impermanent Loss?</h2>
+
+<p>
+<strong>Impermanent loss</strong> is an important concept in liquidity pools. In simplified terms, it refers to a decrease in the value of a liquidity provider's position compared with what the value might have been if the provider had simply held the assets outside the pool, as a result of changes in the relative prices of the assets.
+</p>
+
+<p>
+The term "impermanent" reflects the fact that the difference can change as prices change and may decrease or disappear under certain conditions if relative prices return toward particular levels.
+</p>
+
+<p>
+However, this does not mean the loss will necessarily disappear. If a liquidity provider withdraws while the price difference remains, the comparative loss can become part of the realized outcome of the position.
+</p>
+
+<h2>Why Does Impermanent Loss Happen?</h2>
+
+<p>
+To understand the concept, imagine a liquidity pool containing two assets whose market prices change relative to each other.
+</p>
+
+<p>
+When the price of one asset rises or falls compared with the other, traders and arbitrageurs interact with the pool, changing the asset balances according to the pricing model.
+</p>
+
+<p>
+As a result, a liquidity provider may end up with a different quantity of each asset than they would have had if they had simply held the assets in a wallet.
+</p>
+
+<p>
+When the price movement is significant, the difference between the value of the liquidity position and the value of simply holding the assets can become more noticeable.
+</p>
+
+<h2>A Simple Example of Impermanent Loss</h2>
+
+<p>
+For educational purposes, imagine that a liquidity provider deposits two assets into a pool with equal value.
+</p>
+
+<p>
+If the price of one asset changes significantly relative to the other, traders and arbitrageurs can execute swaps that adjust the asset balances in the pool according to its pricing model.
+</p>
+
+<p>
+As a result, the liquidity provider's position can become more exposed to the asset whose relative value declined and less exposed to the asset whose relative value increased.
+</p>
+
+<p>
+When the liquidity position is compared with simply holding the two assets, a difference in value may appear. This is the basic idea behind impermanent loss.
+</p>
+
+<p>
+This example is intended only to explain the concept. The actual calculation depends on the pool model, price movements, fees, and the timing of deposits and withdrawals.
+</p>
+
+<h2>Does Impermanent Loss Mean a Liquidity Provider Definitely Lost Money?</h2>
+
+<p>
+Not necessarily.
+</p>
+
+<p>
+Impermanent loss is a <strong>comparative difference in value</strong> between providing liquidity and holding the assets outside the pool under changing market prices.
+</p>
+
+<p>
+Trading fees earned by the liquidity provider may offset part or all of that difference in some situations, or they may not, depending on fee revenue, price movements, timing, and other conditions.
+</p>
+
+<p>
+Therefore, the outcome of providing liquidity cannot be determined by looking at impermanent loss alone.
+</p>
+
+<h2>What Is the Difference Between Impermanent Loss and a Realized Loss?</h2>
+
+<p>
+Impermanent loss is a comparative concept that changes with asset prices, while a realized loss concerns the actual outcome when a position is withdrawn, sold, or otherwise closed under the relevant conditions.
+</p>
+
+<p>
+If prices change while liquidity is provided, a comparative difference in value may appear. If that difference remains when the liquidity is withdrawn, it can become part of the user's actual result.
+</p>
+
+<p>
+The word "impermanent" should therefore not be interpreted as a guarantee that the loss will disappear.
+</p>
+
+<h2>What Role Does Arbitrage Play in Liquidity Pools?</h2>
+
+<p>
+<strong>Arbitrage</strong> refers to trading strategies that seek to benefit from price differences between markets or platforms.
+</p>
+
+<p>
+If an asset's price inside a liquidity pool becomes different from its price in another market, arbitrageurs may trade against the pool to capture the difference.
+</p>
+
+<p>
+These trades can often push the pool price closer to prices in other markets, while also changing the asset balances inside the pool.
+</p>
+
+<p>
+This helps explain the relationship between changing market prices and impermanent loss for liquidity providers.
+</p>
+
+<h2>What Is Price Impact in a Liquidity Pool?</h2>
+
+<p>
+<strong>Price impact</strong> is the effect that a trade's size relative to available liquidity has on the execution price.
+</p>
+
+<p>
+If a pool is large and has substantial liquidity relative to the trade, the price impact may be smaller under the same model.
+</p>
+
+<p>
+If the trade is large relative to the pool, execution can move the pool price more significantly.
+</p>
+
+<p>
+This is why liquidity depth is an important consideration when executing large trades.
+</p>
+
+<h2>Is Price Impact the Same as Slippage?</h2>
+
+<p>
+No, although the two concepts are related.
+</p>
+
+<p>
+<strong>Price impact</strong> concerns the effect of trade size and available pool liquidity on the execution price.
+</p>
+
+<p>
+<strong>Slippage</strong> refers to the difference between an expected price and the actual execution price. It can be affected by market movement, changes during transaction execution, and other factors.
+</p>
+
+<p>
+A DEX interface may display both concepts, but they do not mean exactly the same thing.
+</p>
+
+<h2>What Are the Risks of Providing Liquidity?</h2>
+
+<p>
+Providing liquidity in DeFi can involve several categories of risk that users should understand.
+</p>
+
+<h3>1. Smart-Contract Risk</h3>
+
+<p>
+Liquidity pools typically rely on smart contracts or groups of contracts. If those contracts contain vulnerabilities or programming errors, deposited assets may be exposed to risk.
+</p>
+
+<p>
+Being deployed on a blockchain does not automatically make a contract free from vulnerabilities.
+</p>
+
+<h3>2. Price Risk</h3>
+
+<p>
+Changes in asset prices can significantly alter the composition of a pool and may contribute to impermanent loss.
+</p>
+
+<h3>3. Liquidity Risk</h3>
+
+<p>
+Some pools may have relatively little liquidity. This can affect trading efficiency and increase price impact.
+</p>
+
+<h3>4. Protocol Risk</h3>
+
+<p>
+Protocols may rely on complex designs and incentive systems. Errors in pricing, incentives, or liquidity management can create additional risks.
+</p>
+
+<h3>5. Oracle Risk</h3>
+
+<p>
+If a system relies on external price data, the quality and update mechanism of that data can be important. Inaccurate or manipulated data may affect protocol behavior.
+</p>
+
+<h3>6. Administrative Risk</h3>
+
+<p>
+Some protocols retain administrative permissions or keys that can modify certain settings or contracts. The level of control varies from one project to another.
+</p>
+
+<h3>7. Interface and Phishing Risk</h3>
+
+<p>
+Users can encounter fake websites or phishing links that attempt to trick them into signing malicious transactions or granting unwanted permissions.
+</p>
+
+<h3>8. Asset Risk</h3>
+
+<p>
+An asset in a pool may have low liquidity, high volatility, or design characteristics that make its valuation more complex. Evaluating the pool alone is therefore not enough; the underlying assets also matter.
+</p>
+
+<h2>How Are Liquidity Pools Related to AMMs?</h2>
+
+<p>
+On many DEXs, liquidity pools are closely connected to the <strong>Automated Market Maker (AMM)</strong> model.
+</p>
+
+<p>
+The pool provides the assets available for trading, while the AMM mechanism uses programmed rules to determine swap prices based on the state of the pool.
+</p>
+
+<p>
+This means that <strong>Liquidity Pool and AMM are not the same concept</strong>:
+</p>
+
+<ul>
+    <li><strong>Liquidity Pool:</strong> The assets held in a pool according to a protocol's rules.</li>
+    <li><strong>AMM:</strong> A mechanism or model that uses programmed rules and mathematical formulas to price and execute swaps in some DEX systems.</li>
+</ul>
+
+<p>
+Different protocol designs can make the relationship between liquidity and pricing more sophisticated than this simplified model.
+</p>
+
+<h2>Are All Liquidity Pools the Same?</h2>
+
+<p>
+No.
+</p>
+
+<p>
+Pools can differ in the number of assets, liquidity distribution, pricing mechanism, fees, liquidity-provider incentives, governance, administrative permissions, and upgrade mechanisms. Some newer designs also manage liquidity across specific price ranges.
+</p>
+
+<p>
+Knowing that a protocol uses "liquidity pools" is therefore not enough to understand its complete design or risk profile.
+</p>
+
+<h2>What Is Liquidity Mining?</h2>
+
+<p>
+<strong>Liquidity mining</strong> is a term commonly used for programs or mechanisms that provide additional rewards to users who supply liquidity to a protocol.
+</p>
+
+<p>
+Rewards may take the form of digital tokens or other incentives defined by the protocol.
+</p>
+
+<p>
+A high advertised reward does not necessarily mean a high actual return or low risk. The reward token itself can change in value, and additional protocol risks may be involved.
+</p>
+
+<h2>Does Providing Liquidity Guarantee a Return?</h2>
+
+<p>
+No.
+</p>
+
+<p>
+Liquidity providers may earn fees or additional rewards, but the final outcome depends on factors such as asset prices, impermanent loss, fees, liquidity conditions, protocol performance, and technical risks.
+</p>
+
+<p>
+An advertised fee rate or reward rate should therefore not be treated as a guarantee of profit.
+</p>
+
+<h2>What Should You Check Before Providing Liquidity?</h2>
+
+<p>
+Before interacting with a liquidity pool, users should consider reviewing:
+</p>
+
+<ul>
+    <li>The smart contracts involved.</li>
+    <li>The assets held by the pool.</li>
+    <li>Total liquidity.</li>
+    <li>Trading volume.</li>
+    <li>The pricing mechanism.</li>
+    <li>Trading and protocol fees.</li>
+    <li>How fees are distributed.</li>
+    <li>Any additional rewards and their conditions.</li>
+    <li>Administrative permissions.</li>
+    <li>Upgrade mechanisms, if any.</li>
+    <li>Oracle or bridge risks, if applicable.</li>
+    <li>The potential effect of impermanent loss.</li>
+</ul>
+
+<p>
+Users should also verify that they are interacting with the correct website and contracts. Fake DeFi interfaces and phishing attacks can lead to asset loss.
+</p>
+
+<h2>How Do Liquidity Pools Fit Into DeFi?</h2>
+
+<p>
+Liquidity pools are not isolated from the broader DeFi ecosystem. They are part of the infrastructure used by some trading applications and can interact with other DeFi protocols according to the design of each system.
+</p>
+
+<p>
+This is one reason DeFi is often described as an ecosystem of protocols and applications that can interact with one another.
+</p>
+
+<p>
+For a broader introduction, return to:
+<a href="/academy/defi/what-is-defi">What Is DeFi? A Beginner’s Guide to Decentralized Finance</a>.
+</p>
+
+<p>
+To understand the underlying technology, you can also read:
+<a href="/academy/blockchain/what-is-blockchain">What Is Blockchain?</a>
+and
+<a href="/academy/blockchain/how-does-blockchain-work">How Does Blockchain Work?</a>.
+</p>
+
+<h2>Conclusion</h2>
+
+<p>
+<strong>Liquidity pools</strong> are a fundamental component of many DeFi protocols, particularly DEXs that use AMM models.
+</p>
+
+<p>
+Liquidity providers deposit assets into pools according to protocol rules, while traders use available liquidity to execute swaps. Liquidity providers may receive part of the trading fees or other rewards depending on the protocol design.
+</p>
+
+<p>
+However, providing liquidity involves risks. One of the most important concepts is <strong>impermanent loss</strong>, which can result from changes in the relative prices of the assets and affect the value of a liquidity position compared with simply holding the assets outside the pool.
+</p>
+
+<p>
+Other risks include smart-contract vulnerabilities, liquidity conditions, oracle issues, administrative permissions, phishing, and changes in the value of the underlying assets.
+</p>
+
+<p>
+<strong>Educational disclaimer:</strong> This article is provided for educational purposes only. It does not constitute financial, investment, or trading advice and does not recommend providing liquidity or using any particular protocol. Digital assets and DeFi protocols involve technical, market, and financial risks. Conduct independent research and understand the risks before making decisions.
+</p>
+HTML,
+
+    'image' => null,
+
+    'seo_title' => 'ما هي مجمعات السيولة في DeFi؟ شرح Liquidity Pools والخسارة غير الدائمة | AQL Crypto Academy',
+    'seo_title_ar' => 'ما هي مجمعات السيولة في DeFi؟ شرح Liquidity Pools والخسارة غير الدائمة | AQL Crypto Academy',
+    'seo_title_en' => 'What Are DeFi Liquidity Pools? Impermanent Loss Explained | AQL Crypto Academy',
+
+    'meta_description' => 'تعرف على مجمعات السيولة Liquidity Pools في DeFi، ودور مزودي السيولة، وAMM، ورسوم التداول، والخسارة غير الدائمة وأهم المخاطر.',
+    'meta_description_ar' => 'تعرف على مجمعات السيولة Liquidity Pools في DeFi، ودور مزودي السيولة، وAMM، ورسوم التداول، والخسارة غير الدائمة وأهم المخاطر.',
+    'meta_description_en' => 'Learn how DeFi liquidity pools work, what liquidity providers do, how AMMs use pools, how trading fees work, and what impermanent loss means.',
+
+    'faq_ar' => [
+        [
+            'question' => 'ما هو مجمع السيولة Liquidity Pool؟',
+            'answer' => 'مجمع السيولة هو مجموعة من الأصول الرقمية يتم إيداعها داخل عقد ذكي وفق قواعد بروتوكول معين لتوفير السيولة لبعض عمليات التداول أو المبادلة.'
+        ],
+        [
+            'question' => 'من هو مزود السيولة Liquidity Provider؟',
+            'answer' => 'مزود السيولة هو مستخدم يودع أصولًا في مجمع سيولة وفق قواعد البروتوكول بهدف المساهمة في توفير السيولة، وقد يحصل على جزء من رسوم التداول بحسب تصميم البروتوكول.'
+        ],
+        [
+            'question' => 'ما هي الخسارة غير الدائمة Impermanent Loss؟',
+            'answer' => 'الخسارة غير الدائمة هي فرق مقارن في قيمة مركز مزود السيولة مقارنة بالاحتفاظ بالأصول خارج المجمع، وينتج بشكل أساسي عن تغير الأسعار النسبية للأصول.'
+        ],
+        [
+            'question' => 'هل الخسارة غير الدائمة تعني خسارة مؤكدة؟',
+            'answer' => 'ليس بالضرورة. هي خسارة مقارنة تتغير مع الأسعار، وقد تعوض رسوم التداول جزءًا منها أو كلها في بعض الحالات، لكنها قد تصبح جزءًا من النتيجة الفعلية إذا تم سحب المركز بينما يستمر فرق الأسعار.'
+        ],
+        [
+            'question' => 'ما علاقة مجمعات السيولة بـ AMM؟',
+            'answer' => 'مجمع السيولة يحتوي على الأصول المتاحة للتداول، بينما AMM هو نموذج أو آلية تستخدم قواعد برمجية ورياضية لتسعير وتنفيذ بعض عمليات المبادلة اعتمادًا على حالة السيولة.'
+        ],
+        [
+            'question' => 'هل توفير السيولة يحقق عائدًا مضمونًا؟',
+            'answer' => 'لا. قد يحصل مزود السيولة على رسوم أو مكافآت، لكن النتيجة تتأثر بالأسعار والخسارة غير الدائمة والرسوم والسيولة ومخاطر العقود الذكية والبروتوكول.'
+        ],
+        [
+            'question' => 'ما الفرق بين Price Impact وSlippage؟',
+            'answer' => 'Price Impact هو تأثير حجم الصفقة مقارنة بالسيولة على سعر التنفيذ، بينما Slippage هو الفرق بين السعر المتوقع والسعر الفعلي وقد يتأثر بحركة السوق وتوقيت التنفيذ وعوامل أخرى.'
+        ],
+        [
+            'question' => 'ما أهم مخاطر توفير السيولة في DeFi؟',
+            'answer' => 'تشمل المخاطر العقود الذكية، تغير أسعار الأصول، الخسارة غير الدائمة، انخفاض السيولة، مخاطر الأوراكل، الصلاحيات الإدارية، التصيد الاحتيالي ومخاطر الأصول نفسها.'
+        ]
+    ],
+
+    'faq_en' => [
+        [
+            'question' => 'What is a liquidity pool?',
+            'answer' => 'A liquidity pool is a collection of digital assets deposited into a smart contract according to a protocol’s rules to provide liquidity for certain trading or swapping activities.'
+        ],
+        [
+            'question' => 'Who is a liquidity provider?',
+            'answer' => 'A liquidity provider is a user who deposits assets into a liquidity pool according to the protocol rules and may receive a share of trading fees depending on the protocol design.'
+        ],
+        [
+            'question' => 'What is impermanent loss?',
+            'answer' => 'Impermanent loss is a comparative difference in the value of a liquidity position versus holding the underlying assets outside the pool, mainly resulting from changes in their relative prices.'
+        ],
+        [
+            'question' => 'Does impermanent loss mean a guaranteed loss?',
+            'answer' => 'Not necessarily. It is a comparative loss that changes with prices. Trading fees may offset part or all of it in some situations, but the difference can become part of the actual outcome if liquidity is withdrawn while the price difference remains.'
+        ],
+        [
+            'question' => 'How are liquidity pools related to AMMs?',
+            'answer' => 'A liquidity pool contains the assets available for trading, while an AMM is a model or mechanism that uses programmed rules and mathematical formulas to price and execute certain swaps based on the state of the liquidity.'
+        ],
+        [
+            'question' => 'Does providing liquidity guarantee a return?',
+            'answer' => 'No. Liquidity providers may earn fees or rewards, but the outcome is affected by asset prices, impermanent loss, fees, liquidity conditions, smart-contract risks, and protocol risks.'
+        ],
+        [
+            'question' => 'What is the difference between price impact and slippage?',
+            'answer' => 'Price impact is the effect of trade size relative to available liquidity on the execution price, while slippage is the difference between the expected and actual execution price and can be affected by market movement and transaction timing.'
+        ],
+        [
+            'question' => 'What are the main risks of providing liquidity in DeFi?',
+            'answer' => 'Risks include smart-contract vulnerabilities, asset price changes, impermanent loss, low liquidity, oracle issues, administrative permissions, phishing attacks, and risks associated with the underlying assets.'
+        ]
+    ],
+
+    'status' => 'published',
+    'sort_order' => 4,
+    'published_at' => now(),
+],
+[
+    'topic_id' => $defi->id,
+
+    'title' => 'ما هو الإقراض والاقتراض في DeFi؟ شرح Lending وBorrowing',
+    'title_ar' => 'ما هو الإقراض والاقتراض في DeFi؟ شرح Lending وBorrowing',
+    'title_en' => 'What Are DeFi Lending and Borrowing? A Complete Beginner’s Guide',
+
+    'slug' => 'defi-lending-and-borrowing',
+
+    'excerpt' => 'شرح مبسط للإقراض والاقتراض في DeFi، وكيف تعمل بروتوكولات Lending، ودور الضمانات والفائدة والتصفية والمخاطر.',
+    'excerpt_ar' => 'شرح مبسط للإقراض والاقتراض في DeFi، وكيف تعمل بروتوكولات Lending، ودور الضمانات والفائدة والتصفية والمخاطر.',
+    'excerpt_en' => 'A beginner-friendly guide to DeFi lending and borrowing, including lending protocols, collateral, interest rates, liquidation, and key risks.',
+
+    'content' => null,
+
+    'content_ar' => <<<'HTML'
+<article class="academy-article">
+
+    <h2>ما هو الإقراض والاقتراض في DeFi؟</h2>
+
+    <p>
+        يُعد <strong>الإقراض والاقتراض اللامركزي (DeFi Lending &amp; Borrowing)</strong>
+        من أشهر استخدامات التمويل اللامركزي. فهو يتيح للمستخدمين إيداع أصول رقمية في بروتوكولات
+        متخصصة لتوفير السيولة، بينما يستطيع مستخدمون آخرون اقتراض أصول مقابل تقديم ضمانات.
+    </p>
+
+    <p>
+        بدلًا من الاعتماد على بنك أو مؤسسة مالية تقليدية لتحديد من يستطيع إقراض الأموال أو اقتراضها،
+        تعتمد هذه البروتوكولات على <strong>العقود الذكية</strong> والقواعد البرمجية وآليات السوق.
+        ومع ذلك، فإن وصف النظام بأنه "لامركزي" لا يعني بالضرورة أن كل جزء منه يخلو من الإدارة
+        أو الأطراف المؤثرة أو نقاط التحكم.
+    </p>
+
+    <p>
+        في هذا الدرس من <strong>AQL Crypto Academy</strong> سنتعرف على طريقة عمل الإقراض والاقتراض
+        في DeFi، والفرق بين المودع والمقترض، وما المقصود بالضمانات ونسبة الضمان، وكيف تحدث
+        التصفية، وما المخاطر التي يجب فهمها قبل التعامل مع هذه البروتوكولات.
+    </p>
+
+    <div class="academy-note">
+        <strong>ملاحظة تعليمية:</strong>
+        هذا المقال يشرح آلية عمل الإقراض والاقتراض في DeFi لأغراض تعليمية فقط،
+        ولا يمثل توصية باستخدام بروتوكول أو أصل رقمي معين.
+    </div>
+
+    <h2>كيف يرتبط الإقراض والاقتراض بمفهوم DeFi؟</h2>
+
+    <p>
+        يعتمد DeFi على تطبيق خدمات مالية باستخدام شبكات البلوكشين والعقود الذكية بدلًا من
+        الاعتماد الكامل على المؤسسات المالية التقليدية.
+    </p>
+
+    <p>
+        وإذا كنت تريد فهم الصورة العامة أولًا، يمكنك الرجوع إلى مقال
+        <a href="/academy/defi/what-is-defi">ما هو DeFi؟ شرح التمويل اللامركزي للمبتدئين</a>.
+    </p>
+
+    <p>
+        كما يشرح مقال
+        <a href="/academy/defi/how-does-defi-work">كيف يعمل DeFi؟ شرح التمويل اللامركزي والعقود الذكية</a>
+        العلاقة بين العقود الذكية والسيولة والتطبيقات اللامركزية.
+    </p>
+
+    <h2>ما معنى DeFi Lending؟</h2>
+
+    <p>
+        يشير <strong>DeFi Lending</strong> إلى إيداع المستخدم لأصول رقمية في بروتوكول إقراض،
+        بحيث تصبح هذه الأصول جزءًا من السيولة المتاحة للمستخدمين الآخرين.
+    </p>
+
+    <p>
+        في المقابل، يحصل المودع عادةً على عائد أو فائدة وفقًا لآلية البروتوكول وحالة العرض والطلب
+        على الأصل. تختلف طريقة حساب العائد من بروتوكول إلى آخر، ولذلك لا ينبغي افتراض أن معدلًا
+        ظاهرًا في واجهة التطبيق ثابت أو مضمون.
+    </p>
+
+    <p>
+        يمكن تشبيه الفكرة بصورة مبسطة بسوق يجمع بين الأشخاص الذين يريدون توفير السيولة
+        والأشخاص الذين يحتاجون إلى السيولة، بينما يتولى العقد الذكي تطبيق القواعد المحددة
+        مسبقًا.
+    </p>
+
+    <h2>ما معنى DeFi Borrowing؟</h2>
+
+    <p>
+        <strong>DeFi Borrowing</strong> هو استخدام أصول رقمية كضمان من أجل اقتراض أصل رقمي آخر
+        من السيولة المتاحة في البروتوكول.
+    </p>
+
+    <p>
+        في معظم نماذج الإقراض اللامركزي الشائعة، لا يحصل المستخدم على قرض غير مضمون كما قد يحدث
+        في بعض الأنظمة التقليدية. بل يجب أن يودع ضمانًا كافيًا وفق قواعد البروتوكول.
+    </p>
+
+    <p>
+        على سبيل المثال التعليمي، قد يودع المستخدم أصلًا رقميًا كضمان ثم يقترض جزءًا من قيمة
+        ذلك الضمان في أصل آخر. النسبة المسموح بها تختلف حسب البروتوكول والأصول المستخدمة
+        وظروف السوق.
+    </p>
+
+    <h2>كيف يعمل بروتوكول الإقراض اللامركزي؟</h2>
+
+    <p>
+        تختلف التفاصيل التقنية بين البروتوكولات، لكن النموذج العام يمكن تبسيطه إلى الخطوات التالية:
+    </p>
+
+    <ol>
+        <li>يقوم المستخدم بإيداع أصل رقمي يدعمه البروتوكول.</li>
+        <li>يُضاف الأصل إلى مجمع أو سوق السيولة الخاص بذلك الأصل.</li>
+        <li>يمكن لمستخدم آخر اقتراض أصل من السيولة المتاحة إذا استوفى شروط البروتوكول.</li>
+        <li>إذا كان الاقتراض يتطلب ضمانًا، يتم قفل الضمان داخل العقد الذكي.</li>
+        <li>تُحسب الفائدة أو تكلفة الاقتراض وفق آلية البروتوكول.</li>
+        <li>إذا انخفضت قيمة الضمان بدرجة تجعل مركز الاقتراض غير آمن، قد تبدأ عملية التصفية.</li>
+        <li>عند سداد القرض والفوائد المستحقة وفق شروط البروتوكول، يمكن تحرير الضمان للمقترض.</li>
+    </ol>
+
+    <h2>ما هي مجمعات السيولة في بروتوكولات Lending؟</h2>
+
+    <p>
+        تعتمد العديد من بروتوكولات الإقراض على مجمعات أو أسواق تحتوي على أصول يودعها المستخدمون.
+        هذه الأصول تشكل السيولة التي يمكن استخدامها من قبل المقترضين وفق قواعد البروتوكول.
+    </p>
+
+    <p>
+        وهذا يختلف عن فكرة <strong>مجمعات السيولة المستخدمة في منصات التداول اللامركزية</strong>
+        رغم وجود تشابه في مفهوم تجميع الأصول داخل العقود الذكية.
+    </p>
+
+    <p>
+        لمعرفة المزيد عن مفهوم مجمعات السيولة في DeFi، راجع مقال
+        <a href="/academy/defi/what-are-liquidity-pools">ما هي مجمعات السيولة؟ وكيف تعمل في DeFi؟</a>.
+    </p>
+
+    <h2>من هم المشاركون في عملية الإقراض؟</h2>
+
+    <h3>1. المودعون أو المقرضون</h3>
+
+    <p>
+        هم المستخدمون الذين يودعون أصولهم في بروتوكول الإقراض. وقد يحصلون مقابل ذلك على عائد
+        مرتبط بنشاط السوق والطلب على الاقتراض.
+    </p>
+
+    <h3>2. المقترضون</h3>
+
+    <p>
+        هم المستخدمون الذين يحصلون على أصول من السيولة المتاحة، وغالبًا ما يقدمون ضمانات
+        وفق شروط البروتوكول.
+    </p>
+
+    <h3>3. العقد الذكي</h3>
+
+    <p>
+        العقد الذكي هو البرنامج الموجود على البلوكشين الذي ينفذ القواعد البرمجية للبروتوكول.
+        وقد يتولى إدارة الإيداعات والاقتراض وحساب الفوائد والضمانات والتصفية وفق تصميم البروتوكول.
+    </p>
+
+    <h3>4. آليات التسعير أو الأوراكل</h3>
+
+    <p>
+        تحتاج بعض البروتوكولات إلى معرفة القيمة السوقية للأصول حتى تستطيع تحديد قيمة الضمان
+        ومراقبة مخاطر الاقتراض. ولهذا قد تعتمد على <strong>أوراكل (Oracle)</strong> لتوفير بيانات
+        الأسعار.
+    </p>
+
+    <p>
+        ولذلك فإن وجود أوراكل يمثل جزءًا مهمًا من البنية الأمنية لبعض بروتوكولات DeFi،
+        وأي مشكلة في مصدر البيانات أو تصميم آلية التسعير قد تؤثر في النظام.
+    </p>
+
+    <h2>ما هي الضمانات Collateral؟</h2>
+
+    <p>
+        <strong>الضمان (Collateral)</strong> هو أصل رقمي يقدمه المقترض إلى البروتوكول كضمان
+        مقابل الحصول على أصل آخر.
+    </p>
+
+    <p>
+        السبب الرئيسي لاستخدام الضمانات هو تقليل مخاطر عدم السداد. فإذا انخفضت قيمة الضمان
+        إلى مستوى معين وفق قواعد البروتوكول، يمكن أن تصبح العملية مؤهلة للتصفية.
+    </p>
+
+    <p>
+        تختلف الأصول التي يمكن استخدامها كضمان، كما تختلف نسب الضمان وحدود الاقتراض بين
+        البروتوكولات والأسواق المختلفة.
+    </p>
+
+    <h2>ما هي نسبة الضمان أو Loan-to-Value؟</h2>
+
+    <p>
+        من المفاهيم الأساسية في الإقراض اللامركزي <strong>نسبة القرض إلى قيمة الضمان (LTV)</strong>.
+        وهي تقارن قيمة المبلغ المقترض بقيمة الضمان المستخدم.
+    </p>
+
+    <p>
+        على سبيل المثال التعليمي، إذا كان لدى المستخدم ضمان تبلغ قيمته 1,000 دولار واقترض
+        أصولًا بقيمة 500 دولار، فإن نسبة القرض إلى قيمة الضمان تكون 50%.
+    </p>
+
+    <p>
+        المثال لا يمثل حدًا موصى به أو قاعدة عامة، لأن كل بروتوكول يحدد حدوده الخاصة وقد تختلف
+        النسب حسب الأصل والسوق ومستوى المخاطر.
+    </p>
+
+    <h2>ما هي الفائدة في DeFi Lending؟</h2>
+
+    <p>
+        الفائدة هي إحدى الآليات التي تربط بين العرض والطلب على السيولة.
+    </p>
+
+    <p>
+        عندما يزداد الطلب على اقتراض أصل معين، قد ترتفع تكلفة الاقتراض وفق نموذج أسعار الفائدة
+        المستخدم في البروتوكول. وعندما تتغير ظروف السوق والسيولة المتاحة، قد تتغير الفائدة أيضًا.
+    </p>
+
+    <p>
+        لذلك يجب الانتباه إلى أن معدل الفائدة الظاهر في لحظة معينة لا يعني بالضرورة أنه سيبقى
+        كما هو طوال فترة الإيداع أو الاقتراض.
+    </p>
+
+    <h2>ما الفرق بين Supply APY وBorrow APY؟</h2>
+
+    <p>
+        قد تعرض بروتوكولات الإقراض معدلات مختلفة للمودعين والمقترضين.
+    </p>
+
+    <ul>
+        <li><strong>Supply APY:</strong> العائد السنوي التقريبي المرتبط بتوفير أصل للسوق.</li>
+        <li><strong>Borrow APY:</strong> التكلفة السنوية التقريبية لاقتراض أصل من السوق.</li>
+    </ul>
+
+    <p>
+        قد تستخدم البروتوكولات نماذج مختلفة لحساب هذه المعدلات، وقد تتغير بمرور الوقت.
+        لذلك يجب قراءة طريقة الحساب والشروط الخاصة بالبروتوكول بدل الاعتماد على الرقم الظاهر وحده.
+    </p>
+
+    <h2>ما هي التصفية Liquidation؟</h2>
+
+    <p>
+        <strong>التصفية</strong> هي آلية لإدارة مخاطر القروض المضمونة. تحدث عندما يصبح مركز
+        الاقتراض غير آمن وفق الحدود التي يحددها البروتوكول.
+    </p>
+
+    <p>
+        على سبيل المثال، إذا اقترض المستخدم مقابل أصل يستخدمه كضمان، ثم انخفضت قيمة الضمان
+        بشكل كبير، فقد تصبح نسبة القرض إلى قيمة الضمان مرتفعة جدًا.
+    </p>
+
+    <p>
+        عند تجاوز الحد المسموح، قد يسمح البروتوكول لمشاركين آخرين بتسوية جزء من المركز
+        أو كله مقابل الحصول على الضمان وفق القواعد المحددة.
+    </p>
+
+    <div class="academy-warning">
+        <strong>تحذير مهم:</strong>
+        التصفية قد تؤدي إلى خسارة جزء من الضمان، وقد تضاف إليها رسوم أو تكاليف أخرى حسب تصميم
+        البروتوكول. لذلك فإن الاقتراض بضمان أصول شديدة التقلب يحمل مخاطر كبيرة.
+    </div>
+
+    <h2>لماذا تحدث التصفية بسرعة أحيانًا؟</h2>
+
+    <p>
+        أسواق العملات الرقمية يمكن أن تشهد تغيرات سعرية سريعة. وإذا كان مركز الاقتراض قريبًا
+        من حد التصفية، فإن تحركًا كبيرًا في سعر الضمان قد يجعل المركز ينتقل بسرعة من حالة آمنة
+        إلى حالة معرضة للتصفية.
+    </p>
+
+    <p>
+        كما يمكن أن تؤثر طريقة تحديث الأسعار وسرعة تنفيذ المعاملات وظروف الشبكة والسيولة
+        في كيفية حدوث التصفية.
+    </p>
+
+    <h2>ما هو الاقتراض المفرط الضمان Overcollateralized Borrowing؟</h2>
+
+    <p>
+        كثير من بروتوكولات الإقراض اللامركزي تعتمد على نموذج <strong>الضمان الزائد</strong>،
+        أي أن قيمة الضمان يجب أن تكون أكبر من قيمة الأصول المقترضة.
+    </p>
+
+    <p>
+        السبب هو أن البروتوكول لا يعتمد بالضرورة على تقييم ائتماني تقليدي للمستخدم، ولذلك
+        يستخدم الضمان كآلية رئيسية لتقليل مخاطر عدم السداد.
+    </p>
+
+    <p>
+        هذا النموذج يعني أن المستخدم قد يضطر إلى قفل أصول ذات قيمة أكبر من المبلغ الذي يريد اقتراضه.
+    </p>
+
+    <h2>هل يمكن الاقتراض بدون ضمان في DeFi؟</h2>
+
+    <p>
+        توجد نماذج مختلفة من الإقراض اللامركزي، ولذلك لا يمكن القول إن جميع أنواع DeFi Lending
+        تعمل بالطريقة نفسها.
+    </p>
+
+    <p>
+        توجد مثلًا آليات تُعرف باسم <strong>Flash Loans</strong> تسمح باقتراض أصول وتسديدها
+        ضمن المعاملة نفسها وفق شروط محددة. وهي تختلف جذريًا عن القروض التقليدية طويلة الأجل
+        أو القروض المضمونة المعتادة.
+    </p>
+
+    <p>
+        وتُستخدم Flash Loans في بعض التطبيقات المتقدمة مثل تنفيذ عمليات متسلسلة داخل معاملة
+        واحدة، لكنها تتطلب فهمًا تقنيًا عميقًا ولا تعني أن المستخدم يستطيع الحصول على قرض
+        مجاني أو بلا شروط.
+    </p>
+
+    <h2>ما هو Flash Loan؟</h2>
+
+    <p>
+        <strong>Flash Loan</strong> هو نوع من القروض التي تشترط عادةً أن تتم عملية الاقتراض
+        والسداد ضمن المعاملة نفسها.
+    </p>
+
+    <p>
+        إذا لم تتحقق شروط السداد التي يفرضها العقد الذكي، فقد تفشل المعاملة بالكامل وفق تصميم
+        البروتوكول والشبكة.
+    </p>
+
+    <p>
+        هذا النموذج ممكن بسبب خصائص العقود الذكية والقدرة على تنفيذ عدة عمليات بشكل ذري
+        ضمن معاملة واحدة.
+    </p>
+
+    <h2>كيف يختلف DeFi Lending عن القروض البنكية التقليدية؟</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>العنصر</th>
+                <th>DeFi Lending</th>
+                <th>النظام التقليدي</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>تنفيذ القواعد</td>
+                <td>غالبًا عبر عقود ذكية وقواعد بروتوكول</td>
+                <td>عبر مؤسسات وأنظمة مالية تقليدية</td>
+            </tr>
+            <tr>
+                <td>الضمان</td>
+                <td>شائع في العديد من النماذج</td>
+                <td>يختلف حسب نوع القرض</td>
+            </tr>
+            <tr>
+                <td>تقييم المقترض</td>
+                <td>قد يعتمد بدرجة كبيرة على الضمان وقواعد البروتوكول</td>
+                <td>قد يشمل الدخل والسجل الائتماني ومعايير أخرى</td>
+            </tr>
+            <tr>
+                <td>الفائدة</td>
+                <td>قد تتغير حسب العرض والطلب وآلية البروتوكول</td>
+                <td>تحدد وفق سياسات وشروط المؤسسة المالية</td>
+            </tr>
+            <tr>
+                <td>الوسطاء</td>
+                <td>قد يقل الاعتماد على الوسطاء التقليديين، لكن قد توجد جهات إدارية أو بنية تحتية خارجية</td>
+                <td>تعتمد عادةً على مؤسسات ووسطاء منظمين</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p>
+        المقارنة السابقة تبسيط تعليمي؛ فهناك نماذج كثيرة في كل من التمويل اللامركزي والتمويل التقليدي.
+    </p>
+
+    <h2>ما علاقة العقود الذكية بالإقراض والاقتراض؟</h2>
+
+    <p>
+        العقود الذكية هي جزء أساسي من العديد من بروتوكولات DeFi Lending. فهي تحتوي على القواعد
+        التي تحدد كيفية إيداع الأصول واقتراضها وسدادها وحساب الفوائد وإدارة الضمانات والتصفية.
+    </p>
+
+    <p>
+        وإذا كنت تريد فهم الأساس التقني للعقود الذكية والبلوكشين، يمكنك قراءة:
+        <a href="/academy/blockchain/what-is-blockchain">ما هو Blockchain؟</a>
+        و
+        <a href="/academy/blockchain/how-does-blockchain-work">كيف تعمل تقنية Blockchain؟</a>.
+    </p>
+
+    <p>
+        لكن وجود عقد ذكي لا يعني أنه آمن تلقائيًا. فقد تحتوي البرمجيات على أخطاء،
+        أو قد يكون تصميم البروتوكول نفسه معرضًا لمخاطر اقتصادية أو تقنية.
+    </p>
+
+    <h2>ما دور أوراكل الأسعار في Lending؟</h2>
+
+    <p>
+        تحتاج بروتوكولات كثيرة إلى معرفة القيمة النسبية للأصول حتى تتمكن من تقييم الضمان
+        وتحديد ما إذا كان المركز لا يزال ضمن الحدود المسموحة.
+    </p>
+
+    <p>
+        لهذا قد تعتمد على أنظمة Oracle للحصول على بيانات الأسعار من مصادر مختلفة.
+        وتختلف تصميمات الأوراكل وآليات الحماية من بروتوكول إلى آخر.
+    </p>
+
+    <p>
+        لذلك لا يكفي النظر إلى العقد الذكي وحده عند تقييم مخاطر بروتوكول إقراض؛
+        يجب أيضًا فهم مصادر الأسعار وآلية استخدامها.
+    </p>
+
+    <h2>أهم مخاطر DeFi Lending</h2>
+
+    <h3>1. مخاطر العقود الذكية</h3>
+
+    <p>
+        يمكن أن تحتوي العقود الذكية على أخطاء برمجية أو ثغرات. وحتى التدقيق الأمني
+        لا يعني أن البروتوكول أصبح خاليًا من المخاطر.
+    </p>
+
+    <h3>2. مخاطر التصفية</h3>
+
+    <p>
+        انخفاض قيمة الضمان قد يؤدي إلى تصفية المركز إذا تجاوز الحدود التي يحددها البروتوكول.
+    </p>
+
+    <h3>3. مخاطر تقلب الأسعار</h3>
+
+    <p>
+        تقلب أسعار الأصول الرقمية قد يغير قيمة الضمان والاقتراض بسرعة.
+    </p>
+
+    <h3>4. مخاطر Oracle</h3>
+
+    <p>
+        إذا كانت بيانات الأسعار غير دقيقة أو حدثت مشكلة في آلية توفيرها، فقد تتأثر عمليات
+        تقييم الضمان والتصفية.
+    </p>
+
+    <h3>5. مخاطر البروتوكول والإدارة</h3>
+
+    <p>
+        بعض البروتوكولات قد تحتوي على صلاحيات إدارية أو أنظمة ترقية أو مكونات خارجية،
+        وبالتالي لا ينبغي افتراض أن كل بروتوكول يعمل بطريقة غير قابلة للتغيير أو دون جهات مؤثرة.
+    </p>
+
+    <h3>6. مخاطر الشبكة والرسوم</h3>
+
+    <p>
+        رسوم المعاملات وازدحام الشبكة يمكن أن يؤثرا في تكلفة تنفيذ العمليات وسرعتها،
+        خصوصًا أثناء تحركات السوق السريعة.
+    </p>
+
+    <h3>7. مخاطر الأصول نفسها</h3>
+
+    <p>
+        قد تكون بعض الأصول المستخدمة في البروتوكول شديدة التقلب أو منخفضة السيولة أو مرتبطة
+        بمخاطر إضافية، ولذلك يجب تقييم الأصل والبروتوكول بشكل منفصل.
+    </p>
+
+    <h2>هل DeFi Lending يضمن عائدًا ثابتًا؟</h2>
+
+    <p>
+        لا. عرض معدل فائدة أو APY في بروتوكول DeFi لا يعني أن المستخدم سيحصل بالضرورة
+        على عائد ثابت أو مضمون.
+    </p>
+
+    <p>
+        قد تتغير معدلات الفائدة مع تغير العرض والطلب، كما يمكن أن تؤثر رسوم البروتوكول
+        وتقلبات الأصول ومخاطر العقود الذكية وغيرها في النتيجة الفعلية.
+    </p>
+
+    <p>
+        كما يجب التمييز بين <strong>الفائدة الناتجة عن الإقراض</strong> وبين المكافآت الإضافية
+        التي قد تقدمها بعض البروتوكولات ضمن برامج Liquidity Mining أو Incentives.
+    </p>
+
+    <h2>ما الفرق بين Lending وLiquidity Mining؟</h2>
+
+    <p>
+        الإقراض يعني عادةً توفير أصل للسوق بهدف إتاحته للمقترضين والحصول على العائد المحدد
+        وفق نموذج البروتوكول.
+    </p>
+
+    <p>
+        أما <strong>Liquidity Mining</strong> فيشير إلى برامج تحفيزية قد تمنح المستخدم رموزًا
+        إضافية مقابل توفير السيولة أو استخدام البروتوكول.
+    </p>
+
+    <p>
+        وجود مكافآت إضافية لا يعني بالضرورة أن النشاط منخفض المخاطر أو أن قيمة المكافأة
+        ستبقى ثابتة، لأن قيمة الرمز نفسه قد تتغير.
+    </p>
+
+    <h2>مثال تعليمي مبسط</h2>
+
+    <p>
+        لنفترض وجود بروتوكول إقراض يحتوي على سوق لأصل رقمي معين.
+    </p>
+
+    <ol>
+        <li>يودع المستخدم "أ" كمية من الأصل في البروتوكول.</li>
+        <li>تصبح الأصول جزءًا من السيولة المتاحة في السوق.</li>
+        <li>يودع المستخدم "ب" أصلًا آخر كضمان.</li>
+        <li>يقترض المستخدم "ب" كمية من الأصل المتاح وفق الحد الذي يسمح به البروتوكول.</li>
+        <li>تبدأ تكلفة الاقتراض أو الفائدة بالتراكم وفق نموذج السوق.</li>
+        <li>إذا تغيرت أسعار الأصول وأصبح الضمان غير كافٍ، قد يصبح المركز معرضًا للتصفية.</li>
+        <li>عند سداد القرض وفق شروط البروتوكول، يمكن تحرير الضمان المتبقي.</li>
+    </ol>
+
+    <p>
+        هذا المثال يوضح الفكرة فقط، ولا يمثل شروط بروتوكول معين أو نسبة اقتراض محددة.
+    </p>
+
+    <h2>ما الذي يجب فحصه قبل استخدام بروتوكول Lending؟</h2>
+
+    <p>
+        عند دراسة أي بروتوكول إقراض، من المفيد فهم مجموعة من العناصر بدل النظر إلى APY فقط:
+    </p>
+
+    <ul>
+        <li>الأصول التي يدعمها البروتوكول.</li>
+        <li>نسبة الضمان المطلوبة.</li>
+        <li>حدود الاقتراض.</li>
+        <li>آلية احتساب الفائدة.</li>
+        <li>آلية التصفية.</li>
+        <li>مصادر بيانات الأسعار.</li>
+        <li>العقود الذكية المستخدمة.</li>
+        <li>نتائج التدقيقات الأمنية إن وجدت.</li>
+        <li>الصلاحيات الإدارية والترقيات.</li>
+        <li>اعتماد البروتوكول على خدمات أو عقود خارجية.</li>
+        <li>رسوم الشبكة والمعاملات.</li>
+        <li>السيولة المتاحة وحجم السوق.</li>
+    </ul>
+
+    <h2>هل الإقراض والاقتراض في DeFi مناسب للمبتدئين؟</h2>
+
+    <p>
+        من الناحية التعليمية، يمكن للمبتدئ فهم الفكرة الأساسية بسهولة، لكن التعامل الفعلي
+        مع بروتوكولات الإقراض يتطلب فهمًا جيدًا للضمانات والفائدة والتصفية ورسوم الشبكة
+        ومخاطر العقود الذكية والأسعار.
+    </p>
+
+    <p>
+        لذلك من الأفضل فهم آلية البروتوكول بالكامل قبل استخدام أموال حقيقية، وعدم التعامل
+        مع APY أو المكافآت المعروضة على أنها ضمان لتحقيق أرباح.
+    </p>
+
+    <h2>كيف يرتبط Lending بباقي منظومة DeFi؟</h2>
+
+    <p>
+        الإقراض ليس نظامًا منفصلًا عن بقية منظومة DeFi. فقد تتفاعل بروتوكولات الإقراض
+        مع منصات التداول اللامركزي ومجمعات السيولة والأوراكل والعقود الذكية والتطبيقات
+        المالية الأخرى.
+    </p>
+
+    <p>
+        كما يمكن أن تُستخدم الأصول المقترضة في عمليات أخرى داخل النظام، ما يجعل المخاطر
+        مترابطة بين عدة بروتوكولات في بعض الحالات.
+    </p>
+
+    <p>
+        لفهم البنية الأوسع لتطبيقات DeFi، يمكنك العودة إلى
+        <a href="/academy/defi">صفحة أكاديمية DeFi في AQL Crypto Academy</a>.
+    </p>
+
+    <h2>الخلاصة</h2>
+
+    <p>
+        الإقراض والاقتراض في DeFi هما من أهم تطبيقات التمويل اللامركزي. تعتمد العديد من
+        البروتوكولات على العقود الذكية ومجمعات السيولة والضمانات وأسعار الفائدة وآليات التصفية
+        لتوفير أسواق إقراض رقمية.
+    </p>
+
+    <p>
+        يستطيع المودعون توفير السيولة والحصول على عائد وفق شروط البروتوكول، بينما يستطيع
+        المقترضون الحصول على أصول مقابل ضمانات في كثير من النماذج. لكن هذه العملية لا تخلو
+        من المخاطر، ومنها مخاطر العقود الذكية والتصفية وتقلب الأسعار والأوراكل والصلاحيات
+        الإدارية والشبكات والأصول المستخدمة.
+    </p>
+
+    <p>
+        فهم هذه المكونات خطوة أساسية قبل الانتقال إلى موضوعات DeFi الأكثر تقدمًا.
+    </p>
+
+    <div class="academy-takeaways">
+        <h3>أهم النقاط</h3>
+        <ul>
+            <li>DeFi Lending يسمح بتوفير الأصول للسيولة والحصول على عائد وفق آلية البروتوكول.</li>
+            <li>DeFi Borrowing يسمح باقتراض الأصول، وغالبًا يتطلب ضمانًا.</li>
+            <li>نسبة LTV تقارن قيمة الاقتراض بقيمة الضمان.</li>
+            <li>قد تحدث التصفية عندما يصبح مركز الاقتراض غير آمن.</li>
+            <li>أسعار الفائدة قد تتغير مع ظروف السوق.</li>
+            <li>بعض البروتوكولات تعتمد على Oracles لتقييم أسعار الأصول.</li>
+            <li>العقود الذكية لا تعني تلقائيًا أن النظام خالٍ من المخاطر.</li>
+            <li>APY أو المكافآت ليست ضمانًا لعائد ثابت.</li>
+        </ul>
+    </div>
+
+    <div class="academy-disclaimer">
+        <strong>تنبيه:</strong>
+        محتوى AQL Crypto Academy تعليمي وتثقيفي فقط، ولا يُعد نصيحة مالية أو استثمارية
+        أو توصية بشراء أو بيع أو إيداع أو اقتراض أي أصل رقمي. تختلف المخاطر والرسوم
+        وشروط البروتوكولات من مشروع إلى آخر، ويجب إجراء البحث المستقل وفهم المخاطر
+        قبل اتخاذ أي قرار مالي.
+    </div>
+
+</article>
+HTML,
+
+    'content_en' => <<<'HTML'
+<article class="academy-article">
+
+    <h2>What Are DeFi Lending and Borrowing?</h2>
+
+    <p>
+        <strong>DeFi lending and borrowing</strong> are among the most widely used applications
+        of decentralized finance. They allow users to supply digital assets to specialized
+        protocols while other users can borrow assets, often by providing collateral.
+    </p>
+
+    <p>
+        Instead of relying entirely on a traditional bank or financial institution to approve
+        loans and manage liquidity, many DeFi lending protocols use <strong>smart contracts</strong>,
+        predefined rules, and market-based mechanisms.
+    </p>
+
+    <p>
+        However, calling a system "decentralized" does not necessarily mean that every part
+        of the system is free from administration, external dependencies, or influential
+        participants.
+    </p>
+
+    <p>
+        In this AQL Crypto Academy lesson, we will explain how DeFi lending and borrowing work,
+        who the lenders and borrowers are, how collateral and loan-to-value ratios work,
+        what liquidation means, and which risks users should understand.
+    </p>
+
+    <div class="academy-note">
+        <strong>Educational note:</strong>
+        This article explains DeFi lending and borrowing for educational purposes only.
+        It is not a recommendation to use any specific protocol or digital asset.
+    </div>
+
+    <h2>How Does Lending and Borrowing Fit Into DeFi?</h2>
+
+    <p>
+        DeFi uses blockchain networks and smart contracts to provide financial applications
+        without relying entirely on traditional financial institutions.
+    </p>
+
+    <p>
+        If you want to understand the broader concept first, read
+        <a href="/academy/defi/what-is-defi">What Is DeFi? A Beginner’s Guide to Decentralized Finance</a>.
+    </p>
+
+    <p>
+        You can also read
+        <a href="/academy/defi/how-does-defi-work">How Does DeFi Work? A Beginner’s Guide to Decentralized Finance</a>
+        for an overview of smart contracts, liquidity, and decentralized applications.
+    </p>
+
+    <h2>What Does DeFi Lending Mean?</h2>
+
+    <p>
+        <strong>DeFi lending</strong> generally refers to supplying digital assets to a lending
+        protocol so that those assets become part of the liquidity available to borrowers.
+    </p>
+
+    <p>
+        In return, the supplier may receive interest or another form of return based on the
+        protocol's design and market conditions.
+    </p>
+
+    <p>
+        Interest rates are not necessarily fixed. They can change as supply, borrowing demand,
+        utilization, and other protocol-specific factors change.
+    </p>
+
+    <h2>What Does DeFi Borrowing Mean?</h2>
+
+    <p>
+        <strong>DeFi borrowing</strong> means obtaining digital assets from available protocol
+        liquidity, often by depositing another digital asset as collateral.
+    </p>
+
+    <p>
+        In many common DeFi lending models, borrowers do not receive an unsecured loan in the
+        same way some traditional borrowers might. Instead, collateral is used to reduce
+        the protocol's exposure to repayment risk.
+    </p>
+
+    <p>
+        For example, a user may deposit one digital asset as collateral and borrow part of
+        that collateral's value in another asset. The permitted amount depends on the protocol,
+        the assets involved, and current market conditions.
+    </p>
+
+    <h2>How Does a DeFi Lending Protocol Work?</h2>
+
+    <p>
+        The technical details vary between protocols, but the general process can be simplified
+        into several steps:
+    </p>
+
+    <ol>
+        <li>A user deposits a supported digital asset into the protocol.</li>
+        <li>The asset becomes part of the available liquidity for that market.</li>
+        <li>Another user can borrow from the available liquidity if the protocol's conditions are met.</li>
+        <li>If collateral is required, it is locked in the relevant smart contract.</li>
+        <li>Interest or borrowing costs are calculated according to the protocol's mechanism.</li>
+        <li>If collateral value falls enough, the position may become eligible for liquidation.</li>
+        <li>After repayment according to the protocol's rules, remaining collateral can generally be released.</li>
+    </ol>
+
+    <h2>What Are Liquidity Pools in Lending Protocols?</h2>
+
+    <p>
+        Many DeFi lending protocols use pools or markets containing assets supplied by users.
+        These assets form the liquidity that borrowers can access under the protocol's rules.
+    </p>
+
+    <p>
+        This is related to, but not identical to, the liquidity pools used by decentralized
+        exchanges. The underlying concepts and mechanisms can differ substantially.
+    </p>
+
+    <p>
+        For a focused explanation of liquidity pools, read
+        <a href="/academy/defi/what-are-liquidity-pools">What Are Liquidity Pools? How Do They Work in DeFi?</a>.
+    </p>
+
+    <h2>Who Participates in DeFi Lending?</h2>
+
+    <h3>1. Suppliers or Lenders</h3>
+
+    <p>
+        Suppliers deposit assets into the protocol. Depending on the protocol and market
+        conditions, they may receive a return associated with lending activity.
+    </p>
+
+    <h3>2. Borrowers</h3>
+
+    <p>
+        Borrowers access assets from available liquidity and, in many models, provide collateral
+        under the protocol's rules.
+    </p>
+
+    <h3>3. Smart Contracts</h3>
+
+    <p>
+        Smart contracts are blockchain-based programs that enforce the protocol's programmed
+        rules. Depending on the design, they may manage deposits, borrowing, interest,
+        collateral, and liquidation.
+    </p>
+
+    <h3>4. Price Oracles</h3>
+
+    <p>
+        Some lending protocols need reliable asset prices to determine collateral values and
+        monitor borrowing positions. They may therefore depend on <strong>price oracles</strong>
+        or other pricing mechanisms.
+    </p>
+
+    <p>
+        Oracle design is an important part of the risk model because problems with price data
+        can affect collateral valuation and liquidation mechanisms.
+    </p>
+
+    <h2>What Is Collateral?</h2>
+
+    <p>
+        <strong>Collateral</strong> is a digital asset deposited by a borrower as security
+        for a loan.
+    </p>
+
+    <p>
+        Collateral helps reduce repayment risk. If the collateral loses enough value,
+        the borrowing position may become unsafe and subject to liquidation.
+    </p>
+
+    <p>
+        Supported collateral assets and collateral requirements vary between protocols
+        and markets.
+    </p>
+
+    <h2>What Is Loan-to-Value (LTV)?</h2>
+
+    <p>
+        <strong>Loan-to-value (LTV)</strong> is an important concept in collateralized lending.
+        It compares the value of borrowed assets with the value of the collateral.
+    </p>
+
+    <p>
+        For a simple educational example, if a user provides $1,000 worth of collateral
+        and borrows $500 worth of assets, the LTV is 50%.
+    </p>
+
+    <p>
+        This example does not represent a recommended or universal borrowing limit.
+        Each protocol and asset market can use different parameters.
+    </p>
+
+    <h2>How Does Interest Work in DeFi Lending?</h2>
+
+    <p>
+        Interest is one mechanism that connects the supply and demand for liquidity.
+    </p>
+
+    <p>
+        When borrowing demand for an asset increases, the borrowing cost may increase under
+        the protocol's interest-rate model. As liquidity and market conditions change,
+        interest rates can move in the opposite direction as well.
+    </p>
+
+    <p>
+        Therefore, an interest rate shown at one moment should not automatically be treated
+        as a fixed rate for the entire duration of a position.
+    </p>
+
+    <h2>What Are Supply APY and Borrow APY?</h2>
+
+    <p>
+        DeFi lending protocols may display different rates for suppliers and borrowers.
+    </p>
+
+    <ul>
+        <li><strong>Supply APY:</strong> an annualized estimate associated with supplying an asset.</li>
+        <li><strong>Borrow APY:</strong> an annualized estimate associated with borrowing an asset.</li>
+    </ul>
+
+    <p>
+        The exact calculation can vary by protocol, and rates can change over time.
+        Users should understand the methodology and conditions instead of relying only
+        on the displayed percentage.
+    </p>
+
+    <h2>What Is Liquidation?</h2>
+
+    <p>
+        <strong>Liquidation</strong> is a risk-management mechanism used in collateralized
+        lending. It can occur when a borrowing position becomes unsafe under the protocol's
+        defined risk parameters.
+    </p>
+
+    <p>
+        For example, if a borrower uses an asset as collateral and that asset falls sharply
+        in value, the loan-to-value ratio can increase significantly.
+    </p>
+
+    <p>
+        If the position crosses the relevant threshold, the protocol may allow liquidators
+        or other participants to repay part or all of the debt in exchange for collateral,
+        according to the protocol's rules.
+    </p>
+
+    <div class="academy-warning">
+        <strong>Important warning:</strong>
+        Liquidation can result in the loss of part of the collateral and may involve
+        additional fees or penalties depending on the protocol. Borrowing against highly
+        volatile assets can therefore carry significant risk.
+    </div>
+
+    <h2>Why Can Liquidations Happen Quickly?</h2>
+
+    <p>
+        Cryptocurrency markets can experience rapid price movements. If a borrowing position
+        is already close to its liquidation threshold, a sharp change in the collateral price
+        can quickly make the position unsafe.
+    </p>
+
+    <p>
+        Price-update mechanisms, transaction execution speed, network congestion, and market
+        liquidity can also affect how liquidation events occur.
+    </p>
+
+    <h2>What Is Overcollateralized Borrowing?</h2>
+
+    <p>
+        Many DeFi lending protocols use <strong>overcollateralization</strong>, meaning the
+        collateral value must generally be greater than the value of the borrowed assets.
+    </p>
+
+    <p>
+        This model is common because DeFi protocols may not rely on traditional credit scoring.
+        Collateral therefore acts as a major mechanism for managing repayment risk.
+    </p>
+
+    <p>
+        As a result, borrowers may need to lock assets worth more than the amount they borrow.
+    </p>
+
+    <h2>Can You Borrow Without Collateral in DeFi?</h2>
+
+    <p>
+        DeFi includes different lending models, so not every form of lending works in exactly
+        the same way.
+    </p>
+
+    <p>
+        One example is the <strong>flash loan</strong>, which can allow assets to be borrowed
+        and repaid within the same blockchain transaction under specific conditions.
+    </p>
+
+    <p>
+        Flash loans are fundamentally different from conventional collateralized loans.
+        They can be used in advanced on-chain operations, but they do not mean that users
+        receive unrestricted or risk-free loans.
+    </p>
+
+    <h2>What Is a Flash Loan?</h2>
+
+    <p>
+        A <strong>flash loan</strong> is a type of loan that generally requires borrowing
+        and repayment to occur within the same transaction.
+    </p>
+
+    <p>
+        If the required repayment conditions are not satisfied, the transaction may fail
+        according to the protocol's design.
+    </p>
+
+    <p>
+        This mechanism is possible because smart contracts can execute multiple operations
+        atomically within a blockchain transaction.
+    </p>
+
+    <h2>DeFi Lending vs Traditional Bank Loans</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Feature</th>
+                <th>DeFi Lending</th>
+                <th>Traditional Finance</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Rule execution</td>
+                <td>Often implemented through smart contracts and protocol rules</td>
+                <td>Handled through traditional financial institutions and systems</td>
+            </tr>
+            <tr>
+                <td>Collateral</td>
+                <td>Common in many lending models</td>
+                <td>Depends on the type of loan</td>
+            </tr>
+            <tr>
+                <td>Borrower assessment</td>
+                <td>May rely heavily on collateral and protocol rules</td>
+                <td>May include income, credit history, and other criteria</td>
+            </tr>
+            <tr>
+                <td>Interest</td>
+                <td>May change according to supply, demand, and protocol mechanics</td>
+                <td>Set according to institutional policies and loan terms</td>
+            </tr>
+            <tr>
+                <td>Intermediaries</td>
+                <td>Can reduce reliance on traditional intermediaries, but external or administrative components may still exist</td>
+                <td>Typically relies on regulated institutions and intermediaries</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p>
+        This comparison is simplified for educational purposes. Both DeFi and traditional finance
+        contain many different models.
+    </p>
+
+    <h2>What Role Do Smart Contracts Play?</h2>
+
+    <p>
+        Smart contracts are a core component of many DeFi lending protocols. Depending on the
+        protocol, they can contain the rules governing deposits, borrowing, repayment,
+        interest calculations, collateral, and liquidation.
+    </p>
+
+    <p>
+        To understand the underlying blockchain technology, you can read:
+        <a href="/academy/blockchain/what-is-blockchain">What Is Blockchain?</a>
+        and
+        <a href="/academy/blockchain/how-does-blockchain-work">How Does Blockchain Work?</a>.
+    </p>
+
+    <p>
+        However, the presence of a smart contract does not automatically make a system secure.
+        Smart contracts can contain vulnerabilities, and protocol designs can also have
+        economic or technical weaknesses.
+    </p>
+
+    <h2>What Role Do Price Oracles Play?</h2>
+
+    <p>
+        Many lending protocols need asset prices to evaluate collateral and determine whether
+        borrowing positions remain within acceptable limits.
+    </p>
+
+    <p>
+        Protocols may therefore use oracle systems to obtain price information from one or
+        more sources. Oracle designs and security mechanisms vary between protocols.
+    </p>
+
+    <p>
+        Understanding a lending protocol therefore requires more than examining its smart
+        contracts. Its pricing infrastructure and dependencies can also be important.
+    </p>
+
+    <h2>Key Risks of DeFi Lending</h2>
+
+    <h3>1. Smart Contract Risk</h3>
+
+    <p>
+        Smart contracts can contain software vulnerabilities or design flaws. Even a security
+        audit does not guarantee that a protocol is free from risk.
+    </p>
+
+    <h3>2. Liquidation Risk</h3>
+
+    <p>
+        A decline in collateral value can make a borrowing position eligible for liquidation.
+    </p>
+
+    <h3>3. Market Volatility</h3>
+
+    <p>
+        Digital assets can be highly volatile, causing collateral and borrowing values to
+        change quickly.
+    </p>
+
+    <h3>4. Oracle Risk</h3>
+
+    <p>
+        Inaccurate price data or problems in an oracle mechanism can affect collateral valuation
+        and liquidation decisions.
+    </p>
+
+    <h3>5. Protocol and Governance Risk</h3>
+
+    <p>
+        Some protocols include administrative permissions, upgrade mechanisms, or external
+        components. Users should not automatically assume that every protocol is immutable
+        or completely free from influential parties.
+    </p>
+
+    <h3>6. Network and Transaction Costs</h3>
+
+    <p>
+        Blockchain fees and congestion can affect transaction costs and execution speed,
+        particularly during periods of market stress.
+    </p>
+
+    <h3>7. Asset Risk</h3>
+
+    <p>
+        The assets supported by a protocol can have their own risks, including high volatility,
+        limited liquidity, or additional structural risks.
+    </p>
+
+    <h2>Does DeFi Lending Guarantee a Fixed Return?</h2>
+
+    <p>
+        No. A displayed interest rate or APY does not guarantee a fixed return.
+    </p>
+
+    <p>
+        Rates can change as market conditions change. Protocol fees, asset volatility,
+        smart contract risk, and other factors can also affect the actual outcome.
+    </p>
+
+    <p>
+        It is also important to distinguish <strong>lending interest</strong> from additional
+        incentives that some protocols may offer through liquidity mining or reward programs.
+    </p>
+
+    <h2>What Is the Difference Between Lending and Liquidity Mining?</h2>
+
+    <p>
+        Lending generally means supplying an asset to a lending market so that borrowers can
+        access it under the protocol's rules.
+    </p>
+
+    <p>
+        <strong>Liquidity mining</strong> refers to incentive programs that may distribute
+        additional tokens to users for supplying liquidity or participating in a protocol.
+    </p>
+
+    <p>
+        Additional rewards do not automatically mean lower risk or guaranteed profitability,
+        because the value of reward tokens can change.
+    </p>
+
+    <h2>A Simple Educational Example</h2>
+
+    <p>
+        Imagine a lending protocol with a market for a particular digital asset.
+    </p>
+
+    <ol>
+        <li>User A deposits an amount of the asset into the protocol.</li>
+        <li>The deposited assets become part of the available market liquidity.</li>
+        <li>User B deposits another digital asset as collateral.</li>
+        <li>User B borrows part of the available asset within the protocol's limits.</li>
+        <li>Borrowing costs or interest begin accumulating according to the market mechanism.</li>
+        <li>If asset prices move and the collateral becomes insufficient, the position may become liquidatable.</li>
+        <li>After repayment under the protocol's rules, remaining collateral can be released.</li>
+    </ol>
+
+    <p>
+        This example explains the general mechanism and does not represent the terms of any
+        particular protocol or a specific borrowing ratio.
+    </p>
+
+    <h2>What Should You Check Before Using a Lending Protocol?</h2>
+
+    <p>
+        When researching a DeFi lending protocol, it is useful to examine several factors
+        instead of focusing only on the displayed APY:
+    </p>
+
+    <ul>
+        <li>Supported assets.</li>
+        <li>Collateral requirements.</li>
+        <li>Borrowing limits.</li>
+        <li>Interest-rate mechanism.</li>
+        <li>Liquidation mechanism.</li>
+        <li>Price data sources.</li>
+        <li>Smart contracts involved.</li>
+        <li>Available security audits and their limitations.</li>
+        <li>Administrative permissions and upgrade mechanisms.</li>
+        <li>External dependencies.</li>
+        <li>Network and transaction costs.</li>
+        <li>Available liquidity and market depth.</li>
+    </ul>
+
+    <h2>Is DeFi Lending Suitable for Beginners?</h2>
+
+    <p>
+        From an educational perspective, the basic concept can be understood by beginners.
+        However, actually interacting with lending protocols requires an understanding of
+        collateral, interest rates, liquidation, transaction fees, smart contract risks,
+        and asset-price volatility.
+    </p>
+
+    <p>
+        Users should understand a protocol's mechanics before using real funds and should
+        never treat a displayed APY or reward rate as a guarantee of profit.
+    </p>
+
+    <h2>How Does Lending Connect to the Rest of DeFi?</h2>
+
+    <p>
+        Lending is not isolated from the rest of DeFi. Lending protocols can interact with
+        decentralized exchanges, liquidity pools, price oracles, smart contracts, and other
+        financial applications.
+    </p>
+
+    <p>
+        Borrowed assets may also be used in other on-chain applications, which means risks
+        can sometimes become interconnected across multiple protocols.
+    </p>
+
+    <p>
+        For a broader overview of the DeFi ecosystem, visit the
+        <a href="/academy/defi">DeFi section of AQL Crypto Academy</a>.
+    </p>
+
+    <h2>Conclusion</h2>
+
+    <p>
+        DeFi lending and borrowing are among the most important applications of decentralized
+        finance. Many protocols use smart contracts, liquidity markets, collateral, interest
+        rates, and liquidation mechanisms to create blockchain-based lending markets.
+    </p>
+
+    <p>
+        Suppliers can provide liquidity and receive returns according to protocol rules,
+        while borrowers can access assets against collateral in many models.
+        However, these systems involve significant risks, including smart contract risk,
+        liquidation risk, price volatility, oracle risk, governance risk, network costs,
+        and asset-specific risks.
+    </p>
+
+    <p>
+        Understanding these mechanisms is an important foundation for studying more advanced
+        DeFi concepts.
+    </p>
+
+    <div class="academy-takeaways">
+        <h3>Key Takeaways</h3>
+        <ul>
+            <li>DeFi lending allows users to supply assets and potentially earn returns under protocol rules.</li>
+            <li>DeFi borrowing allows users to access assets, often by providing collateral.</li>
+            <li>LTV compares the value of borrowed assets with the value of collateral.</li>
+            <li>Liquidation can occur when a borrowing position becomes unsafe.</li>
+            <li>Interest rates can change with market conditions.</li>
+            <li>Some lending protocols depend on price oracles.</li>
+            <li>Smart contracts are not automatically risk-free.</li>
+            <li>APYs and incentives are not guarantees of fixed returns.</li>
+        </ul>
+    </div>
+
+    <div class="academy-disclaimer">
+        <strong>Disclaimer:</strong>
+        AQL Crypto Academy content is provided for educational and informational purposes only.
+        It is not financial or investment advice and does not recommend buying, selling,
+        lending, borrowing, or depositing any digital asset. Protocol rules, fees, risks,
+        and market conditions vary. Conduct independent research and understand the risks
+        before making any financial decision.
+    </div>
+
+</article>
+HTML,
+
+    'image' => null,
+
+    'seo_title' => 'ما هو الإقراض والاقتراض في DeFi؟ شرح Lending وBorrowing | AQL Crypto Academy',
+    'seo_title_ar' => 'ما هو الإقراض والاقتراض في DeFi؟ شرح Lending وBorrowing | AQL Crypto Academy',
+    'seo_title_en' => 'What Are DeFi Lending and Borrowing? Complete Beginner’s Guide | AQL Crypto Academy',
+
+    'meta_description' => 'تعرف على الإقراض والاقتراض في DeFi، وكيف تعمل بروتوكولات Lending، وما هي الضمانات وLTV والفائدة والتصفية وأهم المخاطر.',
+    'meta_description_ar' => 'تعرف على الإقراض والاقتراض في DeFi، وكيف تعمل بروتوكولات Lending، وما هي الضمانات وLTV والفائدة والتصفية وأهم المخاطر.',
+    'meta_description_en' => 'Learn how DeFi lending and borrowing work, including collateral, LTV, interest rates, liquidation, flash loans, and key protocol risks.',
+
+    'faq_ar' => [
+        [
+            'question' => 'ما هو الإقراض في DeFi؟',
+            'answer' => 'الإقراض في DeFi هو توفير أصول رقمية لبروتوكول إقراض لتصبح جزءًا من السيولة المتاحة للمقترضين، وقد يحصل المودع على عائد أو فائدة وفق آلية البروتوكول وظروف السوق.'
+        ],
+        [
+            'question' => 'ما هو الاقتراض في DeFi؟',
+            'answer' => 'الاقتراض في DeFi هو الحصول على أصول رقمية من سيولة البروتوكول، وغالبًا يتطلب تقديم أصل رقمي آخر كضمان وفق شروط البروتوكول.'
+        ],
+        [
+            'question' => 'ما هي الضمانات Collateral في DeFi؟',
+            'answer' => 'الضمان هو أصل رقمي يودعه المقترض لتأمين عملية الاقتراض. إذا انخفضت قيمة الضمان بدرجة كبيرة، فقد يصبح مركز الاقتراض معرضًا للتصفية.'
+        ],
+        [
+            'question' => 'ما هي نسبة LTV في DeFi؟',
+            'answer' => 'LTV أو Loan-to-Value هي نسبة تقارن قيمة الأصول المقترضة بقيمة الضمان. تختلف الحدود المسموح بها حسب البروتوكول والأصول المستخدمة.'
+        ],
+        [
+            'question' => 'ما هي التصفية Liquidation في DeFi؟',
+            'answer' => 'التصفية هي آلية لإدارة مخاطر القروض المضمونة، وقد تحدث عندما يصبح مركز الاقتراض غير آمن وفق الحدود التي يحددها البروتوكول، مثل انخفاض قيمة الضمان.'
+        ],
+        [
+            'question' => 'هل فوائد DeFi Lending ثابتة؟',
+            'answer' => 'ليست بالضرورة ثابتة. قد تتغير أسعار الفائدة مع تغير العرض والطلب والسيولة واستخدام السوق وآلية البروتوكول.'
+        ],
+        [
+            'question' => 'هل DeFi Lending يضمن تحقيق أرباح؟',
+            'answer' => 'لا. معدل APY أو الفائدة المعروض لا يمثل ضمانًا لعائد ثابت، كما توجد مخاطر مرتبطة بالعقود الذكية والأسعار والتصفية والأوراكل والبروتوكول والأصول.'
+        ],
+        [
+            'question' => 'ما هو Flash Loan؟',
+            'answer' => 'Flash Loan هو نموذج من القروض يتيح اقتراض أصل وتسديده ضمن المعاملة نفسها وفق شروط محددة. وهو يختلف عن القروض المضمونة التقليدية ويستخدم غالبًا في تطبيقات متقدمة.'
+        ],
+        [
+            'question' => 'ما أهم مخاطر الإقراض والاقتراض في DeFi؟',
+            'answer' => 'تشمل المخاطر مخاطر العقود الذكية، التصفية، تقلب أسعار الأصول، أوراكل الأسعار، الصلاحيات الإدارية، الشبكة والرسوم، والسيولة والمخاطر الخاصة بالأصول.'
+        ],
+        [
+            'question' => 'هل الإقراض والاقتراض في DeFi لامركزي بالكامل؟',
+            'answer' => 'ليس بالضرورة. تختلف درجة اللامركزية بين البروتوكولات، وقد توجد صلاحيات إدارية أو أنظمة ترقية أو خدمات خارجية مثل الأوراكل ومكونات أخرى.'
+        ],
+    ],
+
+    'faq_en' => [
+        [
+            'question' => 'What is DeFi lending?',
+            'answer' => 'DeFi lending involves supplying digital assets to a lending protocol so they can become available as liquidity for borrowers. Suppliers may receive interest or another return according to the protocol and market conditions.'
+        ],
+        [
+            'question' => 'What is DeFi borrowing?',
+            'answer' => 'DeFi borrowing means obtaining digital assets from protocol liquidity, often by providing another digital asset as collateral under the protocol’s rules.'
+        ],
+        [
+            'question' => 'What is collateral in DeFi?',
+            'answer' => 'Collateral is a digital asset deposited by a borrower to secure a borrowing position. If the collateral loses enough value, the position may become subject to liquidation.'
+        ],
+        [
+            'question' => 'What is LTV in DeFi lending?',
+            'answer' => 'LTV, or Loan-to-Value, compares the value of borrowed assets with the value of the collateral. The permitted limits vary by protocol and asset market.'
+        ],
+        [
+            'question' => 'What is liquidation in DeFi?',
+            'answer' => 'Liquidation is a risk-management mechanism that can occur when a collateralized borrowing position becomes unsafe under the protocol’s defined parameters, such as after a significant decline in collateral value.'
+        ],
+        [
+            'question' => 'Are DeFi lending interest rates fixed?',
+            'answer' => 'Not necessarily. Interest rates can change as supply, demand, liquidity, utilization, and protocol-specific mechanisms change.'
+        ],
+        [
+            'question' => 'Does DeFi lending guarantee profits?',
+            'answer' => 'No. A displayed APY or interest rate does not guarantee a fixed return. Users also face smart contract, price, liquidation, oracle, protocol, and asset-specific risks.'
+        ],
+        [
+            'question' => 'What is a flash loan?',
+            'answer' => 'A flash loan is a lending mechanism that generally requires an asset to be borrowed and repaid within the same transaction under specific conditions. It differs from conventional collateralized lending and is often used in advanced applications.'
+        ],
+        [
+            'question' => 'What are the main risks of DeFi lending and borrowing?',
+            'answer' => 'Key risks include smart contract vulnerabilities, liquidation, asset-price volatility, oracle issues, administrative permissions, network fees and congestion, liquidity conditions, and risks specific to the assets involved.'
+        ],
+        [
+            'question' => 'Is DeFi lending fully decentralized?',
+            'answer' => 'Not necessarily. The degree of decentralization varies between protocols, and some may include administrative permissions, upgrade mechanisms, external oracles, or other external dependencies.'
+        ],
+    ],
+
+    'status' => 'published',
+    'sort_order' => 5,
+    'published_at' => now(),
+],
+[
+    'topic_id' => $defi->id,
+
+    'title' => 'ما هي العملات المستقرة في DeFi؟ شرح Stablecoins للمبتدئين',
+    'title_ar' => 'ما هي العملات المستقرة في DeFi؟ شرح Stablecoins للمبتدئين',
+    'title_en' => 'What Are Stablecoins in DeFi? A Beginner’s Guide',
+
+    'slug' => 'stablecoins-in-defi',
+
+    'excerpt' => 'تعرف على العملات المستقرة Stablecoins ودورها في DeFi، وكيف تحافظ بعض أنواعها على استقرار نسبي للسعر، وما استخداماتها ومخاطرها.',
+    'excerpt_ar' => 'تعرف على العملات المستقرة Stablecoins ودورها في DeFi، وكيف تحافظ بعض أنواعها على استقرار نسبي للسعر، وما استخداماتها ومخاطرها.',
+    'excerpt_en' => 'Learn what stablecoins are, how they are used in DeFi, how different stablecoin models work, and what risks users should understand.',
+
+    'content' => null,
+
+    'content_ar' => <<<'HTML'
+<article class="academy-article">
+
+    <h2>ما هي العملات المستقرة Stablecoins؟</h2>
+
+    <p>
+        <strong>العملات المستقرة (Stablecoins)</strong> هي أصول رقمية صُممت بهدف الحفاظ على
+        قيمة مستقرة نسبيًا مقارنةً بأصل مرجعي معين، وغالبًا ما يكون هذا الأصل عملة تقليدية
+        مثل الدولار الأمريكي.
+    </p>
+
+    <p>
+        أصبحت العملات المستقرة عنصرًا مهمًا في منظومة <strong>DeFi</strong> لأنها توفر أصلًا
+        رقميًا يمكن استخدامه في التداول والإقراض والاقتراض وتوفير السيولة والتحويلات، مع محاولة
+        تقليل التقلب السعري مقارنةً بالعديد من العملات الرقمية الأخرى.
+    </p>
+
+    <p>
+        لكن من المهم فهم أن كلمة "مستقرة" لا تعني أن السعر مضمون أو أن العملة خالية من المخاطر.
+        تختلف آليات العملات المستقرة بشكل كبير، وقد تواجه مخاطر مرتبطة بالاحتياطيات أو الضمانات
+        أو العقود الذكية أو الحوكمة أو السيولة أو آلية الحفاظ على السعر.
+    </p>
+
+    <p>
+        في هذا الدرس من <strong>AQL Crypto Academy</strong> سنتعرف على مفهوم العملات المستقرة،
+        وأنواعها، وطريقة استخدامها داخل DeFi، ودورها في التداول والإقراض ومجمعات السيولة،
+        بالإضافة إلى أهم المخاطر التي يجب فهمها.
+    </p>
+
+    <div class="academy-note">
+        <strong>ملاحظة تعليمية:</strong>
+        هذا المقال يشرح العملات المستقرة وآلية استخدامها في DeFi لأغراض تعليمية فقط،
+        ولا يمثل توصية باستخدام عملة مستقرة أو بروتوكول معين.
+    </div>
+
+    <h2>لماذا تحتاج منظومة DeFi إلى العملات المستقرة؟</h2>
+
+    <p>
+        معظم الأصول الرقمية المعروفة يمكن أن تشهد تغيرات كبيرة في السعر. هذا التقلب قد يجعل
+        استخدامها كوحدة حساب أو وسيط داخل بعض التطبيقات المالية أكثر صعوبة.
+    </p>
+
+    <p>
+        هنا تظهر أهمية العملات المستقرة؛ فهي تحاول توفير أصل رقمي ذي قيمة أكثر استقرارًا
+        نسبيًا يمكن استخدامه داخل التطبيقات اللامركزية دون الحاجة إلى نقل الأموال بالطريقة
+        التقليدية في كل عملية.
+    </p>
+
+    <p>
+        على سبيل المثال، يمكن استخدام عملة مستقرة في سوق إقراض كأصل للإيداع أو الاقتراض،
+        أو استخدامها في زوج تداول داخل منصة لامركزية، أو الاحتفاظ بها داخل محفظة لاستخدامها
+        في تطبيقات DeFi المختلفة.
+    </p>
+
+    <p>
+        إذا كنت جديدًا على مفهوم التمويل اللامركزي، يمكنك البدء بمقال
+        <a href="/academy/defi/what-is-defi">ما هو DeFi؟ شرح التمويل اللامركزي للمبتدئين</a>.
+    </p>
+
+    <h2>كيف تختلف Stablecoins عن Bitcoin والعملات الرقمية الأخرى؟</h2>
+
+    <p>
+        الهدف الأساسي من Bitcoin وغيرها من الأصول الرقمية المتقلبة ليس الحفاظ على سعر مرتبط
+        بأصل مرجعي. أما العملات المستقرة فتصمم آلياتها عادةً لمحاولة المحافظة على قيمة قريبة
+        من أصل مرجعي محدد.
+    </p>
+
+    <p>
+        هذا لا يعني أن العملة المستقرة لا تتحرك إطلاقًا. فقد يرتفع سعرها أو ينخفض عن القيمة
+        المستهدفة لفترة من الوقت، ويعتمد مدى هذا الانحراف على تصميم العملة والظروف السوقية
+        وآلية الحفاظ على السعر.
+    </p>
+
+    <p>
+        ويمكنك دراسة الفرق بين بعض الأصول الرقمية الرئيسية في مقال
+        <a href="/academy/bitcoin/bitcoin-vs-ethereum">Bitcoin vs Ethereum: ما الفرق بينهما؟</a>
+        إذا كان هذا المقال موجودًا ضمن مسار Bitcoin لديك.
+    </p>
+
+    <h2>كيف تعمل العملة المستقرة؟</h2>
+
+    <p>
+        لا توجد طريقة واحدة لإنشاء Stablecoin. تعتمد الآلية على النموذج الذي اختاره المشروع.
+    </p>
+
+    <p>
+        بعض العملات المستقرة تعتمد على احتياطيات أو أصول خارجية، وبعضها يعتمد على ضمانات
+        موجودة على البلوكشين، بينما تستخدم نماذج أخرى آليات برمجية أو اقتصادية مختلفة
+        للمساعدة في الحفاظ على السعر المستهدف.
+    </p>
+
+    <p>
+        لذلك يجب عدم التعامل مع جميع العملات المستقرة على أنها متطابقة. معرفة نوع العملة
+        وآلية إصدارها واستردادها والضمانات التي تعتمد عليها جزء أساسي من فهم مخاطرها.
+    </p>
+
+    <h2>ما هي أنواع العملات المستقرة؟</h2>
+
+    <p>
+        يمكن تصنيف العملات المستقرة بشكل مبسط وفق نوع الآلية أو الضمان الذي تعتمد عليه.
+        التصنيفات قد تختلف بين المصادر والبروتوكولات، لكن الأنواع الرئيسية تشمل:
+    </p>
+
+    <ol>
+        <li>العملات المستقرة المدعومة بأصول خارجية.</li>
+        <li>العملات المستقرة المدعومة بضمانات على البلوكشين.</li>
+        <li>العملات المستقرة ذات النماذج الخوارزمية أو شبه الخوارزمية.</li>
+    </ol>
+
+    <p>
+        بعض المشاريع قد تجمع بين أكثر من آلية، ولذلك يجب الرجوع إلى الوثائق الخاصة بكل مشروع
+        لفهم النموذج الفعلي.
+    </p>
+
+    <h2>1. العملات المستقرة المدعومة بأصول خارجية</h2>
+
+    <p>
+        هذا النوع يعتمد عادةً على وجود احتياطيات أو أصول خارجية مرتبطة بالعملة المستقرة.
+        وقد تكون هذه الاحتياطيات نقدًا أو أدوات مالية أو أصولًا أخرى وفق تصميم الجهة المصدرة.
+    </p>
+
+    <p>
+        الهدف هو توفير آلية تجعل قيمة العملة المستقرة قريبة من قيمة الأصل المرجعي.
+        لكن المستخدم يحتاج إلى فهم طبيعة الاحتياطيات، ومن يديرها، وكيف تتم عمليات الإصدار
+        والاسترداد، وما المخاطر القانونية والتشغيلية المرتبطة بها.
+    </p>
+
+    <p>
+        لذلك فإن وجود كلمة "مدعومة" لا يعني تلقائيًا أن كل وحدة من العملة مضمونة بطريقة
+        واحدة أو أن المستخدم يستطيع استردادها مباشرةً دون شروط.
+    </p>
+
+    <h2>2. العملات المستقرة المدعومة بضمانات على البلوكشين</h2>
+
+    <p>
+        تعتمد بعض العملات المستقرة على أصول رقمية يتم إيداعها كضمان داخل عقود ذكية.
+    </p>
+
+    <p>
+        قد يكون النظام مصممًا باستخدام ضمانات تتجاوز قيمة العملات المستقرة التي يتم إصدارها،
+        وذلك لتوفير هامش أمان ضد تقلب قيمة الضمان.
+    </p>
+
+    <p>
+        هذه الفكرة ترتبط بما تعلمناه في درس
+        <a href="/academy/defi/defi-lending-and-borrowing">الإقراض والاقتراض في DeFi</a>،
+        حيث تلعب الضمانات دورًا مهمًا في إدارة المخاطر.
+    </p>
+
+    <h2>3. العملات المستقرة الخوارزمية</h2>
+
+    <p>
+        تستخدم بعض النماذج آليات برمجية واقتصادية لمحاولة الحفاظ على السعر المستهدف،
+        وقد تعتمد بدرجات مختلفة على الضمانات أو الحوافز أو تعديل المعروض.
+    </p>
+
+    <p>
+        هذا النوع يمكن أن يكون أكثر تعقيدًا من النماذج التي تعتمد على احتياطيات واضحة،
+        ولذلك يتطلب فهمًا دقيقًا لآلية الحفاظ على السعر ومصادر القيمة والضمانات والحوافز.
+    </p>
+
+    <div class="academy-warning">
+        <strong>تنبيه:</strong>
+        التاريخ يوضح أن بعض نماذج العملات المستقرة قد تفشل في الحفاظ على السعر المستهدف
+        خلال ظروف السوق القاسية. لذلك لا ينبغي اعتبار التصميم الخوارزمي ضمانًا للاستقرار.
+    </div>
+
+    <h2>ما المقصود بـ Peg؟</h2>
+
+    <p>
+        يشير مصطلح <strong>Peg</strong> إلى السعر المرجعي الذي تحاول العملة المستقرة المحافظة
+        عليه.
+    </p>
+
+    <p>
+        على سبيل المثال، قد يكون الهدف النظري لعملة مستقرة معينة هو الاقتراب من قيمة دولار
+        أمريكي واحد.
+    </p>
+
+    <p>
+        لكن السعر الفعلي في السوق قد يختلف قليلًا عن القيمة المستهدفة بسبب العرض والطلب
+        والسيولة وظروف السوق وآلية الاستقرار.
+    </p>
+
+    <h2>ما هو Depeg؟</h2>
+
+    <p>
+        <strong>Depeg</strong> يعني ابتعاد سعر العملة المستقرة بشكل ملحوظ عن القيمة المرجعية
+        التي يفترض أن تحافظ عليها.
+    </p>
+
+    <p>
+        قد يكون الانحراف بسيطًا ومؤقتًا، وقد يكون أكبر أو أكثر استمرارًا في ظروف معينة.
+        يعتمد ذلك على تصميم العملة والسيولة والثقة في الآلية والظروف التي يمر بها السوق.
+    </p>
+
+    <p>
+        ولهذا فإن مراقبة السعر وحده ليست كافية؛ من المهم أيضًا فهم سبب الانحراف وكيفية عمل
+        آلية الاستقرار.
+    </p>
+
+    <h2>لماذا يحدث Depeg؟</h2>
+
+    <p>
+        يمكن أن يحدث الانحراف عن السعر المستهدف لعدة أسباب، منها:
+    </p>
+
+    <ul>
+        <li>ارتفاع مفاجئ في الطلب أو انخفاضه.</li>
+        <li>ضعف السيولة في الأسواق.</li>
+        <li>الشكوك حول الاحتياطيات أو الضمانات.</li>
+        <li>مشكلات في العقود الذكية.</li>
+        <li>مشكلات في آليات الاسترداد أو الإصدار.</li>
+        <li>أحداث سوقية شديدة التقلب.</li>
+        <li>مشكلات في الأوراكل أو مصادر الأسعار لبعض الأنظمة.</li>
+        <li>تغيرات في الحوكمة أو القرارات المتعلقة بالبروتوكول.</li>
+    </ul>
+
+    <p>
+        ليس كل انحراف يعني انهيار المشروع، لكن الانحراف الكبير والمستمر قد يكون مؤشرًا
+        على وجود مشكلة تحتاج إلى فهم وتحليل.
+    </p>
+
+    <h2>ما دور العملات المستقرة في DEXs؟</h2>
+
+    <p>
+        العملات المستقرة تستخدم بكثرة في <strong>منصات التداول اللامركزي (DEXs)</strong>
+        كجزء من أزواج التداول.
+    </p>
+
+    <p>
+        على سبيل المثال، قد يحتوي مجمع تداول على زوج يتكون من عملة رقمية متقلبة وعملة مستقرة.
+        يسمح ذلك للمستخدمين بتبادل الأصل المتقلب مقابل أصل ذي سعر أكثر استقرارًا نسبيًا.
+    </p>
+
+    <p>
+        كما يمكن أن تكون أزواج العملات المستقرة مع بعضها مهمة لتسهيل عمليات التداول
+        وتقليل الحاجة إلى المرور بأصول شديدة التقلب في بعض المسارات.
+    </p>
+
+    <p>
+        لفهم البنية الأساسية لمجمعات السيولة، راجع:
+        <a href="/academy/defi/what-are-liquidity-pools">ما هي مجمعات السيولة؟ وكيف تعمل في DeFi؟</a>.
+    </p>
+
+    <h2>ما دور Stablecoins في الإقراض والاقتراض؟</h2>
+
+    <p>
+        تستخدم العملات المستقرة بشكل واسع في أسواق الإقراض والاقتراض لأنها توفر أصلًا
+        لا يرتبط عادةً بنفس مستوى تقلب بعض العملات الرقمية الأخرى.
+    </p>
+
+    <p>
+        قد يقوم المستخدم بإيداع عملة مستقرة للحصول على عائد وفق شروط بروتوكول الإقراض،
+        بينما يمكن لمستخدم آخر اقتراضها مقابل ضمان.
+    </p>
+
+    <p>
+        لكن انخفاض التقلب النسبي لا يعني اختفاء المخاطر؛ فقد تبقى مخاطر البروتوكول والعقود
+        الذكية والتصفية والسيولة ومخاطر العملة المستقرة نفسها.
+    </p>
+
+    <h2>ما علاقة Stablecoins بمجمعات السيولة؟</h2>
+
+    <p>
+        يمكن استخدام العملات المستقرة كأحد الأصول داخل مجمعات السيولة.
+        وقد تكون هناك مجمعات تحتوي على أكثر من عملة مستقرة أو تجمع بين عملة مستقرة وأصل رقمي آخر.
+    </p>
+
+    <p>
+        عندما يوفر المستخدم السيولة، فإنه يتعرض ليس فقط لمخاطر الأصل نفسه، بل أيضًا
+        لمخاطر العقد الذكي والتصميم والسيولة وتغير الأسعار.
+    </p>
+
+    <p>
+        ولهذا يجب فهم الفرق بين <strong>استقرار سعر العملة المستقرة</strong> وبين
+        <strong>استقرار العائد أو الاستثمار في مجمع السيولة</strong>. فالأمران ليسا الشيء نفسه.
+    </p>
+
+    <h2>هل العملات المستقرة خالية من المخاطر؟</h2>
+
+    <p>
+        لا. وصف العملة بأنها Stablecoin لا يعني أنها خالية من المخاطر.
+    </p>
+
+    <p>
+        نوع المخاطر يعتمد على نموذج العملة. فقد تكون المخاطر مرتبطة بالاحتياطيات،
+        أو بالجهة المصدرة، أو بالعقود الذكية، أو بالضمانات، أو بالحوكمة، أو بالسيولة،
+        أو بقدرة النظام على المحافظة على السعر المستهدف.
+    </p>
+
+    <h2>أهم مخاطر العملات المستقرة</h2>
+
+    <h3>1. مخاطر فقدان الربط السعري</h3>
+
+    <p>
+        قد ينخفض سعر العملة أو يرتفع بعيدًا عن القيمة المستهدفة. وفي بعض الحالات قد يستمر
+        الانحراف لفترة طويلة.
+    </p>
+
+    <h3>2. مخاطر الاحتياطيات</h3>
+
+    <p>
+        العملات التي تعتمد على احتياطيات خارجية ترتبط مخاطرها أيضًا بطبيعة هذه الاحتياطيات
+        وطريقة إدارتها وإمكانية التحقق منها وآلية الاسترداد.
+    </p>
+
+    <h3>3. مخاطر الطرف المقابل</h3>
+
+    <p>
+        بعض النماذج تعتمد على جهات أو مؤسسات خارج البلوكشين. وهذا يضيف مخاطر تتعلق
+        بالجهة الحافظة للأصول أو المصدرة للعملة أو الأطراف الأخرى المشاركة في النظام.
+    </p>
+
+    <h3>4. مخاطر العقود الذكية</h3>
+
+    <p>
+        العملات المستقرة المستخدمة داخل DeFi قد تعتمد على عقود ذكية لإصدار الأصول
+        أو إدارة الضمانات أو تنفيذ عمليات أخرى. أي ثغرة في هذه العقود قد تؤثر في النظام.
+    </p>
+
+    <h3>5. مخاطر الضمانات</h3>
+
+    <p>
+        في النماذج المدعومة بضمانات رقمية، يمكن أن تنخفض قيمة الضمانات بسرعة،
+        مما يضغط على آلية الحفاظ على قيمة العملة المستقرة.
+    </p>
+
+    <h3>6. مخاطر السيولة</h3>
+
+    <p>
+        حتى إذا كانت العملة مصممة للحفاظ على قيمة مرجعية، فقد تؤثر السيولة المحدودة
+        في قدرة المستخدمين على تنفيذ عمليات كبيرة بالسعر المتوقع.
+    </p>
+
+    <h3>7. مخاطر الحوكمة</h3>
+
+    <p>
+        بعض المشاريع تحتوي على أنظمة حوكمة أو صلاحيات إدارية يمكن أن تؤثر في معايير
+        البروتوكول أو الضمانات أو العقود أو آليات التشغيل.
+    </p>
+
+    <h3>8. المخاطر التنظيمية والقانونية</h3>
+
+    <p>
+        تختلف القواعد القانونية والتنظيمية المتعلقة بالعملات المستقرة من دولة إلى أخرى
+        وقد تتغير بمرور الوقت. وقد تؤثر هذه التطورات في الجهات المصدرة أو الخدمات المرتبطة
+        ببعض العملات المستقرة.
+    </p>
+
+    <h2>ما الفرق بين Stablecoin وCBDC؟</h2>
+
+    <p>
+        العملات المستقرة و<strong>العملات الرقمية للبنوك المركزية (CBDCs)</strong> ليستا
+        الشيء نفسه.
+    </p>
+
+    <p>
+        Stablecoin هي أصل رقمي يصدر وفق نموذج خاص بمشروع أو جهة أو بروتوكول، بينما CBDC
+        هي شكل رقمي من عملة تصدرها وتديرها جهة نقدية رسمية مثل البنك المركزي.
+    </p>
+
+    <p>
+        تختلف التفاصيل القانونية والتقنية والتشغيلية لكل نموذج، ولذلك لا ينبغي استخدام
+        المصطلحين بالتبادل.
+    </p>
+
+    <h2>ما الفرق بين Stablecoin وToken عادي؟</h2>
+
+    <p>
+        الرمز الرقمي العادي قد يكون مصممًا لتمثيل أصل أو حق أو استخدام معين، ولا يشترط
+        أن يحافظ على قيمة مستقرة مقابل عملة تقليدية.
+    </p>
+
+    <p>
+        أما Stablecoin فتكون آليتها مصممة بهدف الحفاظ على قيمة مرجعية أكثر استقرارًا نسبيًا.
+    </p>
+
+    <p>
+        هذا الفرق يتعلق بالهدف وآلية التصميم، وليس ضمانًا بأن السعر سيبقى ثابتًا في كل الظروف.
+    </p>
+
+    <h2>كيف تستخدم Stablecoins في DeFi؟</h2>
+
+    <p>
+        يمكن استخدام العملات المستقرة في مجموعة واسعة من التطبيقات، منها:
+    </p>
+
+    <ul>
+        <li>التداول في منصات DEX.</li>
+        <li>توفير السيولة في مجمعات التداول.</li>
+        <li>الإقراض والاقتراض.</li>
+        <li>تسوية بعض المعاملات على البلوكشين.</li>
+        <li>نقل القيمة بين المحافظ والتطبيقات.</li>
+        <li>استخدامها كأصل حساب أو تسعير داخل بعض التطبيقات.</li>
+        <li>استخدامها كجزء من استراتيجيات DeFi متعددة الخطوات.</li>
+    </ul>
+
+    <p>
+        طريقة الاستخدام والمخاطر تختلف حسب التطبيق والبروتوكول والعملة المستقرة نفسها.
+    </p>
+
+    <h2>ما علاقة Stablecoins بالأوراكل؟</h2>
+
+    <p>
+        بعض تطبيقات DeFi التي تستخدم العملات المستقرة قد تعتمد على أوراكل الأسعار للحصول
+        على بيانات حول قيمة الأصول.
+    </p>
+
+    <p>
+        يظهر هذا الأمر بشكل خاص في بروتوكولات الإقراض، حيث يمكن أن تستخدم الأسعار لتقييم
+        الضمانات وتحديد مخاطر المراكز.
+    </p>
+
+    <p>
+        يمكنك معرفة المزيد عن دور البيانات الخارجية في بروتوكولات DeFi من خلال درس
+        <a href="/academy/defi/defi-lending-and-borrowing">الإقراض والاقتراض في DeFi</a>.
+    </p>
+
+    <h2>هل كل Stablecoin مرتبطة بالدولار الأمريكي؟</h2>
+
+    <p>
+        لا. الدولار الأمريكي هو المرجع الأكثر شيوعًا، لكن يمكن تصميم عملات مستقرة
+        مرتبطة بأصول أو عملات أو مؤشرات أخرى.
+    </p>
+
+    <p>
+        لذلك يجب التحقق من الأصل المرجعي لكل عملة مستقرة بدل افتراض أن جميع Stablecoins
+        تهدف إلى الحفاظ على قيمة دولار واحد.
+    </p>
+
+    <h2>هل Stablecoin تعني أن القيمة لن تتغير؟</h2>
+
+    <p>
+        لا. "مستقرة" تعني أن تصميم العملة يهدف إلى تقليل التقلب والمحافظة على قيمة مرجعية
+        معينة، وليس أن السعر لا يمكن أن يتحرك.
+    </p>
+
+    <p>
+        قد يحدث انحراف عن القيمة المستهدفة نتيجة ظروف السوق أو ضعف السيولة أو مشكلات
+        في الضمانات أو الاحتياطيات أو آلية الاستقرار.
+    </p>
+
+    <h2>مثال تعليمي مبسط</h2>
+
+    <p>
+        لنفترض أن هناك عملة مستقرة مصممة لمحاولة الحفاظ على قيمة قريبة من دولار واحد.
+    </p>
+
+    <ol>
+        <li>يستخدم النظام آلية معينة لإصدار العملة أو دعم قيمتها.</li>
+        <li>يتم تداول العملة في أسواق مختلفة داخل وخارج DeFi.</li>
+        <li>يستخدمها أحد المستخدمين كأصل في مجمع سيولة.</li>
+        <li>يستخدمها مستخدم آخر كضمان أو يقترضها من بروتوكول إقراض.</li>
+        <li>إذا تغير العرض والطلب أو حدثت مشكلة في آلية الاستقرار، قد ينحرف السعر عن القيمة المرجعية.</li>
+    </ol>
+
+    <p>
+        هذا مثال تعليمي عام ولا يصف آلية عمل Stablecoin محددة.
+    </p>
+
+    <h2>كيف تقيم Stablecoin قبل استخدامها؟</h2>
+
+    <p>
+        لا يكفي النظر إلى السعر الحالي. من المفيد دراسة مجموعة من الأسئلة، منها:
+    </p>
+
+    <ul>
+        <li>ما الأصل المرجعي للعملة؟</li>
+        <li>ما آلية الحفاظ على السعر؟</li>
+        <li>ما نوع الضمانات أو الاحتياطيات؟</li>
+        <li>من الجهة المسؤولة عن الإصدار أو الإدارة إن وجدت؟</li>
+        <li>هل توجد آلية استرداد واضحة؟</li>
+        <li>هل تعتمد على عقود ذكية؟</li>
+        <li>هل توجد صلاحيات إدارية أو حوكمة مؤثرة؟</li>
+        <li>ما مستوى السيولة في الأسواق المختلفة؟</li>
+        <li>هل تعتمد على أوراكل أو خدمات خارجية؟</li>
+        <li>ما المخاطر القانونية والتنظيمية المرتبطة بها؟</li>
+    </ul>
+
+    <h2>لماذا لا يكفي فحص السعر فقط؟</h2>
+
+    <p>
+        قد يكون سعر Stablecoin قريبًا جدًا من القيمة المرجعية في لحظة معينة، لكن هذا وحده
+        لا يشرح كيفية المحافظة على السعر ولا يكشف جميع المخاطر.
+    </p>
+
+    <p>
+        لفهم العملة يجب النظر إلى آلية الإصدار والضمانات والسيولة والحوكمة والعقود الذكية
+        والجهات الخارجية، إضافةً إلى الظروف التي قد تؤدي إلى فقدان الربط السعري.
+    </p>
+
+    <h2>كيف ترتبط Stablecoins ببنية DeFi الكاملة؟</h2>
+
+    <p>
+        يمكن أن تنتقل العملة المستقرة بين عدة طبقات من منظومة DeFi.
+        فقد تبدأ في محفظة، ثم تُستخدم في منصة تداول لامركزية، وبعد ذلك تُودع في بروتوكول
+        إقراض أو تستخدم كضمان أو تدخل في مجمع سيولة.
+    </p>
+
+    <p>
+        هذا الترابط يجعل العملات المستقرة جزءًا مهمًا من البنية المالية لـ DeFi،
+        لكنه يعني أيضًا أن المشكلة في أحد المكونات قد تنتقل إلى تطبيقات أخرى تعتمد عليه.
+    </p>
+
+    <p>
+        لمراجعة بقية المفاهيم الأساسية، يمكنك زيارة
+        <a href="/academy/defi">صفحة DeFi في AQL Crypto Academy</a>.
+    </p>
+
+    <h2>الخلاصة</h2>
+
+    <p>
+        العملات المستقرة هي أصول رقمية صُممت بهدف الحفاظ على قيمة مستقرة نسبيًا مقارنة
+        بأصل مرجعي. وقد أصبحت من أهم مكونات منظومة DeFi بسبب استخدامها في التداول والإقراض
+        والاقتراض والسيولة والتحويلات.
+    </p>
+
+    <p>
+        لكن Stablecoin ليست مرادفًا للأمان أو الثبات المطلق. تختلف العملات المستقرة
+        في آلياتها، وقد تعتمد على احتياطيات خارجية أو ضمانات على البلوكشين أو نماذج
+        خوارزمية أو آليات هجينة.
+    </p>
+
+    <p>
+        لذلك فإن فهم نوع العملة وآلية الحفاظ على السعر والضمانات والسيولة والحوكمة
+        والعقود الذكية والمخاطر التنظيمية يعد جزءًا أساسيًا من فهم استخدامها في DeFi.
+    </p>
+
+    <div class="academy-takeaways">
+        <h3>أهم النقاط</h3>
+        <ul>
+            <li>Stablecoins هي أصول رقمية تهدف إلى الحفاظ على قيمة مرجعية مستقرة نسبيًا.</li>
+            <li>ليست جميع العملات المستقرة متشابهة في طريقة عملها أو مستوى مخاطرها.</li>
+            <li>بعض العملات تعتمد على احتياطيات خارجية، وأخرى على ضمانات رقمية أو نماذج مختلفة.</li>
+            <li>قد يحدث Depeg عندما يبتعد السعر عن القيمة المرجعية المستهدفة.</li>
+            <li>تستخدم العملات المستقرة في DEXs ومجمعات السيولة والإقراض والاقتراض.</li>
+            <li>الاستقرار النسبي للسعر لا يعني أن العائد أو الاستثمار خالٍ من المخاطر.</li>
+            <li>العقود الذكية والأوراكل والسيولة والحوكمة قد تكون مكونات مهمة في بعض الأنظمة.</li>
+            <li>يجب فهم آلية العمل والضمانات والاحتياطيات قبل تقييم أي Stablecoin.</li>
+        </ul>
+    </div>
+
+    <div class="academy-disclaimer">
+        <strong>تنبيه:</strong>
+        محتوى AQL Crypto Academy تعليمي وتثقيفي فقط، ولا يُعد نصيحة مالية أو استثمارية
+        أو توصية باستخدام أو شراء أو بيع أو إقراض أو اقتراض أي عملة مستقرة أو أصل رقمي.
+        تختلف المخاطر وآليات التشغيل والضمانات والسيولة والشروط من مشروع إلى آخر،
+        ويجب إجراء البحث المستقل وفهم المخاطر قبل اتخاذ أي قرار مالي.
+    </div>
+
+</article>
+HTML,
+
+    'content_en' => <<<'HTML'
+<article class="academy-article">
+
+    <h2>What Are Stablecoins?</h2>
+
+    <p>
+        <strong>Stablecoins</strong> are digital assets designed to maintain a relatively
+        stable value compared with a reference asset, often a traditional currency such
+        as the U.S. dollar.
+    </p>
+
+    <p>
+        Stablecoins have become an important part of <strong>DeFi</strong> because they can
+        be used for trading, lending, borrowing, liquidity provision, settlement, and
+        transfers while generally seeking lower price volatility than many other digital assets.
+    </p>
+
+    <p>
+        However, the word "stable" does not mean that the price is guaranteed or that the
+        asset is risk-free. Different stablecoins use different mechanisms and may face
+        risks related to reserves, collateral, smart contracts, governance, liquidity,
+        or the mechanisms used to maintain the target value.
+    </p>
+
+    <p>
+        In this AQL Crypto Academy lesson, we will explain what stablecoins are, how the
+        main models work, how they are used throughout DeFi, and which risks users should
+        understand.
+    </p>
+
+    <div class="academy-note">
+        <strong>Educational note:</strong>
+        This article explains stablecoins and their role in DeFi for educational purposes only.
+        It is not a recommendation to use any particular stablecoin or protocol.
+    </div>
+
+    <h2>Why Does DeFi Need Stablecoins?</h2>
+
+    <p>
+        Many digital assets can experience significant price movements. Such volatility
+        can make them less convenient as a unit of account or settlement asset in some
+        financial applications.
+    </p>
+
+    <p>
+        Stablecoins attempt to provide a digital asset with a more stable relative value
+        that can be used inside decentralized applications without requiring users to
+        move through traditional financial systems for every transaction.
+    </p>
+
+    <p>
+        For example, a stablecoin can be used in a lending market as a supplied or borrowed
+        asset, as one side of a trading pair on a decentralized exchange, or as an asset
+        held in a wallet for use across DeFi applications.
+    </p>
+
+    <p>
+        If you are new to decentralized finance, start with
+        <a href="/academy/defi/what-is-defi">What Is DeFi? A Beginner’s Guide to Decentralized Finance</a>.
+    </p>
+
+    <h2>How Are Stablecoins Different From Bitcoin and Other Crypto Assets?</h2>
+
+    <p>
+        Bitcoin and many other crypto assets are not primarily designed to maintain a
+        price linked to a reference asset. Stablecoins, by contrast, are generally designed
+        around mechanisms intended to keep their value relatively close to a specified reference.
+    </p>
+
+    <p>
+        This does not mean that a stablecoin can never move away from its target.
+        Its market price can rise or fall depending on supply, demand, liquidity,
+        market conditions, and the effectiveness of its stabilization mechanism.
+    </p>
+
+    <h2>How Does a Stablecoin Work?</h2>
+
+    <p>
+        There is no single method for creating a stablecoin. The mechanism depends on
+        the design chosen by the project.
+    </p>
+
+    <p>
+        Some stablecoins rely on external reserves or assets, while others use on-chain
+        collateral. Other models use algorithmic or economic mechanisms to attempt to
+        maintain a target value.
+    </p>
+
+    <p>
+        Therefore, stablecoins should not be treated as identical. Understanding how a
+        particular stablecoin is issued, backed, redeemed, and governed is important
+        when evaluating its risks.
+    </p>
+
+    <h2>What Are the Main Types of Stablecoins?</h2>
+
+    <p>
+        Stablecoins can be classified according to the type of collateral or mechanism
+        they use. Classifications vary between sources, but the main broad categories include:
+    </p>
+
+    <ol>
+        <li>Stablecoins backed by off-chain assets or reserves.</li>
+        <li>Stablecoins backed by on-chain collateral.</li>
+        <li>Algorithmic or partially algorithmic stablecoin models.</li>
+    </ol>
+
+    <p>
+        Some projects combine multiple mechanisms, so the actual design should be studied
+        through the project's documentation rather than assumed from a category name.
+    </p>
+
+    <h2>1. Stablecoins Backed by Off-Chain Assets</h2>
+
+    <p>
+        This model generally relies on reserves or external assets associated with the
+        stablecoin. Depending on the issuer's structure, these reserves may include cash,
+        financial instruments, or other assets.
+    </p>
+
+    <p>
+        The goal is to support a value close to the reference asset. However, users need
+        to understand what the reserves consist of, who manages them, how issuance and
+        redemption work, and what operational or legal risks are involved.
+    </p>
+
+    <p>
+        Therefore, the word "backed" by itself does not mean that every stablecoin uses
+        the same reserve structure or that redemption is unconditional.
+    </p>
+
+    <h2>2. Stablecoins Backed by On-Chain Collateral</h2>
+
+    <p>
+        Some stablecoins use digital assets deposited as collateral inside smart contracts.
+    </p>
+
+    <p>
+        These systems may use overcollateralization, meaning that the value of the collateral
+        is greater than the value of the stablecoins issued. This can provide a buffer against
+        changes in collateral value.
+    </p>
+
+    <p>
+        This concept is closely related to the collateral mechanisms discussed in
+        <a href="/academy/defi/defi-lending-and-borrowing">DeFi Lending and Borrowing</a>.
+    </p>
+
+    <h2>3. Algorithmic Stablecoins</h2>
+
+    <p>
+        Some models use software-based and economic mechanisms to attempt to maintain
+        a target value. Depending on the design, they may rely to different degrees on
+        collateral, incentives, supply adjustments, or other mechanisms.
+    </p>
+
+    <p>
+        Such systems can be more complex than models based on straightforward reserve
+        structures. Understanding the stabilization mechanism, sources of value,
+        collateral, and incentives is therefore especially important.
+    </p>
+
+    <div class="academy-warning">
+        <strong>Important warning:</strong>
+        Historical events have shown that some stablecoin models can fail to maintain
+        their target value under severe market conditions. An algorithmic design should
+        therefore never be treated as a guarantee of stability.
+    </div>
+
+    <h2>What Does Peg Mean?</h2>
+
+    <p>
+        A <strong>peg</strong> is the reference value that a stablecoin is designed to
+        track or maintain relative to.
+    </p>
+
+    <p>
+        For example, a stablecoin may be designed to target a value close to one U.S. dollar.
+    </p>
+
+    <p>
+        Its actual market price can still differ from the target because of supply and
+        demand, liquidity, market conditions, and the mechanism used to maintain the peg.
+    </p>
+
+    <h2>What Is a Depeg?</h2>
+
+    <p>
+        A <strong>depeg</strong> occurs when a stablecoin moves meaningfully away from
+        the reference value it is designed to track.
+    </p>
+
+    <p>
+        The deviation may be small and temporary or larger and more persistent depending
+        on the stablecoin's design, liquidity, market conditions, and confidence in its
+        stabilization mechanism.
+    </p>
+
+    <p>
+        Therefore, simply observing the price is not always enough. It is also important
+        to understand why the deviation occurred and how the stabilization mechanism works.
+    </p>
+
+    <h2>Why Can a Stablecoin Depeg?</h2>
+
+    <p>
+        A stablecoin can move away from its target for several reasons, including:
+    </p>
+
+    <ul>
+        <li>Sudden changes in supply or demand.</li>
+        <li>Insufficient market liquidity.</li>
+        <li>Concerns about reserves or collateral.</li>
+        <li>Smart contract failures or vulnerabilities.</li>
+        <li>Problems with issuance or redemption mechanisms.</li>
+        <li>Severe market stress.</li>
+        <li>Oracle or pricing problems in systems that depend on external price data.</li>
+        <li>Governance or administrative changes.</li>
+    </ul>
+
+    <p>
+        Not every deviation means that a project has failed. However, a large or persistent
+        deviation can indicate a significant problem that requires careful analysis.
+    </p>
+
+    <h2>What Role Do Stablecoins Play in DEXs?</h2>
+
+    <p>
+        Stablecoins are widely used on <strong>decentralized exchanges (DEXs)</strong>
+        as part of trading pairs.
+    </p>
+
+    <p>
+        For example, a liquidity pool can contain a volatile crypto asset paired with
+        a stablecoin. This allows users to exchange the volatile asset for an asset
+        designed to have a more stable relative value.
+    </p>
+
+    <p>
+        Stablecoin-to-stablecoin markets can also facilitate trading and reduce the need
+        to move through more volatile assets in some transaction routes.
+    </p>
+
+    <p>
+        To understand liquidity pools in more detail, read
+        <a href="/academy/defi/what-are-liquidity-pools">What Are Liquidity Pools? How Do They Work in DeFi?</a>.
+    </p>
+
+    <h2>What Role Do Stablecoins Play in DeFi Lending and Borrowing?</h2>
+
+    <p>
+        Stablecoins are widely used in lending markets because they can provide an asset
+        with lower relative volatility than many other crypto assets.
+    </p>
+
+    <p>
+        A user may supply a stablecoin to a lending protocol and receive a return according
+        to its rules, while another user may borrow the stablecoin against collateral.
+    </p>
+
+    <p>
+        However, lower relative volatility does not eliminate protocol risk, smart contract
+        risk, liquidation risk, liquidity risk, or risks specific to the stablecoin itself.
+    </p>
+
+    <h2>How Are Stablecoins Used in Liquidity Pools?</h2>
+
+    <p>
+        Stablecoins can be one of the assets in a liquidity pool. Some pools contain
+        multiple stablecoins, while others pair a stablecoin with another crypto asset.
+    </p>
+
+    <p>
+        A liquidity provider is exposed not only to the stablecoin itself but potentially
+        also to smart contract risk, protocol design, liquidity conditions, and changes
+        in the prices of other assets in the pool.
+    </p>
+
+    <p>
+        This is why <strong>stablecoin price stability</strong> should not be confused with
+        <strong>stable investment returns</strong>. They are fundamentally different concepts.
+    </p>
+
+    <h2>Are Stablecoins Risk-Free?</h2>
+
+    <p>
+        No. Being called a stablecoin does not make an asset risk-free.
+    </p>
+
+    <p>
+        The specific risks depend on its design. They can involve reserves, issuers,
+        smart contracts, collateral, governance, liquidity, or the mechanism used to
+        maintain the target value.
+    </p>
+
+    <h2>Key Stablecoin Risks</h2>
+
+    <h3>1. Depeg Risk</h3>
+
+    <p>
+        A stablecoin can move away from its target value. In some circumstances,
+        the deviation can become significant or persistent.
+    </p>
+
+    <h3>2. Reserve Risk</h3>
+
+    <p>
+        Stablecoins that rely on external reserves are also exposed to risks associated
+        with the composition, management, verification, and redemption mechanisms of those reserves.
+    </p>
+
+    <h3>3. Counterparty Risk</h3>
+
+    <p>
+        Some models depend on entities outside the blockchain. This can introduce risks
+        related to custodians, issuers, banking relationships, or other service providers.
+    </p>
+
+    <h3>4. Smart Contract Risk</h3>
+
+    <p>
+        Stablecoins used in DeFi may depend on smart contracts for issuance, collateral
+        management, redemption, or other functions. Vulnerabilities can affect the system.
+    </p>
+
+    <h3>5. Collateral Risk</h3>
+
+    <p>
+        In models backed by digital collateral, the collateral can fall sharply in value,
+        putting pressure on the mechanism used to maintain the stablecoin's target value.
+    </p>
+
+    <h3>6. Liquidity Risk</h3>
+
+    <p>
+        Even when a stablecoin is designed to track a reference value, limited market
+        liquidity can affect the ability to execute large transactions at an expected price.
+    </p>
+
+    <h3>7. Governance Risk</h3>
+
+    <p>
+        Some projects have governance systems or administrative permissions that can affect
+        protocol parameters, collateral, contracts, or operational mechanisms.
+    </p>
+
+    <h3>8. Regulatory and Legal Risk</h3>
+
+    <p>
+        Stablecoin regulation varies between jurisdictions and can change over time.
+        Regulatory developments can affect issuers, custodians, exchanges, and related services.
+    </p>
+
+    <h2>Stablecoins vs CBDCs</h2>
+
+    <p>
+        Stablecoins and <strong>central bank digital currencies (CBDCs)</strong> are not the same thing.
+    </p>
+
+    <p>
+        A stablecoin is a digital asset issued under the model of a particular project,
+        company, protocol, or other entity, while a CBDC is a digital form of a country's
+        official currency issued and administered by a central bank.
+    </p>
+
+    <p>
+        Their legal, technical, and operational structures can be very different,
+        so the terms should not be used interchangeably.
+    </p>
+
+    <h2>Stablecoin vs Regular Token</h2>
+
+    <p>
+        A regular digital token may represent an asset, utility, governance right,
+        or another form of value without being designed to maintain a stable reference price.
+    </p>
+
+    <p>
+        A stablecoin, by contrast, is specifically designed around mechanisms intended
+        to maintain a relatively stable reference value.
+    </p>
+
+    <p>
+        This describes the design objective, not a guarantee that the price will remain
+        unchanged under all market conditions.
+    </p>
+
+    <h2>How Are Stablecoins Used Across DeFi?</h2>
+
+    <p>
+        Stablecoins can be used in many DeFi applications, including:
+    </p>
+
+    <ul>
+        <li>Trading on decentralized exchanges.</li>
+        <li>Providing liquidity to trading pools.</li>
+        <li>Lending and borrowing.</li>
+        <li>On-chain transaction settlement.</li>
+        <li>Moving value between wallets and applications.</li>
+        <li>Pricing or accounting within certain applications.</li>
+        <li>Multi-step DeFi strategies and protocols.</li>
+    </ul>
+
+    <p>
+        The actual use case and risk profile depend on the application, protocol,
+        and stablecoin involved.
+    </p>
+
+    <h2>What Is the Relationship Between Stablecoins and Oracles?</h2>
+
+    <p>
+        Some DeFi applications involving stablecoins may depend on price oracles
+        to obtain information about asset values.
+    </p>
+
+    <p>
+        This is particularly relevant to lending protocols, where price information
+        can be used to evaluate collateral and borrowing positions.
+    </p>
+
+    <p>
+        You can learn more about this relationship in
+        <a href="/academy/defi/defi-lending-and-borrowing">DeFi Lending and Borrowing</a>.
+    </p>
+
+    <h2>Are All Stablecoins Pegged to the U.S. Dollar?</h2>
+
+    <p>
+        No. The U.S. dollar is the most common reference, but stablecoins can be designed
+        to track other currencies, assets, or reference values.
+    </p>
+
+    <p>
+        Users should therefore identify the reference asset of a particular stablecoin
+        instead of assuming that every stablecoin targets one U.S. dollar.
+    </p>
+
+    <h2>Does "Stable" Mean the Price Cannot Change?</h2>
+
+    <p>
+        No. "Stable" means that the design aims to reduce volatility and maintain a
+        reference value, not that the market price can never move.
+    </p>
+
+    <p>
+        Deviations can occur because of market conditions, liquidity, collateral problems,
+        reserve concerns, or weaknesses in the stabilization mechanism.
+    </p>
+
+    <h2>A Simple Educational Example</h2>
+
+    <p>
+        Imagine a stablecoin designed to target a value close to one U.S. dollar.
+    </p>
+
+    <ol>
+        <li>The system uses a particular mechanism to issue or support the stablecoin.</li>
+        <li>The stablecoin is traded in markets inside and outside DeFi.</li>
+        <li>A user provides it as liquidity in a DeFi pool.</li>
+        <li>Another user uses it as collateral or borrows it from a lending protocol.</li>
+        <li>If supply, demand, liquidity, or the stabilization mechanism changes significantly, the market price may move away from the target.</li>
+    </ol>
+
+    <p>
+        This is a general educational example and does not describe any specific stablecoin.
+    </p>
+
+    <h2>What Should You Check Before Using a Stablecoin?</h2>
+
+    <p>
+        Looking only at the current price is not enough. Useful questions include:
+    </p>
+
+    <ul>
+        <li>What is the stablecoin's reference asset?</li>
+        <li>How does it attempt to maintain its target value?</li>
+        <li>What reserves or collateral support it?</li>
+        <li>Who is responsible for issuance or administration, if applicable?</li>
+        <li>Is there a defined redemption mechanism?</li>
+        <li>Does it depend on smart contracts?</li>
+        <li>Are there administrative or governance permissions?</li>
+        <li>How liquid are its markets?</li>
+        <li>Does it depend on oracles or external services?</li>
+        <li>What legal and regulatory risks may apply?</li>
+    </ul>
+
+    <h2>Why Is Checking the Price Alone Not Enough?</h2>
+
+    <p>
+        A stablecoin may be trading close to its reference value at a particular moment,
+        but that alone does not explain how the system maintains the value or what risks
+        could affect it in stressed market conditions.
+    </p>
+
+    <p>
+        Understanding a stablecoin requires examining its issuance model, reserves,
+        collateral, liquidity, governance, smart contracts, external dependencies,
+        and the conditions that could cause a depeg.
+    </p>
+
+    <h2>How Do Stablecoins Connect to the DeFi Ecosystem?</h2>
+
+    <p>
+        A stablecoin can move through several parts of the DeFi ecosystem.
+        It may begin in a wallet, be used on a decentralized exchange, then be supplied
+        to a lending protocol, used as collateral, or deposited into a liquidity pool.
+    </p>
+
+    <p>
+        This interconnectedness makes stablecoins an important part of DeFi's financial
+        infrastructure, but it also means that problems in one component can sometimes
+        affect applications that depend on it.
+    </p>
+
+    <p>
+        For the broader DeFi learning path, visit
+        <a href="/academy/defi">the DeFi section of AQL Crypto Academy</a>.
+    </p>
+
+    <h2>Conclusion</h2>
+
+    <p>
+        Stablecoins are digital assets designed to maintain a relatively stable value
+        relative to a reference asset. They have become important components of DeFi
+        because they can be used for trading, lending, borrowing, liquidity, and transfers.
+    </p>
+
+    <p>
+        However, a stablecoin is not automatically synonymous with safety or absolute stability.
+        Stablecoins use different mechanisms, including external reserves, on-chain collateral,
+        algorithmic systems, or combinations of different approaches.
+    </p>
+
+    <p>
+        Understanding the stablecoin's reference asset, stabilization mechanism, reserves,
+        collateral, liquidity, governance, smart contracts, and regulatory environment
+        is therefore essential when studying its role in DeFi.
+    </p>
+
+    <div class="academy-takeaways">
+        <h3>Key Takeaways</h3>
+        <ul>
+            <li>Stablecoins are digital assets designed to maintain a relatively stable reference value.</li>
+            <li>Stablecoins are not identical and can use very different mechanisms.</li>
+            <li>Some rely on external reserves, while others use on-chain collateral or different models.</li>
+            <li>A depeg occurs when the market price moves away from its intended reference value.</li>
+            <li>Stablecoins are widely used in DEXs, liquidity pools, lending, and borrowing.</li>
+            <li>Relative price stability does not mean that an investment or yield is risk-free.</li>
+            <li>Smart contracts, oracles, liquidity, governance, and external dependencies can all matter.</li>
+            <li>Understanding the underlying mechanism is essential before evaluating a stablecoin.</li>
+        </ul>
+    </div>
+
+    <div class="academy-disclaimer">
+        <strong>Disclaimer:</strong>
+        AQL Crypto Academy content is provided for educational and informational purposes only.
+        It is not financial or investment advice and does not recommend using, buying, selling,
+        lending, or borrowing any stablecoin or digital asset. Stablecoins differ in their
+        mechanisms, reserves, collateral, liquidity, and risks. Conduct independent research
+        and understand the risks before making any financial decision.
+    </div>
+
+</article>
+HTML,
+
+    'image' => null,
+
+    'seo_title' => 'ما هي العملات المستقرة في DeFi؟ شرح Stablecoins للمبتدئين | AQL Crypto Academy',
+    'seo_title_ar' => 'ما هي العملات المستقرة في DeFi؟ شرح Stablecoins للمبتدئين | AQL Crypto Academy',
+    'seo_title_en' => 'What Are Stablecoins in DeFi? A Beginner’s Guide | AQL Crypto Academy',
+
+    'meta_description' => 'شرح العملات المستقرة Stablecoins في DeFi، أنواعها وآلية عملها واستخداماتها في التداول والإقراض والسيولة وأهم المخاطر.',
+    'meta_description_ar' => 'شرح العملات المستقرة Stablecoins في DeFi، أنواعها وآلية عملها واستخداماتها في التداول والإقراض والسيولة وأهم المخاطر.',
+    'meta_description_en' => 'Learn what stablecoins are, how they work, their main types, DeFi use cases, depeg risks, and the key factors to understand before using them.',
+
+    'faq_ar' => [
+        [
+            'question' => 'ما هي العملات المستقرة Stablecoins؟',
+            'answer' => 'العملات المستقرة هي أصول رقمية صُممت بهدف الحفاظ على قيمة مستقرة نسبيًا مقارنة بأصل مرجعي معين، وغالبًا ما يكون الدولار الأمريكي، لكنها ليست مضمونة الثبات أو خالية من المخاطر.'
+        ],
+        [
+            'question' => 'لماذا تستخدم العملات المستقرة في DeFi؟',
+            'answer' => 'تستخدم العملات المستقرة في DeFi للتداول وتوفير السيولة والإقراض والاقتراض والتحويلات وتسوية بعض المعاملات، لأنها تحاول توفير قيمة أكثر استقرارًا نسبيًا من كثير من الأصول الرقمية المتقلبة.'
+        ],
+        [
+            'question' => 'ما هي أنواع العملات المستقرة؟',
+            'answer' => 'تشمل التصنيفات العامة العملات المستقرة المدعومة بأصول أو احتياطيات خارجية، والعملات المدعومة بضمانات على البلوكشين، والنماذج الخوارزمية أو شبه الخوارزمية.'
+        ],
+        [
+            'question' => 'ما معنى Peg في العملات المستقرة؟',
+            'answer' => 'Peg هو السعر أو القيمة المرجعية التي تحاول العملة المستقرة تتبعها أو المحافظة عليها، مثل محاولة الحفاظ على قيمة قريبة من دولار أمريكي واحد.'
+        ],
+        [
+            'question' => 'ما هو Depeg؟',
+            'answer' => 'Depeg يعني ابتعاد سعر العملة المستقرة بشكل ملحوظ عن القيمة المرجعية التي صُممت لتتبعها. وقد يكون الانحراف مؤقتًا أو يستمر لفترة أطول حسب الظروف والتصميم.'
+        ],
+        [
+            'question' => 'لماذا قد تفقد العملة المستقرة ربطها السعري؟',
+            'answer' => 'قد يحدث Depeg بسبب تغيرات حادة في العرض والطلب، ضعف السيولة، مشكلات الاحتياطيات أو الضمانات، أخطاء العقود الذكية، مشكلات الإصدار أو الاسترداد، أو ظروف السوق الشديدة.'
+        ],
+        [
+            'question' => 'هل العملات المستقرة خالية من المخاطر؟',
+            'answer' => 'لا. يمكن أن تواجه مخاطر فقدان الربط السعري، والاحتياطيات، والطرف المقابل، والعقود الذكية، والضمانات، والسيولة، والحوكمة، والتنظيم.'
+        ],
+        [
+            'question' => 'هل كل العملات المستقرة مرتبطة بالدولار الأمريكي؟',
+            'answer' => 'لا. الدولار هو المرجع الأكثر شيوعًا، لكن يمكن تصميم بعض العملات المستقرة لتتبع عملات أو أصول أو قيم مرجعية أخرى.'
+        ],
+        [
+            'question' => 'ما دور العملات المستقرة في منصات DEX؟',
+            'answer' => 'تستخدم العملات المستقرة في أزواج التداول ومجمعات السيولة، وقد تساعد المستخدمين على التداول مقابل أصل ذي قيمة أكثر استقرارًا نسبيًا.'
+        ],
+        [
+            'question' => 'هل Stablecoin تعني أن السعر ثابت تمامًا؟',
+            'answer' => 'لا. الهدف هو المحافظة على قيمة مرجعية مستقرة نسبيًا، لكن السعر يمكن أن ينحرف عن القيمة المستهدفة بسبب السوق والسيولة وآلية الاستقرار والمخاطر الأخرى.'
+        ],
+    ],
+
+    'faq_en' => [
+        [
+            'question' => 'What are stablecoins?',
+            'answer' => 'Stablecoins are digital assets designed to maintain a relatively stable value compared with a reference asset, often the U.S. dollar. They are not guaranteed to remain perfectly stable or risk-free.'
+        ],
+        [
+            'question' => 'Why are stablecoins used in DeFi?',
+            'answer' => 'Stablecoins are used in DeFi for trading, liquidity provision, lending, borrowing, transfers, and settlement because they seek to provide a more stable relative value than many volatile digital assets.'
+        ],
+        [
+            'question' => 'What are the main types of stablecoins?',
+            'answer' => 'Broad categories include stablecoins backed by external assets or reserves, stablecoins backed by on-chain collateral, and algorithmic or partially algorithmic models.'
+        ],
+        [
+            'question' => 'What does peg mean in stablecoins?',
+            'answer' => 'A peg is the reference value that a stablecoin is designed to track or maintain, such as a target close to one U.S. dollar.'
+        ],
+        [
+            'question' => 'What is a depeg?',
+            'answer' => 'A depeg occurs when a stablecoin moves meaningfully away from the reference value it is designed to track. The deviation may be temporary or more persistent.'
+        ],
+        [
+            'question' => 'Why can a stablecoin lose its peg?',
+            'answer' => 'A stablecoin can depeg because of sudden supply or demand changes, insufficient liquidity, reserve or collateral concerns, smart contract problems, issuance or redemption issues, or severe market conditions.'
+        ],
+        [
+            'question' => 'Are stablecoins risk-free?',
+            'answer' => 'No. Stablecoins can face depeg, reserve, counterparty, smart contract, collateral, liquidity, governance, and regulatory risks.'
+        ],
+        [
+            'question' => 'Are all stablecoins pegged to the U.S. dollar?',
+            'answer' => 'No. The U.S. dollar is the most common reference, but stablecoins can be designed to track other currencies, assets, or reference values.'
+        ],
+        [
+            'question' => 'What role do stablecoins play on decentralized exchanges?',
+            'answer' => 'Stablecoins are commonly used in trading pairs and liquidity pools, allowing users to trade against an asset designed to have a more stable relative value.'
+        ],
+        [
+            'question' => 'Does stablecoin mean the price is completely fixed?',
+            'answer' => 'No. A stablecoin aims to maintain a relatively stable reference value, but its market price can move away from the target because of market conditions, liquidity, and weaknesses or stress in its stabilization mechanism.'
+        ],
+    ],
+
+    'status' => 'published',
+    'sort_order' => 6,
+    'published_at' => now(),
+],
+[
+    'topic_id' => $defi->id,
+
+    'title' => 'ما هي زراعة العوائد Yield Farming في DeFi؟ شرح للمبتدئين',
+    'title_ar' => 'ما هي زراعة العوائد Yield Farming في DeFi؟ شرح للمبتدئين',
+    'title_en' => 'What Is Yield Farming in DeFi? A Beginner’s Guide',
+
+    'slug' => 'what-is-yield-farming',
+
+    'excerpt' => 'تعرف على مفهوم زراعة العوائد Yield Farming في DeFi، وكيف يحصل المستخدمون على العوائد من السيولة والإقراض ومكافآت البروتوكولات، وما أهم المخاطر.',
+    'excerpt_ar' => 'تعرف على مفهوم زراعة العوائد Yield Farming في DeFi، وكيف يحصل المستخدمون على العوائد من السيولة والإقراض ومكافآت البروتوكولات، وما أهم المخاطر.',
+    'excerpt_en' => 'Learn what yield farming means in DeFi, how users can earn returns from liquidity, lending, and protocol rewards, and which risks should be understood.',
+
+    'content' => null,
+
+    'content_ar' => <<<'HTML'
+<article class="academy-article">
+
+    <h2>ما هي زراعة العوائد Yield Farming؟</h2>
+
+    <p>
+        <strong>زراعة العوائد (Yield Farming)</strong> هي مصطلح يستخدم لوصف مجموعة من
+        الأساليب التي تهدف إلى الحصول على عوائد من خلال توفير أصول رقمية للبروتوكولات
+        والتطبيقات المالية داخل منظومة <strong>DeFi</strong>.
+    </p>
+
+    <p>
+        يمكن أن تأتي هذه العوائد من مصادر مختلفة، مثل رسوم التداول التي يحصل عليها
+        مزودو السيولة، أو الفوائد المدفوعة في أسواق الإقراض، أو مكافآت توزعها بعض
+        البروتوكولات على المشاركين.
+    </p>
+
+    <p>
+        لذلك فإن Yield Farming ليست منتجًا ماليًا واحدًا أو طريقة موحدة. قد تختلف
+        الآلية والمخاطر والعوائد بشكل كبير من بروتوكول إلى آخر.
+    </p>
+
+    <p>
+        في هذا الدرس من <strong>AQL Crypto Academy</strong> سنتعرف على معنى Yield Farming،
+        وكيف تعمل، وما مصادر العائد، وما الفرق بينها وبين توفير السيولة والإقراض،
+        ولماذا لا ينبغي اعتبار معدل العائد المرتفع ضمانًا للربح.
+    </p>
+
+    <div class="academy-note">
+        <strong>ملاحظة تعليمية:</strong>
+        هذا المقال يشرح Yield Farming لأغراض تعليمية فقط، ولا يمثل توصية باستخدام
+        استراتيجية أو بروتوكول أو أصل رقمي معين.
+    </div>
+
+    <h2>لماذا ظهرت فكرة Yield Farming في DeFi؟</h2>
+
+    <p>
+        تعتمد العديد من تطبيقات DeFi على المستخدمين لتوفير السيولة أو إيداع الأصول
+        أو تقديم رأس المال الذي تحتاجه البروتوكولات لتنفيذ وظائفها.
+    </p>
+
+    <p>
+        مقابل المشاركة، قد يحصل المستخدم في بعض الأنظمة على جزء من رسوم التداول،
+        أو فائدة على الأصول المودعة، أو مكافآت من البروتوكول.
+    </p>
+
+    <p>
+        من هنا ظهر مصطلح Yield Farming لوصف البحث عن العوائد الناتجة عن استخدام
+        الأصول في بروتوكولات DeFi المختلفة.
+    </p>
+
+    <p>
+        لفهم الأساس الذي تقوم عليه هذه الأنظمة، يمكنك مراجعة
+        <a href="/academy/defi/what-is-defi">ما هو DeFi؟ شرح التمويل اللامركزي للمبتدئين</a>.
+    </p>
+
+    <h2>كيف تعمل Yield Farming بشكل عام؟</h2>
+
+    <p>
+        تختلف التفاصيل حسب البروتوكول، لكن الفكرة العامة يمكن تبسيطها إلى الخطوات التالية:
+    </p>
+
+    <ol>
+        <li>يختار المستخدم بروتوكول DeFi يوفر وظيفة معينة.</li>
+        <li>يقوم بإيداع أصل أو أكثر وفق شروط البروتوكول.</li>
+        <li>يستخدم البروتوكول الأصول في وظيفة مثل السيولة أو الإقراض.</li>
+        <li>قد يحصل المستخدم على رسوم أو فائدة أو مكافآت وفق قواعد النظام.</li>
+        <li>يمكن أن تتغير قيمة العائد بمرور الوقت حسب نشاط البروتوكول والأسواق والمكافآت.</li>
+    </ol>
+
+    <p>
+        بعض الاستراتيجيات قد تنقل الأصول بين أكثر من بروتوكول، وقد تستخدم عقودًا ذكية
+        متعددة. كل طبقة إضافية يمكن أن تضيف فائدة محتملة، لكنها قد تضيف أيضًا مخاطر إضافية.
+    </p>
+
+    <h2>ما هي مصادر العائد في Yield Farming؟</h2>
+
+    <p>
+        كلمة "العائد" في DeFi قد تشير إلى أكثر من مصدر. من أهم المصادر:
+    </p>
+
+    <ul>
+        <li>رسوم التداول.</li>
+        <li>فوائد الإقراض.</li>
+        <li>مكافآت البروتوكولات.</li>
+        <li>حوافز توفير السيولة.</li>
+        <li>آليات أخرى خاصة ببعض التطبيقات.</li>
+    </ul>
+
+    <p>
+        من المهم معرفة مصدر العائد بدل النظر إلى النسبة المعلنة فقط، لأن العائد الناتج
+        عن رسوم فعلية يختلف في طبيعته عن مكافآت يتم إصدارها من بروتوكول أو رمز جديد.
+    </p>
+
+    <h2>Yield Farming وتوفير السيولة</h2>
+
+    <p>
+        أحد أشهر أشكال Yield Farming هو توفير السيولة في مجمعات التداول اللامركزي.
+    </p>
+
+    <p>
+        يقوم مزود السيولة بإيداع الأصول في مجمع معين، ويمكن للمتداولين استخدام هذه
+        السيولة لإجراء عمليات التبادل.
+    </p>
+
+    <p>
+        في بعض البروتوكولات يحصل مزودو السيولة على جزء من رسوم التداول التي يدفعها المستخدمون.
+    </p>
+
+    <p>
+        لفهم هذا المفهوم بالتفصيل، يمكنك مراجعة مقال
+        <a href="/academy/defi/what-are-liquidity-pools">ما هي مجمعات السيولة؟ وكيف تعمل في DeFi؟</a>.
+    </p>
+
+    <h2>هل توفير السيولة هو نفسه Yield Farming؟</h2>
+
+    <p>
+        ليس بالضرورة.
+    </p>
+
+    <p>
+        <strong>توفير السيولة</strong> يعني إيداع الأصول في مجمع أو نظام لتوفير السيولة
+        للتطبيق، بينما <strong>Yield Farming</strong> هو مفهوم أوسع يمكن أن يشمل توفير
+        السيولة والإقراض والاستفادة من المكافآت أو استخدام عدة بروتوكولات.
+    </p>
+
+    <p>
+        في بعض الحالات يكون توفير السيولة جزءًا من استراتيجية Yield Farming، لكنه ليس
+        تعريفًا كاملًا للمصطلح.
+    </p>
+
+    <h2>Yield Farming والإقراض</h2>
+
+    <p>
+        يمكن أن تعتمد بعض استراتيجيات Yield Farming على إيداع الأصول في بروتوكولات الإقراض.
+    </p>
+
+    <p>
+        عندما يقوم المستخدم بتوريد أصل إلى سوق إقراض، قد يحصل على عائد ناتج عن الفائدة
+        التي يدفعها المقترضون، وفق آلية البروتوكول.
+    </p>
+
+    <p>
+        لكن معدل الفائدة قد يتغير حسب العرض والطلب على الأصول وحالة السوق وقواعد البروتوكول.
+    </p>
+
+    <p>
+        يمكنك دراسة الأساسيات في:
+        <a href="/academy/defi/defi-lending-and-borrowing">الإقراض والاقتراض في DeFi</a>.
+    </p>
+
+    <h2>ما هي Liquidity Mining؟</h2>
+
+    <p>
+        <strong>Liquidity Mining</strong> أو تعدين السيولة هو مصطلح يرتبط بتوزيع
+        مكافآت للمستخدمين الذين يوفرون السيولة أو يشاركون في وظائف محددة داخل بروتوكول.
+    </p>
+
+    <p>
+        قد تكون المكافآت على شكل رموز مرتبطة بالبروتوكول، وقد تختلف شروط الحصول عليها
+        من نظام إلى آخر.
+    </p>
+
+    <p>
+        من المهم التمييز بين المكافآت وبين الرسوم الفعلية التي يولدها النشاط الاقتصادي
+        داخل البروتوكول.
+    </p>
+
+    <h2>هل المكافآت تعني ربحًا حقيقيًا؟</h2>
+
+    <p>
+        ليس بالضرورة.
+    </p>
+
+    <p>
+        قد يحصل المستخدم على عدد من الرموز كمكافآت، لكن قيمة هذه الرموز يمكن أن ترتفع
+        أو تنخفض بشكل كبير.
+    </p>
+
+    <p>
+        لذلك يجب التمييز بين <strong>كمية الرموز التي تم الحصول عليها</strong> وبين
+        <strong>القيمة الاقتصادية الفعلية لهذه الرموز</strong>.
+    </p>
+
+    <p>
+        كما أن ارتفاع نسبة APY المعروضة لا يعني بالضرورة أن المستخدم سيحقق نفس العائد
+        الفعلي خلال فترة طويلة.
+    </p>
+
+    <h2>ما الفرق بين APR وAPY في DeFi؟</h2>
+
+    <p>
+        من المصطلحات الشائعة عند عرض العوائد:
+        <strong>APR</strong> و<strong>APY</strong>.
+    </p>
+
+    <h3>APR</h3>
+
+    <p>
+        يشير APR عادةً إلى معدل العائد السنوي دون احتساب أثر إعادة استثمار العوائد
+        بطريقة المركبة.
+    </p>
+
+    <h3>APY</h3>
+
+    <p>
+        يشير APY عادةً إلى العائد السنوي مع افتراض إعادة استثمار العوائد وفق طريقة
+        الاحتساب المستخدمة.
+    </p>
+
+    <p>
+        تختلف طريقة حساب هذه المؤشرات من منصة إلى أخرى، لذلك من المهم قراءة طريقة
+        احتساب الرقم بدل مقارنته بشكل سطحي مع رقم آخر.
+    </p>
+
+    <div class="academy-warning">
+        <strong>تنبيه:</strong>
+        APY مرتفع لا يعني تلقائيًا ربحًا مضمونًا. قد يتغير معدل العائد بسرعة،
+        وقد تنخفض قيمة المكافآت أو الأصول، كما قد توجد مخاطر أخرى تتجاوز الرقم المعروض.
+    </div>
+
+    <h2>ما هو Impermanent Loss في Yield Farming؟</h2>
+
+    <p>
+        عندما يوفر المستخدم السيولة لبعض أنواع مجمعات التداول، قد يتعرض لما يسمى
+        <strong>Impermanent Loss</strong> أو الخسارة غير الدائمة.
+    </p>
+
+    <p>
+        تحدث هذه الظاهرة عندما تتغير الأسعار النسبية للأصول الموجودة في المجمع مقارنة
+        بما كانت عليه عند إيداعها، مما قد يجعل قيمة الأصول عند سحب السيولة مختلفة عن
+        قيمة الاحتفاظ بها خارج المجمع، مع افتراض ثبات العوامل الأخرى.
+    </p>
+
+    <p>
+        الرسوم والمكافآت يمكن أن تعوض جزءًا من هذا الأثر في بعض الحالات، لكنها لا
+        تضمن تعويضه دائمًا.
+    </p>
+
+    <p>
+        كما أن وصفها بأنها "غير دائمة" لا يعني أن الخسارة ستختفي بالضرورة أو أن المستخدم
+        سيعود تلقائيًا إلى نقطة التعادل.
+    </p>
+
+    <h2>مثال مبسط على Impermanent Loss</h2>
+
+    <p>
+        لنفترض أن المستخدم يوفر السيولة لزوج يتكون من أصل رقمي وعملة مستقرة.
+        إذا ارتفع سعر الأصل الرقمي بشكل كبير، فإن آلية المجمع قد تغير نسب الأصول داخله.
+    </p>
+
+    <p>
+        نتيجة لذلك، قد ينتهي المستخدم عند سحب السيولة بكمية مختلفة من الأصل الرقمي
+        والعملة المستقرة مقارنة بما كان سيملكه لو احتفظ بالأصول خارج المجمع.
+    </p>
+
+    <p>
+        هذا المثال مبسط جدًا، والنتيجة الفعلية تعتمد على تصميم المجمع والأسعار والرسوم
+        والتوقيت وعوامل أخرى.
+    </p>
+
+    <h2>ما هي مخاطر Smart Contract في Yield Farming؟</h2>
+
+    <p>
+        تعتمد استراتيجيات Yield Farming غالبًا على العقود الذكية.
+        وإذا احتوى العقد على ثغرة أو خطأ في التصميم، فقد تتعرض الأصول للخطر.
+    </p>
+
+    <p>
+        تدقيق العقد الذكي يمكن أن يقلل بعض المخاطر، لكنه لا يعني أن النظام أصبح آمنًا
+        بشكل مطلق، ولا يلغي المخاطر المرتبطة بالعقود الأخرى التي قد تعتمد عليها الاستراتيجية.
+    </p>
+
+    <h2>ما هي مخاطر البروتوكول؟</h2>
+
+    <p>
+        البروتوكول قد يعتمد على مجموعة من العقود والقواعد والأوراكل وآليات الحوكمة.
+        وجود خلل في أحد هذه المكونات قد يؤثر في النظام.
+    </p>
+
+    <p>
+        وكلما زادت طبقات البروتوكولات المستخدمة في استراتيجية واحدة، أصبح من المهم
+        فهم العلاقات والاعتماديات بينها.
+    </p>
+
+    <h2>ما هي مخاطر رمز المكافآت؟</h2>
+
+    <p>
+        بعض استراتيجيات Yield Farming تدفع مكافآت باستخدام رمز خاص بالبروتوكول.
+    </p>
+
+    <p>
+        قد تكون كمية المكافآت كبيرة، لكن سعر الرمز يمكن أن يتغير. وإذا انخفضت قيمته
+        بشكل كبير، فقد يصبح العائد الاسمي المعلن أقل أهمية من المتوقع.
+    </p>
+
+    <p>
+        كما يمكن أن تتغير معدلات الإصدار أو توزيع المكافآت أو قواعد البرنامج بمرور الوقت.
+    </p>
+
+    <h2>ما هي مخاطر Rug Pull؟</h2>
+
+    <p>
+        في بعض المشاريع غير الموثوقة قد تكون هناك صلاحيات إدارية أو آليات تسمح لأطراف
+        معينة بالتحكم في العقود أو الأموال أو المعايير الأساسية للبروتوكول.
+    </p>
+
+    <p>
+        لذلك يجب الانتباه إلى صلاحيات الإدارة، وآلية الحوكمة، وشفافية الفريق، والعقود
+        المستخدمة، وليس إلى معدل العائد فقط.
+    </p>
+
+    <h2>ما هي مخاطر السيولة؟</h2>
+
+    <p>
+        ارتفاع العائد المعلن لا يعني أن السوق يتمتع بسيولة كافية.
+    </p>
+
+    <p>
+        عندما تكون السيولة منخفضة، قد يواجه المستخدم انزلاقًا سعريًا كبيرًا عند محاولة
+        تحويل الأصول أو بيع المكافآت، وقد تصبح عملية الخروج أكثر صعوبة.
+    </p>
+
+    <h2>ما هي مخاطر Oracle في بعض استراتيجيات DeFi؟</h2>
+
+    <p>
+        بعض البروتوكولات تحتاج إلى معرفة أسعار الأصول الخارجية أو أسعار السوق لاتخاذ
+        قرارات مثل تقييم الضمانات أو تحديد نسب الاقتراض.
+    </p>
+
+    <p>
+        إذا كانت آلية الأسعار ضعيفة أو تعرضت للتلاعب أو الانقطاع، فقد تتأثر العمليات
+        التي تعتمد عليها.
+    </p>
+
+    <h2>هل Yield Farming آمنة لأنها تعمل على Blockchain؟</h2>
+
+    <p>
+        لا.
+    </p>
+
+    <p>
+        استخدام البلوكشين لا يجعل التطبيق آمنًا تلقائيًا. البلوكشين يوفر بنية لتنفيذ
+        المعاملات والعقود، لكن سلامة البروتوكول تعتمد أيضًا على تصميم العقود والحوكمة
+        والأوراكل والاعتماديات والعمليات الأخرى.
+    </p>
+
+    <p>
+        ويمكنك مراجعة أساسيات البلوكشين من خلال
+        <a href="/academy/blockchain/what-is-blockchain">ما هو Blockchain؟</a>.
+    </p>
+
+    <h2>هل Yield Farming تعني دخلًا ثابتًا؟</h2>
+
+    <p>
+        لا.
+    </p>
+
+    <p>
+        العوائد في DeFi يمكن أن تتغير بمرور الوقت بسبب تغير أسعار الأصول، وحجم التداول،
+        ومعدلات الاقتراض، والسيولة، والمكافآت، وعدد المشاركين، وقواعد البروتوكول.
+    </p>
+
+    <p>
+        لذلك فإن الرقم الظاهر في واجهة التطبيق يمثل عادةً حالة أو تقديرًا يعتمد على
+        معطيات معينة، وليس وعدًا بعائد مستقبلي ثابت.
+    </p>
+
+    <h2>ما الفرق بين Yield Farming وStaking؟</h2>
+
+    <p>
+        <strong>Staking</strong> يرتبط عادةً بالمشاركة في آلية إثبات الحصة أو أنظمة
+        تستخدم الأصول المرهونة للمساعدة في تشغيل الشبكة أو البروتوكول.
+    </p>
+
+    <p>
+        أما Yield Farming فهو مصطلح أوسع يرتبط بالحصول على عوائد من استخدام الأصول
+        في بروتوكولات DeFi المختلفة.
+    </p>
+
+    <p>
+        قد تتقاطع المفاهيم في بعض التطبيقات، لكنهما ليسا مصطلحين متطابقين.
+    </p>
+
+    <h2>ما الفرق بين Yield Farming وLending؟</h2>
+
+    <p>
+        <strong>Lending</strong> يعني عادةً إيداع الأصول في بروتوكول إقراض بحيث يمكن
+        استخدامها من قبل المقترضين وفق قواعد النظام.
+    </p>
+
+    <p>
+        أما Yield Farming فقد تستخدم الإقراض كجزء من استراتيجية أوسع، أو تعتمد على
+        توفير السيولة أو مكافآت البروتوكول أو مجموعة من العمليات.
+    </p>
+
+    <h2>ما هي استراتيجية Yield Farming متعددة الخطوات؟</h2>
+
+    <p>
+        بعض الاستراتيجيات لا تكتفي بإيداع الأصل في بروتوكول واحد، بل قد تمر عبر عدة مراحل.
+    </p>
+
+    <p>
+        مثال تعليمي عام:
+    </p>
+
+    <ol>
+        <li>إيداع أصل في بروتوكول معين.</li>
+        <li>الحصول على رمز يمثل المركز أو الإيداع.</li>
+        <li>استخدام هذا الرمز في بروتوكول آخر.</li>
+        <li>الحصول على مكافآت إضافية وفق قواعد البروتوكولات المستخدمة.</li>
+    </ol>
+
+    <p>
+        هذا النوع من الاستراتيجيات قد يزيد تعقيد النظام؛ لأن المستخدم يصبح معرضًا
+        لمخاطر كل طبقة من الطبقات، وليس فقط مخاطر البروتوكول الأول.
+    </p>
+
+    <h2>لماذا قد يكون العائد مرتفعًا جدًا في بعض المشاريع؟</h2>
+
+    <p>
+        قد تعرض بعض البروتوكولات معدلات مرتفعة عندما تقدم مكافآت كبيرة لجذب السيولة
+        أو المستخدمين.
+    </p>
+
+    <p>
+        قد تتغير هذه المكافآت بسرعة، وقد يكون الرمز المستخدم لدفعها شديد التقلب.
+        لذلك يجب فهم مصدر العائد ومدى استدامته بدل النظر إلى النسبة وحدها.
+    </p>
+
+    <h2>ما معنى APY مرتفع جدًا؟</h2>
+
+    <p>
+        APY المرتفع قد ينتج عن مكافآت مؤقتة أو ظروف معينة في البروتوكول أو ارتفاع الطلب
+        على خدمة معينة.
+    </p>
+
+    <p>
+        لا يعني ذلك تلقائيًا أن البروتوكول سيحافظ على نفس المعدل أو أن المستخدم سيحقق
+        ذلك العائد بعد احتساب تغير أسعار الأصول والرسوم والخسائر المحتملة.
+    </p>
+
+    <h2>ما الذي يجب فحصه قبل دراسة أي Yield Farm؟</h2>
+
+    <p>
+        من المفيد تحليل مجموعة من العناصر بدل الاعتماد على APY فقط:
+    </p>
+
+    <ul>
+        <li>مصدر العائد.</li>
+        <li>طريقة احتساب APR أو APY.</li>
+        <li>نوع الأصول المستخدمة.</li>
+        <li>السيولة المتاحة.</li>
+        <li>حجم التداول إن كانت الاستراتيجية تعتمد على رسوم التداول.</li>
+        <li>مخاطر Impermanent Loss.</li>
+        <li>العقود الذكية المستخدمة.</li>
+        <li>نتائج التدقيق الأمني إن وجدت.</li>
+        <li>صلاحيات الإدارة والحوكمة.</li>
+        <li>طريقة إصدار وتوزيع رموز المكافآت.</li>
+        <li>الاعتماد على أوراكل أو خدمات خارجية.</li>
+        <li>عدد البروتوكولات التي تعتمد عليها الاستراتيجية.</li>
+        <li>سهولة الخروج وتحويل الأصول.</li>
+    </ul>
+
+    <h2>هل التدقيق الأمني Audit يضمن سلامة البروتوكول؟</h2>
+
+    <p>
+        لا.
+    </p>
+
+    <p>
+        التدقيق الأمني يمكن أن يساعد في اكتشاف بعض الأخطاء والثغرات، لكنه لا يمثل
+        ضمانًا مطلقًا بأن البروتوكول لن يتعرض لمشكلة مستقبلية.
+    </p>
+
+    <p>
+        قد تظهر أخطاء في عقود جديدة، أو في تكامل بين بروتوكولات، أو في منطق لم يغطيه
+        التدقيق، أو بسبب تغييرات يتم إدخالها بعد المراجعة.
+    </p>
+
+    <h2>كيف ترتبط Yield Farming بالعملات المستقرة؟</h2>
+
+    <p>
+        يمكن استخدام العملات المستقرة في بعض استراتيجيات Yield Farming، سواء داخل
+        أسواق الإقراض أو مجمعات السيولة أو تطبيقات أخرى.
+    </p>
+
+    <p>
+        لكن استخدام Stablecoin لا يلغي المخاطر. فقد تبقى مخاطر البروتوكول والسيولة
+        والعقود الذكية، إضافة إلى مخاطر العملة المستقرة نفسها.
+    </p>
+
+    <p>
+        لفهم هذه الأصول بشكل أعمق، راجع:
+        <a href="/academy/defi/stablecoins-in-defi">ما هي العملات المستقرة في DeFi؟</a>.
+    </p>
+
+    <h2>هل يمكن خسارة المال في Yield Farming؟</h2>
+
+    <p>
+        نعم.
+    </p>
+
+    <p>
+        يمكن أن تحدث الخسائر بسبب انخفاض أسعار الأصول، أو Impermanent Loss، أو انخفاض
+        قيمة رموز المكافآت، أو اختراق أو خلل في عقد ذكي، أو مشاكل في البروتوكول،
+        أو ضعف السيولة، أو فقدان العملة المستقرة لربطها السعري، أو عوامل أخرى.
+    </p>
+
+    <p>
+        لذلك يجب عدم التعامل مع Yield Farming على أنها طريقة مضمونة لتحقيق عائد.
+    </p>
+
+    <h2>مثال تعليمي مبسط</h2>
+
+    <p>
+        لنفترض أن بروتوكولًا يوفر مجمع سيولة يستخدم أصلًا رقميًا وعملة مستقرة.
+    </p>
+
+    <ol>
+        <li>يودع المستخدم الأصلين في مجمع السيولة.</li>
+        <li>يصبح المستخدم مزودًا للسيولة.</li>
+        <li>يدفع المتداولون رسومًا عند تنفيذ عمليات التبادل.</li>
+        <li>يحصل مزودو السيولة على جزء من الرسوم وفق قواعد البروتوكول.</li>
+        <li>قد يقدم البروتوكول مكافآت إضافية على شكل رموز خاصة به.</li>
+        <li>في الوقت نفسه، قد تتغير أسعار الأصول وقد يظهر Impermanent Loss.</li>
+        <li>إذا انخفضت قيمة المكافآت أو حدثت مشكلة في البروتوكول، فقد تختلف النتيجة النهائية بشكل كبير.</li>
+    </ol>
+
+    <p>
+        هذا مثال تعليمي مبسط وليس استراتيجية استثمارية.
+    </p>
+
+    <h2>ما أهم الأخطاء التي يقع فيها المبتدئون؟</h2>
+
+    <ul>
+        <li>النظر إلى APY فقط دون فهم مصدره.</li>
+        <li>افتراض أن التدقيق الأمني يعني انعدام المخاطر.</li>
+        <li>تجاهل Impermanent Loss عند توفير السيولة.</li>
+        <li>عدم دراسة رمز المكافآت وتقلب سعره.</li>
+        <li>تجاهل سيولة السوق.</li>
+        <li>استخدام بروتوكولات متعددة دون فهم الاعتماديات بينها.</li>
+        <li>اعتبار العائد المعلن مضمونًا.</li>
+        <li>عدم الانتباه إلى صلاحيات الإدارة والحوكمة.</li>
+        <li>إيداع أموال لا يستطيع المستخدم تحمل خسارتها.</li>
+    </ul>
+
+    <h2>كيف تتعلم Yield Farming بطريقة صحيحة؟</h2>
+
+    <p>
+        أفضل طريقة لفهم Yield Farming هي دراسة المكونات التي تتكون منها الاستراتيجية
+        بدل حفظ نسب العوائد.
+    </p>
+
+    <ol>
+        <li>فهم DeFi والعقود الذكية.</li>
+        <li>فهم مجمعات السيولة وAMMs.</li>
+        <li>فهم الإقراض والاقتراض.</li>
+        <li>فهم العملات المستقرة.</li>
+        <li>فهم APR وAPY.</li>
+        <li>فهم Impermanent Loss.</li>
+        <li>فهم مخاطر العقود الذكية والحوكمة والأوراكل.</li>
+        <li>تحليل مصدر العائد قبل تقييمه.</li>
+    </ol>
+
+    <p>
+        يمكنك متابعة بقية الدروس من
+        <a href="/academy/defi">قسم DeFi في AQL Crypto Academy</a>.
+    </p>
+
+    <h2>الخلاصة</h2>
+
+    <p>
+        Yield Farming هو مفهوم واسع في DeFi يشير إلى استخدام الأصول الرقمية في
+        بروتوكولات مختلفة بهدف الحصول على عوائد محتملة.
+    </p>
+
+    <p>
+        يمكن أن يأتي العائد من رسوم التداول أو فوائد الإقراض أو مكافآت البروتوكولات
+        أو حوافز توفير السيولة، وقد تجمع بعض الاستراتيجيات بين أكثر من مصدر.
+    </p>
+
+    <p>
+        لكن العائد المرتفع لا يعني بالضرورة عائدًا مستدامًا أو مضمونًا. قد تتغير
+        الأسعار والمكافآت والسيولة، وقد يواجه المستخدم Impermanent Loss ومخاطر
+        العقود الذكية والحوكمة والأوراكل ورموز المكافآت.
+    </p>
+
+    <p>
+        لذلك فإن فهم مصدر العائد والمخاطر والاعتماديات التقنية أهم من النظر إلى
+        النسبة المعلنة وحدها.
+    </p>
+
+    <div class="academy-takeaways">
+        <h3>أهم النقاط</h3>
+        <ul>
+            <li>Yield Farming هو مفهوم واسع للحصول على عوائد محتملة من استخدام الأصول في DeFi.</li>
+            <li>يمكن أن تأتي العوائد من رسوم التداول أو الإقراض أو مكافآت البروتوكولات.</li>
+            <li>توفير السيولة قد يكون جزءًا من Yield Farming لكنه ليس مرادفًا له دائمًا.</li>
+            <li>Liquidity Mining يرتبط غالبًا بمكافآت توفير السيولة أو المشاركة في البروتوكول.</li>
+            <li>APR وAPY يعبران عن طرق مختلفة لعرض العوائد ويجب فهم طريقة الحساب.</li>
+            <li>مزودو السيولة قد يتعرضون لـ Impermanent Loss.</li>
+            <li>التدقيق الأمني يقلل بعض المخاطر لكنه لا يضمن سلامة البروتوكول بشكل مطلق.</li>
+            <li>ارتفاع APY لا يعني عائدًا مضمونًا أو مستدامًا.</li>
+            <li>دراسة مصدر العائد والسيولة والعقود والحوكمة والمكافآت ضرورية لفهم المخاطر.</li>
+        </ul>
+    </div>
+
+    <div class="academy-disclaimer">
+        <strong>تنبيه:</strong>
+        محتوى AQL Crypto Academy تعليمي وتثقيفي فقط، ولا يُعد نصيحة مالية أو استثمارية
+        أو توصية باستخدام أي استراتيجية Yield Farming أو بروتوكول أو أصل رقمي.
+        العوائد في DeFi ليست مضمونة وقد تتغير أو تنخفض، وقد يتعرض المستخدم لخسارة
+        جزئية أو كاملة لرأس المال بسبب تقلب الأسعار أو Impermanent Loss أو العقود
+        الذكية أو السيولة أو الحوكمة أو المكافآت أو مخاطر أخرى.
+    </div>
+
+</article>
+HTML,
+
+    'content_en' => <<<'HTML'
+<article class="academy-article">
+
+    <h2>What Is Yield Farming?</h2>
+
+    <p>
+        <strong>Yield Farming</strong> is a broad term used to describe strategies
+        that seek returns by putting digital assets to work across protocols and
+        financial applications in the <strong>DeFi</strong> ecosystem.
+    </p>
+
+    <p>
+        These returns can come from different sources, such as trading fees earned by
+        liquidity providers, interest paid in lending markets, or incentives distributed
+        by certain protocols.
+    </p>
+
+    <p>
+        Therefore, Yield Farming is not one financial product or one standardized strategy.
+        Its mechanics, risks, and potential returns can vary significantly from one protocol
+        to another.
+    </p>
+
+    <p>
+        In this AQL Crypto Academy lesson, we will explain what Yield Farming means,
+        how it works, where returns come from, how it relates to liquidity provision
+        and lending, and why a high advertised yield should never be treated as a
+        guarantee of profit.
+    </p>
+
+    <div class="academy-note">
+        <strong>Educational note:</strong>
+        This article explains Yield Farming for educational purposes only. It is not
+        a recommendation to use any particular strategy, protocol, or digital asset.
+    </div>
+
+    <h2>Why Did Yield Farming Emerge in DeFi?</h2>
+
+    <p>
+        Many DeFi applications depend on users to provide liquidity, deposit assets,
+        or supply capital that protocols need to perform their functions.
+    </p>
+
+    <p>
+        In return, participants may receive a share of trading fees, interest on
+        deposited assets, or protocol incentives, depending on the system.
+    </p>
+
+    <p>
+        The term Yield Farming emerged as a broad way to describe seeking returns
+        generated by putting assets to work across DeFi protocols.
+    </p>
+
+    <p>
+        To understand the foundation of this ecosystem, read
+        <a href="/academy/defi/what-is-defi">What Is DeFi? A Beginner’s Guide to Decentralized Finance</a>.
+    </p>
+
+    <h2>How Does Yield Farming Work?</h2>
+
+    <p>
+        The exact process depends on the protocol, but the general idea can be simplified
+        into the following steps:
+    </p>
+
+    <ol>
+        <li>The user selects a DeFi protocol that provides a particular function.</li>
+        <li>The user deposits one or more assets according to the protocol's rules.</li>
+        <li>The protocol uses those assets for a function such as liquidity or lending.</li>
+        <li>The user may receive fees, interest, or incentives according to the system.</li>
+        <li>The resulting return can change over time as market conditions and protocol incentives change.</li>
+    </ol>
+
+    <p>
+        Some strategies may move assets through multiple protocols and smart contracts.
+        Each additional layer can introduce additional complexity and risk.
+    </p>
+
+    <h2>Where Do Yield Farming Returns Come From?</h2>
+
+    <p>
+        The word "yield" in DeFi can refer to several different sources. Common sources include:
+    </p>
+
+    <ul>
+        <li>Trading fees.</li>
+        <li>Lending interest.</li>
+        <li>Protocol rewards.</li>
+        <li>Liquidity incentives.</li>
+        <li>Other mechanisms specific to individual applications.</li>
+    </ul>
+
+    <p>
+        Understanding the source of the return is important. Returns generated from actual
+        trading activity are economically different from token rewards distributed by a protocol.
+    </p>
+
+    <h2>Yield Farming and Liquidity Provision</h2>
+
+    <p>
+        One of the most common forms of Yield Farming involves providing liquidity to
+        decentralized trading pools.
+    </p>
+
+    <p>
+        A liquidity provider deposits assets into a pool that traders can use to execute swaps.
+    </p>
+
+    <p>
+        Depending on the protocol, liquidity providers may receive a portion of the trading
+        fees paid by users.
+    </p>
+
+    <p>
+        To learn more about the underlying mechanism, read
+        <a href="/academy/defi/what-are-liquidity-pools">What Are Liquidity Pools? How Do They Work in DeFi?</a>.
+    </p>
+
+    <h2>Is Liquidity Provision the Same as Yield Farming?</h2>
+
+    <p>
+        Not necessarily.
+    </p>
+
+    <p>
+        <strong>Liquidity provision</strong> means depositing assets into a pool or system
+        to provide liquidity, while <strong>Yield Farming</strong> is a broader concept
+        that can include liquidity provision, lending, protocol incentives, or combinations
+        of several protocols.
+    </p>
+
+    <p>
+        Liquidity provision can therefore be part of a Yield Farming strategy without
+        being a complete definition of the term.
+    </p>
+
+    <h2>Yield Farming and Lending</h2>
+
+    <p>
+        Some Yield Farming strategies involve depositing assets into lending protocols.
+    </p>
+
+    <p>
+        When a user supplies an asset to a lending market, the user may receive interest
+        generated by borrowers according to the protocol's rules.
+    </p>
+
+    <p>
+        Lending rates can change depending on supply, demand, market conditions,
+        and protocol mechanics.
+    </p>
+
+    <p>
+        Learn more in
+        <a href="/academy/defi/defi-lending-and-borrowing">DeFi Lending and Borrowing</a>.
+    </p>
+
+    <h2>What Is Liquidity Mining?</h2>
+
+    <p>
+        <strong>Liquidity Mining</strong> generally refers to distributing incentives
+        to users who provide liquidity or participate in specific protocol functions.
+    </p>
+
+    <p>
+        These incentives may be distributed as protocol-related tokens, with rules
+        that vary between systems.
+    </p>
+
+    <p>
+        It is important to distinguish protocol incentives from actual fees generated
+        by economic activity inside the protocol.
+    </p>
+
+    <h2>Do Rewards Automatically Mean Real Profit?</h2>
+
+    <p>
+        Not necessarily.
+    </p>
+
+    <p>
+        A user may receive a certain number of reward tokens, but the market value of
+        those tokens can rise or fall significantly.
+    </p>
+
+    <p>
+        Therefore, the <strong>quantity of tokens received</strong> should not be confused
+        with the <strong>economic value of those tokens</strong>.
+    </p>
+
+    <p>
+        A high advertised APY also does not mean that the same return will necessarily
+        be achieved over a longer period.
+    </p>
+
+    <h2>What Is the Difference Between APR and APY?</h2>
+
+    <p>
+        Two common terms used when displaying DeFi returns are
+        <strong>APR</strong> and <strong>APY</strong>.
+    </p>
+
+    <h3>APR</h3>
+
+    <p>
+        APR generally refers to an annualized rate without including the effect of
+        compounding returns through reinvestment.
+    </p>
+
+    <h3>APY</h3>
+
+    <p>
+        APY generally represents an annualized return that incorporates compounding
+        under the assumptions used by the calculation.
+    </p>
+
+    <p>
+        Different platforms may calculate these figures differently, so users should
+        examine how a number is calculated rather than comparing displayed percentages
+        without understanding their assumptions.
+    </p>
+
+    <div class="academy-warning">
+        <strong>Important warning:</strong>
+        A high APY does not automatically mean guaranteed profit. The rate can change,
+        reward tokens can lose value, and other risks can affect the final outcome.
+    </div>
+
+    <h2>What Is Impermanent Loss?</h2>
+
+    <p>
+        When users provide liquidity to certain types of trading pools, they may experience
+        what is known as <strong>Impermanent Loss</strong>.
+    </p>
+
+    <p>
+        This can occur when the relative prices of the assets in the pool change compared
+        with their prices when liquidity was deposited. As a result, the value of the assets
+        received when withdrawing liquidity can differ from the value of simply holding
+        the assets outside the pool, assuming other factors remain constant.
+    </p>
+
+    <p>
+        Trading fees and incentives can offset some of this effect in certain circumstances,
+        but they do not guarantee that it will always be fully compensated.
+    </p>
+
+    <p>
+        The term "impermanent" also does not mean that the loss will necessarily disappear
+        or that the position will automatically return to a break-even point.
+    </p>
+
+    <h2>A Simple Impermanent Loss Example</h2>
+
+    <p>
+        Imagine that a user provides liquidity to a pool containing a digital asset and
+        a stablecoin. If the price of the digital asset changes substantially, the pool's
+        mechanism can change the relative quantities of the two assets.
+    </p>
+
+    <p>
+        As a result, the user may withdraw a different combination of the two assets
+        compared with what the user would have held by simply keeping the original assets
+        outside the pool.
+    </p>
+
+    <p>
+        This is a simplified educational example. The actual result depends on the pool
+        design, prices, fees, timing, and other factors.
+    </p>
+
+    <h2>What Is Smart Contract Risk in Yield Farming?</h2>
+
+    <p>
+        Yield Farming strategies often depend on smart contracts. If a contract contains
+        a vulnerability or design flaw, user assets can be exposed to loss.
+    </p>
+
+    <p>
+        A security audit can help identify certain vulnerabilities, but it does not mean
+        that the system is completely safe or that all risks in related contracts have been eliminated.
+    </p>
+
+    <h2>What Is Protocol Risk?</h2>
+
+    <p>
+        A DeFi protocol can depend on multiple contracts, rules, oracles, governance
+        mechanisms, and external integrations.
+    </p>
+
+    <p>
+        A problem in one component can affect the wider system.
+        The more protocols a strategy depends on, the more important it becomes to understand
+        how those dependencies interact.
+    </p>
+
+    <h2>What Is Reward Token Risk?</h2>
+
+    <p>
+        Some Yield Farming strategies distribute rewards using a protocol-specific token.
+    </p>
+
+    <p>
+        A user may receive a large number of tokens, but the market price of those tokens
+        can change substantially. If their value falls sharply, the economic value of the
+        rewards may be much lower than the displayed token quantity suggests.
+    </p>
+
+    <p>
+        Reward emission rates, distribution schedules, and program rules can also change over time.
+    </p>
+
+    <h2>What Is Rug Pull Risk?</h2>
+
+    <p>
+        Some poorly designed or untrusted projects may include administrative permissions
+        or mechanisms that give certain parties significant control over contracts,
+        funds, or protocol parameters.
+    </p>
+
+    <p>
+        Users should therefore examine administrative permissions, governance, contract
+        transparency, and protocol structure instead of focusing only on the advertised yield.
+    </p>
+
+    <h2>What Is Liquidity Risk?</h2>
+
+    <p>
+        A high advertised yield does not mean that a market has sufficient liquidity.
+    </p>
+
+    <p>
+        When liquidity is limited, users may face significant slippage when trying to
+        exchange assets or sell rewards, and exiting a position may become more difficult.
+    </p>
+
+    <h2>What Is Oracle Risk?</h2>
+
+    <p>
+        Some DeFi protocols depend on price oracles to obtain information about asset values.
+    </p>
+
+    <p>
+        This can be important for functions such as collateral valuation and borrowing limits.
+        If the pricing mechanism is manipulated, interrupted, or otherwise unreliable,
+        dependent operations can be affected.
+    </p>
+
+    <h2>Is Yield Farming Safe Because It Uses Blockchain?</h2>
+
+    <p>
+        No.
+    </p>
+
+    <p>
+        Using blockchain technology does not automatically make an application safe.
+        Blockchain provides infrastructure for recording transactions and executing contracts,
+        while protocol safety also depends on contract design, governance, oracles,
+        dependencies, and other components.
+    </p>
+
+    <p>
+        You can review the underlying concepts in
+        <a href="/academy/blockchain/what-is-blockchain">What Is Blockchain?</a>.
+    </p>
+
+    <h2>Does Yield Farming Provide Fixed Income?</h2>
+
+    <p>
+        No.
+    </p>
+
+    <p>
+        DeFi returns can change because of asset prices, trading volume, borrowing rates,
+        liquidity, reward emissions, participant activity, and protocol rules.
+    </p>
+
+    <p>
+        Therefore, a percentage shown by an application generally reflects current or
+        estimated conditions rather than a guaranteed future return.
+    </p>
+
+    <h2>Yield Farming vs Staking</h2>
+
+    <p>
+        <strong>Staking</strong> is generally associated with participating in proof-of-stake
+        systems or other mechanisms where staked assets support network or protocol functions.
+    </p>
+
+    <p>
+        Yield Farming is a broader term describing attempts to earn returns by using assets
+        across different DeFi protocols.
+    </p>
+
+    <p>
+        The concepts can overlap in some applications, but they are not identical.
+    </p>
+
+    <h2>Yield Farming vs Lending</h2>
+
+    <p>
+        <strong>Lending</strong> generally involves supplying assets to a lending protocol
+        so they can be borrowed according to the system's rules.
+    </p>
+
+    <p>
+        Yield Farming can use lending as part of a broader strategy, but it can also involve
+        liquidity provision, protocol incentives, or multiple operations.
+    </p>
+
+    <h2>What Is a Multi-Step Yield Farming Strategy?</h2>
+
+    <p>
+        Some strategies do not simply deposit assets into one protocol. Instead, they may
+        move through several stages.
+    </p>
+
+    <p>
+        A simplified educational example could look like this:
+    </p>
+
+    <ol>
+        <li>Deposit an asset into a protocol.</li>
+        <li>Receive a token representing the position or deposit.</li>
+        <li>Use that token in another protocol.</li>
+        <li>Receive additional incentives according to the rules of the protocols involved.</li>
+    </ol>
+
+    <p>
+        This type of strategy can increase complexity because the user becomes exposed
+        to the risks of each layer rather than only the first protocol.
+    </p>
+
+    <h2>Why Can Some Projects Offer Extremely High Yields?</h2>
+
+    <p>
+        Some protocols may offer high incentives to attract liquidity or users.
+    </p>
+
+    <p>
+        These incentives can change quickly, and the token used to pay them can be highly
+        volatile. Understanding where the yield comes from and whether the mechanism is
+        sustainable is therefore more important than the percentage alone.
+    </p>
+
+    <h2>What Does an Extremely High APY Mean?</h2>
+
+    <p>
+        A very high APY may result from temporary incentives, specific market conditions,
+        or a protocol attempting to attract liquidity.
+    </p>
+
+    <p>
+        It does not automatically mean that the protocol will maintain the same rate or
+        that users will achieve the displayed return after considering asset price changes,
+        fees, and potential losses.
+    </p>
+
+    <h2>What Should You Check Before Studying a Yield Farm?</h2>
+
+    <p>
+        Instead of relying only on APY, it is useful to examine:
+    </p>
+
+    <ul>
+        <li>The source of the yield.</li>
+        <li>How APR or APY is calculated.</li>
+        <li>The assets involved.</li>
+        <li>Available liquidity.</li>
+        <li>Trading volume when returns depend on trading fees.</li>
+        <li>Impermanent Loss exposure.</li>
+        <li>The smart contracts being used.</li>
+        <li>Available security audit information.</li>
+        <li>Governance and administrative permissions.</li>
+        <li>How reward tokens are issued and distributed.</li>
+        <li>Oracle and external service dependencies.</li>
+        <li>The number of protocols involved in the strategy.</li>
+        <li>How easily assets can be converted or withdrawn.</li>
+    </ul>
+
+    <h2>Does an Audit Guarantee Protocol Safety?</h2>
+
+    <p>
+        No.
+    </p>
+
+    <p>
+        A security audit can help identify certain bugs and vulnerabilities, but it is
+        not an absolute guarantee that a protocol will never experience a future problem.
+    </p>
+
+    <p>
+        Issues can arise in new contracts, integrations between protocols, logic that was
+        outside the audit scope, or changes introduced after an audit.
+    </p>
+
+    <h2>How Are Stablecoins Related to Yield Farming?</h2>
+
+    <p>
+        Stablecoins can be used in certain Yield Farming strategies, including lending
+        markets, liquidity pools, and other DeFi applications.
+    </p>
+
+    <p>
+        However, using a stablecoin does not eliminate risk. Protocol, liquidity,
+        smart contract, and stablecoin-specific risks can still apply.
+    </p>
+
+    <p>
+        To learn more, read
+        <a href="/academy/defi/stablecoins-in-defi">What Are Stablecoins in DeFi?</a>.
+    </p>
+
+    <h2>Can You Lose Money in Yield Farming?</h2>
+
+    <p>
+        Yes.
+    </p>
+
+    <p>
+        Losses can result from falling asset prices, Impermanent Loss, declining reward
+        token values, smart contract exploits or failures, protocol problems, insufficient
+        liquidity, stablecoin depegs, and other factors.
+    </p>
+
+    <p>
+        Yield Farming should therefore not be treated as a guaranteed way to earn a return.
+    </p>
+
+    <h2>A Simple Educational Example</h2>
+
+    <p>
+        Imagine a protocol with a liquidity pool containing a digital asset and a stablecoin.
+    </p>
+
+    <ol>
+        <li>The user deposits both assets into the liquidity pool.</li>
+        <li>The user becomes a liquidity provider.</li>
+        <li>Traders pay fees when they execute swaps.</li>
+        <li>Liquidity providers receive a portion of those fees according to the protocol's rules.</li>
+        <li>The protocol may also distribute additional reward tokens.</li>
+        <li>At the same time, asset prices can change and Impermanent Loss can occur.</li>
+        <li>If reward values fall or the protocol experiences a problem, the final result can differ substantially from the advertised yield.</li>
+    </ol>
+
+    <p>
+        This is a simplified educational example, not an investment strategy.
+    </p>
+
+    <h2>Common Beginner Mistakes</h2>
+
+    <ul>
+        <li>Looking only at APY without understanding its source.</li>
+        <li>Assuming an audit means there is no risk.</li>
+        <li>Ignoring Impermanent Loss when providing liquidity.</li>
+        <li>Ignoring the volatility of reward tokens.</li>
+        <li>Ignoring market liquidity.</li>
+        <li>Using multiple protocols without understanding their dependencies.</li>
+        <li>Treating advertised returns as guaranteed.</li>
+        <li>Ignoring governance and administrative permissions.</li>
+        <li>Depositing funds that the user cannot afford to lose.</li>
+    </ul>
+
+    <h2>How Should You Learn Yield Farming?</h2>
+
+    <p>
+        A useful way to understand Yield Farming is to study the components that make up
+        a strategy rather than memorizing yield percentages.
+    </p>
+
+    <ol>
+        <li>Understand DeFi and smart contracts.</li>
+        <li>Understand liquidity pools and AMMs.</li>
+        <li>Understand lending and borrowing.</li>
+        <li>Understand stablecoins.</li>
+        <li>Understand APR and APY.</li>
+        <li>Understand Impermanent Loss.</li>
+        <li>Understand smart contract, governance, and oracle risks.</li>
+        <li>Analyze the source of the yield before evaluating it.</li>
+    </ol>
+
+    <p>
+        Continue the learning path through
+        <a href="/academy/defi">the DeFi section of AQL Crypto Academy</a>.
+    </p>
+
+    <h2>Conclusion</h2>
+
+    <p>
+        Yield Farming is a broad DeFi concept describing the use of digital assets
+        across protocols in pursuit of potential returns.
+    </p>
+
+    <p>
+        Returns may come from trading fees, lending interest, protocol rewards,
+        liquidity incentives, or combinations of several mechanisms.
+    </p>
+
+    <p>
+        However, a high yield does not automatically mean a sustainable or guaranteed return.
+        Asset prices, reward rates, liquidity, and protocol conditions can change,
+        while users may also face Impermanent Loss, smart contract risk, governance risk,
+        oracle risk, and reward token risk.
+    </p>
+
+    <p>
+        Understanding where the yield comes from and what risks support it is therefore
+        more important than looking at the advertised percentage alone.
+    </p>
+
+    <div class="academy-takeaways">
+        <h3>Key Takeaways</h3>
+        <ul>
+            <li>Yield Farming is a broad concept for seeking returns from assets used across DeFi.</li>
+            <li>Returns can come from trading fees, lending, or protocol incentives.</li>
+            <li>Liquidity provision can be part of Yield Farming but is not always synonymous with it.</li>
+            <li>Liquidity Mining commonly involves incentives for providing liquidity or participating in a protocol.</li>
+            <li>APR and APY represent different ways of presenting annualized returns.</li>
+            <li>Liquidity providers may face Impermanent Loss.</li>
+            <li>Security audits can reduce certain risks but do not guarantee protocol safety.</li>
+            <li>A high APY does not mean a guaranteed or sustainable return.</li>
+            <li>Understanding yield sources, liquidity, contracts, governance, and rewards is essential for risk analysis.</li>
+        </ul>
+    </div>
+
+    <div class="academy-disclaimer">
+        <strong>Disclaimer:</strong>
+        AQL Crypto Academy content is provided for educational and informational purposes only.
+        It is not financial or investment advice and does not recommend any Yield Farming
+        strategy, protocol, or digital asset. DeFi returns are not guaranteed and may change
+        or decline. Users can experience partial or total loss of capital due to price
+        volatility, Impermanent Loss, smart contract vulnerabilities, liquidity issues,
+        governance risks, reward token volatility, stablecoin depegs, or other risks.
+    </div>
+
+</article>
+HTML,
+
+    'image' => null,
+
+    'seo_title' => 'ما هي زراعة العوائد Yield Farming في DeFi؟ شرح للمبتدئين | AQL Crypto Academy',
+    'seo_title_ar' => 'ما هي زراعة العوائد Yield Farming في DeFi؟ شرح للمبتدئين | AQL Crypto Academy',
+    'seo_title_en' => 'What Is Yield Farming in DeFi? A Beginner’s Guide | AQL Crypto Academy',
+
+    'meta_description' => 'شرح Yield Farming في DeFi للمبتدئين، مصادر العوائد من السيولة والإقراض والمكافآت، والفرق بين APR وAPY وأهم المخاطر.',
+    'meta_description_ar' => 'شرح Yield Farming في DeFi للمبتدئين، مصادر العوائد من السيولة والإقراض والمكافآت، والفرق بين APR وAPY وأهم المخاطر.',
+    'meta_description_en' => 'Learn what Yield Farming means in DeFi, where returns come from, the difference between APR and APY, and the key risks including Impermanent Loss.',
+
+    'faq_ar' => [
+        [
+            'question' => 'ما هي زراعة العوائد Yield Farming؟',
+            'answer' => 'Yield Farming هو مفهوم واسع في DeFi يصف استخدام الأصول الرقمية في بروتوكولات مختلفة بهدف الحصول على عوائد محتملة من رسوم التداول أو الإقراض أو مكافآت البروتوكول.'
+        ],
+        [
+            'question' => 'من أين تأتي عوائد Yield Farming؟',
+            'answer' => 'يمكن أن تأتي العوائد من رسوم التداول، أو فوائد الإقراض، أو مكافآت البروتوكولات، أو حوافز توفير السيولة، وتختلف المصادر حسب البروتوكول.'
+        ],
+        [
+            'question' => 'هل Yield Farming هو نفسه توفير السيولة؟',
+            'answer' => 'ليس بالضرورة. توفير السيولة هو إيداع الأصول في مجمع أو نظام لتوفير السيولة، بينما Yield Farming مفهوم أوسع يمكن أن يشمل توفير السيولة والإقراض والمكافآت واستخدام عدة بروتوكولات.'
+        ],
+        [
+            'question' => 'ما هي Liquidity Mining؟',
+            'answer' => 'Liquidity Mining هو مصطلح يرتبط غالبًا بتوزيع مكافآت للمستخدمين الذين يوفرون السيولة أو يشاركون في وظائف محددة داخل البروتوكول.'
+        ],
+        [
+            'question' => 'ما الفرق بين APR وAPY؟',
+            'answer' => 'APR يعبر عادةً عن معدل سنوي دون احتساب أثر التركيب، بينما APY يتضمن عادةً أثر إعادة استثمار العوائد وفق طريقة الحساب المستخدمة.'
+        ],
+        [
+            'question' => 'ما هو Impermanent Loss؟',
+            'answer' => 'Impermanent Loss هو أثر قد يحدث لمزود السيولة عندما تتغير الأسعار النسبية للأصول في مجمع السيولة مقارنةً بوقت الإيداع، مما قد يجعل قيمة الأصول عند السحب مختلفة عن الاحتفاظ بها خارج المجمع.'
+        ],
+        [
+            'question' => 'هل APY المرتفع يعني ربحًا مضمونًا؟',
+            'answer' => 'لا. APY يمكن أن يتغير، كما يمكن أن تنخفض قيمة المكافآت والأصول، وقد تحدث خسائر بسبب Impermanent Loss أو مخاطر العقود الذكية والسيولة وغيرها.'
+        ],
+        [
+            'question' => 'هل التدقيق الأمني يضمن سلامة بروتوكول DeFi؟',
+            'answer' => 'لا. التدقيق يمكن أن يساعد في اكتشاف بعض الثغرات، لكنه لا يمثل ضمانًا مطلقًا لسلامة البروتوكول أو العقود المرتبطة به.'
+        ],
+        [
+            'question' => 'هل يمكن خسارة المال في Yield Farming؟',
+            'answer' => 'نعم. يمكن أن تحدث الخسائر بسبب تقلب أسعار الأصول، أو Impermanent Loss، أو انخفاض قيمة رموز المكافآت، أو مشاكل العقود الذكية، أو ضعف السيولة، أو Depeg، أو مخاطر البروتوكول.'
+        ],
+        [
+            'question' => 'ما الذي يجب فحصه قبل دراسة استراتيجية Yield Farming؟',
+            'answer' => 'من المهم دراسة مصدر العائد، وطريقة حساب APR أو APY، والأصول والسيولة، وImpermanent Loss، والعقود الذكية، والتدقيق الأمني، والحوكمة، ورموز المكافآت، والأوراكل، وعدد البروتوكولات المستخدمة.'
+        ],
+    ],
+
+    'faq_en' => [
+        [
+            'question' => 'What is Yield Farming?',
+            'answer' => 'Yield Farming is a broad DeFi concept describing the use of digital assets across protocols in pursuit of potential returns from trading fees, lending, protocol incentives, or other mechanisms.'
+        ],
+        [
+            'question' => 'Where do Yield Farming returns come from?',
+            'answer' => 'Returns can come from trading fees, lending interest, protocol rewards, liquidity incentives, or other mechanisms depending on the protocol.'
+        ],
+        [
+            'question' => 'Is Yield Farming the same as providing liquidity?',
+            'answer' => 'Not necessarily. Liquidity provision means depositing assets to provide liquidity, while Yield Farming is a broader concept that can include liquidity provision, lending, rewards, and multi-protocol strategies.'
+        ],
+        [
+            'question' => 'What is Liquidity Mining?',
+            'answer' => 'Liquidity Mining generally refers to distributing rewards or incentives to users who provide liquidity or participate in specific functions of a protocol.'
+        ],
+        [
+            'question' => 'What is the difference between APR and APY?',
+            'answer' => 'APR generally represents an annualized rate without the effect of compounding, while APY generally incorporates compounding under the assumptions used in the calculation.'
+        ],
+        [
+            'question' => 'What is Impermanent Loss?',
+            'answer' => 'Impermanent Loss is an effect that can occur when the relative prices of assets in a liquidity pool change compared with when liquidity was deposited, potentially making the withdrawn asset value different from simply holding the assets outside the pool.'
+        ],
+        [
+            'question' => 'Does a high APY guarantee profit?',
+            'answer' => 'No. APY can change, reward tokens and assets can lose value, and users can face Impermanent Loss, smart contract risk, liquidity risk, and other risks.'
+        ],
+        [
+            'question' => 'Does a security audit guarantee DeFi protocol safety?',
+            'answer' => 'No. An audit can help identify certain vulnerabilities, but it is not an absolute guarantee that a protocol or its related contracts are completely safe.'
+        ],
+        [
+            'question' => 'Can you lose money in Yield Farming?',
+            'answer' => 'Yes. Losses can result from asset price volatility, Impermanent Loss, declining reward token values, smart contract problems, insufficient liquidity, stablecoin depegs, protocol failures, and other risks.'
+        ],
+        [
+            'question' => 'What should you check before studying a Yield Farming strategy?',
+            'answer' => 'Important factors include the yield source, APR or APY calculation, assets, liquidity, Impermanent Loss exposure, smart contracts, audits, governance, reward tokens, oracle dependencies, and the number of protocols involved.'
+        ],
+    ],
+
+    'status' => 'published',
+    'sort_order' => 7,
+    'published_at' => now(),
+],
+[
+    'topic_id' => $defi->id,
+
+    'title' => 'ما هي الخسارة غير الدائمة Impermanent Loss في DeFi؟',
+    'title_ar' => 'ما هي الخسارة غير الدائمة Impermanent Loss في DeFi؟ شرح للمبتدئين',
+    'title_en' => 'What Is Impermanent Loss in DeFi? A Beginner’s Guide',
+
+    'slug' => 'what-is-impermanent-loss',
+
+    'excerpt' => 'شرح مبسط لمفهوم الخسارة غير الدائمة في التمويل اللامركزي، وكيف تحدث لمزودي السيولة، وما علاقتها بتغير أسعار الأصول ورسوم التداول والعوائد.',
+    'excerpt_ar' => 'شرح مبسط لمفهوم الخسارة غير الدائمة في التمويل اللامركزي، وكيف تحدث لمزودي السيولة، وما علاقتها بتغير أسعار الأصول ورسوم التداول والعوائد.',
+    'excerpt_en' => 'A beginner-friendly explanation of impermanent loss in DeFi, why it happens to liquidity providers, and how it relates to asset price changes, trading fees, and farming rewards.',
+
+    'content' => null,
+
+    'content_ar' => <<<'HTML'
+<article>
+
+    <p>
+        تُعد <strong>الخسارة غير الدائمة (Impermanent Loss)</strong> من أهم المفاهيم التي يجب فهمها قبل توفير السيولة في بروتوكولات التمويل اللامركزي DeFi.
+        وقد تبدو الفكرة معقدة في البداية، لكنها تصبح أوضح عندما نفهم العلاقة بين <strong>مجمعات السيولة</strong> وتغير أسعار الأصول.
+    </p>
+
+    <p>
+        عندما يضيف المستخدم أصلين أو أكثر إلى مجمع سيولة، فإنه لا يحتفظ بهما بالطريقة نفسها التي يحتفظ بها بهما في محفظته.
+        بدلاً من ذلك، تدخل الأصول في آلية البروتوكول لتسهيل عمليات التداول، وقد تتغير الكميات التي يمتلكها مزود السيولة من كل أصل بمرور الوقت.
+    </p>
+
+    <p>
+        إذا تغير سعر أحد الأصول مقارنة بالآخر بدرجة كبيرة، فقد تصبح قيمة الأصول التي يحصل عليها مزود السيولة عند سحبها أقل من قيمة الاحتفاظ بالأصول نفسها خارج المجمع.
+        هذا الفرق هو جوهر مفهوم الخسارة غير الدائمة.
+    </p>
+
+    <h2>ما المقصود بالخسارة غير الدائمة؟</h2>
+
+    <p>
+        الخسارة غير الدائمة هي انخفاض نسبي محتمل في قيمة مركز مزود السيولة مقارنة بالاحتفاظ بالأصول نفسها خارج مجمع السيولة، نتيجة تغير الأسعار النسبية للأصول الموجودة في المجمع.
+    </p>
+
+    <p>
+        كلمة <strong>غير دائمة</strong> لا تعني أن الخسارة ستختفي دائمًا، ولا تعني أنها غير حقيقية.
+        المقصود هو أن الفرق في القيمة قد يتغير مع تغير الأسعار، وقد يقل أو يختفي في بعض الحالات إذا عادت الأسعار النسبية إلى مستويات معينة قبل سحب السيولة.
+    </p>
+
+    <p>
+        وإذا قام المستخدم بسحب السيولة بينما لا يزال فرق السعر قائمًا، فقد تتحول الخسارة غير الدائمة إلى خسارة فعلية مقارنة بسيناريو الاحتفاظ بالأصول.
+    </p>
+
+    <h2>لماذا تحدث الخسارة غير الدائمة؟</h2>
+
+    <p>
+        السبب الأساسي هو أن صانع السوق الآلي <strong>AMM</strong> يحاول الحفاظ على توازن معين بين الأصول داخل مجمع السيولة وفقًا لقواعد البروتوكول.
+    </p>
+
+    <p>
+        في بعض النماذج التقليدية لصانع السوق الآلي، تُستخدم علاقة رياضية مبسطة مثل:
+    </p>
+
+    <p>
+        <strong>x × y = k</strong>
+    </p>
+
+    <p>
+        حيث تمثل <strong>x</strong> كمية الأصل الأول، وتمثل <strong>y</strong> كمية الأصل الثاني، بينما تمثل <strong>k</strong> قيمة ثابتة ضمن النموذج.
+    </p>
+
+    <p>
+        عندما يقوم المتداولون بشراء أحد الأصلين من المجمع، تتغير كمية ذلك الأصل داخل المجمع، وتزداد كمية الأصل الآخر وفقًا لآلية التسعير.
+        ونتيجة لذلك، يتغير تركيب أصول مزود السيولة.
+    </p>
+
+    <h2>مثال مبسط على الخسارة غير الدائمة</h2>
+
+    <p>
+        لنفترض أن مستخدمًا وفر سيولة في مجمع يحتوي على أصلين:
+        <strong>ETH</strong> و<strong>USDC</strong>.
+    </p>
+
+    <p>
+        عند إضافة السيولة، كان سعر ETH يبلغ 2,000 دولار، وكان توزيع أصول المستخدم داخل المجمع يعكس هذا السعر.
+    </p>
+
+    <p>
+        بعد فترة ارتفع سعر ETH بشكل كبير في السوق الخارجي.
+        يقوم المتداولون باستغلال الفرق بين سعر ETH داخل المجمع والسوق، فتحدث عمليات شراء وبيع تؤدي إلى تغير كمية ETH وUSDC الموجودة في المجمع.
+    </p>
+
+    <p>
+        نتيجة لذلك، عندما يقرر مزود السيولة سحب أمواله، قد يحصل على <strong>كمية أقل من ETH وكمية أكبر من USDC</strong> مقارنة بما كان سيحتفظ به لو ترك الأصول في محفظته دون توفير السيولة.
+    </p>
+
+    <p>
+        إذا كانت القيمة الإجمالية للأصول التي حصل عليها من المجمع أقل من قيمة الاحتفاظ بالأصول نفسها خارج المجمع، فإن الفرق يمثل الخسارة غير الدائمة.
+    </p>
+
+    <h2>هل الخسارة غير الدائمة تعني أن المستخدم خسر المال دائمًا؟</h2>
+
+    <p>
+        ليس بالضرورة.
+    </p>
+
+    <p>
+        إذا تغيرت الأسعار ثم عادت النسبة السعرية بين الأصول إلى مستوى قريب من المستوى الذي كانت عليه عند إيداع السيولة، فقد يقل الفرق أو يختفي.
+    </p>
+
+    <p>
+        لكن هذا لا يعني أن المستخدم يحصل على ضمان لاستعادة القيمة، لأن أسعار الأصول وحركة التداول ورسوم البروتوكول والظروف الأخرى قد تتغير باستمرار.
+    </p>
+
+    <p>
+        لذلك من الأفضل النظر إلى المصطلح على أنه <strong>فرق محتمل في القيمة بسبب تغير الأسعار النسبية</strong>، وليس كخسارة مضمونة أو مؤقتة بالضرورة.
+    </p>
+
+    <h2>متى تصبح الخسارة غير الدائمة خسارة فعلية؟</h2>
+
+    <p>
+        تصبح المقارنة أكثر أهمية عندما يقوم مزود السيولة بسحب مركزه بينما لا يزال فرق الأسعار قائمًا.
+    </p>
+
+    <p>
+        عند هذه النقطة يمكن مقارنة القيمة التي حصل عليها من مجمع السيولة بالقيمة التي كان سيملكها لو احتفظ بالأصول الأصلية خارج المجمع.
+    </p>
+
+    <p>
+        إذا كانت قيمة مركز السيولة أقل من قيمة الاحتفاظ بالأصول، فإن الفرق يمثل خسارة محققة بالنسبة إلى ذلك السيناريو المقارن.
+    </p>
+
+    <h2>العلاقة بين تغير السعر والخسارة غير الدائمة</h2>
+
+    <p>
+        كلما كان تغير السعر النسبي بين الأصول أكبر، يمكن أن يصبح أثر الخسارة غير الدائمة أكبر أيضًا، خصوصًا في نماذج مجمعات السيولة التي تعتمد على آليات AMM التقليدية.
+    </p>
+
+    <p>
+        على سبيل المثال، تغير بسيط في السعر قد يؤدي إلى فرق محدود، بينما تغير كبير في السعر النسبي بين الأصلين يمكن أن يؤدي إلى فرق أكبر في تركيب الأصول التي يمتلكها مزود السيولة.
+    </p>
+
+    <p>
+        لذلك لا يكفي معرفة قيمة السيولة التي أضافها المستخدم؛ بل يجب فهم حركة الأسعار النسبية للأصول داخل المركز.
+    </p>
+
+    <h2>الخسارة غير الدائمة ورسوم التداول</h2>
+
+    <p>
+        من أهم النقاط التي يجب فهمها أن مزود السيولة قد يحصل على <strong>رسوم تداول</strong> مقابل توفير السيولة.
+    </p>
+
+    <p>
+        هذه الرسوم يمكن أن تعوض جزءًا من أثر الخسارة غير الدائمة، لكن مقدار التعويض يعتمد على حجم التداول، ونسبة الرسوم، وحصة مزود السيولة من المجمع، ومدة الاحتفاظ بالمركز، بالإضافة إلى عوامل أخرى.
+    </p>
+
+    <p>
+        لذلك لا يمكن القول إن وجود رسوم تداول يعني أن مزود السيولة لن يخسر.
+        كما لا يمكن افتراض أن الرسوم ستكون دائمًا أكبر من الخسارة غير الدائمة.
+    </p>
+
+    <h2>الخسارة غير الدائمة وزراعة العوائد Yield Farming</h2>
+
+    <p>
+        قد يحصل مزود السيولة على مكافآت إضافية من خلال برامج <strong>Liquidity Mining</strong> أو <strong>Yield Farming</strong>.
+    </p>
+
+    <p>
+        هذه المكافآت قد تأتي في صورة رموز مميزة يقدمها البروتوكول أو نظام آخر مرتبط به.
+    </p>
+
+    <p>
+        ولكن يجب الفصل بين ثلاثة عناصر مختلفة:
+    </p>
+
+    <ul>
+        <li>رسوم التداول التي قد يحصل عليها مزود السيولة.</li>
+        <li>مكافآت السيولة أو زراعة العوائد.</li>
+        <li>التغير في قيمة الأصول الناتج عن حركة الأسعار والخسارة غير الدائمة.</li>
+    </ul>
+
+    <p>
+        لذلك فإن ارتفاع معدل العائد المعلن لا يعني تلقائيًا أن مزود السيولة حقق ربحًا فعليًا بعد احتساب تغير أسعار الأصول والخسارة غير الدائمة.
+    </p>
+
+    <h2>هل يمكن أن تكون الخسارة غير الدائمة كبيرة؟</h2>
+
+    <p>
+        نعم، يمكن أن تكون كبيرة عندما يحدث تغير كبير في السعر النسبي للأصول.
+    </p>
+
+    <p>
+        ويزداد الأمر أهمية عندما يكون أحد الأصول أكثر تقلبًا من الآخر.
+        فمجمع يتكون من أصل متقلب وأصل أكثر استقرارًا قد يتعرض لتغير واضح في تركيب الأصول عندما يتحرك سعر الأصل المتقلب بقوة.
+    </p>
+
+    <p>
+        لهذا السبب يجب ألا ينظر المستخدم إلى حجم الرسوم أو معدل العائد وحدهما عند تقييم توفير السيولة.
+    </p>
+
+    <h2>الخسارة غير الدائمة في مجمع ETH وStablecoin</h2>
+
+    <p>
+        من الأمثلة الشائعة مجمع يحتوي على ETH وStablecoin مثل USDC.
+    </p>
+
+    <p>
+        إذا ارتفع سعر ETH بقوة، فقد ينتهي مزود السيولة بكمية أقل من ETH مقارنة بما كان سيحتفظ به خارج المجمع.
+    </p>
+
+    <p>
+        وإذا انخفض سعر ETH بقوة، يمكن أن يحدث العكس من حيث تركيب الأصول، مع بقاء المقارنة مرتبطة بالسعر النسبي بين الأصلين.
+    </p>
+
+    <p>
+        لذلك فإن توفير السيولة لا يعني ببساطة الاحتفاظ بنسبة ثابتة من كل أصل طوال الوقت.
+        آلية AMM والتداولات داخل المجمع يمكن أن تغير هذه النسبة.
+    </p>
+
+    <h2>الخسارة غير الدائمة ليست نفسها خسارة السعر</h2>
+
+    <p>
+        من المهم التفريق بين مفهومين:
+    </p>
+
+    <h3>خسارة بسبب انخفاض سعر الأصل</h3>
+
+    <p>
+        إذا انخفض سعر أصل تملكه، فقد تنخفض قيمة محفظتك بسبب انخفاض سعر الأصل نفسه.
+    </p>
+
+    <h3>الخسارة غير الدائمة</h3>
+
+    <p>
+        هنا تتم المقارنة بين نتيجة توفير السيولة وبين سيناريو الاحتفاظ بالأصول خارج المجمع، بسبب تغير الأسعار النسبية وآلية إعادة موازنة الأصول داخل AMM.
+    </p>
+
+    <p>
+        وقد يحدث الاثنان معًا؛ لذلك يجب عدم الخلط بينهما عند تحليل أداء مركز السيولة.
+    </p>
+
+    <h2>هل جميع مجمعات DeFi لديها الخسارة غير الدائمة نفسها؟</h2>
+
+    <p>
+        لا.
+    </p>
+
+    <p>
+        تختلف المخاطر والآليات باختلاف تصميم البروتوكول ونوع مجمع السيولة ومنحنى التسعير.
+        بعض البروتوكولات تستخدم نماذج مختلفة عن النموذج التقليدي، وبعضها يتيح نطاقات سعرية أو استراتيجيات سيولة أكثر تخصصًا.
+    </p>
+
+    <p>
+        لذلك يجب دراسة آلية كل بروتوكول بدل افتراض أن جميع مجمعات السيولة تعمل بالطريقة نفسها.
+    </p>
+
+    <h2>ما هي Concentrated Liquidity؟</h2>
+
+    <p>
+        بعض أنظمة AMM الحديثة تسمح لمزود السيولة بتحديد <strong>نطاق سعري</strong> يريد توفير السيولة داخله، وهو ما يعرف باسم <strong>Concentrated Liquidity</strong>.
+    </p>
+
+    <p>
+        يمكن لهذا التصميم أن يجعل رأس المال أكثر تركيزًا ضمن نطاق محدد، لكنه يضيف أيضًا مستوى إضافيًا من التعقيد.
+    </p>
+
+    <p>
+        إذا تحرك السعر خارج النطاق المحدد، فقد يتغير سلوك المركز وتوزيع الأصول داخله، وقد يحتاج المستخدم إلى إعادة ضبط المركز وفقًا لتصميم البروتوكول.
+    </p>
+
+    <p>
+        لذلك فإن السيولة المركزة لا تلغي الخسارة غير الدائمة تلقائيًا، وإنما تغير طريقة إدارة السيولة والتعرض للسعر.
+    </p>
+
+    <h2>كيف يمكن تقييم مركز السيولة بشكل صحيح؟</h2>
+
+    <p>
+        لا يكفي النظر إلى مقدار الرسوم أو المكافآت فقط.
+        من المفيد النظر إلى الصورة الكاملة، بما في ذلك:
+    </p>
+
+    <ul>
+        <li>قيمة الأصول عند الإيداع.</li>
+        <li>قيمة الأصول الحالية.</li>
+        <li>التغير في السعر النسبي بين الأصول.</li>
+        <li>رسوم التداول المكتسبة.</li>
+        <li>مكافآت Liquidity Mining أو Yield Farming.</li>
+        <li>قيمة رموز المكافآت نفسها.</li>
+        <li>تكاليف المعاملات والشبكة.</li>
+        <li>مخاطر العقد الذكي والبروتوكول.</li>
+        <li>السيولة المتاحة عند الخروج.</li>
+    </ul>
+
+    <p>
+        بهذه الطريقة يصبح تحليل المركز أكثر واقعية من الاعتماد على رقم APR أو APY وحده.
+    </p>
+
+    <h2>هل توجد طريقة لتجنب الخسارة غير الدائمة تمامًا؟</h2>
+
+    <p>
+        لا توجد قاعدة عامة تضمن التخلص منها تمامًا عند استخدام مجمعات السيولة التي يتغير فيها تركيب الأصول مع الأسعار.
+    </p>
+
+    <p>
+        بعض التصاميم والاستراتيجيات قد تقلل التعرض أو تغير طبيعة المخاطر، لكن كل تصميم له خصائصه ومقايضاته.
+    </p>
+
+    <p>
+        كما أن اختيار أصول ذات حركة سعرية متقاربة قد يقلل بعض صور الخطر المرتبط بتغير السعر النسبي، لكنه لا يلغي المخاطر الأخرى مثل مخاطر العقود الذكية أو البروتوكول أو العملة نفسها.
+    </p>
+
+    <h2>الخسارة غير الدائمة ومخاطر العقود الذكية</h2>
+
+    <p>
+        حتى إذا كان أثر الخسارة غير الدائمة محدودًا، فإن توفير السيولة يظل مرتبطًا بمخاطر أخرى.
+    </p>
+
+    <p>
+        من بينها أخطاء العقود الذكية، والثغرات الأمنية، ومخاطر البروتوكول، ومشكلات السيولة، ومخاطر الأصول المستخدمة، ومخاطر الحوكمة أو صلاحيات الإدارة في بعض المشاريع.
+    </p>
+
+    <p>
+        وجود تدقيق أمني للعقد الذكي قد يكون معلومة مفيدة، لكنه لا يمثل ضمانًا بعدم وجود ثغرات مستقبلية أو مخاطر أخرى.
+    </p>
+
+    <h2>أخطاء شائعة عند فهم Impermanent Loss</h2>
+
+    <ul>
+        <li><strong>اعتقاد أن كلمة غير دائمة تعني أنها ستختفي حتمًا:</strong> هذا غير صحيح.</li>
+        <li><strong>الاعتماد على APR فقط:</strong> العائد المعلن لا يعكس بالضرورة النتيجة النهائية.</li>
+        <li><strong>تجاهل تغير الأسعار:</strong> حركة السعر من أهم عوامل الخسارة غير الدائمة.</li>
+        <li><strong>الخلط بين الرسوم والربح الصافي:</strong> الرسوم قد تعوض جزءًا من الخسارة، لكنها ليست ضمانًا للربح.</li>
+        <li><strong>اعتبار جميع AMM متشابهة:</strong> تختلف الآليات والتصاميم بين البروتوكولات.</li>
+        <li><strong>تجاهل مخاطر البروتوكول:</strong> الخسارة غير الدائمة ليست الخطر الوحيد.</li>
+    </ul>
+
+    <h2>الخسارة غير الدائمة للمبتدئين: الخلاصة</h2>
+
+    <p>
+        الخسارة غير الدائمة مفهوم أساسي لأي شخص يفكر في توفير السيولة في DeFi.
+        وهي تصف الفرق المحتمل بين قيمة مركز السيولة وقيمة الاحتفاظ بالأصول نفسها خارج المجمع، عندما تتغير الأسعار النسبية للأصول.
+    </p>
+
+    <p>
+        يمكن لرسوم التداول ومكافآت السيولة أن تعوض جزءًا من هذا الأثر، لكن ذلك يعتمد على ظروف السوق والبروتوكول ومدة الاحتفاظ بالمركز وقيمة المكافآت.
+    </p>
+
+    <p>
+        لذلك فإن فهم <strong>Liquidity Pools</strong> و<strong>AMM</strong> و<strong>Yield Farming</strong> والخسارة غير الدائمة معًا يعطي صورة أفضل عن المخاطر المرتبطة بتوفير السيولة.
+    </p>
+
+    <p>
+        يمكنك متابعة سلسلة أكاديمية AQL Crypto والبدء من
+        <a href="/academy/defi">قسم DeFi</a>،
+        أو مراجعة
+        <a href="/academy/defi/what-is-defi">ما هو DeFi؟</a>،
+        و
+        <a href="/academy/defi/what-are-liquidity-pools">ما هي مجمعات السيولة؟</a>،
+        ثم الانتقال إلى
+        <a href="/academy/defi/what-is-yield-farming">شرح Yield Farming وزراعة العوائد</a>.
+    </p>
+
+    <h2>أهم النقاط التي يجب تذكرها</h2>
+
+    <ul>
+        <li>الخسارة غير الدائمة مرتبطة بتغير الأسعار النسبية للأصول.</li>
+        <li>مزود السيولة قد ينتهي بتركيبة مختلفة من الأصول عن التي أودعها.</li>
+        <li>الخسارة تصبح أكثر أهمية عند سحب السيولة مع استمرار فرق السعر.</li>
+        <li>رسوم التداول قد تعوض جزءًا من الخسارة لكنها لا تضمن الربح.</li>
+        <li>مكافآت Yield Farming ليست مرادفًا للربح الصافي.</li>
+        <li>تصاميم AMM المختلفة قد تتعامل مع السيولة والأسعار بطرق مختلفة.</li>
+        <li>الخسارة غير الدائمة ليست الخطر الوحيد في DeFi.</li>
+    </ul>
+
+    <div class="academy-disclaimer">
+        <strong>تنبيه تعليمي:</strong>
+        هذا المحتوى مقدم لأغراض تعليمية فقط ولا يمثل نصيحة مالية أو استثمارية أو توصية باستخدام أي بروتوكول أو أصل رقمي.
+        أصول DeFi شديدة المخاطر، وقد تشمل الخسائر الناتجة عن تقلب الأسعار والخسارة غير الدائمة ومخاطر العقود الذكية والبروتوكولات والسيولة.
+        يجب فهم المخاطر وإجراء البحث المستقل قبل اتخاذ أي قرار مالي.
+    </div>
+
+</article>
+HTML,
+
+    'content_en' => <<<'HTML'
+<article>
+
+    <p>
+        <strong>Impermanent Loss</strong> is one of the most important concepts to understand before providing liquidity in decentralized finance, or DeFi.
+        The idea may seem complicated at first, but it becomes much clearer once we understand the relationship between <strong>liquidity pools</strong> and changes in asset prices.
+    </p>
+
+    <p>
+        When a user provides two or more assets to a liquidity pool, the assets are no longer held in exactly the same way as they would be in a personal wallet.
+        Instead, they become part of the protocol’s liquidity mechanism, and the quantities of each asset held by the liquidity provider can change over time.
+    </p>
+
+    <p>
+        If the relative price of one asset changes significantly compared with the other, the value of the assets received when liquidity is withdrawn may be lower than the value of simply holding the original assets outside the pool.
+        This difference is the core idea behind impermanent loss.
+    </p>
+
+    <h2>What Is Impermanent Loss?</h2>
+
+    <p>
+        Impermanent loss describes a potential decrease in the value of a liquidity provider’s position compared with holding the same assets outside the liquidity pool, caused by changes in the relative prices of the assets.
+    </p>
+
+    <p>
+        The word <strong>impermanent</strong> does not mean that the loss will always disappear, nor does it mean that the loss is not real.
+        It means that the difference in value can change as prices change, and in some situations it may become smaller or disappear if the relative prices return toward certain previous levels before liquidity is withdrawn.
+    </p>
+
+    <p>
+        If the liquidity provider withdraws while the price difference remains, the impermanent loss can become a realized loss relative to the alternative of simply holding the original assets.
+    </p>
+
+    <h2>Why Does Impermanent Loss Happen?</h2>
+
+    <p>
+        The main reason is that an <strong>automated market maker (AMM)</strong> attempts to maintain a particular relationship between assets inside a liquidity pool according to the protocol’s pricing mechanism.
+    </p>
+
+    <p>
+        In some traditional AMM models, a simplified relationship such as the following is used:
+    </p>
+
+    <p>
+        <strong>x × y = k</strong>
+    </p>
+
+    <p>
+        In this simplified model, <strong>x</strong> represents the quantity of one asset, <strong>y</strong> represents the quantity of the other asset, and <strong>k</strong> represents a constant within the model.
+    </p>
+
+    <p>
+        When traders buy one of the assets from the pool, the quantity of that asset decreases while the quantity of the other asset changes according to the pricing mechanism.
+        As a result, the composition of the liquidity provider’s position changes.
+    </p>
+
+    <h2>A Simple Impermanent Loss Example</h2>
+
+    <p>
+        Suppose a user provides liquidity to a pool containing <strong>ETH</strong> and <strong>USDC</strong>.
+    </p>
+
+    <p>
+        At the time of deposit, ETH is priced at $2,000, and the user’s contribution reflects the pool’s price relationship between the two assets.
+    </p>
+
+    <p>
+        Later, the market price of ETH rises significantly.
+        Traders interact with the pool and arbitrage the difference between the pool price and the broader market, causing the quantities of ETH and USDC in the pool to change.
+    </p>
+
+    <p>
+        As a result, when the liquidity provider withdraws, they may receive <strong>less ETH and more USDC</strong> than they would have had if they had simply held the original assets in their wallet.
+    </p>
+
+    <p>
+        If the total value received from the pool is lower than the value of simply holding the original assets, the difference represents impermanent loss relative to that comparison.
+    </p>
+
+    <h2>Does Impermanent Loss Mean the User Permanently Lost Money?</h2>
+
+    <p>
+        Not necessarily.
+    </p>
+
+    <p>
+        If prices change and the relative price relationship between the assets moves back toward its earlier level, the difference can become smaller or disappear.
+    </p>
+
+    <p>
+        However, this does not guarantee recovery of value. Asset prices, trading activity, fees, and other conditions can continue to change.
+    </p>
+
+    <p>
+        It is therefore better to think of impermanent loss as a <strong>potential difference in value caused by changes in relative prices</strong>, rather than assuming it is always temporary or guaranteed to disappear.
+    </p>
+
+    <h2>When Does Impermanent Loss Become a Realized Loss?</h2>
+
+    <p>
+        The comparison becomes especially important when a liquidity provider withdraws while the relative price difference remains.
+    </p>
+
+    <p>
+        At that point, the value received from the liquidity position can be compared with the value the user would have had by holding the original assets outside the pool.
+    </p>
+
+    <p>
+        If the liquidity position is worth less than the holding alternative, the difference represents a realized loss relative to that specific comparison.
+    </p>
+
+    <h2>The Relationship Between Price Changes and Impermanent Loss</h2>
+
+    <p>
+        The larger the relative price change between the assets, the larger the potential effect of impermanent loss can become, particularly in traditional AMM models.
+    </p>
+
+    <p>
+        A small price change may create a limited difference, while a large relative price movement can produce a much larger change in the composition of assets held by the liquidity provider.
+    </p>
+
+    <p>
+        This is why the amount of liquidity deposited is not the only factor that matters. The relative price movement of the assets is also important.
+    </p>
+
+    <h2>Impermanent Loss and Trading Fees</h2>
+
+    <p>
+        One important point is that liquidity providers may receive <strong>trading fees</strong> for supplying liquidity.
+    </p>
+
+    <p>
+        These fees can offset part of the impact of impermanent loss, depending on trading volume, fee rates, the provider’s share of the pool, the time spent in the position, and other factors.
+    </p>
+
+    <p>
+        Therefore, the existence of trading fees does not mean that a liquidity provider cannot lose.
+        Likewise, it is not safe to assume that trading fees will always exceed impermanent loss.
+    </p>
+
+    <h2>Impermanent Loss and Yield Farming</h2>
+
+    <p>
+        Liquidity providers may also receive additional rewards through <strong>Liquidity Mining</strong> or <strong>Yield Farming</strong> programs.
+    </p>
+
+    <p>
+        These rewards may come in the form of protocol tokens or other incentives connected to the liquidity program.
+    </p>
+
+    <p>
+        It is useful to separate three different components:
+    </p>
+
+    <ul>
+        <li>Trading fees earned by the liquidity provider.</li>
+        <li>Liquidity mining or yield farming rewards.</li>
+        <li>Changes in asset value caused by market movements and impermanent loss.</li>
+    </ul>
+
+    <p>
+        Therefore, a high advertised yield does not automatically mean that the liquidity provider achieved a positive net return after accounting for asset-price changes and impermanent loss.
+    </p>
+
+    <h2>Can Impermanent Loss Be Large?</h2>
+
+    <p>
+        Yes. Impermanent loss can become significant when the relative price of the assets changes substantially.
+    </p>
+
+    <p>
+        The issue can be particularly important when one asset is much more volatile than the other.
+        A pool containing a volatile asset and a more stable asset can experience a substantial change in asset composition when the volatile asset moves sharply.
+    </p>
+
+    <p>
+        This is why liquidity providers should not evaluate a position based only on its trading fees or advertised yield.
+    </p>
+
+    <h2>Impermanent Loss in an ETH and Stablecoin Pool</h2>
+
+    <p>
+        A common example is a pool containing ETH and a stablecoin such as USDC.
+    </p>
+
+    <p>
+        If ETH rises sharply, the liquidity provider may end up with less ETH than they would have held outside the pool.
+    </p>
+
+    <p>
+        If ETH falls sharply, the asset composition can change in the opposite direction, while the underlying comparison still depends on the relative price between the two assets.
+    </p>
+
+    <p>
+        Providing liquidity therefore does not simply mean holding a fixed percentage of each asset throughout the entire position.
+        The AMM mechanism and trading activity can continuously change that composition.
+    </p>
+
+    <h2>Impermanent Loss Is Not the Same as a Simple Price Loss</h2>
+
+    <p>
+        Two concepts should be distinguished:
+    </p>
+
+    <h3>Loss Caused by an Asset Price Decline</h3>
+
+    <p>
+        If an asset you own falls in price, the value of your portfolio may decline simply because the asset itself became less valuable.
+    </p>
+
+    <h3>Impermanent Loss</h3>
+
+    <p>
+        Impermanent loss is a comparison between the outcome of providing liquidity and the outcome of holding the original assets outside the pool, caused by relative price changes and the AMM’s mechanism for adjusting asset quantities.
+    </p>
+
+    <p>
+        Both effects can occur at the same time, so they should not be confused when evaluating a liquidity position.
+    </p>
+
+    <h2>Do All DeFi Liquidity Pools Have the Same Impermanent Loss?</h2>
+
+    <p>
+        No.
+    </p>
+
+    <p>
+        Risk and behavior vary according to the protocol design, pool type, and pricing curve.
+        Some protocols use mechanisms that differ from traditional constant-product AMMs, while others allow specialized liquidity ranges or strategies.
+    </p>
+
+    <p>
+        Each protocol should therefore be studied according to its own design rather than assuming that every liquidity pool works in exactly the same way.
+    </p>
+
+    <h2>What Is Concentrated Liquidity?</h2>
+
+    <p>
+        Some modern AMM systems allow liquidity providers to specify a <strong>price range</strong> in which they want their liquidity to be active.
+        This is commonly known as <strong>Concentrated Liquidity</strong>.
+    </p>
+
+    <p>
+        This design can make capital more concentrated within a selected price range, but it also introduces additional complexity.
+    </p>
+
+    <p>
+        If the market price moves outside the selected range, the position’s behavior and asset composition can change according to the protocol design, and the provider may need to manage or adjust the position.
+    </p>
+
+    <p>
+        Concentrated liquidity therefore does not automatically eliminate impermanent loss. It changes how liquidity and price exposure are managed.
+    </p>
+
+    <h2>How Should a Liquidity Position Be Evaluated?</h2>
+
+    <p>
+        Looking only at fees or rewards is not enough.
+        A more complete evaluation can consider:
+    </p>
+
+    <ul>
+        <li>The value of the assets at the time of deposit.</li>
+        <li>The current value of the assets.</li>
+        <li>The change in relative asset prices.</li>
+        <li>Trading fees earned.</li>
+        <li>Liquidity mining or yield farming rewards.</li>
+        <li>The current value of reward tokens.</li>
+        <li>Network and transaction costs.</li>
+        <li>Smart-contract and protocol risks.</li>
+        <li>Available liquidity when exiting the position.</li>
+    </ul>
+
+    <p>
+        Looking at these factors together provides a more realistic picture than relying on an APR or APY figure alone.
+    </p>
+
+    <h2>Can Impermanent Loss Be Completely Avoided?</h2>
+
+    <p>
+        There is no general rule that guarantees complete elimination of impermanent loss in liquidity pools where asset composition changes with market prices.
+    </p>
+
+    <p>
+        Some protocols and strategies may reduce certain types of exposure or change the risk profile, but every design comes with its own characteristics and trade-offs.
+    </p>
+
+    <p>
+        Choosing assets whose prices tend to move more closely together may reduce some forms of relative-price exposure, but it does not eliminate other risks such as smart-contract, protocol, liquidity, or asset risks.
+    </p>
+
+    <h2>Impermanent Loss and Smart-Contract Risk</h2>
+
+    <p>
+        Even if impermanent loss is limited, providing liquidity remains exposed to other DeFi risks.
+    </p>
+
+    <p>
+        These can include smart-contract bugs, security vulnerabilities, protocol failures, liquidity risks, risks associated with the underlying assets, and governance or administrative risks in some projects.
+    </p>
+
+    <p>
+        A security audit can provide useful information, but it is not a guarantee that a protocol is free of vulnerabilities or future risks.
+    </p>
+
+    <h2>Common Mistakes When Understanding Impermanent Loss</h2>
+
+    <ul>
+        <li><strong>Assuming “impermanent” means it will definitely disappear:</strong> that is not correct.</li>
+        <li><strong>Looking only at APR:</strong> advertised yield does not necessarily represent the final result.</li>
+        <li><strong>Ignoring price movements:</strong> relative price changes are central to impermanent loss.</li>
+        <li><strong>Confusing fees with net profit:</strong> fees may offset some loss but do not guarantee profit.</li>
+        <li><strong>Assuming all AMMs are identical:</strong> protocols use different designs and mechanisms.</li>
+        <li><strong>Ignoring protocol risk:</strong> impermanent loss is only one part of the overall risk.</li>
+    </ul>
+
+    <h2>Impermanent Loss for Beginners: Key Takeaway</h2>
+
+    <p>
+        Impermanent loss is a fundamental concept for anyone considering liquidity provision in DeFi.
+        It describes the potential difference between the value of a liquidity position and the value of simply holding the same assets outside the pool when their relative prices change.
+    </p>
+
+    <p>
+        Trading fees and liquidity rewards may offset part of the effect, but the outcome depends on market conditions, protocol design, trading activity, the duration of the position, and the value of the rewards.
+    </p>
+
+    <p>
+        Understanding <strong>Liquidity Pools</strong>, <strong>AMMs</strong>, <strong>Yield Farming</strong>, and impermanent loss together provides a more complete picture of the risks involved in providing liquidity.
+    </p>
+
+    <p>
+        Continue through the
+        <a href="/academy/defi">AQL Crypto DeFi Academy</a>,
+        or start with
+        <a href="/academy/defi/what-is-defi">What Is DeFi?</a>,
+        then review
+        <a href="/academy/defi/what-are-liquidity-pools">What Are Liquidity Pools?</a>,
+        followed by
+        <a href="/academy/defi/what-is-yield-farming">What Is Yield Farming?</a>.
+    </p>
+
+    <h2>Key Points to Remember</h2>
+
+    <ul>
+        <li>Impermanent loss is related to changes in the relative prices of assets.</li>
+        <li>A liquidity provider can end up with a different asset composition from the original deposit.</li>
+        <li>The effect becomes particularly important when liquidity is withdrawn while the price difference remains.</li>
+        <li>Trading fees may offset part of the loss but do not guarantee profit.</li>
+        <li>Yield farming rewards are not the same as net profit.</li>
+        <li>Different AMM designs can handle liquidity and pricing differently.</li>
+        <li>Impermanent loss is not the only risk in DeFi.</li>
+    </ul>
+
+    <div class="academy-disclaimer">
+        <strong>Educational disclaimer:</strong>
+        This content is provided for educational purposes only and does not constitute financial or investment advice or a recommendation to use any protocol or digital asset.
+        DeFi assets and protocols can involve substantial risks, including market volatility, impermanent loss, smart-contract vulnerabilities, protocol risks, and liquidity risks.
+        Users should conduct independent research and understand the risks before making financial decisions.
+    </div>
+
+</article>
+HTML,
+
+    'image' => null,
+
+    'seo_title' => 'Impermanent Loss in DeFi: Complete Beginner’s Guide',
+    'seo_title_ar' => 'الخسارة غير الدائمة Impermanent Loss في DeFi: شرح للمبتدئين',
+    'seo_title_en' => 'Impermanent Loss in DeFi: Complete Beginner’s Guide',
+
+    'meta_description' => 'Learn what impermanent loss means in DeFi, why it happens to liquidity providers, how price changes affect liquidity pools, and how trading fees and farming rewards relate to it.',
+    'meta_description_ar' => 'تعرف على الخسارة غير الدائمة Impermanent Loss في DeFi، ولماذا تحدث لمزودي السيولة، وكيف تؤثر تغيرات الأسعار على مجمعات السيولة وعلاقتها بالرسوم وزراعة العوائد.',
+    'meta_description_en' => 'Learn what impermanent loss means in DeFi, why it happens to liquidity providers, how price changes affect liquidity pools, and how trading fees and farming rewards relate to it.',
+
+    'faq_ar' => [
+        [
+            'question' => 'ما هي الخسارة غير الدائمة في DeFi؟',
+            'answer' => 'الخسارة غير الدائمة هي الفرق المحتمل بين قيمة مركز مزود السيولة وقيمة الاحتفاظ بالأصول نفسها خارج مجمع السيولة، نتيجة تغير الأسعار النسبية للأصول.'
+        ],
+        [
+            'question' => 'لماذا تحدث الخسارة غير الدائمة؟',
+            'answer' => 'تحدث بسبب تغير الأسعار النسبية للأصول داخل مجمع السيولة وآلية AMM التي تغير كميات الأصول الموجودة في المجمع مع عمليات التداول.'
+        ],
+        [
+            'question' => 'هل الخسارة غير الدائمة خسارة حقيقية؟',
+            'answer' => 'يمكن أن تصبح خسارة فعلية عند سحب السيولة بينما لا يزال الفرق في الأسعار قائمًا، وذلك عند مقارنة قيمة المركز بقيمة الاحتفاظ بالأصول خارج المجمع.'
+        ],
+        [
+            'question' => 'هل يمكن أن تختفي الخسارة غير الدائمة؟',
+            'answer' => 'قد يقل الفرق أو يختفي في بعض الحالات إذا عادت الأسعار النسبية إلى مستويات قريبة من المستويات السابقة، لكن لا يوجد ضمان بأن ذلك سيحدث.'
+        ],
+        [
+            'question' => 'هل رسوم التداول تعوض الخسارة غير الدائمة؟',
+            'answer' => 'قد تعوض رسوم التداول جزءًا من أثر الخسارة غير الدائمة، لكن مقدار التعويض يعتمد على حجم التداول والرسوم وحصة مزود السيولة ومدة الاحتفاظ بالمركز.'
+        ],
+        [
+            'question' => 'ما علاقة Yield Farming بالخسارة غير الدائمة؟',
+            'answer' => 'قد يحصل مزود السيولة على مكافآت من Yield Farming، لكن هذه المكافآت يجب فصلها عن الخسارة غير الدائمة وعن رسوم التداول عند حساب النتيجة الإجمالية.'
+        ],
+        [
+            'question' => 'هل جميع مجمعات السيولة تتعرض للخسارة غير الدائمة بالطريقة نفسها؟',
+            'answer' => 'لا. تختلف النتيجة باختلاف تصميم البروتوكول ونوع AMM ومنحنى التسعير ونوع الأصول والاستراتيجية المستخدمة.'
+        ],
+        [
+            'question' => 'ما هي Concentrated Liquidity؟',
+            'answer' => 'هي آلية تسمح لمزود السيولة في بعض أنظمة AMM بتحديد نطاق سعري تكون فيه السيولة نشطة، لكنها تضيف تعقيدًا ومخاطر إدارة إضافية.'
+        ],
+        [
+            'question' => 'هل يمكن تجنب الخسارة غير الدائمة تمامًا؟',
+            'answer' => 'لا توجد قاعدة عامة تضمن تجنبها تمامًا في مجمعات السيولة التي تتغير فيها تركيبة الأصول مع الأسعار، وإن كانت بعض التصاميم والاستراتيجيات تغير مستوى التعرض.'
+        ],
+        [
+            'question' => 'هل الخسارة غير الدائمة هي الخطر الوحيد في DeFi؟',
+            'answer' => 'لا. توجد مخاطر أخرى مثل تقلب أسعار الأصول، والثغرات في العقود الذكية، ومخاطر البروتوكول والسيولة والحوكمة والأصول المستخدمة.'
+        ],
+    ],
+
+    'faq_en' => [
+        [
+            'question' => 'What is impermanent loss in DeFi?',
+            'answer' => 'Impermanent loss is the potential difference between the value of a liquidity position and the value of simply holding the same assets outside the pool, caused by changes in relative asset prices.'
+        ],
+        [
+            'question' => 'Why does impermanent loss happen?',
+            'answer' => 'It happens because relative asset prices change and AMMs adjust the quantities of assets in the pool as trades take place.'
+        ],
+        [
+            'question' => 'Is impermanent loss a real loss?',
+            'answer' => 'It can become a realized loss when liquidity is withdrawn while the price difference remains, compared with the value of holding the original assets outside the pool.'
+        ],
+        [
+            'question' => 'Can impermanent loss disappear?',
+            'answer' => 'The difference can become smaller or disappear in some situations if relative prices return toward earlier levels, but there is no guarantee that this will happen.'
+        ],
+        [
+            'question' => 'Can trading fees offset impermanent loss?',
+            'answer' => 'Trading fees may offset part of the effect, but the outcome depends on trading volume, fee rates, liquidity share, and the time spent in the position.'
+        ],
+        [
+            'question' => 'How is Yield Farming related to impermanent loss?',
+            'answer' => 'Liquidity providers may receive Yield Farming rewards, but those rewards should be evaluated separately from impermanent loss and trading fees when calculating the overall result.'
+        ],
+        [
+            'question' => 'Do all liquidity pools have the same impermanent loss?',
+            'answer' => 'No. The outcome varies according to protocol design, AMM type, pricing curve, asset characteristics, and liquidity strategy.'
+        ],
+        [
+            'question' => 'What is Concentrated Liquidity?',
+            'answer' => 'Concentrated Liquidity allows liquidity providers in some AMM systems to specify a price range where their liquidity is active, but it introduces additional management complexity and risks.'
+        ],
+        [
+            'question' => 'Can impermanent loss be completely avoided?',
+            'answer' => 'There is no general guarantee of completely avoiding impermanent loss in liquidity pools where asset composition changes with market prices, although different designs and strategies can change the level of exposure.'
+        ],
+        [
+            'question' => 'Is impermanent loss the only risk in DeFi?',
+            'answer' => 'No. Other risks include asset-price volatility, smart-contract vulnerabilities, protocol risks, liquidity risks, governance risks, and risks associated with the underlying assets.'
+        ],
+    ],
+
+    'status' => 'published',
+    'sort_order' => 8,
+    'published_at' => now(),
+],
+[
+    'topic_id' => $defi->id,
+
+    'title' => 'ما هي المنصات اللامركزية DEX؟ وكيف تعمل؟',
+    'title_ar' => 'ما هي المنصات اللامركزية DEX؟ وكيف تعمل؟ شرح للمبتدئين',
+    'title_en' => 'What Are Decentralized Exchanges (DEXs)? How Do They Work?',
+
+    'slug' => 'what-are-decentralized-exchanges',
+
+    'excerpt' => 'شرح مبسط للمنصات اللامركزية DEX، وكيف تعمل عمليات المبادلة باستخدام العقود الذكية ومجمعات السيولة، وما أهم الفوائد والمخاطر التي يجب فهمها.',
+    'excerpt_ar' => 'شرح مبسط للمنصات اللامركزية DEX، وكيف تعمل عمليات المبادلة باستخدام العقود الذكية ومجمعات السيولة، وما أهم الفوائد والمخاطر التي يجب فهمها.',
+    'excerpt_en' => 'A beginner-friendly guide to decentralized exchanges, how DEX swaps work through smart contracts and liquidity pools, and the main benefits and risks users should understand.',
+
+    'content' => null,
+
+    'content_ar' => <<<'HTML'
+<article>
+
+    <p>
+        تُعد <strong>المنصات اللامركزية (Decentralized Exchanges أو DEXs)</strong> من أهم تطبيقات التمويل اللامركزي DeFi.
+        فهي تتيح للمستخدمين مبادلة الأصول الرقمية من خلال بروتوكولات تعتمد على العقود الذكية، بدل الاعتماد بالضرورة على منصة مركزية تحتفظ بالأصول وتنفذ عمليات التداول نيابة عن المستخدم.
+    </p>
+
+    <p>
+        لكن مصطلح "لامركزية" لا يعني أن جميع المنصات اللامركزية متطابقة أو أنها خالية تمامًا من أي جهة إدارية.
+        تختلف درجة اللامركزية وآلية الحوكمة والصلاحيات الإدارية وتصميم العقود الذكية من بروتوكول إلى آخر.
+    </p>
+
+    <p>
+        في هذا المقال من أكاديمية AQL Crypto، سنتعرف على مفهوم DEX، وآلية عمل المبادلات، ودور العقود الذكية ومجمعات السيولة وصناع السوق الآليين، بالإضافة إلى أهم المزايا والمخاطر.
+    </p>
+
+    <h2>ما هي المنصة اللامركزية DEX؟</h2>
+
+    <p>
+        المنصة اللامركزية DEX هي بروتوكول أو تطبيق يتيح للمستخدمين تداول أو مبادلة الأصول الرقمية من خلال آليات تعتمد على العقود الذكية بدل نموذج دفتر الأوامر المركزي التقليدي في بعض المنصات.
+    </p>
+
+    <p>
+        في نموذج DEX القائم على مجمعات السيولة، لا يحتاج المستخدم بالضرورة إلى العثور على متداول آخر في الجهة المقابلة لعملية المبادلة.
+        بدلاً من ذلك، يمكن تنفيذ المبادلة عبر السيولة الموجودة في مجمعات مخصصة لذلك.
+    </p>
+
+    <p>
+        يمكنك أولًا مراجعة
+        <a href="/academy/defi/what-is-defi">شرح ما هو DeFi؟</a>
+        لفهم الإطار العام الذي تعمل ضمنه هذه التطبيقات.
+    </p>
+
+    <h2>ما الفرق بين DEX والمنصة المركزية CEX؟</h2>
+
+    <p>
+        لفهم DEX بشكل أفضل، من المفيد مقارنته بالنموذج المركزي المعروف باسم <strong>CEX</strong> أو Centralized Exchange.
+    </p>
+
+    <h3>المنصة المركزية CEX</h3>
+
+    <p>
+        في المنصة المركزية، يتفاعل المستخدم عادةً مع شركة أو جهة تدير المنصة.
+        وقد تُحفظ الأصول داخل محافظ تسيطر عليها المنصة، بينما تتم عمليات التداول باستخدام أنظمة داخلية مثل دفتر الأوامر.
+    </p>
+
+    <h3>المنصة اللامركزية DEX</h3>
+
+    <p>
+        في العديد من نماذج DEX، يتفاعل المستخدم مباشرة مع العقود الذكية من خلال محفظته، وتنفذ المبادلة وفق القواعد البرمجية للبروتوكول.
+    </p>
+
+    <p>
+        هذا لا يعني أن DEX لا يحتوي على أي عناصر مركزية على الإطلاق؛ فقد توجد واجهة أمامية مستضافة بشكل معين، أو صلاحيات إدارية، أو أنظمة حوكمة، أو مكونات خارج السلسلة بحسب تصميم البروتوكول.
+    </p>
+
+    <h2>كيف تعمل المبادلة في DEX؟</h2>
+
+    <p>
+        لفهم العملية بصورة مبسطة، تخيل أن مستخدمًا يريد مبادلة أصل رقمي بأصل آخر.
+    </p>
+
+    <ol>
+        <li>يفتح المستخدم واجهة DEX.</li>
+        <li>يربط محفظته بالتطبيق.</li>
+        <li>يحدد الأصل الذي يريد بيعه والأصل الذي يريد الحصول عليه.</li>
+        <li>يحدد الكمية المطلوبة.</li>
+        <li>يستعرض السعر المتوقع والرسوم وأي معلومات أخرى يعرضها البروتوكول.</li>
+        <li>يوافق المستخدم على العملية من خلال محفظته.</li>
+        <li>تتفاعل المعاملة مع العقد الذكي على شبكة البلوكشين.</li>
+        <li>ينفذ العقد المبادلة وفق شروط البروتوكول.</li>
+    </ol>
+
+    <p>
+        تختلف التفاصيل الدقيقة حسب البروتوكول والشبكة ونوع DEX، لكن هذه الخطوات توضح الفكرة الأساسية.
+    </p>
+
+    <h2>ما دور العقود الذكية في DEX؟</h2>
+
+    <p>
+        العقود الذكية هي جزء أساسي من العديد من المنصات اللامركزية.
+        فهي تحتوي على القواعد البرمجية التي تحدد كيفية تنفيذ المبادلات وإدارة السيولة وحساب الأسعار والرسوم وفق تصميم البروتوكول.
+    </p>
+
+    <p>
+        عندما يرسل المستخدم معاملة إلى العقد الذكي، تقوم الشبكة بمعالجة العملية وفق الكود والقواعد المحددة.
+    </p>
+
+    <p>
+        لكن يجب عدم اعتبار وجود عقد ذكي ضمانًا للأمان.
+        فقد تحتوي العقود على أخطاء برمجية أو ثغرات، كما قد توجد مخاطر في مكونات أخرى من النظام.
+    </p>
+
+    <h2>ما هي مجمعات السيولة في DEX؟</h2>
+
+    <p>
+        تعتمد العديد من المنصات اللامركزية على <strong>Liquidity Pools</strong> لتوفير الأصول التي يحتاجها المستخدمون لإجراء المبادلات.
+    </p>
+
+    <p>
+        يتكون مجمع السيولة عادةً من مجموعة من الأصول أودعها مزودو السيولة وفق قواعد البروتوكول.
+        يستطيع المتداول استخدام هذه السيولة لتنفيذ عملية المبادلة.
+    </p>
+
+    <p>
+        في المقابل، يحصل مزودو السيولة في بعض البروتوكولات على جزء من رسوم التداول أو حوافز أخرى وفق تصميم النظام.
+    </p>
+
+    <p>
+        لمعرفة التفاصيل، يمكنك قراءة
+        <a href="/academy/defi/what-are-liquidity-pools">شرح مجمعات السيولة وكيف تعمل في DeFi</a>.
+    </p>
+
+    <h2>ما هو AMM؟</h2>
+
+    <p>
+        <strong>AMM</strong> اختصار لـ Automated Market Maker، ويشير إلى نموذج يستخدم خوارزميات أو منحنيات تسعير لتحديد أسعار المبادلة بدل الاعتماد فقط على دفتر أوامر تقليدي.
+    </p>
+
+    <p>
+        في النموذج الشائع لصانع السوق الآلي القائم على حاصل الضرب الثابت، يمكن تبسيط العلاقة رياضيًا بالشكل:
+    </p>
+
+    <p>
+        <strong>x × y = k</strong>
+    </p>
+
+    <p>
+        حيث تمثل <strong>x</strong> و<strong>y</strong> كميات أصلين داخل المجمع، بينما تمثل <strong>k</strong> قيمة ثابتة ضمن النموذج.
+    </p>
+
+    <p>
+        عند تنفيذ عملية مبادلة، تتغير كميات الأصول داخل المجمع، ويُستخدم نموذج التسعير لتحديد مقدار الأصل الذي سيحصل عليه المستخدم.
+    </p>
+
+    <p>
+        ولا تستخدم جميع DEXs النموذج نفسه؛ فقد تختلف منحنيات التسعير وآليات إدارة السيولة من بروتوكول إلى آخر.
+    </p>
+
+    <h2>من أين يأتي سعر الأصل في DEX؟</h2>
+
+    <p>
+        يعتمد السعر في DEX على تصميم البروتوكول وطريقة اكتشاف السعر.
+        في مجمعات AMM، يتأثر السعر بنسب الأصول داخل المجمع وبعمليات التداول.
+    </p>
+
+    <p>
+        عندما يتغير السعر في السوق الخارجي مقارنة بالسعر داخل المجمع، يمكن للمتداولين والمراجحين تنفيذ عمليات تساعد على تقليل الفرق بين الأسعار.
+    </p>
+
+    <p>
+        لذلك فإن السعر الذي يظهر للمستخدم قد يتغير باستمرار نتيجة التداول والسيولة وحركة السوق.
+    </p>
+
+    <h2>ما المقصود بالـ Slippage؟</h2>
+
+    <p>
+        <strong>Slippage</strong> أو الانزلاق السعري هو الفرق بين السعر المتوقع للمبادلة والسعر الفعلي الذي يتم تنفيذ العملية عنده.
+    </p>
+
+    <p>
+        يمكن أن يحدث الانزلاق بسبب تغير السوق أو حجم العملية أو مستوى السيولة أو نشاط المتداولين بين لحظة إعداد المعاملة ولحظة تنفيذها.
+    </p>
+
+    <p>
+        في بعض المجمعات، يمكن أن تكون العمليات الكبيرة مقارنة بحجم السيولة أكثر تأثيرًا على السعر.
+    </p>
+
+    <h2>ما هو Price Impact؟</h2>
+
+    <p>
+        <strong>Price Impact</strong> أو تأثير السعر يشير إلى مقدار تأثير عملية التداول نفسها على سعر الأصل داخل المجمع.
+    </p>
+
+    <p>
+        عندما تكون السيولة محدودة مقارنة بحجم المبادلة، يمكن أن يكون تأثير السعر أكبر.
+        ولهذا السبب قد يحصل المستخدم على كمية أقل مما يتوقعه إذا كان حجم العملية كبيرًا بالنسبة إلى السيولة المتاحة.
+    </p>
+
+    <p>
+        يجب التمييز بين <strong>Price Impact</strong> و<strong>Slippage</strong>، فهما مفهومان مرتبطان ولكنهما ليسا متطابقين.
+    </p>
+
+    <h2>ما هي رسوم DEX؟</h2>
+
+    <p>
+        قد تتضمن عملية المبادلة عدة أنواع من التكاليف، ويعتمد ذلك على البروتوكول والشبكة.
+    </p>
+
+    <ul>
+        <li>رسوم التداول التي يحددها البروتوكول.</li>
+        <li>رسوم الشبكة أو Gas Fee لتنفيذ المعاملة.</li>
+        <li>تكاليف أخرى قد تظهر بسبب المسار المستخدم أو الخدمات الوسيطة.</li>
+    </ul>
+
+    <p>
+        لذلك يجب النظر إلى التكلفة الإجمالية للعملية بدل التركيز على رسوم التداول وحدها.
+    </p>
+
+    <h2>ما هو Gas Fee؟</h2>
+
+    <p>
+        رسوم الغاز هي التكلفة التي يدفعها المستخدم للشبكة لمعالجة وتنفيذ المعاملة.
+        وهي تختلف حسب الشبكة وحالة الازدحام وتعقيد المعاملة وعوامل أخرى.
+    </p>
+
+    <p>
+        رسوم الغاز ليست بالضرورة جزءًا من رسوم DEX نفسها.
+        فقد يدفع المستخدم رسومًا للشبكة بالإضافة إلى أي رسوم يفرضها البروتوكول.
+    </p>
+
+    <h2>ما معنى Wallet-to-Wallet في DEX؟</h2>
+
+    <p>
+        في كثير من تطبيقات DEX، يمكن للمستخدم التفاعل مع البروتوكول مباشرة من محفظته.
+        وهذا يعني أن المستخدم لا يحتاج بالضرورة إلى إيداع أصوله في حساب تداول مركزي قبل إجراء المبادلة.
+    </p>
+
+    <p>
+        لكن الاتصال بالمحفظة لا يعني أن المستخدم محمي تلقائيًا من المخاطر.
+        يجب التأكد من التطبيق والعقد الذي تتم الموافقة على التفاعل معه، لأن الموافقات الخاطئة أو المواقع الضارة يمكن أن تسبب خسائر.
+    </p>
+
+    <h2>ما هي Token Approval؟</h2>
+
+    <p>
+        بعض عمليات DEX تتطلب من المستخدم منح عقد ذكي صلاحية استخدام كمية معينة من رمز معين من محفظته.
+        تعرف هذه العملية عادة باسم <strong>Token Approval</strong>.
+    </p>
+
+    <p>
+        يجب التعامل مع الموافقات بحذر وفهم ما يتم السماح به، لأن منح صلاحية غير مناسبة لعقد ضار أو مخترق قد يؤدي إلى مخاطر على الأصول.
+    </p>
+
+    <p>
+        لذلك فإن أمان DEX لا يعتمد فقط على عملية المبادلة نفسها، بل أيضًا على طريقة استخدام المستخدم للمحفظة والموافقات والعقود.
+    </p>
+
+    <h2>ما هي MEV؟</h2>
+
+    <p>
+        <strong>MEV</strong> أو Maximal Extractable Value يشير بصورة عامة إلى القيمة التي يمكن لبعض المشاركين في ترتيب أو إنتاج معاملات البلوكشين الحصول عليها من خلال التأثير في ترتيب المعاملات أو استغلال المعلومات المتاحة قبل تنفيذها.
+    </p>
+
+    <p>
+        في سياق DEX، يمكن أن تظهر أنواع مختلفة من سلوكيات MEV حول عمليات التداول.
+        ومن الأمثلة التي يتم مناقشتها في هذا السياق هجمات <strong>Sandwich</strong>، حيث قد يتم وضع معاملات قبل وبعد معاملة مستخدم بهدف الاستفادة من تغير السعر الناتج عنها.
+    </p>
+
+    <p>
+        تختلف آليات MEV وتأثيراتها حسب الشبكة وطريقة تنفيذ المعاملات والبروتوكول.
+    </p>
+
+    <h2>ما هي مزايا المنصات اللامركزية؟</h2>
+
+    <p>
+        يمكن أن توفر DEXs مجموعة من الخصائص التي تجعلها مهمة داخل منظومة DeFi، ومنها:
+    </p>
+
+    <ul>
+        <li><strong>التفاعل المباشر مع المحافظ:</strong> في العديد من النماذج لا يحتاج المستخدم إلى إيداع الأصول في منصة مركزية.</li>
+        <li><strong>الوصول إلى مجموعة واسعة من الأصول:</strong> قد تتوفر رموز لا تكون مدرجة في المنصات المركزية.</li>
+        <li><strong>الشفافية على مستوى البلوكشين:</strong> يمكن فحص المعاملات والعقود والبيانات المتاحة على الشبكة.</li>
+        <li><strong>قابلية البرمجة:</strong> يمكن دمج DEXs مع تطبيقات وبروتوكولات DeFi أخرى.</li>
+        <li><strong>الوصول العالمي نسبيًا:</strong> يمكن الوصول إلى البروتوكولات من أي مكان تتوفر فيه الشبكة والواجهة المناسبة، مع اختلاف القيود القانونية والتقنية حسب المستخدم والمنطقة.</li>
+    </ul>
+
+    <h2>ما هي مخاطر DEX؟</h2>
+
+    <p>
+        رغم المزايا، لا تخلو المنصات اللامركزية من المخاطر.
+        ومن أهمها:
+    </p>
+
+    <h3>1. مخاطر العقود الذكية</h3>
+
+    <p>
+        قد تحتوي العقود على أخطاء أو ثغرات يمكن استغلالها.
+        وحتى التدقيق الأمني لا يضمن اكتشاف جميع المشكلات أو منع المخاطر المستقبلية.
+    </p>
+
+    <h3>2. مخاطر السيولة</h3>
+
+    <p>
+        انخفاض السيولة يمكن أن يؤدي إلى ارتفاع الانزلاق السعري وتأثير السعر، وقد يجعل تنفيذ بعض العمليات أكثر تكلفة.
+    </p>
+
+    <h3>3. مخاطر الأصول</h3>
+
+    <p>
+        بعض الرموز المتداولة على DEX قد تكون جديدة أو قليلة السيولة أو شديدة التقلب أو مرتبطة بمشاريع عالية المخاطر.
+    </p>
+
+    <h3>4. مخاطر التصيد والمواقع المزيفة</h3>
+
+    <p>
+        يمكن للمواقع الضارة تقليد واجهات DEX الحقيقية بهدف خداع المستخدم ومنحه موافقات أو توقيعات خطرة.
+    </p>
+
+    <h3>5. مخاطر MEV</h3>
+
+    <p>
+        قد تتعرض بعض عمليات التداول لأشكال مختلفة من MEV، بما في ذلك بعض أشكال الاستغلال المرتبطة بترتيب المعاملات.
+    </p>
+
+    <h3>6. مخاطر الإدارة والحوكمة</h3>
+
+    <p>
+        بعض البروتوكولات قد تحتوي على صلاحيات إدارية أو آليات حوكمة يمكن أن تؤثر في طريقة عمل النظام.
+        لذلك يجب دراسة الصلاحيات الفعلية بدل الاعتماد على اسم "لامركزي" وحده.
+    </p>
+
+    <h2>هل DEX آمن لمجرد أنه لامركزي؟</h2>
+
+    <p>
+        لا.
+    </p>
+
+    <p>
+        اللامركزية ليست مرادفًا للأمان الكامل.
+        يمكن أن يكون البروتوكول لامركزيًا بدرجة معينة ومع ذلك يحتوي على ثغرات أو مخاطر اقتصادية أو تقنية أو حوكمة.
+    </p>
+
+    <p>
+        كما أن المستخدم نفسه قد يتعرض لمخاطر من خلال موقع مزيف أو توقيع معاملة غير مفهومة أو منح موافقة غير مناسبة.
+    </p>
+
+    <h2>هل DEX مجهول تمامًا؟</h2>
+
+    <p>
+        لا ينبغي وصف DEX بأنه مجهول تمامًا.
+    </p>
+
+    <p>
+        معاملات البلوكشين العامة يمكن أن تكون قابلة للرؤية والتحليل، وقد يمكن ربط العناوين بهويات أو نشاطات معينة من خلال مصادر وبيانات مختلفة.
+    </p>
+
+    <p>
+        لذلك من الأدق الحديث عن طبيعة مختلفة للهوية والخصوصية، وليس عن إخفاء كامل للهوية.
+    </p>
+
+    <h2>ما علاقة DEX بالخسارة غير الدائمة؟</h2>
+
+    <p>
+        ترتبط الخسارة غير الدائمة بمزودي السيولة الذين يضعون أصولهم في مجمعات تستخدمها بعض DEXs.
+    </p>
+
+    <p>
+        عندما تتغير الأسعار النسبية للأصول، يمكن أن يتغير تركيب الأصول داخل المجمع، مما يؤدي إلى فرق محتمل بين قيمة مركز السيولة وقيمة الاحتفاظ بالأصول نفسها خارج المجمع.
+    </p>
+
+    <p>
+        يمكنك متابعة الشرح المتخصص في
+        <a href="/academy/defi/what-is-impermanent-loss">الخسارة غير الدائمة Impermanent Loss</a>
+        لفهم هذه العلاقة بشكل أعمق.
+    </p>
+
+    <h2>ما علاقة DEX بـ Yield Farming؟</h2>
+
+    <p>
+        قد تستخدم بعض برامج Yield Farming السيولة الموجودة في DEXs أو تمنح مكافآت للمستخدمين الذين يوفرون السيولة.
+    </p>
+
+    <p>
+        لكن توفير السيولة وزراعة العوائد ليسا الشيء نفسه.
+        توفير السيولة يعني المساهمة في مجمع أو آلية سيولة، بينما Yield Farming قد يتضمن استراتيجية للحصول على مكافآت من خلال استخدام السيولة أو بروتوكولات أخرى.
+    </p>
+
+    <p>
+        يمكنك قراءة
+        <a href="/academy/defi/what-is-yield-farming">شرح Yield Farming للمبتدئين</a>
+        لفهم الفرق بصورة أكبر.
+    </p>
+
+    <h2>ما الفرق بين Swap وTrade؟</h2>
+
+    <p>
+        في سياق DEX، يستخدم مصطلح <strong>Swap</strong> غالبًا لوصف مبادلة أصل بأصل آخر من خلال بروتوكول.
+    </p>
+
+    <p>
+        أما كلمة <strong>Trade</strong> فهي أوسع وقد تشير إلى التداول بشكل عام، سواء باستخدام DEX أو CEX أو نموذج آخر.
+    </p>
+
+    <p>
+        لذلك فإن كل Swap يمكن اعتباره عملية تداول بمعنى واسع، لكن تفاصيل التنفيذ تختلف حسب النظام المستخدم.
+    </p>
+
+    <h2>ما هي Aggregators؟</h2>
+
+    <p>
+        بعض التطبيقات تعمل كـ <strong>DEX Aggregators</strong>، أي أنها تبحث عبر عدة مصادر للسيولة أو عدة بروتوكولات بهدف إيجاد مسار مناسب للمبادلة وفق المعايير التي تستخدمها.
+    </p>
+
+    <p>
+        قد يؤدي تقسيم عملية المبادلة بين أكثر من مصدر أو استخدام مسار متعدد الخطوات إلى تحسين السعر في بعض الحالات، لكنه قد يضيف أيضًا تعقيدًا ورسومًا أو مخاطر إضافية.
+    </p>
+
+    <p>
+        لذلك يجب على المستخدم فهم المسار الذي سيتم تنفيذه والتكاليف المرتبطة به عندما تكون هذه المعلومات متاحة.
+    </p>
+
+    <h2>كيف يختار المستخدم DEX أو بروتوكولًا للدراسة؟</h2>
+
+    <p>
+        عند دراسة أي بروتوكول، من المفيد عدم الاعتماد على حجم التداول أو اسم المشروع وحدهما.
+        يمكن فحص مجموعة من العناصر، مثل:
+    </p>
+
+    <ul>
+        <li>العقود الذكية المستخدمة.</li>
+        <li>الشبكة التي يعمل عليها البروتوكول.</li>
+        <li>نوع AMM أو آلية التداول.</li>
+        <li>حجم السيولة.</li>
+        <li>حجم التداول.</li>
+        <li>هيكل الرسوم.</li>
+        <li>آلية الحوكمة.</li>
+        <li>الصلاحيات الإدارية.</li>
+        <li>التدقيقات الأمنية المتاحة.</li>
+        <li>التاريخ الأمني المعروف للمشروع.</li>
+        <li>آلية تحديث العقود إن وجدت.</li>
+    </ul>
+
+    <p>
+        هذه المعلومات تساعد على فهم المخاطر، لكنها لا تحول أي بروتوكول إلى نظام خالٍ من المخاطر.
+    </p>
+
+    <h2>نصائح أمنية عند استخدام DEX</h2>
+
+    <ul>
+        <li>تحقق من عنوان الموقع قبل ربط المحفظة.</li>
+        <li>لا تعتمد على نتائج البحث وحدها للوصول إلى التطبيقات المالية.</li>
+        <li>راجع المعاملة والمبلغ والعنوان قبل التوقيع.</li>
+        <li>انتبه إلى Token Approvals والصلاحيات الممنوحة للعقود.</li>
+        <li>لا تمنح صلاحيات غير ضرورية لعقود غير موثوقة.</li>
+        <li>تأكد من الشبكة التي تعمل عليها قبل إرسال الأصول.</li>
+        <li>افهم رسوم الشبكة ورسوم البروتوكول.</li>
+        <li>راقب Slippage وPrice Impact قبل تنفيذ المبادلة.</li>
+        <li>لا تعتبر التدقيق الأمني ضمانًا مطلقًا.</li>
+        <li>لا تستخدم أموالًا لا يمكنك تحمل خسارتها.</li>
+    </ul>
+
+    <h2>DEX للمبتدئين: الخلاصة</h2>
+
+    <p>
+        المنصات اللامركزية DEX هي جزء أساسي من منظومة DeFi، وتتيح في العديد من النماذج مبادلة الأصول من خلال العقود الذكية ومجمعات السيولة بدل الاعتماد على وسيط مركزي لتنفيذ العملية.
+    </p>
+
+    <p>
+        تعتمد كثير من DEXs على AMM، بينما تستخدم بروتوكولات أخرى نماذج مختلفة.
+        ولذلك لا ينبغي افتراض أن جميع المنصات اللامركزية تعمل بالطريقة نفسها.
+    </p>
+
+    <p>
+        كما أن DEX لا يعني تلقائيًا الأمان أو الخصوصية أو اللامركزية الكاملة.
+        توجد مخاطر تتعلق بالعقود الذكية والسيولة والأصول وMEV والحوكمة والتصيد والموافقات وغيرها.
+    </p>
+
+    <p>
+        فهم DEX بشكل صحيح يتطلب ربطه بالمفاهيم التي تعلمناها في المقالات السابقة، خصوصًا
+        <a href="/academy/defi/what-is-defi">DeFi</a>،
+        و<a href="/academy/defi/what-are-liquidity-pools">مجمعات السيولة</a>،
+        و<a href="/academy/defi/what-is-yield-farming">Yield Farming</a>،
+        و<a href="/academy/defi/what-is-impermanent-loss">Impermanent Loss</a>.
+    </p>
+
+    <h2>أهم النقاط التي يجب تذكرها</h2>
+
+    <ul>
+        <li>DEX هي بروتوكولات لتبادل الأصول الرقمية باستخدام آليات تعتمد على العقود الذكية.</li>
+        <li>تعتمد العديد من DEXs على مجمعات السيولة وAMM.</li>
+        <li>ليست جميع DEXs متطابقة في التصميم أو درجة اللامركزية.</li>
+        <li>Slippage وPrice Impact مفهومان مهمان عند تنفيذ المبادلات.</li>
+        <li>رسوم التداول تختلف عن رسوم الشبكة أو Gas Fee.</li>
+        <li>Token Approvals تحتاج إلى تعامل حذر وفهم للصلاحيات.</li>
+        <li>اللامركزية لا تعني الأمان الكامل أو إخفاء الهوية تمامًا.</li>
+        <li>DEXs قد تتعرض لمخاطر العقود الذكية والسيولة وMEV والحوكمة والتصيد.</li>
+        <li>ارتفاع حجم التداول أو السيولة لا يعني انعدام المخاطر.</li>
+    </ul>
+
+    <div class="academy-disclaimer">
+        <strong>تنبيه تعليمي:</strong>
+        هذا المحتوى مقدم لأغراض تعليمية فقط ولا يمثل نصيحة مالية أو استثمارية أو توصية باستخدام أي منصة أو بروتوكول أو أصل رقمي.
+        التعامل مع DeFi وDEXs ينطوي على مخاطر قد تشمل تقلب الأسعار، والخسارة غير الدائمة، ومخاطر العقود الذكية والسيولة والحوكمة وMEV والتصيد والاحتيال.
+        يجب فهم المخاطر وإجراء البحث المستقل قبل اتخاذ أي قرار مالي.
+    </div>
+
+</article>
+HTML,
+
+    'content_en' => <<<'HTML'
+<article>
+
+    <p>
+        <strong>Decentralized Exchanges (DEXs)</strong> are among the most important applications in decentralized finance, or DeFi.
+        They allow users to swap digital assets through protocols that rely on smart contracts, rather than necessarily depending on a centralized exchange that holds assets and executes trades on behalf of users.
+    </p>
+
+    <p>
+        However, the term "decentralized" does not mean that every DEX is identical or completely free from any form of administration.
+        The degree of decentralization, governance model, administrative permissions, and smart-contract design can vary significantly between protocols.
+    </p>
+
+    <p>
+        In this AQL Crypto Academy article, we will explain what a DEX is, how swaps work, and the roles of smart contracts, liquidity pools, and automated market makers, along with the main benefits and risks users should understand.
+    </p>
+
+    <h2>What Is a Decentralized Exchange?</h2>
+
+    <p>
+        A <strong>Decentralized Exchange (DEX)</strong> is a protocol or application that allows users to trade or swap digital assets through mechanisms based on smart contracts rather than relying exclusively on a traditional centralized order-book model.
+    </p>
+
+    <p>
+        In liquidity-pool-based DEX models, a user does not necessarily need to find another trader willing to take the opposite side of the transaction.
+        Instead, the swap can be executed against liquidity supplied to a pool.
+    </p>
+
+    <p>
+        You can first review
+        <a href="/academy/defi/what-is-defi">What Is DeFi?</a>
+        to understand the broader ecosystem in which DEXs operate.
+    </p>
+
+    <h2>DEX vs. CEX: What Is the Difference?</h2>
+
+    <p>
+        A useful way to understand DEXs is to compare them with <strong>Centralized Exchanges (CEXs)</strong>.
+    </p>
+
+    <h3>Centralized Exchange</h3>
+
+    <p>
+        On a centralized exchange, users typically interact with a company or organization that operates the platform.
+        Assets may be held in wallets controlled by the exchange, while trading can take place through internal systems such as an order book.
+    </p>
+
+    <h3>Decentralized Exchange</h3>
+
+    <p>
+        In many DEX models, users interact directly with smart contracts through their wallets, and swaps are executed according to the protocol’s programmed rules.
+    </p>
+
+    <p>
+        This does not mean that every DEX has no centralized components at all.
+        A protocol may have a particular frontend hosting model, administrative permissions, governance mechanisms, or off-chain components depending on its design.
+    </p>
+
+    <h2>How Does a Swap Work on a DEX?</h2>
+
+    <p>
+        To understand the process, imagine that a user wants to exchange one digital asset for another.
+    </p>
+
+    <ol>
+        <li>The user opens the DEX interface.</li>
+        <li>The user connects a wallet to the application.</li>
+        <li>The user selects the asset to sell and the asset to receive.</li>
+        <li>The user specifies the desired amount.</li>
+        <li>The interface displays an estimated price, fees, and other available information.</li>
+        <li>The user confirms the transaction through the wallet.</li>
+        <li>The transaction interacts with a smart contract on the blockchain.</li>
+        <li>The contract executes the swap according to the protocol’s rules.</li>
+    </ol>
+
+    <p>
+        The exact details vary by protocol, blockchain, and DEX architecture, but these steps illustrate the basic concept.
+    </p>
+
+    <h2>What Role Do Smart Contracts Play in a DEX?</h2>
+
+    <p>
+        Smart contracts are a fundamental component of many decentralized exchanges.
+        They contain the programmed rules that determine how swaps, liquidity, pricing, and fees are handled according to the protocol’s design.
+    </p>
+
+    <p>
+        When a user sends a transaction to a smart contract, the blockchain processes it according to the contract’s code and rules.
+    </p>
+
+    <p>
+        However, the existence of a smart contract does not automatically guarantee security.
+        Contracts can contain programming errors or vulnerabilities, and other parts of the system can introduce additional risks.
+    </p>
+
+    <h2>What Are Liquidity Pools in DEXs?</h2>
+
+    <p>
+        Many decentralized exchanges rely on <strong>Liquidity Pools</strong> to provide the assets needed for swaps.
+    </p>
+
+    <p>
+        A liquidity pool generally contains assets deposited by liquidity providers according to the protocol’s rules.
+        Traders can use this liquidity to execute swaps.
+    </p>
+
+    <p>
+        In some protocols, liquidity providers receive a share of trading fees or other incentives in return for supplying liquidity.
+    </p>
+
+    <p>
+        For more detail, read
+        <a href="/academy/defi/what-are-liquidity-pools">What Are Liquidity Pools?</a>
+    </p>
+
+    <h2>What Is an AMM?</h2>
+
+    <p>
+        <strong>AMM</strong> stands for Automated Market Maker.
+        It refers to a model that uses algorithms or pricing curves to determine swap prices rather than relying exclusively on a traditional order book.
+    </p>
+
+    <p>
+        In a common constant-product AMM model, the relationship can be simplified as:
+    </p>
+
+    <p>
+        <strong>x × y = k</strong>
+    </p>
+
+    <p>
+        In this simplified model, <strong>x</strong> and <strong>y</strong> represent the quantities of two assets in the pool, while <strong>k</strong> represents a constant within the model.
+    </p>
+
+    <p>
+        When a swap occurs, the quantities of the assets in the pool change, and the pricing model determines the amount of the asset the user receives.
+    </p>
+
+    <p>
+        Not all DEXs use the same model. Pricing curves and liquidity mechanisms can vary significantly between protocols.
+    </p>
+
+    <h2>Where Does the Price Come From on a DEX?</h2>
+
+    <p>
+        Pricing depends on the protocol design and its price-discovery mechanism.
+        In AMM-based liquidity pools, the price is influenced by the ratio of assets in the pool and ongoing trading activity.
+    </p>
+
+    <p>
+        When the price in a pool differs from prices elsewhere in the market, traders and arbitrageurs may act on the difference, helping move the pool price toward broader market prices.
+    </p>
+
+    <p>
+        As a result, the price displayed to a user can change continuously due to trading activity, liquidity conditions, and market movements.
+    </p>
+
+    <h2>What Is Slippage?</h2>
+
+    <p>
+        <strong>Slippage</strong> refers to the difference between the expected price of a swap and the actual execution price.
+    </p>
+
+    <p>
+        Slippage can result from market movements, transaction size, available liquidity, and trading activity between the time a transaction is prepared and when it is executed.
+    </p>
+
+    <p>
+        In some pools, large transactions relative to available liquidity can have a stronger effect on the execution price.
+    </p>
+
+    <h2>What Is Price Impact?</h2>
+
+    <p>
+        <strong>Price Impact</strong> describes how much the trade itself affects the price of an asset within a liquidity pool.
+    </p>
+
+    <p>
+        When liquidity is limited compared with the size of a swap, price impact can become larger.
+        This means a user may receive less than expected if the transaction is large relative to the available liquidity.
+    </p>
+
+    <p>
+        <strong>Price Impact</strong> and <strong>Slippage</strong> are related concepts, but they are not exactly the same.
+    </p>
+
+    <h2>What Fees Are Charged by DEXs?</h2>
+
+    <p>
+        A swap can involve several types of costs depending on the protocol and blockchain.
+    </p>
+
+    <ul>
+        <li>Trading fees charged according to the protocol’s fee structure.</li>
+        <li>Network or gas fees required to process the blockchain transaction.</li>
+        <li>Additional costs that may arise from routing or intermediary services.</li>
+    </ul>
+
+    <p>
+        This is why users should consider the total transaction cost rather than looking only at the DEX trading fee.
+    </p>
+
+    <h2>What Is a Gas Fee?</h2>
+
+    <p>
+        A gas fee is the cost paid to the blockchain network for processing and executing a transaction.
+        It can vary depending on the network, congestion, transaction complexity, and other factors.
+    </p>
+
+    <p>
+        Gas fees are not necessarily the same as DEX trading fees.
+        A user may pay network fees in addition to any fees charged by the protocol.
+    </p>
+
+    <h2>What Does Wallet-to-Wallet Mean on a DEX?</h2>
+
+    <p>
+        Many DEX applications allow users to interact with the protocol directly from a wallet.
+        This means users do not necessarily have to deposit their assets into a centralized exchange account before performing a swap.
+    </p>
+
+    <p>
+        However, connecting a wallet does not automatically protect the user from risk.
+        Users should verify the application and the contracts they interact with because malicious sites or dangerous approvals can result in asset loss.
+    </p>
+
+    <h2>What Is a Token Approval?</h2>
+
+    <p>
+        Some DEX transactions require users to give a smart contract permission to use a certain amount of a token from their wallet.
+        This is commonly known as a <strong>Token Approval</strong>.
+    </p>
+
+    <p>
+        Approvals should be handled carefully and understood before signing, because granting inappropriate permissions to a malicious or compromised contract can expose assets to risk.
+    </p>
+
+    <p>
+        DEX security therefore depends not only on the swap mechanism but also on how users handle wallets, approvals, and smart contracts.
+    </p>
+
+    <h2>What Is MEV?</h2>
+
+    <p>
+        <strong>MEV</strong>, or Maximal Extractable Value, broadly refers to value that certain participants in blockchain transaction ordering can capture by influencing transaction ordering or taking advantage of information available before transactions are finalized.
+    </p>
+
+    <p>
+        In the context of DEXs, different forms of MEV-related behavior can occur around trades.
+        One commonly discussed example is a <strong>sandwich attack</strong>, where transactions may be placed before and after a user’s transaction in an attempt to benefit from the resulting price movement.
+    </p>
+
+    <p>
+        MEV mechanisms and their effects vary depending on the blockchain, transaction-ordering system, and protocol.
+    </p>
+
+    <h2>What Are the Benefits of DEXs?</h2>
+
+    <p>
+        DEXs can provide several characteristics that make them important within the DeFi ecosystem, including:
+    </p>
+
+    <ul>
+        <li><strong>Direct wallet interaction:</strong> many models allow users to interact with protocols without first depositing assets into a centralized exchange.</li>
+        <li><strong>Access to a broad range of assets:</strong> some tokens may be available on DEXs before they are listed on centralized platforms.</li>
+        <li><strong>Blockchain-level transparency:</strong> transactions and available on-chain data can often be inspected publicly.</li>
+        <li><strong>Programmability:</strong> DEXs can be integrated with other DeFi applications and protocols.</li>
+        <li><strong>Broad accessibility:</strong> protocols can often be accessed from different locations where the required network and interface are available, subject to technical and legal conditions.</li>
+    </ul>
+
+    <h2>What Are the Risks of DEXs?</h2>
+
+    <p>
+        Despite their potential benefits, decentralized exchanges also involve significant risks.
+        Important categories include:
+    </p>
+
+    <h3>1. Smart-Contract Risk</h3>
+
+    <p>
+        Smart contracts can contain bugs or vulnerabilities that may be exploited.
+        Even a security audit does not guarantee that every problem has been discovered or that future vulnerabilities cannot emerge.
+    </p>
+
+    <h3>2. Liquidity Risk</h3>
+
+    <p>
+        Low liquidity can increase slippage and price impact and may make some trades more expensive to execute.
+    </p>
+
+    <h3>3. Asset Risk</h3>
+
+    <p>
+        Some tokens available on DEXs may be new, thinly traded, highly volatile, or associated with projects carrying substantial risks.
+    </p>
+
+    <h3>4. Phishing and Fake-Website Risk</h3>
+
+    <p>
+        Malicious websites can imitate legitimate DEX interfaces in an attempt to trick users into signing dangerous transactions or approvals.
+    </p>
+
+    <h3>5. MEV Risk</h3>
+
+    <p>
+        Some trades can be exposed to different forms of MEV, including behavior related to transaction ordering.
+    </p>
+
+    <h3>6. Governance and Administrative Risk</h3>
+
+    <p>
+        Some protocols may have administrative permissions or governance mechanisms that can affect how the system operates.
+        Users should therefore examine the actual permissions rather than relying on the word "decentralized" alone.
+    </p>
+
+    <h2>Is a DEX Safe Just Because It Is Decentralized?</h2>
+
+    <p>
+        No.
+    </p>
+
+    <p>
+        Decentralization is not the same thing as complete security.
+        A protocol can be decentralized to a certain degree while still having technical, economic, governance, or smart-contract risks.
+    </p>
+
+    <p>
+        Users can also face risks from fake websites, misunderstood transaction signatures, or inappropriate token approvals.
+    </p>
+
+    <h2>Are DEXs Completely Anonymous?</h2>
+
+    <p>
+        A DEX should not be described as completely anonymous.
+    </p>
+
+    <p>
+        Transactions on public blockchains can often be visible and analyzed, and addresses may sometimes be linked to real-world identities or activities through different data sources.
+    </p>
+
+    <p>
+        It is therefore more accurate to discuss blockchain-based identity and privacy characteristics rather than assuming complete anonymity.
+    </p>
+
+    <h2>How Are DEXs Related to Impermanent Loss?</h2>
+
+    <p>
+        Impermanent loss is particularly relevant to liquidity providers who place assets into pools used by some DEXs.
+    </p>
+
+    <p>
+        When relative asset prices change, the composition of the liquidity pool can change, creating a potential difference between the value of the liquidity position and the value of simply holding the same assets outside the pool.
+    </p>
+
+    <p>
+        Read
+        <a href="/academy/defi/what-is-impermanent-loss">What Is Impermanent Loss?</a>
+        for a deeper explanation.
+    </p>
+
+    <h2>How Are DEXs Related to Yield Farming?</h2>
+
+    <p>
+        Some Yield Farming programs use liquidity supplied to DEXs or provide incentives to users who supply liquidity.
+    </p>
+
+    <p>
+        However, liquidity provision and Yield Farming are not the same thing.
+        Liquidity provision means contributing assets to a liquidity mechanism, while Yield Farming can involve strategies designed to earn rewards through liquidity or other DeFi protocols.
+    </p>
+
+    <p>
+        Read
+        <a href="/academy/defi/what-is-yield-farming">What Is Yield Farming?</a>
+        to explore the distinction in more detail.
+    </p>
+
+    <h2>What Is the Difference Between a Swap and a Trade?</h2>
+
+    <p>
+        In the DEX context, <strong>Swap</strong> usually describes exchanging one digital asset for another through a protocol.
+    </p>
+
+    <p>
+        <strong>Trade</strong> is a broader term that can describe buying and selling through DEXs, CEXs, or other market structures.
+    </p>
+
+    <p>
+        A swap can therefore be considered a form of trading in a broad sense, while the exact execution mechanism depends on the system being used.
+    </p>
+
+    <h2>What Are DEX Aggregators?</h2>
+
+    <p>
+        Some applications operate as <strong>DEX Aggregators</strong>.
+        They can search across multiple liquidity sources or protocols to identify a potentially suitable route for a swap according to the criteria used by the aggregator.
+    </p>
+
+    <p>
+        Splitting a swap across multiple liquidity sources or using a multi-step route can sometimes improve execution, but it can also add complexity, fees, or additional risks.
+    </p>
+
+    <p>
+        Users should therefore understand the route and associated costs when this information is available.
+    </p>
+
+    <h2>How Should a Beginner Study a DEX Protocol?</h2>
+
+    <p>
+        When studying a DEX protocol, it is better not to rely only on trading volume or the project’s reputation.
+        Useful areas to examine include:
+    </p>
+
+    <ul>
+        <li>The smart contracts being used.</li>
+        <li>The blockchain on which the protocol operates.</li>
+        <li>The AMM or trading mechanism.</li>
+        <li>Liquidity levels.</li>
+        <li>Trading volume.</li>
+        <li>Fee structure.</li>
+        <li>Governance model.</li>
+        <li>Administrative permissions.</li>
+        <li>Available security audits.</li>
+        <li>Known security history.</li>
+        <li>Contract upgrade mechanisms, if any.</li>
+    </ul>
+
+    <p>
+        These factors can help users understand risk, but they do not make any protocol completely risk-free.
+    </p>
+
+    <h2>Security Tips for Using DEXs</h2>
+
+    <ul>
+        <li>Verify the website address before connecting a wallet.</li>
+        <li>Do not rely solely on search results to access financial applications.</li>
+        <li>Review the transaction, amount, and destination before signing.</li>
+        <li>Pay attention to Token Approvals and permissions granted to contracts.</li>
+        <li>Avoid unnecessary permissions for untrusted contracts.</li>
+        <li>Verify the blockchain network before sending assets.</li>
+        <li>Understand network and protocol fees.</li>
+        <li>Check Slippage and Price Impact before executing a swap.</li>
+        <li>Do not treat a security audit as an absolute guarantee.</li>
+        <li>Never use funds you cannot afford to lose.</li>
+    </ul>
+
+    <h2>DEXs for Beginners: Key Takeaway</h2>
+
+    <p>
+        Decentralized exchanges are a fundamental part of DeFi.
+        In many models, they allow users to swap digital assets through smart contracts and liquidity pools instead of relying on a centralized intermediary to execute the transaction.
+    </p>
+
+    <p>
+        Many DEXs use AMMs, while other protocols use different trading architectures.
+        Therefore, users should not assume that every decentralized exchange works in exactly the same way.
+    </p>
+
+    <p>
+        A DEX also does not automatically mean complete security, privacy, or decentralization.
+        Risks can involve smart contracts, liquidity, assets, MEV, governance, phishing, approvals, and other factors.
+    </p>
+
+    <p>
+        Understanding DEXs becomes easier when connected to the concepts covered in previous articles:
+        <a href="/academy/defi/what-is-defi">DeFi</a>,
+        <a href="/academy/defi/what-are-liquidity-pools">Liquidity Pools</a>,
+        <a href="/academy/defi/what-is-yield-farming">Yield Farming</a>,
+        and
+        <a href="/academy/defi/what-is-impermanent-loss">Impermanent Loss</a>.
+    </p>
+
+    <h2>Key Points to Remember</h2>
+
+    <ul>
+        <li>DEXs are protocols that enable digital-asset swaps through mechanisms based on smart contracts.</li>
+        <li>Many DEXs rely on liquidity pools and AMMs.</li>
+        <li>Not all DEXs have the same architecture or degree of decentralization.</li>
+        <li>Slippage and Price Impact are important concepts when executing swaps.</li>
+        <li>Trading fees are different from blockchain network or gas fees.</li>
+        <li>Token Approvals require careful handling and understanding of permissions.</li>
+        <li>Decentralization does not mean complete security or complete anonymity.</li>
+        <li>DEXs can involve smart-contract, liquidity, MEV, governance, phishing, and asset risks.</li>
+        <li>High trading volume or liquidity does not eliminate risk.</li>
+    </ul>
+
+    <div class="academy-disclaimer">
+        <strong>Educational disclaimer:</strong>
+        This content is provided for educational purposes only and does not constitute financial or investment advice or a recommendation to use any exchange, protocol, or digital asset.
+        DeFi and DEX activity can involve substantial risks, including price volatility, impermanent loss, smart-contract vulnerabilities, liquidity risks, governance risks, MEV, phishing, and fraud.
+        Users should conduct independent research and understand the risks before making financial decisions.
+    </div>
+
+</article>
+HTML,
+
+    'image' => null,
+
+    'seo_title' => 'Decentralized Exchanges (DEXs): How Do They Work?',
+    'seo_title_ar' => 'ما هي المنصات اللامركزية DEX؟ وكيف تعمل؟ شرح للمبتدئين',
+    'seo_title_en' => 'Decentralized Exchanges (DEXs): How Do They Work?',
+
+    'meta_description' => 'Learn what decentralized exchanges (DEXs) are, how swaps work through smart contracts and liquidity pools, and the main risks including slippage, MEV, and smart-contract vulnerabilities.',
+    'meta_description_ar' => 'تعرف على المنصات اللامركزية DEX وكيف تعمل المبادلات عبر العقود الذكية ومجمعات السيولة، مع شرح Slippage وPrice Impact وMEV وأهم المخاطر الأمنية.',
+    'meta_description_en' => 'Learn what decentralized exchanges (DEXs) are, how swaps work through smart contracts and liquidity pools, and the main risks including slippage, MEV, and smart-contract vulnerabilities.',
+
+    'faq_ar' => [
+        [
+            'question' => 'ما هي المنصة اللامركزية DEX؟',
+            'answer' => 'DEX هي بروتوكول أو تطبيق يتيح للمستخدمين مبادلة أو تداول الأصول الرقمية باستخدام آليات تعتمد على العقود الذكية، وغالبًا من خلال مجمعات السيولة أو نماذج تداول أخرى.'
+        ],
+        [
+            'question' => 'ما الفرق بين DEX وCEX؟',
+            'answer' => 'المنصة المركزية CEX تديرها جهة مركزية وتستخدم عادة أنظمة داخلية مثل دفتر الأوامر، بينما تتفاعل العديد من DEXs مباشرة مع العقود الذكية من خلال محافظ المستخدمين.'
+        ],
+        [
+            'question' => 'كيف تعمل المبادلة في DEX؟',
+            'answer' => 'يحدد المستخدم الأصل الذي يريد بيعه والأصل الذي يريد الحصول عليه، ثم يوافق على المعاملة من خلال محفظته، ويتولى العقد الذكي تنفيذ العملية وفق قواعد البروتوكول.'
+        ],
+        [
+            'question' => 'ما هو AMM في DeFi؟',
+            'answer' => 'AMM هو Automated Market Maker، وهو نموذج يستخدم خوارزميات أو منحنيات تسعير لتحديد أسعار المبادلات بدل الاعتماد فقط على دفتر أوامر تقليدي.'
+        ],
+        [
+            'question' => 'ما هو Slippage في DEX؟',
+            'answer' => 'Slippage هو الفرق بين السعر المتوقع للمبادلة والسعر الفعلي عند تنفيذها، وقد يتأثر بحركة السوق والسيولة وحجم العملية.'
+        ],
+        [
+            'question' => 'ما هو Price Impact؟',
+            'answer' => 'Price Impact هو مقدار تأثير عملية التداول نفسها على سعر الأصل داخل مجمع السيولة، ويزداد عادة عندما يكون حجم العملية كبيرًا مقارنة بالسيولة المتاحة.'
+        ],
+        [
+            'question' => 'هل DEX آمن لمجرد أنه لامركزي؟',
+            'answer' => 'لا. اللامركزية لا تعني الأمان الكامل، إذ توجد مخاطر العقود الذكية والسيولة والأصول والحوكمة وMEV والتصيد وغيرها.'
+        ],
+        [
+            'question' => 'هل DEX مجهول تمامًا؟',
+            'answer' => 'لا ينبغي وصف DEX بأنه مجهول تمامًا، لأن معاملات البلوكشين العامة يمكن أن تكون قابلة للرؤية والتحليل وقد يمكن ربط بعض العناوين بهويات أو نشاطات معينة.'
+        ],
+        [
+            'question' => 'ما علاقة DEX بالخسارة غير الدائمة؟',
+            'answer' => 'الخسارة غير الدائمة ترتبط بمزودي السيولة في بعض مجمعات DEX، حيث يمكن أن يؤدي تغير الأسعار النسبية للأصول إلى تغيير تركيب المركز مقارنة بالاحتفاظ بالأصول خارج المجمع.'
+        ],
+        [
+            'question' => 'ما هي DEX Aggregators؟',
+            'answer' => 'هي تطبيقات تبحث عبر عدة مصادر للسيولة أو بروتوكولات مختلفة لاختيار مسار مناسب للمبادلة وفق آلية التجميع المستخدمة.'
+        ],
+    ],
+
+    'faq_en' => [
+        [
+            'question' => 'What is a decentralized exchange (DEX)?',
+            'answer' => 'A DEX is a protocol or application that allows users to swap or trade digital assets through mechanisms based on smart contracts, often using liquidity pools or other trading architectures.'
+        ],
+        [
+            'question' => 'What is the difference between a DEX and a CEX?',
+            'answer' => 'A centralized exchange is operated by a central organization and often uses internal systems such as an order book, while many DEXs allow users to interact directly with smart contracts through their wallets.'
+        ],
+        [
+            'question' => 'How does a DEX swap work?',
+            'answer' => 'The user selects the asset to sell and the asset to receive, confirms the transaction through a wallet, and the smart contract executes the swap according to the protocol rules.'
+        ],
+        [
+            'question' => 'What is an AMM in DeFi?',
+            'answer' => 'An AMM, or Automated Market Maker, is a model that uses algorithms or pricing curves to determine swap prices rather than relying exclusively on a traditional order book.'
+        ],
+        [
+            'question' => 'What is slippage on a DEX?',
+            'answer' => 'Slippage is the difference between the expected swap price and the actual execution price, and it can be affected by market movement, liquidity, and transaction size.'
+        ],
+        [
+            'question' => 'What is price impact?',
+            'answer' => 'Price impact is the effect a trade itself has on the asset price inside a liquidity pool, and it can become larger when a transaction is large relative to available liquidity.'
+        ],
+        [
+            'question' => 'Is a DEX safe simply because it is decentralized?',
+            'answer' => 'No. Decentralization does not mean complete security. Smart-contract, liquidity, asset, governance, MEV, phishing, and other risks can still exist.'
+        ],
+        [
+            'question' => 'Are DEXs completely anonymous?',
+            'answer' => 'No. DEXs should not be described as completely anonymous because public blockchain transactions can often be viewed and analyzed, and some addresses may be linked to identities or activities.'
+        ],
+        [
+            'question' => 'How are DEXs related to impermanent loss?',
+            'answer' => 'Impermanent loss can affect liquidity providers in some DEX pools because changes in relative asset prices can change the composition of a liquidity position compared with simply holding the assets outside the pool.'
+        ],
+        [
+            'question' => 'What are DEX aggregators?',
+            'answer' => 'DEX aggregators are applications that search across multiple liquidity sources or protocols to identify a suitable route for a swap according to the aggregator’s routing mechanism.'
+        ],
+    ],
+
+    'status' => 'published',
+    'sort_order' => 9,
+    'published_at' => now(),
+],
+[
+    'topic_id' => $defi->id,
+
+    'title' => 'أمان DeFi: كيف تحمي أموالك من المخاطر والاحتيال؟',
+    'title_ar' => 'أمان DeFi: كيف تحمي أموالك من المخاطر والاحتيال؟ دليل للمبتدئين',
+    'title_en' => 'DeFi Security: How to Protect Your Assets From Risks and Scams',
+
+    'slug' => 'defi-security-and-safety',
+
+    'excerpt' => 'دليل مبسط لفهم أهم مخاطر أمان DeFi، مثل العقود الذكية والمواقع المزيفة وToken Approvals والتصيد وMEV ومخاطر البروتوكولات، مع خطوات عملية لتحسين الأمان.',
+    'excerpt_ar' => 'دليل مبسط لفهم أهم مخاطر أمان DeFi، مثل العقود الذكية والمواقع المزيفة وToken Approvals والتصيد وMEV ومخاطر البروتوكولات، مع خطوات عملية لتحسين الأمان.',
+    'excerpt_en' => 'A beginner-friendly guide to DeFi security risks, including smart contracts, fake websites, token approvals, phishing, MEV, protocol risks, and practical ways to improve security.',
+
+    'content' => null,
+
+    'content_ar' => <<<'HTML'
+<article>
+
+    <p>
+        أصبح التمويل اللامركزي <strong>DeFi</strong> من أهم التطبيقات المبنية على تقنية البلوكشين، لكنه في الوقت نفسه يتطلب مستوى مرتفعًا من الوعي الأمني.
+        ففي الأنظمة اللامركزية، قد يتفاعل المستخدم مباشرة مع العقود الذكية والمحافظ والبروتوكولات، ولذلك فإن بعض الأخطاء التي تبدو بسيطة يمكن أن تؤدي إلى خسائر يصعب عكسها.
+    </p>
+
+    <p>
+        أمان DeFi لا يعتمد على عامل واحد.
+        فقد تكون هناك مخاطر في العقد الذكي نفسه، أو في البروتوكول، أو في الأصول المستخدمة، أو في الواجهة التي يتفاعل معها المستخدم، أو في المعاملة التي يوافق عليها.
+    </p>
+
+    <p>
+        في هذا المقال من أكاديمية AQL Crypto، سنتعرف على أهم مخاطر DeFi وكيفية التعامل معها بطريقة أكثر وعيًا، دون افتراض أن أي بروتوكول أو محفظة آمنة بشكل مطلق.
+    </p>
+
+    <h2>ما المقصود بأمان DeFi؟</h2>
+
+    <p>
+        أمان DeFi يشير إلى مجموعة الممارسات والإجراءات التي تساعد على تقليل المخاطر أثناء استخدام البروتوكولات والتطبيقات اللامركزية.
+    </p>
+
+    <p>
+        ويشمل ذلك حماية المفاتيح الخاصة والمحافظ، والتحقق من المواقع والعقود، وفهم المعاملات والموافقات، ودراسة البروتوكول قبل استخدامه، والانتباه إلى المخاطر الاقتصادية والتقنية.
+    </p>
+
+    <p>
+        ولا يعني الأمان أن الخطر يصبح صفرًا، وإنما يعني اتخاذ خطوات تقلل احتمالية التعرض لخسارة أو احتيال.
+    </p>
+
+    <h2>لماذا أمان DeFi مهم جدًا؟</h2>
+
+    <p>
+        في بعض أنظمة DeFi، تكون المعاملات مبنية على العقود الذكية ويمكن تنفيذها دون وجود جهة مركزية تستطيع بالضرورة إلغاء العملية بعد تنفيذها.
+    </p>
+
+    <p>
+        ولهذا السبب قد تكون بعض المعاملات غير قابلة للعكس بسهولة.
+        وإذا أرسل المستخدم أصلًا إلى عنوان خاطئ أو وافق على معاملة ضارة، فقد لا توجد طريقة بسيطة لاستعادة الأموال.
+    </p>
+
+    <p>
+        لذلك فإن فهم ما يتم توقيعه والموافقة عليه يمثل جزءًا أساسيًا من أمان المستخدم.
+    </p>
+
+    <h2>أهم مخاطر DeFi</h2>
+
+    <p>
+        يمكن تقسيم المخاطر إلى عدة فئات رئيسية:
+    </p>
+
+    <ul>
+        <li>مخاطر العقود الذكية.</li>
+        <li>مخاطر البروتوكولات.</li>
+        <li>مخاطر المحافظ والمفاتيح الخاصة.</li>
+        <li>التصيد والمواقع المزيفة.</li>
+        <li>مخاطر Token Approvals.</li>
+        <li>مخاطر الأصول والرموز المزيفة.</li>
+        <li>مخاطر السيولة.</li>
+        <li>مخاطر MEV.</li>
+        <li>مخاطر الحوكمة والصلاحيات الإدارية.</li>
+        <li>الأخطاء البشرية.</li>
+    </ul>
+
+    <h2>1. مخاطر العقود الذكية</h2>
+
+    <p>
+        العقود الذكية هي برامج تعمل على البلوكشين وتنفذ قواعد محددة مسبقًا.
+        تعتمد عليها العديد من تطبيقات DeFi، بما في ذلك DEXs والإقراض ومجمعات السيولة وغيرها.
+    </p>
+
+    <p>
+        لكن الكود البرمجي يمكن أن يحتوي على أخطاء أو ثغرات.
+        وإذا تم استغلال ثغرة في عقد ذكي يتحكم في أصول المستخدمين، فقد تكون النتائج كبيرة.
+    </p>
+
+    <p>
+        لذلك لا ينبغي افتراض أن العقد الذكي آمن لمجرد أنه منشور على البلوكشين.
+    </p>
+
+    <h3>هل التدقيق الأمني Audit يكفي؟</h3>
+
+    <p>
+        التدقيق الأمني يمكن أن يكون مؤشرًا مفيدًا عند دراسة البروتوكول، لكنه ليس ضمانًا مطلقًا للأمان.
+    </p>
+
+    <p>
+        فقد لا يتم اكتشاف جميع الثغرات، وقد يتغير الكود بعد التدقيق، أو تظهر مخاطر جديدة في مكونات أخرى من النظام.
+    </p>
+
+    <p>
+        لذلك يجب التعامل مع التدقيق كجزء من عملية التقييم وليس كدليل نهائي على خلو البروتوكول من المخاطر.
+    </p>
+
+    <h2>2. مخاطر البروتوكول</h2>
+
+    <p>
+        حتى إذا كانت العقود الذكية مصممة بشكل جيد، يمكن أن توجد مخاطر مرتبطة بالتصميم الاقتصادي أو الحوكمة أو المكونات الأخرى للبروتوكول.
+    </p>
+
+    <p>
+        بعض البروتوكولات تعتمد على عدة عقود أو أوراكل أو جسور أو خدمات خارج السلسلة، وبالتالي يمكن أن يأتي الخطر من أحد هذه المكونات.
+    </p>
+
+    <p>
+        لهذا السبب يجب النظر إلى البروتوكول كمنظومة كاملة وليس إلى عقد منفرد فقط.
+    </p>
+
+    <h2>3. حماية المحفظة والمفتاح الخاص</h2>
+
+    <p>
+        المحفظة هي نقطة أساسية في أمان المستخدم.
+        وفي المحافظ غير الحاضنة، تكون السيطرة على الأصول مرتبطة بالمفتاح الخاص أو العبارة السرية وفق تصميم المحفظة.
+    </p>
+
+    <p>
+        فقدان هذه المعلومات أو تسريبها يمكن أن يؤدي إلى فقدان السيطرة على الأصول.
+    </p>
+
+    <h3>ما الذي يجب عدم مشاركته؟</h3>
+
+    <ul>
+        <li>العبارة السرية أو Seed Phrase.</li>
+        <li>المفتاح الخاص.</li>
+        <li>رموز الاسترداد السرية.</li>
+        <li>أي معلومات تمنح شخصًا آخر القدرة على التحكم في المحفظة.</li>
+    </ul>
+
+    <p>
+        لا توجد جهة شرعية تحتاج إلى العبارة السرية للمحفظة من أجل "تفعيل" الحساب أو "إلغاء" معاملة.
+    </p>
+
+    <h2>4. التصيد الإلكتروني Phishing</h2>
+
+    <p>
+        التصيد من أكثر المخاطر شيوعًا في عالم العملات الرقمية.
+        قد ينشئ المحتال موقعًا يشبه تمامًا واجهة تطبيق DeFi معروفًا، ثم يطلب من المستخدم ربط محفظته أو توقيع معاملة.
+    </p>
+
+    <p>
+        المشكلة أن المستخدم قد يرى واجهة مألوفة ويعتقد أنه يتعامل مع التطبيق الأصلي بينما هو في موقع مختلف.
+    </p>
+
+    <h3>كيف تكتشف موقعًا مشبوهًا؟</h3>
+
+    <ul>
+        <li>تحقق من عنوان الموقع حرفيًا.</li>
+        <li>انتبه إلى النطاقات التي تحتوي على أخطاء إملائية.</li>
+        <li>لا تثق بالإعلانات أو الروابط العشوائية للوصول إلى تطبيقات مالية.</li>
+        <li>تحقق من الروابط الرسمية من مصادر موثوقة.</li>
+        <li>لا تدخل العبارة السرية في أي موقع ويب.</li>
+    </ul>
+
+    <h2>5. ما هي Token Approvals؟</h2>
+
+    <p>
+        عند استخدام بعض تطبيقات DeFi، قد يطلب العقد الذكي من المستخدم السماح له باستخدام كمية معينة من رمز معين من محفظته.
+        تعرف هذه العملية باسم <strong>Token Approval</strong>.
+    </p>
+
+    <p>
+        الهدف من الموافقة هو السماح للعقد الذكي بتنفيذ عملية مرتبطة بالرمز.
+        لكن المشكلة تظهر عندما يمنح المستخدم صلاحية واسعة لعقد لا يثق به أو لا يفهمه.
+    </p>
+
+    <h3>لماذا يجب الانتباه إلى Approvals؟</h3>
+
+    <p>
+        إذا كان العقد خبيثًا أو تعرض للاختراق وكانت لديه صلاحية مناسبة، فقد تصبح الأصول المرتبطة بهذه الصلاحية معرضة للخطر وفق طبيعة العقد والموافقة.
+    </p>
+
+    <p>
+        لذلك من المهم مراجعة الموافقات غير الضرورية وإلغاؤها عندما يكون ذلك مناسبًا، باستخدام أدوات موثوقة.
+    </p>
+
+    <h2>6. التوقيع على المعاملات والتوقيعات غير الواضحة</h2>
+
+    <p>
+        لا ينبغي للمستخدم أن يوافق على أي توقيع لا يفهمه، خصوصًا عندما يكون مصدر الطلب غير واضح.
+    </p>
+
+    <p>
+        بعض التوقيعات قد لا تبدو للمستخدم مثل عملية تحويل مباشرة، لكنها قد تمنح صلاحيات أو تنفذ إجراءات أخرى حسب التطبيق والعقد.
+    </p>
+
+    <p>
+        لذلك يجب قراءة تفاصيل المعاملة قدر الإمكان قبل التوقيع، والتوقف إذا كانت البيانات غير واضحة أو غير متوقعة.
+    </p>
+
+    <h2>7. العملات والرموز المزيفة</h2>
+
+    <p>
+        يمكن إنشاء رموز رقمية بأسماء وشعارات مشابهة لأصول معروفة.
+        وقد يستخدم المحتالون اسمًا قريبًا جدًا من اسم مشروع مشهور بهدف خداع المستخدم.
+    </p>
+
+    <p>
+        لذلك لا يكفي الاعتماد على اسم الرمز أو صورته.
+        يجب التحقق من <strong>عنوان العقد Contract Address</strong> من مصدر موثوق.
+    </p>
+
+    <p>
+        كما يجب الانتباه إلى أن وجود رمز على DEX لا يعني بالضرورة أنه مشروع موثوق أو آمن.
+    </p>
+
+    <h2>8. مخاطر Rug Pull</h2>
+
+    <p>
+        يشير مصطلح <strong>Rug Pull</strong> بشكل عام إلى حالات يتم فيها استغلال المستخدمين أو السيولة من خلال مشروع أو نظام تم تصميمه أو تشغيله بطريقة تسمح بسحب القيمة أو الإضرار بالمشاركين.
+    </p>
+
+    <p>
+        يمكن أن تختلف آليات هذه الحالات بشكل كبير، ولذلك يجب دراسة صلاحيات العقود والسيولة والحوكمة والفريق والمكونات الأخرى بدل الاعتماد على اسم المشروع فقط.
+    </p>
+
+    <h2>9. مخاطر السيولة</h2>
+
+    <p>
+        السيولة عنصر مهم في DeFi.
+        انخفاض السيولة قد يجعل تنفيذ عمليات كبيرة أكثر صعوبة أو يؤدي إلى ارتفاع Slippage وPrice Impact.
+    </p>
+
+    <p>
+        كما يمكن أن يواجه المستخدم صعوبة في الخروج من بعض المراكز إذا كانت السيولة المتاحة منخفضة.
+    </p>
+
+    <p>
+        وقد تعرفنا في المقال السابق على
+        <a href="/academy/defi/what-are-liquidity-pools">مجمعات السيولة</a>
+        وعلاقتها بتوفير السيولة والتداول.
+    </p>
+
+    <h2>10. مخاطر Impermanent Loss</h2>
+
+    <p>
+        مزودو السيولة في بعض مجمعات DEX قد يتعرضون إلى <strong>Impermanent Loss</strong> عندما تتغير الأسعار النسبية للأصول الموجودة في المجمع.
+    </p>
+
+    <p>
+        وهذا لا يعني أن كل مزود سيولة سيخسر بالضرورة، لكنه يمثل عاملًا يجب احتسابه عند تقييم مركز السيولة.
+    </p>
+
+    <p>
+        يمكنك مراجعة
+        <a href="/academy/defi/what-is-impermanent-loss">شرح الخسارة غير الدائمة</a>
+        لفهم هذه المخاطرة بالتفصيل.
+    </p>
+
+    <h2>11. مخاطر MEV</h2>
+
+    <p>
+        <strong>MEV</strong> يشير بصورة عامة إلى القيمة التي يمكن لبعض المشاركين في ترتيب معاملات البلوكشين استخراجها من خلال التأثير في ترتيب المعاملات أو الاستفادة من المعلومات المتاحة قبل تنفيذها.
+    </p>
+
+    <p>
+        في تداولات DEX، قد تظهر استراتيجيات مرتبطة بترتيب المعاملات، ومنها بعض أنواع <strong>Sandwich Attacks</strong>.
+    </p>
+
+    <p>
+        تختلف تفاصيل MEV حسب الشبكة والبروتوكول وآلية ترتيب المعاملات.
+    </p>
+
+    <h2>12. مخاطر Oracle</h2>
+
+    <p>
+        تعتمد بعض بروتوكولات DeFi على <strong>Oracles</strong> لتوفير بيانات خارجية، مثل أسعار الأصول.
+    </p>
+
+    <p>
+        إذا كانت بيانات السعر غير دقيقة أو تم التلاعب بها أو تعطلت آلية الأوراكل، فقد تتأثر العمليات التي تعتمد عليها.
+    </p>
+
+    <p>
+        لذلك يجب عند دراسة بروتوكول معين معرفة مصادر الأسعار وآلية حماية الأوراكل، خصوصًا في تطبيقات الإقراض والمشتقات.
+    </p>
+
+    <h2>13. مخاطر Bridges</h2>
+
+    <p>
+        الجسور <strong>Bridges</strong> تستخدم في بعض الأنظمة لنقل القيمة أو تمثيل الأصول بين شبكات مختلفة.
+    </p>
+
+    <p>
+        لكنها قد تضيف طبقة أخرى من التعقيد والمخاطر، لأن الجسر قد يعتمد على عقود ذكية أو آليات تحقق أو كيانات متعددة.
+    </p>
+
+    <p>
+        لذلك يجب عدم افتراض أن نقل الأصل عبر جسر يحمل المخاطر نفسها التي تحملها معاملة بسيطة داخل شبكة واحدة.
+    </p>
+
+    <h2>14. مخاطر الحوكمة والصلاحيات الإدارية</h2>
+
+    <p>
+        بعض بروتوكولات DeFi تحتوي على أنظمة حوكمة أو مفاتيح إدارية أو عقود قابلة للترقية.
+    </p>
+
+    <p>
+        قد تسمح بعض هذه الصلاحيات بتغيير جوانب معينة من البروتوكول وفق القواعد المحددة.
+    </p>
+
+    <p>
+        لذلك فإن عبارة "لامركزي" وحدها لا تكفي لفهم مستوى التحكم.
+        يجب دراسة من يملك الصلاحيات، وما الذي يمكن تغييره، وكيف يتم تنفيذ التغييرات.
+    </p>
+
+    <h2>15. مخاطر الشبكة نفسها</h2>
+
+    <p>
+        تطبيق DeFi يعمل فوق شبكة بلوكشين، ولذلك يمكن أن يتأثر بخصائص الشبكة نفسها.
+    </p>
+
+    <p>
+        قد تشمل هذه العوامل ازدحام الشبكة، ارتفاع الرسوم، مشاكل في البنية التحتية، أو توقف بعض الخدمات المرتبطة بها.
+    </p>
+
+    <p>
+        ولهذا يجب فهم أن مخاطر التطبيق لا تنفصل دائمًا عن مخاطر الشبكة الأساسية.
+    </p>
+
+    <h2>كيف تتحقق من مشروع DeFi قبل استخدامه؟</h2>
+
+    <p>
+        يمكن للمستخدم اتباع قائمة فحص أولية قبل التفاعل مع أي بروتوكول:
+    </p>
+
+    <ol>
+        <li>تحقق من الموقع الرسمي والعنوان الصحيح.</li>
+        <li>تحقق من العقود الذكية المستخدمة.</li>
+        <li>راجع الصلاحيات الإدارية إن كانت متاحة.</li>
+        <li>ابحث عن التدقيقات الأمنية المعروفة.</li>
+        <li>تحقق من تاريخ البروتوكول والحوادث الأمنية المعلنة.</li>
+        <li>افهم نموذج السيولة والتسعير.</li>
+        <li>افهم الرسوم وتكاليف الشبكة.</li>
+        <li>تحقق من الأصول التي ستتفاعل معها.</li>
+        <li>راجع Token Approvals المطلوبة.</li>
+        <li>ابدأ بمبالغ صغيرة عند اختبار بروتوكول غير مألوف، دون اعتبار ذلك لإلغاء المخاطر.</li>
+    </ol>
+
+    <h2>لا تعتمد على عدد المتابعين أو حجم المجتمع فقط</h2>
+
+    <p>
+        وجود عدد كبير من المتابعين أو المستخدمين يمكن أن يكون معلومة عن انتشار المشروع، لكنه لا يثبت وحده أن البروتوكول آمن.
+    </p>
+
+    <p>
+        كما أن ارتفاع القيمة المقفلة أو حجم التداول لا يعني أن العقود أو النظام خالٍ من المخاطر.
+    </p>
+
+    <p>
+        الأفضل الجمع بين عدة مؤشرات تقنية واقتصادية وأمنية عند دراسة البروتوكول.
+    </p>
+
+    <h2>هل التدقيق Audit يعني أن البروتوكول آمن؟</h2>
+
+    <p>
+        لا.
+    </p>
+
+    <p>
+        التدقيق الأمني يمكن أن يساعد في اكتشاف بعض المشكلات، لكنه يمثل فحصًا ضمن نطاق وزمن محددين.
+        وقد تتغير العقود أو تظهر ثغرات جديدة بعد انتهاء التدقيق.
+    </p>
+
+    <p>
+        لذلك يجب النظر إلى التدقيق باعتباره جزءًا من تقييم المخاطر وليس شهادة ضمان.
+    </p>
+
+    <h2>كيف تحمي أموالك في محفظة DeFi؟</h2>
+
+    <ul>
+        <li>احتفظ بالعبارة السرية بعيدًا عن الإنترنت.</li>
+        <li>لا ترسل Seed Phrase لأي شخص.</li>
+        <li>استخدم محفظة مخصصة للتجارب عندما يكون ذلك مناسبًا.</li>
+        <li>لا تربط المحفظة الرئيسية بكل التطبيقات.</li>
+        <li>راجع الموافقات بشكل دوري.</li>
+        <li>تحقق من المعاملات قبل توقيعها.</li>
+        <li>استخدم الأجهزة والبرامج المحدثة.</li>
+        <li>احذر من الروابط التي تصل عبر رسائل مجهولة.</li>
+        <li>لا تثق بأي شخص يطلب منك مفتاحك الخاص.</li>
+    </ul>
+
+    <h2>ما هي المحفظة الباردة؟</h2>
+
+    <p>
+        المحفظة الباردة هي وسيلة لحفظ مفاتيح الأصول بطريقة تقلل تعرضها المباشر للإنترنت.
+        وتستخدم بعض المحافظ المادية Hardware Wallets لهذا الغرض.
+    </p>
+
+    <p>
+        لكنها ليست حلًا سحريًا؛ فما زال المستخدم بحاجة إلى حماية العبارة السرية والتأكد من المعاملات التي يوافق عليها.
+    </p>
+
+    <h2>قاعدة مهمة: لا توقع شيئًا لا تفهمه</h2>
+
+    <p>
+        من أهم قواعد الأمان في DeFi أن المستخدم لا ينبغي أن يوقع معاملة أو رسالة أو موافقة غير واضحة له.
+    </p>
+
+    <p>
+        إذا ظهر طلب غير متوقع، أو كانت القيمة أو الصلاحيات غير منطقية، فإن التوقف والتحقق أفضل من التوقيع بسرعة.
+    </p>
+
+    <p>
+        السرعة والخوف من تفويت فرصة <strong>FOMO</strong> يمكن أن يدفعا المستخدم إلى تجاهل إشارات تحذيرية مهمة.
+    </p>
+
+    <h2>ماذا تفعل إذا وقعت في عملية احتيال؟</h2>
+
+    <p>
+        إذا اشتبه المستخدم في أن محفظته تعرضت للخطر، فمن المهم التحرك بسرعة وفق طبيعة الحادث.
+    </p>
+
+    <ul>
+        <li>أوقف أي تفاعل إضافي مع الموقع أو العقد المشبوه.</li>
+        <li>إذا كانت المفاتيح أو العبارة السرية قد تسربت، اعتبر المحفظة معرضة للخطر.</li>
+        <li>انقل الأصول المتبقية إلى محفظة آمنة جديدة عندما يكون ذلك ممكنًا وآمنًا.</li>
+        <li>راجع الموافقات المرتبطة بالمحفظة.</li>
+        <li>احتفظ بعناوين المعاملات والبيانات المتعلقة بالحادث.</li>
+        <li>احذر من المحتالين الذين يدّعون قدرتهم على استعادة الأموال مقابل رسوم.</li>
+    </ul>
+
+    <p>
+        استعادة الأموال بعد معاملات البلوكشين ليست مضمونة، ولذلك تكون الوقاية والتحقق قبل التوقيع أهم من محاولة الإصلاح بعد وقوع المشكلة.
+    </p>
+
+    <h2>هل DeFi آمن للمبتدئين؟</h2>
+
+    <p>
+        لا توجد إجابة عامة تجعل كل تطبيقات DeFi آمنة أو غير آمنة.
+        تختلف المخاطر حسب البروتوكول والشبكة والأصول وطريقة الاستخدام.
+    </p>
+
+    <p>
+        المبتدئ يحتاج أولًا إلى فهم المفاهيم الأساسية مثل
+        <a href="/academy/defi/what-is-defi">DeFi</a>،
+        و<a href="/academy/defi/what-are-liquidity-pools">مجمعات السيولة</a>،
+        و<a href="/academy/defi/what-is-yield-farming">Yield Farming</a>،
+        و<a href="/academy/defi/what-is-impermanent-loss">Impermanent Loss</a>،
+        و<a href="/academy/defi/what-are-decentralized-exchanges">DEXs</a>
+        قبل التفاعل مع البروتوكولات بصورة فعلية.
+    </p>
+
+    <h2>أمان DeFi: الخلاصة</h2>
+
+    <p>
+        أمان DeFi مسؤولية مشتركة بين تصميم البروتوكول وطريقة استخدام المستخدم.
+        لا يوجد بروتوكول أو عقد ذكي أو محفظة يمكن وصفها بأنها خالية من المخاطر بشكل مطلق.
+    </p>
+
+    <p>
+        أهم ما يستطيع المستخدم فعله هو التحقق من الموقع والعقد، وحماية المفاتيح، وفهم الموافقات، ومراجعة المعاملات، ودراسة البروتوكول ومخاطره قبل استخدامه.
+    </p>
+
+    <p>
+        كما يجب تذكر أن المخاطر لا تقتصر على الاحتيال فقط؛ فقد تشمل العقود الذكية، والسيولة، وتقلب الأسعار، وImpermanent Loss، وMEV، والأوراكل، والجسور، والحوكمة، والشبكة نفسها.
+    </p>
+
+    <h2>أهم النقاط التي يجب تذكرها</h2>
+
+    <ul>
+        <li>لا يعني استخدام DeFi أن الأموال أصبحت آمنة تلقائيًا.</li>
+        <li>لا تشارك Seed Phrase أو Private Key مع أي شخص.</li>
+        <li>تحقق من الموقع والعقد قبل التفاعل معه.</li>
+        <li>Token Approvals تحتاج إلى مراجعة وحذر.</li>
+        <li>لا توقع معاملة لا تفهمها.</li>
+        <li>التدقيق الأمني مفيد لكنه ليس ضمانًا مطلقًا.</li>
+        <li>ارتفاع TVL أو حجم التداول لا يعني انعدام المخاطر.</li>
+        <li>انتبه إلى مخاطر السيولة وImpermanent Loss وMEV.</li>
+        <li>الأوراكل والجسور والصلاحيات الإدارية قد تضيف مخاطر إضافية.</li>
+        <li>الوقاية والتحقق قبل المعاملة أهم من محاولة استعادة الأموال بعد الخسارة.</li>
+    </ul>
+
+    <div class="academy-disclaimer">
+        <strong>تنبيه تعليمي:</strong>
+        هذا المحتوى مقدم لأغراض تعليمية فقط ولا يمثل نصيحة مالية أو استثمارية أو توصية باستخدام أي بروتوكول أو محفظة أو أصل رقمي.
+        تطبيقات DeFi تنطوي على مخاطر تقنية واقتصادية وأمنية قد تؤدي إلى فقدان جزء من الأموال أو كلها.
+        يجب إجراء البحث المستقل وفهم المخاطر قبل استخدام أي خدمة أو بروتوكول.
+    </div>
+
+</article>
+HTML,
+
+    'content_en' => <<<'HTML'
+<article>
+
+    <p>
+        <strong>DeFi</strong> has become one of the most important applications built on blockchain technology, but it also requires a high level of security awareness.
+        In decentralized systems, users may interact directly with smart contracts, wallets, and protocols, meaning that seemingly simple mistakes can sometimes result in losses that are difficult to reverse.
+    </p>
+
+    <p>
+        DeFi security does not depend on a single factor.
+        Risks can exist in the smart contract itself, the protocol, the assets being used, the interface, or the transaction that a user signs.
+    </p>
+
+    <p>
+        In this AQL Crypto Academy article, we will explore the major security risks in DeFi and practical ways to reduce exposure, without assuming that any protocol or wallet is completely risk-free.
+    </p>
+
+    <h2>What Does DeFi Security Mean?</h2>
+
+    <p>
+        DeFi security refers to the practices and precautions used to reduce risks when interacting with decentralized applications and protocols.
+    </p>
+
+    <p>
+        This includes protecting private keys and wallets, verifying websites and contracts, understanding transactions and approvals, researching protocols, and considering both technical and economic risks.
+    </p>
+
+    <p>
+        Security does not mean reducing risk to zero. It means taking reasonable steps to reduce the likelihood and potential impact of loss or fraud.
+    </p>
+
+    <h2>Why Is DeFi Security So Important?</h2>
+
+    <p>
+        In some DeFi systems, transactions are executed through smart contracts without a central party that can necessarily reverse the transaction after it has been completed.
+    </p>
+
+    <p>
+        Some transactions may therefore be difficult or impossible to reverse.
+        If a user sends assets to the wrong address or approves a malicious transaction, there may be no simple way to recover the funds.
+    </p>
+
+    <p>
+        Understanding what is being signed or approved is therefore a fundamental part of user security.
+    </p>
+
+    <h2>Major DeFi Security Risks</h2>
+
+    <p>
+        DeFi risks can be divided into several major categories:
+    </p>
+
+    <ul>
+        <li>Smart-contract risks.</li>
+        <li>Protocol risks.</li>
+        <li>Wallet and private-key risks.</li>
+        <li>Phishing and fake websites.</li>
+        <li>Token approval risks.</li>
+        <li>Fake or malicious token risks.</li>
+        <li>Liquidity risks.</li>
+        <li>MEV-related risks.</li>
+        <li>Governance and administrative risks.</li>
+        <li>Human error.</li>
+    </ul>
+
+    <h2>1. Smart-Contract Risk</h2>
+
+    <p>
+        Smart contracts are programs that run on blockchains and execute predefined rules.
+        Many DeFi applications rely on them, including DEXs, lending protocols, liquidity pools, and other financial applications.
+    </p>
+
+    <p>
+        However, software can contain bugs and vulnerabilities.
+        If a vulnerability in a contract controlling user assets is exploited, the consequences can be significant.
+    </p>
+
+    <p>
+        A smart contract should therefore not be considered safe simply because it is deployed on a blockchain.
+    </p>
+
+    <h3>Is a Security Audit Enough?</h3>
+
+    <p>
+        A security audit can be useful information when evaluating a protocol, but it is not an absolute guarantee of safety.
+    </p>
+
+    <p>
+        An audit may not identify every vulnerability, the code may change after the audit, or new risks may emerge in other parts of the system.
+    </p>
+
+    <p>
+        An audit should therefore be treated as one part of risk assessment rather than proof that a protocol is completely secure.
+    </p>
+
+    <h2>2. Protocol Risk</h2>
+
+    <p>
+        Even when smart contracts are well designed, risks can arise from economic design, governance, or other components of the protocol.
+    </p>
+
+    <p>
+        Some protocols depend on multiple contracts, oracles, bridges, or off-chain services.
+        Risk can therefore originate from one of these components rather than from a single contract.
+    </p>
+
+    <p>
+        A protocol should be evaluated as a complete system rather than by examining only one contract.
+    </p>
+
+    <h2>3. Protecting Your Wallet and Private Key</h2>
+
+    <p>
+        The wallet is a critical part of user security.
+        In self-custodial wallets, control over assets is generally tied to private keys or a recovery phrase according to the wallet design.
+    </p>
+
+    <p>
+        Losing or exposing this information can result in losing control over the assets.
+    </p>
+
+    <h3>What Should Never Be Shared?</h3>
+
+    <ul>
+        <li>Your seed or recovery phrase.</li>
+        <li>Your private key.</li>
+        <li>Secret recovery information.</li>
+        <li>Any information that gives another person control over the wallet.</li>
+    </ul>
+
+    <p>
+        A legitimate service does not need your seed phrase to "activate" your wallet or "cancel" a transaction.
+    </p>
+
+    <h2>4. Phishing</h2>
+
+    <p>
+        Phishing is one of the most common risks in the cryptocurrency ecosystem.
+        Attackers may create websites that closely imitate legitimate DeFi applications and then ask users to connect their wallets or sign transactions.
+    </p>
+
+    <p>
+        The danger is that the interface may look familiar even though the user is interacting with a malicious website.
+    </p>
+
+    <h3>How Can You Identify a Suspicious Website?</h3>
+
+    <ul>
+        <li>Check the website address carefully.</li>
+        <li>Watch for misspelled or deceptive domains.</li>
+        <li>Do not rely on random advertisements or links to access financial applications.</li>
+        <li>Verify official links through trusted sources.</li>
+        <li>Never enter a seed phrase into a website.</li>
+    </ul>
+
+    <h2>5. What Are Token Approvals?</h2>
+
+    <p>
+        When using some DeFi applications, a smart contract may ask the user for permission to use a certain amount of a token from the wallet.
+        This is commonly called a <strong>Token Approval</strong>.
+    </p>
+
+    <p>
+        The purpose of an approval is to allow a contract to perform an operation involving the token.
+        The risk appears when users grant broad permissions to contracts they do not trust or understand.
+    </p>
+
+    <h3>Why Should Approvals Be Reviewed?</h3>
+
+    <p>
+        If a contract is malicious or compromised and has an appropriate permission, assets covered by that permission may be exposed depending on the contract and approval design.
+    </p>
+
+    <p>
+        Users should therefore review unnecessary approvals and revoke them when appropriate, using trusted tools.
+    </p>
+
+    <h2>6. Transaction Signatures and Unclear Requests</h2>
+
+    <p>
+        Users should avoid signing transactions or messages they do not understand, especially when the request comes from an unexpected source.
+    </p>
+
+    <p>
+        Some signatures may not look like a direct transfer but can grant permissions or perform other actions depending on the application and contract.
+    </p>
+
+    <p>
+        Review transaction details as carefully as possible before signing, and stop if the information is unclear or unexpected.
+    </p>
+
+    <h2>7. Fake Tokens</h2>
+
+    <p>
+        Digital tokens can be created with names and logos that resemble well-known assets.
+        Attackers may use names that are almost identical to popular projects in order to deceive users.
+    </p>
+
+    <p>
+        A token’s name or logo is therefore not enough to identify it.
+        Users should verify the <strong>Contract Address</strong> through a trusted source.
+    </p>
+
+    <p>
+        The fact that a token is available on a DEX also does not mean that the token or its project is trustworthy.
+    </p>
+
+    <h2>8. Rug Pull Risk</h2>
+
+    <p>
+        The term <strong>Rug Pull</strong> generally describes situations in which users or liquidity are exploited through a project or system designed or operated in a way that allows value to be removed or participants to be harmed.
+    </p>
+
+    <p>
+        The mechanisms can vary significantly, so users should examine contract permissions, liquidity, governance, project structure, and other components rather than relying on the project name alone.
+    </p>
+
+    <h2>9. Liquidity Risk</h2>
+
+    <p>
+        Liquidity is a critical component of DeFi.
+        Low liquidity can make large transactions more difficult and can increase Slippage and Price Impact.
+    </p>
+
+    <p>
+        Users may also have difficulty exiting certain positions when available liquidity is limited.
+    </p>
+
+    <p>
+        Our previous article on
+        <a href="/academy/defi/what-are-liquidity-pools">Liquidity Pools</a>
+        explains how liquidity supports trading and DeFi applications.
+    </p>
+
+    <h2>10. Impermanent Loss Risk</h2>
+
+    <p>
+        Liquidity providers in some DEX pools can experience <strong>Impermanent Loss</strong> when the relative prices of the assets in the pool change.
+    </p>
+
+    <p>
+        This does not mean every liquidity provider will necessarily lose money, but it is an important factor to consider when evaluating a liquidity position.
+    </p>
+
+    <p>
+        Read
+        <a href="/academy/defi/what-is-impermanent-loss">What Is Impermanent Loss?</a>
+        for a detailed explanation.
+    </p>
+
+    <h2>11. MEV Risk</h2>
+
+    <p>
+        <strong>MEV</strong> broadly refers to value that certain participants in blockchain transaction ordering can extract by influencing transaction order or using information available before transactions are finalized.
+    </p>
+
+    <p>
+        In DEX trading, transaction-ordering strategies can affect users, including some forms of <strong>Sandwich Attacks</strong>.
+    </p>
+
+    <p>
+        The exact mechanisms vary depending on the blockchain, protocol, and transaction-ordering system.
+    </p>
+
+    <h2>12. Oracle Risk</h2>
+
+    <p>
+        Some DeFi protocols rely on <strong>Oracles</strong> to provide external information such as asset prices.
+    </p>
+
+    <p>
+        If price data is inaccurate, manipulated, or unavailable, applications that depend on that data can be affected.
+    </p>
+
+    <p>
+        When studying a protocol, it is therefore useful to understand how its price sources work and how oracle-related risks are mitigated, especially in lending and derivatives applications.
+    </p>
+
+    <h2>13. Bridge Risks</h2>
+
+    <p>
+        <strong>Bridges</strong> are used by some systems to transfer value or represent assets across different blockchain networks.
+    </p>
+
+    <p>
+        They can introduce additional complexity and risks because a bridge may depend on smart contracts, verification mechanisms, or multiple participating components.
+    </p>
+
+    <p>
+        Users should therefore not assume that moving an asset through a bridge has the same risk profile as a simple transaction within a single network.
+    </p>
+
+    <h2>14. Governance and Administrative Risks</h2>
+
+    <p>
+        Some DeFi protocols have governance systems, administrative keys, or upgradeable contracts.
+    </p>
+
+    <p>
+        Depending on the design, these permissions may allow certain aspects of the protocol to be changed according to predefined rules.
+    </p>
+
+    <p>
+        The word "decentralized" alone is therefore not enough to understand how much control exists.
+        Users should examine who has administrative authority, what can be changed, and how changes are executed.
+    </p>
+
+    <h2>15. Blockchain Network Risk</h2>
+
+    <p>
+        A DeFi application operates on a blockchain network and can therefore be affected by the characteristics of that network.
+    </p>
+
+    <p>
+        These factors can include network congestion, high fees, infrastructure problems, or interruptions affecting services built around the network.
+    </p>
+
+    <p>
+        Application risk is therefore not always separate from the risks of the underlying blockchain.
+    </p>
+
+    <h2>How Should You Check a DeFi Protocol Before Using It?</h2>
+
+    <p>
+        A beginner can use the following initial checklist before interacting with a protocol:
+    </p>
+
+    <ol>
+        <li>Verify the official website and correct domain.</li>
+        <li>Check the smart contracts being used.</li>
+        <li>Review administrative permissions when available.</li>
+        <li>Look for known security audits.</li>
+        <li>Review the protocol’s history and publicly reported security incidents.</li>
+        <li>Understand its liquidity and pricing model.</li>
+        <li>Understand protocol fees and network costs.</li>
+        <li>Verify the assets involved.</li>
+        <li>Review required Token Approvals.</li>
+        <li>Consider using small amounts when testing an unfamiliar protocol, while recognizing that this does not eliminate risk.</li>
+    </ol>
+
+    <h2>Do Not Rely Only on Followers or Community Size</h2>
+
+    <p>
+        A large number of followers or users may indicate that a project has gained attention, but it does not prove that the protocol is secure.
+    </p>
+
+    <p>
+        Likewise, high total value locked or trading volume does not mean that the contracts and system are free from vulnerabilities.
+    </p>
+
+    <p>
+        A better approach is to consider multiple technical, economic, and security indicators together.
+    </p>
+
+    <h2>Does an Audit Mean a Protocol Is Safe?</h2>
+
+    <p>
+        No.
+    </p>
+
+    <p>
+        A security audit can help identify certain issues, but it is performed within a specific scope and at a particular point in time.
+        Contracts may change after the audit, and new vulnerabilities may emerge.
+    </p>
+
+    <p>
+        An audit should therefore be treated as one component of risk assessment rather than a guarantee.
+    </p>
+
+    <h2>How Can You Protect Your DeFi Wallet?</h2>
+
+    <ul>
+        <li>Keep your recovery phrase offline and secure.</li>
+        <li>Never share your seed phrase.</li>
+        <li>Consider using a separate wallet for experimentation when appropriate.</li>
+        <li>Avoid connecting your primary wallet to every application.</li>
+        <li>Review token approvals periodically.</li>
+        <li>Check transactions before signing them.</li>
+        <li>Keep devices and software updated.</li>
+        <li>Be cautious with links received through unknown messages.</li>
+        <li>Never trust anyone asking for your private key.</li>
+    </ul>
+
+    <h2>What Is a Cold Wallet?</h2>
+
+    <p>
+        A cold wallet is a method of storing wallet credentials in a way that reduces direct exposure to the internet.
+        Some hardware wallets are designed for this purpose.
+    </p>
+
+    <p>
+        However, a cold wallet is not a magic security solution.
+        Users still need to protect recovery information and carefully verify the transactions they approve.
+    </p>
+
+    <h2>A Fundamental Rule: Never Sign What You Do Not Understand</h2>
+
+    <p>
+        One of the most important security principles in DeFi is to avoid signing transactions, messages, or approvals that you do not understand.
+    </p>
+
+    <p>
+        If a request appears unexpected or the amount or permissions do not make sense, stopping and verifying is safer than signing immediately.
+    </p>
+
+    <p>
+        Fear of missing out, or <strong>FOMO</strong>, can cause users to ignore important warning signs.
+    </p>
+
+    <h2>What Should You Do If You Are Scammed?</h2>
+
+    <p>
+        If a user suspects that a wallet has been compromised, it is important to act quickly according to the nature of the incident.
+    </p>
+
+    <ul>
+        <li>Stop interacting with the suspicious website or contract.</li>
+        <li>If private keys or recovery phrases were exposed, treat the wallet as compromised.</li>
+        <li>Move remaining assets to a new secure wallet when possible and appropriate.</li>
+        <li>Review token approvals associated with the wallet.</li>
+        <li>Keep transaction hashes, wallet addresses, and other relevant evidence.</li>
+        <li>Be cautious of people claiming they can recover lost funds in exchange for payment.</li>
+    </ul>
+
+    <p>
+        Recovery of funds after blockchain transactions is not guaranteed, which is why prevention and verification before signing are more important than trying to recover assets afterward.
+    </p>
+
+    <h2>Is DeFi Safe for Beginners?</h2>
+
+    <p>
+        There is no universal answer that makes all DeFi applications either safe or unsafe.
+        Risk depends on the protocol, blockchain, assets, and how the application is used.
+    </p>
+
+    <p>
+        Beginners should first understand fundamental concepts such as
+        <a href="/academy/defi/what-is-defi">DeFi</a>,
+        <a href="/academy/defi/what-are-liquidity-pools">Liquidity Pools</a>,
+        <a href="/academy/defi/what-is-yield-farming">Yield Farming</a>,
+        <a href="/academy/defi/what-is-impermanent-loss">Impermanent Loss</a>,
+        and
+        <a href="/academy/defi/what-are-decentralized-exchanges">DEXs</a>
+        before interacting with protocols directly.
+    </p>
+
+    <h2>DeFi Security: Key Takeaway</h2>
+
+    <p>
+        DeFi security is a shared responsibility between protocol design and user behavior.
+        No protocol, smart contract, or wallet should be assumed to be completely risk-free.
+    </p>
+
+    <p>
+        Users can reduce risk by verifying websites and contracts, protecting private keys, understanding approvals, reviewing transactions, and researching protocols before interacting with them.
+    </p>
+
+    <p>
+        Security risks also extend beyond scams.
+        They can include smart contracts, liquidity, price volatility, Impermanent Loss, MEV, oracles, bridges, governance, and the underlying blockchain network.
+    </p>
+
+    <h2>Key Points to Remember</h2>
+
+    <ul>
+        <li>Using DeFi does not automatically make your funds safe.</li>
+        <li>Never share your seed phrase or private key.</li>
+        <li>Verify websites and contracts before interacting with them.</li>
+        <li>Token Approvals require careful review.</li>
+        <li>Never sign a transaction you do not understand.</li>
+        <li>A security audit is useful but not an absolute guarantee.</li>
+        <li>High TVL or trading volume does not eliminate risk.</li>
+        <li>Pay attention to liquidity, Impermanent Loss, and MEV.</li>
+        <li>Oracles, bridges, and administrative permissions can introduce additional risks.</li>
+        <li>Prevention and verification before signing are more important than trying to recover funds afterward.</li>
+    </ul>
+
+    <div class="academy-disclaimer">
+        <strong>Educational disclaimer:</strong>
+        This content is provided for educational purposes only and does not constitute financial or investment advice or a recommendation to use any protocol, wallet, or digital asset.
+        DeFi applications involve technical, economic, and security risks that may result in partial or total loss of funds.
+        Users should conduct independent research and understand the risks before using any service or protocol.
+    </div>
+
+</article>
+HTML,
+
+    'image' => null,
+
+    'seo_title' => 'DeFi Security: How to Protect Your Crypto Assets',
+    'seo_title_ar' => 'أمان DeFi: كيف تحمي أموالك من المخاطر والاحتيال؟',
+    'seo_title_en' => 'DeFi Security: How to Protect Your Crypto Assets',
+
+    'meta_description' => 'Learn the most important DeFi security risks, including smart contracts, phishing, token approvals, fake tokens, MEV, bridges, oracles, and practical ways to protect your crypto assets.',
+    'meta_description_ar' => 'تعرف على أهم مخاطر أمان DeFi، مثل العقود الذكية والتصيد والمواقع المزيفة وToken Approvals والرموز المزيفة وMEV والجسور والأوراكل، وكيفية حماية أموالك.',
+    'meta_description_en' => 'Learn the most important DeFi security risks, including smart contracts, phishing, token approvals, fake tokens, MEV, bridges, oracles, and practical ways to protect your crypto assets.',
+
+    'faq_ar' => [
+        [
+            'question' => 'ما المقصود بأمان DeFi؟',
+            'answer' => 'أمان DeFi هو مجموعة الممارسات التي تساعد على تقليل المخاطر عند استخدام التطبيقات والبروتوكولات اللامركزية، مثل حماية المفاتيح والتحقق من العقود والمواقع وفهم المعاملات والموافقات.'
+        ],
+        [
+            'question' => 'هل DeFi آمن لمجرد أنه لامركزي؟',
+            'answer' => 'لا. اللامركزية لا تعني الأمان الكامل، فقد توجد مخاطر في العقود الذكية والبروتوكولات والسيولة والأصول والحوكمة والمكونات الأخرى.'
+        ],
+        [
+            'question' => 'هل التدقيق الأمني Audit يضمن أمان البروتوكول؟',
+            'answer' => 'لا. التدقيق يمكن أن يساعد في اكتشاف بعض المشكلات، لكنه لا يضمن اكتشاف جميع الثغرات ولا يمنع ظهور مخاطر جديدة أو تغير الكود بعد التدقيق.'
+        ],
+        [
+            'question' => 'ما هي Token Approvals؟',
+            'answer' => 'هي صلاحيات يمنحها المستخدم في بعض الحالات لعقد ذكي حتى يتمكن من استخدام كمية معينة من رمز من محفظته لتنفيذ عملية معينة.'
+        ],
+        [
+            'question' => 'هل يجب مشاركة Seed Phrase مع الدعم الفني؟',
+            'answer' => 'لا. يجب عدم مشاركة Seed Phrase أو Private Key مع أي شخص، ولا تحتاج الخدمات الشرعية إليها من أجل تفعيل المحفظة أو إلغاء معاملة.'
+        ],
+        [
+            'question' => 'كيف أحمي نفسي من مواقع DeFi المزيفة؟',
+            'answer' => 'تحقق من عنوان الموقع والنطاق، واستخدم الروابط الرسمية من مصادر موثوقة، ولا تدخل العبارة السرية في أي موقع، ولا توقع معاملات غير واضحة.'
+        ],
+        [
+            'question' => 'ما علاقة Impermanent Loss بأمان DeFi؟',
+            'answer' => 'Impermanent Loss ليست اختراقًا أمنيًا، لكنها مخاطرة اقتصادية قد يتعرض لها مزودو السيولة بسبب تغير الأسعار النسبية للأصول في بعض مجمعات السيولة.'
+        ],
+        [
+            'question' => 'ما هي مخاطر MEV؟',
+            'answer' => 'MEV يشير إلى القيمة التي يمكن لبعض المشاركين في ترتيب معاملات البلوكشين استخراجها من خلال التأثير في ترتيب المعاملات أو استغلال المعلومات المتاحة قبل تنفيذها.'
+        ],
+        [
+            'question' => 'هل وجود الرمز على DEX يعني أنه موثوق؟',
+            'answer' => 'لا. يمكن إنشاء رموز مزيفة أو عالية المخاطر وإدراجها في DEXs، لذلك يجب التحقق من عنوان العقد ومعلومات المشروع من مصادر موثوقة.'
+        ],
+        [
+            'question' => 'ماذا أفعل إذا تعرضت محفظتي للاختراق؟',
+            'answer' => 'أوقف التفاعل مع الموقع أو العقد المشبوه، واعتبر المحفظة معرضة للخطر إذا تسربت مفاتيحها أو عبارة الاسترداد، وانقل الأصول المتبقية إلى محفظة آمنة عندما يكون ذلك ممكنًا، وراجع الموافقات واحتفظ بأدلة المعاملات.'
+        ],
+    ],
+
+    'faq_en' => [
+        [
+            'question' => 'What does DeFi security mean?',
+            'answer' => 'DeFi security refers to practices that reduce risk when using decentralized applications and protocols, including protecting keys, verifying contracts and websites, and understanding transactions and approvals.'
+        ],
+        [
+            'question' => 'Is DeFi safe simply because it is decentralized?',
+            'answer' => 'No. Decentralization does not mean complete security. Smart-contract, protocol, liquidity, asset, governance, and other risks can still exist.'
+        ],
+        [
+            'question' => 'Does a security audit guarantee protocol safety?',
+            'answer' => 'No. An audit can identify certain issues, but it cannot guarantee that every vulnerability has been found or prevent new risks from emerging or code from changing afterward.'
+        ],
+        [
+            'question' => 'What are Token Approvals?',
+            'answer' => 'Token Approvals are permissions that users may grant to smart contracts so they can use a specified amount of a token from the wallet for a particular operation.'
+        ],
+        [
+            'question' => 'Should I share my seed phrase with support?',
+            'answer' => 'No. A seed phrase or private key should never be shared with anyone, and legitimate services do not need it to activate a wallet or cancel a transaction.'
+        ],
+        [
+            'question' => 'How can I protect myself from fake DeFi websites?',
+            'answer' => 'Verify the website domain, use official links from trusted sources, never enter a recovery phrase into a website, and avoid signing transactions you do not understand.'
+        ],
+        [
+            'question' => 'How is Impermanent Loss related to DeFi security?',
+            'answer' => 'Impermanent Loss is not a security exploit, but it is an economic risk that can affect liquidity providers when relative asset prices change in certain liquidity pools.'
+        ],
+        [
+            'question' => 'What are MEV risks?',
+            'answer' => 'MEV refers to value that certain participants in blockchain transaction ordering can extract by influencing transaction order or using information available before transactions are finalized.'
+        ],
+        [
+            'question' => 'Does a token being listed on a DEX mean it is trustworthy?',
+            'answer' => 'No. Fake or high-risk tokens can be available on DEXs, so users should verify the contract address and project information through trusted sources.'
+        ],
+        [
+            'question' => 'What should I do if my wallet is compromised?',
+            'answer' => 'Stop interacting with the suspicious site or contract, treat the wallet as compromised if its keys or recovery phrase were exposed, move remaining assets to a secure wallet when appropriate, review approvals, and preserve transaction evidence.'
+        ],
+    ],
+
+    'status' => 'published',
+    'sort_order' => 10,
+    'published_at' => now(),
+],
  ];
 
 foreach ($defiArticles as $article) {
