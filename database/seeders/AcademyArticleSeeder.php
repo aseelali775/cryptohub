@@ -12,6 +12,7 @@ class AcademyArticleSeeder extends Seeder
     {
         $bitcoin = AcademyTopic::where('slug', 'bitcoin')->firstOrFail();
         $blockchain = AcademyTopic::where('slug', 'blockchain')->firstOrFail();
+        $defi = AcademyTopic::where('slug', 'defi')->firstOrFail();
 
         $articles = [
             [
@@ -20697,6 +20698,1164 @@ foreach ($blockchainArticles as $article) {
     AcademyArticle::updateOrCreate(
         [
             'topic_id' => $blockchain->id,
+            'slug' => $article['slug'],
+        ],
+        $article
+    );
+}
+
+$defiArticles = [ 
+    [
+    'title' => 'What Is DeFi?',
+    'title_ar' => 'ما هو التمويل اللامركزي (DeFi)؟ دليل المبتدئين لفهم التمويل اللامركزي',
+    'title_en' => 'What Is DeFi? A Beginner\'s Guide to Decentralized Finance',
+
+    'slug' => 'what-is-defi',
+
+    'excerpt' => 'DeFi, short for Decentralized Finance, is a set of blockchain-based financial applications designed to provide services such as trading, lending, borrowing, and earning through smart contracts rather than traditional financial intermediaries. This beginner-friendly guide explains what DeFi is, how it works, its main applications, benefits, risks, and the key concepts you need to understand before exploring decentralized finance.',
+    'excerpt_ar' => 'التمويل اللامركزي (DeFi) هو مجموعة من التطبيقات والخدمات المالية المبنية على شبكات البلوكتشين، والتي تهدف إلى توفير وظائف مثل التداول والإقراض والاقتراض وإدارة السيولة باستخدام العقود الذكية بدلًا من الاعتماد الكامل على الوسطاء الماليين التقليديين. في هذا الدليل للمبتدئين ستتعرف على مفهوم DeFi، وكيف يعمل، وأهم تطبيقاته، ومزاياه، ومخاطره، والمفاهيم الأساسية التي تحتاج إلى فهمها قبل الدخول في عالم التمويل اللامركزي.',
+    'excerpt_en' => 'DeFi, short for Decentralized Finance, is a set of blockchain-based financial applications designed to provide services such as trading, lending, borrowing, and earning through smart contracts rather than traditional financial intermediaries. This beginner-friendly guide explains what DeFi is, how it works, its main applications, benefits, risks, and the key concepts you need to understand before exploring decentralized finance.',
+
+    'content' => null,
+
+    'content_ar' => <<<'HTML'
+<h2>مقدمة</h2>
+
+<p>أصبح مصطلح <strong>DeFi</strong> أو <strong>التمويل اللامركزي (Decentralized Finance)</strong> من أكثر المصطلحات انتشارًا في عالم العملات الرقمية والبلوكتشين. وقد يبدو المفهوم معقدًا في البداية، خصوصًا عند مواجهة مصطلحات مثل العقود الذكية، والمنصات اللامركزية، ومجمعات السيولة، والإقراض والاقتراض.</p>
+
+<p>لكن الفكرة الأساسية يمكن فهمها ببساطة: <strong>DeFi هو مجموعة من التطبيقات والبروتوكولات المالية التي تعمل على شبكات البلوكتشين وتستخدم العقود الذكية لتنفيذ وظائف مالية وفق قواعد برمجية، بدل الاعتماد الكامل على مؤسسة مالية مركزية لتشغيل الخدمة.</strong></p>
+
+<p>لا يعني ذلك أن كل خدمات DeFi تعمل بالطريقة نفسها أو أنها لا تحتوي على أي جهة أو عنصر مركزي. فاللامركزية لها درجات مختلفة، وتعتمد على تصميم البروتوكول، والشبكة المستخدمة، والعقود الذكية، وآليات الحوكمة، والواجهات التي يصل المستخدمون من خلالها إلى الخدمة.</p>
+
+<p>في هذا الدليل من <strong>AQL Crypto Academy</strong> سنبني فهمًا تدريجيًا للتمويل اللامركزي. سنبدأ من تعريف DeFi، ثم نشرح كيف يعمل، وما علاقته بالبلوكتشين والعقود الذكية، وما أهم تطبيقاته، وما الفرق بينه وبين التمويل التقليدي، وأخيرًا أهم المخاطر التي يجب أن يعرفها المبتدئ.</p>
+
+<h2>ما هو DeFi؟</h2>
+
+<p>DeFi اختصار لعبارة <strong>Decentralized Finance</strong>، أي <strong>التمويل اللامركزي</strong>.</p>
+
+<p>ويشير المصطلح بشكل عام إلى مجموعة من التطبيقات والبروتوكولات المالية المبنية على شبكات البلوكتشين، والتي تستخدم البرمجيات والعقود الذكية لتنفيذ وظائف مالية مثل التداول والإقراض والاقتراض وتوفير السيولة.</p>
+
+<p>في النظام المالي التقليدي، قد تحتاج إلى بنك أو شركة وساطة أو منصة مركزية لتنفيذ خدمة مالية معينة. أما في DeFi، فقد يتم تنفيذ بعض هذه الوظائف من خلال عقد ذكي يعمل وفق قواعد مبرمجة مسبقًا على البلوكتشين.</p>
+
+<p>يمكنك التفكير في العقد الذكي هنا باعتباره برنامجًا يعمل على شبكة البلوكتشين ويقوم بتنفيذ تعليمات محددة عندما تتحقق الشروط التي صُمم وفقها.</p>
+
+<p>لكن من المهم عدم اختزال DeFi في فكرة "لا يوجد وسيط". بعض البروتوكولات تعتمد على عناصر مركزية أو شبه مركزية، مثل واجهات المستخدم، أو بعض مصادر البيانات الخارجية، أو مفاتيح إدارية، أو آليات الحوكمة. لذلك فإن درجة اللامركزية تختلف من مشروع إلى آخر.</p>
+
+<h2>لماذا ظهر DeFi؟</h2>
+
+<p>ظهر DeFi ضمن تطور أوسع في استخدام البلوكتشين لتقديم تطبيقات مالية يمكن الوصول إليها عبر الإنترنت.</p>
+
+<p>الأنظمة المالية التقليدية تعتمد على مؤسسات تؤدي أدوارًا مختلفة: حفظ الأصول، تنفيذ التحويلات، تقديم القروض، إدارة الأسواق، توفير السيولة، التحقق من العملاء، وتسوية المعاملات.</p>
+
+<p>مع تطور البلوكتشين والعقود الذكية، أصبح من الممكن بناء برامج تستطيع إدارة بعض العمليات المالية مباشرة على شبكة عامة، بحيث تكون قواعد التنفيذ مرتبطة بالكود والعقود الذكية بدل أن تعتمد كل خطوة على موظف أو نظام داخلي تابع لمؤسسة واحدة.</p>
+
+<p>هذه الفكرة فتحت المجال أمام بناء أسواق وخدمات مالية تعمل على مدار الساعة ويمكن للمستخدم التفاعل معها مباشرة من خلال محفظة متوافقة.</p>
+
+<p>لكن هذا النموذج لا يلغي الحاجة إلى الثقة بالكامل. فالمستخدم قد يحتاج إلى الثقة في كود العقد الذكي، وآلية الحوكمة، ومصادر البيانات، والواجهة، والبنية الأساسية للشبكة، وفي بعض الحالات الجهات أو المفاتيح التي تملك صلاحيات إدارية.</p>
+
+<h2>كيف يعمل DeFi؟</h2>
+
+<p>لفهم طريقة عمل DeFi، من المفيد تقسيم العملية إلى عدة مكونات مترابطة.</p>
+
+<h3>1. البلوكتشين</h3>
+
+<p>تعمل بروتوكولات DeFi على شبكات بلوكتشين تدعم تنفيذ البرامج أو العقود الذكية.</p>
+
+<p>تقوم الشبكة بتسجيل المعاملات وحالة العقود وفق قواعد البروتوكول. وهذا يوفر البنية الأساسية التي تسمح للتطبيقات اللامركزية بتنفيذ العمليات.</p>
+
+<p>ولفهم هذه الطبقة بشكل أعمق، يمكنك الرجوع إلى درس <a href="/academy/blockchain/what-is-blockchain">ما هو البلوكتشين؟</a> في أكاديمية AQL Crypto.</p>
+
+<h3>2. العقود الذكية</h3>
+
+<p>العقد الذكي هو برنامج يتم نشره على شبكة بلوكتشين قادرة على تشغيله. يحتوي العقد على منطق برمجي يحدد كيفية تنفيذ العمليات وفق الشروط والقواعد التي صُمم من أجلها.</p>
+
+<p>في DeFi، يمكن للعقود الذكية إدارة أرصدة أو تنفيذ عمليات تبادل أو تسجيل قروض أو إدارة مجمعات سيولة، بحسب تصميم البروتوكول.</p>
+
+<p>لكن العقد الذكي لا يفكر أو يتخذ قرارات مثل الإنسان. هو ينفذ الكود والقواعد التي تم نشرها على الشبكة.</p>
+
+<h3>3. المحافظ</h3>
+
+<p>يتفاعل المستخدم عادةً مع بروتوكولات DeFi من خلال محفظة رقمية تدعم الشبكة المستخدمة.</p>
+
+<p>المحفظة تسمح للمستخدم بالتوقيع على المعاملات وإرسالها إلى الشبكة. وفي حالة المحافظ ذات الحيازة الذاتية، يكون المستخدم مسؤولًا عن حماية مفاتيحه وعبارة الاسترداد.</p>
+
+<h3>4. التطبيقات اللامركزية</h3>
+
+<p>قد يستخدم المستخدم واجهة ويب أو تطبيقًا للوصول إلى بروتوكول DeFi. الواجهة تساعد في عرض البيانات وإنشاء المعاملات، بينما قد يتم تنفيذ الجزء الأساسي من العملية بواسطة العقود الذكية على البلوكتشين.</p>
+
+<p>وهنا يجب التمييز بين <strong>الواجهة</strong> وبين <strong>البروتوكول</strong>. وجود واجهة مركزية للوصول إلى بروتوكول لا يعني بالضرورة أن كل مكونات البروتوكول مركزية.</p>
+
+<h2>ما دور العقود الذكية في DeFi؟</h2>
+
+<p>العقود الذكية هي من أهم المكونات التقنية في معظم تطبيقات DeFi.</p>
+
+<p>بدل أن يقوم موظف في مؤسسة مالية بتنفيذ شروط عملية معينة، يمكن للعقد الذكي تنفيذ هذه الشروط برمجيًا وفق الكود الموجود فيه.</p>
+
+<p>على سبيل المثال، في بروتوكول إقراض يمكن أن يحتوي العقد الذكي على قواعد تحدد كيفية إيداع الأصول، وكيفية احتساب الضمانات، وكيفية إنشاء القرض، ومتى يمكن تصفية الضمان إذا انخفضت قيمته وفق شروط البروتوكول.</p>
+
+<p>ومع ذلك، فإن وجود عقد ذكي لا يعني أن البرنامج خالٍ من الأخطاء. خطأ برمجي واحد أو تصميم اقتصادي ضعيف قد يؤدي إلى خسائر كبيرة.</p>
+
+<p>ولهذا فإن <strong>أمان العقود الذكية</strong> يمثل أحد أهم موضوعات أمان DeFi.</p>
+
+<h2>ما أهم تطبيقات DeFi؟</h2>
+
+<p>DeFi ليس تطبيقًا واحدًا، بل منظومة واسعة من التطبيقات والبروتوكولات. ومن أشهر الفئات:</p>
+
+<h3>التداول اللامركزي</h3>
+
+<p>تسمح المنصات اللامركزية أو <strong>DEXs</strong> للمستخدمين بتبادل بعض الأصول الرقمية من خلال عقود ذكية بدل الاعتماد على دفتر أوامر تديره منصة مركزية بالطريقة التقليدية.</p>
+
+<p>تستخدم بعض منصات DEX نموذج <strong>Automated Market Maker (AMM)</strong> ومجمعات السيولة لتوفير آلية للتداول.</p>
+
+<p>وسنتناول لاحقًا في الأكاديمية مفهوم المنصات اللامركزية ومجمعات السيولة وصناع السوق الآليين بصورة مستقلة.</p>
+
+<h3>الإقراض والاقتراض</h3>
+
+<p>تسمح بعض بروتوكولات DeFi للمستخدم بإيداع أصول رقمية في بروتوكول يمكن أن يستخدمها مقترضون وفق قواعد محددة.</p>
+
+<p>وقد يتمكن مستخدم آخر من الاقتراض مقابل تقديم ضمانات، مع تطبيق شروط مرتبطة بنسبة الضمان والقيمة السوقية للأصول.</p>
+
+<p>هذه النماذج تختلف عن القروض التقليدية في طريقة تنفيذها وإدارة الضمانات، لكنها لا تلغي المخاطر المرتبطة بالسوق أو العقود الذكية.</p>
+
+<h3>توفير السيولة</h3>
+
+<p>يمكن لبعض المستخدمين إيداع أصول في مجمعات سيولة تستخدمها بروتوكولات معينة لتسهيل عمليات التداول.</p>
+
+<p>قد يحصل مزود السيولة على جزء من الرسوم أو حوافز وفق تصميم البروتوكول، لكن العائد ليس مضمونًا، وقد توجد مخاطر مثل الخسارة غير الدائمة.</p>
+
+<h3>العملات المستقرة</h3>
+
+<p>تلعب العملات المستقرة دورًا مهمًا في منظومة DeFi لأنها توفر أصولًا مصممة للحفاظ على قيمة مرتبطة بمرجع معين، مثل الدولار الأمريكي، بحسب آلية الإصدار والضمان المستخدمة.</p>
+
+<p>لكن العملات المستقرة ليست متطابقة. فهناك اختلاف كبير بين النماذج المدعومة بأصول تقليدية، والنماذج المدعومة بأصول رقمية، والنماذج الخوارزمية أو الهجينة.</p>
+
+<h3>المشتقات</h3>
+
+<p>توجد بروتوكولات تقدم منتجات مالية تحاول محاكاة أو بناء عقود مرتبطة بسعر أصل أو مؤشر أو نتيجة معينة.</p>
+
+<p>هذه المنتجات أكثر تعقيدًا من التطبيقات الأساسية، وقد تتضمن مخاطر إضافية، ولذلك لا ينبغي للمبتدئ استخدامها قبل فهم آلية عملها.</p>
+
+<h2>ما هي DEX؟</h2>
+
+<p>DEX هو اختصار لـ <strong>Decentralized Exchange</strong>، أي منصة تداول لامركزية.</p>
+
+<p>تسمح DEX في بعض النماذج للمستخدم بالتفاعل مباشرة مع عقود ذكية لتبادل الأصول دون إيداع الأموال في حساب مركزي تديره المنصة بالطريقة المعتادة في منصات التداول المركزية.</p>
+
+<p>قد تعتمد DEX على مجمعات السيولة بدل دفتر أوامر تقليدي. وفي نموذج AMM، تحدد الخوارزمية أو صيغة رياضية كيفية تسعير التداول بناءً على السيولة الموجودة في المجمع.</p>
+
+<p>لكن ليس كل DEX يعمل بالطريقة نفسها، ولذلك يجب فهم التصميم المحدد لكل بروتوكول.</p>
+
+<h2>ما هي مجمعات السيولة؟</h2>
+
+<p>مجمع السيولة هو مجموعة من الأصول التي يتم إيداعها في عقد ذكي وفق تصميم بروتوكول معين، بهدف توفير سيولة لاستخدامات مثل التداول.</p>
+
+<p>بدل أن ينتظر المتداول وجود طرف مقابل مباشر لكل عملية، يمكن أن يتم التداول مقابل الأصول الموجودة في المجمع وفق آلية البروتوكول.</p>
+
+<p>الأشخاص الذين يوفرون السيولة قد يحصلون على جزء من رسوم التداول أو مكافآت أخرى وفق شروط البروتوكول.</p>
+
+<p>لكن توفير السيولة لا يعني الحصول على ربح مضمون، لأن تغير أسعار الأصول يمكن أن يؤدي إلى نتائج مختلفة عن مجرد الاحتفاظ بالأصول خارج المجمع.</p>
+
+<h2>ما هو Yield Farming؟</h2>
+
+<p>يشير مصطلح <strong>Yield Farming</strong> أو الزراعة الربحية إلى استراتيجيات تهدف إلى الحصول على عوائد أو حوافز من خلال توفير السيولة أو استخدام بروتوكولات DeFi مختلفة.</p>
+
+<p>قد تأتي العوائد من رسوم المستخدمين، أو مكافآت البروتوكول، أو رموز الحوكمة، أو مصادر أخرى حسب التصميم.</p>
+
+<p>لكن ارتفاع العائد المعلن لا يعني بالضرورة أن الاستراتيجية آمنة. فقد تكون المكافآت مقومة برمز متقلب السعر، أو قد يتعرض البروتوكول لاختراق أو خلل، أو قد تحدث خسارة غير دائمة أو تغيرات في ظروف السوق.</p>
+
+<h2>ما الفرق بين DeFi والتمويل التقليدي؟</h2>
+
+<p>الفرق الأساسي يتعلق بكيفية بناء وتشغيل الخدمات المالية.</p>
+
+<table>
+<thead>
+<tr>
+<th>العنصر</th>
+<th>DeFi</th>
+<th>التمويل التقليدي</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>التنفيذ</td>
+<td>يمكن تنفيذ جزء كبير من العمليات بواسطة عقود ذكية</td>
+<td>تعتمد العمليات عادةً على مؤسسات وأنظمة مركزية</td>
+</tr>
+<tr>
+<td>الوصول</td>
+<td>قد يكون متاحًا عبر محفظة وشبكة متوافقة</td>
+<td>غالبًا يحتاج المستخدم إلى حساب لدى مؤسسة أو مقدم خدمة</td>
+</tr>
+<tr>
+<td>السجل</td>
+<td>يمكن أن تكون العمليات مسجلة على بلوكتشين عام</td>
+<td>تعتمد السجلات غالبًا على قواعد بيانات مؤسساتية</td>
+</tr>
+<tr>
+<td>الحفظ</td>
+<td>قد يسيطر المستخدم مباشرة على أصوله ومفاتيحه</td>
+<td>قد تحتفظ المؤسسة بالأصول أو تدير الوصول إليها نيابة عن العميل</td>
+</tr>
+<tr>
+<td>الأتمتة</td>
+<td>يمكن للعقود الذكية تنفيذ قواعد مبرمجة</td>
+<td>تعتمد الأتمتة على الأنظمة الداخلية للمؤسسة</td>
+</tr>
+<tr>
+<td>المخاطر</td>
+<td>تشمل مخاطر العقود الذكية والبروتوكول والسيولة والسوق</td>
+<td>تشمل مخاطر المؤسسات والائتمان والسيولة والتشغيل والتنظيم</td>
+</tr>
+</tbody>
+</table>
+
+<p>هذه المقارنة لا تعني أن أحد النظامين يلغي الآخر. فالتمويل اللامركزي والتمويل التقليدي يستخدمان نماذج مختلفة لتقديم الخدمات المالية، ولكل نموذج خصائص ومخاطر مختلفة.</p>
+
+<h2>هل DeFi لامركزي بالكامل؟</h2>
+
+<p>ليس بالضرورة.</p>
+
+<p>مصطلح DeFi يشير إلى مجموعة واسعة جدًا من البروتوكولات، ولا توجد درجة واحدة ثابتة من اللامركزية تنطبق على جميعها.</p>
+
+<p>قد يكون العقد الذكي منشورًا على شبكة عامة، بينما تكون الواجهة التي يستخدمها الناس مركزية. وقد توجد مفاتيح إدارية تسمح بتغيير بعض إعدادات البروتوكول. كما قد يعتمد النظام على خدمة خارجية لتوفير بيانات الأسعار أو معلومات أخرى.</p>
+
+<p>لذلك عند تقييم بروتوكول DeFi، من الأفضل السؤال: <strong>ما المكونات اللامركزية؟ وما المكونات المركزية؟ ومن يملك صلاحية تغيير القواعد؟ وكيف تتم الحوكمة؟</strong></p>
+
+<h2>هل DeFi يحتاج إلى وسيط؟</h2>
+
+<p>يعتمد ذلك على المقصود بالوسيط.</p>
+
+<p>قد يقلل DeFi من الحاجة إلى بعض الوسطاء التقليديين لأن العقد الذكي يمكنه تنفيذ جزء من العملية مباشرة.</p>
+
+<p>لكن قد توجد خدمات أو أطراف أخرى في النظام، مثل مطوري البروتوكول، ومزودي البيانات، ومشغلي الواجهات، ومشاركي الحوكمة، ومقدمي البنية التحتية.</p>
+
+<p>لذلك فإن عبارة "DeFi لا يحتوي على أي وسيط" تبسيط زائد. الأدق هو أن بعض وظائف الوساطة التقليدية يمكن تحويلها إلى برمجيات وقواعد تعمل على البلوكتشين.</p>
+
+<h2>ما علاقة DeFi بالبلوكتشين؟</h2>
+
+<p>البلوكتشين يوفر البنية التحتية التي تسمح بتسجيل المعاملات وتشغيل العقود الذكية في الشبكات التي تدعمها.</p>
+
+<p>أما DeFi فهو طبقة من التطبيقات والبروتوكولات التي تستخدم هذه البنية لتقديم وظائف مالية.</p>
+
+<p>يمكن تبسيط العلاقة كالتالي:</p>
+
+<ul>
+<li><strong>Blockchain:</strong> البنية التحتية والسجل الموزع.</li>
+<li><strong>Smart Contracts:</strong> البرامج التي تنفذ منطق البروتوكول.</li>
+<li><strong>DeFi Protocol:</strong> مجموعة العقود والقواعد التي تقدم وظيفة مالية.</li>
+<li><strong>Wallet:</strong> الأداة التي يستخدمها الشخص للتفاعل مع الشبكة وتوقيع المعاملات.</li>
+<li><strong>User Interface:</strong> الواجهة التي تساعد المستخدم على التعامل مع البروتوكول.</li>
+</ul>
+
+<p>ولهذا فإن فهم <a href="/academy/blockchain/what-is-blockchain">البلوكتشين</a> والعقد والعمليات على الشبكة يساعد على فهم DeFi بصورة أفضل.</p>
+
+<h2>هل DeFi موجود على شبكة واحدة؟</h2>
+
+<p>لا.</p>
+
+<p>يمكن بناء بروتوكولات DeFi على شبكات مختلفة تدعم العقود الذكية أو توفر البنية المناسبة للتطبيقات اللامركزية.</p>
+
+<p>ولهذا قد تختلف رسوم المعاملات، وسرعة التنفيذ، وآليات التوافق، والسيولة، والأصول المتاحة، والمخاطر التقنية من شبكة إلى أخرى.</p>
+
+<p>كما أن انتقال الأصول بين شبكات مختلفة قد يتطلب استخدام جسور أو آليات أخرى، وهذه الأدوات قد تضيف طبقة إضافية من المخاطر.</p>
+
+<h2>ما هي رسوم معاملات DeFi؟</h2>
+
+<p>عند تنفيذ عملية على شبكة بلوكتشين، قد يحتاج المستخدم إلى دفع رسوم للشبكة لمعالجة المعاملة وإدراجها وفق قواعدها.</p>
+
+<p>هذه الرسوم ليست بالضرورة رسومًا يفرضها بروتوكول DeFi نفسه. فقد تكون هناك رسوم للشبكة، بالإضافة إلى رسوم بروتوكول أو رسوم تداول أو تكاليف أخرى حسب العملية.</p>
+
+<p>ولهذا يجب على المستخدم معرفة التكلفة الإجمالية للعملية قبل تنفيذها.</p>
+
+<h2>هل DeFi مجاني؟</h2>
+
+<p>ليس بالضرورة.</p>
+
+<p>قد تكون بعض التطبيقات مفتوحة الوصول من ناحية إنشاء الحساب، لكن تنفيذ المعاملات على البلوكتشين قد يتطلب دفع رسوم شبكة.</p>
+
+<p>كما قد توجد رسوم تداول أو رسوم بروتوكول أو فروق سعرية أو تكاليف أخرى بحسب الخدمة.</p>
+
+<p>وفي بعض الحالات، يمكن أن تكون تكلفة المعاملة نفسها مرتفعة مقارنة بقيمة العملية، خصوصًا عندما تكون الشبكة مزدحمة.</p>
+
+<h2>ما أهم مزايا DeFi؟</h2>
+
+<h3>الوصول المفتوح نسبيًا</h3>
+
+<p>يمكن لبعض بروتوكولات DeFi أن تكون متاحة لأي مستخدم يملك محفظة متوافقة واتصالًا بالشبكة، مع اختلاف المتطلبات والقيود حسب البروتوكول والاختصاص القضائي.</p>
+
+<h3>العمل على مدار الساعة</h3>
+
+<p>لا تعتمد بعض البروتوكولات على ساعات عمل مؤسسة مالية تقليدية، بل تعمل وفق البنية الأساسية للشبكة والعقود الذكية.</p>
+
+<h3>الشفافية القابلة للتحقق</h3>
+
+<p>عندما تعمل العمليات على بلوكتشين عامة، يمكن للمستخدمين وأدوات التحليل فحص جزء من البيانات والمعاملات والعقود المنشورة.</p>
+
+<h3>الأتمتة</h3>
+
+<p>يمكن للعقود الذكية تنفيذ قواعد محددة تلقائيًا عندما تتحقق شروطها، مما يسمح ببناء خدمات مالية قابلة للبرمجة.</p>
+
+<h3>قابلية التركيب</h3>
+
+<p>يمكن لبعض بروتوكولات DeFi أن تتفاعل مع بروتوكولات أخرى، بحيث يمكن بناء تطبيقات جديدة فوق خدمات موجودة.</p>
+
+<p>هذه الخاصية تسمى أحيانًا <strong>Money Legos</strong>، لأنها تشبه تركيب مكونات مالية مختلفة فوق بعضها.</p>
+
+<h2>ما مخاطر DeFi؟</h2>
+
+<p>رغم الإمكانات التقنية، فإن DeFi يحتوي على مخاطر مهمة يجب فهمها قبل استخدام أي بروتوكول.</p>
+
+<h3>مخاطر العقود الذكية</h3>
+
+<p>قد يحتوي العقد الذكي على خطأ برمجي أو ثغرة يمكن استغلالها. وإذا كانت الأصول تحت سيطرة العقد، فقد يؤدي الاستغلال إلى خسائر كبيرة.</p>
+
+<h3>مخاطر البروتوكول</h3>
+
+<p>قد يكون تصميم البروتوكول نفسه غير مناسب لبعض ظروف السوق، حتى إذا لم توجد ثغرة برمجية واضحة.</p>
+
+<h3>مخاطر السيولة</h3>
+
+<p>قد تصبح عملية الدخول أو الخروج من مركز معين أكثر صعوبة عندما تكون السيولة منخفضة، وقد يؤدي ذلك إلى انزلاق سعري أكبر.</p>
+
+<h3>مخاطر تقلب الأسعار</h3>
+
+<p>الأصول المستخدمة في DeFi قد تكون شديدة التقلب. ولذلك فإن قيمة الضمانات أو الأصول المودعة قد تتغير بسرعة.</p>
+
+<h3>الخسارة غير الدائمة</h3>
+
+<p>يمكن أن يواجه مزودو السيولة في بعض نماذج مجمعات السيولة ما يعرف بالخسارة غير الدائمة، وهي نتيجة مرتبطة بتغير أسعار الأصول داخل المجمع مقارنة بالاحتفاظ بها خارج المجمع.</p>
+
+<h3>مخاطر الحوكمة</h3>
+
+<p>بعض البروتوكولات تستخدم رموز حوكمة تسمح لحامليها بالمشاركة في قرارات معينة. لكن تصميم الحوكمة قد يختلف، وقد تكون القوة الفعلية مركزة في مجموعة صغيرة من المشاركين.</p>
+
+<h3>مخاطر الجسور</h3>
+
+<p>عند نقل الأصول أو تمثيلها بين شبكات مختلفة باستخدام جسور أو آليات ربط، قد تظهر مخاطر إضافية مرتبطة بالعقود أو المدققين أو الآلية المستخدمة.</p>
+
+<h3>مخاطر الواجهة والتصيد</h3>
+
+<p>حتى إذا كان العقد الذكي نفسه سليمًا، يمكن أن يتعرض المستخدم لخطر موقع مزيف أو تطبيق ضار يحاول الحصول على توقيع غير مناسب أو معلومات حساسة.</p>
+
+<h3>المخاطر التنظيمية</h3>
+
+<p>القوانين والتنظيمات المتعلقة بالأصول الرقمية والخدمات المالية اللامركزية تختلف بين الدول وقد تتغير بمرور الوقت.</p>
+
+<p>لذلك ينبغي على المستخدم معرفة القواعد المحلية التي تنطبق عليه قبل استخدام خدمات DeFi.</p>
+
+<h2>هل DeFi آمن؟</h2>
+
+<p>لا توجد إجابة عامة بنعم أو لا.</p>
+
+<p>أمان DeFi يعتمد على مجموعة من العناصر، منها أمان البلوكتشين، وجودة العقود الذكية، وآلية البروتوكول، وإدارة المفاتيح، والسيولة، والحوكمة، والواجهات، ومصادر البيانات الخارجية.</p>
+
+<p>يمكن لبروتوكول أن يعمل لفترة طويلة دون مشاكل ثم يتعرض لخلل أو استغلال. كما يمكن أن يكون العقد آمنًا من الناحية البرمجية ولكن يتعرض المستخدم لخطر التصيد أو التوقيع على معاملة لم يفهمها.</p>
+
+<p>لذلك لا ينبغي استخدام عبارة "DeFi آمن" باعتبارها ضمانًا. الأصح هو تقييم المخاطر الخاصة بكل بروتوكول وكل عملية.</p>
+
+<h2>DeFi لا يعني أرباحًا مضمونة</h2>
+
+<p>من أكثر الأخطاء شيوعًا ربط DeFi مباشرة بفكرة الأرباح العالية.</p>
+
+<p>قد تعرض بعض البروتوكولات معدلات عائد مرتفعة أو مكافآت للمستخدمين، لكن العائد المرتفع غالبًا يأتي مع مخاطر أعلى أو مع شروط معينة.</p>
+
+<p>كما أن العائد المقاس بالرمز نفسه قد يبدو مرتفعًا، بينما تنخفض قيمة الرمز في السوق.</p>
+
+<p>لذلك يجب التمييز بين:</p>
+
+<ul>
+<li>العائد المعلن.</li>
+<li>العائد الفعلي بعد الرسوم.</li>
+<li>تغير سعر الأصول.</li>
+<li>مخاطر البروتوكول.</li>
+<li>مدة الاستراتيجية وشروط الخروج.</li>
+</ul>
+
+<h2>DeFi وSmart Contracts وDEX وLiquidity Pools</h2>
+
+<p>هذه المصطلحات مترابطة لكنها ليست الشيء نفسه.</p>
+
+<table>
+<thead>
+<tr>
+<th>المصطلح</th>
+<th>المعنى</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DeFi</td>
+<td>منظومة من التطبيقات والبروتوكولات المالية المبنية على البلوكتشين.</td>
+</tr>
+<tr>
+<td>Smart Contract</td>
+<td>برنامج يعمل على بلوكتشين داعمة للعقود الذكية وينفذ قواعد محددة.</td>
+</tr>
+<tr>
+<td>DEX</td>
+<td>بروتوكول أو منصة لامركزية لتبادل بعض الأصول الرقمية.</td>
+</tr>
+<tr>
+<td>Liquidity Pool</td>
+<td>مجموعة من الأصول مقفلة أو مودعة في عقد ذكي لتوفير السيولة وفق تصميم البروتوكول.</td>
+</tr>
+<tr>
+<td>AMM</td>
+<td>نموذج يستخدم خوارزمية لتحديد آلية التداول والتسعير بدل الاعتماد بالضرورة على دفتر أوامر تقليدي.</td>
+</tr>
+</tbody>
+</table>
+
+<p>فهم هذه العلاقات سيكون مهمًا عندما ننتقل في الدروس القادمة إلى شرح كل عنصر بالتفصيل.</p>
+
+<h2>هل DeFi هو نفسه العملات الرقمية؟</h2>
+
+<p>لا.</p>
+
+<p>العملات والأصول الرقمية هي أصول يمكن استخدامها داخل الشبكات المختلفة، بينما DeFi يشير إلى التطبيقات والبروتوكولات التي تقدم وظائف مالية باستخدام البلوكتشين.</p>
+
+<p>قد تستخدم بروتوكولات DeFi أصولًا رقمية مختلفة، لكن وجود أصل رقمي بحد ذاته لا يعني أنه جزء من بروتوكول DeFi.</p>
+
+<h2>هل DeFi هو نفسه Blockchain؟</h2>
+
+<p>لا.</p>
+
+<p>البلوكتشين هو البنية التحتية التي يمكن أن تستضيف العقود الذكية والتطبيقات، بينما DeFi يمثل مجموعة من التطبيقات والبروتوكولات المالية التي تستخدم هذه البنية.</p>
+
+<p>وبالتالي يمكن القول بشكل مبسط:</p>
+
+<p><strong>Blockchain → Smart Contracts → DeFi Protocols → Financial Applications</strong></p>
+
+<p>هذه ليست بنية موحدة لكل مشروع، لكنها طريقة مفيدة للمبتدئ لفهم العلاقة بين المفاهيم.</p>
+
+<h2>كيف تبدأ في تعلم DeFi؟</h2>
+
+<p>إذا كنت مبتدئًا، فمن الأفضل عدم البدء مباشرة باستخدام أموال حقيقية.</p>
+
+<p>ابدأ أولًا بفهم المفاهيم الأساسية: البلوكتشين، المحافظ، العقود الذكية، المعاملات، DEX، مجمعات السيولة، AMM، الإقراض والاقتراض، والعملات المستقرة.</p>
+
+<p>بعد ذلك يمكنك دراسة كيفية تقييم البروتوكول، مثل قراءة الوثائق، وفهم العقود، ومعرفة صلاحيات الإدارة، ودراسة آلية الحوكمة، وفهم المخاطر والرسوم والسيولة.</p>
+
+<p>يمكنك أيضًا استخدام بيئات تعليمية أو مبالغ صغيرة جدًا فقط بعد فهم آلية العملية والمخاطر، مع الانتباه إلى أن التجربة العملية لا تلغي احتمال الخسارة.</p>
+
+<h2>ما الذي يجب أن تعرفه قبل استخدام بروتوكول DeFi؟</h2>
+
+<ul>
+<li>ما وظيفة البروتوكول؟</li>
+<li>على أي شبكة يعمل؟</li>
+<li>ما العقود الذكية التي تتعامل معها؟</li>
+<li>هل توجد مراجعات أمنية أو تقارير تدقيق؟</li>
+<li>هل توجد صلاحيات إدارية يمكن استخدامها لتغيير سلوك البروتوكول؟</li>
+<li>كيف تتم الحوكمة؟</li>
+<li>ما الرسوم؟</li>
+<li>ما حجم السيولة؟</li>
+<li>ما المخاطر الخاصة بالأصل الذي ستستخدمه؟</li>
+<li>هل تفهم المعاملة التي ستوقع عليها محفظتك؟</li>
+</ul>
+
+<p>وجود تقرير تدقيق أمني لا يعني أن البروتوكول خالٍ من المخاطر، لكنه قد يكون أحد عناصر التقييم التي ينبغي قراءتها وفهم حدودها.</p>
+
+<h2>علاقة DeFi بقسم Blockchain في AQL Crypto Academy</h2>
+
+<p>قبل دراسة DeFi، من المفيد أن تكون لديك صورة واضحة عن أساسيات البلوكتشين.</p>
+
+<p>إذا لم تكن قد قرأت القسم السابق، يمكنك البدء من <a href="/academy/blockchain">قسم Blockchain في AQL Crypto Academy</a>، ثم مراجعة دروس مثل <a href="/academy/blockchain/what-is-blockchain">ما هو البلوكتشين؟</a>، و<a href="/academy/blockchain/how-does-blockchain-work">كيف يعمل البلوكتشين؟</a>، و<a href="/academy/blockchain/what-is-blockchain-consensus">ما هي آلية الإجماع؟</a>، و<a href="/academy/blockchain/what-is-hash-function">ما هي دوال التجزئة؟</a>.</p>
+
+<p>هذه المفاهيم ستجعل فهم DeFi والعقود الذكية والتطبيقات اللامركزية أسهل بكثير.</p>
+
+<h2>الأسئلة الشائعة</h2>
+
+<h3>ما هو DeFi؟</h3>
+
+<p>DeFi هو اختصار للتمويل اللامركزي، ويشير إلى مجموعة من التطبيقات والبروتوكولات المالية المبنية على البلوكتشين وتستخدم العقود الذكية لتنفيذ وظائف مالية وفق قواعد مبرمجة.</p>
+
+<h3>هل DeFi هو نفسه Bitcoin؟</h3>
+
+<p>لا. Bitcoin هو شبكة وبروتوكول وأصل رقمي، بينما DeFi يشير إلى تطبيقات وبروتوكولات مالية مبنية على شبكات البلوكتشين.</p>
+
+<h3>هل DeFi هو نفسه Blockchain؟</h3>
+
+<p>لا. البلوكتشين هو البنية التحتية والسجل الموزع، بينما DeFi هو مجموعة من التطبيقات والبروتوكولات المالية التي يمكن أن تعمل فوق هذه البنية.</p>
+
+<h3>ما دور العقود الذكية في DeFi؟</h3>
+
+<p>تقوم العقود الذكية بتنفيذ قواعد وعمليات محددة برمجيًا على شبكة البلوكتشين، ويمكن استخدامها لإدارة التداول والإقراض والسيولة وغيرها من وظائف DeFi.</p>
+
+<h3>هل DeFi آمن؟</h3>
+
+<p>لا يمكن اعتبار DeFi آمنًا بشكل مطلق. المخاطر تختلف حسب البروتوكول وقد تشمل ثغرات العقود الذكية، وتقلب الأسعار، والسيولة، والحوكمة، والجسور، والتصيد والاحتيال.</p>
+
+<h3>ما هي DEX؟</h3>
+
+<p>DEX هي منصة أو بروتوكول تداول لامركزي يسمح في بعض النماذج للمستخدمين بتبادل الأصول من خلال العقود الذكية بدل الاعتماد على منصة مركزية لحفظ الأموال وتنفيذ التداول.</p>
+
+<h3>ما هي مجمعات السيولة؟</h3>
+
+<p>مجمعات السيولة هي مجموعات من الأصول يتم إيداعها في عقود ذكية وفق تصميم بروتوكول معين بهدف توفير السيولة لعمليات مثل التداول.</p>
+
+<h3>ما هو Yield Farming؟</h3>
+
+<p>Yield Farming هو استخدام استراتيجيات مختلفة داخل منظومة DeFi للحصول على عوائد أو حوافز، مثل توفير السيولة أو استخدام بروتوكولات معينة. العوائد ليست مضمونة وتنطوي الاستراتيجيات على مخاطر.</p>
+
+<h3>هل DeFi مجاني؟</h3>
+
+<p>ليس بالضرورة. قد يحتاج المستخدم إلى دفع رسوم شبكة لتنفيذ المعاملات، إضافة إلى رسوم تداول أو رسوم بروتوكول بحسب الخدمة المستخدمة.</p>
+
+<h3>هل DeFi يحتاج إلى بنك؟</h3>
+
+<p>بعض بروتوكولات DeFi مصممة لتقديم وظائف مالية دون الاعتماد على بنك مركزي أو وسيط مالي تقليدي لتنفيذ الجزء الأساسي من العملية، لكن قد توجد عناصر أخرى مركزية أو شبه مركزية في النظام.</p>
+
+<h3>هل يمكن الربح من DeFi؟</h3>
+
+<p>قد توفر بعض البروتوكولات عوائد أو حوافز للمستخدمين، لكن لا يوجد ضمان للربح. قد تؤدي تقلبات الأسعار أو رسوم المعاملات أو خسائر السيولة أو مشاكل البروتوكول إلى خسائر.</p>
+
+<h3>هل DeFi لامركزي بالكامل؟</h3>
+
+<p>ليس بالضرورة. درجة اللامركزية تختلف من بروتوكول إلى آخر، وقد توجد مكونات مركزية مثل الواجهات أو مصادر البيانات أو مفاتيح الإدارة أو بعض آليات الحوكمة.</p>
+
+<h2>الخلاصة</h2>
+
+<p>DeFi أو التمويل اللامركزي هو أحد أهم الاستخدامات التي ظهرت حول تقنية البلوكتشين، ويهدف إلى بناء خدمات مالية قابلة للبرمجة باستخدام العقود الذكية والبروتوكولات المفتوحة.</p>
+
+<p>يشمل DeFi مجموعة واسعة من التطبيقات مثل التداول اللامركزي، والإقراض والاقتراض، ومجمعات السيولة، والعملات المستقرة، والزراعة الربحية، وغيرها.</p>
+
+<p>لكن DeFi ليس مجرد طريقة للحصول على عوائد مرتفعة، وليس نظامًا خاليًا من الوسطاء أو المخاطر بشكل مطلق. درجة اللامركزية تختلف بين البروتوكولات، والمخاطر قد تشمل العقود الذكية، والسيولة، وتقلب الأسعار، والحوكمة، والجسور، والتصيد، والتنظيم.</p>
+
+<p>إذا فهمت أساسيات البلوكتشين أولًا، فستتمكن من فهم DeFi بطريقة أكثر دقة. ويمكنك متابعة <a href="/academy/blockchain">قسم Blockchain</a> ثم الانتقال إلى الدروس القادمة في قسم DeFi، حيث سنتناول العقود الذكية، وDEX، ومجمعات السيولة، وAMM، والإقراض والاقتراض وغيرها من المفاهيم بالتفصيل.</p>
+
+<p><strong>ملاحظة:</strong> هذا المحتوى تعليمي ولا يمثل نصيحة مالية أو استثمارية. استخدام بروتوكولات DeFi والأصول الرقمية ينطوي على مخاطر، وينبغي إجراء البحث المستقل وفهم المخاطر قبل اتخاذ أي قرار مالي.</p>
+HTML,
+
+    'content_en' => <<<'HTML'
+<h2>Introduction</h2>
+
+<p><strong>DeFi</strong>, short for <strong>Decentralized Finance</strong>, has become one of the most widely used concepts in the blockchain and digital asset industry. For beginners, however, the term can seem complicated because it is often discussed alongside smart contracts, decentralized exchanges, liquidity pools, lending, borrowing, stablecoins, and yield farming.</p>
+
+<p>The core idea is easier to understand: <strong>DeFi is a broad ecosystem of financial applications and protocols built on blockchain networks that use smart contracts to perform financial functions according to programmed rules rather than relying entirely on traditional financial intermediaries.</strong></p>
+
+<p>This does not mean every DeFi protocol is completely decentralized or works in the same way. Decentralization exists on a spectrum and depends on the blockchain, smart contracts, governance system, external data sources, administrative permissions, and user interface involved in a particular protocol.</p>
+
+<p>In this guide from <strong>AQL Crypto Academy</strong>, we will build a clear understanding of decentralized finance step by step. We will explain what DeFi is, how it works, its relationship with blockchain and smart contracts, its main applications, how it differs from traditional finance, and the major risks beginners should understand.</p>
+
+<h2>What Is DeFi?</h2>
+
+<p>DeFi stands for <strong>Decentralized Finance</strong>.</p>
+
+<p>The term generally refers to a broad range of blockchain-based applications and protocols that provide financial functions such as trading, lending, borrowing, liquidity provision, and other financial services through software and smart contracts.</p>
+
+<p>In traditional finance, you may rely on a bank, broker, payment company, or centralized platform to provide a financial service. In DeFi, some of these functions can be implemented through smart contracts operating on a blockchain network.</p>
+
+<p>A smart contract can be thought of as a program deployed on a blockchain that executes predefined rules when the required conditions are met.</p>
+
+<p>However, it would be an oversimplification to define DeFi simply as "finance without intermediaries." Some protocols rely on centralized or semi-centralized components, including user interfaces, external data providers, administrative keys, governance structures, or other infrastructure.</p>
+
+<h2>Why Was DeFi Created?</h2>
+
+<p>DeFi emerged as part of a broader effort to use blockchain technology for applications beyond simple digital asset transfers.</p>
+
+<p>Traditional financial systems rely on institutions to perform many functions, including custody, settlement, lending, market making, record keeping, compliance, and payment processing.</p>
+
+<p>As programmable blockchain networks developed, it became possible to build software that could perform some financial operations directly on a public blockchain. Instead of relying on a financial institution to manually or internally execute every step, smart contracts can enforce specific rules through code.</p>
+
+<p>This opened the door to financial markets and applications that can operate continuously and can, in some cases, be accessed directly through a compatible wallet.</p>
+
+<p>However, this does not eliminate trust completely. Users may still need to trust the smart-contract code, governance model, external data sources, interfaces, infrastructure, and sometimes administrators with special permissions.</p>
+
+<h2>How Does DeFi Work?</h2>
+
+<p>DeFi is easier to understand when its main components are separated.</p>
+
+<h3>1. Blockchain Networks</h3>
+
+<p>DeFi protocols operate on blockchain networks capable of supporting the required applications and smart contracts.</p>
+
+<p>The blockchain records transactions and maintains the state of contracts according to the rules of the network. It provides the underlying infrastructure that allows decentralized applications to operate.</p>
+
+<p>For a deeper introduction, see our guide to <a href="/academy/blockchain/what-is-blockchain">what blockchain is</a>.</p>
+
+<h3>2. Smart Contracts</h3>
+
+<p>A smart contract is software deployed on a blockchain that supports programmable execution. It contains rules that define how specific operations should work.</p>
+
+<p>In DeFi, smart contracts can manage token balances, execute swaps, record loans, manage liquidity pools, or perform other functions depending on the protocol.</p>
+
+<p>A smart contract does not "think" like a person. It executes the logic defined by its code and the rules of the underlying blockchain.</p>
+
+<h3>3. Wallets</h3>
+
+<p>Users commonly interact with DeFi protocols through compatible digital wallets.</p>
+
+<p>A wallet allows a user to sign transactions and submit them to the blockchain. In self-custody systems, the user is responsible for protecting the relevant private keys and recovery information.</p>
+
+<h3>4. Decentralized Applications</h3>
+
+<p>A user may interact with a DeFi protocol through a website or application interface. The interface helps display information and construct transactions, while the core operation may be performed by smart contracts on the blockchain.</p>
+
+<p>This creates an important distinction between the <strong>interface</strong> and the <strong>protocol</strong>. A centralized website used to access a protocol does not automatically mean that every part of the protocol is centralized.</p>
+
+<h2>What Role Do Smart Contracts Play in DeFi?</h2>
+
+<p>Smart contracts are among the most important technical components of many DeFi systems.</p>
+
+<p>Instead of having a financial employee manually execute certain rules, a smart contract can enforce those rules through software.</p>
+
+<p>For example, a lending protocol may use smart contracts to define how assets are deposited, how collateral is calculated, how borrowing works, and when collateral can be liquidated according to the protocol's rules.</p>
+
+<p>However, smart contracts are software, and software can contain bugs or vulnerabilities.</p>
+
+<p>This is why <strong>smart-contract security</strong> is one of the most important topics in DeFi.</p>
+
+<h2>What Are the Main Applications of DeFi?</h2>
+
+<p>DeFi is not a single application. It is a broad ecosystem containing different categories of protocols.</p>
+
+<h3>Decentralized Trading</h3>
+
+<p>Decentralized exchanges, commonly called <strong>DEXs</strong>, allow users in some models to exchange digital assets through smart contracts rather than depositing funds into a centrally managed trading account.</p>
+
+<p>Some DEXs use an <strong>Automated Market Maker (AMM)</strong> model and liquidity pools to facilitate trading.</p>
+
+<p>We will examine DEXs, liquidity pools, and AMMs in more detail in later lessons.</p>
+
+<h3>Lending and Borrowing</h3>
+
+<p>Some DeFi lending protocols allow users to deposit digital assets into a protocol that can make those assets available to borrowers under predefined rules.</p>
+
+<p>A borrower may be able to obtain assets by providing collateral, subject to requirements related to collateral value, loan size, and liquidation conditions.</p>
+
+<p>These models differ from traditional loans in how they are executed and how collateral is managed, but they do not eliminate market or smart-contract risks.</p>
+
+<h3>Liquidity Provision</h3>
+
+<p>Some DeFi users deposit assets into liquidity pools that protocols can use to facilitate trading.</p>
+
+<p>Liquidity providers may receive a portion of trading fees or other incentives depending on the protocol.</p>
+
+<p>Providing liquidity does not guarantee a profit. Changes in asset prices can produce outcomes that differ from simply holding the assets outside the pool.</p>
+
+<h3>Stablecoins</h3>
+
+<p>Stablecoins play an important role in DeFi because they are designed to maintain a value linked to a reference asset or unit, such as the U.S. dollar, depending on the mechanism used.</p>
+
+<p>Stablecoins are not all identical. Their designs can differ significantly, including models backed by traditional assets, crypto collateral, or other mechanisms.</p>
+
+<h3>Derivatives</h3>
+
+<p>Some DeFi protocols offer financial products designed to track or derive value from an asset, index, price, or other reference.</p>
+
+<p>These products can be considerably more complex than basic DeFi applications and may introduce additional risks.</p>
+
+<h2>What Is a DEX?</h2>
+
+<p>DEX stands for <strong>Decentralized Exchange</strong>.</p>
+
+<p>A DEX is a protocol or application that allows users, in certain designs, to exchange digital assets through smart contracts without depositing funds into a centrally managed trading account in the same way as a conventional centralized exchange.</p>
+
+<p>Some DEXs rely on liquidity pools instead of traditional order books. In an AMM model, an algorithm or mathematical formula determines how trades interact with available liquidity.</p>
+
+<p>Not every DEX uses the same architecture, so the specific design of each protocol matters.</p>
+
+<h2>What Are Liquidity Pools?</h2>
+
+<p>A liquidity pool is a collection of assets deposited into a smart contract according to the design of a particular protocol.</p>
+
+<p>Instead of requiring a direct counterparty for every trade, a trading protocol can allow users to trade against assets held in a liquidity pool according to its rules.</p>
+
+<p>Liquidity providers may receive a share of trading fees or other incentives in exchange for supplying liquidity.</p>
+
+<p>Providing liquidity does not guarantee a return. Changes in asset prices can cause the outcome to differ from simply holding the assets outside the pool.</p>
+
+<h2>What Is Yield Farming?</h2>
+
+<p><strong>Yield farming</strong> generally refers to strategies designed to earn returns or incentives by providing liquidity or interacting with different DeFi protocols.</p>
+
+<p>Rewards can come from trading fees, protocol incentives, governance tokens, or other sources depending on the design.</p>
+
+<p>A high advertised yield does not necessarily mean a strategy is safe. Rewards may be paid in volatile tokens, the protocol may be exploited, liquidity conditions may change, or liquidity providers may experience impermanent loss.</p>
+
+<h2>DeFi vs. Traditional Finance</h2>
+
+<p>The main difference is how financial services are structured and operated.</p>
+
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>DeFi</th>
+<th>Traditional Finance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Execution</td>
+<td>Many operations can be executed through smart contracts</td>
+<td>Operations generally depend on institutions and centralized systems</td>
+</tr>
+<tr>
+<td>Access</td>
+<td>May be accessible through a compatible wallet and blockchain</td>
+<td>Usually requires an account with an institution or service provider</td>
+</tr>
+<tr>
+<td>Record keeping</td>
+<td>Transactions can be recorded on a public blockchain</td>
+<td>Records are generally maintained in institutional databases</td>
+</tr>
+<tr>
+<td>Custody</td>
+<td>Users may control assets and keys directly</td>
+<td>Institutions may hold assets or manage access on behalf of customers</td>
+</tr>
+<tr>
+<td>Automation</td>
+<td>Smart contracts can automatically execute programmed rules</td>
+<td>Automation is generally implemented through institutional software</td>
+</tr>
+<tr>
+<td>Risks</td>
+<td>Includes smart-contract, protocol, liquidity, and market risks</td>
+<td>Includes institutional, credit, liquidity, operational, and regulatory risks</td>
+</tr>
+</tbody>
+</table>
+
+<p>This comparison does not mean one system automatically replaces the other. DeFi and traditional finance use different structures and have different characteristics and risk profiles.</p>
+
+<h2>Is DeFi Completely Decentralized?</h2>
+
+<p>Not necessarily.</p>
+
+<p>DeFi is a broad category, and different protocols have different degrees of decentralization.</p>
+
+<p>A smart contract may be deployed on a public blockchain while the interface is centralized. A protocol may also have administrative keys that can modify certain settings, or it may depend on an external service for price data.</p>
+
+<p>When evaluating a DeFi protocol, useful questions include: <strong>Which components are decentralized? Which components are centralized? Who can change the rules? How does governance work?</strong></p>
+
+<h2>Does DeFi Need an Intermediary?</h2>
+
+<p>It depends on what is meant by "intermediary."</p>
+
+<p>Some DeFi systems reduce the need for traditional financial intermediaries because smart contracts can execute parts of a transaction directly.</p>
+
+<p>However, other participants and services may still exist, including protocol developers, data providers, interface operators, governance participants, and infrastructure providers.</p>
+
+<p>It is therefore more accurate to say that DeFi can move some intermediary functions into software and blockchain-based protocols rather than claiming that all forms of intermediation disappear.</p>
+
+<h2>How Is DeFi Related to Blockchain?</h2>
+
+<p>Blockchain provides the infrastructure for recording transactions and, on programmable networks, executing smart contracts.</p>
+
+<p>DeFi is a layer of applications and protocols that uses this infrastructure to provide financial functions.</p>
+
+<p>A simplified relationship looks like this:</p>
+
+<ul>
+<li><strong>Blockchain:</strong> The underlying infrastructure and distributed ledger.</li>
+<li><strong>Smart Contracts:</strong> Programs that execute protocol logic.</li>
+<li><strong>DeFi Protocol:</strong> A set of rules and contracts providing a financial function.</li>
+<li><strong>Wallet:</strong> A tool users can use to interact with the network and sign transactions.</li>
+<li><strong>User Interface:</strong> A layer that helps users interact with the protocol.</li>
+</ul>
+
+<p>This is why understanding <a href="/academy/blockchain/what-is-blockchain">blockchain</a> and blockchain transactions makes DeFi easier to understand.</p>
+
+<h2>Does DeFi Exist on Only One Blockchain?</h2>
+
+<p>No.</p>
+
+<p>DeFi protocols can operate on different blockchain networks that support smart contracts or the required application architecture.</p>
+
+<p>As a result, transaction fees, execution speed, consensus mechanisms, liquidity, available assets, and technical risks can differ significantly between networks.</p>
+
+<p>Moving assets between networks may also require bridges or other mechanisms, which can introduce additional risks.</p>
+
+<h2>What Are DeFi Transaction Fees?</h2>
+
+<p>When a user performs an operation on a blockchain, the transaction may require a network fee for processing according to the rules of that blockchain.</p>
+
+<p>This network fee is not necessarily the same as a fee charged by the DeFi protocol itself. A transaction may also involve protocol fees, trading fees, price impact, or other costs depending on the operation.</p>
+
+<p>Users should therefore understand the total cost of a transaction before confirming it.</p>
+
+<h2>Is DeFi Free?</h2>
+
+<p>Not necessarily.</p>
+
+<p>Some applications may be accessible without creating a traditional account, but executing transactions on a blockchain can require network fees.</p>
+
+<p>There may also be trading fees, protocol fees, price impact, or other costs.</p>
+
+<p>In some cases, the transaction cost itself may be significant relative to the size of the operation, especially when the underlying network is congested.</p>
+
+<h2>What Are the Main Advantages of DeFi?</h2>
+
+<h3>Relatively Open Access</h3>
+
+<p>Some DeFi protocols can be accessed by anyone with a compatible wallet and network connection, subject to the protocol's design, local laws, and other restrictions.</p>
+
+<h3>Continuous Operation</h3>
+
+<p>Many protocols are designed to operate according to blockchain infrastructure rather than conventional institutional business hours.</p>
+
+<h3>Verifiable Transparency</h3>
+
+<p>When transactions and contracts operate on public blockchains, users and analytics tools can inspect portions of the transaction history and contract activity.</p>
+
+<h3>Programmability</h3>
+
+<p>Smart contracts can automatically execute defined rules when their conditions are met, enabling programmable financial applications.</p>
+
+<h3>Composability</h3>
+
+<p>Some DeFi protocols can interact with other protocols, allowing developers to build new applications using existing financial components.</p>
+
+<p>This characteristic is sometimes described using the term <strong>Money Legos</strong>, referring to the ability to combine different financial building blocks.</p>
+
+<h2>What Are the Risks of DeFi?</h2>
+
+<p>Despite its technical possibilities, DeFi introduces significant risks that users should understand.</p>
+
+<h3>Smart-Contract Risk</h3>
+
+<p>Smart contracts can contain software bugs or vulnerabilities. If assets are controlled by a vulnerable contract, an exploit may result in substantial losses.</p>
+
+<h3>Protocol Risk</h3>
+
+<p>A protocol can have design weaknesses even when no obvious software vulnerability exists. Economic assumptions can fail under unexpected market conditions.</p>
+
+<h3>Liquidity Risk</h3>
+
+<p>Low liquidity can make it more difficult to enter or exit a position and may result in greater price impact.</p>
+
+<h3>Market Volatility</h3>
+
+<p>Digital assets used in DeFi can be highly volatile. Collateral values and deposited assets can therefore change significantly.</p>
+
+<h3>Impermanent Loss</h3>
+
+<p>Liquidity providers in certain automated market-making systems may experience impermanent loss when asset prices change relative to simply holding the assets outside the liquidity pool.</p>
+
+<h3>Governance Risk</h3>
+
+<p>Some protocols use governance tokens that allow holders to participate in certain decisions. Governance structures can vary widely, and effective control may sometimes be concentrated among a relatively small group.</p>
+
+<h3>Bridge Risk</h3>
+
+<p>Moving or representing assets across different blockchain networks through bridges or other mechanisms can introduce additional risks involving contracts, validators, or the bridge architecture.</p>
+
+<h3>Interface and Phishing Risk</h3>
+
+<p>Even if a smart contract is functioning correctly, users can be exposed to fake websites, malicious applications, or deceptive transactions designed to obtain inappropriate wallet signatures.</p>
+
+<h3>Regulatory Risk</h3>
+
+<p>Rules governing digital assets and decentralized financial services vary across jurisdictions and can change over time.</p>
+
+<h2>Is DeFi Safe?</h2>
+
+<p>There is no universal yes-or-no answer.</p>
+
+<p>The safety of a DeFi system depends on multiple factors, including blockchain security, smart-contract quality, protocol design, key management, liquidity, governance, user interfaces, and external data sources.</p>
+
+<p>A protocol may operate successfully for a long period and later suffer from a vulnerability or unexpected failure. A smart contract can also be technically sound while a user is compromised through phishing or by signing a transaction they do not understand.</p>
+
+<p>Therefore, "DeFi is safe" should never be treated as a guarantee. Risk should be evaluated for each protocol and each transaction.</p>
+
+<h2>DeFi Does Not Mean Guaranteed Profits</h2>
+
+<p>One of the most common misconceptions is that DeFi automatically means high returns.</p>
+
+<p>Some protocols may offer high yields or incentives, but a high advertised return can come with substantial risks or specific conditions.</p>
+
+<p>A return measured in a protocol token may also look high while the market value of that token falls.</p>
+
+<p>Users should distinguish between:</p>
+
+<ul>
+<li>The advertised yield.</li>
+<li>The actual return after fees.</li>
+<li>Changes in asset prices.</li>
+<li>Protocol and smart-contract risk.</li>
+<li>The strategy's duration and exit conditions.</li>
+</ul>
+
+<h2>DeFi, Smart Contracts, DEXs, and Liquidity Pools</h2>
+
+<p>These concepts are closely related, but they are not the same thing.</p>
+
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DeFi</td>
+<td>An ecosystem of blockchain-based financial applications and protocols.</td>
+</tr>
+<tr>
+<td>Smart Contract</td>
+<td>A program deployed on a blockchain capable of executing predefined rules.</td>
+</tr>
+<tr>
+<td>DEX</td>
+<td>A decentralized protocol or application for exchanging digital assets.</td>
+</tr>
+<tr>
+<td>Liquidity Pool</td>
+<td>A collection of assets deposited into smart contracts to provide liquidity according to a protocol's design.</td>
+</tr>
+<tr>
+<td>AMM</td>
+<td>A model that uses an algorithm or mathematical formula to facilitate trading and pricing rather than relying exclusively on a traditional order book.</td>
+</tr>
+</tbody>
+</table>
+
+<p>Understanding these relationships will make the later DeFi lessons much easier to follow.</p>
+
+<h2>Is DeFi the Same as Cryptocurrency?</h2>
+
+<p>No.</p>
+
+<p>Digital assets are assets that can exist within blockchain ecosystems, while DeFi refers to applications and protocols that provide financial functions using blockchain infrastructure.</p>
+
+<p>A DeFi protocol may use different digital assets, but the existence of a digital asset alone does not make it a DeFi application.</p>
+
+<h2>Is DeFi the Same as Blockchain?</h2>
+
+<p>No.</p>
+
+<p>Blockchain is the underlying infrastructure and distributed ledger, while DeFi refers to financial applications and protocols that can operate on top of blockchain infrastructure.</p>
+
+<p>A simplified conceptual relationship is:</p>
+
+<p><strong>Blockchain → Smart Contracts → DeFi Protocols → Financial Applications</strong></p>
+
+<p>This is not a universal architecture for every project, but it is a useful way for beginners to understand how the concepts relate to one another.</p>
+
+<h2>How Should Beginners Learn DeFi?</h2>
+
+<p>If you are new to DeFi, it is better to learn the concepts before using real funds.</p>
+
+<p>Start with blockchain fundamentals, wallets, transactions, smart contracts, DEXs, liquidity pools, AMMs, lending and borrowing, and stablecoins.</p>
+
+<p>Then learn how to evaluate protocols by reading their documentation, understanding contract permissions, examining governance, studying fees and liquidity, and identifying the specific risks involved.</p>
+
+<p>Educational environments and very small amounts may be appropriate for practical learning after you understand the mechanics, but practical experimentation does not remove the possibility of financial loss.</p>
+
+<h2>What Should You Know Before Using a DeFi Protocol?</h2>
+
+<ul>
+<li>What does the protocol actually do?</li>
+<li>Which blockchain does it use?</li>
+<li>Which smart contracts will you interact with?</li>
+<li>Are there security reviews or audit reports?</li>
+<li>Are there administrative permissions that can change protocol behavior?</li>
+<li>How does governance work?</li>
+<li>What are the fees?</li>
+<li>How much liquidity is available?</li>
+<li>What risks are associated with the assets being used?</li>
+<li>Do you understand the transaction your wallet is asking you to sign?</li>
+</ul>
+
+<p>An audit report does not guarantee that a protocol is risk-free, but it can be one useful part of a broader evaluation when its scope and limitations are understood.</p>
+
+<h2>DeFi and the Blockchain Section at AQL Crypto Academy</h2>
+
+<p>Before studying DeFi in depth, it is useful to have a clear understanding of blockchain fundamentals.</p>
+
+<p>If you have not completed the previous section, start with the <a href="/academy/blockchain">Blockchain section of AQL Crypto Academy</a>. You can review lessons such as <a href="/academy/blockchain/what-is-blockchain">What Is Blockchain?</a>, <a href="/academy/blockchain/how-does-blockchain-work">How Does Blockchain Work?</a>, <a href="/academy/blockchain/what-is-blockchain-consensus">What Is Blockchain Consensus?</a>, and <a href="/academy/blockchain/what-is-hash-function">What Is a Hash Function?</a>.</p>
+
+<p>These concepts will make it much easier to understand DeFi, smart contracts, and decentralized applications.</p>
+
+<h2>Frequently Asked Questions</h2>
+
+<h3>What is DeFi?</h3>
+
+<p>DeFi stands for Decentralized Finance and refers to blockchain-based applications and protocols that use smart contracts to provide financial functions according to programmed rules.</p>
+
+<h3>Is DeFi the same as Bitcoin?</h3>
+
+<p>No. Bitcoin is a network, protocol, and digital asset, while DeFi refers to financial applications and protocols that can operate on blockchain networks.</p>
+
+<h3>Is DeFi the same as blockchain?</h3>
+
+<p>No. Blockchain is the underlying infrastructure and distributed ledger, while DeFi refers to financial applications and protocols that use that infrastructure.</p>
+
+<h3>What role do smart contracts play in DeFi?</h3>
+
+<p>Smart contracts execute predefined rules and operations on blockchain networks. They can be used for trading, lending, liquidity management, and other DeFi functions.</p>
+
+<h3>Is DeFi safe?</h3>
+
+<p>DeFi cannot be considered universally safe. Risks vary by protocol and can include smart-contract vulnerabilities, market volatility, liquidity problems, governance risks, bridge risks, phishing, and regulatory uncertainty.</p>
+
+<h3>What is a DEX?</h3>
+
+<p>A DEX is a decentralized exchange protocol or application that allows users, in certain designs, to exchange digital assets through smart contracts rather than relying on a centrally managed trading account.</p>
+
+<h3>What are liquidity pools?</h3>
+
+<p>Liquidity pools are collections of assets deposited into smart contracts according to a protocol's design to provide liquidity for activities such as decentralized trading.</p>
+
+<h3>What is yield farming?</h3>
+
+<p>Yield farming refers to strategies that seek returns or incentives by providing liquidity or interacting with DeFi protocols. Returns are not guaranteed and can involve significant risks.</p>
+
+<h3>Is DeFi free?</h3>
+
+<p>Not necessarily. Users may need to pay blockchain network fees, protocol fees, trading fees, or other costs depending on the operation.</p>
+
+<h3>Does DeFi need banks?</h3>
+
+<p>Some DeFi protocols are designed to perform financial functions without relying on a traditional bank for the core transaction, but other centralized or semi-centralized components may still exist.</p>
+
+<h3>Can you make money with DeFi?</h3>
+
+<p>Some protocols offer returns or incentives, but profits are not guaranteed. Market volatility, fees, liquidity losses, protocol failures, and other risks can result in losses.</p>
+
+<h3>Is DeFi completely decentralized?</h3>
+
+<p>Not necessarily. The degree of decentralization varies between protocols, and some may depend on centralized interfaces, data providers, administrative keys, or governance structures.</p>
+
+<h2>Conclusion</h2>
+
+<p>DeFi, or decentralized finance, is one of the major application areas that emerged from blockchain technology. It aims to provide programmable financial services through smart contracts and blockchain-based protocols.</p>
+
+<p>The DeFi ecosystem includes decentralized exchanges, lending and borrowing, liquidity pools, stablecoins, yield farming, derivatives, and many other applications.</p>
+
+<p>However, DeFi should not be viewed simply as a way to earn high returns, nor should it be assumed that every DeFi system is fully decentralized or free of intermediaries and risks. Decentralization varies between protocols, while risks can include smart-contract vulnerabilities, liquidity problems, market volatility, governance issues, bridge failures, phishing, and regulatory uncertainty.</p>
+
+<p>If you understand blockchain fundamentals first, you will be in a much better position to understand DeFi accurately. You can review the <a href="/academy/blockchain">Blockchain section</a> and then continue with the upcoming DeFi lessons covering smart contracts, DEXs, liquidity pools, AMMs, lending, borrowing, and other core concepts.</p>
+
+<p><strong>Disclaimer:</strong> This article is provided for educational and informational purposes only and does not constitute financial or investment advice. DeFi protocols and digital assets involve significant risks. Readers should conduct independent research and understand the risks before making financial decisions.</p>
+HTML,
+
+    'image' => null,
+
+    'seo_title' => 'What Is DeFi? Beginner\'s Guide to Decentralized Finance | AQL Crypto Academy',
+    'seo_title_ar' => 'ما هو DeFi؟ شرح التمويل اللامركزي للمبتدئين | AQL Crypto Academy',
+    'seo_title_en' => 'What Is DeFi? Beginner\'s Guide to Decentralized Finance | AQL Crypto Academy',
+
+    'meta_description' => 'Learn what DeFi is, how decentralized finance works, its main applications, smart contracts, DEXs, liquidity pools, benefits, and risks in this beginner-friendly guide.',
+    'meta_description_ar' => 'تعرف على ما هو DeFi وكيف يعمل التمويل اللامركزي، وأهم تطبيقاته والعقود الذكية وDEX ومجمعات السيولة والمزايا والمخاطر في هذا الدليل الشامل للمبتدئين.',
+    'meta_description_en' => 'Learn what DeFi is, how decentralized finance works, its main applications, smart contracts, DEXs, liquidity pools, benefits, and risks in this beginner-friendly guide.',
+
+    'faq_ar' => [
+        [
+            'question' => 'ما هو DeFi؟',
+            'answer' => 'DeFi هو اختصار للتمويل اللامركزي، ويشير إلى مجموعة من التطبيقات والبروتوكولات المالية المبنية على البلوكتشين وتستخدم العقود الذكية لتنفيذ وظائف مالية وفق قواعد مبرمجة.'
+        ],
+        [
+            'question' => 'هل DeFi هو نفسه Bitcoin؟',
+            'answer' => 'لا. Bitcoin هو شبكة وبروتوكول وأصل رقمي، بينما DeFi يشير إلى تطبيقات وبروتوكولات مالية يمكن أن تعمل على شبكات البلوكتشين.'
+        ],
+        [
+            'question' => 'هل DeFi هو نفسه Blockchain؟',
+            'answer' => 'لا. البلوكتشين هو البنية التحتية والسجل الموزع، بينما DeFi يمثل مجموعة من التطبيقات والبروتوكولات المالية التي تستخدم هذه البنية.'
+        ],
+        [
+            'question' => 'ما دور العقود الذكية في DeFi؟',
+            'answer' => 'تقوم العقود الذكية بتنفيذ قواعد وعمليات محددة برمجيًا على شبكة البلوكتشين، ويمكن استخدامها للتداول والإقراض وإدارة السيولة وغيرها من وظائف DeFi.'
+        ],
+        [
+            'question' => 'هل DeFi آمن؟',
+            'answer' => 'لا يمكن اعتبار DeFi آمنًا بشكل مطلق. تختلف المخاطر حسب البروتوكول وقد تشمل ثغرات العقود الذكية وتقلب الأسعار والسيولة والحوكمة والجسور والتصيد.'
+        ],
+        [
+            'question' => 'ما هي DEX؟',
+            'answer' => 'DEX هي منصة أو بروتوكول تداول لامركزي يسمح في بعض النماذج للمستخدمين بتبادل الأصول الرقمية من خلال العقود الذكية.'
+        ],
+        [
+            'question' => 'ما هي مجمعات السيولة؟',
+            'answer' => 'مجمعات السيولة هي مجموعات من الأصول يتم إيداعها في عقود ذكية وفق تصميم بروتوكول معين بهدف توفير السيولة لعمليات مثل التداول.'
+        ],
+        [
+            'question' => 'ما هو Yield Farming؟',
+            'answer' => 'Yield Farming هو استخدام استراتيجيات داخل منظومة DeFi للحصول على عوائد أو حوافز من خلال توفير السيولة أو استخدام بروتوكولات مختلفة، مع وجود مخاطر وعدم وجود ضمان للربح.'
+        ],
+        [
+            'question' => 'هل DeFi مجاني؟',
+            'answer' => 'ليس بالضرورة. قد يحتاج المستخدم إلى دفع رسوم شبكة ورسوم بروتوكول أو تداول أو تكاليف أخرى بحسب العملية.'
+        ],
+        [
+            'question' => 'هل يمكن الربح من DeFi؟',
+            'answer' => 'قد توفر بعض البروتوكولات عوائد أو حوافز، لكن الربح غير مضمون، وقد تؤدي تقلبات الأسعار والرسوم ومخاطر البروتوكول والسيولة إلى خسائر.'
+        ],
+        [
+            'question' => 'هل DeFi لامركزي بالكامل؟',
+            'answer' => 'ليس بالضرورة. تختلف درجة اللامركزية بين البروتوكولات، وقد توجد عناصر مركزية مثل الواجهات أو مصادر البيانات أو مفاتيح الإدارة أو بعض آليات الحوكمة.'
+        ],
+        [
+            'question' => 'ما أهم مخاطر DeFi؟',
+            'answer' => 'تشمل المخاطر ثغرات العقود الذكية، وتقلب أسعار الأصول، ومخاطر السيولة، والخسارة غير الدائمة، ومخاطر الحوكمة والجسور، والتصيد والاحتيال، والمخاطر التنظيمية.'
+        ],
+    ],
+
+    'faq_en' => [
+        [
+            'question' => 'What is DeFi?',
+            'answer' => 'DeFi stands for Decentralized Finance and refers to blockchain-based financial applications and protocols that use smart contracts to provide financial functions according to programmed rules.'
+        ],
+        [
+            'question' => 'Is DeFi the same as Bitcoin?',
+            'answer' => 'No. Bitcoin is a network, protocol, and digital asset, while DeFi refers to financial applications and protocols that can operate on blockchain networks.'
+        ],
+        [
+            'question' => 'Is DeFi the same as blockchain?',
+            'answer' => 'No. Blockchain is the underlying infrastructure and distributed ledger, while DeFi refers to financial applications and protocols that use that infrastructure.'
+        ],
+        [
+            'question' => 'What role do smart contracts play in DeFi?',
+            'answer' => 'Smart contracts execute predefined rules and operations on blockchain networks and can be used for trading, lending, liquidity management, and other DeFi functions.'
+        ],
+        [
+            'question' => 'Is DeFi safe?',
+            'answer' => 'DeFi cannot be considered universally safe. Risks vary by protocol and can include smart-contract vulnerabilities, market volatility, liquidity problems, governance risks, bridge risks, and phishing.'
+        ],
+        [
+            'question' => 'What is a DEX?',
+            'answer' => 'A DEX is a decentralized exchange protocol or application that allows users, in certain designs, to exchange digital assets through smart contracts.'
+        ],
+        [
+            'question' => 'What are liquidity pools?',
+            'answer' => 'Liquidity pools are collections of assets deposited into smart contracts according to a protocol design to provide liquidity for activities such as decentralized trading.'
+        ],
+        [
+            'question' => 'What is yield farming?',
+            'answer' => 'Yield farming refers to strategies that seek returns or incentives by providing liquidity or interacting with DeFi protocols. Returns are not guaranteed and can involve significant risks.'
+        ],
+        [
+            'question' => 'Is DeFi free?',
+            'answer' => 'Not necessarily. Users may need to pay blockchain network fees, protocol fees, trading fees, or other costs depending on the operation.'
+        ],
+        [
+            'question' => 'Can you make money with DeFi?',
+            'answer' => 'Some protocols offer returns or incentives, but profits are not guaranteed. Market volatility, fees, liquidity losses, and protocol risks can result in losses.'
+        ],
+        [
+            'question' => 'Is DeFi completely decentralized?',
+            'answer' => 'Not necessarily. The degree of decentralization varies between protocols, and some may depend on centralized interfaces, data providers, administrative keys, or governance structures.'
+        ],
+        [
+            'question' => 'What are the main risks of DeFi?',
+            'answer' => 'Major risks include smart-contract vulnerabilities, asset price volatility, liquidity risk, impermanent loss, governance and bridge risks, phishing, fraud, and regulatory uncertainty.'
+        ],
+    ],
+
+    'status' => 'published',
+    'sort_order' => 1,
+    'published_at' => now(),
+],
+ ];
+
+foreach ($defiArticles as $article) {
+    AcademyArticle::updateOrCreate(
+        [
+            'topic_id' => $defi->id,
             'slug' => $article['slug'],
         ],
         $article
