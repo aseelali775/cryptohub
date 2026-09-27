@@ -29955,1108 +29955,581 @@ HTML,
     'sort_order' => 8,
     'published_at' => now(),
 ],
+
 [
-    'topic_id' => $defi->id,
+'topic_id' => $defi->id,
+'slug' => 'what-are-decentralized-exchanges',
+'title' => 'آليات التداول في منصات DEX: Slippage وPrice Impact وMEV وToken Approvals',
+'title_ar' => 'آليات التداول في منصات DEX: Slippage وPrice Impact وMEV وToken Approvals',
+'title_en' => 'DEX Trading Mechanics: Slippage, Price Impact, MEV, and Token Approvals',
+'excerpt' => null,
+'excerpt_ar' => 'شرح متقدم لكيفية تنفيذ عمليات Swap في منصات التداول اللامركزي، والفرق بين Slippage وPrice Impact، ودور Token Approvals ومخاطر MEV وSandwich Attacks ومجمّعات السيولة والمجمّعات الذكية.',
+'excerpt_en' => 'An advanced guide to how swaps work on decentralized exchanges, including slippage, price impact, token approvals, MEV, sandwich attacks, liquidity, and DEX aggregators.',
 
-    'title' => 'ما هي المنصات اللامركزية DEX؟ وكيف تعمل؟',
-    'title_ar' => 'ما هي المنصات اللامركزية DEX؟ وكيف تعمل؟ شرح للمبتدئين',
-    'title_en' => 'What Are Decentralized Exchanges (DEXs)? How Do They Work?',
+'content' => null,
 
-    'slug' => 'what-are-decentralized-exchanges',
+'content_ar' => <<<'HTML'
 
-    'excerpt' => 'شرح مبسط للمنصات اللامركزية DEX، وكيف تعمل عمليات المبادلة باستخدام العقود الذكية ومجمعات السيولة، وما أهم الفوائد والمخاطر التي يجب فهمها.',
-    'excerpt_ar' => 'شرح مبسط للمنصات اللامركزية DEX، وكيف تعمل عمليات المبادلة باستخدام العقود الذكية ومجمعات السيولة، وما أهم الفوائد والمخاطر التي يجب فهمها.',
-    'excerpt_en' => 'A beginner-friendly guide to decentralized exchanges, how DEX swaps work through smart contracts and liquidity pools, and the main benefits and risks users should understand.',
 
-    'content' => null,
+<h2>مقدمة</h2>
 
-    'content_ar' => <<<'HTML'
-<article>
+<p>بعد فهم مفهوم منصات التداول اللامركزي (DEX) وطريقة عملها، تأتي مرحلة أكثر عملية: ماذا يحدث فعليًا عند تنفيذ عملية Swap؟ وما الفرق بين <strong>Slippage</strong> و<strong>Price Impact</strong>؟ وما المقصود بـ <strong>Token Approval</strong> و<strong>MEV</strong>؟ وكيف يمكن أن تؤثر هذه العوامل في النتيجة النهائية للمعاملة؟</p>
 
-    <p>
-        تُعد <strong>المنصات اللامركزية (Decentralized Exchanges أو DEXs)</strong> من أهم تطبيقات التمويل اللامركزي DeFi.
-        فهي تتيح للمستخدمين مبادلة الأصول الرقمية من خلال بروتوكولات تعتمد على العقود الذكية، بدل الاعتماد بالضرورة على منصة مركزية تحتفظ بالأصول وتنفذ عمليات التداول نيابة عن المستخدم.
-    </p>
+<p>هذا الدرس يركز على الجوانب العملية والمتقدمة لاستخدام منصات DEX، وليس على إعادة شرح مفهوم DEX من البداية. إذا كنت جديدًا على التمويل اللامركزي، فمن الأفضل أولًا قراءة <a href="/academy/defi/what-is-defi">ما هو DeFi؟</a> و<a href="/academy/defi/what-is-a-decentralized-exchange-dex">ما هي منصات التداول اللامركزي DEX؟</a>.</p>
 
-    <p>
-        لكن مصطلح "لامركزية" لا يعني أن جميع المنصات اللامركزية متطابقة أو أنها خالية تمامًا من أي جهة إدارية.
-        تختلف درجة اللامركزية وآلية الحوكمة والصلاحيات الإدارية وتصميم العقود الذكية من بروتوكول إلى آخر.
-    </p>
+<h2>ماذا يحدث عند تنفيذ Swap؟</h2>
 
-    <p>
-        في هذا المقال من أكاديمية AQL Crypto، سنتعرف على مفهوم DEX، وآلية عمل المبادلات، ودور العقود الذكية ومجمعات السيولة وصناع السوق الآليين، بالإضافة إلى أهم المزايا والمخاطر.
-    </p>
+<p>عند تنفيذ Swap، لا تتم العملية بالضرورة بنفس طريقة تنفيذ أمر شراء وبيع في منصة تداول مركزية. يعتمد المسار على تصميم المنصة والبروتوكول، ولكن في نموذج شائع يعتمد على مجمعات السيولة وAMM يمكن أن تمر العملية بشكل مبسط بالمراحل التالية:</p>
 
-    <h2>ما هي المنصة اللامركزية DEX؟</h2>
+<ol>
+    <li>اختيار الأصل الذي تريد بيعه والأصل الذي تريد الحصول عليه.</li>
+    <li>تحديد الكمية المطلوبة.</li>
+    <li>حساب السعر المتوقع والرسوم والكمية الناتجة.</li>
+    <li>إذا كانت هذه أول مرة تستخدم فيها الرمز مع العقد، قد تحتاج إلى تنفيذ <strong>Token Approval</strong>.</li>
+    <li>توقيع معاملة Swap من خلال المحفظة.</li>
+    <li>إرسال المعاملة إلى الشبكة.</li>
+    <li>تنفيذ العقد الذكي وفق قواعد البروتوكول.</li>
+    <li>إتمام العملية أو رفضها إذا لم تتحقق شروط المعاملة.</li>
+</ol>
 
-    <p>
-        المنصة اللامركزية DEX هي بروتوكول أو تطبيق يتيح للمستخدمين تداول أو مبادلة الأصول الرقمية من خلال آليات تعتمد على العقود الذكية بدل نموذج دفتر الأوامر المركزي التقليدي في بعض المنصات.
-    </p>
+<p>هذا المسار يختلف حسب الشبكة والبروتوكول وتصميم المنصة، لذلك لا ينبغي افتراض أن جميع منصات DEX تعمل بالطريقة نفسها.</p>
 
-    <p>
-        في نموذج DEX القائم على مجمعات السيولة، لا يحتاج المستخدم بالضرورة إلى العثور على متداول آخر في الجهة المقابلة لعملية المبادلة.
-        بدلاً من ذلك، يمكن تنفيذ المبادلة عبر السيولة الموجودة في مجمعات مخصصة لذلك.
-    </p>
+<h2>ما هو Slippage؟</h2>
 
-    <p>
-        يمكنك أولًا مراجعة
-        <a href="/academy/defi/what-is-defi">شرح ما هو DeFi؟</a>
-        لفهم الإطار العام الذي تعمل ضمنه هذه التطبيقات.
-    </p>
+<p><strong>Slippage</strong> أو الانزلاق السعري هو الفرق بين السعر أو النتيجة التي كنت تتوقعها عند إعداد المعاملة والنتيجة التي يمكن قبولها عند تنفيذها.</p>
 
-    <h2>ما الفرق بين DEX والمنصة المركزية CEX؟</h2>
+<p>عندما تقوم بإعداد Swap، قد تحدد حدًا أقصى للانزلاق السعري المقبول. إذا أصبحت النتيجة أسوأ من الحد الذي تسمح به، يمكن للعقد الذكي رفض المعاملة بدل تنفيذها.</p>
 
-    <p>
-        لفهم DEX بشكل أفضل، من المفيد مقارنته بالنموذج المركزي المعروف باسم <strong>CEX</strong> أو Centralized Exchange.
-    </p>
+<p>من المهم فهم أن Slippage ليس بالضرورة هو نفسه انخفاض السعر الناتج عن حجم صفقتك.</p>
 
-    <h3>المنصة المركزية CEX</h3>
+<h3>مثال مبسط</h3>
 
-    <p>
-        في المنصة المركزية، يتفاعل المستخدم عادةً مع شركة أو جهة تدير المنصة.
-        وقد تُحفظ الأصول داخل محافظ تسيطر عليها المنصة، بينما تتم عمليات التداول باستخدام أنظمة داخلية مثل دفتر الأوامر.
-    </p>
+<p>افترض أنك أعددت عملية Swap وتتوقع الحصول على ما يقارب 100 وحدة من أصل معين، وحددت حدًا يسمح بنتيجة أقل قليلًا من ذلك.</p>
 
-    <h3>المنصة اللامركزية DEX</h3>
+<p>إذا أصبحت النتيجة عند التنفيذ أقل من الحد المسموح، فقد تفشل المعاملة بدل قبول نتيجة أسوأ من إعداداتك.</p>
 
-    <p>
-        في العديد من نماذج DEX، يتفاعل المستخدم مباشرة مع العقود الذكية من خلال محفظته، وتنفذ المبادلة وفق القواعد البرمجية للبروتوكول.
-    </p>
+<p>القيم والآليات الدقيقة تختلف حسب البروتوكول وواجهة المستخدم ونوع المعاملة.</p>
 
-    <p>
-        هذا لا يعني أن DEX لا يحتوي على أي عناصر مركزية على الإطلاق؛ فقد توجد واجهة أمامية مستضافة بشكل معين، أو صلاحيات إدارية، أو أنظمة حوكمة، أو مكونات خارج السلسلة بحسب تصميم البروتوكول.
-    </p>
+<h2>ما هو Price Impact؟</h2>
 
-    <h2>كيف تعمل المبادلة في DEX؟</h2>
+<p><strong>Price Impact</strong> أو تأثير السعر هو التغير في السعر الناتج عن تنفيذ صفقة معينة مقارنة بالسعر المتاح قبل تنفيذها.</p>
 
-    <p>
-        لفهم العملية بصورة مبسطة، تخيل أن مستخدمًا يريد مبادلة أصل رقمي بأصل آخر.
-    </p>
+<p>يكون تأثير السعر أكثر وضوحًا عندما تكون الصفقة كبيرة مقارنة بحجم السيولة المتاحة في السوق أو مجمع السيولة.</p>
 
-    <ol>
-        <li>يفتح المستخدم واجهة DEX.</li>
-        <li>يربط محفظته بالتطبيق.</li>
-        <li>يحدد الأصل الذي يريد بيعه والأصل الذي يريد الحصول عليه.</li>
-        <li>يحدد الكمية المطلوبة.</li>
-        <li>يستعرض السعر المتوقع والرسوم وأي معلومات أخرى يعرضها البروتوكول.</li>
-        <li>يوافق المستخدم على العملية من خلال محفظته.</li>
-        <li>تتفاعل المعاملة مع العقد الذكي على شبكة البلوكشين.</li>
-        <li>ينفذ العقد المبادلة وفق شروط البروتوكول.</li>
-    </ol>
+<p>في بعض نماذج AMM، تؤدي الصفقة إلى تغيير نسب الأصول داخل المجمع، وبالتالي يتغير السعر الذي يمكن الحصول عليه للأجزاء التالية من الصفقة.</p>
 
-    <p>
-        تختلف التفاصيل الدقيقة حسب البروتوكول والشبكة ونوع DEX، لكن هذه الخطوات توضح الفكرة الأساسية.
-    </p>
+<h3>الفرق بين Slippage وPrice Impact</h3>
 
-    <h2>ما دور العقود الذكية في DEX؟</h2>
+<ul>
+    <li><strong>Price Impact:</strong> تأثير ناتج عن حجم العملية والسيولة المتاحة وطريقة تسعير البروتوكول.</li>
+    <li><strong>Slippage:</strong> فرق أو نطاق بين النتيجة المتوقعة والنتيجة التي يمكن قبولها عند التنفيذ.</li>
+</ul>
 
-    <p>
-        العقود الذكية هي جزء أساسي من العديد من المنصات اللامركزية.
-        فهي تحتوي على القواعد البرمجية التي تحدد كيفية تنفيذ المبادلات وإدارة السيولة وحساب الأسعار والرسوم وفق تصميم البروتوكول.
-    </p>
+<p>قد يتأثر التنفيذ بعوامل أخرى أيضًا، مثل تغير السوق أثناء انتظار المعاملة أو ترتيب المعاملات على الشبكة.</p>
 
-    <p>
-        عندما يرسل المستخدم معاملة إلى العقد الذكي، تقوم الشبكة بمعالجة العملية وفق الكود والقواعد المحددة.
-    </p>
+<h2>لماذا تؤثر السيولة في عملية Swap؟</h2>
 
-    <p>
-        لكن يجب عدم اعتبار وجود عقد ذكي ضمانًا للأمان.
-        فقد تحتوي العقود على أخطاء برمجية أو ثغرات، كما قد توجد مخاطر في مكونات أخرى من النظام.
-    </p>
+<p>في تصميمات DEX التي تعتمد على مجمعات السيولة، يحتاج المتداول إلى وجود سيولة كافية للأصلين أو للأصول المعنية بالعملية.</p>
 
-    <h2>ما هي مجمعات السيولة في DEX؟</h2>
+<p>كلما كانت السيولة محدودة مقارنة بحجم العملية، يمكن أن يصبح تنفيذ صفقة كبيرة أكثر تأثيرًا في السعر.</p>
 
-    <p>
-        تعتمد العديد من المنصات اللامركزية على <strong>Liquidity Pools</strong> لتوفير الأصول التي يحتاجها المستخدمون لإجراء المبادلات.
-    </p>
+<p>وهذا أحد أسباب أهمية النظر إلى السيولة المتاحة بدل الاعتماد على السعر الظاهر فقط.</p>
 
-    <p>
-        يتكون مجمع السيولة عادةً من مجموعة من الأصول أودعها مزودو السيولة وفق قواعد البروتوكول.
-        يستطيع المتداول استخدام هذه السيولة لتنفيذ عملية المبادلة.
-    </p>
+<p>لمزيد من التفاصيل حول مجمعات السيولة، راجع <a href="/academy/defi/what-are-defi-liquidity-pools">ما هي مجمعات السيولة في DeFi؟</a>.</p>
 
-    <p>
-        في المقابل، يحصل مزودو السيولة في بعض البروتوكولات على جزء من رسوم التداول أو حوافز أخرى وفق تصميم النظام.
-    </p>
+<h2>ما هي Token Approvals؟</h2>
 
-    <p>
-        لمعرفة التفاصيل، يمكنك قراءة
-        <a href="/academy/defi/what-are-liquidity-pools">شرح مجمعات السيولة وكيف تعمل في DeFi</a>.
-    </p>
+<p>في بعض عمليات DeFi، لا يكفي أن تكون الرموز موجودة في محفظتك. قد تحتاج إلى إعطاء عقد ذكي أو بروتوكول صلاحية لاستخدام كمية معينة من رمز ERC-20 نيابة عنك.</p>
 
-    <h2>ما هو AMM؟</h2>
+<p>هذه العملية تُعرف باسم <strong>Token Approval</strong>.</p>
 
-    <p>
-        <strong>AMM</strong> اختصار لـ Automated Market Maker، ويشير إلى نموذج يستخدم خوارزميات أو منحنيات تسعير لتحديد أسعار المبادلة بدل الاعتماد فقط على دفتر أوامر تقليدي.
-    </p>
+<p>الـ Approval لا يعني بالضرورة أن الأموال انتقلت إلى البروتوكول فورًا، لكنه يمنح العقد صلاحية محددة وفق شروط الرمز والمعاملة.</p>
 
-    <p>
-        في النموذج الشائع لصانع السوق الآلي القائم على حاصل الضرب الثابت، يمكن تبسيط العلاقة رياضيًا بالشكل:
-    </p>
+<h3>لماذا يجب الانتباه إلى Approvals؟</h3>
 
-    <p>
-        <strong>x × y = k</strong>
-    </p>
+<p>إذا منحت عقدًا ضارًا أو غير موثوق صلاحية واسعة، فقد يمثل ذلك خطرًا على الرموز التي تسمح بها المحفظة، وفقًا لما تسمح به آلية الرمز والعقد.</p>
 
-    <p>
-        حيث تمثل <strong>x</strong> و<strong>y</strong> كميات أصلين داخل المجمع، بينما تمثل <strong>k</strong> قيمة ثابتة ضمن النموذج.
-    </p>
+<p>لذلك من المهم:</p>
 
-    <p>
-        عند تنفيذ عملية مبادلة، تتغير كميات الأصول داخل المجمع، ويُستخدم نموذج التسعير لتحديد مقدار الأصل الذي سيحصل عليه المستخدم.
-    </p>
+<ul>
+    <li>التأكد من أنك تتفاعل مع الموقع الرسمي للبروتوكول.</li>
+    <li>فهم العقد الذي تطلب من محفظتك التوقيع عليه.</li>
+    <li>عدم منح صلاحيات غير ضرورية عندما يكون الخيار متاحًا.</li>
+    <li>مراجعة الصلاحيات القديمة وإلغاؤها عندما لا تعود مطلوبة.</li>
+</ul>
 
-    <p>
-        ولا تستخدم جميع DEXs النموذج نفسه؛ فقد تختلف منحنيات التسعير وآليات إدارة السيولة من بروتوكول إلى آخر.
-    </p>
+<h2>ما هو MEV؟</h2>
 
-    <h2>من أين يأتي سعر الأصل في DEX؟</h2>
+<p><strong>MEV</strong> هو اختصار لـ <strong>Maximal Extractable Value</strong>، ويشير بصورة عامة إلى القيمة التي يمكن استخراجها من ترتيب المعاملات أو إدراجها أو استبعادها أو تغيير موضعها ضمن عملية إنتاج الكتل أو معالجة المعاملات، بحسب تصميم الشبكة والجهات المشاركة فيها.</p>
 
-    <p>
-        يعتمد السعر في DEX على تصميم البروتوكول وطريقة اكتشاف السعر.
-        في مجمعات AMM، يتأثر السعر بنسب الأصول داخل المجمع وبعمليات التداول.
-    </p>
+<p>في سياق DEX، قد تظهر آثار MEV لأن معاملات التداول تُرسل إلى الشبكة وتصبح خاضعة لآليات ترتيب وتنفيذ معينة قبل تأكيدها.</p>
 
-    <p>
-        عندما يتغير السعر في السوق الخارجي مقارنة بالسعر داخل المجمع، يمكن للمتداولين والمراجحين تنفيذ عمليات تساعد على تقليل الفرق بين الأسعار.
-    </p>
+<p>لا يعني ذلك أن كل معاملة على DEX تتعرض بالضرورة للاستغلال، كما أن آليات MEV تختلف من شبكة إلى أخرى.</p>
 
-    <p>
-        لذلك فإن السعر الذي يظهر للمستخدم قد يتغير باستمرار نتيجة التداول والسيولة وحركة السوق.
-    </p>
+<h2>ما هو Sandwich Attack؟</h2>
 
-    <h2>ما المقصود بالـ Slippage؟</h2>
+<p>من الأمثلة المعروفة المرتبطة بـ MEV ما يسمى <strong>Sandwich Attack</strong>.</p>
 
-    <p>
-        <strong>Slippage</strong> أو الانزلاق السعري هو الفرق بين السعر المتوقع للمبادلة والسعر الفعلي الذي يتم تنفيذ العملية عنده.
-    </p>
+<p>بصورة مبسطة، قد يحاول طرف ما وضع معاملة قبل معاملة مستخدم وأخرى بعدها بهدف الاستفادة من تأثير المعاملة المستهدفة في السعر.</p>
 
-    <p>
-        يمكن أن يحدث الانزلاق بسبب تغير السوق أو حجم العملية أو مستوى السيولة أو نشاط المتداولين بين لحظة إعداد المعاملة ولحظة تنفيذها.
-    </p>
+<p>إذا كانت المعاملة كبيرة والسيولة محدودة، فقد يكون تأثير السعر أكثر وضوحًا، ولذلك قد تصبح بعض عمليات Swap أكثر تعرضًا لهذا النوع من السلوك.</p>
 
-    <p>
-        في بعض المجمعات، يمكن أن تكون العمليات الكبيرة مقارنة بحجم السيولة أكثر تأثيرًا على السعر.
-    </p>
+<p>لا يعني ذلك أن كل DEX أو كل شبكة معرضة بنفس الدرجة، فالأمر يعتمد على تصميم الشبكة والبروتوكول وآلية تنفيذ وترتيب المعاملات.</p>
 
-    <h2>ما هو Price Impact؟</h2>
+<h2>ما علاقة Gas بتنفيذ Swap؟</h2>
 
-    <p>
-        <strong>Price Impact</strong> أو تأثير السعر يشير إلى مقدار تأثير عملية التداول نفسها على سعر الأصل داخل المجمع.
-    </p>
+<p>في الشبكات التي تتطلب رسومًا لتنفيذ المعاملات، يحتاج المستخدم إلى دفع <strong>Gas</strong> لتنفيذ العمليات على الشبكة.</p>
 
-    <p>
-        عندما تكون السيولة محدودة مقارنة بحجم المبادلة، يمكن أن يكون تأثير السعر أكبر.
-        ولهذا السبب قد يحصل المستخدم على كمية أقل مما يتوقعه إذا كان حجم العملية كبيرًا بالنسبة إلى السيولة المتاحة.
-    </p>
+<p>قد تتضمن عملية Swap أكثر من معاملة، مثل Approval ثم Swap، وبالتالي قد يتحمل المستخدم رسوم شبكة لكل معاملة منفصلة.</p>
 
-    <p>
-        يجب التمييز بين <strong>Price Impact</strong> و<strong>Slippage</strong>، فهما مفهومان مرتبطان ولكنهما ليسا متطابقين.
-    </p>
+<p>كما أن ارتفاع ازدحام الشبكة قد يؤدي إلى زيادة تكلفة التنفيذ أو زيادة الوقت اللازم لتأكيد المعاملة، بحسب آلية الرسوم في الشبكة.</p>
 
-    <h2>ما هي رسوم DEX؟</h2>
+<h2>ما هي DEX Aggregators؟</h2>
 
-    <p>
-        قد تتضمن عملية المبادلة عدة أنواع من التكاليف، ويعتمد ذلك على البروتوكول والشبكة.
-    </p>
+<p><strong>DEX Aggregator</strong> هو نظام يبحث عن مسارات تنفيذ من عدة مصادر أو منصات أو مجمعات سيولة بهدف الوصول إلى مسار تداول مناسب وفق المعايير التي يستخدمها النظام.</p>
 
-    <ul>
-        <li>رسوم التداول التي يحددها البروتوكول.</li>
-        <li>رسوم الشبكة أو Gas Fee لتنفيذ المعاملة.</li>
-        <li>تكاليف أخرى قد تظهر بسبب المسار المستخدم أو الخدمات الوسيطة.</li>
-    </ul>
+<p>بدل البحث يدويًا عن مسار واحد، قد يحاول الـ Aggregator تقسيم العملية أو استخدام أكثر من مصدر للسيولة.</p>
 
-    <p>
-        لذلك يجب النظر إلى التكلفة الإجمالية للعملية بدل التركيز على رسوم التداول وحدها.
-    </p>
+<p>لكن استخدام Aggregator لا يعني تلقائيًا الحصول على أفضل نتيجة أو التخلص من جميع المخاطر.</p>
 
-    <h2>ما هو Gas Fee؟</h2>
+<p>قد تظل هناك مخاطر مرتبطة بالعقود الذكية والمسارات المستخدمة والسيولة والرسوم والانزلاق السعري والبنية التي يعتمد عليها النظام.</p>
 
-    <p>
-        رسوم الغاز هي التكلفة التي يدفعها المستخدم للشبكة لمعالجة وتنفيذ المعاملة.
-        وهي تختلف حسب الشبكة وحالة الازدحام وتعقيد المعاملة وعوامل أخرى.
-    </p>
+<h2>هل كل DEX تستخدم AMM؟</h2>
 
-    <p>
-        رسوم الغاز ليست بالضرورة جزءًا من رسوم DEX نفسها.
-        فقد يدفع المستخدم رسومًا للشبكة بالإضافة إلى أي رسوم يفرضها البروتوكول.
-    </p>
+<p>لا.</p>
 
-    <h2>ما معنى Wallet-to-Wallet في DEX؟</h2>
+<p>نموذج <strong>AMM</strong> ومجمعات السيولة من أكثر التصاميم انتشارًا في عالم DEX، لكنه ليس التصميم الوحيد.</p>
 
-    <p>
-        في كثير من تطبيقات DEX، يمكن للمستخدم التفاعل مع البروتوكول مباشرة من محفظته.
-        وهذا يعني أن المستخدم لا يحتاج بالضرورة إلى إيداع أصوله في حساب تداول مركزي قبل إجراء المبادلة.
-    </p>
+<p>يمكن أن تستخدم بعض المنصات نماذج تعتمد على دفاتر الأوامر أو تصميمات هجينة أو آليات أخرى لتنفيذ التداول.</p>
 
-    <p>
-        لكن الاتصال بالمحفظة لا يعني أن المستخدم محمي تلقائيًا من المخاطر.
-        يجب التأكد من التطبيق والعقد الذي تتم الموافقة على التفاعل معه، لأن الموافقات الخاطئة أو المواقع الضارة يمكن أن تسبب خسائر.
-    </p>
+<p>لذلك لا ينبغي استخدام مصطلحات DEX وAMM وLiquidity Pool باعتبارها مترادفات.</p>
 
-    <h2>ما هي Token Approval؟</h2>
+<h2>ماذا يحدث إذا كانت السيولة منخفضة؟</h2>
 
-    <p>
-        بعض عمليات DEX تتطلب من المستخدم منح عقد ذكي صلاحية استخدام كمية معينة من رمز معين من محفظته.
-        تعرف هذه العملية عادة باسم <strong>Token Approval</strong>.
-    </p>
+<p>انخفاض السيولة يمكن أن يؤدي إلى عدة آثار، منها:</p>
 
-    <p>
-        يجب التعامل مع الموافقات بحذر وفهم ما يتم السماح به، لأن منح صلاحية غير مناسبة لعقد ضار أو مخترق قد يؤدي إلى مخاطر على الأصول.
-    </p>
+<ul>
+    <li>ارتفاع تأثير السعر للصفقات الكبيرة.</li>
+    <li>زيادة احتمال الحصول على تنفيذ أقل ملاءمة.</li>
+    <li>زيادة الحساسية للتغيرات المفاجئة في السعر.</li>
+    <li>زيادة صعوبة الخروج من بعض المراكز دون تأثير كبير على السعر.</li>
+</ul>
 
-    <p>
-        لذلك فإن أمان DEX لا يعتمد فقط على عملية المبادلة نفسها، بل أيضًا على طريقة استخدام المستخدم للمحفظة والموافقات والعقود.
-    </p>
+<p>لذلك يجب النظر إلى السيولة الفعلية والمسار المستخدم وليس إلى السعر المعروض وحده.</p>
 
-    <h2>ما هي MEV؟</h2>
+<h2>هل ارتفاع حجم التداول يعني أن العملية آمنة؟</h2>
 
-    <p>
-        <strong>MEV</strong> أو Maximal Extractable Value يشير بصورة عامة إلى القيمة التي يمكن لبعض المشاركين في ترتيب أو إنتاج معاملات البلوكشين الحصول عليها من خلال التأثير في ترتيب المعاملات أو استغلال المعلومات المتاحة قبل تنفيذها.
-    </p>
+<p>ليس بالضرورة.</p>
 
-    <p>
-        في سياق DEX، يمكن أن تظهر أنواع مختلفة من سلوكيات MEV حول عمليات التداول.
-        ومن الأمثلة التي يتم مناقشتها في هذا السياق هجمات <strong>Sandwich</strong>، حيث قد يتم وضع معاملات قبل وبعد معاملة مستخدم بهدف الاستفادة من تغير السعر الناتج عنها.
-    </p>
+<p>ارتفاع حجم التداول أو عدد المستخدمين لا يثبت بمفرده أن العقد الذكي آمن أو أن البروتوكول خالٍ من الثغرات.</p>
 
-    <p>
-        تختلف آليات MEV وتأثيراتها حسب الشبكة وطريقة تنفيذ المعاملات والبروتوكول.
-    </p>
+<p>كما أن انخفاض حجم التداول لا يعني تلقائيًا أن البروتوكول ضار.</p>
 
-    <h2>ما هي مزايا المنصات اللامركزية؟</h2>
+<p>يجب تقييم عدة عوامل معًا، مثل تصميم البروتوكول، العقود الذكية، الصلاحيات الإدارية، السيولة، آليات الحوكمة، الاعتماد على Oracles، والمخاطر المرتبطة بالأصول.</p>
 
-    <p>
-        يمكن أن توفر DEXs مجموعة من الخصائص التي تجعلها مهمة داخل منظومة DeFi، ومنها:
-    </p>
+<h2>ما علاقة هذا الدرس بالخسارة غير الدائمة؟</h2>
 
-    <ul>
-        <li><strong>التفاعل المباشر مع المحافظ:</strong> في العديد من النماذج لا يحتاج المستخدم إلى إيداع الأصول في منصة مركزية.</li>
-        <li><strong>الوصول إلى مجموعة واسعة من الأصول:</strong> قد تتوفر رموز لا تكون مدرجة في المنصات المركزية.</li>
-        <li><strong>الشفافية على مستوى البلوكشين:</strong> يمكن فحص المعاملات والعقود والبيانات المتاحة على الشبكة.</li>
-        <li><strong>قابلية البرمجة:</strong> يمكن دمج DEXs مع تطبيقات وبروتوكولات DeFi أخرى.</li>
-        <li><strong>الوصول العالمي نسبيًا:</strong> يمكن الوصول إلى البروتوكولات من أي مكان تتوفر فيه الشبكة والواجهة المناسبة، مع اختلاف القيود القانونية والتقنية حسب المستخدم والمنطقة.</li>
-    </ul>
+<p>إذا كنت تتعامل مع مجمعات السيولة، فقد تتعرض لما يسمى <strong>Impermanent Loss</strong> نتيجة تغير السعر النسبي للأصول.</p>
 
-    <h2>ما هي مخاطر DEX؟</h2>
+<p>وهذا يختلف عن Slippage وPrice Impact وMEV:</p>
 
-    <p>
-        رغم المزايا، لا تخلو المنصات اللامركزية من المخاطر.
-        ومن أهمها:
-    </p>
+<ul>
+    <li><strong>Impermanent Loss:</strong> يتعلق بالمقارنة بين قيمة مركز السيولة وقيمة الاحتفاظ بالأصول خارجه.</li>
+    <li><strong>Price Impact:</strong> يتعلق بتأثير حجم العملية في السعر المتاح.</li>
+    <li><strong>Slippage:</strong> يتعلق بالفرق بين النتيجة المتوقعة والنتيجة المقبولة أو المنفذة.</li>
+    <li><strong>MEV:</strong> يتعلق بالقيمة التي يمكن استخراجها من ترتيب أو إدراج أو استبعاد المعاملات وفق آليات الشبكة.</li>
+</ul>
 
-    <h3>1. مخاطر العقود الذكية</h3>
+<p>لمزيد من التفاصيل، راجع <a href="/academy/defi/what-is-impermanent-loss">ما هي الخسارة غير الدائمة Impermanent Loss؟</a>.</p>
 
-    <p>
-        قد تحتوي العقود على أخطاء أو ثغرات يمكن استغلالها.
-        وحتى التدقيق الأمني لا يضمن اكتشاف جميع المشكلات أو منع المخاطر المستقبلية.
-    </p>
+<h2>مخاطر استخدام DEX من الناحية العملية</h2>
 
-    <h3>2. مخاطر السيولة</h3>
+<p>فهم آلية Swap لا يعني أن العملية خالية من المخاطر. من أهم المخاطر التي ينبغي معرفتها:</p>
 
-    <p>
-        انخفاض السيولة يمكن أن يؤدي إلى ارتفاع الانزلاق السعري وتأثير السعر، وقد يجعل تنفيذ بعض العمليات أكثر تكلفة.
-    </p>
+<ul>
+    <li>مخاطر العقود الذكية.</li>
+    <li>مخاطر البروتوكول.</li>
+    <li>مخاطر السيولة.</li>
+    <li>مخاطر Slippage وPrice Impact.</li>
+    <li>مخاطر Token Approvals.</li>
+    <li>مخاطر MEV وبعض أشكال الاستغلال.</li>
+    <li>مخاطر Oracles في البروتوكولات التي تعتمد عليها.</li>
+    <li>مخاطر الإدارة والصلاحيات الإدارية.</li>
+    <li>مخاطر الأصول نفسها.</li>
+    <li>مخاطر التصيد والمواقع المزيفة.</li>
+    <li>مخاطر الشبكة ورسوم المعاملات.</li>
+</ul>
 
-    <h3>3. مخاطر الأصول</h3>
+<h2>قائمة فحص قبل تنفيذ Swap</h2>
 
-    <p>
-        بعض الرموز المتداولة على DEX قد تكون جديدة أو قليلة السيولة أو شديدة التقلب أو مرتبطة بمشاريع عالية المخاطر.
-    </p>
+<p>قبل تنفيذ أي عملية، يمكن استخدام قائمة الفحص التالية:</p>
 
-    <h3>4. مخاطر التصيد والمواقع المزيفة</h3>
+<ol>
+    <li>هل أنت على الموقع الرسمي للبروتوكول؟</li>
+    <li>هل عنوان العقد أو الرمز الذي تتعامل معه صحيح؟</li>
+    <li>هل تفهم الأصل الذي ستشتريه أو تبيعه؟</li>
+    <li>هل تفهم كمية الأصل التي ستدفعها والكمية المتوقعة التي ستحصل عليها؟</li>
+    <li>ما قيمة Price Impact؟</li>
+    <li>ما مقدار Slippage المسموح؟</li>
+    <li>هل تحتاج إلى Token Approval؟</li>
+    <li>هل الصلاحية المطلوبة منطقية بالنسبة للعملية؟</li>
+    <li>كم تبلغ رسوم الشبكة؟</li>
+    <li>هل توجد مخاطر مرتبطة بالسيولة أو الأصل أو البروتوكول؟</li>
+    <li>هل تفهم ما الذي ستوقع عليه في محفظتك؟</li>
+</ol>
 
-    <p>
-        يمكن للمواقع الضارة تقليد واجهات DEX الحقيقية بهدف خداع المستخدم ومنحه موافقات أو توقيعات خطرة.
-    </p>
+<h2>أخطاء شائعة عند استخدام DEX</h2>
 
-    <h3>5. مخاطر MEV</h3>
+<ul>
+    <li>الاعتماد على السعر الظاهر فقط دون فحص Price Impact.</li>
+    <li>رفع Slippage بشكل كبير لمجرد تجاوز فشل المعاملة.</li>
+    <li>الموافقة على Token Approval دون فهم الجهة التي ستستخدم الصلاحية.</li>
+    <li>التعامل مع عقد أو رمز من عنوان غير موثوق.</li>
+    <li>الاعتقاد بأن DEX يعني تلقائيًا أن العملية آمنة.</li>
+    <li>الاعتقاد بأن انخفاض الرسوم يعني انخفاض المخاطر.</li>
+    <li>الاعتماد على عدد المتابعين أو التعليقات بدل فحص البروتوكول نفسه.</li>
+    <li>توقيع رسالة أو معاملة لا يفهم المستخدم مضمونها.</li>
+</ul>
 
-    <p>
-        قد تتعرض بعض عمليات التداول لأشكال مختلفة من MEV، بما في ذلك بعض أشكال الاستغلال المرتبطة بترتيب المعاملات.
-    </p>
+<h2>هل DEX أكثر أمانًا من CEX؟</h2>
 
-    <h3>6. مخاطر الإدارة والحوكمة</h3>
+<p>لا توجد إجابة عامة تصلح لكل الحالات.</p>
 
-    <p>
-        بعض البروتوكولات قد تحتوي على صلاحيات إدارية أو آليات حوكمة يمكن أن تؤثر في طريقة عمل النظام.
-        لذلك يجب دراسة الصلاحيات الفعلية بدل الاعتماد على اسم "لامركزي" وحده.
-    </p>
+<p>DEX وCEX يعتمدان على نماذج مختلفة من الحفظ والتنفيذ والثقة. في DEX قد يحتفظ المستخدم بأصوله في محفظته ويتفاعل مباشرة أو بصورة غير مباشرة مع عقود ذكية، بينما تعتمد CEX عادةً على بنية مركزية تدير الحسابات والأصول وعمليات التداول.</p>
 
-    <h2>هل DEX آمن لمجرد أنه لامركزي؟</h2>
+<p>كل نموذج يملك أنواعًا مختلفة من المخاطر، ولذلك لا ينبغي اعتبار أحدهما آمنًا بشكل مطلق لمجرد اسمه أو بنيته.</p>
 
-    <p>
-        لا.
-    </p>
+<h2>الخلاصة</h2>
 
-    <p>
-        اللامركزية ليست مرادفًا للأمان الكامل.
-        يمكن أن يكون البروتوكول لامركزيًا بدرجة معينة ومع ذلك يحتوي على ثغرات أو مخاطر اقتصادية أو تقنية أو حوكمة.
-    </p>
+<p>استخدام DEX لا يقتصر على الضغط على زر Swap. فهم التفاصيل المحيطة بالمعاملة يساعد على قراءة النتيجة المتوقعة وفهم المخاطر قبل التوقيع.</p>
 
-    <p>
-        كما أن المستخدم نفسه قد يتعرض لمخاطر من خلال موقع مزيف أو توقيع معاملة غير مفهومة أو منح موافقة غير مناسبة.
-    </p>
+<p>أهم المفاهيم التي ينبغي تذكرها هي:</p>
 
-    <h2>هل DEX مجهول تمامًا؟</h2>
+<ul>
+    <li><strong>Slippage</strong> يتعلق بنطاق النتيجة المقبولة مقارنة بالتوقع.</li>
+    <li><strong>Price Impact</strong> يتعلق بتأثير العملية في السعر المتاح.</li>
+    <li><strong>Token Approval</strong> قد يمنح عقدًا ذكيًا صلاحية استخدام رموز معينة وفق آلية الرمز والصلاحية.</li>
+    <li><strong>MEV</strong> يرتبط بالقيمة الناتجة عن آليات ترتيب وتنفيذ المعاملات.</li>
+    <li><strong>السيولة</strong> تؤثر في جودة تنفيذ بعض عمليات التداول.</li>
+    <li><strong>DEX Aggregators</strong> قد تجمع مصادر أو مسارات متعددة، لكنها لا تلغي المخاطر.</li>
+</ul>
 
-    <p>
-        لا ينبغي وصف DEX بأنه مجهول تمامًا.
-    </p>
+<p>ولا توجد طريقة تجعل عمليات DeFi خالية من المخاطر. لذلك يجب فهم العملية والعقد الذي ستتفاعل معه والمعاملة التي ستوقعها قبل التنفيذ.</p>
 
-    <p>
-        معاملات البلوكشين العامة يمكن أن تكون قابلة للرؤية والتحليل، وقد يمكن ربط العناوين بهويات أو نشاطات معينة من خلال مصادر وبيانات مختلفة.
-    </p>
-
-    <p>
-        لذلك من الأدق الحديث عن طبيعة مختلفة للهوية والخصوصية، وليس عن إخفاء كامل للهوية.
-    </p>
-
-    <h2>ما علاقة DEX بالخسارة غير الدائمة؟</h2>
-
-    <p>
-        ترتبط الخسارة غير الدائمة بمزودي السيولة الذين يضعون أصولهم في مجمعات تستخدمها بعض DEXs.
-    </p>
-
-    <p>
-        عندما تتغير الأسعار النسبية للأصول، يمكن أن يتغير تركيب الأصول داخل المجمع، مما يؤدي إلى فرق محتمل بين قيمة مركز السيولة وقيمة الاحتفاظ بالأصول نفسها خارج المجمع.
-    </p>
-
-    <p>
-        يمكنك متابعة الشرح المتخصص في
-        <a href="/academy/defi/what-is-impermanent-loss">الخسارة غير الدائمة Impermanent Loss</a>
-        لفهم هذه العلاقة بشكل أعمق.
-    </p>
-
-    <h2>ما علاقة DEX بـ Yield Farming؟</h2>
-
-    <p>
-        قد تستخدم بعض برامج Yield Farming السيولة الموجودة في DEXs أو تمنح مكافآت للمستخدمين الذين يوفرون السيولة.
-    </p>
-
-    <p>
-        لكن توفير السيولة وزراعة العوائد ليسا الشيء نفسه.
-        توفير السيولة يعني المساهمة في مجمع أو آلية سيولة، بينما Yield Farming قد يتضمن استراتيجية للحصول على مكافآت من خلال استخدام السيولة أو بروتوكولات أخرى.
-    </p>
-
-    <p>
-        يمكنك قراءة
-        <a href="/academy/defi/what-is-yield-farming">شرح Yield Farming للمبتدئين</a>
-        لفهم الفرق بصورة أكبر.
-    </p>
-
-    <h2>ما الفرق بين Swap وTrade؟</h2>
-
-    <p>
-        في سياق DEX، يستخدم مصطلح <strong>Swap</strong> غالبًا لوصف مبادلة أصل بأصل آخر من خلال بروتوكول.
-    </p>
-
-    <p>
-        أما كلمة <strong>Trade</strong> فهي أوسع وقد تشير إلى التداول بشكل عام، سواء باستخدام DEX أو CEX أو نموذج آخر.
-    </p>
-
-    <p>
-        لذلك فإن كل Swap يمكن اعتباره عملية تداول بمعنى واسع، لكن تفاصيل التنفيذ تختلف حسب النظام المستخدم.
-    </p>
-
-    <h2>ما هي Aggregators؟</h2>
-
-    <p>
-        بعض التطبيقات تعمل كـ <strong>DEX Aggregators</strong>، أي أنها تبحث عبر عدة مصادر للسيولة أو عدة بروتوكولات بهدف إيجاد مسار مناسب للمبادلة وفق المعايير التي تستخدمها.
-    </p>
-
-    <p>
-        قد يؤدي تقسيم عملية المبادلة بين أكثر من مصدر أو استخدام مسار متعدد الخطوات إلى تحسين السعر في بعض الحالات، لكنه قد يضيف أيضًا تعقيدًا ورسومًا أو مخاطر إضافية.
-    </p>
-
-    <p>
-        لذلك يجب على المستخدم فهم المسار الذي سيتم تنفيذه والتكاليف المرتبطة به عندما تكون هذه المعلومات متاحة.
-    </p>
-
-    <h2>كيف يختار المستخدم DEX أو بروتوكولًا للدراسة؟</h2>
-
-    <p>
-        عند دراسة أي بروتوكول، من المفيد عدم الاعتماد على حجم التداول أو اسم المشروع وحدهما.
-        يمكن فحص مجموعة من العناصر، مثل:
-    </p>
-
-    <ul>
-        <li>العقود الذكية المستخدمة.</li>
-        <li>الشبكة التي يعمل عليها البروتوكول.</li>
-        <li>نوع AMM أو آلية التداول.</li>
-        <li>حجم السيولة.</li>
-        <li>حجم التداول.</li>
-        <li>هيكل الرسوم.</li>
-        <li>آلية الحوكمة.</li>
-        <li>الصلاحيات الإدارية.</li>
-        <li>التدقيقات الأمنية المتاحة.</li>
-        <li>التاريخ الأمني المعروف للمشروع.</li>
-        <li>آلية تحديث العقود إن وجدت.</li>
-    </ul>
-
-    <p>
-        هذه المعلومات تساعد على فهم المخاطر، لكنها لا تحول أي بروتوكول إلى نظام خالٍ من المخاطر.
-    </p>
-
-    <h2>نصائح أمنية عند استخدام DEX</h2>
-
-    <ul>
-        <li>تحقق من عنوان الموقع قبل ربط المحفظة.</li>
-        <li>لا تعتمد على نتائج البحث وحدها للوصول إلى التطبيقات المالية.</li>
-        <li>راجع المعاملة والمبلغ والعنوان قبل التوقيع.</li>
-        <li>انتبه إلى Token Approvals والصلاحيات الممنوحة للعقود.</li>
-        <li>لا تمنح صلاحيات غير ضرورية لعقود غير موثوقة.</li>
-        <li>تأكد من الشبكة التي تعمل عليها قبل إرسال الأصول.</li>
-        <li>افهم رسوم الشبكة ورسوم البروتوكول.</li>
-        <li>راقب Slippage وPrice Impact قبل تنفيذ المبادلة.</li>
-        <li>لا تعتبر التدقيق الأمني ضمانًا مطلقًا.</li>
-        <li>لا تستخدم أموالًا لا يمكنك تحمل خسارتها.</li>
-    </ul>
-
-    <h2>DEX للمبتدئين: الخلاصة</h2>
-
-    <p>
-        المنصات اللامركزية DEX هي جزء أساسي من منظومة DeFi، وتتيح في العديد من النماذج مبادلة الأصول من خلال العقود الذكية ومجمعات السيولة بدل الاعتماد على وسيط مركزي لتنفيذ العملية.
-    </p>
-
-    <p>
-        تعتمد كثير من DEXs على AMM، بينما تستخدم بروتوكولات أخرى نماذج مختلفة.
-        ولذلك لا ينبغي افتراض أن جميع المنصات اللامركزية تعمل بالطريقة نفسها.
-    </p>
-
-    <p>
-        كما أن DEX لا يعني تلقائيًا الأمان أو الخصوصية أو اللامركزية الكاملة.
-        توجد مخاطر تتعلق بالعقود الذكية والسيولة والأصول وMEV والحوكمة والتصيد والموافقات وغيرها.
-    </p>
-
-    <p>
-        فهم DEX بشكل صحيح يتطلب ربطه بالمفاهيم التي تعلمناها في المقالات السابقة، خصوصًا
-        <a href="/academy/defi/what-is-defi">DeFi</a>،
-        و<a href="/academy/defi/what-are-liquidity-pools">مجمعات السيولة</a>،
-        و<a href="/academy/defi/what-is-yield-farming">Yield Farming</a>،
-        و<a href="/academy/defi/what-is-impermanent-loss">Impermanent Loss</a>.
-    </p>
-
-    <h2>أهم النقاط التي يجب تذكرها</h2>
-
-    <ul>
-        <li>DEX هي بروتوكولات لتبادل الأصول الرقمية باستخدام آليات تعتمد على العقود الذكية.</li>
-        <li>تعتمد العديد من DEXs على مجمعات السيولة وAMM.</li>
-        <li>ليست جميع DEXs متطابقة في التصميم أو درجة اللامركزية.</li>
-        <li>Slippage وPrice Impact مفهومان مهمان عند تنفيذ المبادلات.</li>
-        <li>رسوم التداول تختلف عن رسوم الشبكة أو Gas Fee.</li>
-        <li>Token Approvals تحتاج إلى تعامل حذر وفهم للصلاحيات.</li>
-        <li>اللامركزية لا تعني الأمان الكامل أو إخفاء الهوية تمامًا.</li>
-        <li>DEXs قد تتعرض لمخاطر العقود الذكية والسيولة وMEV والحوكمة والتصيد.</li>
-        <li>ارتفاع حجم التداول أو السيولة لا يعني انعدام المخاطر.</li>
-    </ul>
-
-    <div class="academy-disclaimer">
-        <strong>تنبيه تعليمي:</strong>
-        هذا المحتوى مقدم لأغراض تعليمية فقط ولا يمثل نصيحة مالية أو استثمارية أو توصية باستخدام أي منصة أو بروتوكول أو أصل رقمي.
-        التعامل مع DeFi وDEXs ينطوي على مخاطر قد تشمل تقلب الأسعار، والخسارة غير الدائمة، ومخاطر العقود الذكية والسيولة والحوكمة وMEV والتصيد والاحتيال.
-        يجب فهم المخاطر وإجراء البحث المستقل قبل اتخاذ أي قرار مالي.
-    </div>
-
-</article>
+<p>للاطلاع على المخاطر الأمنية بصورة أوسع، انتقل إلى درس <a href="/academy/defi/defi-security-and-safety">أمان DeFi: كيف تحمي أموالك من المخاطر والاحتيال؟</a>.</p>
 HTML,
 
-    'content_en' => <<<'HTML'
-<article>
-
-    <p>
-        <strong>Decentralized Exchanges (DEXs)</strong> are among the most important applications in decentralized finance, or DeFi.
-        They allow users to swap digital assets through protocols that rely on smart contracts, rather than necessarily depending on a centralized exchange that holds assets and executes trades on behalf of users.
-    </p>
-
-    <p>
-        However, the term "decentralized" does not mean that every DEX is identical or completely free from any form of administration.
-        The degree of decentralization, governance model, administrative permissions, and smart-contract design can vary significantly between protocols.
-    </p>
-
-    <p>
-        In this AQL Crypto Academy article, we will explain what a DEX is, how swaps work, and the roles of smart contracts, liquidity pools, and automated market makers, along with the main benefits and risks users should understand.
-    </p>
-
-    <h2>What Is a Decentralized Exchange?</h2>
-
-    <p>
-        A <strong>Decentralized Exchange (DEX)</strong> is a protocol or application that allows users to trade or swap digital assets through mechanisms based on smart contracts rather than relying exclusively on a traditional centralized order-book model.
-    </p>
-
-    <p>
-        In liquidity-pool-based DEX models, a user does not necessarily need to find another trader willing to take the opposite side of the transaction.
-        Instead, the swap can be executed against liquidity supplied to a pool.
-    </p>
-
-    <p>
-        You can first review
-        <a href="/academy/defi/what-is-defi">What Is DeFi?</a>
-        to understand the broader ecosystem in which DEXs operate.
-    </p>
-
-    <h2>DEX vs. CEX: What Is the Difference?</h2>
-
-    <p>
-        A useful way to understand DEXs is to compare them with <strong>Centralized Exchanges (CEXs)</strong>.
-    </p>
-
-    <h3>Centralized Exchange</h3>
-
-    <p>
-        On a centralized exchange, users typically interact with a company or organization that operates the platform.
-        Assets may be held in wallets controlled by the exchange, while trading can take place through internal systems such as an order book.
-    </p>
-
-    <h3>Decentralized Exchange</h3>
-
-    <p>
-        In many DEX models, users interact directly with smart contracts through their wallets, and swaps are executed according to the protocol’s programmed rules.
-    </p>
-
-    <p>
-        This does not mean that every DEX has no centralized components at all.
-        A protocol may have a particular frontend hosting model, administrative permissions, governance mechanisms, or off-chain components depending on its design.
-    </p>
-
-    <h2>How Does a Swap Work on a DEX?</h2>
+'content_en' => <<<'HTML'
 
-    <p>
-        To understand the process, imagine that a user wants to exchange one digital asset for another.
-    </p>
 
-    <ol>
-        <li>The user opens the DEX interface.</li>
-        <li>The user connects a wallet to the application.</li>
-        <li>The user selects the asset to sell and the asset to receive.</li>
-        <li>The user specifies the desired amount.</li>
-        <li>The interface displays an estimated price, fees, and other available information.</li>
-        <li>The user confirms the transaction through the wallet.</li>
-        <li>The transaction interacts with a smart contract on the blockchain.</li>
-        <li>The contract executes the swap according to the protocol’s rules.</li>
-    </ol>
+<h2>Introduction</h2>
 
-    <p>
-        The exact details vary by protocol, blockchain, and DEX architecture, but these steps illustrate the basic concept.
-    </p>
+<p>After learning what decentralized exchanges (DEXs) are and how they generally work, the next step is understanding what actually happens when a Swap is executed. What is the difference between <strong>Slippage</strong> and <strong>Price Impact</strong>? What is a <strong>Token Approval</strong>? What does <strong>MEV</strong> mean, and how can liquidity and DEX aggregators affect execution?</p>
 
-    <h2>What Role Do Smart Contracts Play in a DEX?</h2>
+<p>This lesson focuses on the practical and more advanced mechanics of using DEXs rather than repeating the basic definition of a decentralized exchange. Beginners should first review <a href="/academy/defi/what-is-defi">What is DeFi?</a> and <a href="/academy/defi/what-is-a-decentralized-exchange-dex">What Are Decentralized Exchanges (DEXs)?</a>.</p>
 
-    <p>
-        Smart contracts are a fundamental component of many decentralized exchanges.
-        They contain the programmed rules that determine how swaps, liquidity, pricing, and fees are handled according to the protocol’s design.
-    </p>
-
-    <p>
-        When a user sends a transaction to a smart contract, the blockchain processes it according to the contract’s code and rules.
-    </p>
+<h2>What Happens During a Swap?</h2>
 
-    <p>
-        However, the existence of a smart contract does not automatically guarantee security.
-        Contracts can contain programming errors or vulnerabilities, and other parts of the system can introduce additional risks.
-    </p>
+<p>When a user performs a Swap, the process does not necessarily work like buying or selling on a centralized exchange. The exact flow depends on the protocol and its design, but a common liquidity-pool and AMM-based process can be summarized as follows:</p>
 
-    <h2>What Are Liquidity Pools in DEXs?</h2>
+<ol>
+    <li>Select the asset to sell and the asset to receive.</li>
+    <li>Enter the amount.</li>
+    <li>The interface estimates the expected output, fees, and other execution parameters.</li>
+    <li>If required, the user performs a <strong>Token Approval</strong>.</li>
+    <li>The user signs the Swap transaction with the wallet.</li>
+    <li>The transaction is submitted to the blockchain.</li>
+    <li>The smart contract executes according to the protocol's rules.</li>
+    <li>The transaction succeeds or fails depending on the specified conditions.</li>
+</ol>
 
-    <p>
-        Many decentralized exchanges rely on <strong>Liquidity Pools</strong> to provide the assets needed for swaps.
-    </p>
+<p>The exact process varies between networks and protocols, so DEXs should not be assumed to work identically.</p>
 
-    <p>
-        A liquidity pool generally contains assets deposited by liquidity providers according to the protocol’s rules.
-        Traders can use this liquidity to execute swaps.
-    </p>
+<h2>What Is Slippage?</h2>
 
-    <p>
-        In some protocols, liquidity providers receive a share of trading fees or other incentives in return for supplying liquidity.
-    </p>
+<p><strong>Slippage</strong> describes the difference between an expected trading result and the result that can be accepted or obtained when the transaction is executed.</p>
 
-    <p>
-        For more detail, read
-        <a href="/academy/defi/what-are-liquidity-pools">What Are Liquidity Pools?</a>
-    </p>
+<p>When preparing a Swap, a user may specify a maximum acceptable slippage. If the transaction cannot meet that condition, it may revert instead of executing at a worse result.</p>
 
-    <h2>What Is an AMM?</h2>
+<p>Slippage should not automatically be treated as the same thing as the price impact caused by the size of a trade.</p>
 
-    <p>
-        <strong>AMM</strong> stands for Automated Market Maker.
-        It refers to a model that uses algorithms or pricing curves to determine swap prices rather than relying exclusively on a traditional order book.
-    </p>
+<h3>A Simple Example</h3>
 
-    <p>
-        In a common constant-product AMM model, the relationship can be simplified as:
-    </p>
+<p>Suppose a Swap interface estimates that you will receive approximately 100 units of an asset. You may configure the transaction so that it will only execute if the final result remains within an acceptable range.</p>
 
-    <p>
-        <strong>x × y = k</strong>
-    </p>
+<p>If the available result moves outside that range before execution, the transaction may fail rather than accept a worse result.</p>
 
-    <p>
-        In this simplified model, <strong>x</strong> and <strong>y</strong> represent the quantities of two assets in the pool, while <strong>k</strong> represents a constant within the model.
-    </p>
+<p>The exact behavior depends on the protocol, interface, and transaction design.</p>
 
-    <p>
-        When a swap occurs, the quantities of the assets in the pool change, and the pricing model determines the amount of the asset the user receives.
-    </p>
+<h2>What Is Price Impact?</h2>
 
-    <p>
-        Not all DEXs use the same model. Pricing curves and liquidity mechanisms can vary significantly between protocols.
-    </p>
+<p><strong>Price Impact</strong> refers to the effect that a particular trade has on the available price compared with the price before the trade.</p>
 
-    <h2>Where Does the Price Come From on a DEX?</h2>
+<p>Price impact can become more significant when a transaction is large relative to the available market or pool liquidity.</p>
 
-    <p>
-        Pricing depends on the protocol design and its price-discovery mechanism.
-        In AMM-based liquidity pools, the price is influenced by the ratio of assets in the pool and ongoing trading activity.
-    </p>
+<p>In some AMM designs, executing a trade changes the asset ratio inside the pool, which can change the price available for subsequent portions of the trade.</p>
 
-    <p>
-        When the price in a pool differs from prices elsewhere in the market, traders and arbitrageurs may act on the difference, helping move the pool price toward broader market prices.
-    </p>
+<h3>Slippage vs. Price Impact</h3>
 
-    <p>
-        As a result, the price displayed to a user can change continuously due to trading activity, liquidity conditions, and market movements.
-    </p>
+<ul>
+    <li><strong>Price Impact:</strong> the effect of the trade itself on the available price based on its size, liquidity, and pricing mechanism.</li>
+    <li><strong>Slippage:</strong> the difference or allowed range between the expected result and the result that can be accepted or executed.</li>
+</ul>
 
-    <h2>What Is Slippage?</h2>
+<p>Other factors can also affect execution, including market movement while a transaction is waiting to be confirmed and the way transactions are ordered on the network.</p>
 
-    <p>
-        <strong>Slippage</strong> refers to the difference between the expected price of a swap and the actual execution price.
-    </p>
+<h2>Why Does Liquidity Matter?</h2>
 
-    <p>
-        Slippage can result from market movements, transaction size, available liquidity, and trading activity between the time a transaction is prepared and when it is executed.
-    </p>
+<p>In DEX designs that rely on liquidity pools, traders need sufficient liquidity for the assets involved in a Swap.</p>
 
-    <p>
-        In some pools, large transactions relative to available liquidity can have a stronger effect on the execution price.
-    </p>
+<p>When available liquidity is limited relative to the size of the transaction, a large trade can have a greater effect on the available price.</p>
 
-    <h2>What Is Price Impact?</h2>
+<p>This is why users should consider available liquidity instead of relying only on the displayed price.</p>
 
-    <p>
-        <strong>Price Impact</strong> describes how much the trade itself affects the price of an asset within a liquidity pool.
-    </p>
+<p>For more information, see <a href="/academy/defi/what-are-defi-liquidity-pools">What Are DeFi Liquidity Pools?</a>.</p>
 
-    <p>
-        When liquidity is limited compared with the size of a swap, price impact can become larger.
-        This means a user may receive less than expected if the transaction is large relative to the available liquidity.
-    </p>
+<h2>What Are Token Approvals?</h2>
 
-    <p>
-        <strong>Price Impact</strong> and <strong>Slippage</strong> are related concepts, but they are not exactly the same.
-    </p>
+<p>In some DeFi transactions, having tokens in a wallet is not enough. A user may need to authorize a smart contract to spend a specified amount of an ERC-20 token on the user's behalf.</p>
 
-    <h2>What Fees Are Charged by DEXs?</h2>
+<p>This authorization is known as a <strong>Token Approval</strong>.</p>
 
-    <p>
-        A swap can involve several types of costs depending on the protocol and blockchain.
-    </p>
+<p>An Approval does not necessarily mean that the tokens are immediately transferred to the protocol. Instead, it grants a spending allowance according to the token and contract mechanisms.</p>
 
-    <ul>
-        <li>Trading fees charged according to the protocol’s fee structure.</li>
-        <li>Network or gas fees required to process the blockchain transaction.</li>
-        <li>Additional costs that may arise from routing or intermediary services.</li>
-    </ul>
+<h3>Why Should Approvals Be Taken Seriously?</h3>
 
-    <p>
-        This is why users should consider the total transaction cost rather than looking only at the DEX trading fee.
-    </p>
+<p>If a malicious or untrusted contract receives a broad spending allowance, that allowance can create a security risk for the relevant tokens according to the token and contract mechanics.</p>
 
-    <h2>What Is a Gas Fee?</h2>
+<p>Users should therefore:</p>
 
-    <p>
-        A gas fee is the cost paid to the blockchain network for processing and executing a transaction.
-        It can vary depending on the network, congestion, transaction complexity, and other factors.
-    </p>
+<ul>
+    <li>Verify that they are interacting with the official protocol website.</li>
+    <li>Understand the contract they are authorizing.</li>
+    <li>Avoid granting unnecessary permissions when a more limited option is available.</li>
+    <li>Review old approvals and revoke permissions that are no longer needed when appropriate.</li>
+</ul>
 
-    <p>
-        Gas fees are not necessarily the same as DEX trading fees.
-        A user may pay network fees in addition to any fees charged by the protocol.
-    </p>
+<h2>What Is MEV?</h2>
 
-    <h2>What Does Wallet-to-Wallet Mean on a DEX?</h2>
+<p><strong>MEV</strong> stands for <strong>Maximal Extractable Value</strong>. Broadly, it refers to value that can be extracted through transaction ordering, inclusion, exclusion, or placement within block production and transaction processing, depending on the network design and participants involved.</p>
 
-    <p>
-        Many DEX applications allow users to interact with the protocol directly from a wallet.
-        This means users do not necessarily have to deposit their assets into a centralized exchange account before performing a swap.
-    </p>
+<p>In the DEX context, MEV can arise because trading transactions are submitted to a blockchain and become subject to transaction-ordering and execution mechanisms before confirmation.</p>
 
-    <p>
-        However, connecting a wallet does not automatically protect the user from risk.
-        Users should verify the application and the contracts they interact with because malicious sites or dangerous approvals can result in asset loss.
-    </p>
+<p>This does not mean that every DEX transaction is exploited, and MEV mechanisms differ across networks.</p>
 
-    <h2>What Is a Token Approval?</h2>
+<h2>What Is a Sandwich Attack?</h2>
 
-    <p>
-        Some DEX transactions require users to give a smart contract permission to use a certain amount of a token from their wallet.
-        This is commonly known as a <strong>Token Approval</strong>.
-    </p>
+<p>One well-known example associated with MEV is a <strong>Sandwich Attack</strong>.</p>
 
-    <p>
-        Approvals should be handled carefully and understood before signing, because granting inappropriate permissions to a malicious or compromised contract can expose assets to risk.
-    </p>
+<p>In simplified terms, an actor may attempt to place one transaction before a user's transaction and another after it, seeking to benefit from the price effect created by the targeted transaction.</p>
 
-    <p>
-        DEX security therefore depends not only on the swap mechanism but also on how users handle wallets, approvals, and smart contracts.
-    </p>
+<p>Large trades in relatively limited liquidity can make price effects more noticeable, which can make certain Swaps more exposed to this type of behavior.</p>
 
-    <h2>What Is MEV?</h2>
+<p>However, exposure varies depending on the network, protocol, transaction-ordering mechanism, liquidity, and other factors.</p>
 
-    <p>
-        <strong>MEV</strong>, or Maximal Extractable Value, broadly refers to value that certain participants in blockchain transaction ordering can capture by influencing transaction ordering or taking advantage of information available before transactions are finalized.
-    </p>
+<h2>How Does Gas Affect a Swap?</h2>
 
-    <p>
-        In the context of DEXs, different forms of MEV-related behavior can occur around trades.
-        One commonly discussed example is a <strong>sandwich attack</strong>, where transactions may be placed before and after a user’s transaction in an attempt to benefit from the resulting price movement.
-    </p>
+<p>On networks that charge transaction fees, users need to pay <strong>Gas</strong> to execute blockchain transactions.</p>
 
-    <p>
-        MEV mechanisms and their effects vary depending on the blockchain, transaction-ordering system, and protocol.
-    </p>
+<p>A DEX interaction may involve more than one transaction. For example, a Token Approval may be followed by a separate Swap transaction, meaning that the user may pay network fees for both.</p>
 
-    <h2>What Are the Benefits of DEXs?</h2>
+<p>Network congestion can also affect transaction costs or confirmation times depending on the network's fee mechanism.</p>
 
-    <p>
-        DEXs can provide several characteristics that make them important within the DeFi ecosystem, including:
-    </p>
+<h2>What Are DEX Aggregators?</h2>
 
-    <ul>
-        <li><strong>Direct wallet interaction:</strong> many models allow users to interact with protocols without first depositing assets into a centralized exchange.</li>
-        <li><strong>Access to a broad range of assets:</strong> some tokens may be available on DEXs before they are listed on centralized platforms.</li>
-        <li><strong>Blockchain-level transparency:</strong> transactions and available on-chain data can often be inspected publicly.</li>
-        <li><strong>Programmability:</strong> DEXs can be integrated with other DeFi applications and protocols.</li>
-        <li><strong>Broad accessibility:</strong> protocols can often be accessed from different locations where the required network and interface are available, subject to technical and legal conditions.</li>
-    </ul>
+<p>A <strong>DEX Aggregator</strong> is a system that searches across multiple sources, liquidity pools, or exchanges to find an execution route according to its own routing logic.</p>
 
-    <h2>What Are the Risks of DEXs?</h2>
+<p>Instead of manually searching for one route, an aggregator may use multiple liquidity sources or split a transaction across different routes.</p>
 
-    <p>
-        Despite their potential benefits, decentralized exchanges also involve significant risks.
-        Important categories include:
-    </p>
+<p>However, using an aggregator does not automatically guarantee the best execution or eliminate risk.</p>
 
-    <h3>1. Smart-Contract Risk</h3>
+<p>Risks may still exist in the underlying smart contracts, liquidity sources, routing mechanism, fees, slippage, and other infrastructure.</p>
 
-    <p>
-        Smart contracts can contain bugs or vulnerabilities that may be exploited.
-        Even a security audit does not guarantee that every problem has been discovered or that future vulnerabilities cannot emerge.
-    </p>
+<h2>Do All DEXs Use AMMs?</h2>
 
-    <h3>2. Liquidity Risk</h3>
+<p>No.</p>
 
-    <p>
-        Low liquidity can increase slippage and price impact and may make some trades more expensive to execute.
-    </p>
+<p><strong>AMMs</strong> and liquidity pools are widely used in the DEX ecosystem, but they are not the only possible designs.</p>
 
-    <h3>3. Asset Risk</h3>
+<p>Some DEXs can use order-book models, hybrid systems, or other execution mechanisms.</p>
 
-    <p>
-        Some tokens available on DEXs may be new, thinly traded, highly volatile, or associated with projects carrying substantial risks.
-    </p>
+<p>Therefore, DEX, AMM, and Liquidity Pool should not be treated as interchangeable terms.</p>
 
-    <h3>4. Phishing and Fake-Website Risk</h3>
+<h2>What Happens When Liquidity Is Low?</h2>
 
-    <p>
-        Malicious websites can imitate legitimate DEX interfaces in an attempt to trick users into signing dangerous transactions or approvals.
-    </p>
+<p>Low liquidity can contribute to several effects:</p>
 
-    <h3>5. MEV Risk</h3>
+<ul>
+    <li>Greater price impact for larger trades.</li>
+    <li>A higher chance of receiving a less favorable execution result.</li>
+    <li>Greater sensitivity to sudden price movements.</li>
+    <li>More difficulty exiting some positions without significantly affecting the available price.</li>
+</ul>
 
-    <p>
-        Some trades can be exposed to different forms of MEV, including behavior related to transaction ordering.
-    </p>
+<p>This is why users should evaluate actual liquidity and routing rather than relying only on the displayed price.</p>
 
-    <h3>6. Governance and Administrative Risk</h3>
+<h2>Does High Trading Volume Mean a DEX Is Safe?</h2>
 
-    <p>
-        Some protocols may have administrative permissions or governance mechanisms that can affect how the system operates.
-        Users should therefore examine the actual permissions rather than relying on the word "decentralized" alone.
-    </p>
+<p>Not necessarily.</p>
 
-    <h2>Is a DEX Safe Just Because It Is Decentralized?</h2>
+<p>High trading volume or a large number of users does not, by itself, prove that a smart contract is secure or that a protocol is free from vulnerabilities.</p>
 
-    <p>
-        No.
-    </p>
+<p>Likewise, low trading volume does not automatically prove that a protocol is malicious.</p>
 
-    <p>
-        Decentralization is not the same thing as complete security.
-        A protocol can be decentralized to a certain degree while still having technical, economic, governance, or smart-contract risks.
-    </p>
+<p>A broader evaluation can consider smart-contract design, administrative permissions, liquidity, governance, oracle dependencies, protocol architecture, and asset-specific risks.</p>
 
-    <p>
-        Users can also face risks from fake websites, misunderstood transaction signatures, or inappropriate token approvals.
-    </p>
+<h2>How Does This Relate to Impermanent Loss?</h2>
 
-    <h2>Are DEXs Completely Anonymous?</h2>
+<p>Users providing liquidity can be exposed to <strong>Impermanent Loss</strong> when the relative prices of the assets change.</p>
 
-    <p>
-        A DEX should not be described as completely anonymous.
-    </p>
+<p>This is different from Slippage, Price Impact, and MEV:</p>
 
-    <p>
-        Transactions on public blockchains can often be visible and analyzed, and addresses may sometimes be linked to real-world identities or activities through different data sources.
-    </p>
+<ul>
+    <li><strong>Impermanent Loss:</strong> compares the value of a liquidity position with the value of simply holding the assets outside the pool.</li>
+    <li><strong>Price Impact:</strong> refers to the effect of the trade size on the available price.</li>
+    <li><strong>Slippage:</strong> refers to the difference between the expected result and the acceptable or executed result.</li>
+    <li><strong>MEV:</strong> relates to value extraction associated with transaction ordering and execution mechanisms.</li>
+</ul>
 
-    <p>
-        It is therefore more accurate to discuss blockchain-based identity and privacy characteristics rather than assuming complete anonymity.
-    </p>
+<p>For more information, see <a href="/academy/defi/what-is-impermanent-loss">What Is Impermanent Loss?</a>.</p>
 
-    <h2>How Are DEXs Related to Impermanent Loss?</h2>
+<h2>Practical Risks of Using DEXs</h2>
 
-    <p>
-        Impermanent loss is particularly relevant to liquidity providers who place assets into pools used by some DEXs.
-    </p>
+<p>Understanding Swap mechanics does not make a transaction risk-free. Important risk categories include:</p>
 
-    <p>
-        When relative asset prices change, the composition of the liquidity pool can change, creating a potential difference between the value of the liquidity position and the value of simply holding the same assets outside the pool.
-    </p>
+<ul>
+    <li>Smart-contract risk.</li>
+    <li>Protocol risk.</li>
+    <li>Liquidity risk.</li>
+    <li>Slippage and Price Impact.</li>
+    <li>Token Approval risk.</li>
+    <li>MEV-related risks and certain forms of transaction exploitation.</li>
+    <li>Oracle risk in protocols that depend on external price data.</li>
+    <li>Governance and administrative risks.</li>
+    <li>Asset-specific risks.</li>
+    <li>Phishing and fake websites.</li>
+    <li>Network and transaction-fee risks.</li>
+</ul>
 
-    <p>
-        Read
-        <a href="/academy/defi/what-is-impermanent-loss">What Is Impermanent Loss?</a>
-        for a deeper explanation.
-    </p>
+<h2>Swap Checklist</h2>
 
-    <h2>How Are DEXs Related to Yield Farming?</h2>
+<ol>
+    <li>Are you using the official protocol website?</li>
+    <li>Is the token or contract address correct?</li>
+    <li>Do you understand the asset you are buying or selling?</li>
+    <li>Do you understand the amount you are paying and the expected amount you will receive?</li>
+    <li>What is the estimated Price Impact?</li>
+    <li>What Slippage limit is being used?</li>
+    <li>Is a Token Approval required?</li>
+    <li>Is the requested allowance appropriate for the operation?</li>
+    <li>How much will the network transaction cost?</li>
+    <li>Are there liquidity, asset, or protocol risks?</li>
+    <li>Do you understand what your wallet is asking you to sign?</li>
+</ol>
 
-    <p>
-        Some Yield Farming programs use liquidity supplied to DEXs or provide incentives to users who supply liquidity.
-    </p>
+<h2>Common DEX Mistakes</h2>
 
-    <p>
-        However, liquidity provision and Yield Farming are not the same thing.
-        Liquidity provision means contributing assets to a liquidity mechanism, while Yield Farming can involve strategies designed to earn rewards through liquidity or other DeFi protocols.
-    </p>
-
-    <p>
-        Read
-        <a href="/academy/defi/what-is-yield-farming">What Is Yield Farming?</a>
-        to explore the distinction in more detail.
-    </p>
+<ul>
+    <li>Looking only at the displayed price without checking Price Impact.</li>
+    <li>Increasing Slippage excessively simply to make a failed transaction go through.</li>
+    <li>Approving a token allowance without understanding the contract receiving the authorization.</li>
+    <li>Interacting with a token or contract from an unverified address.</li>
+    <li>Assuming that using a DEX automatically makes a transaction safe.</li>
+    <li>Assuming lower fees automatically mean lower risk.</li>
+    <li>Relying on followers or social-media comments instead of evaluating the protocol.</li>
+    <li>Signing a transaction or message that you do not understand.</li>
+</ul>
 
-    <h2>What Is the Difference Between a Swap and a Trade?</h2>
-
-    <p>
-        In the DEX context, <strong>Swap</strong> usually describes exchanging one digital asset for another through a protocol.
-    </p>
-
-    <p>
-        <strong>Trade</strong> is a broader term that can describe buying and selling through DEXs, CEXs, or other market structures.
-    </p>
-
-    <p>
-        A swap can therefore be considered a form of trading in a broad sense, while the exact execution mechanism depends on the system being used.
-    </p>
-
-    <h2>What Are DEX Aggregators?</h2>
-
-    <p>
-        Some applications operate as <strong>DEX Aggregators</strong>.
-        They can search across multiple liquidity sources or protocols to identify a potentially suitable route for a swap according to the criteria used by the aggregator.
-    </p>
-
-    <p>
-        Splitting a swap across multiple liquidity sources or using a multi-step route can sometimes improve execution, but it can also add complexity, fees, or additional risks.
-    </p>
-
-    <p>
-        Users should therefore understand the route and associated costs when this information is available.
-    </p>
-
-    <h2>How Should a Beginner Study a DEX Protocol?</h2>
-
-    <p>
-        When studying a DEX protocol, it is better not to rely only on trading volume or the project’s reputation.
-        Useful areas to examine include:
-    </p>
-
-    <ul>
-        <li>The smart contracts being used.</li>
-        <li>The blockchain on which the protocol operates.</li>
-        <li>The AMM or trading mechanism.</li>
-        <li>Liquidity levels.</li>
-        <li>Trading volume.</li>
-        <li>Fee structure.</li>
-        <li>Governance model.</li>
-        <li>Administrative permissions.</li>
-        <li>Available security audits.</li>
-        <li>Known security history.</li>
-        <li>Contract upgrade mechanisms, if any.</li>
-    </ul>
-
-    <p>
-        These factors can help users understand risk, but they do not make any protocol completely risk-free.
-    </p>
-
-    <h2>Security Tips for Using DEXs</h2>
-
-    <ul>
-        <li>Verify the website address before connecting a wallet.</li>
-        <li>Do not rely solely on search results to access financial applications.</li>
-        <li>Review the transaction, amount, and destination before signing.</li>
-        <li>Pay attention to Token Approvals and permissions granted to contracts.</li>
-        <li>Avoid unnecessary permissions for untrusted contracts.</li>
-        <li>Verify the blockchain network before sending assets.</li>
-        <li>Understand network and protocol fees.</li>
-        <li>Check Slippage and Price Impact before executing a swap.</li>
-        <li>Do not treat a security audit as an absolute guarantee.</li>
-        <li>Never use funds you cannot afford to lose.</li>
-    </ul>
-
-    <h2>DEXs for Beginners: Key Takeaway</h2>
-
-    <p>
-        Decentralized exchanges are a fundamental part of DeFi.
-        In many models, they allow users to swap digital assets through smart contracts and liquidity pools instead of relying on a centralized intermediary to execute the transaction.
-    </p>
-
-    <p>
-        Many DEXs use AMMs, while other protocols use different trading architectures.
-        Therefore, users should not assume that every decentralized exchange works in exactly the same way.
-    </p>
-
-    <p>
-        A DEX also does not automatically mean complete security, privacy, or decentralization.
-        Risks can involve smart contracts, liquidity, assets, MEV, governance, phishing, approvals, and other factors.
-    </p>
-
-    <p>
-        Understanding DEXs becomes easier when connected to the concepts covered in previous articles:
-        <a href="/academy/defi/what-is-defi">DeFi</a>,
-        <a href="/academy/defi/what-are-liquidity-pools">Liquidity Pools</a>,
-        <a href="/academy/defi/what-is-yield-farming">Yield Farming</a>,
-        and
-        <a href="/academy/defi/what-is-impermanent-loss">Impermanent Loss</a>.
-    </p>
-
-    <h2>Key Points to Remember</h2>
-
-    <ul>
-        <li>DEXs are protocols that enable digital-asset swaps through mechanisms based on smart contracts.</li>
-        <li>Many DEXs rely on liquidity pools and AMMs.</li>
-        <li>Not all DEXs have the same architecture or degree of decentralization.</li>
-        <li>Slippage and Price Impact are important concepts when executing swaps.</li>
-        <li>Trading fees are different from blockchain network or gas fees.</li>
-        <li>Token Approvals require careful handling and understanding of permissions.</li>
-        <li>Decentralization does not mean complete security or complete anonymity.</li>
-        <li>DEXs can involve smart-contract, liquidity, MEV, governance, phishing, and asset risks.</li>
-        <li>High trading volume or liquidity does not eliminate risk.</li>
-    </ul>
-
-    <div class="academy-disclaimer">
-        <strong>Educational disclaimer:</strong>
-        This content is provided for educational purposes only and does not constitute financial or investment advice or a recommendation to use any exchange, protocol, or digital asset.
-        DeFi and DEX activity can involve substantial risks, including price volatility, impermanent loss, smart-contract vulnerabilities, liquidity risks, governance risks, MEV, phishing, and fraud.
-        Users should conduct independent research and understand the risks before making financial decisions.
-    </div>
-
-</article>
+<h2>Are DEXs Safer Than CEXs?</h2>
+
+<p>There is no universal answer.</p>
+
+<p>DEXs and CEXs rely on different models of custody, execution, and trust. A DEX may allow users to retain control of their wallet while interacting with smart contracts, whereas a CEX generally uses centralized infrastructure to manage accounts, assets, and trading operations.</p>
+
+<p>Each model introduces different types of risks, so neither should be considered absolutely safe simply because of its structure or name.</p>
+
+<h2>Conclusion</h2>
+
+<p>Using a DEX is more than pressing a Swap button. Understanding the mechanics behind the transaction can help users evaluate the expected result and recognize important risks before signing.</p>
+
+<p>The key concepts are:</p>
+
+<ul>
+    <li><strong>Slippage</strong> concerns the acceptable range around the expected execution result.</li>
+    <li><strong>Price Impact</strong> concerns the effect of the trade on the available price.</li>
+    <li><strong>Token Approval</strong> can authorize a smart contract to spend specified tokens according to the token's allowance mechanism.</li>
+    <li><strong>MEV</strong> concerns value extraction associated with transaction ordering and execution.</li>
+    <li><strong>Liquidity</strong> can significantly affect the execution of some trades.</li>
+    <li><strong>DEX Aggregators</strong> can combine liquidity sources and routes, but they do not eliminate risk.</li>
+</ul>
+
+<p>No general method makes DeFi transactions risk-free. Users should understand the operation, the contract, and the transaction they are signing before proceeding.</p>
+
+<p>For a broader security guide, continue to <a href="/academy/defi/defi-security-and-safety">DeFi Security: How to Protect Your Funds</a>.</p>
 HTML,
 
-    'image' => null,
+'image' => null,
 
-    'seo_title' => 'Decentralized Exchanges (DEXs): How Do They Work?',
-    'seo_title_ar' => 'ما هي المنصات اللامركزية DEX؟ وكيف تعمل؟ شرح للمبتدئين',
-    'seo_title_en' => 'Decentralized Exchanges (DEXs): How Do They Work?',
+'seo_title' => null,
+'seo_title_ar' => 'آليات التداول في DEX: شرح Slippage وPrice Impact وMEV',
+'seo_title_en' => 'DEX Trading Mechanics: Slippage, Price Impact, MEV and Approvals',
 
-    'meta_description' => 'Learn what decentralized exchanges (DEXs) are, how swaps work through smart contracts and liquidity pools, and the main risks including slippage, MEV, and smart-contract vulnerabilities.',
-    'meta_description_ar' => 'تعرف على المنصات اللامركزية DEX وكيف تعمل المبادلات عبر العقود الذكية ومجمعات السيولة، مع شرح Slippage وPrice Impact وMEV وأهم المخاطر الأمنية.',
-    'meta_description_en' => 'Learn what decentralized exchanges (DEXs) are, how swaps work through smart contracts and liquidity pools, and the main risks including slippage, MEV, and smart-contract vulnerabilities.',
+'meta_description' => null,
+'meta_description_ar' => 'تعرف على آليات التداول في منصات DEX، والفرق بين Slippage وPrice Impact، وشرح Token Approval وMEV وSandwich Attacks ومخاطر السيولة والمجمّعات.',
+'meta_description_en' => 'Learn how DEX trading works, including Slippage, Price Impact, Token Approvals, MEV, Sandwich Attacks, liquidity, and DEX aggregators.',
 
-    'faq_ar' => [
-        [
-            'question' => 'ما هي المنصة اللامركزية DEX؟',
-            'answer' => 'DEX هي بروتوكول أو تطبيق يتيح للمستخدمين مبادلة أو تداول الأصول الرقمية باستخدام آليات تعتمد على العقود الذكية، وغالبًا من خلال مجمعات السيولة أو نماذج تداول أخرى.'
-        ],
-        [
-            'question' => 'ما الفرق بين DEX وCEX؟',
-            'answer' => 'المنصة المركزية CEX تديرها جهة مركزية وتستخدم عادة أنظمة داخلية مثل دفتر الأوامر، بينما تتفاعل العديد من DEXs مباشرة مع العقود الذكية من خلال محافظ المستخدمين.'
-        ],
-        [
-            'question' => 'كيف تعمل المبادلة في DEX؟',
-            'answer' => 'يحدد المستخدم الأصل الذي يريد بيعه والأصل الذي يريد الحصول عليه، ثم يوافق على المعاملة من خلال محفظته، ويتولى العقد الذكي تنفيذ العملية وفق قواعد البروتوكول.'
-        ],
-        [
-            'question' => 'ما هو AMM في DeFi؟',
-            'answer' => 'AMM هو Automated Market Maker، وهو نموذج يستخدم خوارزميات أو منحنيات تسعير لتحديد أسعار المبادلات بدل الاعتماد فقط على دفتر أوامر تقليدي.'
-        ],
-        [
-            'question' => 'ما هو Slippage في DEX؟',
-            'answer' => 'Slippage هو الفرق بين السعر المتوقع للمبادلة والسعر الفعلي عند تنفيذها، وقد يتأثر بحركة السوق والسيولة وحجم العملية.'
-        ],
-        [
-            'question' => 'ما هو Price Impact؟',
-            'answer' => 'Price Impact هو مقدار تأثير عملية التداول نفسها على سعر الأصل داخل مجمع السيولة، ويزداد عادة عندما يكون حجم العملية كبيرًا مقارنة بالسيولة المتاحة.'
-        ],
-        [
-            'question' => 'هل DEX آمن لمجرد أنه لامركزي؟',
-            'answer' => 'لا. اللامركزية لا تعني الأمان الكامل، إذ توجد مخاطر العقود الذكية والسيولة والأصول والحوكمة وMEV والتصيد وغيرها.'
-        ],
-        [
-            'question' => 'هل DEX مجهول تمامًا؟',
-            'answer' => 'لا ينبغي وصف DEX بأنه مجهول تمامًا، لأن معاملات البلوكشين العامة يمكن أن تكون قابلة للرؤية والتحليل وقد يمكن ربط بعض العناوين بهويات أو نشاطات معينة.'
-        ],
-        [
-            'question' => 'ما علاقة DEX بالخسارة غير الدائمة؟',
-            'answer' => 'الخسارة غير الدائمة ترتبط بمزودي السيولة في بعض مجمعات DEX، حيث يمكن أن يؤدي تغير الأسعار النسبية للأصول إلى تغيير تركيب المركز مقارنة بالاحتفاظ بالأصول خارج المجمع.'
-        ],
-        [
-            'question' => 'ما هي DEX Aggregators؟',
-            'answer' => 'هي تطبيقات تبحث عبر عدة مصادر للسيولة أو بروتوكولات مختلفة لاختيار مسار مناسب للمبادلة وفق آلية التجميع المستخدمة.'
-        ],
+'faq_ar' => [
+    [
+        'question' => 'ما الفرق بين Slippage وPrice Impact في DEX؟',
+        'answer' => 'Price Impact هو تأثير حجم الصفقة والسيولة وآلية التسعير في السعر المتاح، بينما Slippage يتعلق بالفرق بين النتيجة المتوقعة والنتيجة المقبولة أو المنفذة عند إتمام المعاملة.'
     ],
-
-    'faq_en' => [
-        [
-            'question' => 'What is a decentralized exchange (DEX)?',
-            'answer' => 'A DEX is a protocol or application that allows users to swap or trade digital assets through mechanisms based on smart contracts, often using liquidity pools or other trading architectures.'
-        ],
-        [
-            'question' => 'What is the difference between a DEX and a CEX?',
-            'answer' => 'A centralized exchange is operated by a central organization and often uses internal systems such as an order book, while many DEXs allow users to interact directly with smart contracts through their wallets.'
-        ],
-        [
-            'question' => 'How does a DEX swap work?',
-            'answer' => 'The user selects the asset to sell and the asset to receive, confirms the transaction through a wallet, and the smart contract executes the swap according to the protocol rules.'
-        ],
-        [
-            'question' => 'What is an AMM in DeFi?',
-            'answer' => 'An AMM, or Automated Market Maker, is a model that uses algorithms or pricing curves to determine swap prices rather than relying exclusively on a traditional order book.'
-        ],
-        [
-            'question' => 'What is slippage on a DEX?',
-            'answer' => 'Slippage is the difference between the expected swap price and the actual execution price, and it can be affected by market movement, liquidity, and transaction size.'
-        ],
-        [
-            'question' => 'What is price impact?',
-            'answer' => 'Price impact is the effect a trade itself has on the asset price inside a liquidity pool, and it can become larger when a transaction is large relative to available liquidity.'
-        ],
-        [
-            'question' => 'Is a DEX safe simply because it is decentralized?',
-            'answer' => 'No. Decentralization does not mean complete security. Smart-contract, liquidity, asset, governance, MEV, phishing, and other risks can still exist.'
-        ],
-        [
-            'question' => 'Are DEXs completely anonymous?',
-            'answer' => 'No. DEXs should not be described as completely anonymous because public blockchain transactions can often be viewed and analyzed, and some addresses may be linked to identities or activities.'
-        ],
-        [
-            'question' => 'How are DEXs related to impermanent loss?',
-            'answer' => 'Impermanent loss can affect liquidity providers in some DEX pools because changes in relative asset prices can change the composition of a liquidity position compared with simply holding the assets outside the pool.'
-        ],
-        [
-            'question' => 'What are DEX aggregators?',
-            'answer' => 'DEX aggregators are applications that search across multiple liquidity sources or protocols to identify a suitable route for a swap according to the aggregator’s routing mechanism.'
-        ],
+    [
+        'question' => 'ما هو Token Approval؟',
+        'answer' => 'هو إذن يسمح لعقد ذكي باستخدام كمية محددة من رمز معين نيابة عن المحفظة وفق آلية Allowance الخاصة بالرمز.'
     ],
-
-    'status' => 'published',
-    'sort_order' => 9,
-    'published_at' => now(),
+    [
+        'question' => 'ما هو MEV في منصات DEX؟',
+        'answer' => 'MEV هو القيمة التي يمكن استخراجها من ترتيب أو إدراج أو استبعاد المعاملات ضمن آليات معالجة وإنتاج الكتل، وقد تظهر له تطبيقات مختلفة في عمليات التداول اللامركزي.'
+    ],
+    [
+        'question' => 'هل كل منصات DEX تستخدم AMM؟',
+        'answer' => 'لا. تستخدم العديد من منصات DEX نماذج AMM ومجمعات السيولة، لكن توجد أيضًا تصميمات تعتمد على دفاتر الأوامر أو نماذج هجينة وآليات أخرى.'
+    ],
+    [
+        'question' => 'هل استخدام DEX يعني أن التداول آمن؟',
+        'answer' => 'لا. DEXs لها مخاطر مختلفة تشمل العقود الذكية والسيولة والتصيد وToken Approvals وMEV والأصول نفسها وغيرها.'
+    ]
 ],
+
+'faq_en' => [
+    [
+        'question' => 'What is the difference between Slippage and Price Impact on a DEX?',
+        'answer' => 'Price Impact refers to the effect of a trade on the available price based on trade size, liquidity, and the pricing mechanism. Slippage concerns the difference between the expected result and the result that can be accepted or executed.'
+    ],
+    [
+        'question' => 'What is a Token Approval?',
+        'answer' => 'A Token Approval authorizes a smart contract to spend a specified amount of a token on behalf of a wallet according to the token allowance mechanism.'
+    ],
+    [
+        'question' => 'What is MEV in DEX trading?',
+        'answer' => 'MEV refers to value that can be extracted through transaction ordering, inclusion, exclusion, or placement within transaction processing and block production mechanisms.'
+    ],
+    [
+        'question' => 'Do all DEXs use AMMs?',
+        'answer' => 'No. Many DEXs use AMMs and liquidity pools, but other designs include order books, hybrid models, and different execution mechanisms.'
+    ],
+    [
+        'question' => 'Does using a DEX mean trading is safe?',
+        'answer' => 'No. DEXs involve different risks, including smart-contract risk, liquidity risk, phishing, Token Approvals, MEV, asset risk, and other protocol-specific risks.'
+    ]
+],
+
+'status' => 'published',
+'sort_order' => 9,
+'published_at' => now(),
+
+],
+
 [
     'topic_id' => $defi->id,
 
