@@ -171,7 +171,7 @@
          ========================================================= --}}
 
     @inertiaHead
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9335744708032421"
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8435595322630950"
      crossorigin="anonymous"></script>
 
 </head>
