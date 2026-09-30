@@ -18,11 +18,11 @@
     <meta head-key="twitter:description" name="twitter:description" :content="t('seoDescription')" />
     <meta head-key="twitter:image" name="twitter:image" content="https://aqlcrypto.com/images/default-og.jpg" />
    <component
-    is="script"
-    async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9335744708032421"
-    crossorigin="anonymous"
+    
+
 ></component>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8435595322630950"
+     crossorigin="anonymous"></script>
   </Head>
 
   <div :dir="locale === 'ar' ? 'rtl' : 'ltr'">
