@@ -252,28 +252,29 @@ const displayDate = computed(() => {
 const breadcrumbSchema = computed(() => ({
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
+
     "itemListElement": [
         {
             "@type": "ListItem",
             "position": 1,
-            "name": locale.value === 'ar' ? 'الرئيسية' : 'Home',
+            "name": locale.value === 'ar'
+                ? 'الرئيسية'
+                : 'Home',
             "item": "https://aqlcrypto.com/"
         },
+
         {
             "@type": "ListItem",
             "position": 2,
-            "name": locale.value === 'ar' ? 'الأخبار' : 'News',
+            "name": locale.value === 'ar'
+                ? 'الأخبار'
+                : 'News',
             "item": "https://aqlcrypto.com/news"
         },
+
         {
             "@type": "ListItem",
             "position": 3,
-            "name": props.newsItem.category || 'Crypto',
-            "item": "https://aqlcrypto.com/news?category=" + (props.newsItem.category || 'Crypto')
-        },
-        {
-            "@type": "ListItem",
-            "position": 4,
             "name": seoTitle.value,
             "item": canonicalUrl.value
         }

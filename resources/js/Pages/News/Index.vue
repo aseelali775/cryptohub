@@ -2,23 +2,28 @@
   <HomeLayout>
 
     <Head>
-      <title>
-        {{
-          locale === 'ar'
-            ? 'آخر أخبار الكريبتو وتلخيصات الذكاء الاصطناعي | Aql Crypto'
-            : 'Latest Crypto News & AI Summaries | Aql Crypto'
-        }}
-      </title>
+  <title>
+    {{
+      locale === 'ar'
+        ? 'آخر أخبار الكريبتو وتلخيصات الذكاء الاصطناعي | Aql Crypto'
+        : 'Latest Crypto News & AI Summaries | Aql Crypto'
+    }}
+  </title>
 
-      <meta
-        name="description"
-        :content="
-          locale === 'ar'
-            ? 'تغطية شاملة ومستمرة لأحداث سوق العملات الرقمية العالمية مع تحليل ذكي لأهم الأنباء.'
-            : 'Comprehensive global coverage of crypto events with smart AI analysis.'
-        "
-      />
-    </Head>
+  <link
+    rel="canonical"
+    :href="canonicalUrl"
+  />
+
+  <meta
+    name="description"
+    :content="
+      locale === 'ar'
+        ? 'تغطية شاملة ومستمرة لأحداث سوق العملات الرقمية العالمية مع تحليل ذكي لأهم الأنباء.'
+        : 'Comprehensive global coverage of crypto events with smart AI analysis.'
+    "
+  />
+</Head>
 
     <div
       class="w-full min-h-screen pb-24 bg-slate-50 dark:bg-[#0b1121] transition-colors duration-300"
@@ -548,7 +553,61 @@ const page = usePage();
 const locale = computed(
   () => page.props.locale || 'ar'
 );
+/*
+|--------------------------------------------------------------------------
+| Canonical URL
+|--------------------------------------------------------------------------
+|
+| - /news                → canonical /news
+| - /news?page=2         → canonical لنفس صفحة pagination
+| - أي فلتر أو بحث      → canonical إلى /news
+|
+| صفحات الفلاتر والبحث ليست صفحات تحريرية مستقلة.
+|
+*/
 
+const canonicalUrl = computed(() => {
+
+  const currentUrl = new URL(
+    window.location.href
+  );
+
+  const pageNumber =
+    currentUrl.searchParams.get('page');
+
+  const hasFilters =
+    currentUrl.searchParams.has('search') ||
+    currentUrl.searchParams.has('category') ||
+    currentUrl.searchParams.has('sentiment') ||
+    currentUrl.searchParams.has('date');
+
+  /*
+   * الصفحة الأساسية أو أي صفحة بها Filters:
+   * نستخدم /news كـ canonical.
+   */
+
+  if (hasFilters) {
+    return 'https://aqlcrypto.com/news';
+  }
+
+  /*
+   * الصفحة الأولى:
+   * /news?page=1
+   * تعتبر نفس /news.
+   */
+
+  if (!pageNumber || pageNumber === '1') {
+    return 'https://aqlcrypto.com/news';
+  }
+
+  /*
+   * Pagination بدون Filters:
+   * كل صفحة لها canonical خاص بها.
+   */
+
+  return `https://aqlcrypto.com/news?page=${encodeURIComponent(pageNumber)}`;
+
+});
 
 /*
 |--------------------------------------------------------------------------

@@ -448,22 +448,52 @@ public function show($id)
      * قبل تشغيل Vue / JavaScript.
      */
 
-    /*
-     * عنوان الصفحة.
-     */
+   
+  /*
+|--------------------------------------------------------------------------
+| SEO Language
+|--------------------------------------------------------------------------
+|
+| توحيد لغة SEO Server-Side مع لغة الموقع الحالية.
+|
+*/
+
+$seoLocale = app()->getLocale();
+
+$isArabic = $seoLocale === 'ar';
+
+
+/*
+|--------------------------------------------------------------------------
+| SEO Title
+|--------------------------------------------------------------------------
+*/
+
+if ($isArabic) {
+
+    $seoTitle = $item->title_ar
+        ?: $item->title_en
+        ?: 'Aql Crypto';
+
+} else {
+
     $seoTitle = $item->title_en
         ?: $item->title_ar
         ?: 'Aql Crypto';
 
-    /*
-     * وصف الصفحة.
-     *
-     * الأولوية:
-     * 1. summary_ar
-     * 2. meta_description_ar
-     * 3. أول 160 حرف من المحتوى.
-     */
-    $seoDescription = $item->summary_ar
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| SEO Description
+|--------------------------------------------------------------------------
+*/
+
+if ($isArabic) {
+
+    $seoDescription =
+        $item->summary_ar
         ?: $item->meta_description_ar
         ?: mb_substr(
             strip_tags(
@@ -474,6 +504,37 @@ public function show($id)
             0,
             160
         );
+
+} else {
+
+    $seoDescription =
+        $item->meta_description_en
+        ?: mb_substr(
+            strip_tags(
+                $item->content_en
+                    ?: $item->content_ar
+                    ?: ''
+            ),
+            0,
+            160
+        );
+
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| تنظيف وصف SEO
+|--------------------------------------------------------------------------
+*/
+
+$seoDescription = trim(
+    preg_replace(
+        '/\s+/',
+        ' ',
+        $seoDescription
+    )
+);
 
     /*
      * الرابط الرسمي للخبر.
