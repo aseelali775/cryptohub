@@ -293,8 +293,7 @@ class CryptoController extends Controller
                     }
                 }
             })
-            ->latest('published_at')
-            ->latest('created_at')
+           ->latest('created_at')
             ->limit(6)
             ->get()
             ->unique('id')
