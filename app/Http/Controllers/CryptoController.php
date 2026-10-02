@@ -146,11 +146,39 @@ class CryptoController extends Controller
     /**
      * صفحة العملة الفردية
      */
-    public function show($symbol)
-    {
-        $crypto = Cryptocurrency::with('aliases')
-            ->where('symbol', strtoupper($symbol))
-            ->firstOrFail();
+public function show($symbol)
+{
+    $requestedSymbol = trim((string) $symbol);
+    $canonicalSymbol = strtolower($requestedSymbol);
+
+    $crypto = Cryptocurrency::with('aliases')
+        ->whereRaw('LOWER(symbol) = ?', [$canonicalSymbol])
+        ->firstOrFail();
+
+    /*
+    |--------------------------------------------------------------------------
+    | Canonical crypto URL
+    |--------------------------------------------------------------------------
+    |
+    | The official URL must always use lowercase symbols.
+    |
+    | /crypto/BTC
+    | /crypto/Btc
+    | /crypto/bTc
+    |
+    |        ↓ 301
+    |
+    | /crypto/btc
+    |--------------------------------------------------------------------------
+    */
+
+    if ($requestedSymbol !== $canonicalSymbol) {
+        return redirect()->route(
+            'crypto.show',
+            ['symbol' => $canonicalSymbol],
+            301
+        );
+    }
 
         /*
         |--------------------------------------------------------------------------
