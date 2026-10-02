@@ -209,52 +209,101 @@ class CryptoController extends Controller
         |--------------------------------------------------------------------------
         */
 
-        $searchTerms = array_unique(
-            array_merge(
-                [
-                    $crypto->name,
-                    $crypto->symbol,
-                ],
-                $crypto->aliases
-                    ->pluck('alias')
-                    ->toArray()
-            )
-        );
+       $coinNews = Cache::remember(
+    'coin_news_' . strtolower($crypto->symbol),
+    1800,
+    function () use ($crypto) {
 
-        $coinNews = Cache::remember(
-            'coin_news_' . $crypto->symbol,
-            1800,
-            function () use ($searchTerms) {
+        $name = trim((string) $crypto->name);
+        $symbol = strtoupper(trim((string) $crypto->symbol));
 
-                return News::where('ai_processed', true)
-                    ->where(function ($query) use ($searchTerms) {
+        /*
+        |--------------------------------------------------------------------------
+        | Build safe search terms
+        |--------------------------------------------------------------------------
+        | Name:
+        |   Used for exact keyword matching and title matching.
+        |
+        | Symbol:
+        |   Used ONLY as an exact keyword.
+        |   Never use a short symbol in LIKE queries.
+        |
+        | Aliases:
+        |   Used as exact keywords.
+        |   Title LIKE is allowed only for sufficiently long aliases.
+        |--------------------------------------------------------------------------
+        */
 
-                        foreach ($searchTerms as $term) {
+        $aliases = $crypto->aliases
+            ->pluck('alias')
+            ->map(fn ($alias) => trim((string) $alias))
+            ->filter(fn ($alias) => $alias !== '')
+            ->unique()
+            ->values();
 
-                            $query
-                                ->orWhereJsonContains(
-                                    'keywords',
-                                    $term
-                                )
-                                ->orWhere(
-                                    'title_en',
-                                    'LIKE',
-                                    "%{$term}%"
-                                );
-                        }
+        return News::query()
+            ->where('ai_processed', true)
+            ->where(function ($query) use ($name, $symbol, $aliases) {
 
-                    })
-                    ->latest()
-                    ->take(6)
-                    ->get()
-                    ->map(function ($item) {
+                /*
+                |--------------------------------------------------------------------------
+                | Exact keyword matching
+                |--------------------------------------------------------------------------
+                */
 
-                        return NewsFormatterService::format($item);
+                $query->whereJsonContains('keywords', $name)
+                    ->orWhereJsonContains('keywords', $symbol);
 
-                    });
-            }
-        );
+                foreach ($aliases as $alias) {
+                    $query->orWhereJsonContains('keywords', $alias);
+                }
 
+                /*
+                |--------------------------------------------------------------------------
+                | Title matching
+                |--------------------------------------------------------------------------
+                |
+                | The symbol is intentionally NOT used here.
+                |
+                | Example:
+                |   S  -> dangerous
+                |   A  -> dangerous
+                |   OP -> too short
+                |
+                | Therefore title matching uses the full coin name
+                | and only sufficiently long aliases.
+                |--------------------------------------------------------------------------
+                */
+
+                if (mb_strlen($name) >= 4) {
+                    $query->orWhere(
+                        'title_en',
+                        'LIKE',
+                        '%' . addcslashes($name, '%_') . '%'
+                    );
+                }
+
+                foreach ($aliases as $alias) {
+                    if (mb_strlen($alias) >= 4) {
+                        $query->orWhere(
+                            'title_en',
+                            'LIKE',
+                            '%' . addcslashes($alias, '%_') . '%'
+                        );
+                    }
+                }
+            })
+            ->latest('published_at')
+            ->latest('created_at')
+            ->limit(6)
+            ->get()
+            ->unique('id')
+            ->values()
+            ->map(function ($item) {
+                return NewsFormatterService::format($item);
+            });
+    }
+);
         /*
         |--------------------------------------------------------------------------
         | تقرير الذكاء الاصطناعي
