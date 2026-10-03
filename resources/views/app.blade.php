@@ -134,7 +134,8 @@
         rel="apple-touch-icon"
         href="/favicon.webp"
     >
-
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8435595322630950"
+     crossorigin="anonymous"></script>
     {{-- =========================================================
          Google Analytics
          ========================================================= --}}
@@ -171,8 +172,7 @@
          ========================================================= --}}
 
     @inertiaHead
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8435595322630950"
-     crossorigin="anonymous"></script>
+
 
 </head>
 

@@ -201,19 +201,7 @@ public function show($symbol)
         |--------------------------------------------------------------------------
         */
 
-        if (empty($sparkline) && $crypto->current_price > 0) {
-
-            $price = (float) $crypto->current_price;
-
-            $sparkline = [
-                $price * 0.97,
-                $price * 0.99,
-                $price * 0.98,
-                $price * 1.01,
-                $price,
-            ];
-        }
-
+       
         /*
         |--------------------------------------------------------------------------
         | بيانات النطاق التاريخي
