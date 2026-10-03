@@ -151,20 +151,39 @@ class FetchCryptoPrices extends Command
 
                 $currentCoinGeckoIds[] = $coinGeckoId;
 
-                Cryptocurrency::updateOrCreate(
-                    [
-                        'coingecko_id' => $coinGeckoId,
-                    ],
-                    [
-                        'name'          => $coin['name'] ?? null,
-                        'symbol'        => strtoupper($coin['symbol'] ?? ''),
-                        'image_url'     => $coin['image'] ?? null,
-                        'current_price' => $coin['current_price'] ?? 0,
-                        'change_24h'    => $coin['price_change_percentage_24h'] ?? 0,
-                        'volume_24h'    => $coin['total_volume'] ?? 0,
-                        'market_cap'    => $coin['market_cap'] ?? 0,
-                    ]
-                );
+               $sparkline = $coin['sparkline_in_7d']['price'] ?? null;
+
+Cryptocurrency::updateOrCreate(
+    [
+        'coingecko_id' => $coinGeckoId,
+    ],
+    [
+        'name'          => $coin['name'] ?? null,
+        'symbol'        => strtoupper($coin['symbol'] ?? ''),
+        'image_url'     => $coin['image'] ?? null,
+
+        // بيانات السوق الحالية
+        'current_price' => $coin['current_price'] ?? 0,
+        'change_24h'    => $coin['price_change_percentage_24h'] ?? 0,
+        'volume_24h'    => $coin['total_volume'] ?? 0,
+        'market_cap'    => $coin['market_cap'] ?? 0,
+
+        // الرسم السعري لآخر 7 أيام
+        'sparkline_in_7d' => $sparkline,
+
+        // أعلى وأدنى سعر تاريخي
+        'ath'      => $coin['ath'] ?? null,
+        'atl'      => $coin['atl'] ?? null,
+
+        // أعلى وأدنى سعر خلال 24 ساعة
+        'high_24h' => $coin['high_24h'] ?? null,
+        'low_24h'  => $coin['low_24h'] ?? null,
+
+        // تاريخ ATH / ATL
+        'ath_date' => $coin['ath_date'] ?? null,
+        'atl_date' => $coin['atl_date'] ?? null,
+    ]
+);
 
                 $updatedCount++;
             }
