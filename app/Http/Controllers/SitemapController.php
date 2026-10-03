@@ -217,13 +217,44 @@ class SitemapController extends Controller
                 ];
             }
 
-            /*
+                       /*
             |--------------------------------------------------------------------------
-            | Cryptocurrency pages
+            | Featured Cryptocurrency pages
             |--------------------------------------------------------------------------
+            |
+            | فقط العملات الأساسية العشرون تظهر كصفحات Coin Hub
+            | مستقلة في Sitemap.
+            |
+            | جميع العملات الأخرى تبقى موجودة في قاعدة البيانات
+            | ومتاحة من صفحة الأسعار /prices.
+            |
             */
 
+            $featuredCryptoSymbols = [
+                'btc',
+                'eth',
+                'xrp',
+                'usdt',
+                'bnb',
+                'usdc',
+                'sol',
+                'trx',
+                'zec',
+                'hype',
+                'doge',
+                'xmr',
+                'link',
+                'ada',
+                'xlm',
+                'qnt',
+                'sui',
+                'bch',
+                'ltc',
+                'avax',
+            ];
+
             $coins = Cryptocurrency::query()
+                ->whereIn('symbol', $featuredCryptoSymbols)
                 ->select('symbol', 'updated_at')
                 ->get();
 
