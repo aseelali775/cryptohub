@@ -7,6 +7,7 @@ use App\Models\News;
 use App\Services\NewsFormatterService;
 use Illuminate\Support\Facades\Cache;
 use Inertia\Inertia;
+use App\Models\AcademyTopic;
 
 class CryptoController extends Controller
 {
@@ -354,12 +355,40 @@ public function show($symbol)
         | صفحة العملة
         |--------------------------------------------------------------------------
         */
+        /*
+|--------------------------------------------------------------------------
+| أكاديمية AQL Crypto
+|--------------------------------------------------------------------------
+|
+| نعرض الموضوعات التعليمية النشطة حتى يعرف زائر صفحة
+| العملة بوجود الأكاديمية، بدون ربط كل عملة بدرس خاص بها.
+|
+*/
+
+$academyTopics = Cache::remember(
+    'academy_topics_crypto_widget',
+    3600,
+    function () {
+        return AcademyTopic::query()
+            ->where('is_active', true)
+            ->orderBy('sort_order')
+            ->get([
+                'id',
+                'name_ar',
+                'name_en',
+                'slug',
+                'description_ar',
+                'description_en',
+            ]);
+    }
+);
 
         return Inertia::render('Crypto/Show', [
-            'crypto' => $crypto,
-            'chartData' => $chartData,
-            'coinNews' => $coinNews,
-            'aiReport' => $aiReport,
-        ]);
+    'crypto' => $crypto,
+    'chartData' => $chartData,
+    'coinNews' => $coinNews,
+    'aiReport' => $aiReport,
+    'academyTopics' => $academyTopics,
+]);
     }
 }

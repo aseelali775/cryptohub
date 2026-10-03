@@ -169,6 +169,387 @@
           </div>
 
         </div>
+        <!-- =====================================================
+     AQL Crypto Academy
+====================================================== -->
+
+<section
+  v-if="academyTopics.length"
+  class="bg-white dark:bg-[#151e32]
+         border border-slate-200 dark:border-slate-800
+         rounded-3xl shadow-sm p-6 sm:p-8
+         animate-fade-in"
+>
+  <div
+    class="flex flex-col lg:flex-row
+           lg:items-center lg:justify-between
+           gap-6 mb-7"
+  >
+
+    <div>
+      <div class="flex items-center gap-3 mb-2">
+        <span class="text-2xl">📚</span>
+
+        <h2
+          class="text-xl sm:text-2xl font-black
+                 text-slate-900 dark:text-white"
+        >
+          {{ locale === 'ar'
+              ? 'أكاديمية AQL Crypto'
+              : 'AQL Crypto Academy'
+          }}
+        </h2>
+      </div>
+
+      <p
+        class="text-sm sm:text-base
+               text-slate-500 dark:text-slate-400
+               leading-relaxed max-w-2xl"
+      >
+        {{ locale === 'ar'
+            ? 'هل تريد فهم العملات الرقمية وتقنياتها بشكل أعمق؟ استكشف الدروس التعليمية في أكاديمية AQL Crypto.'
+            : 'Want to understand cryptocurrencies and their technology more deeply? Explore the lessons in AQL Crypto Academy.'
+        }}
+      </p>
+    </div>
+
+    <Link
+      href="/academy"
+      class="shrink-0 inline-flex items-center
+             justify-center gap-2
+             px-5 py-3 rounded-xl
+             bg-indigo-600 hover:bg-indigo-700
+             text-white font-bold
+             transition-colors"
+    >
+      {{ locale === 'ar'
+          ? 'استكشف الأكاديمية'
+          : 'Explore Academy'
+      }}
+
+      <span :class="locale === 'ar' ? 'rotate-180' : ''">
+        →
+      </span>
+    </Link>
+
+  </div>
+
+  <!-- Academy Topics -->
+
+  <div
+    class="grid grid-cols-2
+           md:grid-cols-3
+           lg:grid-cols-4
+           gap-4"
+  >
+
+    <Link
+      v-for="topic in academyTopics.slice(0, 4)"
+      :key="topic.id"
+      :href="`/academy/${topic.slug}`"
+      class="group p-4 rounded-2xl
+             bg-slate-50 dark:bg-slate-800/50
+             border border-slate-200 dark:border-slate-700
+             hover:border-indigo-400
+             dark:hover:border-indigo-500
+             hover:-translate-y-0.5
+             transition-all"
+    >
+
+      <h3
+        class="font-bold text-sm
+               text-slate-900 dark:text-white
+               group-hover:text-indigo-600
+               dark:group-hover:text-indigo-400
+               transition-colors"
+      >
+        {{ locale === 'ar'
+            ? topic.name_ar
+            : topic.name_en
+        }}
+      </h3>
+
+      <p
+        class="mt-1 text-xs
+               text-slate-500 dark:text-slate-400
+               line-clamp-2"
+      >
+        {{ locale === 'ar'
+            ? topic.description_ar
+            : topic.description_en
+        }}
+      </p>
+
+    </Link>
+
+  </div>
+
+</section>
+<!-- =====================================================
+     Data Sources & Methodology
+====================================================== -->
+
+<section
+  class="bg-white dark:bg-[#151e32]
+         border border-slate-200 dark:border-slate-800
+         rounded-3xl shadow-sm p-6 sm:p-8
+         animate-fade-in"
+>
+  <!-- Header -->
+
+  <div class="flex items-start gap-4 mb-7">
+
+    <div
+      class="shrink-0 w-11 h-11 rounded-2xl
+             bg-indigo-50 dark:bg-indigo-500/10
+             flex items-center justify-center text-xl"
+    >
+      🔎
+    </div>
+
+    <div>
+      <h2
+        class="text-xl sm:text-2xl font-black
+               text-slate-900 dark:text-white"
+      >
+        {{ locale === 'ar'
+            ? 'مصادر البيانات والمنهجية'
+            : 'Data Sources & Methodology'
+        }}
+      </h2>
+
+      <p
+        class="mt-2 text-sm
+               text-slate-500 dark:text-slate-400
+               leading-relaxed max-w-3xl"
+      >
+        {{ locale === 'ar'
+            ? 'تعتمد هذه الصفحة على بيانات سوقية وأخبار وتحليلات آلية تتم معالجتها وتجميعها وفق منهجية AQL Crypto.'
+            : 'This page combines market data, news and automated analysis processed and organized according to the AQL Crypto methodology.'
+        }}
+      </p>
+    </div>
+
+  </div>
+
+
+  <!-- Sources -->
+
+  <div
+    class="grid grid-cols-1
+           sm:grid-cols-2
+           lg:grid-cols-4
+           gap-4"
+  >
+
+    <!-- Market Data -->
+
+    <div
+      class="p-5 rounded-2xl
+             bg-slate-50 dark:bg-slate-800/50
+             border border-slate-200 dark:border-slate-700"
+    >
+      <div class="flex items-center gap-2 mb-3">
+        <span class="text-lg">📊</span>
+
+        <h3
+          class="font-bold text-slate-900
+                 dark:text-white"
+        >
+          {{ locale === 'ar'
+              ? 'بيانات السوق'
+              : 'Market Data'
+          }}
+        </h3>
+      </div>
+
+      <p
+        class="text-xs sm:text-sm
+               text-slate-500 dark:text-slate-400
+               leading-relaxed"
+      >
+        {{ locale === 'ar'
+            ? 'يتم الحصول على السعر والقيمة السوقية وحجم التداول من CoinGecko API، ثم تتم معالجة البيانات وتخزينها في أنظمة AQL Crypto.'
+            : 'Price, market capitalization and trading volume are obtained from the CoinGecko API and then processed and stored by AQL Crypto.'
+        }}
+      </p>
+    </div>
+
+
+    <!-- News -->
+
+    <div
+      class="p-5 rounded-2xl
+             bg-slate-50 dark:bg-slate-800/50
+             border border-slate-200 dark:border-slate-700"
+    >
+      <div class="flex items-center gap-2 mb-3">
+        <span class="text-lg">📰</span>
+
+        <h3
+          class="font-bold text-slate-900
+                 dark:text-white"
+        >
+          {{ locale === 'ar'
+              ? 'الأخبار'
+              : 'News'
+          }}
+        </h3>
+      </div>
+
+      <p
+        class="text-xs sm:text-sm
+               text-slate-500 dark:text-slate-400
+               leading-relaxed"
+      >
+        {{ locale === 'ar'
+            ? 'يتم اختيار الأخبار المرتبطة بالعملة من قاعدة أخبار AQL بعد معالجتها، باستخدام الاسم والرمز والكلمات المفتاحية والمرادفات المتاحة.'
+            : 'Coin-related news is selected from the processed AQL news database using the coin name, symbol, keywords and available aliases.'
+        }}
+      </p>
+    </div>
+
+
+    <!-- AI Analysis -->
+
+    <div
+      class="p-5 rounded-2xl
+             bg-slate-50 dark:bg-slate-800/50
+             border border-slate-200 dark:border-slate-700"
+    >
+      <div class="flex items-center gap-2 mb-3">
+        <span class="text-lg">🤖</span>
+
+        <h3
+          class="font-bold text-slate-900
+                 dark:text-white"
+        >
+          {{ locale === 'ar'
+              ? 'التحليل الآلي'
+              : 'AI Analysis'
+          }}
+        </h3>
+      </div>
+
+      <p
+        class="text-xs sm:text-sm
+               text-slate-500 dark:text-slate-400
+               leading-relaxed"
+      >
+        {{ locale === 'ar'
+            ? 'يتم إنشاء تقارير التحليل آليًا باستخدام Gemini اعتمادًا على سياق الأخبار المرتبطة بالعملة.'
+            : 'AI reports are generated using Gemini based on the context of relevant news associated with the cryptocurrency.'
+        }}
+      </p>
+    </div>
+
+
+    <!-- Fear & Greed -->
+
+    <div
+      class="p-5 rounded-2xl
+             bg-slate-50 dark:bg-slate-800/50
+             border border-slate-200 dark:border-slate-700"
+    >
+      <div class="flex items-center gap-2 mb-3">
+        <span class="text-lg">📈</span>
+
+        <h3
+          class="font-bold text-slate-900
+                 dark:text-white"
+        >
+          {{ locale === 'ar'
+              ? 'مؤشر السوق'
+              : 'Market Indicator'
+          }}
+        </h3>
+      </div>
+
+      <p
+        class="text-xs sm:text-sm
+               text-slate-500 dark:text-slate-400
+               leading-relaxed"
+      >
+        {{ locale === 'ar'
+            ? 'يتم الحصول على مؤشر الخوف والطمع من Alternative.me كمرجع عام لمعنويات سوق العملات الرقمية.'
+            : 'The Fear & Greed Index is obtained from Alternative.me as a general reference for cryptocurrency market sentiment.'
+        }}
+      </p>
+    </div>
+
+  </div>
+
+
+  <!-- Last Updated -->
+
+  <div
+    class="mt-6 pt-5
+           border-t border-slate-100
+           dark:border-slate-800
+           flex flex-col sm:flex-row
+           sm:items-center sm:justify-between
+           gap-3"
+  >
+
+    <div
+      class="flex items-center gap-2
+             text-xs text-slate-500
+             dark:text-slate-400"
+    >
+      <span>🕒</span>
+
+      <span>
+        {{ locale === 'ar'
+            ? 'آخر تحديث لبيانات السوق:'
+            : 'Last market data update:'
+        }}
+      </span>
+    </div>
+
+    <time
+      v-if="crypto.updated_at"
+      :datetime="crypto.updated_at"
+      class="text-xs font-mono
+             font-bold text-slate-600
+             dark:text-slate-300"
+    >
+      {{ new Date(crypto.updated_at).toLocaleString(
+          locale === 'ar' ? 'ar-YE' : 'en-US',
+          {
+            dateStyle: 'medium',
+            timeStyle: 'short'
+          }
+      ) }}
+    </time>
+
+  </div>
+
+
+  <!-- Disclaimer -->
+
+  <div
+    class="mt-5 p-4 rounded-2xl
+           bg-amber-50 dark:bg-amber-500/5
+           border border-amber-100
+           dark:border-amber-500/20"
+  >
+
+    <p
+      class="text-xs sm:text-sm
+             text-amber-800 dark:text-amber-300
+             leading-relaxed"
+    >
+      ⚠️
+      {{ locale === 'ar'
+          ? 'قد تتغير بيانات السوق والأخبار والتحليلات الآلية مع تحديث المصادر. التحليل الآلي لأغراض المعلومات فقط ولا يمثل توصية استثمارية أو ضمانًا لحركة الأسعار.'
+          : 'Market data, news and automated analysis may change as sources are updated. AI analysis is provided for informational purposes only and does not constitute investment advice or a guarantee of price movements.'
+      }}
+    </p>
+
+  </div>
+
+</section>
+
 
       </div>
     </div>
@@ -185,7 +566,8 @@ const props = defineProps({
   crypto: { type: Object, required: true },
   chartData: { type: Object, required: true },
   coinNews: { type: Array, default: () => [] },
-  aiReport: { type: Object, default: () => null }
+  aiReport: { type: Object, default: () => null },
+  academyTopics: { type: Array, default: () => [] }
 });
 
 const page = usePage();
