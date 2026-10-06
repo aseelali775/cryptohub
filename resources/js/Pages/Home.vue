@@ -1,234 +1,995 @@
 <template>
   <HomeLayout>
-    
+
     <Head>
       <title head-key="title">{{ t('seoTitle') }}</title>
 
-      <link head-key="canonical" rel="canonical" :href="canonicalUrl" />
+      <link
+        head-key="canonical"
+        rel="canonical"
+        :href="canonicalUrl"
+      />
 
-      <meta head-key="description" name="description" :content="t('seoDesc')" />
-      <meta head-key="keywords" name="keywords" :content="seoKeywords" />
+      <meta
+        head-key="description"
+        name="description"
+        :content="t('seoDesc')"
+      />
 
+      <meta
+        head-key="keywords"
+        name="keywords"
+        :content="seoKeywords"
+      />
+
+      <!-- Open Graph -->
       <meta head-key="og:type" property="og:type" content="website" />
-      <meta head-key="og:title" property="og:title" :content="t('seoTitle')" />
-      <meta head-key="og:description" property="og:description" :content="t('seoDesc')" />
-      <meta head-key="og:url" property="og:url" :content="canonicalUrl" />
-      <meta head-key="og:image" property="og:image" content="https://aqlcrypto.com/images/default-og.jpg" />
+      <meta
+        head-key="og:title"
+        property="og:title"
+        :content="t('seoTitle')"
+      />
+      <meta
+        head-key="og:description"
+        property="og:description"
+        :content="t('seoDesc')"
+      />
+      <meta
+        head-key="og:url"
+        property="og:url"
+        :content="canonicalUrl"
+      />
+      <meta
+        head-key="og:image"
+        property="og:image"
+        content="https://aqlcrypto.com/images/default-og.jpg"
+      />
 
-      <meta head-key="twitter:card" name="twitter:card" content="summary_large_image" />
-      <meta head-key="twitter:title" name="twitter:title" :content="t('seoTitle')" />
-      <meta head-key="twitter:description" name="twitter:description" :content="t('seoDesc')" />
-      <meta head-key="twitter:image" name="twitter:image" content="https://aqlcrypto.com/images/default-og.jpg" />
-      <meta head-key="twitter:url" name="twitter:url" :content="canonicalUrl" />
+      <!-- Twitter -->
+      <meta
+        head-key="twitter:card"
+        name="twitter:card"
+        content="summary_large_image"
+      />
+      <meta
+        head-key="twitter:title"
+        name="twitter:title"
+        :content="t('seoTitle')"
+      />
+      <meta
+        head-key="twitter:description"
+        name="twitter:description"
+        :content="t('seoDesc')"
+      />
+      <meta
+        head-key="twitter:image"
+        name="twitter:image"
+        content="https://aqlcrypto.com/images/default-og.jpg"
+      />
+      <meta
+        head-key="twitter:url"
+        name="twitter:url"
+        :content="canonicalUrl"
+      />
     </Head>
 
-    <div class="w-full pb-20 bg-slate-50 dark:bg-[#0b1121] transition-colors duration-300">
-      
-      <section class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 pb-10 relative overflow-hidden">
+    <div
+      class="w-full pb-20 bg-slate-50 dark:bg-[#0b1121] transition-colors duration-300"
+    >
+
+      <!-- ======================================================
+           HERO
+      ======================================================= -->
+      <section
+        class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 pb-10 relative overflow-hidden"
+      >
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div class="text-center lg:text-start z-10" :class="locale === 'ar' ? 'lg:text-right' : 'lg:text-left'">
-            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white leading-[1.2] tracking-tight">
-              {{ t('heroTitle1') }} <br>
-              <span class="text-emerald-500 bg-emerald-500/10 px-2 rounded-lg">{{ t('heroTitleHighlight') }}</span>
+
+          <div
+            class="text-center lg:text-start z-10"
+            :class="locale === 'ar' ? 'lg:text-right' : 'lg:text-left'"
+          >
+            <h1
+              class="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white leading-[1.2] tracking-tight"
+            >
+              {{ t('heroTitle1') }}
+              <br>
+
+              <span
+                class="text-emerald-500 bg-emerald-500/10 px-2 rounded-lg"
+              >
+                {{ t('heroTitleHighlight') }}
+              </span>
             </h1>
-            <p class="mt-6 text-base sm:text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-medium">
+
+            <p
+              class="mt-6 text-base sm:text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-medium"
+            >
               {{ t('heroSub') }}
             </p>
-            <div class="mt-10 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-              <Link href="/prices" class="w-full sm:w-auto h-12 px-8 rounded-xl bg-emerald-500 text-white text-sm font-bold hover:bg-emerald-600 hover:shadow-emerald-500/25 hover:shadow-lg transition-all flex items-center justify-center active:scale-95">
+
+            <div
+              class="mt-10 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4"
+            >
+              <Link
+                href="/prices"
+                class="w-full sm:w-auto h-12 px-8 rounded-xl bg-emerald-500 text-white text-sm font-bold hover:bg-emerald-600 hover:shadow-emerald-500/25 hover:shadow-lg transition-all flex items-center justify-center active:scale-95"
+              >
                 {{ t('btnAnalytics') }}
               </Link>
-              <Link href="/news" class="w-full sm:w-auto h-12 px-8 rounded-xl bg-white dark:bg-[#151e32] border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-200 text-sm font-bold hover:bg-slate-50 dark:hover:bg-slate-800 transition-all flex items-center justify-center active:scale-95">
+
+              <Link
+                href="/news"
+                class="w-full sm:w-auto h-12 px-8 rounded-xl bg-white dark:bg-[#151e32] border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-200 text-sm font-bold hover:bg-slate-50 dark:hover:bg-slate-800 transition-all flex items-center justify-center active:scale-95"
+              >
                 {{ t('btnNews') }}
               </Link>
             </div>
           </div>
-          
-          <div class="relative hidden lg:flex justify-center items-center h-full">
-            <div class="absolute w-72 h-72 bg-emerald-500/20 blur-[100px] rounded-full"></div>
-            <div class="relative w-80 h-80 bg-white dark:bg-[#151e32] border border-slate-200 dark:border-slate-700/50 rounded-full flex items-center justify-center shadow-2xl p-8 transform hover:scale-105 transition-transform duration-700">
-              <div class="w-full h-full rounded-full border border-dashed border-emerald-500/40 animate-[spin_20s_linear_infinite] absolute"></div>
-              <div class="text-[120px] font-black text-emerald-500 opacity-90 drop-shadow-2xl">₿</div>
+
+          <!-- Hero Visual -->
+          <div
+            class="relative hidden lg:flex justify-center items-center h-full"
+          >
+            <div
+              class="absolute w-72 h-72 bg-emerald-500/20 blur-[100px] rounded-full"
+            ></div>
+
+            <div
+              class="relative w-80 h-80 bg-white dark:bg-[#151e32] border border-slate-200 dark:border-slate-700/50 rounded-full flex items-center justify-center shadow-2xl p-8 transform hover:scale-105 transition-transform duration-700"
+            >
+              <div
+                class="w-full h-full rounded-full border border-dashed border-emerald-500/40 animate-[spin_20s_linear_infinite] absolute"
+              ></div>
+
+              <div
+                class="text-[120px] font-black text-emerald-500 opacity-90 drop-shadow-2xl"
+              >
+                ₿
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ======================================================
+           WHAT IS AQL CRYPTO
+      ======================================================= -->
+      <section
+        class="max-w-[1100px] mx-auto px-4 sm:px-6 lg:px-8 mt-4 mb-14"
+      >
+        <div
+          class="bg-white dark:bg-[#151e32] border border-slate-200 dark:border-slate-800 rounded-3xl p-7 sm:p-9 shadow-sm"
+          :dir="locale === 'ar' ? 'rtl' : 'ltr'"
+        >
+          <div
+            class="max-w-4xl mx-auto text-center"
+          >
+            <span
+              class="inline-flex items-center px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-bold mb-4"
+            >
+              {{ t('aboutBadge') }}
+            </span>
+
+            <h2
+              class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white mb-4"
+            >
+              {{ t('aboutTitle') }}
+            </h2>
+
+            <p
+              class="text-sm sm:text-base leading-8 text-slate-600 dark:text-slate-400"
+            >
+              {{ t('aboutDesc') }}
+            </p>
+
+            <div class="mt-6 flex flex-wrap justify-center gap-3">
+              <Link
+                href="/about"
+                class="inline-flex items-center justify-center px-5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-sm font-bold hover:bg-slate-200 dark:hover:bg-slate-700 transition"
+              >
+                {{ t('aboutLink') }}
+              </Link>
+
+              <Link
+                href="/editorial-policy"
+                class="inline-flex items-center justify-center px-5 py-2.5 rounded-xl bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-sm font-bold hover:bg-emerald-100 dark:hover:bg-emerald-500/20 transition"
+              >
+                {{ t('editorialLink') }}
+              </Link>
             </div>
           </div>
         </div>
       </section>
 
-      <section class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- ======================================================
+           MARKET / NEWS / FEAR GREED
+      ======================================================= -->
+      <section
+        class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8"
+      >
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-          
+
+          <!-- Market Overview -->
           <div class="lg:col-span-3 flex flex-col gap-6">
-            <div class="bg-white dark:bg-[#151e32] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm hover:shadow-md transition-shadow">
-              <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-6 border-b border-slate-100 dark:border-slate-800 pb-3">{{ t('marketOverview') }}</h3>
+
+            <div
+              class="bg-white dark:bg-[#151e32] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm hover:shadow-md transition-shadow"
+            >
+              <h2
+                class="text-lg font-bold text-slate-900 dark:text-white mb-6 border-b border-slate-100 dark:border-slate-800 pb-3"
+              >
+                {{ t('marketOverview') }}
+              </h2>
+
               <div class="space-y-4">
-                <div v-for="(stat, index) in dynamicMarketStats" :key="index" class="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50 dark:hover:bg-[#0f172a] transition-colors">
-                  <span class="text-xs sm:text-sm font-bold text-slate-500 dark:text-slate-400">{{ stat.label }}</span>
+
+                <div
+                  v-for="(stat, index) in dynamicMarketStats"
+                  :key="index"
+                  class="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50 dark:hover:bg-[#0f172a] transition-colors"
+                >
+                  <span
+                    class="text-xs sm:text-sm font-bold text-slate-500 dark:text-slate-400"
+                  >
+                    {{ stat.label }}
+                  </span>
+
                   <div class="text-end">
-                    <div class="text-sm font-black text-slate-900 dark:text-white font-mono">{{ stat.value }}</div>
-                    <div v-if="stat.change !== '—'" :class="stat.isUp ? 'text-emerald-500' : 'text-rose-500'" class="text-[10px] font-bold mt-0.5">
+                    <div
+                      class="text-sm font-black text-slate-900 dark:text-white font-mono"
+                    >
+                      {{ stat.value }}
+                    </div>
+
+                    <div
+                      v-if="stat.change !== '—'"
+                      :class="
+                        stat.isUp
+                          ? 'text-emerald-500'
+                          : 'text-rose-500'
+                      "
+                      class="text-[10px] font-bold mt-0.5"
+                    >
                       {{ stat.isUp ? '▲ +' : '▼ ' }}{{ stat.change }}%
                     </div>
                   </div>
                 </div>
+
               </div>
+
+              <Link
+                href="/prices"
+                class="mt-6 w-full inline-flex items-center justify-center h-10 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs font-bold text-slate-700 dark:text-slate-300 hover:border-emerald-500/40 hover:text-emerald-500 transition"
+              >
+                {{ t('viewAllCoins') }}
+              </Link>
             </div>
+
           </div>
 
+          <!-- Top News -->
           <div class="lg:col-span-6 flex flex-col">
-            <div class="flex items-center justify-between mb-4 px-2">
-              <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+
+            <div
+              class="flex items-center justify-between mb-4 px-2"
+            >
+              <h2
+                class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2"
+              >
+                <span
+                  class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"
+                ></span>
+
                 {{ t('topNews') }}
-              </h3>
+              </h2>
+
+              <Link
+                href="/news"
+                class="text-xs font-bold text-emerald-500 hover:text-emerald-600 transition"
+              >
+                {{ t('viewAllNews') }}
+              </Link>
             </div>
-            
-            <div class="bg-white dark:bg-[#151e32] border border-slate-200 dark:border-slate-800 rounded-3xl p-5 shadow-sm flex flex-col gap-4">
-              
-              <Link :href="mainNews ? `/news/${mainNews.id}` : '#'" v-if="mainNews" class="relative w-full h-72 rounded-2xl overflow-hidden bg-slate-900 group cursor-pointer block shadow-inner">
-                <img :src="mainNews?.image_url" class="absolute inset-0 w-full h-full object-cover z-0 group-hover:scale-105 transition-transform duration-700 opacity-60" :alt="mainNews?.translations?.[locale === 'ar' ? 'ar' : 'en']?.title || mainNews?.title_en" />
-                <div class="absolute inset-0 bg-gradient-to-t from-[#0b1121] via-[#0b1121]/70 to-transparent z-10"></div>
-                
+
+            <div
+              class="bg-white dark:bg-[#151e32] border border-slate-200 dark:border-slate-800 rounded-3xl p-5 shadow-sm flex flex-col gap-4"
+            >
+
+              <!-- Main News -->
+              <Link
+                v-if="mainNews"
+                :href="`/news/${mainNews.id}`"
+                class="relative w-full h-72 rounded-2xl overflow-hidden bg-slate-900 group cursor-pointer block shadow-inner"
+              >
+
+                <img
+                  :src="mainNews?.image_url"
+                  class="absolute inset-0 w-full h-full object-cover z-0 group-hover:scale-105 transition-transform duration-700 opacity-60"
+                  :alt="
+                    mainNews?.translations?.[
+                      locale === 'ar' ? 'ar' : 'en'
+                    ]?.title ||
+                    mainNews?.title_en ||
+                    'Crypto News'
+                  "
+                />
+
+                <div
+                  class="absolute inset-0 bg-gradient-to-t from-[#0b1121] via-[#0b1121]/70 to-transparent z-10"
+                ></div>
+
                 <div class="absolute bottom-0 inset-x-0 p-5 z-20">
-                  
+
                   <div class="flex flex-wrap items-center gap-2 mb-3">
-                    <span class="inline-block px-2.5 py-1 rounded bg-emerald-500 text-white text-[10px] font-bold uppercase tracking-wider">{{ t('mainNewsTag') }}</span>
-                    <span v-if="mainNews?.sentiment === 'Bullish'" class="inline-block px-2.5 py-1 rounded bg-green-500/80 backdrop-blur-sm text-white text-[10px] font-bold border border-green-400/30">🟢 {{ locale === 'ar' ? 'صعودي' : 'Bullish' }}</span>
-                    <span v-else-if="mainNews?.sentiment === 'Bearish'" class="inline-block px-2.5 py-1 rounded bg-red-500/80 backdrop-blur-sm text-white text-[10px] font-bold border border-red-400/30">🔴 {{ locale === 'ar' ? 'هبوطي' : 'Bearish' }}</span>
-                    <span v-else-if="mainNews?.sentiment === 'Neutral'" class="inline-block px-2.5 py-1 rounded bg-slate-500/80 backdrop-blur-sm text-white text-[10px] font-bold border border-slate-400/30">⚪ {{ locale === 'ar' ? 'محايد' : 'Neutral' }}</span>
+
+                    <span
+                      class="inline-block px-2.5 py-1 rounded bg-emerald-500 text-white text-[10px] font-bold uppercase tracking-wider"
+                    >
+                      {{ t('mainNewsTag') }}
+                    </span>
+
+                    <span
+                      v-if="mainNews?.sentiment === 'Bullish'"
+                      class="inline-block px-2.5 py-1 rounded bg-green-500/80 backdrop-blur-sm text-white text-[10px] font-bold border border-green-400/30"
+                    >
+                      🟢 {{ locale === 'ar' ? 'صعودي' : 'Bullish' }}
+                    </span>
+
+                    <span
+                      v-else-if="mainNews?.sentiment === 'Bearish'"
+                      class="inline-block px-2.5 py-1 rounded bg-red-500/80 backdrop-blur-sm text-white text-[10px] font-bold border border-red-400/30"
+                    >
+                      🔴 {{ locale === 'ar' ? 'هبوطي' : 'Bearish' }}
+                    </span>
+
+                    <span
+                      v-else-if="mainNews?.sentiment === 'Neutral'"
+                      class="inline-block px-2.5 py-1 rounded bg-slate-500/80 backdrop-blur-sm text-white text-[10px] font-bold border border-slate-400/30"
+                    >
+                      ⚪ {{ locale === 'ar' ? 'محايد' : 'Neutral' }}
+                    </span>
+
                   </div>
 
-                  <h4 class="text-lg sm:text-xl font-bold text-white mb-2 leading-snug group-hover:text-emerald-400 transition-colors line-clamp-2" :class="locale === 'ar' ? 'text-right' : 'text-left'" :dir="locale === 'ar' ? 'rtl' : 'ltr'">
-                    {{ mainNews?.translations?.[locale === 'ar' ? 'ar' : 'en']?.title || mainNews?.title_en || 'Crypto News' }}
-                  </h4>
-                  
-                  <p v-if="mainNews?.translations" class="text-xs sm:text-sm text-slate-300 line-clamp-2 mb-2 font-medium leading-relaxed" :class="locale === 'ar' ? 'text-right' : 'text-left'" :dir="locale === 'ar' ? 'rtl' : 'ltr'">
-                    {{ locale === 'ar' && mainNews?.ai_processed ? mainNews?.translations?.ar?.summary : mainNews?.translations?.[locale === 'ar' ? 'ar' : 'en']?.content }}
+                  <h3
+                    class="text-lg sm:text-xl font-bold text-white mb-2 leading-snug group-hover:text-emerald-400 transition-colors line-clamp-2"
+                    :class="locale === 'ar' ? 'text-right' : 'text-left'"
+                    :dir="locale === 'ar' ? 'rtl' : 'ltr'"
+                  >
+                    {{
+                      mainNews?.translations?.[
+                        locale === 'ar' ? 'ar' : 'en'
+                      ]?.title ||
+                      mainNews?.title_en ||
+                      'Crypto News'
+                    }}
+                  </h3>
+
+                  <p
+                    v-if="mainNews?.translations"
+                    class="text-xs sm:text-sm text-slate-300 line-clamp-2 mb-2 font-medium leading-relaxed"
+                    :class="locale === 'ar' ? 'text-right' : 'text-left'"
+                    :dir="locale === 'ar' ? 'rtl' : 'ltr'"
+                  >
+                    {{
+                      locale === 'ar' && mainNews?.ai_processed
+                        ? mainNews?.translations?.ar?.summary
+                        : mainNews?.translations?.[
+                            locale === 'ar' ? 'ar' : 'en'
+                          ]?.content
+                    }}
                   </p>
-                  <p v-else-if="mainNews?.summary || mainNews?.content_en" class="text-xs sm:text-sm text-slate-300 line-clamp-2 mb-2 font-medium leading-relaxed text-left" dir="ltr">
+
+                  <p
+                    v-else-if="mainNews?.summary || mainNews?.content_en"
+                    class="text-xs sm:text-sm text-slate-300 line-clamp-2 mb-2 font-medium leading-relaxed text-left"
+                    dir="ltr"
+                  >
                     {{ mainNews?.summary || mainNews?.content_en }}
                   </p>
 
-                  <div class="flex items-center gap-4 mt-2 text-xs font-bold text-slate-400" :dir="locale === 'ar' ? 'rtl' : 'ltr'">
-                    <span class="text-emerald-500">{{ t('readMore') }}</span>
-                    <span>• {{ mainNews?.source || 'Aql Crypto' }}</span>
-                    <span v-if="mainNews?.impact_score" class="flex items-center gap-1" :title="locale === 'ar' ? 'درجة التأثير' : 'Impact Score'">
-                      <span class="text-amber-400 text-sm">⚡</span> {{ mainNews?.impact_score }}/10
+                  <div
+                    class="flex items-center gap-4 mt-2 text-xs font-bold text-slate-400"
+                    :dir="locale === 'ar' ? 'rtl' : 'ltr'"
+                  >
+                    <span class="text-emerald-500">
+                      {{ t('readMore') }}
+                    </span>
+
+                    <span>
+                      • {{ mainNews?.source || 'Aql Crypto' }}
+                    </span>
+
+                    <span
+                      v-if="mainNews?.impact_score"
+                      class="flex items-center gap-1"
+                      :title="
+                        locale === 'ar'
+                          ? 'درجة التأثير'
+                          : 'Impact Score'
+                      "
+                    >
+                      <span class="text-amber-400 text-sm">⚡</span>
+                      {{ mainNews?.impact_score }}/10
                     </span>
                   </div>
+
                 </div>
               </Link>
 
-              <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-2" v-if="subNews && subNews.length">
-                <Link :href="`/news/${news?.id}`" v-for="news in subNews" :key="news?.id" class="bg-slate-50 dark:bg-[#0f172a] p-4 rounded-2xl border border-slate-100 dark:border-slate-800 hover:border-emerald-500/30 transition-all cursor-pointer flex flex-col h-full group relative overflow-hidden">
-                  
-                  <div class="flex justify-between items-start mb-3 relative z-10" :dir="locale === 'ar' ? 'rtl' : 'ltr'">
-                    <span class="inline-block px-2 py-1 rounded bg-white dark:bg-slate-800 text-slate-500 dark:text-slate-400 text-[10px] font-bold border border-slate-200 dark:border-slate-700 shadow-sm">{{ news?.source || 'News' }}</span>
-                    
-                    <span v-if="news?.sentiment === 'Bullish'" class="text-xs drop-shadow-md animate-pulse" :title="locale === 'ar' ? 'صعودي' : 'Bullish'">🟢</span>
-                    <span v-else-if="news?.sentiment === 'Bearish'" class="text-xs drop-shadow-md animate-pulse" :title="locale === 'ar' ? 'هبوطي' : 'Bearish'">🔴</span>
+              <!-- Sub News -->
+              <div
+                v-if="subNews && subNews.length"
+                class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-2"
+              >
+                <Link
+                  :href="`/news/${news?.id}`"
+                  v-for="news in subNews"
+                  :key="news?.id"
+                  class="bg-slate-50 dark:bg-[#0f172a] p-4 rounded-2xl border border-slate-100 dark:border-slate-800 hover:border-emerald-500/30 transition-all cursor-pointer flex flex-col h-full group relative overflow-hidden"
+                >
+
+                  <div
+                    class="flex justify-between items-start mb-3 relative z-10"
+                    :dir="locale === 'ar' ? 'rtl' : 'ltr'"
+                  >
+                    <span
+                      class="inline-block px-2 py-1 rounded bg-white dark:bg-slate-800 text-slate-500 dark:text-slate-400 text-[10px] font-bold border border-slate-200 dark:border-slate-700 shadow-sm"
+                    >
+                      {{ news?.source || 'News' }}
+                    </span>
+
+                    <span
+                      v-if="news?.sentiment === 'Bullish'"
+                      class="text-xs drop-shadow-md animate-pulse"
+                      :title="locale === 'ar' ? 'صعودي' : 'Bullish'"
+                    >
+                      🟢
+                    </span>
+
+                    <span
+                      v-else-if="news?.sentiment === 'Bearish'"
+                      class="text-xs drop-shadow-md animate-pulse"
+                      :title="locale === 'ar' ? 'هبوطي' : 'Bearish'"
+                    >
+                      🔴
+                    </span>
                   </div>
-                  
-                  <h5 class="text-xs font-bold text-slate-900 dark:text-white leading-relaxed mb-2 flex-1 group-hover:text-emerald-500 transition-colors relative z-10 line-clamp-3" :class="locale === 'ar' ? 'text-right' : 'text-left'" :dir="locale === 'ar' ? 'rtl' : 'ltr'">
-                    {{ news?.translations?.[locale === 'ar' ? 'ar' : 'en']?.title || news?.title_en || 'Crypto News' }}
-                  </h5>
+
+                  <h4
+                    class="text-xs font-bold text-slate-900 dark:text-white leading-relaxed mb-2 flex-1 group-hover:text-emerald-500 transition-colors relative z-10 line-clamp-3"
+                    :class="locale === 'ar' ? 'text-right' : 'text-left'"
+                    :dir="locale === 'ar' ? 'rtl' : 'ltr'"
+                  >
+                    {{
+                      news?.translations?.[
+                        locale === 'ar' ? 'ar' : 'en'
+                      ]?.title ||
+                      news?.title_en ||
+                      'Crypto News'
+                    }}
+                  </h4>
+
                 </Link>
               </div>
 
-              <div v-if="!mainNews" class="h-64 flex flex-col items-center justify-center text-slate-400 border-2 border-dashed border-slate-200 dark:border-slate-800 rounded-2xl">
+              <!-- No News -->
+              <div
+                v-if="!mainNews"
+                class="h-64 flex flex-col items-center justify-center text-slate-400 border-2 border-dashed border-slate-200 dark:border-slate-800 rounded-2xl"
+              >
                 <span>📰</span>
-                <p class="text-sm mt-2 font-medium">{{ locale === 'ar' ? 'لا توجد أخبار حالياً' : 'No news available' }}</p>
+
+                <p class="text-sm mt-2 font-medium">
+                  {{
+                    locale === 'ar'
+                      ? 'لا توجد أخبار حالياً'
+                      : 'No news available'
+                  }}
+                </p>
               </div>
+
             </div>
           </div>
 
+          <!-- Right Column -->
           <div class="lg:col-span-3 flex flex-col gap-6">
-            <div class="bg-white dark:bg-[#151e32] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm flex flex-col items-center hover:shadow-md transition-shadow relative overflow-hidden">
-              <div class="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 blur-2xl rounded-full"></div>
-              <h3 class="text-base font-bold text-slate-900 dark:text-white mb-6 relative z-10">{{ t('fearGreed') }}</h3>
-              <div class="relative w-48 h-24 mb-4 overflow-hidden flex justify-center z-10">
-                <svg viewBox="0 0 100 50" class="w-full h-full overflow-visible">
-                  <path d="M 10 50 A 40 40 0 0 1 90 50" fill="none" class="stroke-slate-100 dark:stroke-slate-800" stroke-width="12" stroke-linecap="round"/>
-                  <path d="M 10 50 A 40 40 0 0 1 90 50" fill="none" stroke="url(#gradient)" stroke-width="12" stroke-dasharray="125.6" :stroke-dashoffset="125.6 * (1 - ((props.fearGreed?.value || 50) / 100))" stroke-linecap="round" class="transition-all duration-1000 ease-out"/>
+
+            <!-- Fear & Greed -->
+            <div
+              class="bg-white dark:bg-[#151e32] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm flex flex-col items-center hover:shadow-md transition-shadow relative overflow-hidden"
+            >
+
+              <div
+                class="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 blur-2xl rounded-full"
+              ></div>
+
+              <h2
+                class="text-base font-bold text-slate-900 dark:text-white mb-6 relative z-10"
+              >
+                {{ t('fearGreed') }}
+              </h2>
+
+              <div
+                class="relative w-48 h-24 mb-4 overflow-hidden flex justify-center z-10"
+              >
+                <svg
+                  viewBox="0 0 100 50"
+                  class="w-full h-full overflow-visible"
+                >
+                  <path
+                    d="M 10 50 A 40 40 0 0 1 90 50"
+                    fill="none"
+                    class="stroke-slate-100 dark:stroke-slate-800"
+                    stroke-width="12"
+                    stroke-linecap="round"
+                  />
+
+                  <path
+                    d="M 10 50 A 40 40 0 0 1 90 50"
+                    fill="none"
+                    stroke="url(#gradient)"
+                    stroke-width="12"
+                    stroke-dasharray="125.6"
+                    :stroke-dashoffset="
+                      125.6 *
+                      (
+                        1 -
+                        (
+                          (props.fearGreed?.value || 50) / 100
+                        )
+                      )
+                    "
+                    stroke-linecap="round"
+                    class="transition-all duration-1000 ease-out"
+                  />
+
                   <defs>
-                    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                      <stop offset="0%" stop-color="#ef4444" />
-                      <stop offset="50%" stop-color="#eab308" />
-                      <stop offset="100%" stop-color="#10b981" />
+                    <linearGradient
+                      id="gradient"
+                      x1="0%"
+                      y1="0%"
+                      x2="100%"
+                      y2="0%"
+                    >
+                      <stop
+                        offset="0%"
+                        stop-color="#ef4444"
+                      />
+
+                      <stop
+                        offset="50%"
+                        stop-color="#eab308"
+                      />
+
+                      <stop
+                        offset="100%"
+                        stop-color="#10b981"
+                      />
                     </linearGradient>
                   </defs>
                 </svg>
+
                 <div class="absolute bottom-0 text-center">
-                  <div class="text-4xl font-black text-slate-900 dark:text-emerald-400">{{ props.fearGreed?.value || 50 }}</div>
-                  <div class="text-[10px] font-black uppercase tracking-widest mt-1" :class="(props.fearGreed?.value || 50) >= 50 ? 'text-emerald-500' : 'text-rose-500'">
-                    {{ props.fearGreed?.classification ? translateFearGreed(props.fearGreed.classification) : t('greed') }}
+
+                  <div
+                    class="text-4xl font-black text-slate-900 dark:text-emerald-400"
+                  >
+                    {{ props.fearGreed?.value || 50 }}
                   </div>
+
+                  <div
+                    class="text-[10px] font-black uppercase tracking-widest mt-1"
+                    :class="
+                      (props.fearGreed?.value || 50) >= 50
+                        ? 'text-emerald-500'
+                        : 'text-rose-500'
+                    "
+                  >
+                    {{
+                      props.fearGreed?.classification
+                        ? translateFearGreed(
+                            props.fearGreed.classification
+                          )
+                        : t('neutral')
+                    }}
+                  </div>
+
                 </div>
               </div>
-              <p class="text-[11px] text-center text-slate-500 dark:text-slate-400 mt-2 relative z-10 font-medium" v-html="t('fearGreedDesc')"></p>
+
+              <p
+                class="text-[11px] text-center text-slate-500 dark:text-slate-400 mt-2 relative z-10 font-medium leading-relaxed"
+                v-html="fearGreedDescription"
+              ></p>
+
             </div>
 
-            <div class="bg-white dark:bg-[#151e32] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm hover:shadow-md transition-shadow">
-              <div class="flex items-center justify-between mb-5 border-b border-slate-100 dark:border-slate-800 pb-3">
-                <h3 class="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
-                  <span class="text-emerald-500">🔥</span> {{ t('topGainers') }}
-                </h3>
+            <!-- Top Gainers -->
+            <div
+              class="bg-white dark:bg-[#151e32] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm hover:shadow-md transition-shadow"
+            >
+
+              <div
+                class="flex items-center justify-between mb-5 border-b border-slate-100 dark:border-slate-800 pb-3"
+              >
+                <h2
+                  class="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-1.5"
+                >
+                  <span class="text-emerald-500">🔥</span>
+                  {{ t('topGainers') }}
+                </h2>
               </div>
-              
+
               <div class="space-y-3">
-                <Link 
-                  :href="`/crypto/${coin?.symbol?.toLowerCase()}`" 
-                  v-for="coin in props.topGainers" 
-                  :key="coin?.id" 
+
+                <Link
+                  :href="`/crypto/${coin?.symbol?.toLowerCase()}`"
+                  v-for="coin in props.topGainers"
+                  :key="coin?.id"
                   class="flex items-center justify-between p-2.5 rounded-xl hover:bg-slate-50 dark:hover:bg-[#0f172a] border border-transparent hover:border-slate-100 dark:hover:border-slate-800 transition-all cursor-pointer group"
                 >
+
                   <div class="flex items-center gap-3">
-                    <img v-if="coin?.image_url" :src="coin.image_url" :alt="coin?.name" class="w-7 h-7 rounded-full object-contain bg-slate-100 dark:bg-slate-800 p-1 shadow-sm" />
+
+                    <img
+                      v-if="coin?.image_url"
+                      :src="coin.image_url"
+                      :alt="coin?.name"
+                      class="w-7 h-7 rounded-full object-contain bg-slate-100 dark:bg-slate-800 p-1 shadow-sm"
+                    />
+
                     <div class="flex flex-col">
-                      <span class="text-xs font-bold text-slate-900 dark:text-white group-hover:text-emerald-500 transition-colors">{{ coin?.name }}</span>
-                      <span class="text-[10px] font-mono text-slate-400">{{ coin?.symbol?.toUpperCase() }}</span>
+
+                      <span
+                        class="text-xs font-bold text-slate-900 dark:text-white group-hover:text-emerald-500 transition-colors"
+                      >
+                        {{ coin?.name }}
+                      </span>
+
+                      <span
+                        class="text-[10px] font-mono text-slate-400"
+                      >
+                        {{ coin?.symbol?.toUpperCase() }}
+                      </span>
+
                     </div>
                   </div>
+
                   <div class="flex flex-col items-end">
-                    <span class="text-[11px] font-mono font-bold text-slate-700 dark:text-slate-300">
-                      ${{ Number(coin?.current_price || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 4 }) }}
+
+                    <span
+                      class="text-[11px] font-mono font-bold text-slate-700 dark:text-slate-300"
+                    >
+                      ${{
+                        Number(
+                          coin?.current_price || 0
+                        ).toLocaleString('en-US', {
+                          minimumFractionDigits: 2,
+                          maximumFractionDigits: 4
+                        })
+                      }}
                     </span>
-                    <span class="text-[10px] font-black text-emerald-500 mt-0.5 bg-emerald-50 dark:bg-emerald-500/10 px-1.5 rounded">
+
+                    <span
+                      class="text-[10px] font-black text-emerald-500 mt-0.5 bg-emerald-50 dark:bg-emerald-500/10 px-1.5 rounded"
+                    >
                       +{{ coin?.change_24h || 0 }}%
                     </span>
+
                   </div>
+
                 </Link>
-                <div v-if="!props.topGainers || props.topGainers.length === 0" class="text-xs text-center text-slate-400 py-4 italic">
-                  {{ locale === 'ar' ? 'جاري الحساب...' : 'Calculating...' }}
+
+                <div
+                  v-if="
+                    !props.topGainers ||
+                    props.topGainers.length === 0
+                  "
+                  class="text-xs text-center text-slate-400 py-4 italic"
+                >
+                  {{
+                    locale === 'ar'
+                      ? 'جاري الحساب...'
+                      : 'Calculating...'
+                  }}
                 </div>
+
               </div>
             </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================
+           FEATURES
+      ======================================================= -->
+      <section
+        class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 mt-16 pt-10 border-t border-slate-200 dark:border-slate-800/80"
+      >
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+
+          <!-- Feature 1 -->
+          <div class="flex flex-col items-center">
+
+            <div
+              class="w-12 h-12 rounded-2xl bg-emerald-50 dark:bg-emerald-500/10 text-emerald-500 flex items-center justify-center text-xl mb-4 shadow-sm border border-emerald-100 dark:border-emerald-500/20"
+            >
+              📈
+            </div>
+
+            <h3
+              class="text-sm font-bold text-slate-900 dark:text-white mb-1.5"
+            >
+              {{ t('feat1Title') }}
+            </h3>
+
+            <p
+              class="text-xs text-slate-500 dark:text-slate-400 font-medium"
+            >
+              {{ t('feat1Desc') }}
+            </p>
+
+          </div>
+
+          <!-- Feature 2 -->
+          <div class="flex flex-col items-center">
+
+            <div
+              class="w-12 h-12 rounded-2xl bg-indigo-50 dark:bg-indigo-500/10 text-indigo-500 flex items-center justify-center text-xl mb-4 shadow-sm border border-indigo-100 dark:border-indigo-500/20"
+            >
+              🎓
+            </div>
+
+            <h3
+              class="text-sm font-bold text-slate-900 dark:text-white mb-1.5"
+            >
+              {{ t('feat2Title') }}
+            </h3>
+
+            <p
+              class="text-xs text-slate-500 dark:text-slate-400 font-medium"
+            >
+              {{ t('feat2Desc') }}
+            </p>
+
+          </div>
+
+          <!-- Feature 3 -->
+          <div class="flex flex-col items-center">
+
+            <div
+              class="w-12 h-12 rounded-2xl bg-amber-50 dark:bg-amber-500/10 text-amber-500 flex items-center justify-center text-xl mb-4 shadow-sm border border-amber-100 dark:border-amber-500/20"
+            >
+              🤖
+            </div>
+
+            <h3
+              class="text-sm font-bold text-slate-900 dark:text-white mb-1.5"
+            >
+              {{ t('feat3Title') }}
+            </h3>
+
+            <p
+              class="text-xs text-slate-500 dark:text-slate-400 font-medium"
+            >
+              {{ t('feat3Desc') }}
+            </p>
+
+          </div>
+
+          <!-- Feature 4 -->
+          <div class="flex flex-col items-center">
+
+            <div
+              class="w-12 h-12 rounded-2xl bg-blue-50 dark:bg-blue-500/10 text-blue-500 flex items-center justify-center text-xl mb-4 shadow-sm border border-blue-100 dark:border-blue-500/20"
+            >
+              🛡️
+            </div>
+
+            <h3
+              class="text-sm font-bold text-slate-900 dark:text-white mb-1.5"
+            >
+              {{ t('feat4Title') }}
+            </h3>
+
+            <p
+              class="text-xs text-slate-500 dark:text-slate-400 font-medium"
+            >
+              {{ t('feat4Desc') }}
+            </p>
+
           </div>
 
         </div>
       </section>
 
-      <section class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 mt-16 pt-10 border-t border-slate-200 dark:border-slate-800/80">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-          <div class="flex flex-col items-center">
-            <div class="w-12 h-12 rounded-2xl bg-emerald-50 dark:bg-emerald-500/10 text-emerald-500 flex items-center justify-center text-xl mb-4 shadow-sm border border-emerald-100 dark:border-emerald-500/20">📈</div>
-            <h4 class="text-sm font-bold text-slate-900 dark:text-white mb-1.5">{{ t('feat1Title') }}</h4>
-            <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">{{ t('feat1Desc') }}</p>
+      <!-- ======================================================
+           ACADEMY
+      ======================================================= -->
+      <section
+        class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 mt-16"
+      >
+        <div
+          class="relative overflow-hidden bg-white dark:bg-[#151e32] border border-slate-200 dark:border-slate-800 rounded-3xl p-8 sm:p-10 shadow-sm"
+          :dir="locale === 'ar' ? 'rtl' : 'ltr'"
+        >
+
+          <div
+            class="absolute -top-24 -right-24 w-64 h-64 bg-emerald-500/10 blur-3xl rounded-full"
+          ></div>
+
+          <div
+            class="absolute -bottom-24 -left-24 w-64 h-64 bg-indigo-500/10 blur-3xl rounded-full"
+          ></div>
+
+          <div
+            class="relative z-10 grid grid-cols-1 lg:grid-cols-3 gap-8 items-center"
+          >
+
+            <div class="lg:col-span-2">
+
+              <span
+                class="inline-flex items-center px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-bold mb-4"
+              >
+                {{ t('academyBadge') }}
+              </span>
+
+              <h2
+                class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white mb-4"
+              >
+                {{ t('academyTitle') }}
+              </h2>
+
+              <p
+                class="text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-8 max-w-3xl"
+              >
+                {{ t('academyDesc') }}
+              </p>
+
+              <div class="flex flex-wrap gap-2 mt-6">
+
+                <span
+                  v-for="topic in academyTopicNames"
+                  :key="topic"
+                  class="px-3 py-1.5 rounded-lg bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs font-bold text-slate-600 dark:text-slate-300"
+                >
+                  {{ topic }}
+                </span>
+
+              </div>
+
+            </div>
+
+            <div class="flex justify-center lg:justify-end">
+
+              <Link
+                href="/academy"
+                class="inline-flex items-center justify-center px-7 py-3.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-bold shadow-lg shadow-emerald-500/10 transition-all"
+              >
+                {{ t('academyButton') }}
+              </Link>
+
+            </div>
+
           </div>
-          <div class="flex flex-col items-center">
-            <div class="w-12 h-12 rounded-2xl bg-indigo-50 dark:bg-indigo-500/10 text-indigo-500 flex items-center justify-center text-xl mb-4 shadow-sm border border-indigo-100 dark:border-indigo-500/20">⚡</div>
-            <h4 class="text-sm font-bold text-slate-900 dark:text-white mb-1.5">{{ t('feat2Title') }}</h4>
-            <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">{{ t('feat2Desc') }}</p>
+        </div>
+      </section>
+
+      <!-- ======================================================
+           DATA SOURCES & METHODOLOGY
+      ======================================================= -->
+      <section
+        class="max-w-[1100px] mx-auto px-4 sm:px-6 lg:px-8 mt-16"
+      >
+        <div
+          class="bg-slate-100 dark:bg-[#0f172a] border border-slate-200 dark:border-slate-800 rounded-3xl p-8 sm:p-10"
+          :dir="locale === 'ar' ? 'rtl' : 'ltr'"
+        >
+
+          <div class="text-center max-w-3xl mx-auto">
+
+            <span
+              class="inline-flex items-center px-3 py-1 rounded-full bg-white dark:bg-[#151e32] border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 text-xs font-bold mb-4"
+            >
+              {{ t('sourcesBadge') }}
+            </span>
+
+            <h2
+              class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white mb-4"
+            >
+              {{ t('sourcesTitle') }}
+            </h2>
+
+            <p
+              class="text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-8"
+            >
+              {{ t('sourcesDesc') }}
+            </p>
+
           </div>
-          <div class="flex flex-col items-center">
-            <div class="w-12 h-12 rounded-2xl bg-amber-50 dark:bg-amber-500/10 text-amber-500 flex items-center justify-center text-xl mb-4 shadow-sm border border-amber-100 dark:border-amber-500/20">🤖</div>
-            <h4 class="text-sm font-bold text-slate-900 dark:text-white mb-1.5">{{ t('feat3Title') }}</h4>
-            <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">{{ t('feat3Desc') }}</p>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8">
+
+            <div
+              class="bg-white dark:bg-[#151e32] rounded-2xl border border-slate-200 dark:border-slate-800 p-5"
+            >
+              <h3
+                class="font-bold text-slate-900 dark:text-white mb-2"
+              >
+                {{ t('sourceMarketTitle') }}
+              </h3>
+
+              <p
+                class="text-xs text-slate-500 dark:text-slate-400 leading-6"
+              >
+                {{ t('sourceMarketDesc') }}
+              </p>
+            </div>
+
+            <div
+              class="bg-white dark:bg-[#151e32] rounded-2xl border border-slate-200 dark:border-slate-800 p-5"
+            >
+              <h3
+                class="font-bold text-slate-900 dark:text-white mb-2"
+              >
+                {{ t('sourceIndicatorTitle') }}
+              </h3>
+
+              <p
+                class="text-xs text-slate-500 dark:text-slate-400 leading-6"
+              >
+                {{ t('sourceIndicatorDesc') }}
+              </p>
+            </div>
+
+            <div
+              class="bg-white dark:bg-[#151e32] rounded-2xl border border-slate-200 dark:border-slate-800 p-5"
+            >
+              <h3
+                class="font-bold text-slate-900 dark:text-white mb-2"
+              >
+                {{ t('sourceNewsTitle') }}
+              </h3>
+
+              <p
+                class="text-xs text-slate-500 dark:text-slate-400 leading-6"
+              >
+                {{ t('sourceNewsDesc') }}
+              </p>
+            </div>
+
           </div>
-          <div class="flex flex-col items-center">
-            <div class="w-12 h-12 rounded-2xl bg-blue-50 dark:bg-blue-500/10 text-blue-500 flex items-center justify-center text-xl mb-4 shadow-sm border border-blue-100 dark:border-blue-500/20">🛡️</div>
-            <h4 class="text-sm font-bold text-slate-900 dark:text-white mb-1.5">{{ t('feat4Title') }}</h4>
-            <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">{{ t('feat4Desc') }}</p>
+
+          <div class="text-center mt-7">
+
+            <Link
+              href="/about"
+              class="text-sm font-bold text-emerald-500 hover:text-emerald-600 transition"
+            >
+              {{ t('methodologyLink') }}
+            </Link>
+
           </div>
+
+        </div>
+      </section>
+
+      <!-- ======================================================
+           DISCLAIMER
+      ======================================================= -->
+      <section
+        class="max-w-[1100px] mx-auto px-4 sm:px-6 lg:px-8 mt-10"
+      >
+        <div
+          class="text-center text-xs text-slate-500 dark:text-slate-500 leading-6"
+          :dir="locale === 'ar' ? 'rtl' : 'ltr'"
+        >
+          {{ t('homepageDisclaimer') }}
         </div>
       </section>
 
@@ -242,148 +1003,622 @@ import { Link, usePage, Head } from '@inertiajs/vue3';
 import { computed } from 'vue';
 
 const props = defineProps({
-  tickerCryptos: { type: Array, default: () => [] },
-  topGainers: { type: Array, default: () => [] },
-  news: { type: Array, default: () => [] },
-  globalStats: { type: Object, default: () => ({ market_cap: 0, volume: 0, btc_dominance: 0, active_coins: 0, market_cap_change: 0 }) },
-  fearGreed: { type: Object, default: () => ({ value: 50, classification: 'Neutral' }) }
+  tickerCryptos: {
+    type: Array,
+    default: () => []
+  },
+
+  topGainers: {
+    type: Array,
+    default: () => []
+  },
+
+  news: {
+    type: Array,
+    default: () => []
+  },
+
+  globalStats: {
+    type: Object,
+    default: () => ({
+      market_cap: 0,
+      volume: 0,
+      btc_dominance: 0,
+      active_coins: 0,
+      market_cap_change: 0
+    })
+  },
+
+  fearGreed: {
+    type: Object,
+    default: () => ({
+      value: 50,
+      classification: 'Neutral'
+    })
+  }
 });
 
 const page = usePage();
+
 const locale = computed(() => page.props.locale || 'ar');
 
-// ======================================================
-// SEO + Canonical
-// ======================================================
+/*
+|--------------------------------------------------------------------------
+| SEO + Canonical
+|--------------------------------------------------------------------------
+*/
 
 const canonicalUrl = computed(() => {
-    const cleanPath = page.url.split('?')[0];
-    return cleanPath === '/'
-        ? 'https://aqlcrypto.com'
-        : 'https://aqlcrypto.com' + cleanPath;
+  const cleanPath = page.url.split('?')[0];
+
+  return cleanPath === '/'
+    ? 'https://aqlcrypto.com'
+    : 'https://aqlcrypto.com' + cleanPath;
 });
 
 const seoKeywords = computed(() => {
-    return locale.value === 'ar'
-        ? 'العملات الرقمية, بيتكوين, ايثريوم, اسعار الكريبتو, اخبار الكريبتو, تحليل السوق, Aql Crypto'
-        : 'crypto, cryptocurrency, bitcoin, ethereum, crypto prices, crypto news, Aql Crypto';
+  return locale.value === 'ar'
+    ? 'العملات الرقمية, بيتكوين, ايثريوم, اسعار العملات الرقمية, اخبار العملات الرقمية, تحليل السوق, أكاديمية العملات الرقمية, AQL Crypto'
+    : 'crypto, cryptocurrency, bitcoin, ethereum, crypto prices, crypto news, crypto analysis, crypto academy, AQL Crypto';
 });
 
-// ======================================================
-// Data Processing
-// ======================================================
+/*
+|--------------------------------------------------------------------------
+| News
+|--------------------------------------------------------------------------
+*/
 
-const mainNews = computed(() => props.news && props.news.length > 0 ? props.news[0] : null);
-const subNews = computed(() => props.news && props.news.length > 1 ? props.news.slice(1, 4) : []);
+const mainNews = computed(() =>
+  props.news && props.news.length > 0
+    ? props.news[0]
+    : null
+);
+
+const subNews = computed(() =>
+  props.news && props.news.length > 1
+    ? props.news.slice(1, 4)
+    : []
+);
+
+/*
+|--------------------------------------------------------------------------
+| Formatting
+|--------------------------------------------------------------------------
+*/
 
 const formatCompact = (num) => {
-  if (!num) return '$0';
+  if (!num) {
+    return '$0';
+  }
+
   return new Intl.NumberFormat('en-US', {
-    style: 'currency', currency: 'USD', notation: "compact", maximumFractionDigits: 2
+    style: 'currency',
+    currency: 'USD',
+    notation: 'compact',
+    maximumFractionDigits: 2
   }).format(num);
 };
 
+/*
+|--------------------------------------------------------------------------
+| Fear & Greed
+|--------------------------------------------------------------------------
+*/
+
 const translateFearGreed = (status) => {
-  if (!status) return '';
+  if (!status) {
+    return '';
+  }
+
   const dict = {
-    'Extreme Greed': locale.value === 'ar' ? 'طمع شديد' : 'Extreme Greed',
-    'Greed': locale.value === 'ar' ? 'طمع' : 'Greed',
-    'Neutral': locale.value === 'ar' ? 'محايد' : 'Neutral',
-    'Fear': locale.value === 'ar' ? 'خوف' : 'Fear',
-    'Extreme Fear': locale.value === 'ar' ? 'خوف شديد' : 'Extreme Fear',
+    'Extreme Greed':
+      locale.value === 'ar'
+        ? 'طمع شديد'
+        : 'Extreme Greed',
+
+    'Greed':
+      locale.value === 'ar'
+        ? 'طمع'
+        : 'Greed',
+
+    'Neutral':
+      locale.value === 'ar'
+        ? 'محايد'
+        : 'Neutral',
+
+    'Fear':
+      locale.value === 'ar'
+        ? 'خوف'
+        : 'Fear',
+
+    'Extreme Fear':
+      locale.value === 'ar'
+        ? 'خوف شديد'
+        : 'Extreme Fear'
   };
+
   return dict[status] || status;
 };
 
+const fearGreedDescription = computed(() => {
+  const value = Number(
+    props.fearGreed?.value ?? 50
+  );
+
+  const classification =
+    props.fearGreed?.classification || 'Neutral';
+
+  const translated =
+    translateFearGreed(classification);
+
+  if (locale.value === 'ar') {
+    return `المؤشر الحالي عند <strong>${value}</strong> ويعكس حالة <span class="text-emerald-500 font-bold">${translated}</span> في السوق.`;
+  }
+
+  return `The current index is <strong>${value}</strong>, indicating <span class="text-emerald-500 font-bold">${translated}</span> in the market.`;
+});
+
+/*
+|--------------------------------------------------------------------------
+| Market Stats
+|--------------------------------------------------------------------------
+*/
+
 const dynamicMarketStats = computed(() => [
-  { 
-    label: locale.value === 'ar' ? 'القيمة السوقية' : 'Market Cap', 
-    value: formatCompact(props.globalStats.market_cap), 
-    change: Number(props.globalStats.market_cap_change).toFixed(2), 
-    isUp: props.globalStats.market_cap_change >= 0 
+  {
+    label:
+      locale.value === 'ar'
+        ? 'القيمة السوقية'
+        : 'Market Cap',
+
+    value: formatCompact(
+      props.globalStats.market_cap
+    ),
+
+    change:
+      Number(
+        props.globalStats.market_cap_change
+      ).toFixed(2),
+
+    isUp:
+      Number(
+        props.globalStats.market_cap_change
+      ) >= 0
   },
-  { 
-    label: locale.value === 'ar' ? 'حجم التداول (24س)' : 'Volume (24h)', 
-    value: formatCompact(props.globalStats.volume), 
-    change: '—', 
-    isUp: true 
+
+  {
+    label:
+      locale.value === 'ar'
+        ? 'حجم التداول (24س)'
+        : 'Volume (24h)',
+
+    value: formatCompact(
+      props.globalStats.volume
+    ),
+
+    change: '—',
+
+    isUp: true
   },
-  { 
-    label: locale.value === 'ar' ? 'هيمنة البيتكوين' : 'BTC Dominance', 
-    value: Number(props.globalStats.btc_dominance).toFixed(2) + '%', 
-    change: '—', 
-    isUp: true 
+
+  {
+    label:
+      locale.value === 'ar'
+        ? 'هيمنة البيتكوين'
+        : 'BTC Dominance',
+
+    value:
+      Number(
+        props.globalStats.btc_dominance
+      ).toFixed(2) + '%',
+
+    change: '—',
+
+    isUp: true
   },
-  { 
-    label: locale.value === 'ar' ? 'عدد العملات المدرجة' : 'Listed Coins', 
-    value: '20', 
-    change: '0.00', 
-    isUp: true 
-  },
+
+  {
+    label:
+      locale.value === 'ar'
+        ? 'الأصول المتاحة'
+        : 'Available Assets',
+
+    value:
+      Number(
+        props.globalStats.active_coins || 0
+      ).toLocaleString('en-US'),
+
+    change: '—',
+
+    isUp: true
+  }
 ]);
+
+/*
+|--------------------------------------------------------------------------
+| Academy Topics
+|--------------------------------------------------------------------------
+|
+| These are the currently active Academy topics.
+| Kept as a stable homepage summary so the homepage does not
+| depend on another backend prop.
+|
+*/
+
+const academyTopicNames = computed(() => {
+  if (locale.value === 'ar') {
+    return [
+      'بيتكوين',
+      'بلوكشين',
+      'التمويل اللامركزي',
+      'التخزين',
+      'Web3',
+      'NFTs',
+      'المحافظ',
+      'أساسيات التداول',
+      'الأمان'
+    ];
+  }
+
+  return [
+    'Bitcoin',
+    'Blockchain',
+    'DeFi',
+    'Staking',
+    'Web3',
+    'NFTs',
+    'Wallets',
+    'Trading Basics',
+    'Security'
+  ];
+});
+
+/*
+|--------------------------------------------------------------------------
+| Translations
+|--------------------------------------------------------------------------
+*/
 
 const translations = {
   ar: {
-    seoTitle: "Aql Crypto | المنصة الرائدة لبيانات العملات الرقمية",
-    seoDesc: "منصة متكاملة تجمع نبض الأسواق العالمية، الأخبار المالية العاجلة، البيانات اللحظية، والتحليلات المتقدمة لتمنحك أفضلية معلوماتية تسبق حركة الأسواق",
-    heroTitle1: "نبض السوق المشفر",
-    heroTitleHighlight: "بين يديك",
-    heroSub: "منصة متكاملة تجمع نبض الأسواق العالمية، الأخبار المالية العاجلة، البيانات اللحظية، والتحليلات المتقدمة لتمنحك أفضلية معلوماتية تسبق حركة الأسواق",
-    btnAnalytics: "استكشاف الأسواق",
-    btnNews: "تصفح الأخبار",
-    viewAllCoins: "عرض جميع العملات",
-    marketOverview: "نظرة عامة على السوق",
-    topNews: "أبرز المستجدات",
-    mainNewsTag: "تغطية خاصة",
-    readMore: "اقرأ التفاصيل",
-    fearGreed: "مؤشر الخوف والطمع",
-    greed: "طمع",
-    fearGreedDesc: "المؤشر الحالي يعكس حالة <span class='text-emerald-500 font-bold'>طمع</span> في الأسواق.<br>يرجى إدارة مخاطرك بحكمة.",
-    topGainers: "أعلى الارتفاعات (24س)",
-    feat1Title: "بيانات حية وموثوقة",
-    feat1Desc: "أسعار محدثة آلياً من قلب السوق",
-    feat2Title: "سرعة في التنفيذ",
-    feat2Desc: "منصة مصممة للتجاوب الفوري بدون تأخير",
-    feat3Title: "أخبار بالذكاء الاصطناعي",
-    feat3Desc: "محرك آلي يجلب ويصنف لك أهم الأخبار",
-    feat4Title: "شفافية وحياد",
-    feat4Desc: "نعرض البيانات دون أي توجيه استثماري",
+    seoTitle:
+      'AQL Crypto | أخبار وبيانات وتحليلات العملات الرقمية',
+
+    seoDesc:
+      'AQL Crypto منصة معلوماتية تجمع أخبار العملات الرقمية وبيانات السوق ومؤشرات السوق والتحليلات والمحتوى التعليمي في مكان واحد.',
+
+    heroTitle1:
+      'معلومات سوق العملات الرقمية',
+
+    heroTitleHighlight:
+      'في مكان واحد',
+
+    heroSub:
+      'منصة معلوماتية تجمع أخبار العملات الرقمية، بيانات السوق، مؤشرات السوق، التحليلات، والمحتوى التعليمي لمساعدتك على فهم سوق الأصول الرقمية بصورة أوضح.',
+
+    btnAnalytics:
+      'استكشاف الأسواق',
+
+    btnNews:
+      'تصفح الأخبار',
+
+    viewAllCoins:
+      'عرض بيانات الأسواق',
+
+    viewAllNews:
+      'عرض جميع الأخبار',
+
+    marketOverview:
+      'نظرة عامة على السوق',
+
+    topNews:
+      'أبرز المستجدات',
+
+    mainNewsTag:
+      'أبرز خبر',
+
+    readMore:
+      'اقرأ التفاصيل',
+
+    fearGreed:
+      'مؤشر الخوف والطمع',
+
+    neutral:
+      'محايد',
+
+    topGainers:
+      'أعلى الارتفاعات (24س)',
+
+    /*
+    |--------------------------------------------------------------------------
+    | About
+    |--------------------------------------------------------------------------
+    */
+
+    aboutBadge:
+      'عن AQL Crypto',
+
+    aboutTitle:
+      'منصة معلوماتية لسوق العملات الرقمية',
+
+    aboutDesc:
+      'AQL Crypto منصة متخصصة في أخبار العملات الرقمية وبيانات السوق ومؤشرات السوق والتحليلات والمحتوى التعليمي. نعمل على تنظيم المعلومات من مصادر متخصصة وتقديمها بصورة واضحة، مع توضيح مصادر البيانات والمنهجية المستخدمة، ودون تقديم توصيات استثمارية شخصية.',
+
+    aboutLink:
+      'من نحن',
+
+    editorialLink:
+      'السياسة التحريرية',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Features
+    |--------------------------------------------------------------------------
+    */
+
+    feat1Title:
+      'بيانات سوق محدثة',
+
+    feat1Desc:
+      'بيانات أسعار وسوق يتم تحديثها آليًا من مصادر بيانات متخصصة',
+
+    feat2Title:
+      'محتوى تعليمي',
+
+    feat2Desc:
+      'أكاديمية منظمة لشرح مفاهيم العملات الرقمية وتقنيات البلوكشين',
+
+    feat3Title:
+      'معالجة مدعومة بالذكاء الاصطناعي',
+
+    feat3Desc:
+      'أدوات آلية تساعد في معالجة الأخبار وتنظيمها وإعداد التحليلات',
+
+    feat4Title:
+      'شفافية ومنهجية واضحة',
+
+    feat4Desc:
+      'نوضح مصادر البيانات وطريقة معالجة الأخبار والتحليلات',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Academy
+    |--------------------------------------------------------------------------
+    */
+
+    academyBadge:
+      'AQL Crypto Academy',
+
+    academyTitle:
+      'تعلم أساسيات العملات الرقمية وتقنيات البلوكشين',
+
+    academyDesc:
+      'تقدم أكاديمية AQL Crypto محتوى تعليميًا منظمًا حول بيتكوين، البلوكشين، التمويل اللامركزي، التخزين، Web3، الرموز غير القابلة للاستبدال، المحافظ، أساسيات التداول، وأمن الأصول الرقمية.',
+
+    academyButton:
+      'استكشف الأكاديمية',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Sources
+    |--------------------------------------------------------------------------
+    */
+
+    sourcesBadge:
+      'المصادر والمنهجية',
+
+    sourcesTitle:
+      'كيف يتم إعداد البيانات والمحتوى؟',
+
+    sourcesDesc:
+      'تعتمد AQL Crypto على مصادر بيانات متخصصة ومصادر إخبارية عامة، مع استخدام أدوات آلية للمساعدة في جمع المعلومات وتنظيمها ومعالجتها. نوضح المنهجية والمصادر بشكل أكبر في صفحات الموقع المخصصة لذلك.',
+
+    sourceMarketTitle:
+      'بيانات السوق',
+
+    sourceMarketDesc:
+      'يتم الاعتماد على CoinGecko للحصول على بيانات أسعار السوق والقيمة السوقية وحجم التداول وغيرها من بيانات الأصول الرقمية.',
+
+    sourceIndicatorTitle:
+      'مؤشرات السوق',
+
+    sourceIndicatorDesc:
+      'يتم استخدام Alternative.me كمصدر لمؤشر الخوف والطمع المعروض في الموقع.',
+
+    sourceNewsTitle:
+      'الأخبار والتحليلات',
+
+    sourceNewsDesc:
+      'يتم جمع الأخبار من مصادر متخصصة ومعالجتها وتنظيمها داخل قاعدة بيانات AQL Crypto، مع استخدام أدوات الذكاء الاصطناعي للمساعدة في بعض مراحل المعالجة.',
+
+    methodologyLink:
+      'تعرف على المنهجية التحريرية ومصادر البيانات',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Disclaimer
+    |--------------------------------------------------------------------------
+    */
+
+    homepageDisclaimer:
+      'المحتوى والبيانات والتحليلات المعروضة على AQL Crypto لأغراض معلوماتية وتعليمية فقط ولا تمثل نصيحة استثمارية أو توصية بشراء أو بيع أي أصل رقمي.'
   },
+
   en: {
-    seoTitle: "Aql Crypto | The Leading Crypto Data Platform",
-    seoDesc: "One platform for global market intelligence—real-time data, breaking financial news, and in-depth analytics to help you stay ahead of every market move",
-    heroTitle1: "The Crypto Market Pulse",
-    heroTitleHighlight: "In Your Hands",
-    heroSub: "One platform for global market intelligence—real-time data, breaking financial news, and in-depth analytics to help you stay ahead of every market move",
-    btnAnalytics: "Explore Markets",
-    btnNews: "Browse News",
-    viewAllCoins: "View All Assets",
-    marketOverview: "Global Market Overview",
-    topNews: "Top Stories",
-    mainNewsTag: "Featured",
-    readMore: "Read Details",
-    fearGreed: "Fear & Greed Index",
-    greed: "Greed",
-    fearGreedDesc: "The current index reflects <span class='text-emerald-500 font-bold'>greed</span> in the market.<br>Please manage your risks wisely.",
-    topGainers: "Top Gainers (24H)",
-    feat1Title: "Live Reliable Data",
-    feat1Desc: "Automated real-time prices directly from the market",
-    feat2Title: "Lightning Fast",
-    feat2Desc: "Built for instant response and zero lag",
-    feat3Title: "AI-Powered News",
-    feat3Desc: "Automated engine fetching top industry news",
-    feat4Title: "Transparent & Neutral",
-    feat4Desc: "Providing data without investment bias",
+    seoTitle:
+      'AQL Crypto | Crypto News, Market Data & Analysis',
+
+    seoDesc:
+      'AQL Crypto provides cryptocurrency news, market data, market indicators, analysis, and educational content in one platform.',
+
+    heroTitle1:
+      'Cryptocurrency Market',
+
+    heroTitleHighlight:
+      'Information in One Place',
+
+    heroSub:
+      'An information platform covering cryptocurrency news, market data, market indicators, analysis, and educational content to help you better understand digital asset markets.',
+
+    btnAnalytics:
+      'Explore Markets',
+
+    btnNews:
+      'Browse News',
+
+    viewAllCoins:
+      'View Market Data',
+
+    viewAllNews:
+      'View All News',
+
+    marketOverview:
+      'Global Market Overview',
+
+    topNews:
+      'Top Stories',
+
+    mainNewsTag:
+      'Featured',
+
+    readMore:
+      'Read Details',
+
+    fearGreed:
+      'Fear & Greed Index',
+
+    neutral:
+      'Neutral',
+
+    topGainers:
+      'Top Gainers (24H)',
+
+    /*
+    |--------------------------------------------------------------------------
+    | About
+    |--------------------------------------------------------------------------
+    */
+
+    aboutBadge:
+      'About AQL Crypto',
+
+    aboutTitle:
+      'An Information Platform for Digital Asset Markets',
+
+    aboutDesc:
+      'AQL Crypto covers cryptocurrency news, market data, market indicators, analysis, and educational content. We organize information from specialized sources and present it clearly while explaining our data sources and methodology. We do not provide personalized investment recommendations.',
+
+    aboutLink:
+      'About Us',
+
+    editorialLink:
+      'Editorial Policy',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Features
+    |--------------------------------------------------------------------------
+    */
+
+    feat1Title:
+      'Updated Market Data',
+
+    feat1Desc:
+      'Market and price data updated automatically from specialized data sources',
+
+    feat2Title:
+      'Educational Content',
+
+    feat2Desc:
+      'A structured Academy covering cryptocurrency and blockchain concepts',
+
+    feat3Title:
+      'AI-Assisted Processing',
+
+    feat3Desc:
+      'Automated tools help process, organize, and analyze relevant news',
+
+    feat4Title:
+      'Transparency & Methodology',
+
+    feat4Desc:
+      'We explain our data sources and approach to news and analysis',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Academy
+    |--------------------------------------------------------------------------
+    */
+
+    academyBadge:
+      'AQL Crypto Academy',
+
+    academyTitle:
+      'Learn Cryptocurrency and Blockchain Fundamentals',
+
+    academyDesc:
+      'AQL Crypto Academy provides structured educational content covering Bitcoin, blockchain, decentralized finance, staking, Web3, NFTs, wallets, trading basics, and digital asset security.',
+
+    academyButton:
+      'Explore the Academy',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Sources
+    |--------------------------------------------------------------------------
+    */
+
+    sourcesBadge:
+      'Sources & Methodology',
+
+    sourcesTitle:
+      'How Our Data and Content Are Prepared',
+
+    sourcesDesc:
+      'AQL Crypto uses specialized market data sources and public news sources, with automated tools assisting in information collection, organization, and processing. More details about our methodology and sources are available throughout the site.',
+
+    sourceMarketTitle:
+      'Market Data',
+
+    sourceMarketDesc:
+      'CoinGecko is used for market prices, market capitalization, trading volume, and other digital asset market data.',
+
+    sourceIndicatorTitle:
+      'Market Indicators',
+
+    sourceIndicatorDesc:
+      'Alternative.me is used as the source for the Fear & Greed Index displayed on the platform.',
+
+    sourceNewsTitle:
+      'News & Analysis',
+
+    sourceNewsDesc:
+      'News is collected from specialized sources and processed and organized within the AQL Crypto database, with AI tools assisting in selected processing stages.',
+
+    methodologyLink:
+      'Learn more about our editorial methodology and data sources',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Disclaimer
+    |--------------------------------------------------------------------------
+    */
+
+    homepageDisclaimer:
+      'Content, data, and analysis presented by AQL Crypto are provided for informational and educational purposes only and do not constitute investment advice or a recommendation to buy or sell any digital asset.'
   }
 };
 
-const t = (key) => translations[locale.value][key] || key;
+const t = (key) => {
+  return translations[locale.value]?.[key] || key;
+};
 </script>
 
 <style scoped>
 .scrollbar-none::-webkit-scrollbar {
   display: none;
 }
+
 .scrollbar-none {
   -ms-overflow-style: none;
   scrollbar-width: none;

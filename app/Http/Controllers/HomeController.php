@@ -4,14 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Cryptocurrency;
 use App\Models\News;
+use Illuminate\Support\Facades\Cache;
 use Inertia\Inertia;
 
 class HomeController extends Controller
 {
     /**
-     * دالة مساعدة لتغليف الأخبار بهيكلة الترجمات والذكاء الاصطناعي
+     * تجهيز خبر واحد بالهيكلة المطلوبة لواجهة Vue.
      */
-    private function mapNewsItem($item)
+    private function mapNewsItem($item): array
     {
         return [
             'id'           => $item->id,
@@ -22,57 +23,136 @@ class HomeController extends Controller
             'category'     => $item->category ?? 'General',
             'impact_score' => $item->impact_score ?? 5,
             'ai_processed' => (bool) $item->ai_processed,
-            'date'         => $item->created_at ? $item->created_at->diffForHumans() : '',
-            
-            // الهيكلة الذكية الجديدة للغات
+
+            'date' => $item->created_at
+                ? $item->created_at->diffForHumans()
+                : '',
+
             'translations' => [
                 'ar' => [
-                    'title'          => $item->title_ar ?? $item->title_en,
-                    'content'        => $item->content_ar ?? $item->content_en,
-                    'summary'        => $item->summary_ar ?? mb_substr($item->content_en, 0, 150) . '...',
+                    'title' => $item->title_ar
+                        ?? $item->title_en,
+
+                    'content' => $item->content_ar
+                        ?? $item->content_en,
+
+                    'summary' => $item->summary_ar
+                        ?? (
+                            $item->content_en
+                                ? mb_substr(strip_tags($item->content_en), 0, 150) . '...'
+                                : ''
+                        ),
+
                     'why_it_matters' => $item->why_it_matters_ar,
                 ],
+
                 'en' => [
                     'title'   => $item->title_en,
                     'content' => $item->content_en,
-                ]
-            ]
+                ],
+            ],
         ];
     }
 
     /**
-     * عرض الصفحة الرئيسية للمنصة (Home)
+     * الصفحة الرئيسية للمنصة.
      */
     public function index()
     {
-        $tickerCryptos = Cryptocurrency::take(8)->get();
-        $topGainers = Cryptocurrency::orderBy('change_24h', 'desc')->take(3)->get();
-        
-        // 🟢 جلب آخر 4 أخبار (معالجة ومنشورة فقط) وتغليفها لتتوافق مع واجهة Vue
-        $latestNews = News::where('status', 'published')
-            ->where('ai_processed', 1)
-            ->latest()
+        /*
+        |--------------------------------------------------------------------------
+        | شريط العملات
+        |--------------------------------------------------------------------------
+        |
+        | نعرض مجموعة من العملات الموجودة فعلياً في بيانات السوق.
+        | لا نربط هذا العدد بعدد صفحات Coin Hub المميزة.
+        |
+        */
+        $tickerCryptos = Cryptocurrency::query()
+            ->whereNotNull('current_price')
+            ->orderByDesc('market_cap')
+            ->take(8)
+            ->get();
+
+        /*
+        |--------------------------------------------------------------------------
+        | العملات الأعلى ارتفاعاً
+        |--------------------------------------------------------------------------
+        */
+        $topGainers = Cryptocurrency::query()
+            ->whereNotNull('current_price')
+            ->whereNotNull('change_24h')
+            ->orderByDesc('change_24h')
+            ->take(3)
+            ->get();
+
+        /*
+        |--------------------------------------------------------------------------
+        | آخر الأخبار
+        |--------------------------------------------------------------------------
+        |
+        | نعرض فقط الأخبار المنشورة والمعالجة.
+        | هذا يمنع ظهور مسودات أو أخبار لم تكتمل معالجتها.
+        |
+        */
+        $latestNews = News::query()
+            ->where('status', 'published')
+            ->where('ai_processed', true)
+            ->whereNotNull('title_ar')
+            ->where('title_ar', '!=', '')
+            ->latest('created_at')
             ->take(4)
             ->get()
-            ->map(function($item) {
+            ->map(function ($item) {
                 return $this->mapNewsItem($item);
-            });
+            })
+            ->values();
 
-        // 🟢 قراءة البيانات الحية من الكاش (مع قيم افتراضية في حال كانت فارغة)
-        $globalStats = \Illuminate\Support\Facades\Cache::get('market_global_stats', [
-            'market_cap' => 0, 'volume' => 0, 'btc_dominance' => 0, 'active_coins' => 0, 'market_cap_change' => 0
+        /*
+        |--------------------------------------------------------------------------
+        | إحصائيات السوق العامة
+        |--------------------------------------------------------------------------
+        */
+        $globalStats = Cache::get('market_global_stats', [
+            'market_cap'        => 0,
+            'volume'            => 0,
+            'btc_dominance'     => 0,
+            'active_coins'      => 0,
+            'market_cap_change' => 0,
         ]);
-        
-        $fearGreed = \Illuminate\Support\Facades\Cache::get('fear_greed_index', [
-            'value' => 50, 'classification' => 'Neutral'
+
+        /*
+        |--------------------------------------------------------------------------
+        | مؤشر الخوف والطمع
+        |--------------------------------------------------------------------------
+        */
+        $fearGreed = Cache::get('fear_greed_index', [
+            'value'          => 50,
+            'classification' => 'Neutral',
         ]);
+
+        /*
+        |--------------------------------------------------------------------------
+        | معلومات المنصة
+        |--------------------------------------------------------------------------
+        |
+        | هذه المعلومات تستخدمها Homepage لإظهار هوية AQL Crypto
+        | ومصادر البيانات بصورة واضحة.
+        |
+        */
+        $platformInfo = [
+            'featured_coin_hubs' => 20,
+            'market_data_source' => 'CoinGecko',
+            'fear_greed_source'  => 'Alternative.me',
+        ];
 
         return Inertia::render('Home', [
             'tickerCryptos' => $tickerCryptos,
             'topGainers'    => $topGainers,
-            'news'          => $latestNews,  // 🟢 تم التمرير بالهيكلة الجديدة
-            'globalStats'   => $globalStats, 
-            'fearGreed'     => $fearGreed    
+            'news'          => $latestNews,
+            'globalStats'   => $globalStats,
+            'fearGreed'     => $fearGreed,
+            'platformInfo'  => $platformInfo,
         ]);
     }
 }
