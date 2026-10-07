@@ -37085,10 +37085,10 @@ HTML,
 ];
 
 
-foreach ($stakingArticles as $article) {
+foreach ($web3Articles as $article) {
     AcademyArticle::updateOrCreate(
         [
-            'topic_id' => $staking->id,
+            'topic_id' => $web3->id,
             'slug' => $article['slug'],
         ],
         $article
