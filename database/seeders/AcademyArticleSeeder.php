@@ -37095,5 +37095,3199 @@ foreach ($web3Articles as $article) {
     );
 }
 
+
+
+$nftsArticles = [
+
+   [
+    'title' => 'What Are NFTs?',
+    'title_ar' => 'ما هي NFTs؟ شرح الرموز غير القابلة للاستبدال للمبتدئين',
+    'title_en' => 'What Are NFTs? A Beginner’s Guide to Non-Fungible Tokens',
+    'slug' => 'what-are-nfts',
+
+    'excerpt' => 'A comprehensive introduction to NFTs, explaining non-fungibility, blockchain ownership records, token IDs, metadata, smart contracts, use cases, risks and what users actually own when they acquire an NFT.',
+    'excerpt_ar' => 'دليل شامل للمبتدئين يشرح ما هي NFTs، ومعنى الرموز غير القابلة للاستبدال، وكيف تسجل الملكية على البلوكشين، ودور Token ID والعقود الذكية والبيانات الوصفية، وأهم الاستخدامات والمخاطر وما الذي يملكه المستخدم فعليًا عند شراء NFT.',
+    'excerpt_en' => 'A comprehensive beginner’s guide to NFTs, explaining non-fungibility, blockchain ownership records, token IDs, metadata, smart contracts, use cases, risks and what users actually own when they acquire an NFT.',
+
+    'content' => null,
+
+    'content_ar' => <<<'HTML'
+<article dir="rtl">
+
+    <h2>ما هي NFTs؟</h2>
+
+    <p>
+        NFT هو اختصار لعبارة <strong>Non-Fungible Token</strong>، أي "رمز غير قابل للاستبدال".
+        وهو نوع من الرموز الرقمية التي تمتلك هوية وتمييزًا خاصًا بها على شبكة البلوكشين، بحيث لا يكون
+        رمز معين مطابقًا بالضرورة لرمز آخر كما هو الحال في العملات والرموز القابلة للاستبدال.
+    </p>
+
+    <p>
+        أصبحت NFTs معروفة على نطاق واسع بسبب استخدامها في الفن الرقمي والمقتنيات الرقمية،
+        لكنها لا تقتصر على الصور أو الأعمال الفنية. يمكن استخدام هذا النوع من الرموز لتمثيل
+        مقتنيات رقمية، عناصر داخل الألعاب، تذاكر، عضويات، شهادات، أصول مرتبطة بخدمات رقمية،
+        أو أنواع أخرى من الحقوق والبيانات بحسب تصميم المشروع والعقد الذكي المستخدم.
+    </p>
+
+    <p>
+        ومن المهم منذ البداية فهم نقطة أساسية: <strong>NFT ليس هو الملف الرقمي نفسه</strong>.
+        فقد يمثل NFT صورة أو فيديو أو ملفًا أو عنصرًا رقميًا، لكن الرمز الموجود على البلوكشين
+        وسجل ملكيته شيء مختلف عن الملف الذي يشير إليه.
+    </p>
+
+    <h2>ماذا يعني Non-Fungible؟</h2>
+
+    <p>
+        لفهم NFTs بشكل صحيح، يجب أولًا فهم الفرق بين الأصل القابل للاستبدال والأصل غير القابل للاستبدال.
+    </p>
+
+    <h3>الأصول القابلة للاستبدال</h3>
+
+    <p>
+        الأصل القابل للاستبدال هو أصل يمكن استبدال وحدة منه بوحدة أخرى من النوع والقيمة نفسها
+        دون أن يكون هناك فرق جوهري بين الوحدتين.
+    </p>
+
+    <p>
+        على سبيل المثال، إذا كان لديك وحدة من عملة رقمية قابلة للاستبدال، فإن استبدالها بوحدة
+        أخرى من العملة نفسها لا يغيّر طبيعة ما تملكه. الوحدات متساوية من حيث النوع ويمكن التعامل
+        معها كبدائل عن بعضها.
+    </p>
+
+    <h3>الأصول غير القابلة للاستبدال</h3>
+
+    <p>
+        أما الأصل غير القابل للاستبدال، فله هوية أو خصائص تميّزه عن أصل آخر.
+        وهذا هو المفهوم الأساسي وراء NFT.
+    </p>
+
+    <p>
+        يمكن تشبيه ذلك بتذكرة تحمل رقم مقعد محدد. التذكرة قد تكون من الفئة نفسها التي تنتمي
+        إليها تذاكر أخرى، لكن رقمها وخصائصها قد تجعلها مختلفة عن تذكرة أخرى.
+    </p>
+
+    <p>
+        في NFT يتم تسجيل هوية الرمز وخصائصه وعلاقته بالعقد الذكي والمالك الحالي على البلوكشين
+        وفق تصميم النظام المستخدم.
+    </p>
+
+    <h2>NFT ليس مجرد صورة رقمية</h2>
+
+    <p>
+        من أكثر المفاهيم الخاطئة شيوعًا أن NFT يعني "صورة على الإنترنت".
+        الصورة قد تكون جزءًا من المشروع، لكنها ليست NFT بحد ذاتها.
+    </p>
+
+    <p>
+        يمكن أن توجد ملايين الصور الرقمية المتطابقة، ويمكن لأي شخص نسخ ملف صورة منشور على الإنترنت.
+        لكن النسخة الموجودة على جهاز شخص ما ليست بالضرورة هي الرمز المسجل على البلوكشين.
+    </p>
+
+    <p>
+        NFT هو في الأساس <strong>سجل رقمي على شبكة البلوكشين</strong> يحدد رمزًا معينًا وفق العقد
+        أو المعيار المستخدم، ويمكن أن يحتوي هذا السجل أو يرتبط ببيانات تصف الأصل الذي يمثله.
+    </p>
+
+    <p>
+        لذلك يجب التمييز بين ثلاثة أشياء:
+    </p>
+
+    <ul>
+        <li><strong>الرمز NFT:</strong> الكيان المسجل وفق عقد أو معيار على البلوكشين.</li>
+        <li><strong>الملكية:</strong> الحالة المسجلة على الشبكة والتي تحدد العنوان المرتبط بالرمز وفق قواعد العقد.</li>
+        <li><strong>الملف أو المحتوى:</strong> الصورة أو الفيديو أو البيانات التي قد يشير إليها NFT.</li>
+    </ul>
+
+    <h2>كيف يستخدم البلوكشين في NFTs؟</h2>
+
+    <p>
+        البلوكشين هو الجزء الذي يوفر سجلًا مشتركًا للمعاملات والحالة الخاصة بالرموز.
+        فعندما يتم إنشاء NFT أو نقله، تسجل الشبكة العملية وفق قواعد البروتوكول والعقد الذكي.
+    </p>
+
+    <p>
+        هذا يسمح للمستخدمين والتطبيقات المتوافقة بقراءة حالة الرمز والتحقق من العنوان المرتبط
+        به دون الاعتماد بالضرورة على قاعدة بيانات مركزية واحدة.
+    </p>
+
+    <p>
+        ومع ذلك، وجود NFT على بلوكشين لا يعني تلقائيًا أن كل مكونات المشروع لامركزية.
+        فقد يعتمد المستخدم على واجهة ويب مركزية أو مزود RPC أو خدمة فهرسة أو تخزين خارجي.
+    </p>
+
+    <p>
+        لمعرفة الصورة الأكبر، يمكنك مراجعة
+        <a href="/academy/blockchain/what-is-blockchain">درس ما هي Blockchain؟</a>
+        و
+        <a href="/academy/blockchain/how-does-blockchain-work">درس كيف تعمل Blockchain؟</a>.
+    </p>
+
+    <h2>ما هو Token ID؟</h2>
+
+    <p>
+        في العديد من أنظمة NFTs يكون لكل رمز معرف خاص يسمى <strong>Token ID</strong>.
+        يساعد هذا المعرف على تمييز رمز معين عن الرموز الأخرى التي تنتمي إلى العقد أو المجموعة نفسها.
+    </p>
+
+    <p>
+        على سبيل المثال، قد يحتوي عقد NFT على عدد كبير من الرموز، ولكل رمز معرف مختلف.
+        لذلك لا يكفي أحيانًا معرفة اسم المجموعة فقط؛ بل يجب النظر أيضًا إلى العقد والـToken ID
+        لتحديد الرمز المقصود.
+    </p>
+
+    <p>
+        طريقة التعامل مع Token ID تختلف بحسب معيار NFT والعقد الذكي والشبكة المستخدمة،
+        لذلك لا ينبغي افتراض أن جميع NFTs تعمل بالطريقة نفسها تمامًا.
+    </p>
+
+    <h2>ما دور العقد الذكي في NFT؟</h2>
+
+    <p>
+        العقد الذكي هو برنامج يعمل وفق قواعد محددة على البلوكشين، ويمكن أن يحتوي على وظائف
+        لإدارة إنشاء الرموز ونقلها والاستعلام عن ملكيتها وبياناتها، بحسب تصميم العقد.
+    </p>
+
+    <p>
+        في نظام NFT، يمكن للعقد الذكي أن يحدد أمورًا مثل:
+    </p>
+
+    <ul>
+        <li>كيفية إنشاء الرموز.</li>
+        <li>كيفية تحديد معرفات الرموز.</li>
+        <li>كيفية نقل الرموز بين العناوين.</li>
+        <li>كيفية قراءة المالك المرتبط بالرمز.</li>
+        <li>كيفية الوصول إلى بعض البيانات الوصفية.</li>
+        <li>بعض قواعد البيع أو الرسوم إذا صُممت ضمن العقد.</li>
+    </ul>
+
+    <p>
+        لكن يجب عدم افتراض أن العقد الذكي آمن أو خالٍ من الأخطاء لمجرد أنه يعمل على البلوكشين.
+        جودة الكود والتصميم والمكونات الأخرى للنظام كلها عوامل مهمة.
+    </p>
+
+    <h2>ما هي مجموعة NFT؟</h2>
+
+    <p>
+        مجموعة NFT هي مجموعة من الرموز التي ترتبط عادة بعقد أو نظام معين وتشارك في هوية أو موضوع
+        مشترك. قد تحتوي المجموعة على آلاف الرموز، ويكون لكل رمز منها معرف وخصائص خاصة به.
+    </p>
+
+    <p>
+        قد تكون الاختلافات بين الرموز في الصورة أو السمات أو الخصائص أو البيانات أو الاستخدام،
+        بحسب تصميم المجموعة.
+    </p>
+
+    <p>
+        وجود عدد محدود من الرموز أو اختلاف خصائصها لا يعني تلقائيًا أن لها قيمة مالية مرتفعة.
+        القيمة تعتمد على عوامل كثيرة مثل الطلب والاستخدام والسمعة والسيولة والتوقعات وظروف السوق.
+    </p>
+
+    <h2>ما هي Metadata في NFTs؟</h2>
+
+    <p>
+        <strong>Metadata</strong> أو البيانات الوصفية هي بيانات تصف NFT أو المحتوى المرتبط به.
+        وقد تتضمن اسم الرمز ووصفه وخصائصه ورابط الصورة أو معلومات أخرى بحسب تصميم المشروع.
+    </p>
+
+    <p>
+        يمكن تخزين بعض البيانات على البلوكشين مباشرة، بينما يمكن تخزين بيانات أخرى خارج البلوكشين
+        وربط NFT بها من خلال عنوان أو URI.
+    </p>
+
+    <p>
+        لذلك فإن وجود NFT على البلوكشين لا يعني بالضرورة أن الصورة أو الفيديو المرتبط به مخزن
+        بالكامل على البلوكشين.
+    </p>
+
+    <p>
+        هذه النقطة مهمة جدًا عند تقييم NFT، وسيتم شرحها بالتفصيل في درس
+        <a href="/academy/nfts/nft-metadata-and-storage">بيانات NFT الوصفية والتخزين</a>.
+    </p>
+
+    <h2>On-Chain وOff-Chain</h2>
+
+    <p>
+        عندما تكون البيانات <strong>On-Chain</strong> فهذا يعني أنها مخزنة أو مسجلة ضمن بيانات
+        البلوكشين وفق الطريقة التي يستخدمها النظام.
+    </p>
+
+    <p>
+        أما <strong>Off-Chain</strong> فتشير إلى البيانات المخزنة خارج البلوكشين، مثل خادم تقليدي
+        أو نظام تخزين خارجي أو شبكة تخزين أخرى.
+    </p>
+
+    <p>
+        هذا الفرق مهم لأن استمرار الوصول إلى المحتوى قد يعتمد في بعض التصاميم على البنية التحتية
+        الخارجية المستخدمة لتخزين البيانات.
+    </p>
+
+    <p>
+        لذلك لا ينبغي استخدام كلمة "دائم" أو "غير قابل للتغيير" بشكل مطلق لوصف كل محتوى مرتبط بـNFT.
+    </p>
+
+    <h2>ما علاقة المحفظة بـNFT؟</h2>
+
+    <p>
+        تتفاعل المحافظ الرقمية مع NFTs من خلال العناوين والمفاتيح والتوقيعات والمعاملات.
+        وفي كثير من الحالات لا تكون الصورة أو الملف نفسه "داخل المحفظة".
+    </p>
+
+    <p>
+        المحفظة تساعد المستخدم على التحكم في المفاتيح التي تسمح له بالتوقيع على العمليات المرتبطة
+        بعنوانه، بينما حالة ملكية NFT نفسها تكون مسجلة على البلوكشين وفق قواعد العقد.
+    </p>
+
+    <p>
+        ولهذا فإن فقدان الوصول إلى المفاتيح الخاصة قد يعني فقدان القدرة على التحكم في العنوان
+        الذي ترتبط به الأصول، حتى لو بقي سجلها على الشبكة.
+    </p>
+
+    <p>
+        لمزيد من الفهم، راجع أيضًا
+        <a href="/academy/web3/web3-wallets-and-identity">درس محافظ Web3 والهوية الرقمية</a>.
+    </p>
+
+    <h2>NFTs مقابل العملات الرقمية</h2>
+
+    <p>
+        الفرق الأساسي هو قابلية الاستبدال.
+    </p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>الخاصية</th>
+                <th>NFT</th>
+                <th>رمز قابل للاستبدال</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>قابلية الاستبدال</td>
+                <td>غير قابل للاستبدال عادة</td>
+                <td>قابل للاستبدال</td>
+            </tr>
+            <tr>
+                <td>الهوية</td>
+                <td>لكل رمز هوية أو معرف بحسب المعيار</td>
+                <td>الوحدات من النوع نفسه قابلة للتبادل</td>
+            </tr>
+            <tr>
+                <td>الاستخدامات</td>
+                <td>مقتنيات، تذاكر، ألعاب، عضويات وغيرها</td>
+                <td>دفع، تحويل، استخدام داخل بروتوكول وغيرها</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p>
+        الفرق هنا يتعلق بطبيعة الرمز، وليس بحقيقة أن أحدهما يعمل على البلوكشين والآخر لا.
+        يمكن أن تعمل NFTs والرموز القابلة للاستبدال على الشبكة نفسها، وفق عقود ومعايير مختلفة.
+    </p>
+
+    <h2>NFT مقابل الملف الرقمي التقليدي</h2>
+
+    <p>
+        يمكن نسخ ملف رقمي مثل صورة أو فيديو بسهولة. أما NFT فيضيف طبقة مختلفة تتمثل في
+        وجود رمز وسجل على البلوكشين.
+    </p>
+
+    <p>
+        على سبيل المثال، قد يستطيع آلاف الأشخاص تنزيل صورة مرتبطة بـNFT، لكن ذلك لا يعني أن
+        كل واحد منهم يمتلك NFT نفسه. الملكية المرتبطة بالرمز تعتمد على حالة العقد والبلوكشين.
+    </p>
+
+    <p>
+        لذلك فإن "امتلاك نسخة من الصورة" و"امتلاك NFT المرتبط بها" مفهومان مختلفان.
+    </p>
+
+    <h2>لماذا يمكن استخدام NFTs في أشياء كثيرة؟</h2>
+
+    <p>
+        لأن NFT ليس مرتبطًا بطبيعة واحدة من المحتوى. هو نموذج لرمز غير قابل للاستبدال يمكن
+        تصميمه ليمثل شيئًا أو يمنح استخدامًا معينًا وفق قواعد المشروع.
+    </p>
+
+    <h3>الفن الرقمي</h3>
+
+    <p>
+        يمكن استخدام NFT لربط عمل فني رقمي برمز وسجل ملكية على البلوكشين.
+        لكن الرمز لا ينقل تلقائيًا جميع حقوق الملكية الفكرية للعمل الفني.
+    </p>
+
+    <h3>المقتنيات الرقمية</h3>
+
+    <p>
+        يمكن استخدام NFTs لإنشاء مقتنيات رقمية تتميز بمعرفات وخصائص مختلفة.
+    </p>
+
+    <h3>الألعاب</h3>
+
+    <p>
+        يمكن استخدام NFTs لتمثيل عناصر أو شخصيات أو مقتنيات داخل بعض الألعاب،
+        بحسب تصميم اللعبة والبنية التحتية المستخدمة.
+    </p>
+
+    <h3>التذاكر</h3>
+
+    <p>
+        يمكن تصميم التذاكر كرموز رقمية غير قابلة للاستبدال، مع إضافة قواعد للتحقق
+        من استخدامها أو نقلها وفق النظام المستخدم.
+    </p>
+
+    <h3>العضويات</h3>
+
+    <p>
+        قد تستخدم بعض الأنظمة NFT كوسيلة لإثبات امتلاك عضوية أو صلاحية معينة.
+    </p>
+
+    <h3>الهوية والشهادات</h3>
+
+    <p>
+        يمكن استخدام نماذج غير قابلة للاستبدال لتمثيل شهادات أو بيانات هوية أو إنجازات،
+        لكن ملاءمة ذلك تعتمد على طبيعة البيانات ومتطلبات الخصوصية والقوانين.
+    </p>
+
+    <h3>الأصول المرمزة</h3>
+
+    <p>
+        يمكن استخدام الرموز غير القابلة للاستبدال لتمثيل أنواع معينة من الأصول أو الحقوق،
+        لكن العلاقة القانونية بين الرمز والأصل الحقيقي تعتمد على العقد والجهة المصدرة
+        والقانون المعمول به.
+    </p>
+
+    <h2>هل NFT يعني أنك تملك حقوق الطبع والنشر؟</h2>
+
+    <p>
+        <strong>لا.</strong> شراء NFT لا يعني تلقائيًا أنك حصلت على جميع حقوق الطبع والنشر
+        أو حقوق الاستخدام التجاري للعمل المرتبط به.
+    </p>
+
+    <p>
+        يجب التمييز بين ملكية الرمز على البلوكشين وبين حقوق الملكية الفكرية المتعلقة بالمحتوى.
+        الحقوق التي يحصل عليها المشتري تعتمد على شروط الترخيص والعقد والجهة التي أصدرت العمل
+        والقانون المعمول به.
+    </p>
+
+    <p>
+        لذلك، قبل شراء NFT مرتبط بعمل فني أو محتوى إبداعي، يجب معرفة ما الذي ينص عليه الترخيص
+        وما هي الحقوق التي يتم منحها للمشتري فعلًا.
+    </p>
+
+    <p>
+        سيتم تناول هذه النقطة بتفصيل أكبر في درس
+        <a href="/academy/nfts/nft-ownership-and-copyright">ملكية NFT وحقوق النشر</a>.
+    </p>
+
+    <h2>ماذا عن Royalties أو عوائد المبدعين؟</h2>
+
+    <p>
+        قد تتضمن بعض أنظمة NFT آليات تسمح للمبدعين بالحصول على عوائد عند عمليات إعادة البيع.
+        لكن من الخطأ اعتبار Royalties حقًا مضمونًا أو موحدًا في جميع NFTs.
+    </p>
+
+    <p>
+        طريقة تنفيذ العوائد تختلف بحسب العقد الذكي والمعيار والسوق والمنصة والقواعد المستخدمة.
+        وفي بعض التصاميم قد تكون آلية العوائد اختيارية أو تعتمد على دعم المنصة أو آلية معينة.
+    </p>
+
+    <p>
+        لذلك يجب فحص شروط النظام نفسه بدل افتراض أن كل NFT يوفر تلقائيًا عائدًا دائمًا للمبدع.
+    </p>
+
+    <h2>هل الندرة تعني أن NFT له قيمة؟</h2>
+
+    <p>
+        الندرة وحدها لا تضمن القيمة.
+    </p>
+
+    <p>
+        يمكن أن يكون رمز ما نادرًا من الناحية التقنية، لكن إذا لم يوجد طلب حقيقي عليه فقد لا
+        تكون له قيمة سوقية مرتفعة.
+    </p>
+
+    <p>
+        القيمة قد تتأثر بالمنفعة والطلب والمجتمع والسمعة والسيولة والتصميم والحقوق المرتبطة
+        بالرمز وظروف السوق وعوامل أخرى كثيرة.
+    </p>
+
+    <p>
+        لذلك يجب عدم الخلط بين <strong>الندرة التقنية</strong> و<strong>القيمة الاقتصادية</strong>.
+    </p>
+
+    <h2>كيف يتم نقل NFT؟</h2>
+
+    <p>
+        عندما ينقل مالك NFT الرمز إلى عنوان آخر، يتم تنفيذ معاملة وفق قواعد العقد الذكي
+        والبروتوكول المستخدم.
+    </p>
+
+    <p>
+        بعد تأكيد المعاملة، تتغير حالة الملكية المسجلة على الشبكة وفق قواعد ذلك النظام.
+    </p>
+
+    <p>
+        قد تتطلب العملية رسوم شبكة، وقد توجد متطلبات أخرى بحسب التطبيق والعقد الذكي.
+    </p>
+
+    <p>
+        النقل لا يعني بالضرورة نقل جميع حقوق المحتوى المرتبط بالرمز؛ فهو ينقل الرمز وفق قواعد
+        البلوكشين والعقد، بينما الحقوق القانونية تعتمد على شروطها الخاصة.
+    </p>
+
+    <h2>ما هو Minting؟</h2>
+
+    <p>
+        يشير <strong>Minting</strong> في سياق NFTs إلى عملية إنشاء أو تسجيل رمز NFT وفق آلية
+        العقد الذكي أو النظام المستخدم.
+    </p>
+
+    <p>
+        قد تتضمن العملية إنشاء Token ID وربط بيانات أو Metadata بالرمز وتسجيل الحالة على البلوكشين.
+    </p>
+
+    <p>
+        تفاصيل عملية السك تختلف من مشروع إلى آخر، وسيتم شرحها بالتفصيل في درس
+        <a href="/academy/nfts/what-is-nft-minting">ما هو Minting في NFTs؟</a>.
+    </p>
+
+    <h2>ما هي أسواق NFT؟</h2>
+
+    <p>
+        أسواق NFT هي منصات تسمح للمستخدمين باستعراض NFTs وإدراجها للبيع أو شرائها أو نقلها،
+        وفق الخدمات والآليات التي توفرها كل منصة.
+    </p>
+
+    <p>
+        بعض الأسواق توفر وظائف إضافية مثل عرض البيانات والخصائص وإدارة القوائم وعمليات الشراء،
+        وقد تعتمد على عقود ذكية أو أنظمة أخرى لتنفيذ العمليات.
+    </p>
+
+    <p>
+        سيتم شرح طريقة عمل هذه الأسواق في درس
+        <a href="/academy/nfts/nft-marketplaces">أسواق NFT</a>.
+    </p>
+
+    <h2>المخاطر الأساسية في NFTs</h2>
+
+    <p>
+        NFTs ليست خالية من المخاطر. ومن المهم أن يفهم المبتدئ المخاطر التقنية والسوقية والقانونية
+        قبل التفاعل مع أي مشروع.
+    </p>
+
+    <h3>1. الاحتيال والمجموعات المزيفة</h3>
+
+    <p>
+        قد يحاول المحتالون إنشاء مجموعات أو حسابات تشبه مشاريع معروفة لخداع المستخدمين.
+        لذلك يجب التحقق من مصدر المشروع والعقد والروابط الرسمية بدل الاعتماد على الاسم أو الصورة فقط.
+    </p>
+
+    <h3>2. التصيد وسرقة المفاتيح</h3>
+
+    <p>
+        قد تستخدم المواقع المزيفة رسائل أو عروضًا مغرية للحصول على بيانات حساسة أو دفع المستخدم
+        إلى توقيع عمليات ضارة.
+    </p>
+
+    <h3>3. العقود الذكية</h3>
+
+    <p>
+        يمكن أن تحتوي العقود الذكية على أخطاء أو تصميمات غير آمنة، وقد تؤدي بعض التفاعلات
+        معها إلى خسائر.
+    </p>
+
+    <h3>4. Token Approvals والتوقيعات</h3>
+
+    <p>
+        بعض التطبيقات قد تطلب من المستخدم توقيع معاملات أو منح صلاحيات لعقود ذكية.
+        يجب قراءة ما يتم توقيعه وفهم الصلاحيات المطلوبة قدر الإمكان.
+    </p>
+
+    <h3>5. التخزين والبيانات الوصفية</h3>
+
+    <p>
+        إذا كان المحتوى مخزنًا خارج البلوكشين، فقد يعتمد الوصول إليه على خدمة أو بنية تخزين خارجية.
+    </p>
+
+    <h3>6. حقوق الملكية الفكرية</h3>
+
+    <p>
+        قد لا يكون بائع NFT هو صاحب الحقوق القانونية الكاملة للمحتوى المرتبط به،
+        لذلك يجب التحقق من الترخيص والحقوق.
+    </p>
+
+    <h3>7. الرسوم</h3>
+
+    <p>
+        قد تتطلب عمليات إنشاء أو نقل أو شراء NFT دفع رسوم شبكة أو رسوم خدمة.
+        تختلف هذه الرسوم حسب الشبكة والتطبيق وظروف الاستخدام.
+    </p>
+
+    <h3>8. السيولة والقيمة السوقية</h3>
+
+    <p>
+        قد يكون من السهل شراء NFT في بعض الحالات، لكن ذلك لا يعني أنه سيكون من السهل بيعه
+        بالسعر نفسه أو بأي سعر آخر لاحقًا.
+    </p>
+
+    <p>
+        لمزيد من التفاصيل، راجع
+        <a href="/academy/nfts/nft-security-and-scams">درس أمان NFTs والاحتيال</a>.
+    </p>
+
+    <h2>هل NFTs لامركزية بالكامل؟</h2>
+
+    <p>
+        ليس بالضرورة.
+    </p>
+
+    <p>
+        قد يكون سجل NFT موجودًا على بلوكشين عام، لكن تجربة المستخدم قد تعتمد على واجهة ويب
+        مركزية أو خدمة RPC أو مزود فهرسة أو نظام تخزين خارجي.
+    </p>
+
+    <p>
+        لذلك يجب التمييز بين لامركزية البلوكشين أو العقد وبين بقية مكونات النظام.
+        وجود رمز على بلوكشين لا يجعل كل الخدمات المحيطة به لامركزية تلقائيًا.
+    </p>
+
+    <h2>دورة حياة NFT بشكل مبسط</h2>
+
+    <ol>
+        <li>يتم تصميم NFT والعقد أو النظام الذي سيصدره.</li>
+        <li>يتم إنشاء الرمز وفق قواعد النظام.</li>
+        <li>يحصل الرمز على معرف وبيانات وفق التصميم.</li>
+        <li>قد يرتبط الرمز بملف أو Metadata.</li>
+        <li>يتم تسجيل حالته وملكيته على البلوكشين.</li>
+        <li>يمكن عرضه في تطبيقات أو أسواق متوافقة.</li>
+        <li>يمكن نقله إلى عنوان آخر وفق قواعد العقد.</li>
+        <li>تتغير حالة الملكية على الشبكة بعد تأكيد المعاملة.</li>
+    </ol>
+
+    <h2>أخطاء شائعة عند فهم NFTs</h2>
+
+    <ul>
+        <li><strong>NFT هو الصورة نفسها:</strong> غير صحيح؛ الرمز والملف شيئان مختلفان.</li>
+        <li><strong>شراء NFT يعني امتلاك حقوق النشر:</strong> ليس بالضرورة.</li>
+        <li><strong>كل NFTs مخزنة بالكامل على البلوكشين:</strong> غير صحيح.</li>
+        <li><strong>كل NFT نادر له قيمة مرتفعة:</strong> الندرة لا تضمن القيمة.</li>
+        <li><strong>Royalties مضمونة دائمًا:</strong> طريقة تنفيذها تختلف.</li>
+        <li><strong>كل مشاريع NFT لامركزية بالكامل:</strong> قد تعتمد على خدمات مركزية.</li>
+        <li><strong>وجود العقد على البلوكشين يعني أنه آمن:</strong> الأمان يعتمد على التصميم والكود والبنية المحيطة.</li>
+    </ul>
+
+    <h2>كيف تبدأ بفهم NFTs كمبتدئ؟</h2>
+
+    <p>
+        لا تحتاج إلى شراء NFT حتى تفهم التقنية. الأفضل أولًا فهم المفاهيم الأساسية ثم الانتقال
+        إلى التفاصيل التقنية.
+    </p>
+
+    <ol>
+        <li>افهم أساسيات البلوكشين.</li>
+        <li>افهم المحافظ والعناوين والتوقيعات.</li>
+        <li>تعلم الفرق بين الرموز القابلة للاستبدال وغير القابلة للاستبدال.</li>
+        <li>تعرف على العقود الذكية.</li>
+        <li>افهم Token ID وMetadata.</li>
+        <li>تعلم كيفية عمل أسواق NFT.</li>
+        <li>تعلم المخاطر قبل تجربة أي معاملة.</li>
+        <li>تحقق من العقد والروابط والمصدر قبل التفاعل مع أي مشروع.</li>
+    </ol>
+
+    <p>
+        ولتكوين صورة أوسع عن البيئة، يمكنك قراءة
+        <a href="/academy/web3/what-is-web3">ما هو Web3؟</a>
+        و
+        <a href="/academy/web3/how-does-web3-work">كيف يعمل Web3؟</a>.
+    </p>
+
+    <h2>قائمة تحقق للمبتدئ قبل التعامل مع NFT</h2>
+
+    <ul>
+        <li>هل أعرف الشبكة التي يعمل عليها NFT؟</li>
+        <li>هل تحققت من عنوان العقد الصحيح؟</li>
+        <li>هل أعرف Token ID المقصود؟</li>
+        <li>هل فهمت أين توجد Metadata والملفات المرتبطة؟</li>
+        <li>هل أعرف ما الحقوق التي يمنحها الشراء؟</li>
+        <li>هل تحققت من مصدر الرابط والمنصة؟</li>
+        <li>هل أفهم المعاملة التي سأوقعها؟</li>
+        <li>هل أعرف الرسوم المطلوبة؟</li>
+        <li>هل أستطيع تحمل خسارة الأموال التي قد أستخدمها؟</li>
+    </ul>
+
+    <h2>الخلاصة</h2>
+
+    <p>
+        NFT هو رمز غير قابل للاستبدال يمكن أن يمتلك هوية ومعرفًا خاصًا ويتم التعامل معه
+        وفق قواعد البلوكشين والعقد الذكي المستخدم.
+    </p>
+
+    <p>
+        يمكن أن يرتبط NFT بصورة أو فيديو أو لعبة أو تذكرة أو عضوية أو أنواع أخرى من المحتوى
+        والاستخدامات، لكنه ليس الملف نفسه بالضرورة.
+    </p>
+
+    <p>
+        لفهم NFTs بشكل صحيح، يجب معرفة العلاقة بين البلوكشين والعقد الذكي والمحفظة وToken ID
+        وMetadata والتخزين والملكية والحقوق القانونية.
+    </p>
+
+    <p>
+        كما يجب عدم افتراض أن NFT مضمون القيمة أو آمن تلقائيًا أو يمنح حقوق الطبع والنشر
+        أو أن محتواه مخزن دائمًا على البلوكشين.
+    </p>
+
+    <p>
+        بعد فهم هذه الأساسيات، يمكنك الانتقال إلى الدرس التالي:
+        <a href="/academy/nfts/how-do-nfts-work">كيف تعمل NFTs؟</a>
+        حيث سننتقل من تعريف NFT إلى شرح آلية عمله بصورة أكثر تقنية.
+    </p>
+
+    <hr>
+
+    <h2>الأسئلة الشائعة حول NFTs</h2>
+
+    <h3>ما معنى NFT؟</h3>
+    <p>
+        NFT اختصار لـNon-Fungible Token، أي رمز غير قابل للاستبدال، وهو رمز رقمي يمتلك
+        هوية أو خصائص تميزه عن الرموز الأخرى وفق النظام المستخدم.
+    </p>
+
+    <h3>هل NFT هو الصورة؟</h3>
+    <p>
+        لا. الصورة قد تكون مرتبطة بـNFT، لكن NFT نفسه هو الرمز وسجله على البلوكشين،
+        بينما الملف قد يكون مخزنًا على البلوكشين أو خارجه بحسب التصميم.
+    </p>
+
+    <h3>هل شراء NFT يعني امتلاك حقوق الطبع والنشر؟</h3>
+    <p>
+        ليس بالضرورة. حقوق الطبع والنشر والاستخدام التجاري تعتمد على الترخيص والشروط
+        القانونية المرتبطة بالمحتوى.
+    </p>
+
+    <h3>هل كل NFTs نادرة؟</h3>
+    <p>
+        NFTs مصممة لتكون غير قابلة للاستبدال، لكن مستوى الندرة والخصائص وعدد الرموز
+        يختلف من مشروع إلى آخر.
+    </p>
+
+    <h3>هل الندرة تجعل NFT ذا قيمة؟</h3>
+    <p>
+        لا. الندرة قد تكون أحد العوامل، لكنها لا تضمن الطلب أو القيمة السوقية.
+    </p>
+
+    <h3>هل NFTs مخزنة بالكامل على البلوكشين؟</h3>
+    <p>
+        ليس بالضرورة. قد تكون بعض البيانات أو الملفات مخزنة خارج البلوكشين ويتم ربطها بالرمز.
+    </p>
+
+    <h3>ما هو Token ID؟</h3>
+    <p>
+        هو معرف يستخدم في العديد من أنظمة NFTs لتمييز رمز معين عن الرموز الأخرى داخل العقد أو المجموعة.
+    </p>
+
+    <h3>ما هو Minting؟</h3>
+    <p>
+        هو إنشاء أو تسجيل NFT وفق قواعد العقد الذكي أو النظام المستخدم.
+    </p>
+
+    <h3>هل Royalties مضمونة في كل NFT؟</h3>
+    <p>
+        لا. آلية العوائد تختلف بحسب العقد الذكي والمعيار والمنصة والتصميم المستخدم.
+    </p>
+
+    <h3>هل NFTs آمنة؟</h3>
+    <p>
+        لا يمكن اعتبار جميع NFTs آمنة تلقائيًا. توجد مخاطر تتعلق بالعقود الذكية والاحتيال
+        والتصيد والتوقيعات والتخزين والحقوق والقيمة السوقية.
+    </p>
+
+    <h3>هل أحتاج إلى شراء NFT حتى أتعلم عنه؟</h3>
+    <p>
+        لا. يمكنك فهم المفاهيم والتقنية ومخاطرها دون شراء أي NFT.
+    </p>
+
+    <h2>دروس ذات صلة</h2>
+
+    <ul>
+        <li><a href="/academy/blockchain/what-is-blockchain">ما هي Blockchain؟</a></li>
+        <li><a href="/academy/blockchain/how-does-blockchain-work">كيف تعمل Blockchain؟</a></li>
+        <li><a href="/academy/web3/what-is-web3">ما هو Web3؟</a></li>
+        <li><a href="/academy/web3/how-does-web3-work">كيف يعمل Web3؟</a></li>
+        <li><a href="/academy/staking/what-is-staking">ما هو Staking؟</a></li>
+        <li><a href="/academy/defi/what-is-defi">ما هو DeFi؟</a></li>
+        <li><a href="/academy/nfts/how-do-nfts-work">كيف تعمل NFTs؟</a></li>
+        <li><a href="/academy/nfts/nft-standards">ما هي معايير NFT؟</a></li>
+        <li><a href="/academy/nfts/nft-metadata-and-storage">بيانات NFT الوصفية والتخزين</a></li>
+        <li><a href="/academy/nfts/nft-marketplaces">أسواق NFT</a></li>
+        <li><a href="/academy/nfts/nft-ownership-and-copyright">ملكية NFT وحقوق النشر</a></li>
+        <li><a href="/academy/nfts/nft-security-and-scams">أمان NFTs والاحتيال</a></li>
+    </ul>
+
+    <p>
+        <strong>تنبيه تعليمي:</strong>
+        هذا الدرس مقدم لأغراض تعليمية فقط، ولا يمثل نصيحة مالية أو استثمارية أو قانونية.
+        أسواق الأصول الرقمية وNFTs قد تكون عالية المخاطر، ويجب إجراء البحث والتحقق المستقل
+        قبل اتخاذ أي قرار.
+    </p>
+
+</article>
+HTML,
+
+    'content_en' => <<<'HTML'
+<article>
+
+    <h2>What Are NFTs?</h2>
+
+    <p>
+        NFT stands for <strong>Non-Fungible Token</strong>. It is a type of digital token
+        designed to have a distinct identity or properties that distinguish it from other
+        tokens within the system where it exists.
+    </p>
+
+    <p>
+        NFTs became widely known through digital art and collectibles, but their potential
+        uses are much broader. Depending on the design of a project, NFTs can represent
+        digital collectibles, gaming items, tickets, memberships, certificates, identity-related
+        records, or other digital rights and utilities.
+    </p>
+
+    <p>
+        One of the most important concepts to understand from the beginning is that
+        <strong>an NFT is not necessarily the digital file itself</strong>.
+        An NFT may represent or reference an image, video, document, or other content,
+        while the token and its ownership record exist separately on a blockchain.
+    </p>
+
+    <h2>What Does Non-Fungible Mean?</h2>
+
+    <p>
+        To understand NFTs, it is useful to first understand the difference between
+        fungible and non-fungible assets.
+    </p>
+
+    <h3>Fungible Assets</h3>
+
+    <p>
+        A fungible asset consists of units that can generally be exchanged for other units
+        of the same type without creating a meaningful distinction between them.
+    </p>
+
+    <p>
+        For example, units of a fungible cryptocurrency are normally interchangeable with
+        other units of the same token under the rules of the system.
+    </p>
+
+    <h3>Non-Fungible Assets</h3>
+
+    <p>
+        A non-fungible asset has an identity or characteristics that distinguish one item
+        from another.
+    </p>
+
+    <p>
+        A simple real-world analogy is a ticket with a specific seat number. Two tickets
+        may belong to the same event, but their individual identifiers can make them different.
+    </p>
+
+    <p>
+        NFTs apply a similar concept digitally by associating a token with a distinct identity,
+        identifier, and state according to the blockchain and smart contract involved.
+    </p>
+
+    <h2>An NFT Is Not Simply a Digital Image</h2>
+
+    <p>
+        One of the most common misconceptions is that an NFT means "a picture on the internet."
+        The image may be part of an NFT project, but the image itself is not necessarily the NFT.
+    </p>
+
+    <p>
+        Digital images can be copied and downloaded. A person having a copy of an image does
+        not automatically mean that the person owns the NFT associated with it.
+    </p>
+
+    <p>
+        An NFT is better understood as a <strong>blockchain-based token and ownership record</strong>
+        governed by the rules of its contract or protocol.
+    </p>
+
+    <p>
+        It is useful to distinguish between three concepts:
+    </p>
+
+    <ul>
+        <li><strong>The NFT:</strong> the token represented and managed by a contract or standard.</li>
+        <li><strong>Ownership:</strong> the blockchain state associating the token with an address according to the contract rules.</li>
+        <li><strong>The content:</strong> the image, video, file, or other data associated with the token.</li>
+    </ul>
+
+    <h2>How Does Blockchain Support NFTs?</h2>
+
+    <p>
+        The blockchain provides a shared record of transactions and state.
+        When an NFT is created or transferred, the relevant operation is recorded according
+        to the rules of the network and smart contract.
+    </p>
+
+    <p>
+        This allows compatible applications and users to inspect the state of a token without
+        relying exclusively on a single centralized database.
+    </p>
+
+    <p>
+        However, having an NFT on a blockchain does not automatically make the entire system
+        decentralized. A user may still depend on centralized frontends, RPC providers,
+        indexing services, or external storage.
+    </p>
+
+    <p>
+        For a broader foundation, see
+        <a href="/academy/blockchain/what-is-blockchain">What Is Blockchain?</a>
+        and
+        <a href="/academy/blockchain/how-does-blockchain-work">How Does Blockchain Work?</a>.
+    </p>
+
+    <h2>What Is a Token ID?</h2>
+
+    <p>
+        Many NFT systems use a unique identifier called a <strong>Token ID</strong>.
+        It helps distinguish one token from other tokens managed by the same contract or collection.
+    </p>
+
+    <p>
+        A collection may contain a large number of NFTs, each with a different identifier.
+        Therefore, knowing only the collection name may not be enough to identify a specific NFT.
+    </p>
+
+    <p>
+        The exact way Token IDs are generated and managed depends on the NFT standard,
+        smart contract, and blockchain being used.
+    </p>
+
+    <h2>What Role Does a Smart Contract Play?</h2>
+
+    <p>
+        A smart contract is software deployed on a blockchain that executes according to
+        predefined rules. In an NFT system, the contract can provide functions for creating,
+        transferring, and querying tokens and their associated data.
+    </p>
+
+    <p>
+        Depending on its design, an NFT contract may define:
+    </p>
+
+    <ul>
+        <li>How tokens are created.</li>
+        <li>How token identifiers are assigned.</li>
+        <li>How tokens can be transferred.</li>
+        <li>How ownership is queried.</li>
+        <li>How metadata references are handled.</li>
+        <li>Whether certain sale or fee mechanisms are implemented.</li>
+    </ul>
+
+    <p>
+        A smart contract should not automatically be considered secure simply because it runs
+        on a blockchain. Code quality, architecture, permissions, dependencies, and surrounding
+        infrastructure all matter.
+    </p>
+
+    <h2>What Is an NFT Collection?</h2>
+
+    <p>
+        An NFT collection is generally a group of tokens associated with a common contract,
+        identity, theme, or system. A collection may contain many tokens, each with its own
+        identifier and characteristics.
+    </p>
+
+    <p>
+        Differences between NFTs in the same collection may involve artwork, traits,
+        attributes, utility, metadata, or other properties.
+    </p>
+
+    <p>
+        A limited supply or technically rare trait does not automatically create high economic value.
+        Value depends on many factors, including demand, utility, liquidity, reputation,
+        market conditions, and expectations.
+    </p>
+
+    <h2>What Is NFT Metadata?</h2>
+
+    <p>
+        <strong>Metadata</strong> is information describing an NFT or the content associated with it.
+        It may include the token name, description, traits, image reference, or other fields
+        depending on the project.
+    </p>
+
+    <p>
+        Some data can be stored on-chain, while other data may be stored outside the blockchain
+        and referenced through a URI or another mechanism.
+    </p>
+
+    <p>
+        Therefore, the fact that an NFT exists on a blockchain does not necessarily mean that
+        the associated image or video is stored entirely on-chain.
+    </p>
+
+    <p>
+        This distinction is important and will be explored in detail in
+        <a href="/academy/nfts/nft-metadata-and-storage">NFT Metadata and Storage</a>.
+    </p>
+
+    <h2>On-Chain and Off-Chain Data</h2>
+
+    <p>
+        <strong>On-chain</strong> data is stored or recorded as part of the blockchain state
+        according to the system's design.
+    </p>
+
+    <p>
+        <strong>Off-chain</strong> data is stored outside the blockchain, such as on a traditional
+        server, decentralized storage system, or another external service.
+    </p>
+
+    <p>
+        This distinction matters because access to off-chain content may depend on the
+        infrastructure used to store and serve it.
+    </p>
+
+    <p>
+        For this reason, terms such as "permanent" or "immutable" should not automatically
+        be applied to every piece of content associated with an NFT.
+    </p>
+
+    <h2>How Do Wallets Relate to NFTs?</h2>
+
+    <p>
+        Digital wallets interact with NFTs through addresses, private keys, signatures,
+        and blockchain transactions. The image or file associated with an NFT is generally
+        not literally stored inside the wallet.
+    </p>
+
+    <p>
+        A wallet helps the user control the keys needed to authorize actions from an address.
+        The blockchain records the token's state and ownership according to the contract rules.
+    </p>
+
+    <p>
+        This is why losing access to private keys can mean losing the ability to control
+        assets associated with an address, even though the blockchain record itself remains.
+    </p>
+
+    <p>
+        For more context, see
+        <a href="/academy/web3/web3-wallets-and-identity">Web3 Wallets and Digital Identity</a>.
+    </p>
+
+    <h2>NFTs vs Fungible Tokens</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Property</th>
+                <th>NFT</th>
+                <th>Fungible Token</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Fungibility</td>
+                <td>Generally non-fungible</td>
+                <td>Fungible</td>
+            </tr>
+            <tr>
+                <td>Identity</td>
+                <td>Distinct identity or identifier</td>
+                <td>Units of the same token type are generally interchangeable</td>
+            </tr>
+            <tr>
+                <td>Examples of uses</td>
+                <td>Collectibles, tickets, gaming items, memberships and more</td>
+                <td>Payments, transfers, protocol utility and more</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p>
+        The key difference is the nature of the token, not whether it uses blockchain technology.
+        NFTs and fungible tokens can exist on the same blockchain while following different
+        standards and contract rules.
+    </p>
+
+    <h2>NFTs vs Ordinary Digital Files</h2>
+
+    <p>
+        Digital files such as images and videos can usually be copied easily.
+        NFTs add a separate layer: a token and ownership record on a blockchain.
+    </p>
+
+    <p>
+        Thousands of people may be able to download an image associated with an NFT,
+        but that does not mean all of them own the NFT. Ownership of the token is determined
+        by the blockchain state and contract rules.
+    </p>
+
+    <p>
+        Therefore, owning a copy of an image and owning the NFT associated with that image
+        are two different concepts.
+    </p>
+
+    <h2>Why Can NFTs Represent Different Things?</h2>
+
+    <p>
+        NFTs are not limited to a single type of content. They provide a model for representing
+        distinct digital tokens that can be designed for different applications.
+    </p>
+
+    <h3>Digital Art</h3>
+
+    <p>
+        NFTs can associate a digital artwork with a blockchain token and ownership record.
+        However, the token does not automatically transfer all intellectual property rights.
+    </p>
+
+    <h3>Digital Collectibles</h3>
+
+    <p>
+        NFTs can represent digital collectibles with unique identifiers and characteristics.
+    </p>
+
+    <h3>Gaming</h3>
+
+    <p>
+        Some games can use NFTs to represent items, characters, or collectibles depending
+        on the game's architecture and infrastructure.
+    </p>
+
+    <h3>Tickets</h3>
+
+    <p>
+        Event tickets can be represented as NFTs, with rules for verification, transfer,
+        redemption, or other functionality depending on the implementation.
+    </p>
+
+    <h3>Memberships</h3>
+
+    <p>
+        NFTs can sometimes be used to represent membership or access rights within a digital service.
+    </p>
+
+    <h3>Identity and Certificates</h3>
+
+    <p>
+        Non-fungible tokens can be used in some systems to represent certificates, credentials,
+        achievements, or identity-related records. Suitability depends on privacy requirements,
+        system design, and applicable laws.
+    </p>
+
+    <h3>Tokenized Assets</h3>
+
+    <p>
+        NFTs can be designed to represent certain real-world assets or rights, but the legal
+        relationship between a token and an underlying asset depends on the issuer, contractual
+        terms, and applicable law.
+    </p>
+
+    <h2>Does Buying an NFT Give You Copyright?</h2>
+
+    <p>
+        <strong>No, not automatically.</strong> Buying an NFT does not automatically transfer
+        all copyright or commercial rights associated with the content.
+    </p>
+
+    <p>
+        Ownership of a blockchain token and ownership of intellectual property are different concepts.
+        The rights granted to an NFT buyer depend on licensing terms, contractual conditions,
+        the creator or issuer, and applicable law.
+    </p>
+
+    <p>
+        Before acquiring an NFT associated with creative content, users should understand
+        what license and usage rights are actually provided.
+    </p>
+
+    <p>
+        This topic is covered in greater detail in
+        <a href="/academy/nfts/nft-ownership-and-copyright">NFT Ownership and Copyright</a>.
+    </p>
+
+    <h2>What About Creator Royalties?</h2>
+
+    <p>
+        Some NFT systems include mechanisms that can allow creators to receive compensation
+        when NFTs are resold.
+    </p>
+
+    <p>
+        However, royalties should not be treated as universally guaranteed or identical across
+        all NFTs. Their implementation can depend on the smart contract, token standard,
+        marketplace, and system design.
+    </p>
+
+    <p>
+        Therefore, users should inspect the actual rules of the project instead of assuming
+        that every NFT automatically provides permanent resale royalties.
+    </p>
+
+    <h2>Does Scarcity Make an NFT Valuable?</h2>
+
+    <p>
+        Scarcity alone does not guarantee value.
+    </p>
+
+    <p>
+        A token can be technically rare but still have limited demand. Market value can depend
+        on utility, demand, reputation, community, liquidity, perceived benefits, and broader
+        market conditions.
+    </p>
+
+    <p>
+        It is therefore important to distinguish between <strong>technical scarcity</strong>
+        and <strong>economic value</strong>.
+    </p>
+
+    <h2>How Is an NFT Transferred?</h2>
+
+    <p>
+        When an NFT owner transfers the token to another address, a blockchain transaction
+        is executed according to the rules of the relevant contract and network.
+    </p>
+
+    <p>
+        Once the transaction is confirmed, the ownership state recorded by the system changes
+        according to those rules.
+    </p>
+
+    <p>
+        The transaction may require network fees and may involve additional requirements depending
+        on the application and contract.
+    </p>
+
+    <p>
+        Transferring the token does not necessarily transfer every legal right associated with
+        the underlying content. Blockchain ownership and intellectual property rights are separate matters.
+    </p>
+
+    <h2>What Is NFT Minting?</h2>
+
+    <p>
+        <strong>Minting</strong> generally refers to creating or registering an NFT according
+        to the rules of the relevant smart contract or system.
+    </p>
+
+    <p>
+        Depending on the implementation, minting may involve assigning a Token ID,
+        associating metadata, and recording the token on the blockchain.
+    </p>
+
+    <p>
+        The exact minting process varies by project and will be explored in detail in
+        <a href="/academy/nfts/what-is-nft-minting">What Is NFT Minting?</a>.
+    </p>
+
+    <h2>What Are NFT Marketplaces?</h2>
+
+    <p>
+        NFT marketplaces are platforms that allow users to browse, list, buy, sell,
+        or otherwise interact with NFTs, depending on the services provided.
+    </p>
+
+    <p>
+        Marketplaces may provide additional functions such as displaying metadata and traits,
+        managing listings, and facilitating transactions through smart contracts or other mechanisms.
+    </p>
+
+    <p>
+        Their operation will be explained in detail in
+        <a href="/academy/nfts/nft-marketplaces">NFT Marketplaces</a>.
+    </p>
+
+    <h2>Main Risks of NFTs</h2>
+
+    <p>
+        NFTs involve technical, market, security, and legal risks. Understanding these risks
+        is essential before interacting with any NFT project.
+    </p>
+
+    <h3>1. Scams and Fake Collections</h3>
+
+    <p>
+        Scammers may create collections or websites that imitate legitimate projects.
+        Users should verify official sources, contract addresses, and links instead of relying
+        only on names or images.
+    </p>
+
+    <h3>2. Phishing and Key Theft</h3>
+
+    <p>
+        Fake websites and messages may attempt to obtain sensitive information or trick users
+        into signing malicious transactions.
+    </p>
+
+    <h3>3. Smart Contract Risk</h3>
+
+    <p>
+        Smart contracts can contain vulnerabilities, design flaws, or dangerous permissions.
+        Interacting with them can create risks if the contract is not trustworthy.
+    </p>
+
+    <h3>4. Token Approvals and Signatures</h3>
+
+    <p>
+        Some applications may request signatures or approvals that grant permissions to contracts.
+        Users should understand what they are authorizing before signing.
+    </p>
+
+    <h3>5. Metadata and Storage Risk</h3>
+
+    <p>
+        If content is stored off-chain, access to that content may depend on external storage
+        infrastructure or services.
+    </p>
+
+    <h3>6. Intellectual Property Risk</h3>
+
+    <p>
+        An NFT seller may not necessarily own all legal rights to the content associated with the token.
+        Licensing and copyright terms should be checked carefully.
+    </p>
+
+    <h3>7. Fees</h3>
+
+    <p>
+        Minting, transferring, buying, or interacting with NFTs may involve blockchain network
+        fees or marketplace fees. These vary by network and application.
+    </p>
+
+    <h3>8. Liquidity and Market Value</h3>
+
+    <p>
+        Being able to buy an NFT does not mean that it will later be easy to sell it at the
+        same price or at any particular price.
+    </p>
+
+    <p>
+        For more details, see
+        <a href="/academy/nfts/nft-security-and-scams">NFT Security and Scams</a>.
+    </p>
+
+    <h2>Are NFTs Fully Decentralized?</h2>
+
+    <p>
+        Not necessarily.
+    </p>
+
+    <p>
+        The NFT ownership record may exist on a public blockchain, while the user experience
+        can still depend on centralized websites, RPC providers, indexing services, or external storage.
+    </p>
+
+    <p>
+        It is therefore important to distinguish blockchain-level decentralization from the
+        decentralization of the entire application and its supporting infrastructure.
+    </p>
+
+    <h2>A Simple NFT Lifecycle</h2>
+
+    <ol>
+        <li>The NFT system and smart contract are designed.</li>
+        <li>The token is created according to the system's rules.</li>
+        <li>The token receives an identifier and associated data.</li>
+        <li>The token may reference metadata or digital content.</li>
+        <li>The token state and ownership are recorded on the blockchain.</li>
+        <li>Compatible applications or marketplaces can display the NFT.</li>
+        <li>The NFT can be transferred according to the contract rules.</li>
+        <li>The ownership state changes after the transaction is confirmed.</li>
+    </ol>
+
+    <h2>Common NFT Misconceptions</h2>
+
+    <ul>
+        <li><strong>An NFT is the image itself:</strong> Not necessarily; the token and file are different things.</li>
+        <li><strong>Buying an NFT gives copyright:</strong> Not automatically.</li>
+        <li><strong>Every NFT is stored entirely on-chain:</strong> Not necessarily.</li>
+        <li><strong>Every rare NFT is valuable:</strong> Scarcity does not guarantee value.</li>
+        <li><strong>Royalties are always guaranteed:</strong> Their implementation varies.</li>
+        <li><strong>Every NFT project is fully decentralized:</strong> Many systems depend on external services.</li>
+        <li><strong>A blockchain contract is automatically secure:</strong> Security depends on code, design, permissions, and infrastructure.</li>
+    </ul>
+
+    <h2>How Should a Beginner Learn About NFTs?</h2>
+
+    <p>
+        You do not need to buy an NFT to understand the technology. It is better to learn
+        the concepts first and then explore more technical topics.
+    </p>
+
+    <ol>
+        <li>Learn blockchain fundamentals.</li>
+        <li>Understand wallets, addresses, keys, and signatures.</li>
+        <li>Learn the difference between fungible and non-fungible tokens.</li>
+        <li>Understand smart contracts.</li>
+        <li>Learn about Token IDs and metadata.</li>
+        <li>Understand how NFT marketplaces operate.</li>
+        <li>Learn the major security risks.</li>
+        <li>Verify contracts and official sources before interacting with a project.</li>
+    </ol>
+
+    <p>
+        For a broader overview, read
+        <a href="/academy/web3/what-is-web3">What Is Web3?</a>
+        and
+        <a href="/academy/web3/how-does-web3-work">How Does Web3 Work?</a>.
+    </p>
+
+    <h2>Beginner Checklist Before Interacting With an NFT</h2>
+
+    <ul>
+        <li>Do I know which blockchain the NFT uses?</li>
+        <li>Have I verified the correct contract address?</li>
+        <li>Do I know the Token ID?</li>
+        <li>Do I understand where the metadata and files are stored?</li>
+        <li>Do I know what rights the purchase actually provides?</li>
+        <li>Have I verified the website and marketplace source?</li>
+        <li>Do I understand the transaction I am signing?</li>
+        <li>Do I understand the expected fees?</li>
+        <li>Can I afford to lose the funds involved?</li>
+    </ul>
+
+    <h2>Conclusion</h2>
+
+    <p>
+        An NFT is a non-fungible digital token with a distinct identity or properties,
+        managed according to blockchain and smart contract rules.
+    </p>
+
+    <p>
+        NFTs can be associated with images, videos, games, tickets, memberships, collectibles,
+        and other applications, but the token is not necessarily the underlying file itself.
+    </p>
+
+    <p>
+        Understanding NFTs requires more than understanding digital art. It requires understanding
+        blockchain records, smart contracts, wallets, Token IDs, metadata, storage, ownership,
+        licensing, and security.
+    </p>
+
+    <p>
+        NFTs are not automatically valuable, secure, fully decentralized, permanently stored,
+        or associated with copyright ownership.
+    </p>
+
+    <p>
+        After understanding these fundamentals, continue to
+        <a href="/academy/nfts/how-do-nfts-work">How Do NFTs Work?</a>
+        to explore the technical process in greater detail.
+    </p>
+
+    <hr>
+
+    <h2>Frequently Asked Questions About NFTs</h2>
+
+    <h3>What does NFT stand for?</h3>
+    <p>
+        NFT stands for Non-Fungible Token, a digital token designed to have a distinct identity
+        or characteristics under the rules of its blockchain system.
+    </p>
+
+    <h3>Is an NFT the same thing as an image?</h3>
+    <p>
+        No. An image may be associated with an NFT, but the NFT is the blockchain token and
+        its associated state, while the file may be stored on-chain or off-chain.
+    </p>
+
+    <h3>Does buying an NFT give me copyright?</h3>
+    <p>
+        Not automatically. Copyright and commercial rights depend on the applicable license,
+        contractual terms, creator, and law.
+    </p>
+
+    <h3>Are all NFTs rare?</h3>
+    <p>
+        NFTs are designed to be non-fungible, but their supply, traits, and degree of scarcity
+        vary from one project to another.
+    </p>
+
+    <h3>Does scarcity make an NFT valuable?</h3>
+    <p>
+        No. Scarcity can be one factor, but it does not guarantee demand or market value.
+    </p>
+
+    <h3>Are NFTs stored entirely on the blockchain?</h3>
+    <p>
+        Not necessarily. Some metadata or content may be stored outside the blockchain and
+        referenced by the NFT.
+    </p>
+
+    <h3>What is a Token ID?</h3>
+    <p>
+        A Token ID is an identifier used by many NFT systems to distinguish one token from
+        other tokens managed by the same contract or collection.
+    </p>
+
+    <h3>What is NFT minting?</h3>
+    <p>
+        Minting generally refers to creating or registering an NFT according to the rules
+        of its smart contract or system.
+    </p>
+
+    <h3>Are NFT royalties guaranteed?</h3>
+    <p>
+        No. Royalty mechanisms vary depending on the contract, token standard, marketplace,
+        and implementation.
+    </p>
+
+    <h3>Are NFTs safe?</h3>
+    <p>
+        NFTs are not automatically safe. Risks include scams, phishing, malicious signatures,
+        smart contract vulnerabilities, storage dependencies, copyright issues, fees,
+        and uncertain market value.
+    </p>
+
+    <h3>Do I need to buy an NFT to learn about NFTs?</h3>
+    <p>
+        No. You can learn the technology, concepts, and risks without purchasing any NFT.
+    </p>
+
+    <h2>Related Lessons</h2>
+
+    <ul>
+        <li><a href="/academy/blockchain/what-is-blockchain">What Is Blockchain?</a></li>
+        <li><a href="/academy/blockchain/how-does-blockchain-work">How Does Blockchain Work?</a></li>
+        <li><a href="/academy/web3/what-is-web3">What Is Web3?</a></li>
+        <li><a href="/academy/web3/how-does-web3-work">How Does Web3 Work?</a></li>
+        <li><a href="/academy/staking/what-is-staking">What Is Staking?</a></li>
+        <li><a href="/academy/defi/what-is-defi">What Is DeFi?</a></li>
+        <li><a href="/academy/nfts/how-do-nfts-work">How Do NFTs Work?</a></li>
+        <li><a href="/academy/nfts/nft-standards">NFT Standards</a></li>
+        <li><a href="/academy/nfts/nft-metadata-and-storage">NFT Metadata and Storage</a></li>
+        <li><a href="/academy/nfts/nft-marketplaces">NFT Marketplaces</a></li>
+        <li><a href="/academy/nfts/nft-ownership-and-copyright">NFT Ownership and Copyright</a></li>
+        <li><a href="/academy/nfts/nft-security-and-scams">NFT Security and Scams</a></li>
+    </ul>
+
+    <p>
+        <strong>Educational disclaimer:</strong>
+        This lesson is provided for educational purposes only and does not constitute
+        financial, investment, or legal advice. Digital assets and NFTs can involve significant
+        risks. Conduct independent research and verification before making decisions.
+    </p>
+
+</article>
+HTML,
+
+    'image' => null,
+
+    'seo_title' => 'What Are NFTs? A Beginner’s Guide to Non-Fungible Tokens | AQL Crypto Academy',
+    'seo_title_ar' => 'ما هي NFTs؟ شرح الرموز غير القابلة للاستبدال للمبتدئين | أكاديمية AQL Crypto',
+    'seo_title_en' => 'What Are NFTs? A Beginner’s Guide to Non-Fungible Tokens | AQL Crypto Academy',
+
+    'meta_description' => 'Learn what NFTs are, how non-fungible tokens work, the role of blockchain and smart contracts, Token IDs, metadata, ownership, use cases, risks and digital ownership.',
+    'meta_description_ar' => 'تعرف على ما هي NFTs وكيف تعمل الرموز غير القابلة للاستبدال، ودور البلوكشين والعقود الذكية وToken ID وMetadata والملكية الرقمية والاستخدامات والمخاطر.',
+    'meta_description_en' => 'Learn what NFTs are, how non-fungible tokens work, the role of blockchain and smart contracts, Token IDs, metadata, ownership, use cases, risks and digital ownership.',
+
+    'faq_ar' => [
+        [
+            'question' => 'ما معنى NFT؟',
+            'answer' => 'NFT اختصار لـ Non-Fungible Token، أي رمز غير قابل للاستبدال، وهو رمز رقمي يمتلك هوية أو خصائص تميزه عن الرموز الأخرى وفق النظام المستخدم.'
+        ],
+        [
+            'question' => 'هل NFT هو الصورة نفسها؟',
+            'answer' => 'لا. الصورة قد تكون مرتبطة بـNFT، لكن NFT نفسه هو الرمز وسجله على البلوكشين، بينما الملف قد يكون مخزنًا على البلوكشين أو خارجه بحسب التصميم.'
+        ],
+        [
+            'question' => 'هل شراء NFT يعني امتلاك حقوق الطبع والنشر؟',
+            'answer' => 'ليس بالضرورة. حقوق الطبع والنشر والاستخدام التجاري تعتمد على الترخيص والشروط القانونية المرتبطة بالمحتوى.'
+        ],
+        [
+            'question' => 'هل كل NFTs نادرة؟',
+            'answer' => 'NFTs مصممة لتكون غير قابلة للاستبدال، لكن مستوى الندرة والخصائص وعدد الرموز يختلف من مشروع إلى آخر.'
+        ],
+        [
+            'question' => 'هل الندرة تجعل NFT ذا قيمة؟',
+            'answer' => 'لا. الندرة قد تكون أحد العوامل، لكنها لا تضمن الطلب أو القيمة السوقية.'
+        ],
+        [
+            'question' => 'هل NFTs مخزنة بالكامل على البلوكشين؟',
+            'answer' => 'ليس بالضرورة. قد تكون بعض البيانات أو الملفات مخزنة خارج البلوكشين ويتم ربطها بالرمز.'
+        ],
+        [
+            'question' => 'ما هو Token ID؟',
+            'answer' => 'هو معرف يستخدم في العديد من أنظمة NFTs لتمييز رمز معين عن الرموز الأخرى داخل العقد أو المجموعة.'
+        ],
+        [
+            'question' => 'ما هو Minting؟',
+            'answer' => 'هو إنشاء أو تسجيل NFT وفق قواعد العقد الذكي أو النظام المستخدم.'
+        ],
+        [
+            'question' => 'هل Royalties مضمونة في كل NFT؟',
+            'answer' => 'لا. آلية العوائد تختلف بحسب العقد الذكي والمعيار والمنصة والتصميم المستخدم.'
+        ],
+        [
+            'question' => 'هل NFTs آمنة؟',
+            'answer' => 'لا يمكن اعتبار جميع NFTs آمنة تلقائيًا. توجد مخاطر تتعلق بالعقود الذكية والاحتيال والتصيد والتوقيعات والتخزين والحقوق والقيمة السوقية.'
+        ],
+        [
+            'question' => 'هل أحتاج إلى شراء NFT حتى أتعلم عنه؟',
+            'answer' => 'لا. يمكنك فهم المفاهيم والتقنية ومخاطرها دون شراء أي NFT.'
+        ],
+    ],
+
+    'faq_en' => [
+        [
+            'question' => 'What does NFT stand for?',
+            'answer' => 'NFT stands for Non-Fungible Token, a digital token designed to have a distinct identity or characteristics under the rules of its blockchain system.'
+        ],
+        [
+            'question' => 'Is an NFT the same thing as an image?',
+            'answer' => 'No. An image may be associated with an NFT, but the NFT is the blockchain token and its associated state, while the file may be stored on-chain or off-chain.'
+        ],
+        [
+            'question' => 'Does buying an NFT give me copyright?',
+            'answer' => 'Not automatically. Copyright and commercial rights depend on the applicable license, contractual terms, creator, and law.'
+        ],
+        [
+            'question' => 'Are all NFTs rare?',
+            'answer' => 'NFTs are designed to be non-fungible, but their supply, traits, and degree of scarcity vary from one project to another.'
+        ],
+        [
+            'question' => 'Does scarcity make an NFT valuable?',
+            'answer' => 'No. Scarcity can be one factor, but it does not guarantee demand or market value.'
+        ],
+        [
+            'question' => 'Are NFTs stored entirely on the blockchain?',
+            'answer' => 'Not necessarily. Some metadata or content may be stored outside the blockchain and referenced by the NFT.'
+        ],
+        [
+            'question' => 'What is a Token ID?',
+            'answer' => 'A Token ID is an identifier used by many NFT systems to distinguish one token from other tokens managed by the same contract or collection.'
+        ],
+        [
+            'question' => 'What is NFT minting?',
+            'answer' => 'Minting generally refers to creating or registering an NFT according to the rules of its smart contract or system.'
+        ],
+        [
+            'question' => 'Are NFT royalties guaranteed?',
+            'answer' => 'No. Royalty mechanisms vary depending on the contract, token standard, marketplace, and implementation.'
+        ],
+        [
+            'question' => 'Are NFTs safe?',
+            'answer' => 'NFTs are not automatically safe. Risks include scams, phishing, malicious signatures, smart contract vulnerabilities, storage dependencies, copyright issues, fees, and uncertain market value.'
+        ],
+        [
+            'question' => 'Do I need to buy an NFT to learn about NFTs?',
+            'answer' => 'No. You can learn the technology, concepts, and risks without purchasing any NFT.'
+        ],
+    ],
+
+    'status' => 'published',
+    'sort_order' => 1,
+    'published_at' => now(),
+],
+
+[
+    'title' => 'How Do NFTs Work?',
+    'title_ar' => 'كيف تعمل NFTs؟ شرح الملكية الرقمية والبلوكشين والعقود الذكية',
+    'title_en' => 'How Do NFTs Work? Blockchain, Smart Contracts and Digital Ownership',
+    'slug' => 'how-do-nfts-work',
+
+    'excerpt' => 'Learn how NFTs work from creation and token identification to ownership, metadata, smart contracts, blockchain transactions, transfers, marketplaces and digital ownership.',
+    'excerpt_ar' => 'تعرف على كيفية عمل NFTs بداية من إنشاء الرمز وتحديد هويته، مرورًا بالعقود الذكية والبلوكشين والبيانات الوصفية، ووصولًا إلى الملكية الرقمية والنقل والأسواق والمخاطر.',
+    'excerpt_en' => 'Learn how NFTs work from creation and token identification to ownership, metadata, smart contracts, blockchain transactions, transfers, marketplaces and digital ownership.',
+
+    'content' => null,
+
+    'content_ar' => <<<'HTML'
+<article dir="rtl">
+
+    <h2>كيف تعمل NFTs؟</h2>
+
+    <p>
+        بعد أن تعرفنا في الدرس السابق على معنى NFT، حان الوقت لفهم ما يحدث فعليًا خلف الكواليس.
+        NFT ليس مجرد صورة تظهر داخل محفظة رقمية، بل هو نظام من الرموز والبيانات والعقود الذكية
+        والمعاملات التي تعمل معًا على شبكة البلوكشين.
+    </p>
+
+    <p>
+        بصورة مبسطة، يمكن تصور عمل NFT بهذه السلسلة:
+    </p>
+
+    <p>
+        <strong>
+            إنشاء الرمز ← تسجيله على البلوكشين ← ربطه بالبيانات ← تحديد المالك ←
+            عرضه في التطبيقات ← نقله أو بيعه ← تحديث حالة الملكية
+        </strong>
+    </p>
+
+    <p>
+        تختلف التفاصيل من شبكة إلى أخرى ومن معيار NFT إلى آخر، لكن هذه الفكرة تساعد على فهم
+        المكونات الأساسية للنظام.
+    </p>
+
+    <h2>المكونات الأساسية التي تجعل NFT يعمل</h2>
+
+    <p>
+        يعتمد NFT عادة على عدة مكونات تعمل معًا، أهمها:
+    </p>
+
+    <ul>
+        <li><strong>Blockchain:</strong> الشبكة التي تسجل حالة الرمز والمعاملات.</li>
+        <li><strong>Smart Contract:</strong> البرنامج الذي يحدد قواعد NFT.</li>
+        <li><strong>Token ID:</strong> معرف يميز الرمز في العديد من الأنظمة.</li>
+        <li><strong>Wallet Address:</strong> العنوان الذي يمكن أن ترتبط به ملكية الرمز.</li>
+        <li><strong>Metadata:</strong> البيانات التي تصف الرمز أو المحتوى المرتبط به.</li>
+        <li><strong>Digital Content:</strong> الصورة أو الفيديو أو الملف أو المحتوى المرتبط بالرمز.</li>
+        <li><strong>Applications and Marketplaces:</strong> الواجهات التي تسمح للمستخدمين بعرض والتفاعل مع NFTs.</li>
+    </ul>
+
+    <h2>الخطوة الأولى: إنشاء NFT</h2>
+
+    <p>
+        تبدأ العملية عندما يتم إنشاء NFT وفق قواعد عقد ذكي أو نظام معين.
+        تسمى هذه العملية في كثير من الحالات <strong>Minting</strong>.
+    </p>
+
+    <p>
+        أثناء عملية الإنشاء قد يتم إنشاء معرف للرمز وربطه بعنوان معين وبيانات وصفية،
+        ثم تسجيل الحالة على البلوكشين من خلال معاملة.
+    </p>
+
+    <p>
+        طريقة إنشاء NFT ليست موحدة لجميع المشاريع. فقد يسمح العقد بإنشاء الرموز من خلال
+        وظيفة محددة، أو قد تستخدم المنصة واجهة تسهّل العملية للمستخدم.
+    </p>
+
+    <h2>ما الذي يحدث أثناء Minting؟</h2>
+
+    <p>
+        بصورة مبسطة، قد تحدث مجموعة من العمليات مثل:
+    </p>
+
+    <ol>
+        <li>إرسال معاملة إلى العقد الذكي.</li>
+        <li>تنفيذ وظيفة إنشاء الرمز وفق قواعد العقد.</li>
+        <li>تخصيص Token ID أو معرف للرمز.</li>
+        <li>تحديد العنوان الذي سيُسجل له الرمز وفق قواعد العقد.</li>
+        <li>إنشاء أو ربط Metadata.</li>
+        <li>تسجيل الحالة الجديدة على البلوكشين.</li>
+    </ol>
+
+    <p>
+        ليس من الضروري أن تكون كل هذه الخطوات منفصلة أو أن تحدث بالطريقة نفسها في كل مشروع.
+        التنفيذ يعتمد على العقد والمعيار والشبكة.
+    </p>
+
+    <h2>دور البلوكشين</h2>
+
+    <p>
+        البلوكشين هو طبقة السجل التي تحفظ حالة الشبكة وفق قواعدها.
+        وفي نظام NFT يمكن أن تتضمن هذه الحالة معلومات مرتبطة بالرموز وملكيتها ومعاملاتها.
+    </p>
+
+    <p>
+        عندما يتم نقل NFT، تسجل الشبكة المعاملة وتحدث حالة العقد وفق القواعد التي ينفذها.
+        ويمكن للتطبيقات المتوافقة قراءة هذه الحالة وعرضها للمستخدم.
+    </p>
+
+    <p>
+        لذلك فإن البلوكشين لا يخزن بالضرورة كل شيء يتعلق بـNFT.
+        فقد تكون ملكية الرمز مسجلة على الشبكة بينما تكون الصورة أو بعض البيانات خارجها.
+    </p>
+
+    <p>
+        لفهم طبقة البلوكشين بشكل أعمق، راجع
+        <a href="/academy/blockchain/what-is-blockchain">ما هي Blockchain؟</a>
+        و
+        <a href="/academy/blockchain/how-does-blockchain-work">كيف تعمل Blockchain؟</a>.
+    </p>
+
+    <h2>دور العقد الذكي</h2>
+
+    <p>
+        العقد الذكي هو البرنامج الذي يحدد كيفية التعامل مع NFT.
+        يمكن أن يحتوي على وظائف لإنشاء الرموز ونقلها والاستعلام عن مالكها وإدارة بعض البيانات،
+        بحسب التصميم.
+    </p>
+
+    <p>
+        يمكن تشبيه العقد الذكي بمجموعة من القواعد البرمجية التي تحدد:
+    </p>
+
+    <ul>
+        <li>من يستطيع إنشاء NFT.</li>
+        <li>كيف يتم إنشاء Token ID.</li>
+        <li>كيفية نقل الرمز.</li>
+        <li>كيف يتم معرفة المالك الحالي.</li>
+        <li>كيف يتم الوصول إلى Metadata.</li>
+        <li>ما هي الصلاحيات المتاحة للمستخدمين أو المشغلين.</li>
+    </ul>
+
+    <p>
+        لكن هذه القواعد تختلف من عقد إلى آخر. لذلك لا ينبغي افتراض أن جميع NFTs تعمل بنفس الطريقة.
+    </p>
+
+    <h2>كيف يتم تحديد مالك NFT؟</h2>
+
+    <p>
+        من المفاهيم المهمة في NFTs أن الملكية لا تعتمد فقط على قاعدة بيانات داخل موقع إلكتروني.
+        في النظام القائم على البلوكشين، يتم تمثيل ملكية الرمز ضمن حالة العقد وفق قواعده.
+    </p>
+
+    <p>
+        عندما يكون عنوان معين هو المالك المسجل لرمز محدد، تستطيع التطبيقات المتوافقة الاستعلام
+        عن هذه الحالة وعرض NFT ضمن ذلك العنوان.
+    </p>
+
+    <p>
+        وإذا تم نقل الرمز إلى عنوان آخر بنجاح، تتغير حالة الملكية وفق المعاملة المنفذة.
+    </p>
+
+    <h2>ما علاقة المحفظة بالملكية؟</h2>
+
+    <p>
+        المحفظة تساعد المستخدم على التحكم في عنوانه من خلال المفاتيح والتوقيعات.
+        وهي لا تعني بالضرورة أن NFT أو الصورة مخزنة فعليًا داخل التطبيق الخاص بالمحفظة.
+    </p>
+
+    <p>
+        عندما يريد المستخدم نقل NFT، يحتاج عادة إلى توقيع معاملة تسمح بتنفيذ العملية
+        من عنوانه وفق قواعد العقد.
+    </p>
+
+    <p>
+        لهذا السبب تعتبر حماية المفتاح الخاص أو وسيلة التحكم بالعنوان من أهم جوانب أمان NFTs.
+    </p>
+
+    <p>
+        ويمكنك معرفة المزيد عن هذه العلاقة في درس
+        <a href="/academy/web3/web3-wallets-and-identity">محافظ Web3 والهوية الرقمية</a>.
+    </p>
+
+    <h2>ما هو Token ID وكيف يعمل؟</h2>
+
+    <p>
+        Token ID هو معرف يميز رمزًا معينًا ضمن نظام NFT.
+        قد يكون لكل NFT في المجموعة معرف مختلف، حتى لو كانت جميع الرموز مرتبطة بالعقد نفسه.
+    </p>
+
+    <p>
+        على سبيل المثال، قد يحتوي عقد معين على الرموز 1 و2 و3 و4.
+        كل معرف يشير إلى رمز مختلف وفق قواعد العقد.
+    </p>
+
+    <p>
+        لكن Token ID وحده قد لا يكون كافيًا لتحديد الرمز في جميع السياقات؛
+        فمن المهم أيضًا معرفة العقد والشبكة التي يوجد عليها الرمز.
+    </p>
+
+    <h2>كيف ترتبط Metadata بـNFT؟</h2>
+
+    <p>
+        Metadata هي البيانات التي تصف NFT.
+        قد تتضمن اسم الرمز والوصف والخصائص ورابط الصورة أو الفيديو أو معلومات أخرى.
+    </p>
+
+    <p>
+        قد يحتوي العقد الذكي على وظيفة أو قيمة تسمح للتطبيقات بالحصول على مرجع Metadata
+        المرتبط بـToken ID.
+    </p>
+
+    <p>
+        يمكن بعد ذلك للتطبيق أو السوق قراءة هذه البيانات وعرضها للمستخدم.
+    </p>
+
+    <p>
+        لكن وجود Metadata لا يعني بالضرورة أن كل المحتوى الموجود فيها مخزن على البلوكشين.
+    </p>
+
+    <h2>On-Chain مقابل Off-Chain</h2>
+
+    <h3>البيانات On-Chain</h3>
+
+    <p>
+        هي البيانات المسجلة ضمن البلوكشين أو حالة العقد وفق تصميم النظام.
+        ميزتها الأساسية أنها جزء من البيانات التي يمكن للشبكة الاحتفاظ بها والتحقق منها.
+    </p>
+
+    <h3>البيانات Off-Chain</h3>
+
+    <p>
+        هي البيانات الموجودة خارج البلوكشين، مثل الملفات الموجودة على خادم أو نظام تخزين خارجي.
+    </p>
+
+    <p>
+        قد يستخدم NFT عنوانًا يشير إلى ملف موجود خارج الشبكة.
+        في هذه الحالة، وجود الرمز على البلوكشين لا يعني أن الملف نفسه موجود داخل البلوكشين.
+    </p>
+
+    <p>
+        لذلك فإن تقييم طريقة تخزين NFT مهم لفهم مدى اعتماد المحتوى على خدمات خارجية.
+    </p>
+
+    <p>
+        سيتم شرح هذا الموضوع بالتفصيل في
+        <a href="/academy/nfts/nft-metadata-and-storage">درس NFT Metadata and Storage</a>.
+    </p>
+
+    <h2>كيف يرى المستخدم NFT؟</h2>
+
+    <p>
+        المستخدم عادة لا يتعامل مباشرة مع البيانات الخام للعقد الذكي.
+        بدلاً من ذلك، يستخدم محفظة أو تطبيقًا أو سوق NFT يقوم بقراءة البيانات من البلوكشين
+        وربطها بالـMetadata وعرضها في واجهة مفهومة.
+    </p>
+
+    <p>
+        لذلك قد ترى صورة واسمًا وخصائص NFT في تطبيق معين، بينما التطبيق في الخلفية يقوم
+        بقراءة معلومات من أكثر من مصدر.
+    </p>
+
+    <p>
+        هذا يعني أن واجهة العرض ليست هي مصدر الحقيقة الوحيد.
+        قد يكون سجل الملكية موجودًا على البلوكشين بينما تكون الواجهة أو بعض خدماتها مركزية.
+    </p>
+
+    <h2>كيف تنتقل ملكية NFT؟</h2>
+
+    <p>
+        عندما يقرر مالك NFT نقل الرمز، يتم تنفيذ معاملة وفق قواعد العقد الذكي.
+    </p>
+
+    <p>
+        بصورة مبسطة:
+    </p>
+
+    <ol>
+        <li>يحدد المستخدم الرمز الذي يريد نقله.</li>
+        <li>يحدد العنوان المستلم.</li>
+        <li>يطلب التطبيق من المحفظة توقيع المعاملة.</li>
+        <li>تُرسل المعاملة إلى الشبكة.</li>
+        <li>تتحقق الشبكة من المعاملة وتنفذ قواعد العقد.</li>
+        <li>بعد تأكيدها، تتغير حالة الملكية وفق قواعد العقد.</li>
+        <li>تستطيع التطبيقات المتوافقة قراءة الحالة الجديدة.</li>
+    </ol>
+
+    <p>
+        وقد تتطلب العملية دفع رسوم للشبكة، وتختلف الرسوم حسب الشبكة وظروفها.
+    </p>
+
+    <h2>هل يمكن إلغاء تحويل NFT؟</h2>
+
+    <p>
+        لا توجد قاعدة عامة تسمح للمستخدم بإلغاء تحويل NFT بعد تأكيد المعاملة.
+        تعتمد إمكانية عكس أو تعديل أي عملية على تصميم النظام والعقد، وفي شبكات البلوكشين
+        التقليدية لا يمكن ببساطة حذف معاملة مؤكدة من السجل.
+    </p>
+
+    <p>
+        لهذا يجب التعامل مع معاملات NFT بحذر والتأكد من العنوان والمعاملة قبل التوقيع.
+    </p>
+
+    <h2>كيف يتم بيع NFT؟</h2>
+
+    <p>
+        يمكن أن تتم عملية البيع من خلال سوق NFT أو آلية أخرى مصممة للتعامل مع الرموز.
+        قد يضع المالك الرمز للبيع، ثم يتفاعل المشتري مع آلية البيع.
+    </p>
+
+    <p>
+        في بعض الأنظمة يمكن أن تستخدم عملية البيع عقدًا ذكيًا ينفذ شروط الصفقة.
+        وقد تشمل العملية نقل NFT ودفع أصل رقمي وتحصيل رسوم وفق التصميم.
+    </p>
+
+    <p>
+        لا تعمل جميع الأسواق بالطريقة نفسها، لذلك يجب فهم آلية كل منصة قبل التفاعل معها.
+    </p>
+
+    <h2>ما دور سوق NFT؟</h2>
+
+    <p>
+        السوق يوفر واجهة تساعد المستخدم على اكتشاف NFTs والتفاعل معها.
+        وقد يقوم بقراءة بيانات البلوكشين والـMetadata وعرضها بطريقة سهلة.
+    </p>
+
+    <p>
+        يمكن أن يوفر السوق وظائف مثل:
+    </p>
+
+    <ul>
+        <li>عرض NFTs.</li>
+        <li>البحث والتصفية.</li>
+        <li>عرض الخصائص والبيانات.</li>
+        <li>إنشاء قوائم للبيع.</li>
+        <li>تنفيذ أو تسهيل عمليات الشراء.</li>
+        <li>عرض تاريخ بعض المعاملات.</li>
+    </ul>
+
+    <p>
+        لكن السوق نفسه ليس هو البلوكشين.
+        وقد تعتمد بعض وظائفه على خدمات مركزية أو عقود ذكية أو مزودين خارجيين.
+    </p>
+
+    <p>
+        لمعرفة المزيد، راجع
+        <a href="/academy/nfts/nft-marketplaces">درس أسواق NFT</a>.
+    </p>
+
+    <h2>كيف تعرف التطبيقات أن NFT موجود؟</h2>
+
+    <p>
+        تحتاج التطبيقات إلى الوصول إلى بيانات الشبكة.
+        وقد يتم ذلك من خلال عقدة مباشرة أو مزود RPC أو خدمات فهرسة وغيرها من البنية التحتية.
+    </p>
+
+    <p>
+        بعد الحصول على البيانات، يمكن للتطبيق تحليل حالة العقد والرمز وقراءة Metadata
+        ثم عرض النتيجة للمستخدم.
+    </p>
+
+    <p>
+        ولهذا فإن تطبيقات NFT قد تعتمد على طبقات متعددة بين المستخدم والبلوكشين.
+    </p>
+
+    <h2>RPC وNFTs</h2>
+
+    <p>
+        RPC هو وسيلة تسمح للتطبيقات بالتواصل مع عقد الشبكة وطلب البيانات أو إرسال المعاملات.
+    </p>
+
+    <p>
+        عند فتح تطبيق Web3، قد لا يكون التطبيق متصلًا مباشرة بعقدة يديرها المستخدم.
+        قد يستخدم مزود RPC خارجي لتسهيل الاتصال بالشبكة.
+    </p>
+
+    <p>
+        وجود مزود RPC مركزي لا يعني أن البلوكشين نفسه مركزي، لكنه يمثل جزءًا من البنية التحتية
+        التي يعتمد عليها المستخدم في الوصول إلى الشبكة.
+    </p>
+
+    <h2>ما دور Indexers؟</h2>
+
+    <p>
+        بعض تطبيقات NFT تحتاج إلى البحث في عدد كبير من معاملات وبيانات البلوكشين.
+        تنفيذ كل عمليات البحث مباشرة من خلال العقد قد يكون غير عملي من ناحية تجربة المستخدم.
+    </p>
+
+    <p>
+        لذلك يمكن استخدام خدمات فهرسة <strong>Indexers</strong> تقوم بجمع وتنظيم البيانات
+        لتسهيل البحث والاستعلام.
+    </p>
+
+    <p>
+        هذه الخدمات قد تكون مركزية أو مبنية بطرق مختلفة، ولذلك يجب عدم اعتبارها جزءًا من
+        البلوكشين نفسه.
+    </p>
+
+    <h2>ماذا يحدث عندما يتم عرض صورة NFT؟</h2>
+
+    <p>
+        عندما يفتح المستخدم NFT، قد تحدث عدة خطوات في الخلفية:
+    </p>
+
+    <ol>
+        <li>التطبيق يحدد العقد والـToken ID.</li>
+        <li>يستعلم عن بيانات الرمز.</li>
+        <li>يحصل على مرجع Metadata.</li>
+        <li>يقرأ Metadata.</li>
+        <li>يجد مرجع الصورة أو الملف.</li>
+        <li>يحمّل الملف من موقع التخزين المناسب.</li>
+        <li>يعرض النتيجة للمستخدم.</li>
+    </ol>
+
+    <p>
+        لذلك فإن الصورة التي تراها على الشاشة قد تمر عبر عدة طبقات قبل ظهورها.
+        وهذا أحد الأسباب التي تجعل فهم التخزين والـMetadata مهمًا.
+    </p>
+
+    <h2>كيف تعمل NFT مع Web3؟</h2>
+
+    <p>
+        NFT جزء من منظومة Web3 الأوسع.
+        يمكن للمستخدم استخدام محفظته للتفاعل مع تطبيق لامركزي، ثم يوقع معاملة
+        تتعامل مع عقد ذكي، ويتم تسجيل النتيجة على البلوكشين.
+    </p>
+
+    <p>
+        يمكن للتطبيق بعد ذلك قراءة الحالة وعرض NFT أو استخدامها في وظيفة معينة.
+    </p>
+
+    <p>
+        لمزيد من الفهم، راجع
+        <a href="/academy/web3/what-is-web3">ما هو Web3؟</a>
+        و
+        <a href="/academy/web3/how-does-web3-work">كيف يعمل Web3؟</a>.
+    </p>
+
+    <h2>مثال مبسط لكيفية عمل NFT</h2>
+
+    <p>
+        لنفترض وجود مشروع أنشأ مجموعة من NFTs.
+    </p>
+
+    <ol>
+        <li>ينشر المشروع عقد NFT على البلوكشين.</li>
+        <li>يتم إنشاء رمز جديد برقم Token ID محدد.</li>
+        <li>يتم تسجيل الرمز وفق قواعد العقد.</li>
+        <li>يرتبط الرمز ببيانات Metadata.</li>
+        <li>تحتوي Metadata على وصف وخصائص ومرجع للمحتوى.</li>
+        <li>يظهر NFT في تطبيق متوافق.</li>
+        <li>يتم نقل NFT من عنوان إلى آخر من خلال معاملة.</li>
+        <li>يقرأ التطبيق الحالة الجديدة ويعرض المالك الجديد.</li>
+    </ol>
+
+    <p>
+        هذه الصورة المبسطة توضح أن NFT ليس مجرد ملف صورة، وإنما منظومة من السجل والرمز
+        والبيانات والعقد والتطبيقات.
+    </p>
+
+    <h2>هل يمكن نسخ NFT؟</h2>
+
+    <p>
+        يمكن نسخ الملفات الرقمية المرتبطة بـNFT مثل الصور أو الفيديوهات.
+        لكن نسخ الملف لا يعني إنشاء نسخة مطابقة من سجل الملكية الموجود على البلوكشين.
+    </p>
+
+    <p>
+        يمكن لأي شخص حفظ صورة على جهازه، لكن ذلك لا يجعله مالكًا للرمز المسجل في العقد.
+    </p>
+
+    <p>
+        لذلك يجب الفصل بين <strong>نسخ المحتوى</strong> و<strong>امتلاك الرمز</strong>.
+    </p>
+
+    <h2>هل يمكن تعديل NFT؟</h2>
+
+    <p>
+        الإجابة تعتمد على تصميم العقد والـMetadata والنظام المستخدم.
+        بعض NFTs قد تستخدم بيانات قابلة للتحديث، بينما قد تكون عناصر أخرى ثابتة بعد إنشائها.
+    </p>
+
+    <p>
+        إذا كانت Metadata أو المحتوى موجودًا خارج البلوكشين، فقد تكون هناك آليات تسمح بتغيير
+        البيانات الخارجية أو المرجع إليها، بحسب النظام.
+    </p>
+
+    <p>
+        لذلك لا ينبغي افتراض أن كل NFT غير قابل للتعديل في كل جوانبه.
+    </p>
+
+    <h2>هل NFT آمن لأنه موجود على Blockchain؟</h2>
+
+    <p>
+        ليس بالضرورة.
+    </p>
+
+    <p>
+        البلوكشين قد يوفر سجلًا يمكن التحقق منه، لكنه لا يضمن أن العقد الذكي خالٍ من الأخطاء،
+        أو أن الموقع الذي تستخدمه آمن، أو أن Metadata غير قابلة للتغيير، أو أن المشروع شرعي.
+    </p>
+
+    <p>
+        الأمان يعتمد على عدة طبقات:
+    </p>
+
+    <ul>
+        <li>أمان البلوكشين نفسه.</li>
+        <li>تصميم العقد الذكي.</li>
+        <li>إدارة الصلاحيات.</li>
+        <li>أمان المحفظة والمفاتيح.</li>
+        <li>واجهة التطبيق.</li>
+        <li>مصدر Metadata والتخزين.</li>
+        <li>مزودات البنية التحتية.</li>
+        <li>سلوك المستخدم.</li>
+    </ul>
+
+    <h2>ما العلاقة بين NFT والـDeFi؟</h2>
+
+    <p>
+        NFTs وDeFi مجالان مختلفان لكن يمكن أن يتداخلا.
+        يمكن لبعض بروتوكولات أو تطبيقات Web3 استخدام NFTs داخل أنظمة مالية أو كضمان
+        أو كجزء من منتجات رقمية، بحسب التصميم.
+    </p>
+
+    <p>
+        لكن وجود NFT لا يعني تلقائيًا أنه جزء من DeFi.
+        لفهم الفرق، راجع
+        <a href="/academy/defi/what-is-defi">ما هو DeFi؟</a>.
+    </p>
+
+    <h2>ماذا يحدث عند فقدان المفتاح الخاص؟</h2>
+
+    <p>
+        إذا فقد المستخدم القدرة على التحكم بالمفتاح الخاص المرتبط بعنوان يملك NFT،
+        فقد يفقد القدرة على توقيع معاملات من ذلك العنوان.
+    </p>
+
+    <p>
+        سجل NFT نفسه لا يختفي بالضرورة من البلوكشين، لكن القدرة على التحكم فيه قد تصبح غير متاحة
+        للمستخدم.
+    </p>
+
+    <p>
+        وهذا يوضح الفرق بين وجود الأصل على الشبكة وبين القدرة على التحكم في العنوان.
+    </p>
+
+    <h2>ما الذي يجب التحقق منه عند فحص NFT؟</h2>
+
+    <ul>
+        <li>الشبكة التي يوجد عليها NFT.</li>
+        <li>عنوان العقد الذكي.</li>
+        <li>Token ID.</li>
+        <li>العنوان المالك الحالي وفق العقد.</li>
+        <li>مصدر Metadata.</li>
+        <li>مكان تخزين المحتوى.</li>
+        <li>الصلاحيات التي يمتلكها العقد أو المشغلون.</li>
+        <li>المعاملات السابقة ذات الصلة.</li>
+        <li>الموقع أو السوق الذي تتفاعل معه.</li>
+        <li>المعاملة التي سيطلب منك توقيعها.</li>
+    </ul>
+
+    <h2>أهم المفاهيم التي يجب أن تتذكرها</h2>
+
+    <ul>
+        <li>NFT هو رمز وليس بالضرورة الملف المرتبط به.</li>
+        <li>البلوكشين يسجل حالة الرمز والمعاملات وفق قواعد الشبكة والعقد.</li>
+        <li>العقد الذكي يحدد قواعد التعامل مع NFT.</li>
+        <li>Token ID يساعد على تحديد رمز معين.</li>
+        <li>المحفظة تتحكم في المفاتيح التي تسمح بالتوقيع من العنوان.</li>
+        <li>Metadata تصف الرمز أو المحتوى المرتبط به.</li>
+        <li>ليس كل المحتوى مخزنًا على البلوكشين.</li>
+        <li>الأسواق والتطبيقات قد تعتمد على RPC وIndexers وخدمات أخرى.</li>
+        <li>نقل NFT يحتاج إلى معاملة وفق قواعد العقد.</li>
+        <li>وجود NFT على البلوكشين لا يضمن تلقائيًا الأمان أو القيمة أو حقوق الملكية الفكرية.</li>
+    </ul>
+
+    <h2>الخلاصة</h2>
+
+    <p>
+        تعمل NFTs من خلال مجموعة من المكونات المترابطة، أهمها البلوكشين والعقد الذكي
+        وToken ID والمحفظة والـMetadata والتطبيقات التي تعرض البيانات.
+    </p>
+
+    <p>
+        عند إنشاء NFT يتم تسجيل الرمز وفق قواعد العقد، وعند نقله يتم تنفيذ معاملة تغير
+        حالة الملكية على الشبكة. أما المحتوى المرتبط به فقد يكون مخزنًا على البلوكشين
+        أو خارجها بحسب تصميم المشروع.
+    </p>
+
+    <p>
+        كما أن تجربة المستخدم التي توفرها أسواق NFT والتطبيقات لا تمثل بالضرورة كامل
+        البنية التقنية؛ فقد توجد طبقات مثل RPC وIndexers والتخزين الخارجي.
+    </p>
+
+    <p>
+        فهم هذه العملية يساعدك على الانتقال إلى المفاهيم الأكثر تقدمًا مثل معايير NFT
+        وMetadata وMinting والأسواق والملكية وحقوق النشر والأمان.
+    </p>
+
+    <p>
+        في الدرس التالي سنتعرف على الفرق بين NFTs والرموز القابلة للاستبدال، ولماذا تختلف
+        طريقة التعامل مع كل نوع.
+    </p>
+
+    <p>
+        <a href="/academy/nfts/nfts-vs-fungible-tokens">انتقل إلى درس NFTs vs Fungible Tokens</a>.
+    </p>
+
+    <hr>
+
+    <h2>الأسئلة الشائعة حول كيفية عمل NFTs</h2>
+
+    <h3>كيف يعمل NFT بشكل مبسط؟</h3>
+    <p>
+        يتم إنشاء رمز وفق عقد ذكي، ثم تسجيله على البلوكشين وربطه بمعرف وبيانات،
+        وتسجيل ملكيته وفق قواعد العقد. ويمكن بعد ذلك نقله والتفاعل معه عبر التطبيقات المتوافقة.
+    </p>
+
+    <h3>ما الذي يحدد مالك NFT؟</h3>
+    <p>
+        تحدد حالة العقد والبلوكشين العنوان المرتبط بملكية الرمز وفق قواعد النظام المستخدم.
+    </p>
+
+    <h3>هل الصورة نفسها موجودة على البلوكشين؟</h3>
+    <p>
+        ليس بالضرورة. قد تكون الصورة أو الملف مخزنًا خارج البلوكشين، بينما يحتوي NFT على
+        مرجع أو Metadata تشير إليه.
+    </p>
+
+    <h3>ما هو Minting؟</h3>
+    <p>
+        Minting هو إنشاء أو تسجيل NFT وفق قواعد العقد الذكي أو النظام المستخدم.
+    </p>
+
+    <h3>هل NFT يحتاج إلى عقد ذكي؟</h3>
+    <p>
+        معظم NFTs على شبكات البلوكشين العامة تعتمد على عقود أو برامج تحدد قواعد الرموز،
+        لكن التفاصيل تختلف حسب الشبكة والتصميم.
+    </p>
+
+    <h3>هل يمكن نقل NFT إلى محفظة أخرى؟</h3>
+    <p>
+        نعم، إذا كان العقد والنظام يسمحان بالنقل، يتم ذلك من خلال معاملة وفق قواعد العقد.
+    </p>
+
+    <h3>هل نقل NFT ينقل حقوق النشر؟</h3>
+    <p>
+        ليس تلقائيًا. نقل الرمز وحقوق الملكية الفكرية مفهومان مختلفان، وتعتمد الحقوق
+        على الترخيص والشروط القانونية.
+    </p>
+
+    <h3>هل يمكن نسخ NFT؟</h3>
+    <p>
+        يمكن نسخ الملفات المرتبطة به، مثل الصور، لكن نسخ الملف لا يعني امتلاك الرمز الأصلي
+        أو سجل الملكية الموجود على البلوكشين.
+    </p>
+
+    <h3>هل جميع NFTs غير قابلة للتعديل؟</h3>
+    <p>
+        ليس بالضرورة. قابلية تعديل Metadata أو المحتوى تعتمد على تصميم العقد وطريقة التخزين
+        والآليات التي يستخدمها المشروع.
+    </p>
+
+    <h3>هل NFT آمن لمجرد وجوده على البلوكشين؟</h3>
+    <p>
+        لا. الأمان يعتمد على البلوكشين والعقد الذكي والمحفظة والتطبيقات وMetadata والتخزين
+        والبنية التحتية وسلوك المستخدم.
+    </p>
+
+    <h2>دروس ذات صلة</h2>
+
+    <ul>
+        <li><a href="/academy/nfts/what-are-nfts">ما هي NFTs؟</a></li>
+        <li><a href="/academy/nfts/nfts-vs-fungible-tokens">NFTs مقابل الرموز القابلة للاستبدال</a></li>
+        <li><a href="/academy/nfts/nft-standards">معايير NFT</a></li>
+        <li><a href="/academy/nfts/nft-metadata-and-storage">NFT Metadata والتخزين</a></li>
+        <li><a href="/academy/nfts/nft-marketplaces">أسواق NFT</a></li>
+        <li><a href="/academy/nfts/what-is-nft-minting">NFT Minting</a></li>
+        <li><a href="/academy/nfts/nft-ownership-and-copyright">ملكية NFT وحقوق النشر</a></li>
+        <li><a href="/academy/nfts/nft-security-and-scams">أمان NFTs والاحتيال</a></li>
+        <li><a href="/academy/blockchain/what-is-blockchain">ما هي Blockchain؟</a></li>
+        <li><a href="/academy/blockchain/how-does-blockchain-work">كيف تعمل Blockchain؟</a></li>
+        <li><a href="/academy/web3/what-is-web3">ما هو Web3؟</a></li>
+        <li><a href="/academy/web3/how-does-web3-work">كيف يعمل Web3؟</a></li>
+        <li><a href="/academy/web3/web3-wallets-and-identity">محافظ Web3 والهوية الرقمية</a></li>
+        <li><a href="/academy/defi/what-is-defi">ما هو DeFi؟</a></li>
+    </ul>
+
+    <p>
+        <strong>تنبيه تعليمي:</strong>
+        هذا الدرس مقدم لأغراض تعليمية فقط، ولا يمثل نصيحة مالية أو استثمارية أو قانونية.
+        الأصول الرقمية وNFTs قد تنطوي على مخاطر تقنية وسوقية وقانونية، ويجب إجراء البحث
+        والتحقق المستقل قبل اتخاذ أي قرار.
+    </p>
+
+</article>
+HTML,
+
+    'content_en' => <<<'HTML'
+<article>
+
+    <h2>How Do NFTs Work?</h2>
+
+    <p>
+        After learning what an NFT is, the next step is understanding what actually happens
+        behind the scenes. An NFT is not simply an image displayed inside a wallet.
+        It is a system involving tokens, blockchain state, smart contracts, metadata,
+        transactions, wallets, and applications.
+    </p>
+
+    <p>
+        In simplified form, the process can be viewed as:
+    </p>
+
+    <p>
+        <strong>
+            Create the token → record it on the blockchain → associate data →
+            determine ownership → display it through applications → transfer or sell it →
+            update the ownership state
+        </strong>
+    </p>
+
+    <p>
+        Exact implementation varies between blockchains, NFT standards, smart contracts,
+        and applications, but this model provides a useful foundation.
+    </p>
+
+    <h2>Core Components of an NFT System</h2>
+
+    <p>
+        An NFT system commonly involves several components working together:
+    </p>
+
+    <ul>
+        <li><strong>Blockchain:</strong> records token state and transactions.</li>
+        <li><strong>Smart Contract:</strong> defines the rules governing the NFT.</li>
+        <li><strong>Token ID:</strong> identifies a particular token in many NFT systems.</li>
+        <li><strong>Wallet Address:</strong> an address that can be associated with token ownership.</li>
+        <li><strong>Metadata:</strong> information describing the token or associated content.</li>
+        <li><strong>Digital Content:</strong> an image, video, file, or other associated content.</li>
+        <li><strong>Applications and Marketplaces:</strong> interfaces used to view and interact with NFTs.</li>
+    </ul>
+
+    <h2>Step One: Creating an NFT</h2>
+
+    <p>
+        The process begins when an NFT is created according to the rules of a smart contract
+        or another system. This process is commonly called <strong>minting</strong>.
+    </p>
+
+    <p>
+        During minting, a token may receive an identifier, become associated with an address,
+        and receive metadata or a reference to metadata. A blockchain transaction records
+        the resulting state according to the contract rules.
+    </p>
+
+    <p>
+        Minting is not identical across all projects. A contract may expose a specific function
+        for creating tokens, while a marketplace or application may provide a user-friendly
+        interface around the process.
+    </p>
+
+    <h2>What Happens During Minting?</h2>
+
+    <p>
+        At a high level, a minting process may involve:
+    </p>
+
+    <ol>
+        <li>Sending a transaction to the smart contract.</li>
+        <li>Executing a token-creation function according to the contract rules.</li>
+        <li>Assigning a Token ID or another token identifier.</li>
+        <li>Associating the token with an address according to the contract rules.</li>
+        <li>Creating or referencing metadata.</li>
+        <li>Recording the resulting state on the blockchain.</li>
+    </ol>
+
+    <p>
+        These steps do not necessarily occur as separate operations, and implementations vary
+        according to the contract, standard, and blockchain.
+    </p>
+
+    <h2>The Role of the Blockchain</h2>
+
+    <p>
+        The blockchain provides the shared state and transaction record for the system.
+        An NFT's state can include information about tokens, ownership, and transactions
+        according to the contract and network rules.
+    </p>
+
+    <p>
+        When an NFT is transferred, the transaction is processed by the network and the contract
+        updates the relevant state according to its rules.
+    </p>
+
+    <p>
+        However, the blockchain does not necessarily store everything related to an NFT.
+        Ownership information may be on-chain while the image or other content is stored elsewhere.
+    </p>
+
+    <p>
+        For a broader foundation, see
+        <a href="/academy/blockchain/what-is-blockchain">What Is Blockchain?</a>
+        and
+        <a href="/academy/blockchain/how-does-blockchain-work">How Does Blockchain Work?</a>.
+    </p>
+
+    <h2>The Role of Smart Contracts</h2>
+
+    <p>
+        A smart contract is the software that defines how an NFT can be created, transferred,
+        and queried. Depending on its design, it may contain functions for token creation,
+        transfers, ownership queries, metadata references, and other features.
+    </p>
+
+    <p>
+        The contract may define:
+    </p>
+
+    <ul>
+        <li>Who can create NFTs.</li>
+        <li>How Token IDs are assigned.</li>
+        <li>How tokens can be transferred.</li>
+        <li>How current ownership is queried.</li>
+        <li>How metadata references are provided.</li>
+        <li>Which permissions are available to users or administrators.</li>
+    </ul>
+
+    <p>
+        These rules vary between contracts, so NFTs should not be assumed to operate identically.
+    </p>
+
+    <h2>How Is NFT Ownership Determined?</h2>
+
+    <p>
+        One important concept is that NFT ownership does not simply depend on a database
+        maintained by a website. In a blockchain-based system, ownership is represented
+        within the contract and blockchain state according to the system's rules.
+    </p>
+
+    <p>
+        When an address is recorded as the owner of a particular token, compatible applications
+        can query that state and display the NFT for that address.
+    </p>
+
+    <p>
+        If the NFT is successfully transferred to another address, the ownership state changes
+        according to the executed transaction.
+    </p>
+
+    <h2>How Does a Wallet Relate to Ownership?</h2>
+
+    <p>
+        A wallet helps the user control an address through private keys and signatures.
+        It does not necessarily mean that the NFT or its associated image is physically stored
+        inside the wallet application.
+    </p>
+
+    <p>
+        When a user wants to transfer an NFT, the wallet generally signs a transaction that
+        authorizes the operation from the relevant address according to the contract rules.
+    </p>
+
+    <p>
+        Protecting private keys or other mechanisms controlling the address is therefore a
+        fundamental part of NFT security.
+    </p>
+
+    <p>
+        For more context, see
+        <a href="/academy/web3/web3-wallets-and-identity">Web3 Wallets and Digital Identity</a>.
+    </p>
+
+    <h2>What Is a Token ID?</h2>
+
+    <p>
+        A Token ID is an identifier used to distinguish a particular token within an NFT system.
+        A collection can contain many tokens, each with its own identifier.
+    </p>
+
+    <p>
+        For example, a contract might manage tokens with IDs 1, 2, 3, and 4.
+        Each identifier represents a different token under the contract's rules.
+    </p>
+
+    <p>
+        However, a Token ID alone may not uniquely identify an NFT in every context.
+        The blockchain network and contract address are also important.
+    </p>
+
+    <h2>How Does Metadata Relate to an NFT?</h2>
+
+    <p>
+        Metadata describes an NFT. It can include the token name, description, traits,
+        image reference, video reference, or other information.
+    </p>
+
+    <p>
+        A smart contract may expose a function or value that allows applications to obtain
+        the metadata reference associated with a particular Token ID.
+    </p>
+
+    <p>
+        The application can then retrieve that metadata and display the NFT to the user.
+    </p>
+
+    <p>
+        However, metadata does not necessarily mean that all associated content is stored
+        directly on the blockchain.
+    </p>
+
+    <h2>On-Chain vs Off-Chain</h2>
+
+    <h3>On-Chain Data</h3>
+
+    <p>
+        On-chain data is recorded as part of the blockchain state or blockchain data according
+        to the system's design.
+    </p>
+
+    <h3>Off-Chain Data</h3>
+
+    <p>
+        Off-chain data is stored outside the blockchain, such as on a traditional server
+        or an external storage system.
+    </p>
+
+    <p>
+        An NFT may contain or reference a location for metadata or content stored outside
+        the blockchain. In that case, the NFT's presence on-chain does not mean the file
+        itself exists on-chain.
+    </p>
+
+    <p>
+        Understanding storage is therefore important when evaluating how an NFT works.
+    </p>
+
+    <p>
+        This topic is explored in detail in
+        <a href="/academy/nfts/nft-metadata-and-storage">NFT Metadata and Storage</a>.
+    </p>
+
+    <h2>How Does a User See an NFT?</h2>
+
+    <p>
+        Users generally do not interact directly with raw smart contract data.
+        Instead, a wallet, application, or marketplace reads blockchain information,
+        retrieves metadata, and presents the result through a user interface.
+    </p>
+
+    <p>
+        This means that the image, name, and traits displayed on a screen may be assembled
+        from multiple sources.
+    </p>
+
+    <p>
+        The user interface is therefore not necessarily the only source of truth.
+        Ownership may be recorded on-chain while the interface and some supporting services
+        remain centralized.
+    </p>
+
+    <h2>How Is an NFT Transferred?</h2>
+
+    <p>
+        When an NFT owner transfers a token, a blockchain transaction is executed according
+        to the rules of the relevant smart contract.
+    </p>
+
+    <p>
+        In simplified form:
+    </p>
+
+    <ol>
+        <li>The user selects the NFT.</li>
+        <li>The recipient address is specified.</li>
+        <li>The application requests a signature from the wallet.</li>
+        <li>The transaction is submitted to the network.</li>
+        <li>The network validates and executes the contract rules.</li>
+        <li>After confirmation, the ownership state changes according to those rules.</li>
+        <li>Compatible applications can read and display the updated state.</li>
+    </ol>
+
+    <p>
+        The transaction may require a network fee, depending on the blockchain and conditions.
+    </p>
+
+    <h2>Can an NFT Transfer Be Reversed?</h2>
+
+    <p>
+        There is no universal mechanism that allows a user to simply cancel a confirmed NFT transfer.
+        Whether an operation can be changed or reversed depends on the system's design.
+    </p>
+
+    <p>
+        On conventional blockchains, a confirmed transaction is generally not something a user
+        can simply delete from the ledger.
+    </p>
+
+    <p>
+        This is why users should verify recipient addresses and transaction details before signing.
+    </p>
+
+    <h2>How Is an NFT Sold?</h2>
+
+    <p>
+        An NFT can be sold through an NFT marketplace or another mechanism designed to handle
+        token transactions.
+    </p>
+
+    <p>
+        A seller may list the token, after which a buyer interacts with the sale mechanism.
+        Depending on the implementation, a smart contract can enforce parts of the transaction,
+        including transferring the NFT and handling payment according to the configured rules.
+    </p>
+
+    <p>
+        Marketplaces do not all work in exactly the same way, so users should understand the
+        mechanism used by a particular platform.
+    </p>
+
+    <h2>What Is the Role of an NFT Marketplace?</h2>
+
+    <p>
+        A marketplace provides an interface for discovering NFTs and interacting with them.
+        It may read blockchain data and metadata and present the information in a convenient format.
+    </p>
+
+    <p>
+        Marketplace functionality may include:
+    </p>
+
+    <ul>
+        <li>Displaying NFTs.</li>
+        <li>Searching and filtering.</li>
+        <li>Displaying traits and metadata.</li>
+        <li>Creating listings.</li>
+        <li>Facilitating purchases.</li>
+        <li>Displaying relevant transaction history.</li>
+    </ul>
+
+    <p>
+        A marketplace itself is not the blockchain. It may depend on smart contracts,
+        centralized services, infrastructure providers, and other components.
+    </p>
+
+    <p>
+        Learn more in
+        <a href="/academy/nfts/nft-marketplaces">NFT Marketplaces</a>.
+    </p>
+
+    <h2>How Do Applications Know That an NFT Exists?</h2>
+
+    <p>
+        Applications need access to blockchain data. They may obtain this data through
+        blockchain nodes, RPC providers, indexing services, or other infrastructure.
+    </p>
+
+    <p>
+        The application can then analyze contract state, token information, and metadata
+        before presenting the result to the user.
+    </p>
+
+    <p>
+        This means that NFT applications may involve several infrastructure layers between
+        the user and the underlying blockchain.
+    </p>
+
+    <h2>RPC and NFTs</h2>
+
+    <p>
+        RPC is a communication method that allows applications to interact with blockchain nodes
+        by requesting data or submitting transactions.
+    </p>
+
+    <p>
+        A Web3 application does not necessarily connect directly to a node operated by the user.
+        It may rely on an external RPC provider.
+    </p>
+
+    <p>
+        A centralized RPC provider does not automatically make the blockchain centralized,
+        but it can represent one centralized dependency in the user's access path.
+    </p>
+
+    <h2>What Are Indexers?</h2>
+
+    <p>
+        NFT applications often need to search large amounts of blockchain data.
+        Querying every relevant piece of information directly from contracts may not provide
+        an efficient user experience.
+    </p>
+
+    <p>
+        Indexing services can collect and organize blockchain data so applications can query
+        it more efficiently.
+    </p>
+
+    <p>
+        Indexers may be centralized or use different architectures, so they should not be
+        confused with the blockchain itself.
+    </p>
+
+    <h2>What Happens When an NFT Image Is Displayed?</h2>
+
+    <p>
+        When a user opens an NFT, several steps may happen in the background:
+    </p>
+
+    <ol>
+        <li>The application identifies the contract and Token ID.</li>
+        <li>It queries token-related data.</li>
+        <li>It obtains a metadata reference.</li>
+        <li>It retrieves the metadata.</li>
+        <li>The metadata provides a reference to the image or other file.</li>
+        <li>The application retrieves the file from the relevant storage system.</li>
+        <li>The final content is displayed to the user.</li>
+    </ol>
+
+    <p>
+        The image displayed on the screen may therefore pass through several infrastructure
+        layers before reaching the user.
+    </p>
+
+    <h2>How Do NFTs Work With Web3?</h2>
+
+    <p>
+        NFTs are part of the broader Web3 ecosystem.
+        A user can connect a wallet to an application, sign a transaction, interact with
+        a smart contract, and have the resulting state recorded on a blockchain.
+    </p>
+
+    <p>
+        The application can later read that state and display the NFT or use it as part
+        of another function.
+    </p>
+
+    <p>
+        For more context, see
+        <a href="/academy/web3/what-is-web3">What Is Web3?</a>
+        and
+        <a href="/academy/web3/how-does-web3-work">How Does Web3 Work?</a>.
+    </p>
+
+    <h2>A Simple NFT Example</h2>
+
+    <p>
+        Imagine a project that creates an NFT collection.
+    </p>
+
+    <ol>
+        <li>The project deploys an NFT smart contract.</li>
+        <li>A new token is created with a specific Token ID.</li>
+        <li>The token is recorded according to the contract rules.</li>
+        <li>The token is associated with metadata.</li>
+        <li>The metadata contains a description, traits, and a reference to content.</li>
+        <li>A compatible application displays the NFT.</li>
+        <li>The NFT is transferred from one address to another through a transaction.</li>
+        <li>The application reads the updated state and displays the new owner.</li>
+    </ol>
+
+    <p>
+        This example shows why an NFT is more than an image. It involves a token,
+        blockchain state, smart contract rules, metadata, and applications.
+    </p>
+
+    <h2>Can an NFT Be Copied?</h2>
+
+    <p>
+        Digital files associated with NFTs, such as images and videos, can often be copied.
+        Copying the file does not create an identical copy of the blockchain ownership record.
+    </p>
+
+    <p>
+        Anyone can save an image to a device, but that does not make the person the owner
+        of the token recorded by the contract.
+    </p>
+
+    <p>
+        The distinction between <strong>copying content</strong> and <strong>owning the token</strong>
+        is fundamental to understanding NFTs.
+    </p>
+
+    <h2>Can an NFT Be Modified?</h2>
+
+    <p>
+        It depends on the design of the contract, metadata system, and storage architecture.
+        Some NFTs can use metadata that changes over time, while other designs can make certain
+        components effectively fixed.
+    </p>
+
+    <p>
+        If metadata or content is stored outside the blockchain, external mechanisms may allow
+        changes to that content or its reference, depending on the implementation.
+    </p>
+
+    <p>
+        Therefore, users should not assume that every part of every NFT is permanently immutable.
+    </p>
+
+    <h2>Is an NFT Safe Because It Is on a Blockchain?</h2>
+
+    <p>
+        Not necessarily.
+    </p>
+
+    <p>
+        A blockchain can provide a verifiable record, but it does not guarantee that the smart
+        contract has no vulnerabilities, that the website is legitimate, that metadata cannot
+        change, or that a project is trustworthy.
+    </p>
+
+    <p>
+        Security depends on multiple layers:
+    </p>
+
+    <ul>
+        <li>Blockchain security.</li>
+        <li>Smart contract design.</li>
+        <li>Permission management.</li>
+        <li>Wallet and key security.</li>
+        <li>Application security.</li>
+        <li>Metadata and storage.</li>
+        <li>Infrastructure providers.</li>
+        <li>User behavior.</li>
+    </ul>
+
+    <h2>What Is the Relationship Between NFTs and DeFi?</h2>
+
+    <p>
+        NFTs and DeFi are different areas, but they can interact.
+        Some Web3 applications can use NFTs in financial systems, as collateral, or as part
+        of digital products depending on the design.
+    </p>
+
+    <p>
+        However, an NFT is not automatically part of DeFi.
+        For more context, see
+        <a href="/academy/defi/what-is-defi">What Is DeFi?</a>.
+    </p>
+
+    <h2>What Happens If You Lose the Private Key?</h2>
+
+    <p>
+        If a user loses control of the private key associated with an address that owns an NFT,
+        the user may lose the ability to authorize transactions from that address.
+    </p>
+
+    <p>
+        The NFT record itself may remain on the blockchain, but the user may no longer be able
+        to control the address or transfer the token.
+    </p>
+
+    <p>
+        This illustrates the difference between an asset remaining recorded on the network
+        and having practical control over the address.
+    </p>
+
+    <h2>What Should You Verify When Examining an NFT?</h2>
+
+    <ul>
+        <li>The blockchain network.</li>
+        <li>The smart contract address.</li>
+        <li>The Token ID.</li>
+        <li>The current owner according to the contract.</li>
+        <li>The source of the metadata.</li>
+        <li>Where the associated content is stored.</li>
+        <li>Contract permissions and administrative controls.</li>
+        <li>Relevant transaction history.</li>
+        <li>The website or marketplace you are using.</li>
+        <li>The exact transaction you are being asked to sign.</li>
+    </ul>
+
+    <h2>Key Concepts to Remember</h2>
+
+    <ul>
+        <li>An NFT is a token, not necessarily the associated file.</li>
+        <li>The blockchain records token state and transactions according to network and contract rules.</li>
+        <li>The smart contract defines how the NFT operates.</li>
+        <li>The Token ID helps identify a specific token.</li>
+        <li>A wallet controls keys used to authorize actions from an address.</li>
+        <li>Metadata describes the token or associated content.</li>
+        <li>Not all content is stored on-chain.</li>
+        <li>Marketplaces and applications may rely on RPC providers, indexers, and other services.</li>
+        <li>NFT transfers require transactions according to the contract rules.</li>
+        <li>Being on a blockchain does not automatically guarantee security, value, or intellectual property rights.</li>
+    </ul>
+
+    <h2>Conclusion</h2>
+
+    <p>
+        NFTs work through several interconnected components, including blockchains, smart contracts,
+        Token IDs, wallets, metadata, and applications.
+    </p>
+
+    <p>
+        When an NFT is created, the token is recorded according to contract rules.
+        When it is transferred, a transaction updates the ownership state on the blockchain.
+        The associated content may be stored on-chain or off-chain depending on the project's design.
+    </p>
+
+    <p>
+        The user experience provided by NFT marketplaces and applications does not necessarily
+        represent the entire technical architecture. RPC providers, indexing services,
+        and external storage can form additional layers.
+    </p>
+
+    <p>
+        Understanding this process prepares you for more advanced topics such as NFT standards,
+        metadata, minting, marketplaces, ownership, copyright, and security.
+    </p>
+
+    <p>
+        In the next lesson, we will compare NFTs with fungible tokens and explain why the two
+        token types behave differently.
+    </p>
+
+    <p>
+        <a href="/academy/nfts/nfts-vs-fungible-tokens">Continue to NFTs vs Fungible Tokens</a>.
+    </p>
+
+    <hr>
+
+    <h2>Frequently Asked Questions About How NFTs Work</h2>
+
+    <h3>How does an NFT work in simple terms?</h3>
+    <p>
+        An NFT is created according to smart contract rules, recorded on a blockchain,
+        associated with an identifier and data, and assigned ownership according to the system.
+        It can then be transferred and used by compatible applications.
+    </p>
+
+    <h3>What determines who owns an NFT?</h3>
+    <p>
+        The blockchain and smart contract state determine the address associated with ownership
+        according to the rules of the system.
+    </p>
+
+    <h3>Is the image itself stored on the blockchain?</h3>
+    <p>
+        Not necessarily. The image may be stored outside the blockchain while the NFT contains
+        metadata or a reference to the content.
+    </p>
+
+    <h3>What is minting?</h3>
+    <p>
+        Minting generally refers to creating or registering an NFT according to the rules
+        of its smart contract or system.
+    </p>
+
+    <h3>Does an NFT require a smart contract?</h3>
+    <p>
+        Most NFTs on public blockchain systems rely on contracts or blockchain programs
+        that define token rules, although implementation details vary.
+    </p>
+
+    <h3>Can an NFT be transferred to another wallet?</h3>
+    <p>
+        Yes, if the contract and system allow transfers, the NFT can be moved through a
+        blockchain transaction according to the contract rules.
+    </p>
+
+    <h3>Does transferring an NFT transfer copyright?</h3>
+    <p>
+        Not automatically. Token ownership and intellectual property rights are separate concepts.
+    </p>
+
+    <h3>Can an NFT be copied?</h3>
+    <p>
+        Associated digital files can often be copied, but copying the file does not mean owning
+        the original token or its blockchain ownership record.
+    </p>
+
+    <h3>Are all NFTs immutable?</h3>
+    <p>
+        Not necessarily. The ability to modify metadata or content depends on the contract,
+        storage system, and project architecture.
+    </p>
+
+    <h3>Is an NFT safe simply because it is on a blockchain?</h3>
+    <p>
+        No. Security depends on the blockchain, smart contract, wallet, application,
+        metadata, storage, infrastructure, and user behavior.
+    </p>
+
+    <h2>Related Lessons</h2>
+
+    <ul>
+        <li><a href="/academy/nfts/what-are-nfts">What Are NFTs?</a></li>
+        <li><a href="/academy/nfts/nfts-vs-fungible-tokens">NFTs vs Fungible Tokens</a></li>
+        <li><a href="/academy/nfts/nft-standards">NFT Standards</a></li>
+        <li><a href="/academy/nfts/nft-metadata-and-storage">NFT Metadata and Storage</a></li>
+        <li><a href="/academy/nfts/nft-marketplaces">NFT Marketplaces</a></li>
+        <li><a href="/academy/nfts/what-is-nft-minting">NFT Minting</a></li>
+        <li><a href="/academy/nfts/nft-ownership-and-copyright">NFT Ownership and Copyright</a></li>
+        <li><a href="/academy/nfts/nft-security-and-scams">NFT Security and Scams</a></li>
+        <li><a href="/academy/blockchain/what-is-blockchain">What Is Blockchain?</a></li>
+        <li><a href="/academy/blockchain/how-does-blockchain-work">How Does Blockchain Work?</a></li>
+        <li><a href="/academy/web3/what-is-web3">What Is Web3?</a></li>
+        <li><a href="/academy/web3/how-does-web3-work">How Does Web3 Work?</a></li>
+        <li><a href="/academy/web3/web3-wallets-and-identity">Web3 Wallets and Digital Identity</a></li>
+        <li><a href="/academy/defi/what-is-defi">What Is DeFi?</a></li>
+    </ul>
+
+    <p>
+        <strong>Educational disclaimer:</strong>
+        This lesson is provided for educational purposes only and does not constitute
+        financial, investment, or legal advice. Digital assets and NFTs can involve technical,
+        market, and legal risks. Conduct independent research and verification before making decisions.
+    </p>
+
+</article>
+HTML,
+
+    'image' => null,
+
+    'seo_title' => 'How Do NFTs Work? Blockchain, Smart Contracts and Digital Ownership | AQL Crypto Academy',
+    'seo_title_ar' => 'كيف تعمل NFTs؟ شرح الملكية الرقمية والبلوكشين والعقود الذكية | أكاديمية AQL Crypto',
+    'seo_title_en' => 'How Do NFTs Work? Blockchain, Smart Contracts and Digital Ownership | AQL Crypto Academy',
+
+    'meta_description' => 'Learn how NFTs work through blockchain, smart contracts, Token IDs, wallets, metadata, ownership records, transfers, marketplaces, RPC, indexers and digital content.',
+    'meta_description_ar' => 'تعرف على كيفية عمل NFTs من خلال البلوكشين والعقود الذكية وToken ID والمحافظ وMetadata وسجل الملكية والنقل والأسواق وRPC وIndexers والمحتوى الرقمي.',
+    'meta_description_en' => 'Learn how NFTs work through blockchain, smart contracts, Token IDs, wallets, metadata, ownership records, transfers, marketplaces, RPC, indexers and digital content.',
+
+    'faq_ar' => [
+        [
+            'question' => 'كيف يعمل NFT بشكل مبسط؟',
+            'answer' => 'يتم إنشاء رمز وفق عقد ذكي، ثم تسجيله على البلوكشين وربطه بمعرف وبيانات، وتسجيل ملكيته وفق قواعد العقد. ويمكن بعد ذلك نقله والتفاعل معه عبر التطبيقات المتوافقة.'
+        ],
+        [
+            'question' => 'ما الذي يحدد مالك NFT؟',
+            'answer' => 'تحدد حالة العقد والبلوكشين العنوان المرتبط بملكية الرمز وفق قواعد النظام المستخدم.'
+        ],
+        [
+            'question' => 'هل الصورة نفسها موجودة على البلوكشين؟',
+            'answer' => 'ليس بالضرورة. قد تكون الصورة أو الملف مخزنًا خارج البلوكشين، بينما يحتوي NFT على مرجع أو Metadata تشير إليه.'
+        ],
+        [
+            'question' => 'ما هو Minting؟',
+            'answer' => 'Minting هو إنشاء أو تسجيل NFT وفق قواعد العقد الذكي أو النظام المستخدم.'
+        ],
+        [
+            'question' => 'هل NFT يحتاج إلى عقد ذكي؟',
+            'answer' => 'معظم NFTs على شبكات البلوكشين العامة تعتمد على عقود أو برامج تحدد قواعد الرموز، لكن التفاصيل تختلف حسب الشبكة والتصميم.'
+        ],
+        [
+            'question' => 'هل يمكن نقل NFT إلى محفظة أخرى؟',
+            'answer' => 'نعم، إذا كان العقد والنظام يسمحان بالنقل، يتم ذلك من خلال معاملة وفق قواعد العقد.'
+        ],
+        [
+            'question' => 'هل نقل NFT ينقل حقوق النشر؟',
+            'answer' => 'ليس تلقائيًا. نقل الرمز وحقوق الملكية الفكرية مفهومان مختلفان، وتعتمد الحقوق على الترخيص والشروط القانونية.'
+        ],
+        [
+            'question' => 'هل يمكن نسخ NFT؟',
+            'answer' => 'يمكن نسخ الملفات المرتبطة به، مثل الصور، لكن نسخ الملف لا يعني امتلاك الرمز الأصلي أو سجل الملكية الموجود على البلوكشين.'
+        ],
+        [
+            'question' => 'هل جميع NFTs غير قابلة للتعديل؟',
+            'answer' => 'ليس بالضرورة. قابلية تعديل Metadata أو المحتوى تعتمد على تصميم العقد وطريقة التخزين والآليات التي يستخدمها المشروع.'
+        ],
+        [
+            'question' => 'هل NFT آمن لمجرد وجوده على البلوكشين؟',
+            'answer' => 'لا. الأمان يعتمد على البلوكشين والعقد الذكي والمحفظة والتطبيقات وMetadata والتخزين والبنية التحتية وسلوك المستخدم.'
+        ],
+    ],
+
+    'faq_en' => [
+        [
+            'question' => 'How does an NFT work in simple terms?',
+            'answer' => 'An NFT is created according to smart contract rules, recorded on a blockchain, associated with an identifier and data, and assigned ownership according to the system. It can then be transferred and used by compatible applications.'
+        ],
+        [
+            'question' => 'What determines who owns an NFT?',
+            'answer' => 'The blockchain and smart contract state determine the address associated with ownership according to the rules of the system.'
+        ],
+        [
+            'question' => 'Is the image itself stored on the blockchain?',
+            'answer' => 'Not necessarily. The image may be stored outside the blockchain while the NFT contains metadata or a reference to the content.'
+        ],
+        [
+            'question' => 'What is minting?',
+            'answer' => 'Minting generally refers to creating or registering an NFT according to the rules of its smart contract or system.'
+        ],
+        [
+            'question' => 'Does an NFT require a smart contract?',
+            'answer' => 'Most NFTs on public blockchain systems rely on contracts or blockchain programs that define token rules, although implementation details vary.'
+        ],
+        [
+            'question' => 'Can an NFT be transferred to another wallet?',
+            'answer' => 'Yes, if the contract and system allow transfers, the NFT can be moved through a blockchain transaction according to the contract rules.'
+        ],
+        [
+            'question' => 'Does transferring an NFT transfer copyright?',
+            'answer' => 'Not automatically. Token ownership and intellectual property rights are separate concepts.'
+        ],
+        [
+            'question' => 'Can an NFT be copied?',
+            'answer' => 'Associated digital files can often be copied, but copying the file does not mean owning the original token or its blockchain ownership record.'
+        ],
+        [
+            'question' => 'Are all NFTs immutable?',
+            'answer' => 'Not necessarily. The ability to modify metadata or content depends on the contract, storage system, and project architecture.'
+        ],
+        [
+            'question' => 'Is an NFT safe simply because it is on a blockchain?',
+            'answer' => 'No. Security depends on the blockchain, smart contract, wallet, application, metadata, storage, infrastructure, and user behavior.'
+        ],
+    ],
+
+    'status' => 'published',
+    'sort_order' => 2,
+    'published_at' => now(),
+],
+
+    [
+        'title' => 'NFTs vs Fungible Tokens',
+        'title_ar' => 'ما الفرق بين NFTs والعملات والرموز القابلة للاستبدال؟',
+        'title_en' => 'NFTs vs Fungible Tokens: What Is the Difference?',
+
+        'slug' => 'nfts-vs-fungible-tokens',
+
+        'sort_order' => 3,
+    ],
+
+    [
+        'title' => 'NFT Standards',
+        'title_ar' => 'ما هي معايير NFT؟ شرح معايير الرموز غير القابلة للاستبدال',
+        'title_en' => 'NFT Standards: Understanding How NFT Tokens Work',
+
+        'slug' => 'nft-standards',
+
+        'sort_order' => 4,
+    ],
+
+    [
+        'title' => 'NFT Metadata and Storage',
+        'title_ar' => 'ما هي بيانات NFT الوصفية؟ شرح Metadata والتخزين على السلسلة وخارجها',
+        'title_en' => 'NFT Metadata and Storage: On-Chain and Off-Chain Data',
+
+        'slug' => 'nft-metadata-and-storage',
+
+        'sort_order' => 5,
+    ],
+
+    [
+        'title' => 'NFT Marketplaces',
+        'title_ar' => 'ما هي أسواق NFT؟ كيف تعمل منصات بيع وشراء الرموز غير القابلة للاستبدال؟',
+        'title_en' => 'NFT Marketplaces: How NFT Buying and Selling Works',
+
+        'slug' => 'nft-marketplaces',
+
+        'sort_order' => 6,
+    ],
+
+    [
+        'title' => 'NFT Minting',
+        'title_ar' => 'ما هو Minting في NFTs؟ شرح إنشاء وسك الرموز غير القابلة للاستبدال',
+        'title_en' => 'What Is NFT Minting? How NFTs Are Created',
+
+        'slug' => 'what-is-nft-minting',
+
+        'sort_order' => 7,
+    ],
+
+    [
+        'title' => 'NFT Ownership and Copyright',
+        'title_ar' => 'ملكية NFT وحقوق النشر: ماذا تشتري فعليًا عند شراء NFT؟',
+        'title_en' => 'NFT Ownership and Copyright: What Do You Actually Own?',
+
+        'slug' => 'nft-ownership-and-copyright',
+
+        'sort_order' => 8,
+    ],
+
+    [
+        'title' => 'NFT Security and Scams',
+        'title_ar' => 'أمان NFTs والاحتيال: كيف تحمي نفسك من سرقة الرموز والأصول الرقمية؟',
+        'title_en' => 'NFT Security and Scams: How to Protect Your Digital Assets',
+
+        'slug' => 'nft-security-and-scams',
+
+        'sort_order' => 9,
+    ],
+
+    [
+        'title' => 'The Future of NFTs',
+        'title_ar' => 'مستقبل NFTs: الاستخدامات والتحديات وتطور الملكية الرقمية',
+        'title_en' => 'The Future of NFTs: Use Cases, Challenges and Digital Ownership',
+
+        'slug' => 'future-of-nfts',
+
+        'sort_order' => 10,
+    ],
+    ];
+
+foreach ($nftsArticles as $article) {
+    AcademyArticle::updateOrCreate(
+        [
+            'topic_id' => $nfts->id,
+            'slug' => $article['slug'],
+        ],
+        $article
+    );
+}
+
+
+
+
     }
 }
