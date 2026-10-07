@@ -13,6 +13,13 @@ class AcademyArticleSeeder extends Seeder
         $bitcoin = AcademyTopic::where('slug', 'bitcoin')->firstOrFail();
         $blockchain = AcademyTopic::where('slug', 'blockchain')->firstOrFail();
         $defi = AcademyTopic::where('slug', 'defi')->firstOrFail();
+        $staking = AcademyTopic::where('slug', 'staking')->firstOrFail();
+        $web3 = AcademyTopic::where('slug', 'web3')->firstOrFail();
+        $nfts = AcademyTopic::where('slug', 'nfts')->firstOrFail();
+        $wallets = AcademyTopic::where('slug', 'wallets')->firstOrFail();
+        $tradingBasics = AcademyTopic::where('slug', 'trading-basics')->firstOrFail();
+        $security = AcademyTopic::where('slug', 'security')->firstOrFail();
+         
 
         $articles = [
             [
@@ -31626,6 +31633,2464 @@ foreach ($defiArticles as $article) {
         $article
     );
 }
+$staking = AcademyTopic::where('slug', 'staking')->firstOrFail();
+
+$stakingArticles = [
+
+    [
+        'title' => 'What Is Staking?',
+        'title_ar' => 'ما هو Staking؟ شرح التخزين والمشاركة في العملات الرقمية للمبتدئين',
+        'title_en' => 'What Is Staking? A Beginner\'s Guide to Crypto Staking',
+
+        'slug' => 'what-is-staking',
+
+        'excerpt' => 'A beginner-friendly guide to crypto staking, how it works, why networks use it, how rewards are generated, and the main risks to understand before staking.',
+        'excerpt_ar' => 'دليل مبسط للمبتدئين يشرح ما هو Staking، وكيف يعمل، ولماذا تستخدمه شبكات البلوكشين، وكيف تتولد المكافآت، وما أهم المخاطر التي يجب فهمها قبل المشاركة.',
+        'excerpt_en' => 'A beginner-friendly guide to crypto staking, how it works, why networks use it, how rewards are generated, and the main risks to understand before staking.',
+
+        'content' => null,
+
+        'content_ar' => <<<'HTML'
+<div dir="rtl">
+
+<h2>ما هو Staking؟</h2>
+
+<p>
+<strong>Staking</strong> أو تخزين العملات الرقمية هو إحدى الطرق التي يمكن من خلالها للمستخدم المشاركة في تشغيل بعض شبكات البلوكشين التي تعتمد على
+<strong>إثبات الحصة (Proof of Stake - PoS)</strong>.
+</p>
+
+<p>
+بدلًا من الاعتماد على أجهزة حاسوب متخصصة واستهلاك كميات كبيرة من الطاقة كما يحدث في بعض أنظمة التعدين، تعتمد شبكات إثبات الحصة على المشاركين الذين يخصصون كمية من العملات الرقمية للمشاركة في عملية التحقق من المعاملات وتأمين الشبكة وفق القواعد التي تحددها الشبكة.
+</p>
+
+<p>
+في المقابل، قد يحصل المشاركون المؤهلون على مكافآت يحددها بروتوكول الشبكة. لكن من المهم فهم أن هذه المكافآت ليست دخلًا مضمونًا، وأن Staking لا يخلو من المخاطر.
+</p>
+
+<h2>شرح Staking ببساطة</h2>
+
+<p>
+يمكن تصور Staking بطريقة مبسطة كالتالي:
+</p>
+
+<ul>
+    <li>توجد شبكة بلوكشين تعتمد على Proof of Stake.</li>
+    <li>يحتاج النظام إلى مشاركين يساعدون في التحقق من المعاملات والمحافظة على عمل الشبكة.</li>
+    <li>يخصص المشاركون كمية من العملة وفق قواعد الشبكة.</li>
+    <li>يمكن لبعض المشاركين تشغيل عقد تحقق تسمى <strong>Validators</strong>.</li>
+    <li>قد يحصل المشاركون على مكافآت مقابل مشاركتهم، بحسب تصميم الشبكة وأدائها.</li>
+</ul>
+
+<p>
+لكن التفاصيل تختلف من شبكة إلى أخرى؛ فبعض الشبكات تتطلب تشغيل Validator مباشرة، بينما تسمح شبكات أخرى للمستخدم بتفويض حصته إلى Validator موجود.
+</p>
+
+<h2>لماذا تستخدم شبكات البلوكشين Staking؟</h2>
+
+<p>
+الهدف الأساسي من Staking في شبكات Proof of Stake هو المساهمة في آلية <strong>الإجماع (Consensus)</strong> التي تستخدمها الشبكة لاختيار المشاركين في التحقق من المعاملات وإضافة الكتل وفق قواعد محددة.
+</p>
+
+<p>
+ويعمل تخصيص العملات كجزء من آلية الحوافز والردع في النظام. فالمشارك الذي يلتزم بقواعد الشبكة يمكن أن يحصل على مكافآت، بينما قد يتعرض Validator لعقوبات في حالات معينة مثل بعض أشكال السلوك المخالف أو الفشل في أداء المهام المطلوبة.
+</p>
+
+<p>
+لذلك فإن Staking ليس مجرد طريقة للحصول على مكافآت، بل هو جزء من تصميم بعض شبكات البلوكشين وطريقة عملها.
+</p>
+
+<h2>ما العلاقة بين Staking وProof of Stake؟</h2>
+
+<p>
+<strong>Proof of Stake</strong> هو آلية إجماع، بينما <strong>Staking</strong> هو عملية تخصيص أو حجز الأصول وفق قواعد هذه الآلية للمشاركة في تشغيل الشبكة.
+</p>
+
+<p>
+بمعنى آخر، يمكن النظر إلى Proof of Stake باعتباره النظام الذي يحدد كيفية الوصول إلى الإجماع، بينما يمثل Staking أحد العناصر الأساسية التي تسمح للمشاركين بالدخول في هذا النظام وفق قواعد الشبكة.
+</p>
+
+<p>
+ولهذا السبب فإن فهم Staking يصبح أسهل عندما يكون لديك فهم أساسي لكيفية عمل البلوكشين وآليات الإجماع.
+</p>
+
+<p>
+يمكنك أولًا مراجعة:
+<a href="/academy/blockchain/what-is-blockchain">ما هي تقنية Blockchain؟</a>
+ثم:
+<a href="/academy/blockchain/what-is-blockchain-consensus">ما هو إجماع البلوكشين؟</a>
+</p>
+
+<h2>من هو Validator؟</h2>
+
+<p>
+<strong>Validator</strong> أو المدقق هو مشارك في شبكة Proof of Stake يقوم بتشغيل البنية البرمجية المطلوبة للمشاركة في التحقق من المعاملات والمساهمة في عملية الإجماع، وفق قواعد الشبكة.
+</p>
+
+<p>
+ويحتاج تشغيل Validator عادةً إلى معرفة تقنية وموارد تشغيل واتصال مستقر بالشبكة، وقد تفرض بعض الشبكات متطلبات محددة من حيث الحد الأدنى للحصة أو آلية الاختيار.
+</p>
+
+<p>
+لا يعني ذلك أن كل شخص يقوم بعملية Staking يجب أن يشغل Validator بنفسه. ففي العديد من الشبكات يمكن للمستخدم تفويض حصته إلى Validator آخر بدلًا من تشغيل البنية التحتية بنفسه.
+</p>
+
+<h2>ما الفرق بين Staker وValidator وDelegator؟</h2>
+
+<p>
+قد تبدو هذه المصطلحات متشابهة، لكنها لا تعني الشيء نفسه دائمًا:
+</p>
+
+<ul>
+    <li><strong>Staker:</strong> شخص يخصص عملات رقمية للمشاركة في نظام Staking.</li>
+    <li><strong>Validator:</strong> مشارك يشغل برنامج التحقق ويشارك مباشرة في عملية الإجماع وفق قواعد الشبكة.</li>
+    <li><strong>Delegator:</strong> مستخدم يفوض حصته إلى Validator بدلًا من تشغيل Validator بنفسه، عندما تدعم الشبكة هذا النموذج.</li>
+</ul>
+
+<p>
+قد تختلف المصطلحات الدقيقة وآلية التفويض من شبكة إلى أخرى، لذلك يجب دائمًا الرجوع إلى قواعد الشبكة نفسها قبل المشاركة.
+</p>
+
+<h2>كيف تعمل عملية Staking بشكل عام؟</h2>
+
+<p>
+رغم اختلاف التفاصيل بين الشبكات، يمكن تبسيط دورة Staking في عدة مراحل:
+</p>
+
+<ol>
+    <li>امتلاك أصل رقمي يدعم Staking وفق آلية الشبكة.</li>
+    <li>اختيار طريقة المشاركة المناسبة، مثل تشغيل Validator أو التفويض إلى Validator.</li>
+    <li>تخصيص الحصة وفق القواعد المطلوبة.</li>
+    <li>مشاركة Validator أو الحصة المفوضة في نظام الإجماع.</li>
+    <li>احتساب المكافآت أو العقوبات وفق أداء الشبكة وقواعدها.</li>
+    <li>إمكانية سحب الحصة بعد انتهاء فترة الانتظار أو فك الارتباط إذا كانت الشبكة تفرض ذلك.</li>
+</ol>
+
+<p>
+هذه الدورة ليست موحدة لجميع الشبكات، ولذلك لا ينبغي افتراض أن عملية Staking في شبكة معينة تعمل بالطريقة نفسها في شبكة أخرى.
+</p>
+
+<h2>من أين تأتي مكافآت Staking؟</h2>
+
+<p>
+قد تأتي مكافآت المشاركين من مصادر مختلفة بحسب تصميم البروتوكول، مثل إصدار وحدات جديدة من العملة وفق السياسة النقدية للشبكة، أو توزيع جزء من الرسوم، أو آليات أخرى يحددها البروتوكول.
+</p>
+
+<p>
+لذلك فإن عبارة "مكافآت Staking" لا تعني بالضرورة أن هناك أموالًا جديدة تأتي من مصدر خارجي. في بعض الشبكات قد يكون جزء من المكافآت مرتبطًا بإصدار جديد للعملة، وهو ما يجعل فهم التضخم مهمًا عند تقييم العائد الحقيقي.
+</p>
+
+<h2>هل Staking يعني الحصول على ربح مضمون؟</h2>
+
+<p>
+لا.
+</p>
+
+<p>
+معدل المكافأة الذي يظهر للمستخدم لا يضمن تحقيق ربح فعلي. فقيمة العملة نفسها يمكن أن ترتفع أو تنخفض في السوق، كما يمكن أن تتغير معدلات المكافآت والرسوم، وقد توجد فترات قفل أو انتظار للسحب.
+</p>
+
+<p>
+على سبيل المثال، إذا حصل المستخدم على عدد إضافي من العملات نتيجة Staking، ثم انخفض سعر هذه العملة في السوق بشكل كبير، فقد تكون القيمة السوقية الإجمالية للأصول أقل رغم زيادة عدد العملات.
+</p>
+
+<p>
+لذلك يجب التفريق بين <strong>العائد المقاس بعدد العملات</strong> وبين <strong>العائد المقاس بالقيمة السوقية</strong>.
+</p>
+
+<h2>ما الفرق بين Staking والتعدين Mining؟</h2>
+
+<p>
+كلاهما يرتبط بتأمين شبكات البلوكشين أو المشاركة في آلية الإجماع، لكن طريقة العمل مختلفة.
+</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Staking</th>
+            <th>Mining</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>يرتبط عادةً بشبكات Proof of Stake</td>
+            <td>يرتبط عادةً بشبكات Proof of Work</td>
+        </tr>
+        <tr>
+            <td>يعتمد على الحصة وفق قواعد البروتوكول</td>
+            <td>يعتمد على القدرة الحاسوبية لحل مسائل التحقق المطلوبة</td>
+        </tr>
+        <tr>
+            <td>لا يحتاج بالضرورة إلى أجهزة تعدين متخصصة</td>
+            <td>قد يحتاج إلى أجهزة ومعدات حوسبة متخصصة</td>
+        </tr>
+        <tr>
+            <td>توجد مخاطر مرتبطة بالحصة وValidator وقواعد الشبكة</td>
+            <td>توجد مخاطر مرتبطة بتكاليف الأجهزة والطاقة وصعوبة التعدين وغيرها</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>
+ولا يعني ذلك أن أحد النظامين أفضل بشكل مطلق؛ فلكل شبكة تصميمها وأهدافها ومقايضاتها.
+</p>
+
+<h2>ما الفرق بين Staking وLending؟</h2>
+
+<p>
+<strong>Staking</strong> و<strong>Lending</strong> قد يبدوان متشابهين لأن كليهما قد يؤدي إلى حصول المستخدم على عائد، لكن مصدر العائد وآلية المخاطر مختلفان.
+</p>
+
+<p>
+في Staking، تكون المشاركة مرتبطة عادةً بآلية إجماع الشبكة نفسها. أما في Lending، فيقوم المستخدم بإقراض أصل رقمي إلى طرف أو بروتوكول وفق شروط معينة، وقد يأتي العائد من الفائدة التي يدفعها المقترضون أو من آلية أخرى للمنصة.
+</p>
+
+<p>
+يمكنك معرفة المزيد عن الإقراض والاقتراض من خلال:
+<a href="/academy/defi/defi-lending-and-borrowing">ما هو الإقراض والاقتراض في DeFi؟</a>
+</p>
+
+<h2>ما الفرق بين Staking وYield Farming؟</h2>
+
+<p>
+<strong>Yield Farming</strong> مصطلح يرتبط غالبًا باستراتيجيات DeFi التي تهدف إلى الحصول على عوائد من خلال توفير السيولة أو استخدام بروتوكولات مختلفة.
+</p>
+
+<p>
+أما Staking التقليدي فيرتبط عادةً بالمشاركة في آلية Proof of Stake الخاصة بالشبكة.
+</p>
+
+<p>
+قد توجد منتجات تجمع بين Staking وDeFi أو تستخدم أصولًا مشتقة من Staking، لذلك يجب فهم الآلية الفعلية للمنتج بدلًا من الاعتماد على الاسم التسويقي فقط.
+</p>
+
+<p>
+لمعرفة المزيد عن Yield Farming:
+<a href="/academy/defi/what-is-yield-farming">ما هي زراعة العوائد Yield Farming في DeFi؟</a>
+</p>
+
+<h2>ما هو Native Staking؟</h2>
+
+<p>
+يقصد بـ <strong>Native Staking</strong> المشاركة في نظام Staking الأصلي للشبكة نفسها، وفق قواعد البروتوكول.
+</p>
+
+<p>
+في هذا النموذج قد يتفاعل المستخدم مباشرة مع شبكة البلوكشين أو يستخدم محفظة أو خدمة تساعده على المشاركة، حسب تصميم الشبكة.
+</p>
+
+<p>
+يختلف هذا عن بعض المنتجات التي تقدم تعرضًا غير مباشر لـ Staking أو تصدر أصولًا تمثل حصة مقفلة أو مشاركة في نظام Staking.
+</p>
+
+<h2>ما هو Liquid Staking؟</h2>
+
+<p>
+<strong>Liquid Staking</strong> هو نموذج يسمح للمستخدم بالمشاركة في Staking مع الحصول، في بعض البروتوكولات، على أصل يمثل قيمة أو حصة المشاركة ويمكن استخدامه في تطبيقات أخرى.
+</p>
+
+<p>
+قد يوفر ذلك مرونة أكبر من بعض أشكال Staking التقليدية، لكنه يضيف أيضًا طبقات إضافية من المخاطر، مثل مخاطر العقود الذكية، ومخاطر البروتوكول، ومخاطر الأصل المشتق نفسه.
+</p>
+
+<p>
+لذلك لا ينبغي اعتبار Liquid Staking مجرد نسخة "أفضل" من Staking التقليدي؛ بل هو تصميم مختلف له مزايا ومخاطر خاصة به.
+</p>
+
+<h2>ما معنى Lock-up وUnbonding Period؟</h2>
+
+<p>
+بعض شبكات Staking تفرض فترة لا يمكن خلالها سحب الحصة مباشرة، أو تفرض فترة انتظار بعد طلب فك الارتباط قبل أن تصبح الأصول متاحة للاستخدام.
+</p>
+
+<p>
+تسمى بعض هذه الفترات:
+</p>
+
+<ul>
+    <li><strong>Lock-up Period:</strong> فترة يكون فيها الأصل مقيدًا وفق شروط محددة.</li>
+    <li><strong>Unbonding Period:</strong> فترة انتظار بعد طلب إزالة الحصة أو إنهاء التفويض.</li>
+</ul>
+
+<p>
+هذه الفترات تختلف بشكل كبير بين الشبكات، وقد تؤثر على سيولة المستخدم. لذلك يجب معرفة شروط السحب قبل بدء Staking.
+</p>
+
+<h2>ما هو Slashing؟</h2>
+
+<p>
+<strong>Slashing</strong> هو نوع من العقوبات الموجودة في بعض شبكات Proof of Stake، ويمكن أن تؤدي حالات محددة من السلوك المخالف لقواعد البروتوكول إلى خسارة جزء من الحصة أو فرض عقوبات أخرى.
+</p>
+
+<p>
+كما قد توجد عقوبات أو آثار مختلفة بسبب عدم توفر Validator أو ضعف أدائه، حسب تصميم الشبكة.
+</p>
+
+<p>
+المهم هو عدم افتراض أن كل شبكات Proof of Stake تستخدم Slashing بالطريقة نفسها؛ فالقواعد تختلف من بروتوكول إلى آخر.
+</p>
+
+<h2>أهم مخاطر Staking</h2>
+
+<h3>1. مخاطر انخفاض سعر العملة</h3>
+
+<p>
+حتى إذا حصلت على مكافآت، يمكن أن تنخفض قيمة العملة التي تمتلكها. وهذا يعني أن العائد المقاس بعدد العملات لا يساوي بالضرورة ربحًا بالقيمة النقدية.
+</p>
+
+<h3>2. مخاطر التضخم</h3>
+
+<p>
+إذا كانت الشبكة تصدر وحدات جديدة كمكافآت، فقد يؤدي ذلك إلى زيادة المعروض من العملة. لذلك يجب النظر إلى معدل إصدار العملة عند تقييم العائد بدلًا من التركيز على نسبة المكافأة فقط.
+</p>
+
+<h3>3. مخاطر Validator</h3>
+
+<p>
+عند تفويض الحصة إلى Validator، قد يتأثر الأداء بالمشارك الذي اخترته، وقد توجد عمولات أو عقوبات أو قواعد خاصة بالتفويض.
+</p>
+
+<h3>4. مخاطر Slashing</h3>
+
+<p>
+في الشبكات التي تستخدم آليات عقابية، يمكن لبعض المخالفات أن تؤدي إلى خسائر وفق قواعد البروتوكول.
+</p>
+
+<h3>5. مخاطر السيولة</h3>
+
+<p>
+إذا كانت هناك فترة Lock-up أو Unbonding، فقد لا تتمكن من الوصول إلى أصولك فورًا عند الحاجة إليها.
+</p>
+
+<h3>6. مخاطر العقود الذكية</h3>
+
+<p>
+عند استخدام بروتوكول أو تطبيق وسيط، وخاصة في Liquid Staking أو منتجات DeFi المرتبطة بـ Staking، قد تظهر مخاطر إضافية ناتجة عن أخطاء أو ثغرات في العقود الذكية.
+</p>
+
+<h3>7. مخاطر الحفظ والمنصة</h3>
+
+<p>
+إذا تم Staking من خلال منصة مركزية، فقد توجد مخاطر مرتبطة بحفظ الأصول والمنصة نفسها، بالإضافة إلى المخاطر المرتبطة بالشبكة.
+</p>
+
+<h3>8. مخاطر التركّز</h3>
+
+<p>
+يمكن أن يؤدي تركّز الحصص لدى عدد محدود من Validators أو الجهات إلى مخاطر مرتبطة بمركزية المشاركة أو الاعتماد الكبير على عدد قليل من المشاركين.
+</p>
+
+<h2>APR وAPY في Staking</h2>
+
+<p>
+من المصطلحات الشائعة عند عرض عوائد Staking:
+<strong>APR</strong> و<strong>APY</strong>.
+</p>
+
+<p>
+عادةً يشير APR إلى معدل سنوي دون افتراض إعادة استثمار العائد، بينما يأخذ APY في الاعتبار أثر إعادة الاستثمار وفق افتراضات محددة.
+</p>
+
+<p>
+لكن يجب الانتباه إلى أن النسبة المعروضة في واجهة المنصة قد تعتمد على طريقة حساب خاصة بها، وقد تتغير بمرور الوقت.
+</p>
+
+<p>
+لذلك لا يكفي النظر إلى رقم مثل "10% APY" دون معرفة:
+</p>
+
+<ul>
+    <li>هل النسبة ثابتة أم متغيرة؟</li>
+    <li>هل تشمل رسومًا معينة؟</li>
+    <li>هل المكافآت مقومة بالعملة نفسها؟</li>
+    <li>هل هناك فترة قفل؟</li>
+    <li>هل توجد مخاطر Slashing؟</li>
+    <li>هل العائد ناتج عن إصدار جديد للعملة؟</li>
+</ul>
+
+<h2>مثال مبسط على Staking</h2>
+
+<p>
+لنفترض، لأغراض تعليمية فقط، أن شخصًا يملك <strong>100 وحدة</strong> من أصل رقمي وأن معدل المكافأة السنوي المعلن هو <strong>5%</strong>.
+</p>
+
+<p>
+إذا افترضنا بشكل مبسط وثابت أن المعدل لا يتغير ولا توجد رسوم أو عقوبات أو تغيرات في قيمة الأصل، فقد يحصل المستخدم نظريًا على ما يعادل <strong>5 وحدات</strong> خلال سنة.
+</p>
+
+<p>
+لكن هذا المثال لا يمثل عائدًا مضمونًا في الواقع، لأن معدل المكافأة قد يتغير، وقد توجد رسوم أو فترات انتظار أو عقوبات، كما أن سعر الأصل نفسه يمكن أن يرتفع أو ينخفض.
+</p>
+
+<h2>ماذا يجب أن تعرف قبل البدء في Staking؟</h2>
+
+<p>
+قبل المشاركة، من المفيد مراجعة النقاط التالية:
+</p>
+
+<ol>
+    <li>هل الشبكة تدعم Staking أصلًا؟</li>
+    <li>ما الحد الأدنى المطلوب للمشاركة؟</li>
+    <li>هل توجد فترة Lock-up أو Unbonding؟</li>
+    <li>كيف يتم احتساب المكافآت؟</li>
+    <li>هل المكافآت ثابتة أم متغيرة؟</li>
+    <li>ما الرسوم التي يتم خصمها؟</li>
+    <li>هل توجد آلية Slashing؟</li>
+    <li>هل المشاركة مباشرة أم من خلال منصة أو بروتوكول؟</li>
+    <li>هل توجد مخاطر عقود ذكية أو حفظ مركزي؟</li>
+    <li>كيف يؤثر التضخم وإصدار العملات الجديدة على العائد؟</li>
+</ol>
+
+<h2>أخطاء شائعة عند المبتدئين</h2>
+
+<ul>
+    <li>اعتبار Staking ربحًا مضمونًا.</li>
+    <li>اختيار أعلى APY دون فهم مصدر العائد.</li>
+    <li>تجاهل فترة Unbonding.</li>
+    <li>عدم معرفة رسوم Validator أو المنصة.</li>
+    <li>تجاهل مخاطر انخفاض سعر العملة.</li>
+    <li>الخلط بين Staking وLending وYield Farming.</li>
+    <li>استخدام منصة أو بروتوكول دون فهم طريقة حفظ الأصول.</li>
+    <li>الاعتقاد بأن جميع شبكات Proof of Stake لها القواعد نفسها.</li>
+</ul>
+
+<h2>كيف تختار طريقة Staking بشكل واعٍ؟</h2>
+
+<p>
+لا توجد طريقة واحدة مناسبة للجميع. القرار يعتمد على الشبكة، والهدف، ومستوى المعرفة التقنية، ومتطلبات السيولة، وتحمل المخاطر.
+</p>
+
+<p>
+لذلك من الأفضل مقارنة الآلية الفعلية بدلًا من مقارنة نسب العوائد فقط.
+</p>
+
+<p>
+وعند التعامل مع أي خدمة أو بروتوكول، تحقق من مصدر المعلومات الرسمي، وافهم شروط السحب والرسوم والمخاطر قبل تخصيص الأصول.
+</p>
+
+<h2>الخلاصة</h2>
+
+<p>
+Staking هو أحد المكونات الأساسية في شبكات البلوكشين التي تستخدم Proof of Stake، حيث يشارك المستخدمون وفق قواعد الشبكة في آلية الإجماع، وقد يحصلون مقابل ذلك على مكافآت.
+</p>
+
+<p>
+لكن Staking ليس حساب توفير ولا يضمن الربح. يجب النظر إلى سعر الأصل، والتضخم، ومعدل المكافآت، والرسوم، وفترات القفل، ومخاطر Validator، وSlashing، والعقود الذكية أو الحفظ المركزي عند استخدام خدمات إضافية.
+</p>
+
+<p>
+فهم هذه الأساسيات هو الخطوة الأولى قبل الانتقال إلى التفاصيل التقنية حول كيفية عمل Proof of Stake وآلية اختيار Validators وحساب المكافآت والعقوبات.
+</p>
+
+<h2>الأسئلة الشائعة حول Staking</h2>
+
+<h3>هل Staking آمن؟</h3>
+<p>
+لا يمكن اعتباره آمنًا بشكل مطلق. مستوى المخاطر يعتمد على الشبكة وطريقة المشاركة وValidator والمنصة أو البروتوكول المستخدم، إضافة إلى مخاطر سعر الأصل.
+</p>
+
+<h3>هل أحتاج إلى تشغيل Validator حتى أشارك في Staking؟</h3>
+<p>
+ليس دائمًا. بعض الشبكات تسمح للمستخدمين بتفويض حصتهم إلى Validators آخرين بدلًا من تشغيل Validator بأنفسهم.
+</p>
+
+<h3>هل Staking أفضل من التعدين؟</h3>
+<p>
+لا توجد إجابة عامة. Staking وMining آليتان مختلفتان للإجماع، ولكل منهما متطلبات ومخاطر وتصميم اقتصادي مختلف.
+</p>
+
+<h3>هل مكافآت Staking مضمونة؟</h3>
+<p>
+لا. المكافآت تعتمد على قواعد الشبكة وقد تتغير، كما أن قيمة الأصل نفسه يمكن أن تتغير بشكل كبير.
+</p>
+
+<h3>هل يمكن سحب العملات أثناء Staking؟</h3>
+<p>
+يعتمد ذلك على الشبكة وطريقة Staking. قد يكون السحب فوريًا في بعض النماذج، بينما تفرض شبكات أخرى Lock-up أو Unbonding Period.
+</p>
+
+<h3>ما الفرق بين APR وAPY؟</h3>
+<p>
+APR يعبر عادةً عن معدل سنوي دون احتساب إعادة استثمار العوائد، بينما APY يتضمن أثر إعادة الاستثمار وفق افتراضات محددة. يجب دائمًا معرفة طريقة الحساب الفعلية.
+</p>
+
+<h3>هل يمكن أن أخسر جزءًا من العملات أثناء Staking؟</h3>
+<p>
+نعم، بحسب الشبكة وطريقة المشاركة، قد توجد مخاطر مثل Slashing أو العقوبات أو أخطاء البروتوكول، بالإضافة إلى انخفاض سعر الأصل.
+</p>
+
+<h3>هل Staking هو نفسه Lending؟</h3>
+<p>
+لا. Staking يرتبط عادةً بالمشاركة في آلية إجماع الشبكة، بينما Lending يعني إقراض الأصول وفق شروط بروتوكول أو جهة معينة.
+</p>
+
+<h3>هل Staking هو نفسه Yield Farming؟</h3>
+<p>
+لا. Yield Farming يرتبط عادةً باستراتيجيات DeFi للحصول على عوائد من توفير السيولة أو استخدام بروتوكولات مختلفة، بينما Staking التقليدي مرتبط بآلية Proof of Stake.
+</p>
+
+<h3>هل Staking مناسب للمبتدئين؟</h3>
+<p>
+يمكن للمبتدئ فهمه والمشاركة فيه، لكن يجب أولًا فهم قواعد الشبكة، ومصدر المكافآت، والرسوم، وفترات السحب، والمخاطر المرتبطة بالطريقة المستخدمة.
+</p>
+
+<h2>روابط ذات صلة داخل أكاديمية AQL Crypto</h2>
+
+<ul>
+    <li><a href="/academy/blockchain/what-is-blockchain">ما هي تقنية Blockchain؟</a></li>
+    <li><a href="/academy/blockchain/how-does-blockchain-work">كيف تعمل تقنية Blockchain؟</a></li>
+    <li><a href="/academy/blockchain/what-is-blockchain-consensus">ما هو إجماع البلوكشين؟</a></li>
+    <li><a href="/academy/defi">مسار التمويل اللامركزي DeFi</a></li>
+    <li><a href="/academy/defi/defi-lending-and-borrowing">الإقراض والاقتراض في DeFi</a></li>
+    <li><a href="/academy/defi/what-is-yield-farming">ما هي زراعة العوائد Yield Farming؟</a></li>
+    <li><a href="/academy/security">مسار أمان العملات الرقمية</a></li>
+    <li><a href="/academy/wallets">مسار المحافظ الرقمية</a></li>
+</ul>
+
+<p>
+<strong>ملاحظة تعليمية:</strong> هذا المحتوى لأغراض تعليمية فقط ولا يمثل توصية مالية أو استثمارية.
+</p>
+
+</div>
+HTML,
+
+        'content_en' => <<<'HTML'
+<div dir="ltr">
+
+<h2>What Is Staking?</h2>
+
+<p>
+<strong>Staking</strong> is a way of participating in certain blockchain networks that use
+<strong>Proof of Stake (PoS)</strong>.
+</p>
+
+<p>
+Instead of relying on specialized mining hardware and large amounts of computational work, Proof of Stake networks use participants who commit or allocate crypto assets according to the network's rules. These participants can help support transaction validation and the network's consensus process.
+</p>
+
+<p>
+Eligible participants may receive rewards in return, depending on the network's design. However, staking rewards are not guaranteed profits, and staking involves several risks.
+</p>
+
+<h2>How Does Staking Work in Simple Terms?</h2>
+
+<p>
+A simplified staking process looks like this:
+</p>
+
+<ul>
+    <li>A blockchain uses Proof of Stake.</li>
+    <li>The network needs participants to help validate transactions and maintain consensus.</li>
+    <li>Participants allocate crypto assets according to the protocol rules.</li>
+    <li>Some participants operate validator nodes.</li>
+    <li>Eligible participants may receive rewards based on network rules and performance.</li>
+</ul>
+
+<p>
+The exact process differs between networks. Some require users to operate validators, while others allow users to delegate their stake to existing validators.
+</p>
+
+<h2>Why Do Blockchain Networks Use Staking?</h2>
+
+<p>
+In Proof of Stake systems, staking is part of the incentive and security model used by the network's <strong>consensus mechanism</strong>.
+</p>
+
+<p>
+Participants can receive rewards for following the protocol's rules, while certain forms of harmful behavior or validator failure may result in penalties, depending on the network.
+</p>
+
+<p>
+Staking is therefore more than simply a way to earn rewards. It is part of how many Proof of Stake networks are designed to operate.
+</p>
+
+<h2>What Is the Relationship Between Staking and Proof of Stake?</h2>
+
+<p>
+<strong>Proof of Stake</strong> is a consensus mechanism, while <strong>staking</strong> refers to allocating or committing assets according to that mechanism's rules.
+</p>
+
+<p>
+Understanding blockchain fundamentals and consensus makes it easier to understand staking.
+</p>
+
+<p>
+You can start with:
+<a href="/academy/blockchain/what-is-blockchain">What Is Blockchain?</a>
+and then:
+<a href="/academy/blockchain/what-is-blockchain-consensus">What Is Blockchain Consensus?</a>
+</p>
+
+<h2>What Is a Validator?</h2>
+
+<p>
+A <strong>validator</strong> is a participant that runs the software and infrastructure required to participate in transaction validation and consensus according to the network's rules.
+</p>
+
+<p>
+Running a validator can require technical knowledge, reliable infrastructure, and sometimes a minimum amount of stake.
+</p>
+
+<p>
+Not every staking participant needs to operate a validator. Many networks allow users to delegate their stake to validators instead.
+</p>
+
+<h2>Staker vs Validator vs Delegator</h2>
+
+<ul>
+    <li><strong>Staker:</strong> A participant who allocates crypto assets to a staking system.</li>
+    <li><strong>Validator:</strong> A participant that operates validation infrastructure and participates directly in consensus.</li>
+    <li><strong>Delegator:</strong> A participant who delegates stake to a validator instead of operating one directly, where supported.</li>
+</ul>
+
+<p>
+Terminology and delegation rules vary between networks.
+</p>
+
+<h2>How Does the Staking Lifecycle Work?</h2>
+
+<ol>
+    <li>Hold an asset that supports staking.</li>
+    <li>Choose a participation method.</li>
+    <li>Allocate the required stake.</li>
+    <li>Participate in the network's consensus system directly or through delegation.</li>
+    <li>Receive rewards or incur penalties according to the protocol.</li>
+    <li>Withdraw or unstake according to the network's rules.</li>
+</ol>
+
+<p>
+Some networks impose waiting periods before unstaked assets become available.
+</p>
+
+<h2>Where Do Staking Rewards Come From?</h2>
+
+<p>
+Depending on the protocol, staking rewards may come from newly issued tokens, transaction fees, or other mechanisms defined by the network.
+</p>
+
+<p>
+Therefore, staking rewards should not automatically be interpreted as external income. If new tokens are issued as rewards, understanding inflation and token supply is important when evaluating the economic effect.
+</p>
+
+<h2>Does Staking Guarantee Profit?</h2>
+
+<p>
+No.
+</p>
+
+<p>
+A staking reward rate does not guarantee a positive investment return. The market value of the underlying asset can fall, reward rates can change, and fees or withdrawal restrictions may apply.
+</p>
+
+<h2>Staking vs Mining</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Staking</th>
+            <th>Mining</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Commonly associated with Proof of Stake</td>
+            <td>Commonly associated with Proof of Work</td>
+        </tr>
+        <tr>
+            <td>Uses stake according to protocol rules</td>
+            <td>Uses computational work</td>
+        </tr>
+        <tr>
+            <td>Does not necessarily require specialized mining hardware</td>
+            <td>May require specialized hardware and significant energy</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Staking vs Lending</h2>
+
+<p>
+<strong>Staking</strong> and <strong>Lending</strong> can both produce rewards or returns, but their mechanisms are different.
+</p>
+
+<p>
+Staking is generally connected to a blockchain's consensus mechanism, while lending involves supplying assets to a borrower, protocol, or platform under specific terms.
+</p>
+
+<p>
+Learn more:
+<a href="/academy/defi/defi-lending-and-borrowing">What Is DeFi Lending and Borrowing?</a>
+</p>
+
+<h2>Staking vs Yield Farming</h2>
+
+<p>
+<strong>Yield Farming</strong> generally refers to DeFi strategies involving liquidity provision or other protocols to generate returns.
+</p>
+
+<p>
+Traditional staking is generally tied to Proof of Stake participation. Some products combine staking with DeFi, so users should understand the actual mechanism rather than relying only on the product name.
+</p>
+
+<p>
+Learn more:
+<a href="/academy/defi/what-is-yield-farming">What Is Yield Farming?</a>
+</p>
+
+<h2>What Is Native Staking?</h2>
+
+<p>
+<strong>Native staking</strong> refers to participating directly in a blockchain's native staking system according to its protocol rules.
+</p>
+
+<p>
+Depending on the network, users may interact directly with the blockchain or use a wallet or service that supports native staking.
+</p>
+
+<h2>What Is Liquid Staking?</h2>
+
+<p>
+<strong>Liquid staking</strong> is a model in which users can participate in staking while receiving an asset representing their staked position that may be usable elsewhere.
+</p>
+
+<p>
+This can provide additional flexibility, but it also introduces additional risks such as smart-contract risk, protocol risk, and risks associated with the derivative or representative asset.
+</p>
+
+<h2>What Are Lock-up and Unbonding Periods?</h2>
+
+<p>
+Some networks restrict withdrawals during staking or require a waiting period after an unstaking request.
+</p>
+
+<ul>
+    <li><strong>Lock-up Period:</strong> A period during which assets are restricted under specific rules.</li>
+    <li><strong>Unbonding Period:</strong> A waiting period after removing or undelegating stake.</li>
+</ul>
+
+<p>
+These periods vary significantly between networks and can affect liquidity.
+</p>
+
+<h2>What Is Slashing?</h2>
+
+<p>
+<strong>Slashing</strong> is a penalty mechanism used by some Proof of Stake networks. Certain protocol violations or validator behavior can result in the loss of part of the staked amount or other penalties.
+</p>
+
+<p>
+Validator downtime or poor performance can also have consequences depending on the network.
+</p>
+
+<h2>Main Risks of Staking</h2>
+
+<h3>1. Market Price Risk</h3>
+<p>
+The asset price can decline even while you receive staking rewards.
+</p>
+
+<h3>2. Inflation Risk</h3>
+<p>
+New token issuance can increase supply, so the inflation model matters when evaluating staking rewards.
+</p>
+
+<h3>3. Validator Risk</h3>
+<p>
+Delegating stake exposes users to validator performance, commissions, and network-specific rules.
+</p>
+
+<h3>4. Slashing Risk</h3>
+<p>
+Networks with slashing mechanisms may impose penalties for certain validator violations.
+</p>
+
+<h3>5. Liquidity Risk</h3>
+<p>
+Lock-up or unbonding periods may prevent immediate access to staked assets.
+</p>
+
+<h3>6. Smart Contract Risk</h3>
+<p>
+Liquid staking and DeFi-based staking products can introduce additional smart-contract and protocol risks.
+</p>
+
+<h3>7. Custody and Platform Risk</h3>
+<p>
+Using centralized platforms introduces additional risks related to custody and the platform itself.
+</p>
+
+<h3>8. Concentration Risk</h3>
+<p>
+High concentration of stake among a small number of validators can create centralization-related risks.
+</p>
+
+<h2>APR and APY in Staking</h2>
+
+<p>
+<strong>APR</strong> generally represents an annual rate without assuming reinvestment, while <strong>APY</strong> incorporates the effect of compounding under specific assumptions.
+</p>
+
+<p>
+The displayed rate may depend on how a platform calculates rewards and may change over time.
+</p>
+
+<h2>A Simple Staking Example</h2>
+
+<p>
+For educational purposes, suppose someone holds <strong>100 units</strong> of a crypto asset and the stated annual staking reward rate is <strong>5%</strong>.
+</p>
+
+<p>
+Under a simplified assumption that the rate remains constant and there are no fees, penalties, or price changes, the participant could theoretically receive the equivalent of <strong>5 additional units</strong> over one year.
+</p>
+
+<p>
+This is only an educational example, not a guaranteed real-world return.
+</p>
+
+<h2>What Should You Check Before Staking?</h2>
+
+<ol>
+    <li>Does the network support staking?</li>
+    <li>Is there a minimum stake?</li>
+    <li>Are there lock-up or unbonding periods?</li>
+    <li>How are rewards calculated?</li>
+    <li>Can the reward rate change?</li>
+    <li>What fees apply?</li>
+    <li>Does the network use slashing?</li>
+    <li>Are you staking directly or through a platform or protocol?</li>
+    <li>Are there smart-contract or custody risks?</li>
+    <li>How does token inflation affect the reward?</li>
+</ol>
+
+<h2>Common Beginner Mistakes</h2>
+
+<ul>
+    <li>Assuming staking is guaranteed profit.</li>
+    <li>Choosing the highest APY without understanding its source.</li>
+    <li>Ignoring unbonding periods.</li>
+    <li>Ignoring validator fees.</li>
+    <li>Ignoring market-price risk.</li>
+    <li>Confusing staking with lending or yield farming.</li>
+    <li>Using a platform without understanding custody arrangements.</li>
+    <li>Assuming every Proof of Stake network follows the same rules.</li>
+</ul>
+
+<h2>Conclusion</h2>
+
+<p>
+Staking is an important component of many Proof of Stake blockchain networks. It allows participants to contribute to the network's consensus process under protocol-defined rules and may provide rewards.
+</p>
+
+<p>
+However, staking is not a savings account and does not guarantee profit. Users should understand market risk, inflation, reward mechanics, fees, withdrawal periods, validator risk, slashing, and any additional smart-contract or custody risks.
+</p>
+
+<h2>Frequently Asked Questions</h2>
+
+<h3>Is staking safe?</h3>
+<p>
+There is no absolute guarantee of safety. Risk depends on the network, validator, staking method, platform, and market value of the underlying asset.
+</p>
+
+<h3>Do I need to run a validator to stake?</h3>
+<p>
+Not necessarily. Many networks allow users to delegate their stake to existing validators.
+</p>
+
+<h3>Is staking better than mining?</h3>
+<p>
+There is no universal answer. Staking and mining use different consensus models and have different requirements and risks.
+</p>
+
+<h3>Are staking rewards guaranteed?</h3>
+<p>
+No. Reward rates can change, and the value of the underlying asset can rise or fall.
+</p>
+
+<h3>Can I withdraw my assets while staking?</h3>
+<p>
+It depends on the network and staking method. Some allow flexible withdrawals, while others impose lock-up or unbonding periods.
+</p>
+
+<h3>What is the difference between APR and APY?</h3>
+<p>
+APR generally excludes the effect of reinvesting rewards, while APY incorporates compounding under specific assumptions.
+</p>
+
+<h3>Can staking cause losses?</h3>
+<p>
+Yes. Losses can result from market-price declines, slashing, protocol risks, smart-contract failures, fees, or other network-specific mechanisms.
+</p>
+
+<h3>Is staking the same as lending?</h3>
+<p>
+No. Staking is generally related to blockchain consensus, while lending involves supplying assets under lending terms.
+</p>
+
+<h3>Is staking the same as yield farming?</h3>
+<p>
+No. Yield farming generally involves DeFi strategies such as liquidity provision or interaction with multiple protocols.
+</p>
+
+<h2>Related AQL Crypto Academy Lessons</h2>
+
+<ul>
+    <li><a href="/academy/blockchain/what-is-blockchain">What Is Blockchain?</a></li>
+    <li><a href="/academy/blockchain/how-does-blockchain-work">How Does Blockchain Work?</a></li>
+    <li><a href="/academy/blockchain/what-is-blockchain-consensus">What Is Blockchain Consensus?</a></li>
+    <li><a href="/academy/defi">DeFi Academy Path</a></li>
+    <li><a href="/academy/defi/defi-lending-and-borrowing">DeFi Lending and Borrowing</a></li>
+    <li><a href="/academy/defi/what-is-yield-farming">Yield Farming</a></li>
+    <li><a href="/academy/security">Crypto Security Academy Path</a></li>
+    <li><a href="/academy/wallets">Crypto Wallets Academy Path</a></li>
+</ul>
+
+<p>
+<strong>Educational disclaimer:</strong> This content is provided for educational purposes only and does not constitute financial or investment advice.
+</p>
+
+</div>
+HTML,
+
+        'image' => null,
+
+        'seo_title' => 'What Is Staking? Beginner\'s Guide to Crypto Staking',
+        'seo_title_ar' => 'ما هو Staking؟ دليل المبتدئين لفهم التخزين في العملات الرقمية',
+        'seo_title_en' => 'What Is Staking? A Beginner\'s Guide to Crypto Staking',
+
+        'meta_description' => 'Learn what crypto staking is, how Proof of Stake works, how staking rewards are generated, and the key risks beginners should understand.',
+        'meta_description_ar' => 'تعرف على مفهوم Staking في العملات الرقمية، وعلاقته بـ Proof of Stake، وكيف تعمل المكافآت، وما أهم المخاطر التي يجب على المبتدئين فهمها.',
+        'meta_description_en' => 'Learn what crypto staking is, how Proof of Stake works, how staking rewards are generated, and the key risks beginners should understand.',
+
+        'faq_ar' => [
+            [
+                'question' => 'ما هو Staking؟',
+                'answer' => 'Staking هو تخصيص أو حجز أصول رقمية وفق قواعد شبكة تعتمد على Proof of Stake للمشاركة في آلية الإجماع، وقد يحصل المشاركون المؤهلون على مكافآت.'
+            ],
+            [
+                'question' => 'هل Staking يضمن الربح؟',
+                'answer' => 'لا. المكافآت ليست ضمانًا للربح، لأن سعر الأصل قد ينخفض، كما قد تتغير المكافآت وتوجد رسوم أو عقوبات أو فترات انتظار للسحب.'
+            ],
+            [
+                'question' => 'هل أحتاج إلى تشغيل Validator؟',
+                'answer' => 'ليس دائمًا. بعض الشبكات تسمح للمستخدم بتفويض حصته إلى Validator بدلًا من تشغيل Validator بنفسه.'
+            ],
+            [
+                'question' => 'ما الفرق بين Staking وMining؟',
+                'answer' => 'Staking يرتبط عادةً بشبكات Proof of Stake، بينما Mining يرتبط عادةً بشبكات Proof of Work ويعتمد على العمل الحسابي.'
+            ],
+            [
+                'question' => 'هل يمكن سحب العملات أثناء Staking؟',
+                'answer' => 'يعتمد ذلك على الشبكة وطريقة المشاركة. قد توجد فترات Lock-up أو Unbonding تمنع السحب الفوري.'
+            ],
+            [
+                'question' => 'ما هو Slashing؟',
+                'answer' => 'Slashing هو آلية عقوبات تستخدمها بعض شبكات Proof of Stake ويمكن أن تؤدي في حالات محددة إلى خسارة جزء من الحصة أو عقوبات أخرى.'
+            ],
+            [
+                'question' => 'ما الفرق بين APR وAPY؟',
+                'answer' => 'APR يمثل عادة معدلًا سنويًا دون احتساب إعادة استثمار العوائد، بينما APY يتضمن أثر إعادة الاستثمار وفق افتراضات محددة.'
+            ],
+            [
+                'question' => 'هل Staking هو نفسه Lending؟',
+                'answer' => 'لا. Staking يرتبط عادة بآلية إجماع الشبكة، بينما Lending يعني إقراض الأصول وفق شروط محددة.'
+            ],
+        ],
+
+        'faq_en' => [
+            [
+                'question' => 'What is staking?',
+                'answer' => 'Staking is the process of allocating crypto assets according to the rules of a Proof of Stake network to participate in its consensus system and potentially receive rewards.'
+            ],
+            [
+                'question' => 'Does staking guarantee profit?',
+                'answer' => 'No. Rewards do not guarantee profit because the asset price can fall, reward rates can change, and fees, penalties, or withdrawal restrictions may apply.'
+            ],
+            [
+                'question' => 'Do I need to run a validator to stake?',
+                'answer' => 'Not necessarily. Many networks allow users to delegate their stake to existing validators.'
+            ],
+            [
+                'question' => 'What is the difference between staking and mining?',
+                'answer' => 'Staking is generally associated with Proof of Stake, while mining is generally associated with Proof of Work and relies on computational work.'
+            ],
+            [
+                'question' => 'Can I withdraw my assets while staking?',
+                'answer' => 'It depends on the network and staking method. Some systems impose lock-up or unbonding periods.'
+            ],
+            [
+                'question' => 'What is slashing?',
+                'answer' => 'Slashing is a penalty mechanism used by some Proof of Stake networks for certain validator violations or behaviors.'
+            ],
+            [
+                'question' => 'What is the difference between APR and APY?',
+                'answer' => 'APR generally represents an annual rate without compounding, while APY incorporates the effect of compounding under specific assumptions.'
+            ],
+            [
+                'question' => 'Is staking the same as lending?',
+                'answer' => 'No. Staking is generally connected to blockchain consensus, while lending involves supplying assets under lending terms.'
+            ],
+        ],
+
+        'status' => 'published',
+        'sort_order' => 1,
+        'published_at' => now(),
+    ],
+
+  [
+    'title' => 'What Is Proof of Stake?',
+    'title_ar' => 'ما هو Proof of Stake؟ شرح آلية إجماع إثبات الحصة وكيف تعمل',
+    'title_en' => 'What Is Proof of Stake? A Complete Guide to PoS Consensus',
+
+    'slug' => 'what-is-proof-of-stake',
+
+    'excerpt' => 'A comprehensive guide to Proof of Stake consensus, including validators, block proposals, attestations, rewards, penalties, finality, decentralization, and the main differences from Proof of Work.',
+    'excerpt_ar' => 'دليل شامل يشرح Proof of Stake وآلية إجماع إثبات الحصة، ودور Validators، وكيف يتم اقتراح الكتل والتحقق منها، وكيف تعمل المكافآت والعقوبات والنهائية، وما أهم مزايا وقيود PoS.',
+    'excerpt_en' => 'A comprehensive guide to Proof of Stake consensus, including validators, block proposals, attestations, rewards, penalties, finality, decentralization, and the main differences from Proof of Work.',
+
+    'content' => null,
+
+    'content_ar' => <<<'HTML'
+<div dir="rtl">
+
+<h2>ما هو Proof of Stake؟</h2>
+
+<p>
+<strong>Proof of Stake (PoS)</strong> أو <strong>إثبات الحصة</strong> هو إحدى آليات الإجماع المستخدمة في بعض شبكات البلوكشين للوصول إلى اتفاق مشترك حول حالة الشبكة، والتحقق من المعاملات، وتحديد الكتل التي يمكن قبولها ضمن السلسلة.
+</p>
+
+<p>
+تختلف شبكات Proof of Stake في تفاصيل تصميمها، لكن الفكرة الأساسية هي استخدام <strong>الحصة (Stake)</strong> كجزء من نظام المشاركة والحوافز والعقوبات، بدلًا من الاعتماد على المنافسة الحسابية المكثفة التي تميز Proof of Work.
+</p>
+
+<p>
+ومن المهم التمييز بين المصطلحين: <strong>Proof of Stake هو آلية إجماع</strong>، بينما <strong>Staking هو عملية المشاركة في نظام يعتمد على هذه الآلية وفق قواعد الشبكة</strong>.
+</p>
+
+<h2>لماذا تحتاج البلوكشين إلى آلية إجماع؟</h2>
+
+<p>
+في البلوكشين اللامركزي لا توجد قاعدة بيانات مركزية واحدة يملكها طرف واحد ويقرر وحده ما هي المعاملات الصحيحة. توجد نسخ متعددة من سجل الشبكة لدى عدد من المشاركين.
+</p>
+
+<p>
+لذلك تحتاج الشبكة إلى طريقة تجعل المشاركين يتفقون على أسئلة أساسية مثل:
+</p>
+
+<ul>
+    <li>ما المعاملات الصحيحة التي يجب قبولها؟</li>
+    <li>ما الكتلة التي يجب إضافتها بعد الكتلة السابقة؟</li>
+    <li>ما الحالة الحالية الصحيحة للشبكة؟</li>
+    <li>كيف يتم التعامل مع المشاركين الذين يتصرفون بطريقة مخالفة للقواعد؟</li>
+</ul>
+
+<p>
+هذه الوظيفة هي جزء أساسي من مفهوم <strong>Consensus</strong> أو الإجماع.
+</p>
+
+<p>
+لفهم هذه الفكرة بشكل أفضل، يمكنك مراجعة درس:
+<a href="/academy/blockchain/what-is-blockchain-consensus">ما هو إجماع البلوكشين؟</a>
+</p>
+
+<h2>الفكرة الأساسية وراء Proof of Stake</h2>
+
+<p>
+تعتمد PoS على فكرة اقتصادية بسيطة نسبيًا: يخصص المشاركون حصة من أصول الشبكة وفق القواعد المحددة، وتصبح هذه الحصة جزءًا من آلية الحوافز والردع.
+</p>
+
+<p>
+إذا شارك Validator بطريقة صحيحة، فقد يحصل على مكافآت. وإذا خالف قواعد البروتوكول في شبكات تستخدم آليات عقابية معينة، فقد يتعرض لعقوبات أو يخسر جزءًا من الحصة.
+</p>
+
+<p>
+بهذه الطريقة لا تعتمد الشبكة فقط على الرغبة في المشاركة، بل تربط المشاركة أيضًا بحوافز اقتصادية يمكن أن تؤثر في سلوك المشاركين.
+</p>
+
+<h2>من هو Validator في Proof of Stake؟</h2>
+
+<p>
+<strong>Validator</strong> أو المدقق هو مشارك يشغل برنامجًا وبنية تحتية تسمح له بالمشاركة في عملية الإجماع وفق قواعد الشبكة.
+</p>
+
+<p>
+وقد تشمل مهام Validator، بحسب البروتوكول:
+</p>
+
+<ul>
+    <li>المشاركة في التحقق من المعاملات.</li>
+    <li>اقتراح كتل جديدة عندما يتم اختياره لذلك.</li>
+    <li>التصويت أو تقديم Attestations على صحة كتل أو حالات معينة.</li>
+    <li>المشاركة في آليات الوصول إلى Finality عندما يدعمها البروتوكول.</li>
+    <li>الحفاظ على اتصال مستقر بالشبكة وتشغيل البرامج المطلوبة.</li>
+</ul>
+
+<p>
+لكن هذه المهام ليست متطابقة في جميع شبكات Proof of Stake؛ فكل بروتوكول يحدد آلية الإجماع الخاصة به.
+</p>
+
+<h2>كيف يتم اختيار Validator؟</h2>
+
+<p>
+لا تختار شبكات Proof of Stake المدققين بالطريقة نفسها. تستخدم البروتوكولات المختلفة خوارزميات وقواعد مختلفة لتحديد المشاركين الذين سيقترحون الكتل أو يؤدون أدوارًا أخرى في الإجماع.
+</p>
+
+<p>
+قد تدخل عوامل مثل حجم الحصة، والاختيار العشوائي أو شبه العشوائي، وحالة Validator، وعدد من القواعد الأخرى في عملية الاختيار، بحسب تصميم الشبكة.
+</p>
+
+<p>
+لذلك من الخطأ اختصار الأمر بالقول إن "صاحب أكبر حصة يكتب كل الكتل". في الأنظمة المصممة جيدًا توجد آليات محددة لتوزيع أدوار المشاركة عبر Validators وفق قواعد البروتوكول.
+</p>
+
+<h2>هل امتلاك حصة أكبر يعني دائمًا الحصول على كل المكافآت؟</h2>
+
+<p>
+لا.
+</p>
+
+<p>
+يمكن أن تؤثر كمية الحصة في احتمالات المشاركة أو مقدار المكافآت في بعض الأنظمة، لكن النتيجة النهائية تعتمد على قواعد البروتوكول وأداء Validator والعمولات والعوامل الأخرى.
+</p>
+
+<p>
+كما أن بعض الشبكات تسمح للمستخدم بتفويض الحصة إلى Validator بدلًا من تشغيل Validator بنفسه.
+</p>
+
+<h2>ما هو Block Proposal؟</h2>
+
+<p>
+في العديد من شبكات Proof of Stake توجد أدوار مرتبطة بـ <strong>اقتراح الكتل (Block Proposal)</strong>.
+</p>
+
+<p>
+عندما يتم اختيار Validator ليقترح كتلة، يقوم ببناء كتلة وفق قواعد الشبكة، وقد تتضمن الكتلة مجموعة من المعاملات التي يرى البروتوكول أنها صالحة.
+</p>
+
+<p>
+بعد ذلك يمكن لبقية المشاركين التحقق من الكتلة والمشاركة في آلية التصويت أو التأييد وفق تصميم الشبكة.
+</p>
+
+<p>
+وهذا يعني أن اقتراح الكتلة ليس بالضرورة الخطوة الأخيرة؛ إذ توجد عادةً مراحل أخرى للتحقق والقبول والوصول إلى الحالة التي يعتبرها البروتوكول نهائية.
+</p>
+
+<h2>ما هي Attestations أو Votes؟</h2>
+
+<p>
+تستخدم بعض بروتوكولات Proof of Stake مفهوم <strong>Attestations</strong> أو التصويتات، حيث يقدم المشاركون إشارات تشهد بأنهم يرون كتلة أو حالة معينة متوافقة مع قواعد الشبكة.
+</p>
+
+<p>
+الهدف من هذه الآلية هو مساعدة الشبكة على تجميع آراء المشاركين حول الحالة الصحيحة للسلسلة والوصول إلى اتفاق.
+</p>
+
+<p>
+تختلف تفاصيل هذه العملية بشكل كبير بين البروتوكولات، لذلك لا ينبغي اعتبار مصطلح Attestation قاعدة مشتركة حرفيًا لجميع شبكات PoS.
+</p>
+
+<h2>ما المقصود بـ Slot وEpoch؟</h2>
+
+<p>
+تستخدم بعض شبكات Proof of Stake تقسيمًا زمنيًا لتنظيم عملية الإجماع.
+</p>
+
+<p>
+قد يمثل <strong>Slot</strong> فترة زمنية محددة يمكن خلالها تنفيذ دور معين مثل اقتراح كتلة، بينما قد يمثل <strong>Epoch</strong> مجموعة من Slots وفق قواعد الشبكة.
+</p>
+
+<p>
+هذه المصطلحات ليست جزءًا موحدًا من جميع تصاميم PoS، ولذلك تختلف معانيها واستخداماتها بين البروتوكولات.
+</p>
+
+<h2>كيف تصل الشبكة إلى Finality؟</h2>
+
+<p>
+<strong>Finality</strong> أو النهائية تشير إلى النقطة التي تصبح فيها حالة أو مجموعة من الكتل مؤكدة وفق قواعد البروتوكول بدرجة تجعل التراجع عنها غير متوقع أو غير ممكن ضمن النموذج الأمني المحدد.
+</p>
+
+<p>
+بعض شبكات Proof of Stake تستخدم آليات Finality صريحة تعتمد على تصويتات Validators، بينما تستخدم شبكات أخرى نماذج مختلفة للتعامل مع تأكيد الكتل.
+</p>
+
+<p>
+وهنا يجب التفريق بين:
+</p>
+
+<ul>
+    <li><strong>Block Confirmation:</strong> وجود كتلة وتراكم مزيد من الكتل بعدها.</li>
+    <li><strong>Finality:</strong> حالة أقوى يحددها البروتوكول وفق قواعده.</li>
+</ul>
+
+<p>
+لمزيد من المعلومات حول هذا المفهوم يمكنك قراءة:
+<a href="/academy/blockchain/what-is-blockchain-finality">ما هي Finality في البلوكشين؟</a>
+</p>
+
+<h2>ماذا يحدث إذا اقترح Validators كتلًا متعارضة؟</h2>
+
+<p>
+في الأنظمة الموزعة قد تظهر حالات تتضمن أكثر من اقتراح أو أكثر من رؤية مؤقتة للسلسلة، خصوصًا عند حدوث تأخير في الشبكة أو مشاكل في الاتصال.
+</p>
+
+<p>
+تستخدم بروتوكولات الإجماع قواعد محددة لتحديد السلسلة أو الحالة التي يجب اعتمادها، وقد تتضمن آليات للتصويت أو الاختيار أو Finality.
+</p>
+
+<p>
+إذا ظهرت حالات إعادة تنظيم للسلسلة، فإن كيفية التعامل معها تعتمد على تصميم البروتوكول.
+</p>
+
+<p>
+يمكنك التوسع في هذا الموضوع من خلال:
+<a href="/academy/blockchain/what-is-chain-reorganization">ما هي Chain Reorganization؟</a>
+</p>
+
+<h2>ما هي حوافز Validators؟</h2>
+
+<p>
+تحتاج شبكة Proof of Stake إلى تصميم اقتصادي يشجع المشاركين على أداء أدوارهم بطريقة صحيحة.
+</p>
+
+<p>
+يمكن أن تتضمن الحوافز:
+</p>
+
+<ul>
+    <li>مكافآت للمشاركة الصحيحة.</li>
+    <li>مكافآت مرتبطة باقتراح الكتل وفق قواعد البروتوكول.</li>
+    <li>جزءًا من رسوم المعاملات في بعض الشبكات.</li>
+    <li>آليات أخرى يحددها البروتوكول.</li>
+</ul>
+
+<p>
+ولا يعني ذلك أن كل شبكة تستخدم جميع هذه المصادر أو أن المكافآت ثابتة.
+</p>
+
+<h2>من أين تأتي مكافآت Proof of Stake؟</h2>
+
+<p>
+تختلف مصادر المكافآت من شبكة إلى أخرى. وقد تعتمد على إصدار وحدات جديدة من العملة، أو رسوم المعاملات، أو مزيج من الآليات، أو تصميم اقتصادي خاص بالبروتوكول.
+</p>
+
+<p>
+ولهذا السبب يجب عدم التعامل مع نسبة العائد المعلنة باعتبارها رقمًا مستقلًا عن اقتصاد الشبكة.
+</p>
+
+<p>
+إذا كانت الشبكة تصدر وحدات جديدة كمكافآت، فإن ذلك قد يؤدي إلى زيادة المعروض. ومن هنا تظهر أهمية فهم العلاقة بين <strong>Staking Rewards</strong> و<strong>Token Inflation</strong>.
+</p>
+
+<h2>ما هو التضخم في شبكات PoS؟</h2>
+
+<p>
+في سياق العملات الرقمية، يمكن أن يشير التضخم إلى زيادة المعروض من وحدات العملة بمرور الوقت.
+</p>
+
+<p>
+إذا تم إصدار وحدات جديدة لتوزيع المكافآت، فقد يحصل المشاركون في Staking على عدد أكبر من العملات، لكن زيادة المعروض قد تؤثر في الاقتصاد الكلي للعملة وفي حصة المشاركين غير المشاركين في Staking.
+</p>
+
+<p>
+لذلك فإن الحصول على 5% من العملات الإضافية، على سبيل المثال، لا يعني بالضرورة تحقيق عائد حقيقي قدره 5% من حيث القوة الشرائية أو القيمة السوقية.
+</p>
+
+<h2>ما هو Slashing في Proof of Stake؟</h2>
+
+<p>
+<strong>Slashing</strong> هو آلية عقابية تستخدمها بعض شبكات Proof of Stake لمعاقبة أنواع محددة من السلوك المخالف أو الضار وفق قواعد البروتوكول.
+</p>
+
+<p>
+قد ترتبط العقوبة، بحسب الشبكة، بمحاولات مثل توقيع رسائل متعارضة أو تنفيذ سلوك يعتبره البروتوكول مخالفًا لقواعد الإجماع.
+</p>
+
+<p>
+لا تستخدم جميع الشبكات Slashing بالطريقة نفسها، كما أن حجم العقوبة وشروط تطبيقها تختلف من بروتوكول إلى آخر.
+</p>
+
+<h2>هل توقف Validator عن العمل يعني Slashing دائمًا؟</h2>
+
+<p>
+ليس بالضرورة.
+</p>
+
+<p>
+بعض الشبكات قد تفرض عقوبات أو تقلل المكافآت بسبب عدم توفر Validator أو ضعف أدائه، بينما قد تكون عقوبات Slashing مخصصة لأنواع أكثر خطورة من السلوك.
+</p>
+
+<p>
+لذلك يجب قراءة القواعد الخاصة بالشبكة بدلًا من استخدام كلمة Slashing لوصف جميع حالات فقدان المكافآت.
+</p>
+
+<h2>ما أهمية أداء Validator؟</h2>
+
+<p>
+إذا اختار المستخدم تفويض حصته إلى Validator، فقد يؤثر أداء هذا Validator في المكافآت التي يحصل عليها المستخدم وفق قواعد الشبكة.
+</p>
+
+<p>
+ومن العوامل التي قد تكون مهمة:
+</p>
+
+<ul>
+    <li>مدة تشغيل Validator وتوفره.</li>
+    <li>أداء البنية التحتية.</li>
+    <li>العمولات التي يفرضها Validator.</li>
+    <li>تاريخ المخالفات أو العقوبات إذا كان متاحًا.</li>
+    <li>تركيز الحصة لدى Validator.</li>
+</ul>
+
+<p>
+لكن هذه العوامل لا تعني أن Validator الذي يملك أكبر حصة أو أعلى عائد معلن هو بالضرورة الخيار الأفضل.
+</p>
+
+<h2>ما الفرق بين تشغيل Validator وتفويض الحصة؟</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>تشغيل Validator</th>
+            <th>تفويض الحصة</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>المستخدم يشغل البنية المطلوبة للمشاركة</td>
+            <td>المستخدم يخصص حصته إلى Validator موجود</td>
+        </tr>
+        <tr>
+            <td>يتطلب معرفة تقنية وموارد تشغيل</td>
+            <td>قد يكون أبسط من الناحية التقنية</td>
+        </tr>
+        <tr>
+            <td>المستخدم يتحمل مسؤولية التشغيل وفق قواعد الشبكة</td>
+            <td>يعتمد المستخدم جزئيًا على أداء Validator</td>
+        </tr>
+        <tr>
+            <td>قد يحصل المستخدم على مكافآت وفق أداء Validator وقواعد البروتوكول</td>
+            <td>قد يتم خصم عمولة Validator وفق النظام المستخدم</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>هل Proof of Stake لامركزي دائمًا؟</h2>
+
+<p>
+ليس بالضرورة.
+</p>
+
+<p>
+اللامركزية تعتمد على كيفية توزيع الحصة وعدد Validators وتنوع المشاركين ودرجة الاعتماد على جهات أو بنى تحتية محددة.
+</p>
+
+<p>
+قد يؤدي تركّز نسبة كبيرة من الحصة لدى عدد محدود من المشاركين إلى زيادة مخاطر المركزية أو التأثير على ديناميكية الإجماع.
+</p>
+
+<p>
+لذلك لا يكفي القول إن شبكة ما تستخدم Proof of Stake للحكم تلقائيًا بأنها "لامركزية بالكامل".
+</p>
+
+<h2>هل يمكن أن تتجمع الحصة لدى عدد قليل من Validators؟</h2>
+
+<p>
+نعم، ويمكن أن يحدث ذلك لأسباب اقتصادية أو تقنية أو بسبب تفضيل المستخدمين لخدمات معينة.
+</p>
+
+<p>
+وقد يؤدي التركّز إلى مخاطر تتعلق بمقاومة الرقابة، والمرونة، والتنوع، والقدرة على التحكم أو التأثير في عملية الإجماع.
+</p>
+
+<p>
+لهذا السبب تعد <strong>Stake Distribution</strong> من المؤشرات المهمة عند دراسة تصميم شبكة Proof of Stake.
+</p>
+
+<h2>ما علاقة Proof of Stake بالحوكمة؟</h2>
+
+<p>
+في بعض الشبكات قد ترتبط الحصة أو المشاركة بآليات الحوكمة، بينما تفصل شبكات أخرى بين إجماع الشبكة والتصويت على قرارات البروتوكول.
+</p>
+
+<p>
+لذلك يجب عدم افتراض أن امتلاك Stake يمنح تلقائيًا حقًا في اتخاذ جميع قرارات الشبكة.
+</p>
+
+<p>
+تعتمد حقوق الحوكمة على تصميم البروتوكول والأنظمة المرتبطة به.
+</p>
+
+<h2>ما أنواع Proof of Stake؟</h2>
+
+<p>
+لا توجد نسخة واحدة موحدة من Proof of Stake تستخدمها جميع الشبكات.
+</p>
+
+<p>
+ظهرت تصاميم متعددة، من بينها أنظمة تعتمد على:
+</p>
+
+<ul>
+    <li>Validators مباشرِين.</li>
+    <li>Delegation أو تفويض الحصة.</li>
+    <li>آليات انتخاب أو اختيار مختلفة للمدققين.</li>
+    <li>تصاميم تعتمد على مجموعات أو لجان للمشاركة في الإجماع.</li>
+    <li>نماذج مختلفة للحوافز والعقوبات والنهائية.</li>
+</ul>
+
+<p>
+وقد تستخدم بعض المشاريع أسماء مثل <strong>Delegated Proof of Stake (DPoS)</strong> أو تصاميم أخرى مشتقة أو معدلة من مفهوم PoS.
+</p>
+
+<p>
+لكن وجود كلمة "Proof of Stake" في الاسم لا يعني أن جميع هذه الأنظمة تعمل بالطريقة نفسها.
+</p>
+
+<h2>Proof of Stake مقابل Proof of Work</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>العنصر</th>
+            <th>Proof of Stake</th>
+            <th>Proof of Work</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>المبدأ الأساسي</td>
+            <td>الحصة والمشاركة وفق قواعد البروتوكول</td>
+            <td>العمل الحسابي وإثبات القدرة على تنفيذ العمل</td>
+        </tr>
+        <tr>
+            <td>المشاركون الأساسيون</td>
+            <td>Validators</td>
+            <td>Miners</td>
+        </tr>
+        <tr>
+            <td>المورد الرئيسي</td>
+            <td>الأصول المخصصة والمشاركة في البروتوكول</td>
+            <td>القدرة الحاسوبية والطاقة</td>
+        </tr>
+        <tr>
+            <td>نوع المخاطر</td>
+            <td>الحصة، Validator، العقوبات، البروتوكول وغيرها</td>
+            <td>الأجهزة، الطاقة، المنافسة، الصعوبة وغيرها</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>
+لا تعني هذه المقارنة أن أحد النظامين أفضل في جميع الحالات؛ فلكل نموذج افتراضاته وتصميمه ومقايضاته.
+</p>
+
+<h2>ما مزايا Proof of Stake؟</h2>
+
+<h3>1. تقليل الاعتماد على التعدين الحسابي</h3>
+
+<p>
+لا يعتمد PoS على نفس نموذج المنافسة الحسابية المكثفة المستخدم في Proof of Work.
+</p>
+
+<h3>2. إمكانية المشاركة من خلال التفويض</h3>
+
+<p>
+بعض الشبكات تسمح للمستخدمين بالمشاركة من خلال Delegation دون تشغيل بنية Validator بأنفسهم.
+</p>
+
+<h3>3. ربط الحوافز بالأصول المخصصة</h3>
+
+<p>
+يمكن للبروتوكول استخدام الحصة كجزء من نظام الحوافز والعقوبات.
+</p>
+
+<h3>4. تصميمات متنوعة</h3>
+
+<p>
+يمكن بناء آليات مختلفة لاختيار Validators، وتوزيع الأدوار، وحساب المكافآت، والوصول إلى Finality.
+</p>
+
+<h2>ما قيود ومخاطر Proof of Stake؟</h2>
+
+<h3>1. تركّز الحصة</h3>
+
+<p>
+قد يؤدي تركّز Stake لدى عدد محدود من المشاركين إلى زيادة مخاطر المركزية.
+</p>
+
+<h3>2. مخاطر Validator</h3>
+
+<p>
+يعتمد المستخدم الذي يفوض حصته على Validator وأدائه وقواعد الشبكة.
+</p>
+
+<h3>3. مخاطر العقوبات</h3>
+
+<p>
+يمكن لبعض البروتوكولات فرض عقوبات على سلوك معين أو عدم أداء المهام المطلوبة.
+</p>
+
+<h3>4. مخاطر اقتصادية</h3>
+
+<p>
+قد تؤثر مكافآت Staking وإصدار العملات الجديدة في المعروض والاقتصاد الخاص بالأصل.
+</p>
+
+<h3>5. التعقيد التقني</h3>
+
+<p>
+تختلف قواعد الإجماع من شبكة إلى أخرى، وقد تتضمن مفاهيم مثل Slots وEpochs وAttestations وFinality وغيرها.
+</p>
+
+<h3>6. مخاطر البنية التحتية</h3>
+
+<p>
+يحتاج تشغيل Validator إلى اتصال مستقر وبرامج وبنية تحتية مناسبة، وقد يؤدي الفشل في التشغيل إلى فقدان مكافآت أو فرض عقوبات بحسب البروتوكول.
+</p>
+
+<h2>هل PoS أكثر كفاءة من PoW؟</h2>
+
+<p>
+من الناحية التشغيلية، لا يعتمد Proof of Stake على نموذج التعدين التنافسي نفسه الذي يعتمد عليه Proof of Work، ولذلك تختلف متطلبات الطاقة والبنية التحتية بين النموذجين.
+</p>
+
+<p>
+لكن تقييم كفاءة شبكة ما لا ينبغي أن يعتمد على استهلاك الطاقة وحده؛ فهناك أيضًا اعتبارات تتعلق بالأمان، واللامركزية، والأداء، والموثوقية، والحوافز الاقتصادية، وتصميم البروتوكول.
+</p>
+
+<h2>هل يمكن مهاجمة شبكة Proof of Stake؟</h2>
+
+<p>
+لا توجد آلية إجماع محصنة من جميع أنواع الهجمات.
+</p>
+
+<p>
+تعتمد مقاومة الشبكة للهجمات على تصميم البروتوكول وتوزيع الحصة وقواعد اختيار Validators وآليات التصويت والعقوبات وغيرها من الافتراضات.
+</p>
+
+<p>
+ومن الأمثلة النظرية على المخاطر محاولة جهة أو مجموعة الحصول على تأثير كبير على عملية الإجماع، أو استغلال ثغرات في تنفيذ البروتوكول، أو التلاعب ببنية الشبكة.
+</p>
+
+<p>
+لذلك فإن استخدام PoS وحده لا يكفي للحكم على مستوى أمان شبكة معينة.
+</p>
+
+<h2>ما علاقة PoS بإعادة تنظيم السلسلة؟</h2>
+
+<p>
+قد تواجه بعض شبكات البلوكشين حالات مؤقتة يكون فيها أكثر من مسار أو اقتراح للسلسلة بسبب ظروف الشبكة أو الاختلاف المؤقت بين المشاركين.
+</p>
+
+<p>
+تعتمد كيفية حل هذه الحالات على قواعد الإجماع.
+</p>
+
+<p>
+في الشبكات التي توفر Finality قوية، يمكن أن تصبح بعض الحالات مؤكدة وفق قواعد تجعل التراجع عنها أصعب بكثير ضمن النموذج الأمني للبروتوكول.
+</p>
+
+<p>
+لمزيد من التفاصيل:
+<a href="/academy/blockchain/what-is-chain-reorganization">شرح Chain Reorganization</a>.
+</p>
+
+<h2>ما علاقة PoS بمشكلة Double Spending؟</h2>
+
+<p>
+إحدى الوظائف الأساسية لأي آلية إجماع هي المساعدة في منع قبول حالتين متعارضتين للشبكة بطريقة تسمح بإنفاق الأصل نفسه أكثر من مرة ضمن السجل المعتمد.
+</p>
+
+<p>
+يساعد الإجماع على تحديد الحالة التي يجب اعتمادها وفق قواعد البروتوكول.
+</p>
+
+<p>
+لكن مفهوم Double Spending أوسع من مجرد PoS، ويمكنك دراسته بشكل مستقل في:
+<a href="/academy/blockchain/what-is-double-spending">ما هو Double Spending؟</a>
+</p>
+
+<h2>ما الذي يجب أن يفهمه المبتدئ عن PoS؟</h2>
+
+<p>
+لا يحتاج المبتدئ إلى حفظ جميع التفاصيل الرياضية أو البرمجية لفهم الفكرة الأساسية.
+</p>
+
+<p>
+يكفي في البداية فهم أن:
+</p>
+
+<ol>
+    <li>Proof of Stake هو آلية إجماع.</li>
+    <li>Validators يشاركون في التحقق والإجماع وفق قواعد الشبكة.</li>
+    <li>الحصة جزء من نموذج المشاركة والحوافز والعقوبات.</li>
+    <li>قد يتم اختيار Validators وفق خوارزميات مختلفة.</li>
+    <li>المكافآت تختلف من شبكة إلى أخرى.</li>
+    <li>بعض الشبكات تستخدم Slashing أو آليات عقابية.</li>
+    <li>بعض الشبكات توفر Finality وفق آليات محددة.</li>
+    <li>توزيع الحصة يؤثر في اللامركزية وأمن الشبكة.</li>
+    <li>استخدام PoS لا يعني أن الشبكة آمنة أو لامركزية تلقائيًا.</li>
+</ol>
+
+<h2>الخلاصة</h2>
+
+<p>
+<strong>Proof of Stake</strong> هو نموذج إجماع تستخدمه بعض شبكات البلوكشين للوصول إلى اتفاق حول حالة الشبكة والتحقق من المعاملات وإضافة الكتل.
+</p>
+
+<p>
+يعتمد النموذج على Validators والحصة كجزء من نظام المشاركة والحوافز والعقوبات، لكن تفاصيل اختيار المدققين، واقتراح الكتل، والتصويت، والـ Finality، والمكافآت والعقوبات تختلف بين الشبكات.
+</p>
+
+<p>
+كما أن PoS ليس مرادفًا تلقائيًا للامركزية أو الأمان المطلق. فهذه الخصائص تعتمد على تصميم البروتوكول، وتوزيع الحصة، وسلوك المشاركين، والبرمجيات، والبنية التحتية، والحوكمة، وغيرها من العوامل.
+</p>
+
+<p>
+بعد فهم Proof of Stake، تصبح دراسة العلاقة بين Staking وValidators والمكافآت والعقوبات وفترات Unbonding أكثر وضوحًا.
+</p>
+
+<h2>الأسئلة الشائعة حول Proof of Stake</h2>
+
+<h3>ما هو Proof of Stake باختصار؟</h3>
+<p>
+Proof of Stake هو آلية إجماع تستخدم الحصة كجزء من طريقة مشاركة المشاركين في التحقق من المعاملات والوصول إلى اتفاق حول حالة الشبكة.
+</p>
+
+<h3>هل Proof of Stake هو نفسه Staking؟</h3>
+<p>
+لا. Proof of Stake هو آلية إجماع، بينما Staking هو المشاركة في نظام يعتمد على الحصة وفق قواعد البروتوكول.
+</p>
+
+<h3>من هو Validator؟</h3>
+<p>
+Validator هو مشارك يشغل البنية البرمجية المطلوبة للمشاركة في التحقق والإجماع وفق قواعد الشبكة.
+</p>
+
+<h3>كيف يتم اختيار Validator؟</h3>
+<p>
+تختلف طريقة الاختيار حسب البروتوكول، وقد تستخدم الشبكة عوامل مثل الحصة والاختيار العشوائي أو شبه العشوائي وقواعد أخرى.
+</p>
+
+<h3>هل أكبر Validator يحصل دائمًا على أكبر مكافأة؟</h3>
+<p>
+ليس بالضرورة. تعتمد المكافآت على تصميم الشبكة وأداء Validator والعمولات وعوامل أخرى.
+</p>
+
+<h3>ما هو Slashing؟</h3>
+<p>
+Slashing هو آلية عقوبات تستخدمها بعض شبكات Proof of Stake لمعاقبة أنواع محددة من السلوك المخالف وفق قواعد البروتوكول.
+</p>
+
+<h3>هل كل شبكات PoS تستخدم Slashing؟</h3>
+<p>
+لا. تختلف آليات العقوبات من شبكة إلى أخرى، وقد تستخدم بعض الشبكات أنواعًا مختلفة من العقوبات أو الحوافز.
+</p>
+
+<h3>ما المقصود بـ Finality؟</h3>
+<p>
+Finality هي حالة تصبح فيها كتلة أو حالة معينة مؤكدة وفق قواعد البروتوكول بدرجة تجعل التراجع عنها غير متوقع أو غير ممكن ضمن النموذج الأمني المحدد.
+</p>
+
+<h3>هل Proof of Stake لامركزي دائمًا؟</h3>
+<p>
+لا. تعتمد اللامركزية على توزيع الحصة وتنوع المشاركين وعدد Validators وغيرها من العوامل.
+</p>
+
+<h3>هل Proof of Stake أكثر أمانًا من Proof of Work؟</h3>
+<p>
+لا يمكن إصدار حكم عام. كلا النموذجين له افتراضاته وآليات الحماية والمخاطر والتصميم الاقتصادي المختلف.
+</p>
+
+<h3>هل يحتاج Validator إلى تشغيل أجهزة متخصصة مثل التعدين؟</h3>
+<p>
+لا يحتاج Validator إلى أجهزة تعدين بالطريقة نفسها التي يعتمد عليها التعدين في Proof of Work، لكنه قد يحتاج إلى خادم وموارد اتصال وتخزين ومعالجة مناسبة حسب الشبكة.
+</p>
+
+<h3>هل مكافآت PoS مضمونة؟</h3>
+<p>
+لا. تختلف المكافآت حسب الشبكة، وقد تتغير، كما يمكن أن توجد رسوم أو عقوبات أو مخاطر مرتبطة بسعر الأصل.
+</p>
+
+<h2>روابط ذات صلة داخل أكاديمية AQL Crypto</h2>
+
+<ul>
+    <li><a href="/academy/staking">مسار Staking</a></li>
+    <li><a href="/academy/blockchain/what-is-blockchain">ما هي تقنية Blockchain؟</a></li>
+    <li><a href="/academy/blockchain/how-does-blockchain-work">كيف تعمل تقنية Blockchain؟</a></li>
+    <li><a href="/academy/blockchain/what-is-blockchain-consensus">ما هو إجماع البلوكشين؟</a></li>
+    <li><a href="/academy/blockchain/what-is-blockchain-finality">ما هي Finality في البلوكشين؟</a></li>
+    <li><a href="/academy/blockchain/what-is-chain-reorganization">ما هي Chain Reorganization؟</a></li>
+    <li><a href="/academy/blockchain/what-is-double-spending">ما هو Double Spending؟</a></li>
+    <li><a href="/academy/defi">مسار التمويل اللامركزي DeFi</a></li>
+    <li><a href="/academy/defi/defi-lending-and-borrowing">ما هو الإقراض والاقتراض في DeFi؟</a></li>
+    <li><a href="/academy/defi/what-is-yield-farming">ما هي زراعة العوائد Yield Farming؟</a></li>
+</ul>
+
+<p>
+<strong>ملاحظة تعليمية:</strong> هذا المحتوى لأغراض تعليمية فقط ولا يمثل توصية مالية أو استثمارية.
+</p>
+
+</div>
+HTML,
+
+    'content_en' => <<<'HTML'
+<div dir="ltr">
+
+<h2>What Is Proof of Stake?</h2>
+
+<p>
+<strong>Proof of Stake (PoS)</strong> is a consensus mechanism used by some blockchain networks to agree on the state of the network, validate transactions, and determine which blocks should be accepted.
+</p>
+
+<p>
+Different Proof of Stake networks use different designs, but the common idea is to use <strong>stake</strong> as part of the participation, incentive, and penalty system instead of relying on the computational competition associated with Proof of Work.
+</p>
+
+<p>
+It is important to distinguish the two terms: <strong>Proof of Stake is a consensus mechanism</strong>, while <strong>staking is the process of participating in a stake-based network according to its rules</strong>.
+</p>
+
+<h2>Why Does a Blockchain Need Consensus?</h2>
+
+<p>
+A decentralized blockchain does not have one central database administrator who decides which transactions are valid. Multiple participants maintain copies of the network state.
+</p>
+
+<p>
+The network therefore needs a mechanism that helps participants agree on questions such as:
+</p>
+
+<ul>
+    <li>Which transactions are valid?</li>
+    <li>Which block should follow the previous block?</li>
+    <li>What is the current valid state of the network?</li>
+    <li>How should participants that violate protocol rules be handled?</li>
+</ul>
+
+<p>
+This function is part of <strong>consensus</strong>.
+</p>
+
+<p>
+Learn more:
+<a href="/academy/blockchain/what-is-blockchain-consensus">What Is Blockchain Consensus?</a>
+</p>
+
+<h2>The Core Idea Behind Proof of Stake</h2>
+
+<p>
+Proof of Stake uses an economic model in which participants commit or allocate assets according to protocol rules. That stake becomes part of the network's participation, incentive, and penalty system.
+</p>
+
+<p>
+A validator may receive rewards for performing its duties correctly. In networks that use penalty mechanisms, certain forms of protocol violations may result in penalties or loss of part of the stake.
+</p>
+
+<h2>What Is a Validator?</h2>
+
+<p>
+A <strong>validator</strong> is a participant that operates the software and infrastructure required to participate in a network's consensus process.
+</p>
+
+<p>
+Depending on the protocol, validator responsibilities may include:
+</p>
+
+<ul>
+    <li>Helping validate transactions.</li>
+    <li>Proposing blocks when selected.</li>
+    <li>Providing attestations or votes.</li>
+    <li>Participating in finality mechanisms.</li>
+    <li>Maintaining reliable infrastructure and network connectivity.</li>
+</ul>
+
+<p>
+These responsibilities are not identical across all Proof of Stake networks.
+</p>
+
+<h2>How Are Validators Selected?</h2>
+
+<p>
+Proof of Stake networks do not all select validators in the same way. Protocols can use different algorithms and rules to determine which participants propose blocks or perform other consensus roles.
+</p>
+
+<p>
+Factors may include stake amount, random or pseudo-random selection, validator status, and other protocol-specific rules.
+</p>
+
+<p>
+It is therefore inaccurate to simply say that the participant with the largest stake writes every block.
+</p>
+
+<h2>Does More Stake Always Mean More Rewards?</h2>
+
+<p>
+No.
+</p>
+
+<p>
+Stake size can influence participation or reward opportunities in some systems, but actual rewards depend on protocol rules, validator performance, commissions, and other factors.
+</p>
+
+<p>
+Some networks also allow users to delegate their stake to validators instead of operating one themselves.
+</p>
+
+<h2>What Is Block Proposal?</h2>
+
+<p>
+Many Proof of Stake networks assign validators roles related to <strong>block proposal</strong>.
+</p>
+
+<p>
+When selected to propose a block, a validator constructs a block according to protocol rules and may include valid transactions.
+</p>
+
+<p>
+Other participants can then verify the block and participate in voting or attestation mechanisms depending on the protocol.
+</p>
+
+<p>
+Block proposal is therefore not necessarily the final step in the consensus process.
+</p>
+
+<h2>What Are Attestations and Votes?</h2>
+
+<p>
+Some Proof of Stake protocols use <strong>attestations</strong> or votes, where participants signal that they consider a particular block or network state valid according to the protocol.
+</p>
+
+<p>
+These signals help the network aggregate participant views and reach agreement.
+</p>
+
+<p>
+The exact implementation differs significantly between protocols.
+</p>
+
+<h2>What Are Slots and Epochs?</h2>
+
+<p>
+Some Proof of Stake networks organize consensus activity into time-based units.
+</p>
+
+<p>
+A <strong>slot</strong> may represent a defined period during which a particular consensus role can be performed, while an <strong>epoch</strong> may represent a group of slots according to the protocol.
+</p>
+
+<p>
+These terms are not universal to every Proof of Stake design.
+</p>
+
+<h2>How Does Finality Work?</h2>
+
+<p>
+<strong>Finality</strong> refers to a point at which a block or network state is considered finalized according to protocol rules, making reversal highly unlikely or impossible within the protocol's security model.
+</p>
+
+<p>
+Some Proof of Stake networks use explicit finality mechanisms based on validator votes, while others use different models for confirming blocks.
+</p>
+
+<p>
+It is useful to distinguish ordinary block confirmations from protocol-defined finality.
+</p>
+
+<p>
+Learn more:
+<a href="/academy/blockchain/what-is-blockchain-finality">What Is Blockchain Finality?</a>
+</p>
+
+<h2>What Happens When Validators Propose Conflicting Blocks?</h2>
+
+<p>
+Distributed networks can temporarily experience competing views or proposals, especially when network delays or connectivity problems occur.
+</p>
+
+<p>
+Consensus protocols use defined rules to determine which chain or state should be accepted.
+</p>
+
+<p>
+Some networks may also use explicit finality mechanisms to make certain states strongly confirmed.
+</p>
+
+<h2>What Incentives Do Validators Receive?</h2>
+
+<p>
+Proof of Stake networks need an economic model that encourages participants to follow protocol rules.
+</p>
+
+<p>
+Depending on the network, incentives may include:
+</p>
+
+<ul>
+    <li>Rewards for correct participation.</li>
+    <li>Block proposal rewards.</li>
+    <li>A share of transaction fees in some networks.</li>
+    <li>Other protocol-defined incentives.</li>
+</ul>
+
+<p>
+Not every network uses all of these mechanisms.
+</p>
+
+<h2>Where Do Proof of Stake Rewards Come From?</h2>
+
+<p>
+Reward sources vary between networks. They may include newly issued tokens, transaction fees, or a combination of mechanisms.
+</p>
+
+<p>
+If new tokens are issued as rewards, the increase in supply becomes an important part of the network's economic model.
+</p>
+
+<h2>What Is Inflation in Proof of Stake?</h2>
+
+<p>
+In crypto economics, inflation can refer to an increase in the circulating or total supply of an asset over time.
+</p>
+
+<p>
+If new tokens are issued to fund staking rewards, stakers may receive more units of the asset while the total supply also increases.
+</p>
+
+<p>
+Therefore, receiving additional tokens does not automatically mean that the participant achieved the same percentage return in market value.
+</p>
+
+<h2>What Is Slashing?</h2>
+
+<p>
+<strong>Slashing</strong> is a penalty mechanism used by some Proof of Stake networks for specific types of protocol violations or harmful validator behavior.
+</p>
+
+<p>
+Depending on the network, penalties may apply to actions such as signing conflicting messages or violating consensus rules.
+</p>
+
+<p>
+Slashing rules and penalty sizes vary between protocols.
+</p>
+
+<h2>Does Validator Downtime Always Mean Slashing?</h2>
+
+<p>
+Not necessarily.
+</p>
+
+<p>
+Some networks may reduce rewards or apply other penalties for validator downtime or poor performance, while slashing may be reserved for more serious protocol violations.
+</p>
+
+<p>
+The exact rules must therefore be checked for each network.
+</p>
+
+<h2>Why Does Validator Performance Matter?</h2>
+
+<p>
+When a user delegates stake to a validator, that validator's performance can affect the rewards received under the network's rules.
+</p>
+
+<p>
+Potentially relevant factors include:
+</p>
+
+<ul>
+    <li>Validator uptime.</li>
+    <li>Infrastructure reliability.</li>
+    <li>Validator commission.</li>
+    <li>Known penalties or violations.</li>
+    <li>Stake concentration.</li>
+</ul>
+
+<p>
+A validator with the largest stake or highest advertised reward is not automatically the best choice.
+</p>
+
+<h2>Running a Validator vs Delegating Stake</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Running a Validator</th>
+            <th>Delegating Stake</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>The participant operates the required infrastructure.</td>
+            <td>The participant assigns stake to an existing validator.</td>
+        </tr>
+        <tr>
+            <td>Requires technical knowledge and infrastructure.</td>
+            <td>Can be simpler from a technical perspective.</td>
+        </tr>
+        <tr>
+            <td>The participant is responsible for validator operations.</td>
+            <td>The participant relies partly on validator performance.</td>
+        </tr>
+        <tr>
+            <td>Rewards depend on protocol rules and validator performance.</td>
+            <td>Validator commissions may apply.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Is Proof of Stake Always Decentralized?</h2>
+
+<p>
+No.
+</p>
+
+<p>
+Decentralization depends on factors such as stake distribution, validator diversity, infrastructure concentration, and participation structure.
+</p>
+
+<p>
+If a large share of stake is controlled by a small number of participants, centralization-related risks may increase.
+</p>
+
+<h2>Can Stake Become Concentrated?</h2>
+
+<p>
+Yes. Stake may become concentrated for economic, technical, or user-preference reasons.
+</p>
+
+<p>
+High concentration can create risks related to censorship resistance, resilience, diversity, and influence over consensus.
+</p>
+
+<p>
+Stake distribution is therefore an important factor when studying a Proof of Stake network.
+</p>
+
+<h2>How Is Proof of Stake Related to Governance?</h2>
+
+<p>
+Some networks connect staking or stake ownership with governance, while others separate consensus participation from governance voting.
+</p>
+
+<p>
+Holding stake does not automatically mean that a participant controls every protocol decision.
+</p>
+
+<p>
+Governance rights depend on the network's specific design.
+</p>
+
+<h2>What Types of Proof of Stake Exist?</h2>
+
+<p>
+There is no single implementation of Proof of Stake used by every blockchain.
+</p>
+
+<p>
+Different designs can include:
+</p>
+
+<ul>
+    <li>Direct validator participation.</li>
+    <li>Delegation mechanisms.</li>
+    <li>Different validator selection systems.</li>
+    <li>Committee-based consensus designs.</li>
+    <li>Different reward, penalty, and finality mechanisms.</li>
+</ul>
+
+<p>
+Projects may also use terms such as <strong>Delegated Proof of Stake (DPoS)</strong> or other variations of stake-based consensus.
+</p>
+
+<h2>Proof of Stake vs Proof of Work</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Factor</th>
+            <th>Proof of Stake</th>
+            <th>Proof of Work</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Core mechanism</td>
+            <td>Stake-based participation</td>
+            <td>Computational work</td>
+        </tr>
+        <tr>
+            <td>Main participants</td>
+            <td>Validators</td>
+            <td>Miners</td>
+        </tr>
+        <tr>
+            <td>Primary resource</td>
+            <td>Staked assets and protocol participation</td>
+            <td>Computational power and energy</td>
+        </tr>
+        <tr>
+            <td>Typical risks</td>
+            <td>Stake, validator, penalty, protocol, and economic risks</td>
+            <td>Hardware, energy, competition, and difficulty risks</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>
+This comparison does not mean one consensus model is universally better. Each has different assumptions, designs, and trade-offs.
+</p>
+
+<h2>Advantages of Proof of Stake</h2>
+
+<h3>1. Less reliance on computational mining</h3>
+
+<p>
+Proof of Stake does not rely on the same competitive computational process used by Proof of Work.
+</p>
+
+<h3>2. Delegation can simplify participation</h3>
+
+<p>
+Some networks allow users to participate by delegating stake instead of operating validators themselves.
+</p>
+
+<h3>3. Economic incentives are built into participation</h3>
+
+<p>
+Stake can be used as part of the protocol's incentive and penalty structure.
+</p>
+
+<h3>4. Flexible protocol designs</h3>
+
+<p>
+Different networks can design their own validator selection, reward, voting, and finality mechanisms.
+</p>
+
+<h2>Limitations and Risks of Proof of Stake</h2>
+
+<h3>1. Stake concentration</h3>
+
+<p>
+Large concentrations of stake can increase centralization-related risks.
+</p>
+
+<h3>2. Validator risk</h3>
+
+<p>
+Delegators depend partly on validator performance and protocol rules.
+</p>
+
+<h3>3. Penalty risk</h3>
+
+<p>
+Some networks can penalize certain validator behaviors or failures.
+</p>
+
+<h3>4. Economic risks</h3>
+
+<p>
+Reward issuance and token inflation can affect the economics of the asset.
+</p>
+
+<h3>5. Technical complexity</h3>
+
+<p>
+Proof of Stake protocols can involve concepts such as slots, epochs, attestations, committees, and finality.
+</p>
+
+<h3>6. Infrastructure risk</h3>
+
+<p>
+Validators require reliable software, connectivity, and infrastructure, and failures may reduce rewards or trigger penalties depending on the network.
+</p>
+
+<h2>Is Proof of Stake More Efficient Than Proof of Work?</h2>
+
+<p>
+Operationally, Proof of Stake does not use the same competitive mining model as Proof of Work, so the infrastructure and energy requirements can be substantially different.
+</p>
+
+<p>
+However, network efficiency should not be evaluated using energy consumption alone. Security, decentralization, performance, reliability, economic incentives, and protocol design also matter.
+</p>
+
+<h2>Can a Proof of Stake Network Be Attacked?</h2>
+
+<p>
+No consensus mechanism is immune to every possible attack.
+</p>
+
+<p>
+A network's resistance to attacks depends on protocol design, stake distribution, validator selection, voting rules, penalties, software implementation, and other assumptions.
+</p>
+
+<p>
+A sufficiently influential group may attempt to gain control over consensus, exploit implementation weaknesses, or manipulate network conditions.
+</p>
+
+<p>
+Using Proof of Stake alone therefore does not prove that a network is completely secure.
+</p>
+
+<h2>How Is PoS Related to Chain Reorganization?</h2>
+
+<p>
+Some blockchains can temporarily experience competing chain views due to network conditions or disagreements between participants.
+</p>
+
+<p>
+Consensus rules determine how these situations are resolved.
+</p>
+
+<p>
+Networks with strong finality mechanisms can make certain states much harder to reverse once finalized.
+</p>
+
+<p>
+Learn more:
+<a href="/academy/blockchain/what-is-chain-reorganization">What Is Chain Reorganization?</a>
+</p>
+
+<h2>How Is PoS Related to Double Spending?</h2>
+
+<p>
+A major function of consensus is helping prevent conflicting network states from allowing the same asset to be spent more than once in the accepted ledger.
+</p>
+
+<p>
+Consensus rules help determine which state should be accepted.
+</p>
+
+<p>
+Learn more:
+<a href="/academy/blockchain/what-is-double-spending">What Is Double Spending?</a>
+</p>
+
+<h2>What Should Beginners Understand About PoS?</h2>
+
+<p>
+Beginners do not need to memorize every technical or mathematical detail to understand the basic concept.
+</p>
+
+<p>
+The key points are:
+</p>
+
+<ol>
+    <li>Proof of Stake is a consensus mechanism.</li>
+    <li>Validators participate in validation and consensus.</li>
+    <li>Stake is part of the participation and incentive model.</li>
+    <li>Validator selection differs between networks.</li>
+    <li>Rewards differ between protocols.</li>
+    <li>Some networks use slashing or other penalties.</li>
+    <li>Some networks use explicit finality mechanisms.</li>
+    <li>Stake distribution affects decentralization and security.</li>
+    <li>PoS does not automatically guarantee complete security or decentralization.</li>
+</ol>
+
+<h2>Conclusion</h2>
+
+<p>
+<strong>Proof of Stake</strong> is a consensus model used by some blockchain networks to agree on the state of the network, validate transactions, and add blocks.
+</p>
+
+<p>
+It uses validators and stake as part of its participation, incentive, and penalty structure, but the details of validator selection, block proposal, voting, finality, rewards, and penalties vary significantly between networks.
+</p>
+
+<p>
+Proof of Stake should not automatically be treated as synonymous with decentralization or absolute security. These properties depend on protocol design, stake distribution, participant behavior, software, infrastructure, governance, and other factors.
+</p>
+
+<h2>Frequently Asked Questions About Proof of Stake</h2>
+
+<h3>What is Proof of Stake in simple terms?</h3>
+<p>
+Proof of Stake is a blockchain consensus mechanism that uses stake as part of the process for validating transactions and reaching agreement on the network state.
+</p>
+
+<h3>Is Proof of Stake the same as staking?</h3>
+<p>
+No. Proof of Stake is a consensus mechanism, while staking is participation in a stake-based system according to protocol rules.
+</p>
+
+<h3>What is a validator?</h3>
+<p>
+A validator is a participant that operates the required infrastructure to help validate transactions and participate in consensus.
+</p>
+
+<h3>How are validators selected?</h3>
+<p>
+Selection varies by protocol and may involve stake, random or pseudo-random selection, validator status, and other rules.
+</p>
+
+<h3>Does the largest validator always receive the largest reward?</h3>
+<p>
+Not necessarily. Rewards depend on protocol rules, validator performance, commissions, and other factors.
+</p>
+
+<h3>What is slashing?</h3>
+<p>
+Slashing is a penalty mechanism used by some Proof of Stake networks for specific protocol violations or harmful validator behavior.
+</p>
+
+<h3>Do all Proof of Stake networks use slashing?</h3>
+<p>
+No. Penalty mechanisms differ between networks.
+</p>
+
+<h3>What is finality?</h3>
+<p>
+Finality is a protocol-defined state in which a block or network state becomes strongly confirmed and difficult or impossible to reverse within the protocol's security model.
+</p>
+
+<h3>Is Proof of Stake always decentralized?</h3>
+<p>
+No. Decentralization depends on stake distribution, validator diversity, infrastructure concentration, and other factors.
+</p>
+
+<h3>Is Proof of Stake safer than Proof of Work?</h3>
+<p>
+There is no universal answer. Both models have different assumptions, security mechanisms, risks, and economic designs.
+</p>
+
+<h3>Does a validator need specialized mining hardware?</h3>
+<p>
+No. Validators do not use mining hardware in the same way Proof of Work miners do, but they still require suitable servers, connectivity, storage, and computing resources depending on the network.
+</p>
+
+<h3>Are Proof of Stake rewards guaranteed?</h3>
+<p>
+No. Rewards depend on the network and can change, while fees, penalties, and changes in the asset's market value can also affect the outcome.
+</p>
+
+<h2>Related AQL Crypto Academy Lessons</h2>
+
+<ul>
+    <li><a href="/academy/staking">Staking Academy Path</a></li>
+    <li><a href="/academy/blockchain/what-is-blockchain">What Is Blockchain?</a></li>
+    <li><a href="/academy/blockchain/how-does-blockchain-work">How Does Blockchain Work?</a></li>
+    <li><a href="/academy/blockchain/what-is-blockchain-consensus">What Is Blockchain Consensus?</a></li>
+    <li><a href="/academy/blockchain/what-is-blockchain-finality">What Is Blockchain Finality?</a></li>
+    <li><a href="/academy/blockchain/what-is-chain-reorganization">What Is Chain Reorganization?</a></li>
+    <li><a href="/academy/blockchain/what-is-double-spending">What Is Double Spending?</a></li>
+    <li><a href="/academy/defi">DeFi Academy Path</a></li>
+    <li><a href="/academy/defi/defi-lending-and-borrowing">What Is DeFi Lending and Borrowing?</a></li>
+    <li><a href="/academy/defi/what-is-yield-farming">What Is Yield Farming?</a></li>
+</ul>
+
+<p>
+<strong>Educational disclaimer:</strong> This content is provided for educational purposes only and does not constitute financial or investment advice.
+</p>
+
+</div>
+HTML,
+
+    'image' => null,
+
+    'seo_title' => 'What Is Proof of Stake (PoS)? Complete Guide to Consensus',
+    'seo_title_ar' => 'ما هو Proof of Stake؟ دليل شامل لآلية إجماع إثبات الحصة',
+    'seo_title_en' => 'What Is Proof of Stake (PoS)? Complete Guide to Consensus',
+
+    'meta_description' => 'Learn how Proof of Stake works, including validators, block proposals, attestations, finality, staking rewards, slashing, decentralization, and PoS vs PoW.',
+    'meta_description_ar' => 'تعرف على Proof of Stake وكيف تعمل آلية إثبات الحصة، ودور Validators، واقتراح الكتل، والتصويت، وFinality، والمكافآت، وSlashing، واللامركزية، والفرق عن PoW.',
+    'meta_description_en' => 'Learn how Proof of Stake works, including validators, block proposals, attestations, finality, staking rewards, slashing, decentralization, and PoS vs PoW.',
+
+    'faq_ar' => [
+        [
+            'question' => 'ما هو Proof of Stake؟',
+            'answer' => 'Proof of Stake هو آلية إجماع تستخدم الحصة كجزء من طريقة مشاركة المشاركين في التحقق من المعاملات والوصول إلى اتفاق حول حالة شبكة البلوكشين.'
+        ],
+        [
+            'question' => 'هل Proof of Stake هو نفسه Staking؟',
+            'answer' => 'لا. Proof of Stake هو آلية إجماع، بينما Staking هو المشاركة في نظام يعتمد على الحصة وفق قواعد البروتوكول.'
+        ],
+        [
+            'question' => 'من هو Validator؟',
+            'answer' => 'Validator هو مشارك يشغل البنية البرمجية المطلوبة للمساهمة في التحقق من المعاملات والمشاركة في عملية الإجماع.'
+        ],
+        [
+            'question' => 'كيف يتم اختيار Validator؟',
+            'answer' => 'تختلف آلية الاختيار حسب الشبكة، وقد تعتمد على الحصة والاختيار العشوائي أو شبه العشوائي وحالة Validator وقواعد أخرى.'
+        ],
+        [
+            'question' => 'ما هو Slashing؟',
+            'answer' => 'Slashing هو آلية عقوبات تستخدمها بعض شبكات Proof of Stake لمعاقبة أنواع محددة من السلوك المخالف لقواعد البروتوكول.'
+        ],
+        [
+            'question' => 'هل كل شبكات Proof of Stake تستخدم Slashing؟',
+            'answer' => 'لا. تختلف آليات العقوبات وشروط تطبيقها من شبكة إلى أخرى.'
+        ],
+        [
+            'question' => 'ما المقصود بـ Finality؟',
+            'answer' => 'Finality هي حالة تصبح فيها كتلة أو حالة معينة مؤكدة وفق قواعد البروتوكول بدرجة تجعل التراجع عنها غير متوقع أو غير ممكن ضمن النموذج الأمني للشبكة.'
+        ],
+        [
+            'question' => 'هل Proof of Stake لامركزي دائمًا؟',
+            'answer' => 'لا. اللامركزية تعتمد على توزيع الحصة وتنوع Validators وتركيز البنية التحتية وعوامل أخرى.'
+        ],
+        [
+            'question' => 'هل Proof of Stake أكثر أمانًا من Proof of Work؟',
+            'answer' => 'لا توجد إجابة عامة. لكل نموذج افتراضاته وآليات الحماية والمخاطر والتصميم الاقتصادي المختلف.'
+        ],
+        [
+            'question' => 'هل مكافآت Proof of Stake مضمونة؟',
+            'answer' => 'لا. المكافآت تعتمد على قواعد الشبكة وقد تتغير، كما توجد رسوم وعقوبات ومخاطر مرتبطة بقيمة الأصل.'
+        ],
+    ],
+
+    'faq_en' => [
+        [
+            'question' => 'What is Proof of Stake?',
+            'answer' => 'Proof of Stake is a blockchain consensus mechanism that uses stake as part of the process for validating transactions and reaching agreement on the network state.'
+        ],
+        [
+            'question' => 'Is Proof of Stake the same as staking?',
+            'answer' => 'No. Proof of Stake is a consensus mechanism, while staking is participation in a stake-based system according to protocol rules.'
+        ],
+        [
+            'question' => 'What is a validator?',
+            'answer' => 'A validator is a participant that operates the required infrastructure to help validate transactions and participate in consensus.'
+        ],
+        [
+            'question' => 'How are validators selected?',
+            'answer' => 'Validator selection varies by protocol and may involve stake, random or pseudo-random selection, validator status, and other rules.'
+        ],
+        [
+            'question' => 'What is slashing?',
+            'answer' => 'Slashing is a penalty mechanism used by some Proof of Stake networks for specific protocol violations or harmful validator behavior.'
+        ],
+        [
+            'question' => 'Do all Proof of Stake networks use slashing?',
+            'answer' => 'No. Penalty mechanisms and their conditions vary between networks.'
+        ],
+        [
+            'question' => 'What is finality?',
+            'answer' => 'Finality is a protocol-defined state in which a block or network state becomes strongly confirmed and difficult or impossible to reverse within the protocol security model.'
+        ],
+        [
+            'question' => 'Is Proof of Stake always decentralized?',
+            'answer' => 'No. Decentralization depends on stake distribution, validator diversity, infrastructure concentration, and other factors.'
+        ],
+        [
+            'question' => 'Is Proof of Stake safer than Proof of Work?',
+            'answer' => 'There is no universal answer. Both models have different assumptions, security mechanisms, risks, and economic designs.'
+        ],
+        [
+            'question' => 'Are Proof of Stake rewards guaranteed?',
+            'answer' => 'No. Rewards depend on the network and can change, while fees, penalties, and changes in the asset market value can also affect the outcome.'
+        ],
+    ],
+
+    'status' => 'published',
+    'sort_order' => 2,
+    'published_at' => now(),
+],
+
+];
 
     }
 }
