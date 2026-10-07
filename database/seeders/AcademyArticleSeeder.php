@@ -34090,8 +34090,16 @@ HTML,
     'published_at' => now(),
 ],
 
-
 ];
+foreach ($stakingArticles as $article) {
+    AcademyArticle::updateOrCreate(
+        [
+            'topic_id' => $staking->id,
+            'slug' => $article['slug'],
+        ],
+        $article
+    );
+}
 
     }
 }
