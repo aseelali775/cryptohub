@@ -34101,5 +34101,2999 @@ foreach ($stakingArticles as $article) {
     );
 }
 
+
+
+$web3Articles = [
+
+    [
+    'title' => 'What Is Web3?',
+    'title_ar' => 'ما هو Web3؟ شرح الويب اللامركزي للمبتدئين',
+    'title_en' => 'What Is Web3? A Beginner’s Guide to the Decentralized Web',
+
+    'slug' => 'what-is-web3',
+
+    'excerpt' => 'A complete beginner-friendly introduction to Web3, its main components, how it differs from Web2, and how blockchain, wallets, smart contracts and DApps fit together.',
+    'excerpt_ar' => 'دليل شامل للمبتدئين لفهم Web3 والويب اللامركزي، ومكوناته الأساسية، والفرق بين Web2 وWeb3، ودور البلوكشين والمحافظ والعقود الذكية والتطبيقات اللامركزية.',
+    'excerpt_en' => 'A complete beginner-friendly introduction to Web3, its main components, how it differs from Web2, and how blockchain, wallets, smart contracts and DApps fit together.',
+
+    'content' => null,
+
+    'content_ar' => <<<'HTML'
+<h2>ما هو Web3؟</h2>
+
+<p>
+Web3 هو مصطلح يُستخدم لوصف جيل من تطبيقات وخدمات الإنترنت التي تستفيد من تقنيات مثل
+<strong>Blockchain</strong> والعقود الذكية والمحافظ الرقمية والتطبيقات اللامركزية،
+بهدف منح المستخدمين دورًا أكبر في امتلاك الأصول الرقمية والتفاعل مع الخدمات دون الاعتماد
+بالضرورة على منصة مركزية واحدة.
+</p>
+
+<p>
+ولا يعني Web3 أن كل شيء على الإنترنت يصبح لامركزيًا بالكامل. في الواقع، يمكن لتطبيقات
+Web3 أن تحتوي على أجزاء مركزية مثل الواجهات الأمامية والخوادم ومزودي خدمات البنية التحتية.
+لذلك من الأفضل النظر إلى Web3 باعتباره <strong>مجموعة من التقنيات والنماذج الجديدة لبناء
+واستخدام خدمات الإنترنت</strong>، وليس شبكة منفصلة تحل محل الإنترنت الحالي بالكامل.
+</p>
+
+<p>
+لفهم Web3 بشكل صحيح، من المفيد أولًا معرفة كيف تطور الويب من Web1 إلى Web2 ثم إلى
+النموذج الذي يُشار إليه اليوم باسم Web3.
+</p>
+
+<h2>من Web1 إلى Web2 ثم Web3</h2>
+
+<h3>Web1: الويب للقراءة</h3>
+
+<p>
+يشير Web1 بشكل مبسط إلى المرحلة المبكرة من الإنترنت، عندما كانت معظم المواقع عبارة عن
+صفحات ثابتة يقرأ المستخدم محتواها دون تفاعل كبير معها.
+</p>
+
+<p>
+كان المستخدم في الغالب <strong>قارئًا للمحتوى</strong>، بينما كان إنشاء ونشر المحتوى
+أقل سهولة مما هو عليه اليوم.
+</p>
+
+<h3>Web2: الويب التفاعلي</h3>
+
+<p>
+مع Web2 أصبح الإنترنت أكثر تفاعلية. ظهرت الشبكات الاجتماعية والمنصات التي تسمح للمستخدم
+بإنشاء المحتوى والتعليق والمشاركة والتواصل وإدارة حسابه من خلال خدمات مركزية.
+</p>
+
+<p>
+أصبح المستخدم في Web2 مشاركًا وصانعًا للمحتوى، لكن المنصة غالبًا ما تتحكم في جزء كبير
+من البيانات والحسابات والبنية التحتية.
+</p>
+
+<p>
+فعلى سبيل المثال، عند إنشاء حساب في منصة مركزية، تكون هوية المستخدم وحساباته وبياناته
+عادة مرتبطة بالبنية التحتية التي تديرها تلك المنصة.
+</p>
+
+<h3>Web3: ملكية وتفاعل قائم على الشبكات اللامركزية</h3>
+
+<p>
+يحاول Web3 إضافة نموذج مختلف من خلال استخدام شبكات البلوكشين والعقود الذكية والمحافظ
+والأصول الرقمية.
+</p>
+
+<p>
+بدل أن يكون الحساب هو الوسيلة الوحيدة للتفاعل مع الخدمة، يمكن للمستخدم في بعض تطبيقات
+Web3 استخدام <strong>محفظة رقمية</strong> للتوقيع على العمليات والتفاعل مع العقود الذكية.
+</p>
+
+<p>
+وهنا تظهر فكرة مهمة: في Web3 قد تنتقل بعض جوانب التحكم والملكية من المنصة إلى المستخدم
+أو إلى بروتوكول يعمل على شبكة لامركزية.
+</p>
+
+<h2>ما الفكرة الأساسية وراء Web3؟</h2>
+
+<p>
+يمكن تلخيص الفكرة الأساسية لـ Web3 في محاولة بناء خدمات إنترنت تسمح للمستخدمين بالتفاعل
+مع شبكات وبروتوكولات يمكن تشغيلها دون الاعتماد الكامل على جهة مركزية واحدة.
+</p>
+
+<p>
+وتعتمد هذه الفكرة على عدة مكونات تعمل معًا، أهمها:
+</p>
+
+<ul>
+    <li><strong>Blockchain:</strong> طبقة لتسجيل البيانات والعمليات بطريقة موزعة وفق قواعد الشبكة.</li>
+    <li><strong>Smart Contracts:</strong> برامج تعمل على البلوكشين لتنفيذ منطق محدد وفق قواعدها.</li>
+    <li><strong>Wallets:</strong> أدوات لإدارة المفاتيح والتوقيع على العمليات والتفاعل مع التطبيقات.</li>
+    <li><strong>DApps:</strong> تطبيقات تستخدم العقود الذكية أو شبكات البلوكشين كجزء من بنيتها.</li>
+    <li><strong>Digital Assets:</strong> أصول ورموز رقمية يمكن تسجيل ملكيتها أو نقلها على شبكات البلوكشين.</li>
+    <li><strong>Decentralized Infrastructure:</strong> مجموعة من التقنيات التي قد تقلل الاعتماد على بعض مكونات البنية المركزية.</li>
+</ul>
+
+<h2>كيف يعمل Web3 بشكل مبسط؟</h2>
+
+<p>
+عندما يتفاعل المستخدم مع تطبيق Web3، قد تحدث عدة خطوات خلف الكواليس.
+</p>
+
+<ol>
+    <li>يفتح المستخدم واجهة التطبيق.</li>
+    <li>يتصل بمحفظته الرقمية إذا كان التطبيق يحتاج إلى توقيع أو إثبات ملكية.</li>
+    <li>ينشئ التطبيق طلبًا أو معاملة.</li>
+    <li>تقوم المحفظة بتوقيع العملية باستخدام المفتاح الخاص دون كشف المفتاح الخاص للتطبيق.</li>
+    <li>تُرسل المعاملة إلى شبكة البلوكشين عبر البنية التحتية المناسبة.</li>
+    <li>تتحقق الشبكة من المعاملة وفق قواعد الإجماع الخاصة بها.</li>
+    <li>إذا كانت العملية تتفاعل مع عقد ذكي، ينفذ العقد المنطق المحدد فيه.</li>
+    <li>تُسجل النتيجة على الشبكة وفق طبيعة العملية والبروتوكول المستخدم.</li>
+</ol>
+
+<p>
+لكن ليس كل تطبيق Web3 يعمل بالطريقة نفسها. بعض التطبيقات تعتمد على العقود الذكية بشكل
+كبير، بينما تستخدم تطبيقات أخرى مزيجًا من البنية اللامركزية والمكونات المركزية.
+</p>
+
+<h2>ما دور Blockchain في Web3؟</h2>
+
+<p>
+البلوكشين يمثل أحد أهم المكونات في منظومة Web3 لأنه يمكن أن يوفر طبقة مشتركة لتسجيل
+المعاملات والبيانات وفق قواعد محددة.
+</p>
+
+<p>
+بدل أن يكون السجل موجودًا داخل قاعدة بيانات خاصة بشركة واحدة، يمكن لشبكة البلوكشين
+أن تحتفظ بسجل يتم التحقق منه وتحديثه بواسطة مجموعة من المشاركين في الشبكة.
+</p>
+
+<p>
+ومع ذلك، لا يعني استخدام Blockchain تلقائيًا أن التطبيق أصبح لامركزيًا بالكامل.
+فقد تكون الواجهة أو الخوادم أو خدمات التخزين أو بعض أجزاء النظام تحت سيطرة جهة واحدة.
+</p>
+
+<h2>ما هي العقود الذكية في Web3؟</h2>
+
+<p>
+العقد الذكي هو برنامج يُنشر على شبكة بلوكشين ويدير منطقًا محددًا وفق القواعد التي تمت
+برمجته عليها، مع اختلاف التفاصيل التقنية من شبكة إلى أخرى.
+</p>
+
+<p>
+يمكن للعقود الذكية أن تُستخدم في:
+</p>
+
+<ul>
+    <li>إدارة الرموز الرقمية.</li>
+    <li>تنفيذ عمليات نقل الأصول.</li>
+    <li>إنشاء تطبيقات مالية لامركزية.</li>
+    <li>إدارة بعض أنواع الأصول الرقمية.</li>
+    <li>تنفيذ قواعد بروتوكولات مختلفة.</li>
+    <li>إدارة عمليات التصويت أو الحوكمة في بعض الأنظمة.</li>
+</ul>
+
+<p>
+ومن المهم فهم أن العقد الذكي لا يملك القدرة على فعل أي شيء خارج البيئة التي توفرها له
+الشبكة أو الخدمات المرتبطة به. وقد يحتاج إلى مصادر بيانات خارجية، مثل Oracles، عندما
+يتعامل مع معلومات من العالم الخارجي.
+</p>
+
+<h2>ما هي محفظة Web3؟</h2>
+
+<p>
+محفظة Web3 ليست مجرد مكان لتخزين العملات الرقمية بالمعنى التقليدي. في كثير من الحالات
+تعمل المحفظة كأداة لإدارة المفاتيح الرقمية وتوقيع المعاملات والتفاعل مع التطبيقات.
+</p>
+
+<p>
+عند استخدام محفظة للتفاعل مع تطبيق Web3، فإن التطبيق قد يطلب من المستخدم توقيع عملية.
+يتم إنشاء التوقيع باستخدام المفتاح الخاص، بينما لا ينبغي مشاركة المفتاح الخاص مع الموقع
+أو التطبيق.
+</p>
+
+<p>
+ولهذا السبب تعتبر حماية العبارة السرية والمفاتيح الخاصة من أهم قواعد أمان Web3.
+</p>
+
+<h2>ما هي DApps؟</h2>
+
+<p>
+DApps هي اختصار لـ <strong>Decentralized Applications</strong>، أي التطبيقات اللامركزية.
+وهي تطبيقات تستخدم البلوكشين أو العقود الذكية كجزء أساسي من وظائفها.
+</p>
+
+<p>
+لكن مصطلح "لامركزي" لا يعني بالضرورة أن كل مكونات التطبيق موزعة بالكامل.
+فقد تكون الواجهة الأمامية مستضافة على خادم تقليدي، بينما تتم بعض العمليات المهمة من خلال
+عقد ذكي على البلوكشين.
+</p>
+
+<p>
+لذلك يجب تقييم كل تطبيق Web3 بناءً على مكوناته الفعلية، وليس اعتمادًا على الاسم فقط.
+</p>
+
+<h2>ما الفرق بين Web2 وWeb3؟</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>العنصر</th>
+            <th>Web2</th>
+            <th>Web3</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>إدارة الحساب</td>
+            <td>غالبًا حساب تديره منصة مركزية</td>
+            <td>قد يعتمد على محفظة وهوية رقمية قائمة على التوقيع</td>
+        </tr>
+        <tr>
+            <td>البيانات</td>
+            <td>غالبًا تديرها المنصة</td>
+            <td>قد تُسجل بعض البيانات أو الملكيات على البلوكشين</td>
+        </tr>
+        <tr>
+            <td>الملكية الرقمية</td>
+            <td>قد تكون مرتبطة بقاعدة بيانات المنصة</td>
+            <td>يمكن تمثيل بعض الأصول والحقوق برموز على الشبكة</td>
+        </tr>
+        <tr>
+            <td>تنفيذ العمليات</td>
+            <td>غالبًا يتم عبر خوادم مركزية</td>
+            <td>قد يتم جزء من المنطق عبر عقود ذكية</td>
+        </tr>
+        <tr>
+            <td>الاعتماد على جهة واحدة</td>
+            <td>غالبًا مرتفع في الخدمات المركزية</td>
+            <td>قد ينخفض في بعض التطبيقات والبروتوكولات، لكنه لا يختفي بالضرورة</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>هل Web3 يعني اللامركزية الكاملة؟</h2>
+
+<p>
+لا. هذه من أهم النقاط التي يجب فهمها عند دراسة Web3.
+</p>
+
+<p>
+يمكن أن يحتوي تطبيق Web3 على أجزاء مركزية متعددة، مثل:
+</p>
+
+<ul>
+    <li>واجهة المستخدم.</li>
+    <li>خوادم API.</li>
+    <li>مزود RPC.</li>
+    <li>خدمات التحليل والفهرسة.</li>
+    <li>خدمات التخزين.</li>
+    <li>نقاط الدخول أو البنية التشغيلية.</li>
+</ul>
+
+<p>
+لذلك من الأفضل وصف اللامركزية بأنها <strong>طيف أو مجموعة من الخصائص</strong> بدل اعتبار
+التطبيق إما مركزيًا بالكامل أو لامركزيًا بالكامل.
+</p>
+
+<h2>ما المقصود بالملكية الرقمية في Web3؟</h2>
+
+<p>
+من الأفكار المهمة في Web3 إمكانية تمثيل ملكية بعض الأصول الرقمية بواسطة سجلات على
+البلوكشين.
+</p>
+
+<p>
+فعلى سبيل المثال، يمكن استخدام الرموز الرقمية لتمثيل وحدات أو حقوق محددة وفق تصميم
+البروتوكول.
+</p>
+
+<p>
+لكن امتلاك رمز على البلوكشين لا يعني تلقائيًا امتلاك حقوق قانونية في أصل حقيقي أو شركة
+أو خدمة. طبيعة الحقوق تعتمد على تصميم الأصل والعقد والقوانين والاتفاقيات المرتبطة به.
+</p>
+
+<h2>ما العلاقة بين Web3 والعملات الرقمية؟</h2>
+
+<p>
+العملات والرموز الرقمية تمثل جزءًا مهمًا من Web3 لأنها يمكن أن تُستخدم داخل بعض التطبيقات
+للدفع أو الحوافز أو الحوكمة أو تمثيل الأصول.
+</p>
+
+<p>
+لكن Web3 أوسع من مجرد العملات الرقمية. فالمفهوم يشمل التطبيقات والبنية التحتية والهوية
+والملكية الرقمية والتفاعل مع الشبكات اللامركزية.
+</p>
+
+<p>
+لذلك يمكن النظر إلى العملات الرقمية كأحد مكونات منظومة Web3، وليس باعتبارها التعريف
+الكامل لها.
+</p>
+
+<h2>ما العلاقة بين Web3 وDeFi؟</h2>
+
+<p>
+DeFi أو التمويل اللامركزي يمثل أحد أهم المجالات التي تطورت ضمن منظومة Web3.
+</p>
+
+<p>
+تستخدم تطبيقات DeFi العقود الذكية والبنية القائمة على البلوكشين لتوفير وظائف مالية مختلفة،
+مثل التداول والإقراض والاقتراض وإدارة السيولة.
+</p>
+
+<p>
+لكن Web3 أوسع من DeFi، ويشمل أيضًا مجالات مثل التطبيقات اللامركزية والأصول الرقمية
+والهوية الرقمية وNFTs والبنية التحتية وغيرها.
+</p>
+
+<p>
+يمكنك التوسع في هذا الموضوع من خلال
+<a href="/academy/defi">مسار DeFi في أكاديمية AQL Crypto</a>.
+</p>
+
+<h2>ما العلاقة بين Web3 وNFTs؟</h2>
+
+<p>
+NFT هو رمز غير قابل للاستبدال يمكن استخدامه لتمثيل أصل أو عنصر رقمي وفق تصميم الشبكة
+والعقد الذكي.
+</p>
+
+<p>
+وقد أصبحت NFTs أحد التطبيقات المعروفة لفكرة الملكية الرقمية، لكن استخدامها لا يقتصر
+على الصور أو الأعمال الفنية. يمكن أن تستخدم في الألعاب والتذاكر والمقتنيات الرقمية
+وأنظمة العضوية وغيرها.
+</p>
+
+<p>
+وسنخصص لاحقًا مسارًا مستقلاً في الأكاديمية لشرح NFTs بشكل أكثر تفصيلًا.
+</p>
+
+<h2>ما فوائد Web3 المحتملة؟</h2>
+
+<h3>1. تقليل الاعتماد على بعض الوسطاء</h3>
+
+<p>
+في بعض الحالات يمكن للعقود الذكية تنفيذ قواعد محددة مباشرة على الشبكة بدل الاعتماد
+على جهة مركزية لتنفيذ كل خطوة.
+</p>
+
+<h3>2. قابلية نقل بعض الأصول</h3>
+
+<p>
+يمكن لبعض الأصول الرقمية أن تكون مرتبطة بمحفظة المستخدم بدل أن تكون محصورة داخل حساب
+منصة واحدة، مع مراعاة أن قابلية النقل تعتمد على تصميم الأصل والتطبيق.
+</p>
+
+<h3>3. الشفافية القابلة للتحقق</h3>
+
+<p>
+يمكن للبيانات المسجلة على بعض شبكات البلوكشين أن تكون قابلة للفحص والتحقق بشكل عام،
+لكن مستوى الشفافية يختلف حسب نوع الشبكة والبيانات.
+</p>
+
+<h3>4. قابلية البرمجة</h3>
+
+<p>
+تسمح العقود الذكية بإنشاء منطق برمجي يمكن تنفيذه وفق قواعد الشبكة، وهو ما يفتح المجال
+لإنشاء بروتوكولات وتطبيقات جديدة.
+</p>
+
+<h3>5. إمكانية بناء خدمات مفتوحة</h3>
+
+<p>
+بعض البروتوكولات تسمح لمطورين ومستخدمين مختلفين بالتفاعل مع نفس العقود أو البيانات،
+مما قد يساعد على بناء منظومات مترابطة.
+</p>
+
+<h2>ما أهم مخاطر Web3؟</h2>
+
+<p>
+رغم الإمكانات الكبيرة، لا يخلو Web3 من المخاطر والتحديات.
+</p>
+
+<ul>
+    <li><strong>أخطاء العقود الذكية:</strong> وجود خطأ برمجي قد يؤدي إلى نتائج غير متوقعة.</li>
+    <li><strong>سرقة المفاتيح:</strong> فقدان المفتاح الخاص أو العبارة السرية قد يؤدي إلى فقدان الوصول إلى الأصول.</li>
+    <li><strong>التطبيقات الاحتيالية:</strong> قد تنتحل بعض المواقع والتطبيقات أسماء مشاريع معروفة.</li>
+    <li><strong>المعاملات غير القابلة للعكس:</strong> بعض معاملات البلوكشين لا يمكن إلغاؤها بسهولة بعد تأكيدها.</li>
+    <li><strong>مخاطر البنية التحتية:</strong> اعتماد التطبيق على مزود RPC أو خدمة فهرسة أو واجهة مركزية قد يمثل نقطة فشل.</li>
+    <li><strong>مخاطر الحوكمة:</strong> قد تكون السيطرة على بعض البروتوكولات مركزة لدى عدد محدود من المشاركين.</li>
+    <li><strong>مخاطر الجسور:</strong> الأنظمة التي تنقل الأصول أو الرسائل بين شبكات مختلفة تضيف افتراضات ومخاطر إضافية.</li>
+    <li><strong>المخاطر التنظيمية:</strong> القوانين المتعلقة بالأصول الرقمية والخدمات المبنية على البلوكشين تختلف بين الدول.</li>
+</ul>
+
+<h2>هل Web3 أكثر أمانًا من Web2؟</h2>
+
+<p>
+لا يمكن القول بشكل عام إن Web3 أكثر أمانًا أو أقل أمانًا من Web2.
+</p>
+
+<p>
+Web3 يغير بعض نماذج الثقة والمخاطر. ففي بعض التطبيقات قد يقل الاعتماد على خادم مركزي،
+لكن المستخدم قد يتحمل مسؤولية أكبر عن حماية المفاتيح والتوقيعات والتأكد من العقود
+والتطبيقات التي يتفاعل معها.
+</p>
+
+<p>
+كما أن استخدام Blockchain لا يجعل العقد الذكي أو التطبيق آمنًا تلقائيًا. الأمان يعتمد
+على جودة البرمجيات وتصميم البروتوكول والبنية التحتية وإدارة المفاتيح والحوكمة وغيرها
+من العوامل.
+</p>
+
+<h2>مثال مبسط على استخدام Web3</h2>
+
+<p>
+لنفترض أن هناك تطبيقًا يسمح للمستخدمين بالتفاعل مع أصل رقمي عبر عقد ذكي.
+</p>
+
+<ol>
+    <li>يدخل المستخدم إلى واجهة التطبيق.</li>
+    <li>يتصل بمحفظته.</li>
+    <li>يختار العملية التي يريد تنفيذها.</li>
+    <li>ينشئ التطبيق معاملة مناسبة للعقد الذكي.</li>
+    <li>تعرض المحفظة تفاصيل العملية للمستخدم.</li>
+    <li>يوافق المستخدم ويوقع المعاملة.</li>
+    <li>ترسل المعاملة إلى الشبكة.</li>
+    <li>تتحقق الشبكة منها.</li>
+    <li>ينفذ العقد الذكي العملية وفق قواعده.</li>
+    <li>يمكن للتطبيق قراءة النتيجة وعرضها للمستخدم.</li>
+</ol>
+
+<p>
+هذا المثال يوضح الفكرة العامة، لكن التفاصيل تختلف كثيرًا من شبكة إلى أخرى ومن تطبيق
+إلى آخر.
+</p>
+
+<h2>ما الذي تحتاج إلى تعلمه لفهم Web3؟</h2>
+
+<p>
+إذا كنت جديدًا على Web3، فمن الأفضل عدم محاولة تعلم جميع المصطلحات دفعة واحدة. اتبع
+ترتيبًا تدريجيًا:
+</p>
+
+<ol>
+    <li>تعلم أساسيات Blockchain.</li>
+    <li>افهم كيف تعمل المعاملات والشبكات.</li>
+    <li>تعلم مفهوم الإجماع وFinality.</li>
+    <li>افهم المحافظ والمفاتيح والتوقيعات.</li>
+    <li>تعلم العقود الذكية.</li>
+    <li>افهم DApps.</li>
+    <li>تعلم كيف تتفاعل التطبيقات مع البلوكشين.</li>
+    <li>بعد ذلك انتقل إلى DeFi وNFTs وباقي تطبيقات Web3.</li>
+</ol>
+
+<p>
+يمكنك البدء من
+<a href="/academy/blockchain/what-is-blockchain">درس ما هو Blockchain؟</a>
+ثم الانتقال إلى
+<a href="/academy/blockchain/how-does-blockchain-work">كيف يعمل Blockchain؟</a>
+لفهم الأساس التقني الذي يعتمد عليه جزء كبير من Web3.
+</p>
+
+<h2>أهم المصطلحات التي يجب معرفتها</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>المصطلح</th>
+            <th>المعنى المبسط</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Web3</td>
+            <td>نموذج لتطبيقات وخدمات إنترنت تستفيد من تقنيات لامركزية مثل Blockchain.</td>
+        </tr>
+        <tr>
+            <td>Blockchain</td>
+            <td>شبكة وسجل موزع لتسجيل البيانات والمعاملات وفق قواعد محددة.</td>
+        </tr>
+        <tr>
+            <td>Smart Contract</td>
+            <td>برنامج يعمل على البلوكشين وينفذ منطقًا محددًا.</td>
+        </tr>
+        <tr>
+            <td>Wallet</td>
+            <td>أداة لإدارة المفاتيح والتوقيع والتفاعل مع التطبيقات والشبكات.</td>
+        </tr>
+        <tr>
+            <td>DApp</td>
+            <td>تطبيق يستخدم البلوكشين أو العقود الذكية كجزء من وظائفه.</td>
+        </tr>
+        <tr>
+            <td>Token</td>
+            <td>أصل أو وحدة رقمية يتم إصدارها وفق قواعد محددة على شبكة بلوكشين.</td>
+        </tr>
+        <tr>
+            <td>Oracle</td>
+            <td>آلية أو خدمة توفر للعقود الذكية بيانات من خارج البلوكشين.</td>
+        </tr>
+        <tr>
+            <td>RPC</td>
+            <td>واجهة تستخدمها التطبيقات للتواصل مع عقد أو خدمات الوصول إلى شبكة البلوكشين.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>أخطاء شائعة عند فهم Web3</h2>
+
+<h3>Web3 يعني العملات الرقمية فقط</h3>
+
+<p>
+هذا غير صحيح. العملات الرقمية جزء من المنظومة، لكن Web3 يشمل أيضًا التطبيقات والعقود
+الذكية والبنية التحتية والهوية والأصول الرقمية وغيرها.
+</p>
+
+<h3>كل Web3 لامركزي بالكامل</h3>
+
+<p>
+ليس بالضرورة. يجب فحص مكونات التطبيق لمعرفة الأجزاء اللامركزية والأجزاء المركزية.
+</p>
+
+<h3>Blockchain يعني أن التطبيق آمن</h3>
+
+<p>
+استخدام البلوكشين لا يلغي أخطاء البرمجيات أو مخاطر المفاتيح أو مخاطر البنية التحتية.
+</p>
+
+<h3>المحفظة تخزن العملات بداخلها</h3>
+
+<p>
+المحفظة في الأساس تساعد المستخدم على إدارة المفاتيح والتوقيع والتفاعل مع الشبكات.
+الأصول نفسها تُسجل وفق قواعد الشبكة، وليست ببساطة ملفات مخزنة داخل تطبيق المحفظة.
+</p>
+
+<h3>كل معاملة Web3 يمكن إلغاؤها</h3>
+
+<p>
+ليس بالضرورة. بعد تأكيد المعاملة على الشبكة قد لا يكون هناك طريق عملي لإلغائها أو عكس
+نتيجتها.
+</p>
+
+<h2>كيف تبدأ تعلم Web3؟</h2>
+
+<p>
+أفضل طريقة هي بناء فهم تدريجي بدل حفظ المصطلحات.
+ابدأ بالبلوكشين، ثم تعلم المحافظ والمفاتيح، وبعدها العقود الذكية وDApps، ثم انتقل إلى
+DeFi وNFTs والبنية التحتية والأمان.
+</p>
+
+<p>
+في الدروس التالية من مسار Web3 سنتوسع في كيفية عمل هذه المكونات والعلاقة بينها، بحيث
+تنتقل من الصورة العامة إلى التفاصيل التقنية تدريجيًا.
+</p>
+
+<h2>الخلاصة</h2>
+
+<p>
+Web3 هو مفهوم واسع يشير إلى جيل من تطبيقات وخدمات الإنترنت التي تستفيد من Blockchain
+والعقود الذكية والمحافظ والأصول الرقمية وغيرها من التقنيات اللامركزية.
+</p>
+
+<p>
+الفكرة الأساسية ليست مجرد إنشاء عملات رقمية جديدة، وإنما تغيير بعض طرق امتلاك الأصول
+والتفاعل مع التطبيقات وتنفيذ العمليات على الإنترنت.
+</p>
+
+<p>
+ومع ذلك، Web3 ليس لامركزيًا بالكامل في جميع الحالات، وليس أكثر أمانًا تلقائيًا من
+Web2. لكل تطبيق تصميمه وافتراضات الثقة والمخاطر الخاصة به.
+</p>
+
+<p>
+إذا فهمت العلاقة بين <strong>Blockchain + Smart Contracts + Wallets + DApps</strong>،
+فقد وضعت الأساس الصحيح لفهم بقية منظومة Web3.
+</p>
+
+<hr>
+
+<h2>الأسئلة الشائعة حول Web3</h2>
+
+<h3>ما هو Web3 باختصار؟</h3>
+<p>
+Web3 هو مفهوم يشير إلى تطبيقات وخدمات إنترنت تستخدم تقنيات مثل Blockchain والعقود الذكية
+والمحافظ والأصول الرقمية لمنح المستخدمين طرقًا جديدة للتفاعل والملكية.
+</p>
+
+<h3>ما الفرق بين Web2 وWeb3؟</h3>
+<p>
+Web2 يعتمد غالبًا على منصات وخدمات مركزية لإدارة الحسابات والبيانات، بينما يستخدم Web3
+تقنيات مثل Blockchain والمحافظ والعقود الذكية في بعض التطبيقات لتوزيع بعض جوانب التحكم
+والملكية.
+</p>
+
+<h3>هل Web3 يعني اللامركزية الكاملة؟</h3>
+<p>
+لا. يمكن أن تحتوي تطبيقات Web3 على مكونات مركزية مثل الواجهات والخوادم ومزودي RPC
+وخدمات الفهرسة والتخزين.
+</p>
+
+<h3>هل Web3 هو نفسه العملات الرقمية؟</h3>
+<p>
+لا. العملات والرموز الرقمية جزء من Web3، لكن المفهوم يشمل أيضًا Blockchain والعقود
+الذكية وDApps والمحافظ والبنية التحتية والهوية الرقمية وغيرها.
+</p>
+
+<h3>ما هي DApps؟</h3>
+<p>
+DApps هي تطبيقات تستخدم Blockchain أو العقود الذكية كجزء أساسي من وظائفها، مع إمكانية
+وجود مكونات مركزية في بعض الحالات.
+</p>
+
+<h3>ما دور المحفظة في Web3؟</h3>
+<p>
+تستخدم المحفظة لإدارة المفاتيح الرقمية والتوقيع على المعاملات والتفاعل مع التطبيقات
+والشبكات، وليست مجرد مكان لتخزين العملات.
+</p>
+
+<h3>هل Web3 آمن؟</h3>
+<p>
+لا توجد إجابة عامة. الأمان يعتمد على تصميم الشبكة والعقد الذكي والتطبيق والبنية التحتية
+وحماية المستخدم لمفاتيحه وغيرها من العوامل.
+</p>
+
+<h3>هل Web3 وDeFi شيء واحد؟</h3>
+<p>
+لا. DeFi هو أحد المجالات المهمة داخل منظومة Web3، بينما Web3 مفهوم أوسع يشمل مجالات
+وتطبيقات متعددة.
+</p>
+
+<h3>هل يمكن امتلاك الأصول الرقمية في Web3؟</h3>
+<p>
+يمكن تمثيل ملكية بعض الأصول الرقمية بواسطة سجلات ورموز على البلوكشين، لكن طبيعة الملكية
+والحقوق المرتبطة بها تعتمد على تصميم الأصل والقوانين والاتفاقيات ذات الصلة.
+</p>
+
+<h3>هل يجب أن أتعلم البرمجة لفهم Web3؟</h3>
+<p>
+لا. يمكن فهم أساسيات Web3 دون برمجة، لكن تعلم البرمجة والعقود الذكية وتقنيات البلوكشين
+يساعدك على الانتقال إلى المستوى التقني المتقدم.
+</p>
+
+<h2>دروس ذات صلة</h2>
+
+<ul>
+    <li>
+        <a href="/academy/blockchain/what-is-blockchain">
+            ما هو Blockchain؟
+        </a>
+    </li>
+    <li>
+        <a href="/academy/blockchain/how-does-blockchain-work">
+            كيف يعمل Blockchain؟
+        </a>
+    </li>
+    <li>
+        <a href="/academy/blockchain/what-is-blockchain-consensus">
+            ما هو إجماع Blockchain؟
+        </a>
+    </li>
+    <li>
+        <a href="/academy/blockchain/what-is-blockchain-finality">
+            ما هي Finality في Blockchain؟
+        </a>
+    </li>
+    <li>
+        <a href="/academy/defi">
+            مسار DeFi
+        </a>
+    </li>
+    <li>
+        <a href="/academy/staking/what-is-staking">
+            ما هو Staking؟
+        </a>
+    </li>
+</ul>
+
+<p>
+<strong>تنبيه تعليمي:</strong>
+هذا المحتوى مقدم لأغراض تعليمية فقط ولا يمثل نصيحة مالية أو استثمارية أو قانونية.
+ينبغي إجراء البحث المستقل وفهم المخاطر قبل التعامل مع أي أصل رقمي أو تطبيق أو بروتوكول.
+</p>
+HTML,
+
+    'content_en' => <<<'HTML'
+<h2>What Is Web3?</h2>
+
+<p>
+Web3 is a broad term used to describe a generation of internet applications and services
+that make use of technologies such as <strong>blockchains</strong>, smart contracts,
+digital wallets, and digital assets.
+</p>
+
+<p>
+The goal is not necessarily to make every part of the internet fully decentralized.
+Instead, Web3 introduces alternative ways for users to interact with applications,
+networks, and digital assets without relying entirely on a single centralized platform.
+</p>
+
+<p>
+Some Web3 applications still use centralized frontends, APIs, infrastructure providers,
+indexing services, or storage systems. For that reason, Web3 is better understood as a
+<strong>set of technologies and design approaches</strong> rather than a completely
+separate replacement for the internet.
+</p>
+
+<h2>From Web1 to Web2 and Web3</h2>
+
+<h3>Web1: The Read-Only Web</h3>
+
+<p>
+Web1 is commonly used to describe the early stage of the internet, when many websites
+were mainly static pages designed for users to read.
+</p>
+
+<p>
+Users were mostly consumers of published information, while creating and distributing
+content was much less accessible than it is today.
+</p>
+
+<h3>Web2: The Interactive Web</h3>
+
+<p>
+Web2 introduced highly interactive services such as social networks, online platforms,
+collaborative applications, and user-generated content.
+</p>
+
+<p>
+Users became active participants and content creators, but many services remained
+controlled by centralized companies that manage accounts, infrastructure, and large
+amounts of user data.
+</p>
+
+<h3>Web3: New Models of Ownership and Interaction</h3>
+
+<p>
+Web3 introduces another model by using technologies such as blockchains, smart contracts,
+wallets, and digital assets.
+</p>
+
+<p>
+Instead of relying only on a traditional platform account, users can sometimes connect
+a digital wallet and sign transactions to interact with blockchain-based applications.
+</p>
+
+<p>
+This can move some aspects of control or digital ownership away from a single platform
+and toward users or decentralized protocols, depending on the application's design.
+</p>
+
+<h2>The Core Idea Behind Web3</h2>
+
+<p>
+At a high level, Web3 aims to create applications and services that can use decentralized
+networks and programmable blockchain infrastructure.
+</p>
+
+<p>
+The main building blocks include:
+</p>
+
+<ul>
+    <li><strong>Blockchain:</strong> A distributed network and ledger that records transactions and data according to network rules.</li>
+    <li><strong>Smart Contracts:</strong> Programs deployed on blockchains that execute predefined logic.</li>
+    <li><strong>Wallets:</strong> Tools used to manage keys, sign transactions, and interact with applications.</li>
+    <li><strong>DApps:</strong> Applications that use blockchains or smart contracts as part of their functionality.</li>
+    <li><strong>Digital Assets:</strong> Tokens and other assets represented on blockchain networks.</li>
+    <li><strong>Web3 Infrastructure:</strong> Technologies that connect applications to blockchain networks and decentralized services.</li>
+</ul>
+
+<h2>How Does Web3 Work?</h2>
+
+<p>
+When a user interacts with a Web3 application, several components may work together.
+</p>
+
+<ol>
+    <li>The user opens the application's interface.</li>
+    <li>The user connects a wallet if signing or ownership verification is required.</li>
+    <li>The application prepares a transaction or request.</li>
+    <li>The wallet signs the transaction using the user's private key without exposing the private key to the application.</li>
+    <li>The transaction is submitted to the blockchain through the required infrastructure.</li>
+    <li>The network validates the transaction according to its consensus rules.</li>
+    <li>If a smart contract is involved, the contract executes its programmed logic.</li>
+    <li>The result is recorded or reflected according to the rules of the network and application.</li>
+</ol>
+
+<p>
+The exact process varies between networks and applications. Some systems rely heavily on
+smart contracts, while others combine decentralized components with traditional
+centralized infrastructure.
+</p>
+
+<h2>The Role of Blockchain in Web3</h2>
+
+<p>
+Blockchain is one of the most important technologies associated with Web3 because it can
+provide a shared environment for recording transactions and other data according to
+network rules.
+</p>
+
+<p>
+Instead of storing all records inside a database controlled by one company, a blockchain
+can maintain a distributed record verified and updated by participants in the network.
+</p>
+
+<p>
+However, using a blockchain does not automatically make an application fully decentralized.
+A Web3 application may still depend on centralized interfaces, APIs, infrastructure
+providers, storage, or other services.
+</p>
+
+<h2>What Are Smart Contracts?</h2>
+
+<p>
+A smart contract is a program deployed on a blockchain that executes logic according to
+the rules written into the contract and the capabilities of the underlying network.
+</p>
+
+<p>
+Smart contracts can be used for:
+</p>
+
+<ul>
+    <li>Managing digital tokens.</li>
+    <li>Executing asset transfers.</li>
+    <li>Building decentralized financial applications.</li>
+    <li>Managing certain digital assets.</li>
+    <li>Implementing protocol rules.</li>
+    <li>Supporting governance mechanisms in some systems.</li>
+</ul>
+
+<p>
+Smart contracts cannot automatically access arbitrary real-world information. When
+external information is required, applications may use services such as oracles.
+</p>
+
+<h2>What Is a Web3 Wallet?</h2>
+
+<p>
+A Web3 wallet is more than a simple place to store cryptocurrency. In many cases, it is
+a tool for managing cryptographic keys, signing transactions, and interacting with
+blockchain applications.
+</p>
+
+<p>
+When an application asks a wallet to sign a transaction, the wallet uses the private key
+to create a digital signature. The private key should not be shared with websites or
+applications.
+</p>
+
+<p>
+Protecting the recovery phrase and private keys is therefore one of the most important
+Web3 security practices.
+</p>
+
+<h2>What Are DApps?</h2>
+
+<p>
+DApps stands for <strong>Decentralized Applications</strong>. These are applications
+that use blockchain networks or smart contracts as part of their core functionality.
+</p>
+
+<p>
+However, "decentralized" does not necessarily mean that every component is distributed.
+A DApp may have a traditional frontend hosted on centralized infrastructure while
+important operations are handled by smart contracts.
+</p>
+
+<p>
+This is why each application should be evaluated based on its actual architecture rather
+than its branding.
+</p>
+
+<h2>Web2 vs Web3</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Area</th>
+            <th>Web2</th>
+            <th>Web3</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Accounts</td>
+            <td>Usually managed by centralized platforms</td>
+            <td>May use wallets and cryptographic signatures</td>
+        </tr>
+        <tr>
+            <td>Data</td>
+            <td>Often managed by the platform</td>
+            <td>Some records or ownership can be represented on blockchains</td>
+        </tr>
+        <tr>
+            <td>Digital ownership</td>
+            <td>Often tied to platform databases</td>
+            <td>Can be represented through blockchain-based tokens</td>
+        </tr>
+        <tr>
+            <td>Application logic</td>
+            <td>Usually executed on centralized servers</td>
+            <td>Some logic can run through smart contracts</td>
+        </tr>
+        <tr>
+            <td>Central dependency</td>
+            <td>Often high for centralized services</td>
+            <td>Can be reduced in some applications, but not necessarily eliminated</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Does Web3 Mean Full Decentralization?</h2>
+
+<p>
+No. This is one of the most important concepts to understand.
+</p>
+
+<p>
+A Web3 application can still depend on centralized components such as:
+</p>
+
+<ul>
+    <li>User interfaces.</li>
+    <li>API servers.</li>
+    <li>RPC providers.</li>
+    <li>Indexing services.</li>
+    <li>Storage providers.</li>
+    <li>Operational infrastructure.</li>
+</ul>
+
+<p>
+Decentralization is therefore better understood as a spectrum of architectural properties
+rather than a simple yes-or-no label.
+</p>
+
+<h2>Digital Ownership in Web3</h2>
+
+<p>
+One of the major ideas associated with Web3 is the ability to represent ownership of
+certain digital assets through blockchain records and tokens.
+</p>
+
+<p>
+Tokens can represent assets, units, or rights depending on the design of the underlying
+protocol.
+</p>
+
+<p>
+However, owning a blockchain token does not automatically mean owning a legal claim over
+a real-world asset, company, or service. The rights associated with a token depend on
+its design, legal framework, agreements, and jurisdiction.
+</p>
+
+<h2>Web3 and Cryptocurrency</h2>
+
+<p>
+Cryptocurrencies and tokens are important parts of many Web3 ecosystems. They can be
+used for payments, incentives, governance, or digital asset representation.
+</p>
+
+<p>
+However, Web3 is broader than cryptocurrency. It includes applications, infrastructure,
+digital identity, smart contracts, digital ownership, and other technologies.
+</p>
+
+<h2>Web3 and DeFi</h2>
+
+<p>
+DeFi, or decentralized finance, is one of the major application areas within the broader
+Web3 ecosystem.
+</p>
+
+<p>
+DeFi applications can use smart contracts and blockchain infrastructure to provide
+functions such as trading, lending, borrowing, and liquidity management.
+</p>
+
+<p>
+However, Web3 is broader than DeFi and includes many other areas.
+</p>
+
+<p>
+You can learn more through the
+<a href="/academy/defi">AQL Crypto DeFi Academy path</a>.
+</p>
+
+<h2>Web3 and NFTs</h2>
+
+<p>
+An NFT is a non-fungible token that can represent a digital item, asset, or other
+defined property according to the design of its blockchain and smart contract.
+</p>
+
+<p>
+NFTs became widely associated with digital art and collectibles, but they can also be
+used for gaming items, tickets, memberships, and other applications.
+</p>
+
+<p>
+A dedicated NFTs path will explore these concepts in greater depth.
+</p>
+
+<h2>Potential Benefits of Web3</h2>
+
+<h3>1. Reduced dependence on some intermediaries</h3>
+
+<p>
+Smart contracts can execute predefined rules directly on a blockchain, potentially
+reducing the need for a centralized party to perform every step.
+</p>
+
+<h3>2. Portable digital assets</h3>
+
+<p>
+Some digital assets can be associated with a user's wallet rather than being limited to
+one platform, although portability depends on the asset and application design.
+</p>
+
+<h3>3. Verifiable transparency</h3>
+
+<p>
+Some blockchain records can be publicly inspected and independently verified, although
+the level of transparency varies by network and application.
+</p>
+
+<h3>4. Programmability</h3>
+
+<p>
+Smart contracts make it possible to build programmable protocols and applications with
+rules that can be executed by blockchain networks.
+</p>
+
+<h3>5. Open ecosystems</h3>
+
+<p>
+Some protocols allow different applications and users to interact with the same
+on-chain contracts or data, which can support interconnected ecosystems.
+</p>
+
+<h2>Major Web3 Risks</h2>
+
+<ul>
+    <li><strong>Smart contract bugs:</strong> Software vulnerabilities can produce unexpected outcomes.</li>
+    <li><strong>Key theft:</strong> Losing private keys or recovery phrases can result in loss of access to assets.</li>
+    <li><strong>Phishing and scams:</strong> Malicious websites may imitate legitimate applications.</li>
+    <li><strong>Irreversible transactions:</strong> Some confirmed blockchain transactions cannot easily be reversed.</li>
+    <li><strong>Infrastructure risks:</strong> Dependence on centralized RPC, indexing, or frontend services can create failure points.</li>
+    <li><strong>Governance risks:</strong> Control over some protocols may be concentrated among a limited number of participants.</li>
+    <li><strong>Bridge risks:</strong> Cross-chain systems introduce additional trust assumptions and technical risks.</li>
+    <li><strong>Regulatory risks:</strong> Digital asset laws and Web3 regulations vary across jurisdictions.</li>
+</ul>
+
+<h2>Is Web3 More Secure Than Web2?</h2>
+
+<p>
+There is no universal answer.
+</p>
+
+<p>
+Web3 changes the trust model and introduces different types of risks. A user may depend
+less on a centralized server for some operations but may have greater responsibility
+for protecting private keys, reviewing transactions, and verifying applications.
+</p>
+
+<p>
+Blockchain technology also does not automatically make smart contracts or applications
+secure. Security depends on software quality, protocol design, infrastructure, key
+management, governance, and other factors.
+</p>
+
+<h2>A Simple Web3 Example</h2>
+
+<p>
+Imagine a Web3 application that allows users to interact with a digital asset through a
+smart contract.
+</p>
+
+<ol>
+    <li>The user opens the application.</li>
+    <li>The user connects a wallet.</li>
+    <li>The user selects an action.</li>
+    <li>The application prepares a transaction for the smart contract.</li>
+    <li>The wallet displays the transaction details.</li>
+    <li>The user approves and signs the transaction.</li>
+    <li>The transaction is submitted to the network.</li>
+    <li>The network validates it.</li>
+    <li>The smart contract executes its programmed rules.</li>
+    <li>The application reads the result and displays it to the user.</li>
+</ol>
+
+<p>
+The exact process differs across networks and applications, but this example illustrates
+how wallets, applications, smart contracts, and blockchains can work together.
+</p>
+
+<h2>What Should You Learn to Understand Web3?</h2>
+
+<ol>
+    <li>Learn blockchain fundamentals.</li>
+    <li>Understand transactions and blockchain networks.</li>
+    <li>Learn consensus and finality.</li>
+    <li>Understand wallets, keys, and signatures.</li>
+    <li>Learn smart contracts.</li>
+    <li>Understand DApps.</li>
+    <li>Learn how applications communicate with blockchains.</li>
+    <li>Then explore DeFi, NFTs, infrastructure, and Web3 security.</li>
+</ol>
+
+<p>
+Start with
+<a href="/academy/blockchain/what-is-blockchain">What Is Blockchain?</a>
+and then continue with
+<a href="/academy/blockchain/how-does-blockchain-work">How Does Blockchain Work?</a>
+to build the technical foundation behind Web3.
+</p>
+
+<h2>Important Web3 Terms</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Term</th>
+            <th>Simple meaning</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Web3</td>
+            <td>A broad model for internet applications using decentralized technologies such as blockchains.</td>
+        </tr>
+        <tr>
+            <td>Blockchain</td>
+            <td>A distributed network and ledger that records data according to defined rules.</td>
+        </tr>
+        <tr>
+            <td>Smart Contract</td>
+            <td>A program that runs on a blockchain.</td>
+        </tr>
+        <tr>
+            <td>Wallet</td>
+            <td>A tool for managing keys, signing transactions, and interacting with networks.</td>
+        </tr>
+        <tr>
+            <td>DApp</td>
+            <td>An application that uses blockchain or smart contracts as part of its functionality.</td>
+        </tr>
+        <tr>
+            <td>Token</td>
+            <td>A digital asset or unit issued according to rules on a blockchain network.</td>
+        </tr>
+        <tr>
+            <td>Oracle</td>
+            <td>A mechanism or service that provides external data to smart contracts.</td>
+        </tr>
+        <tr>
+            <td>RPC</td>
+            <td>An interface used by applications to communicate with blockchain nodes or access services.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Common Web3 Misconceptions</h2>
+
+<h3>Web3 is only cryptocurrency</h3>
+
+<p>
+Incorrect. Cryptocurrency is one component of Web3, while the broader ecosystem includes
+blockchains, smart contracts, wallets, DApps, infrastructure, digital identity, and
+digital assets.
+</p>
+
+<h3>Every Web3 application is fully decentralized</h3>
+
+<p>
+Not necessarily. Applications should be evaluated based on their actual architecture.
+</p>
+
+<h3>Blockchain automatically makes applications secure</h3>
+
+<p>
+Blockchain does not eliminate software vulnerabilities, key-management risks, or
+infrastructure failures.
+</p>
+
+<h3>A wallet stores cryptocurrency inside the app</h3>
+
+<p>
+A wallet primarily manages keys and signs transactions. Assets are recorded according
+to the rules of the blockchain rather than simply being stored as files inside the
+wallet application.
+</p>
+
+<h3>Every Web3 transaction can be reversed</h3>
+
+<p>
+Not necessarily. Once some blockchain transactions are confirmed, there may be no
+practical way to reverse them.
+</p>
+
+<h2>How to Start Learning Web3</h2>
+
+<p>
+The best approach is to build your knowledge gradually rather than trying to memorize
+every Web3 term at once.
+</p>
+
+<p>
+Start with blockchain fundamentals, then learn wallets and keys, smart contracts, DApps,
+and blockchain interaction. After that, move into DeFi, NFTs, infrastructure, and
+security.
+</p>
+
+<p>
+The following lessons in this Web3 path will move from this broad overview toward the
+individual technologies and how they work together.
+</p>
+
+<h2>Conclusion</h2>
+
+<p>
+Web3 is a broad concept describing internet applications and services that use
+technologies such as blockchains, smart contracts, wallets, digital assets, and
+decentralized infrastructure.
+</p>
+
+<p>
+The idea is not simply to create new cryptocurrencies. It also explores new approaches
+to digital ownership, application interaction, programmable services, and decentralized
+networks.
+</p>
+
+<p>
+At the same time, Web3 is not automatically fully decentralized or more secure than
+Web2. Every application has its own architecture, trust assumptions, dependencies, and
+risks.
+</p>
+
+<p>
+Understanding the relationship between
+<strong>Blockchain + Smart Contracts + Wallets + DApps</strong>
+provides a strong foundation for learning the rest of the Web3 ecosystem.
+</p>
+
+<hr>
+
+<h2>Frequently Asked Questions About Web3</h2>
+
+<h3>What is Web3 in simple terms?</h3>
+<p>
+Web3 is a broad concept for internet applications and services that use technologies
+such as blockchains, smart contracts, wallets, and digital assets.
+</p>
+
+<h3>What is the difference between Web2 and Web3?</h3>
+<p>
+Web2 generally relies heavily on centralized platforms, while Web3 can use blockchains,
+wallets, and smart contracts to distribute some aspects of control and ownership.
+</p>
+
+<h3>Does Web3 mean full decentralization?</h3>
+<p>
+No. Web3 applications can still depend on centralized interfaces, APIs, RPC providers,
+indexing services, storage, and other infrastructure.
+</p>
+
+<h3>Is Web3 the same as cryptocurrency?</h3>
+<p>
+No. Cryptocurrency is one component of Web3. The broader concept also includes
+blockchains, smart contracts, DApps, wallets, infrastructure, and digital ownership.
+</p>
+
+<h3>What are DApps?</h3>
+<p>
+DApps are applications that use blockchain networks or smart contracts as part of their
+functionality. Some DApps can still contain centralized components.
+</p>
+
+<h3>What does a Web3 wallet do?</h3>
+<p>
+A Web3 wallet manages cryptographic keys, signs transactions, and allows users to interact
+with blockchain applications and networks.
+</p>
+
+<h3>Is Web3 secure?</h3>
+<p>
+Security depends on the blockchain, smart contract, application, infrastructure, key
+management, governance, and other factors. Web3 is not automatically secure simply
+because it uses blockchain technology.
+</p>
+
+<h3>Are Web3 and DeFi the same?</h3>
+<p>
+No. DeFi is one major application area within the broader Web3 ecosystem.
+</p>
+
+<h3>Can users own digital assets in Web3?</h3>
+<p>
+Some digital assets can be represented through blockchain records and tokens, but the
+rights associated with an asset depend on its design, agreements, and applicable laws.
+</p>
+
+<h3>Do I need programming skills to learn Web3?</h3>
+<p>
+No. You can learn Web3 fundamentals without programming. Programming and smart-contract
+development become important when moving into advanced technical topics.
+</p>
+
+<h2>Related Lessons</h2>
+
+<ul>
+    <li>
+        <a href="/academy/blockchain/what-is-blockchain">
+            What Is Blockchain?
+        </a>
+    </li>
+    <li>
+        <a href="/academy/blockchain/how-does-blockchain-work">
+            How Does Blockchain Work?
+        </a>
+    </li>
+    <li>
+        <a href="/academy/blockchain/what-is-blockchain-consensus">
+            What Is Blockchain Consensus?
+        </a>
+    </li>
+    <li>
+        <a href="/academy/blockchain/what-is-blockchain-finality">
+            What Is Blockchain Finality?
+        </a>
+    </li>
+    <li>
+        <a href="/academy/defi">
+            DeFi Academy Path
+        </a>
+    </li>
+    <li>
+        <a href="/academy/staking/what-is-staking">
+            What Is Staking?
+        </a>
+    </li>
+</ul>
+
+<p>
+<strong>Educational disclaimer:</strong>
+This content is provided for educational purposes only and does not constitute financial,
+investment, or legal advice. Always conduct independent research and understand the risks
+before interacting with digital assets, applications, or blockchain protocols.
+</p>
+HTML,
+
+    'image' => null,
+
+    'seo_title' => 'What Is Web3? Complete Beginner’s Guide to the Decentralized Web',
+    'seo_title_ar' => 'ما هو Web3؟ دليل شامل للمبتدئين لفهم الويب اللامركزي',
+    'seo_title_en' => 'What Is Web3? Complete Beginner’s Guide to the Decentralized Web',
+
+    'meta_description' => 'Learn what Web3 is, how it differs from Web2, and how blockchain, smart contracts, wallets, DApps and digital assets work together.',
+    'meta_description_ar' => 'تعرّف على Web3 والويب اللامركزي، والفرق بين Web2 وWeb3، ودور البلوكشين والعقود الذكية والمحافظ وDApps والأصول الرقمية.',
+    'meta_description_en' => 'Learn what Web3 is, how it differs from Web2, and how blockchain, smart contracts, wallets, DApps and digital assets work together.',
+
+    'faq_ar' => [
+        [
+            'question' => 'ما هو Web3 باختصار؟',
+            'answer' => 'Web3 هو مفهوم يشير إلى تطبيقات وخدمات إنترنت تستخدم تقنيات مثل Blockchain والعقود الذكية والمحافظ والأصول الرقمية.'
+        ],
+        [
+            'question' => 'ما الفرق بين Web2 وWeb3؟',
+            'answer' => 'يعتمد Web2 غالبًا على منصات مركزية، بينما يمكن لـ Web3 استخدام Blockchain والمحافظ والعقود الذكية لتوزيع بعض جوانب التحكم والملكية.'
+        ],
+        [
+            'question' => 'هل Web3 يعني اللامركزية الكاملة؟',
+            'answer' => 'لا. يمكن أن تحتوي تطبيقات Web3 على واجهات وخوادم ومزودي RPC وخدمات تخزين وفهرسة مركزية.'
+        ],
+        [
+            'question' => 'هل Web3 هو نفسه العملات الرقمية؟',
+            'answer' => 'لا. العملات الرقمية جزء من Web3، لكن Web3 يشمل أيضًا Blockchain والعقود الذكية وDApps والمحافظ والبنية التحتية.'
+        ],
+        [
+            'question' => 'ما هي DApps؟',
+            'answer' => 'DApps هي تطبيقات تستخدم Blockchain أو العقود الذكية كجزء من وظائفها، وقد تحتوي على مكونات مركزية أيضًا.'
+        ],
+        [
+            'question' => 'ما دور محفظة Web3؟',
+            'answer' => 'تستخدم المحفظة لإدارة المفاتيح الرقمية وتوقيع المعاملات والتفاعل مع التطبيقات والشبكات.'
+        ],
+        [
+            'question' => 'هل Web3 آمن؟',
+            'answer' => 'الأمان يعتمد على تصميم الشبكة والعقد الذكي والتطبيق والبنية التحتية وحماية المفاتيح وغيرها من العوامل.'
+        ],
+        [
+            'question' => 'هل Web3 وDeFi شيء واحد؟',
+            'answer' => 'لا. DeFi هو أحد المجالات الرئيسية داخل منظومة Web3، بينما Web3 مفهوم أوسع.'
+        ],
+        [
+            'question' => 'هل يمكن امتلاك الأصول الرقمية في Web3؟',
+            'answer' => 'يمكن تمثيل ملكية بعض الأصول الرقمية بواسطة رموز وسجلات على البلوكشين، لكن الحقوق المرتبطة بها تعتمد على تصميم الأصل والقوانين ذات الصلة.'
+        ],
+        [
+            'question' => 'هل أحتاج إلى تعلم البرمجة لفهم Web3؟',
+            'answer' => 'لا. يمكن فهم الأساسيات دون برمجة، بينما تصبح البرمجة مهمة عند الانتقال إلى تطوير العقود الذكية والتطبيقات المتقدمة.'
+        ],
+    ],
+
+    'faq_en' => [
+        [
+            'question' => 'What is Web3 in simple terms?',
+            'answer' => 'Web3 is a broad concept for internet applications and services that use technologies such as blockchains, smart contracts, wallets, and digital assets.'
+        ],
+        [
+            'question' => 'What is the difference between Web2 and Web3?',
+            'answer' => 'Web2 generally relies heavily on centralized platforms, while Web3 can use blockchains, wallets, and smart contracts to distribute some aspects of control and ownership.'
+        ],
+        [
+            'question' => 'Does Web3 mean full decentralization?',
+            'answer' => 'No. Web3 applications can still depend on centralized interfaces, APIs, RPC providers, storage, and indexing services.'
+        ],
+        [
+            'question' => 'Is Web3 the same as cryptocurrency?',
+            'answer' => 'No. Cryptocurrency is one component of Web3, while the broader concept includes blockchains, smart contracts, DApps, wallets, and infrastructure.'
+        ],
+        [
+            'question' => 'What are DApps?',
+            'answer' => 'DApps are applications that use blockchains or smart contracts as part of their functionality, although they may still contain centralized components.'
+        ],
+        [
+            'question' => 'What does a Web3 wallet do?',
+            'answer' => 'A Web3 wallet manages cryptographic keys, signs transactions, and allows users to interact with blockchain applications and networks.'
+        ],
+        [
+            'question' => 'Is Web3 secure?',
+            'answer' => 'Security depends on the blockchain, smart contract, application, infrastructure, key management, governance, and other factors.'
+        ],
+        [
+            'question' => 'Are Web3 and DeFi the same?',
+            'answer' => 'No. DeFi is one major application area within the broader Web3 ecosystem.'
+        ],
+        [
+            'question' => 'Can users own digital assets in Web3?',
+            'answer' => 'Some digital assets can be represented through blockchain records and tokens, but the rights associated with them depend on their design and applicable laws.'
+        ],
+        [
+            'question' => 'Do I need programming skills to learn Web3?',
+            'answer' => 'No. You can learn Web3 fundamentals without programming, although programming becomes useful for advanced technical development.'
+        ],
+    ],
+
+    'status' => 'published',
+    'sort_order' => 1,
+    'published_at' => now(),
+],
+
+    [
+    'title' => 'How Does Web3 Work?',
+    'title_ar' => 'كيف يعمل Web3؟ شرح البلوكشين والمحافظ والعقود الذكية والتطبيقات اللامركزية',
+    'title_en' => 'How Does Web3 Work? Blockchain, Wallets, Smart Contracts and DApps',
+
+    'slug' => 'how-does-web3-work',
+
+    'excerpt' => 'Learn how Web3 works through the interaction between users, wallets, decentralized applications, smart contracts, blockchains, and supporting infrastructure.',
+    'excerpt_ar' => 'تعرف على كيفية عمل Web3 من خلال فهم العلاقة بين المستخدم والمحفظة والتطبيقات اللامركزية والعقود الذكية والبلوكشين والبنية التحتية التي تدعم هذا النظام.',
+    'excerpt_en' => 'Learn how Web3 works through the interaction between users, wallets, decentralized applications, smart contracts, blockchains, and supporting infrastructure.',
+
+    'content' => null,
+
+    'content_ar' => <<<'HTML'
+<div dir="rtl">
+
+<h2>كيف يعمل Web3؟</h2>
+
+<p>
+بعد أن تعرفنا في الدرس السابق على مفهوم <strong>Web3</strong> وفكرة الويب الذي يعتمد بدرجات مختلفة على البلوكشين والأصول الرقمية وملكية المستخدم، تأتي الخطوة التالية لفهم ما يحدث فعليًا عندما يستخدم الشخص تطبيقًا من تطبيقات Web3.
+</p>
+
+<p>
+بشكل مبسط، يمكن تصور عملية استخدام Web3 كسلسلة من المكونات التي تعمل معًا:
+</p>
+
+<p>
+<strong>المستخدم ← المحفظة ← التطبيق اللامركزي DApp ← العقد الذكي ← شبكة البلوكشين</strong>
+</p>
+
+<p>
+لكن هذه الصورة المبسطة لا تكفي لفهم النظام بالكامل؛ لأن Web3 قد يعتمد أيضًا على العقد (Nodes)، وخدمات RPC، والأوراكل (Oracles)، والمفهرسات (Indexers)، والتخزين اللامركزي أو التقليدي، وواجهات الاستخدام التي قد تكون مركزية في بعض الحالات.
+</p>
+
+<h2>المكونات الأساسية التي تجعل Web3 يعمل</h2>
+
+<p>
+هناك مجموعة من المكونات الرئيسية التي تتعاون لتنفيذ تجربة Web3. أهمها:
+</p>
+
+<ul>
+<li>المستخدم.</li>
+<li>المحفظة الرقمية.</li>
+<li>المفتاح الخاص والمفتاح العام.</li>
+<li>التوقيعات الرقمية.</li>
+<li>التطبيق اللامركزي DApp.</li>
+<li>العقد الذكي Smart Contract.</li>
+<li>شبكة البلوكشين.</li>
+<li>العقد Nodes.</li>
+<li>خدمات RPC.</li>
+<li>الأوراكل Oracles عند الحاجة إلى بيانات خارج الشبكة.</li>
+<li>خدمات الفهرسة Indexing عند الحاجة إلى البحث السريع في البيانات.</li>
+<li>أنظمة التخزين التي قد تكون على السلسلة أو خارجها.</li>
+</ul>
+
+<h2>1. المستخدم: نقطة البداية</h2>
+
+<p>
+كل عملية في Web3 تبدأ عادةً من المستخدم الذي يريد تنفيذ إجراء معين، مثل قراءة بيانات من تطبيق، أو الاتصال بتطبيق لامركزي، أو إرسال معاملة، أو استخدام أصل رقمي.
+</p>
+
+<p>
+في التطبيقات التقليدية، يتعامل المستخدم غالبًا مع حساب تديره المنصة، مثل اسم مستخدم وكلمة مرور.
+</p>
+
+<p>
+أما في كثير من تطبيقات Web3، فقد يكون عنوان المحفظة هو وسيلة التعرف الأساسية على المستخدم داخل التطبيق، مع استخدام التوقيع الرقمي لإثبات أن صاحب المفتاح المرتبط بالعنوان وافق على عملية معينة.
+</p>
+
+<p>
+وهذا لا يعني أن عنوان المحفظة يكشف تلقائيًا هوية الشخص الحقيقية؛ فالعنوان يمكن أن يكون اسمًا مستعارًا على السلسلة، بينما قد توجد طرق أخرى لربطه بهوية واقعية خارج البلوكشين.
+</p>
+
+<h2>2. ما دور محفظة Web3؟</h2>
+
+<p>
+المحفظة في Web3 ليست مجرد مكان لتخزين العملات كما قد يوحي اسمها.
+</p>
+
+<p>
+في كثير من الحالات، المحفظة هي الواجهة التي تساعد المستخدم على إدارة مفاتيحه والتوقيع على الرسائل والمعاملات والتفاعل مع التطبيقات.
+</p>
+
+<p>
+الأصول الرقمية نفسها تكون عادةً مسجلة على شبكة البلوكشين، بينما تساعد المحفظة المستخدم على الوصول إلى الحسابات أو العناوين المرتبطة بالمفاتيح التي يسيطر عليها.
+</p>
+
+<p>
+ولهذا فإن فقدان المفتاح الخاص أو العبارة السرية قد يؤدي إلى فقدان القدرة على التحكم في الأصول المرتبطة بذلك الحساب.
+</p>
+
+<h2>3. المفتاح الخاص والمفتاح العام</h2>
+
+<p>
+تعتمد المحافظ على أنظمة تشفير تسمح بإنشاء مفاتيح مرتبطة ببعضها.
+</p>
+
+<ul>
+<li><strong>Private Key:</strong> مفتاح سري يستخدم لإنتاج التوقيعات وإثبات التحكم في الحساب أو العنوان وفق قواعد الشبكة.</li>
+<li><strong>Public Key:</strong> مفتاح عام يمكن استخدامه ضمن نظام التشفير للتحقق من التوقيعات.</li>
+<li><strong>Wallet Address:</strong> عنوان يستخدم للتعامل مع الحساب أو الأصول على الشبكة وفق تصميم البلوكشين.</li>
+</ul>
+
+<p>
+المفتاح الخاص ليس كلمة مرور عادية. من يمتلك القدرة على استخدامه قد يتمكن من توقيع معاملات باسم الحساب المرتبط به.
+</p>
+
+<h2>4. ما هي التوقيعات الرقمية؟</h2>
+
+<p>
+عندما يريد المستخدم تنفيذ عملية تتطلب إثبات موافقته، يمكن للمحفظة استخدام المفتاح الخاص لإنشاء <strong>Digital Signature</strong>.
+</p>
+
+<p>
+تسمح هذه التوقيعات للشبكة أو للتطبيق بالتحقق من أن الرسالة أو المعاملة تم توقيعها باستخدام المفتاح المرتبط بالحساب، دون الحاجة إلى إرسال المفتاح الخاص نفسه إلى البلوكشين.
+</p>
+
+<p>
+وهذا من أهم المفاهيم التي تجعل المستخدم قادرًا على التفاعل مع أنظمة Web3 دون إرسال مفتاحه السري إلى التطبيق.
+</p>
+
+<h2>5. ما هو DApp؟</h2>
+
+<p>
+<strong>DApp</strong> اختصار لـ <strong>Decentralized Application</strong>، أي تطبيق لامركزي.
+</p>
+
+<p>
+عادةً يتكون تطبيق Web3 من واجهة يستخدمها الشخص، بالإضافة إلى مكونات خلفية أو عقود ذكية تعمل على شبكة البلوكشين.
+</p>
+
+<p>
+لكن من المهم عدم افتراض أن كل جزء من DApp يجب أن يكون لامركزيًا بالكامل.
+</p>
+
+<p>
+قد تكون الواجهة الأمامية مستضافة على خادم تقليدي، بينما تكون العمليات الأساسية التي تتعامل مع الأصول أو القواعد المالية موجودة في عقد ذكي.
+</p>
+
+<p>
+لذلك يجب تحليل كل مكون على حدة عند تقييم درجة اللامركزية في تطبيق معين.
+</p>
+
+<h2>6. ماذا يحدث عندما يفتح المستخدم DApp؟</h2>
+
+<p>
+عند فتح تطبيق Web3، قد تحدث عدة عمليات خلف الكواليس.
+</p>
+
+<ol>
+<li>يقوم المتصفح بتحميل واجهة التطبيق.</li>
+<li>يتصل التطبيق بمصدر للبيانات أو بشبكة البلوكشين.</li>
+<li>قد يطلب التطبيق من المستخدم ربط محفظته.</li>
+<li>تتعرف الواجهة على عنوان المستخدم بعد الموافقة على الاتصال.</li>
+<li>يمكن للتطبيق قراءة بعض البيانات العامة من البلوكشين.</li>
+<li>عند طلب تنفيذ معاملة، يقوم التطبيق بإنشاء البيانات المطلوبة.</li>
+<li>تعرض المحفظة تفاصيل العملية للمستخدم.</li>
+<li>يوافق المستخدم على التوقيع إذا كان يريد تنفيذ العملية.</li>
+<li>تُرسل المعاملة الموقعة إلى الشبكة.</li>
+<li>تتحقق عقد الشبكة من المعاملة وفق قواعد البروتوكول.</li>
+<li>إذا تم قبولها، تدخل المعاملة ضمن عملية إنتاج الكتل والتوافق.</li>
+</ol>
+
+<h2>7. ما الفرق بين القراءة والكتابة على البلوكشين؟</h2>
+
+<p>
+هذه نقطة مهمة جدًا لفهم تجربة Web3.
+</p>
+
+<h3>قراءة البيانات</h3>
+
+<p>
+قد يستطيع التطبيق قراءة بيانات عامة من البلوكشين دون أن يطلب من المستخدم توقيع معاملة أو دفع رسوم شبكة.
+</p>
+
+<h3>كتابة البيانات</h3>
+
+<p>
+عندما يريد المستخدم تغيير حالة موجودة على البلوكشين، مثل تنفيذ معاملة أو استدعاء دالة تغير بيانات العقد الذكي، فإن العملية عادةً تحتاج إلى معاملة يتم توقيعها وإرسالها إلى الشبكة.
+</p>
+
+<p>
+ولهذا قد يكون تصفح البيانات مجانيًا نسبيًا، بينما تنفيذ عملية على السلسلة قد يتطلب رسوم شبكة.
+</p>
+
+<h2>8. ما هو Smart Contract؟</h2>
+
+<p>
+<strong>Smart Contract</strong> هو برنامج يتم نشره على شبكة بلوكشين تدعم تشغيل العقود الذكية، ويحدد مجموعة من القواعد التي تنفذها الشبكة وفق بيئتها.
+</p>
+
+<p>
+يمكن للعقد الذكي أن يحتوي على وظائف تسمح للمستخدمين أو التطبيقات بالتفاعل معه.
+</p>
+
+<p>
+على سبيل المثال، يمكن أن يحتوي عقد معين على قواعد لإدارة رمز رقمي، أو تنفيذ عملية Swap، أو تسجيل ملكية أصل رقمي، أو إدارة نظام تصويت، بحسب تصميمه.
+</p>
+
+<p>
+العقد الذكي ليس بالضرورة "عقدًا قانونيًا"، كما أن وجوده على البلوكشين لا يعني أنه خالٍ من الأخطاء أو المخاطر.
+</p>
+
+<h2>9. كيف يتفاعل DApp مع Smart Contract؟</h2>
+
+<p>
+يمكن تصور العلاقة بهذا الشكل:
+</p>
+
+<p>
+<strong>المستخدم → واجهة DApp → المحفظة → المعاملة → Smart Contract → Blockchain</strong>
+</p>
+
+<p>
+الواجهة تساعد المستخدم على تجهيز العملية، والمحفظة تساعد في التوقيع، ثم تنتقل المعاملة إلى الشبكة حيث يتم تنفيذها وفق قواعد العقد والبروتوكول.
+</p>
+
+<p>
+إذا كانت العملية تتطلب تغيير حالة على البلوكشين، فلا يستطيع المستخدم ببساطة تعديل بيانات العقد من خلال واجهة التطبيق دون المرور بالقواعد التي يفرضها العقد والشبكة.
+</p>
+
+<h2>10. ما هي Blockchain Nodes؟</h2>
+
+<p>
+العقد أو <strong>Nodes</strong> هي أجهزة تشارك في تشغيل شبكة البلوكشين وفق أدوار تختلف حسب البروتوكول.
+</p>
+
+<p>
+يمكن أن تقوم العقد بمهام مثل استقبال المعاملات، والتحقق من البيانات، وتخزين أو إتاحة نسخة من حالة الشبكة، والمشاركة في آلية الإجماع، بحسب نوع العقد والبروتوكول.
+</p>
+
+<p>
+لا يجب افتراض أن كل عقدة تقوم بكل وظيفة بنفس الطريقة؛ فالشبكات قد تحتوي على أنواع وأدوار مختلفة من العقد.
+</p>
+
+<h2>11. ما هو RPC؟</h2>
+
+<p>
+<strong>RPC</strong> هو أسلوب اتصال يسمح للتطبيقات بالتواصل مع عقد البلوكشين وطلب بيانات أو إرسال معاملات وفق الواجهات التي توفرها الخدمة.
+</p>
+
+<p>
+عندما يفتح المستخدم DApp، لا يعني ذلك بالضرورة أن المتصفح يتصل مباشرةً بعقدة يديرها المستخدم نفسه.
+</p>
+
+<p>
+قد يستخدم التطبيق مزود RPC خارجيًا لتسهيل الوصول إلى الشبكة.
+</p>
+
+<p>
+وهنا تظهر نقطة مهمة: وجود تطبيق لامركزي لا يعني أن جميع البنية التحتية التي يعتمد عليها لا مركزية بالكامل.
+</p>
+
+<h2>12. لماذا تحتاج Web3 إلى Indexers؟</h2>
+
+<p>
+البيانات الموجودة على البلوكشين يمكن أن تكون كبيرة ومعقدة، وقد لا يكون من العملي للتطبيق إجراء عمليات بحث وتحليل معقدة مباشرةً من العقدة في كل مرة.
+</p>
+
+<p>
+لذلك يمكن استخدام <strong>Indexers</strong> لتنظيم البيانات وفهرستها بحيث يستطيع التطبيق الوصول إلى معلومات معينة بسرعة أكبر.
+</p>
+
+<p>
+لكن هذا قد يضيف طبقة بنية تحتية أخرى، وقد تختلف درجة الاعتماد على الفهرسة بين التطبيقات.
+</p>
+
+<h2>13. ما دور Oracles؟</h2>
+
+<p>
+البلوكشين يستطيع معالجة البيانات الموجودة ضمن بيئته، لكنه لا يعرف تلقائيًا كل المعلومات الموجودة خارج الشبكة.
+</p>
+
+<p>
+هنا تظهر الحاجة في بعض التطبيقات إلى <strong>Oracles</strong>، وهي آليات تساعد العقود الذكية على الحصول على بيانات خارجية مثل أسعار الأصول أو بيانات أخرى.
+</p>
+
+<p>
+الأوراكل مهم لأن العقد الذكي قد يعتمد على البيانات التي يحصل عليها، وبالتالي فإن تصميم مصدر البيانات وطريقة التحقق منه يمثلان جزءًا من نموذج الأمان.
+</p>
+
+<h2>14. On-Chain وOff-Chain</h2>
+
+<p>
+من المفاهيم الأساسية في Web3 التمييز بين البيانات التي يتم تسجيلها مباشرة على البلوكشين والبيانات التي تبقى خارج السلسلة.
+</p>
+
+<h3>On-Chain</h3>
+
+<p>
+هي البيانات أو العمليات التي يتم تسجيلها أو تنفيذها ضمن شبكة البلوكشين.
+</p>
+
+<h3>Off-Chain</h3>
+
+<p>
+هي البيانات أو العمليات التي تتم خارج البلوكشين، مثل بعض أنواع التخزين أو الخدمات الخلفية أو الواجهات.
+</p>
+
+<p>
+قد يجمع التطبيق بين النموذجين. فمثلًا يمكن تسجيل ملكية أصل على البلوكشين بينما تكون بعض البيانات الإضافية المرتبطة به محفوظة خارج السلسلة.
+</p>
+
+<h2>15. كيف تتم معاملة Web3؟</h2>
+
+<p>
+يمكن تبسيط دورة المعاملة كالتالي:
+</p>
+
+<ol>
+<li>يختار المستخدم إجراءً داخل التطبيق.</li>
+<li>ينشئ التطبيق بيانات المعاملة المطلوبة.</li>
+<li>تعرض المحفظة تفاصيل العملية للمستخدم.</li>
+<li>يراجع المستخدم البيانات.</li>
+<li>يوقع المستخدم على المعاملة.</li>
+<li>ترسل المعاملة الموقعة إلى الشبكة.</li>
+<li>تتحقق العقد من صحة المعاملة وفق قواعد البروتوكول.</li>
+<li>تدخل المعاملة في آلية إنتاج الكتل والإجماع.</li>
+<li>تتم إضافة المعاملة إلى كتلة عند قبولها.</li>
+<li>يستطيع التطبيق بعد ذلك قراءة الحالة الجديدة وعرضها للمستخدم.</li>
+</ol>
+
+<h2>16. ماذا تعني رسوم الشبكة؟</h2>
+
+<p>
+تنفيذ العمليات على البلوكشين قد يتطلب دفع رسوم للشبكة.
+</p>
+
+<p>
+تختلف طريقة حساب الرسوم من شبكة إلى أخرى، وقد تعتمد على ازدحام الشبكة، أو حجم العملية، أو الموارد الحسابية المطلوبة، أو قواعد البروتوكول.
+</p>
+
+<p>
+لهذا يمكن أن تختلف تكلفة العملية نفسها بشكل كبير بين شبكة وأخرى أو في أوقات مختلفة.
+</p>
+
+<h2>17. لماذا تطلب المحفظة توقيعًا؟</h2>
+
+<p>
+عندما يطلب DApp من المستخدم توقيع معاملة، فإن التوقيع هو وسيلة لإثبات أن صاحب المفتاح المرتبط بالحساب وافق على إرسال العملية وفق البيانات المحددة.
+</p>
+
+<p>
+يجب على المستخدم قراءة تفاصيل التوقيع قبل الموافقة، لأن التوقيع قد يؤدي إلى تنفيذ عملية حقيقية أو منح صلاحية لعقد أو تغيير حالة على الشبكة، حسب نوع الرسالة.
+</p>
+
+<p>
+وهنا تظهر أهمية الأمان في Web3؛ لأن المستخدم لا ينبغي أن يوافق على أي طلب توقيع لمجرد أن التطبيق يعرضه.
+</p>
+
+<h2>18. ما معنى Token Approval؟</h2>
+
+<p>
+في بعض شبكات Web3، يمكن للمستخدم منح عقد ذكي صلاحية استخدام كمية معينة من رمز معين نيابةً عنه وفق قواعد ذلك الرمز والعقد.
+</p>
+
+<p>
+تسمى هذه العملية عادةً <strong>Token Approval</strong>.
+</p>
+
+<p>
+المشكلة أن المستخدم قد يوافق على صلاحية أكبر مما يحتاجه التطبيق إذا لم ينتبه إلى تفاصيل العملية.
+</p>
+
+<p>
+لذلك من المهم فهم الصلاحيات التي يمنحها المستخدم للعقود ومراجعتها دوريًا عندما تكون الأدوات التي يستخدمها توفر إمكانية إدارة هذه الصلاحيات.
+</p>
+
+<h2>19. هل Web3 لامركزي بالكامل؟</h2>
+
+<p>
+ليس بالضرورة.
+</p>
+
+<p>
+يمكن أن يحتوي تطبيق Web3 على أجزاء لامركزية وأجزاء مركزية.
+</p>
+
+<p>
+مثلًا:
+</p>
+
+<ul>
+<li>العقد الذكي قد يكون منشورًا على البلوكشين.</li>
+<li>الواجهة قد تكون مستضافة على خادم تقليدي.</li>
+<li>التطبيق قد يعتمد على مزود RPC مركزي.</li>
+<li>قد يعتمد على خدمة فهرسة خارجية.</li>
+<li>قد يستخدم تخزينًا خارجيًا لبعض البيانات.</li>
+<li>قد توجد مفاتيح إدارية أو صلاحيات حوكمة في بعض البروتوكولات.</li>
+</ul>
+
+<p>
+لذلك فإن السؤال الصحيح ليس "هل هذا التطبيق Web3؟" فقط، بل أيضًا: <strong>أي أجزاء منه لامركزية؟ وأي أجزاء تعتمد على جهات أو خدمات مركزية؟</strong>
+</p>
+
+<h2>20. ما هي Composability في Web3؟</h2>
+
+<p>
+من الأفكار المهمة في Web3 مفهوم <strong>Composability</strong> أو قابلية التركيب.
+</p>
+
+<p>
+المقصود هو إمكانية بناء تطبيقات أو خدمات جديدة باستخدام مكونات موجودة بالفعل، مثل العقود الذكية أو البروتوكولات أو الأصول الرقمية، وفق القواعد التي تسمح بها تلك الأنظمة.
+</p>
+
+<p>
+يمكن أن يؤدي ذلك إلى ظهور تطبيقات تعتمد على خدمات متعددة فوق بعضها، لكن هذا يعني أيضًا أن المخاطر قد تنتقل من مكون إلى آخر.
+</p>
+
+<h2>21. لماذا تعتبر Composability مهمة؟</h2>
+
+<p>
+في النظام التقليدي، قد يحتاج المطور إلى الحصول على إذن أو عقد شراكة مع خدمة أخرى حتى يستطيع دمجها.
+</p>
+
+<p>
+في Web3، إذا كان العقد الذكي والبيانات والواجهات البرمجية متاحة ويمكن التفاعل معها وفق قواعدها، فقد يستطيع مطور آخر بناء خدمة فوقها.
+</p>
+
+<p>
+هذه الخاصية يمكن أن تسرع الابتكار، لكنها قد تؤدي إلى سلاسل من الاعتماديات؛ فإذا تعرض مكون أساسي لمشكلة، فقد تتأثر التطبيقات التي تعتمد عليه.
+</p>
+
+<h2>22. مثال عملي مبسط لاستخدام Web3</h2>
+
+<p>
+لنفترض أن مستخدمًا يريد استخدام تطبيق لامركزي يدعم تبادل أصل رقمي.
+</p>
+
+<ol>
+<li>يفتح المستخدم واجهة التطبيق.</li>
+<li>يختار ربط المحفظة.</li>
+<li>تطلب المحفظة الإذن للاتصال بالتطبيق.</li>
+<li>يختار المستخدم الأصل والعملية المطلوبة.</li>
+<li>يقوم التطبيق ببناء بيانات المعاملة.</li>
+<li>تعرض المحفظة العملية والرسوم المطلوبة.</li>
+<li>يراجع المستخدم التفاصيل.</li>
+<li>يوقع المعاملة.</li>
+<li>تُرسل المعاملة إلى شبكة البلوكشين.</li>
+<li>يتحقق البروتوكول من المعاملة.</li>
+<li>ينفذ العقد الذكي العملية إذا استوفت الشروط.</li>
+<li>بعد تأكيد العملية، يقرأ التطبيق الحالة الجديدة ويعرض النتيجة.</li>
+</ol>
+
+<p>
+هذه العملية توضح كيف تتعاون عدة طبقات بدلًا من أن يكون Web3 برنامجًا واحدًا منفصلًا.
+</p>
+
+<h2>23. ما فوائد هذا النموذج؟</h2>
+
+<ul>
+<li><strong>ملكية وتحكم أكبر في بعض الأصول:</strong> يمكن للمستخدم التحكم مباشرة في مفاتيح حسابه عندما يستخدم نموذج الحفظ الذاتي.</li>
+<li><strong>قابلية التحقق:</strong> يمكن التحقق من كثير من البيانات والمعاملات على الشبكة العامة، بحسب تصميم البلوكشين.</li>
+<li><strong>البرمجة على السلسلة:</strong> يمكن للعقود الذكية تنفيذ قواعد محددة تلقائيًا وفق بيئة البلوكشين.</li>
+<li><strong>قابلية التركيب:</strong> يمكن دمج بعض البروتوكولات والمكونات لبناء خدمات جديدة.</li>
+<li><strong>إمكانية الوصول:</strong> بعض التطبيقات تسمح بالتفاعل مباشرة مع العقود دون حساب تقليدي لدى شركة واحدة، مع بقاء متطلبات الشبكة والقوانين والبنية التحتية مهمة.</li>
+</ul>
+
+<h2>24. ما المخاطر الأساسية؟</h2>
+
+<p>
+Web3 يقدم نموذجًا مختلفًا، لكنه لا يلغي المخاطر.
+</p>
+
+<ul>
+<li>سرقة المفاتيح أو العبارة السرية.</li>
+<li>التصيد الاحتيالي.</li>
+<li>التطبيقات المزيفة.</li>
+<li>العقود الذكية التي تحتوي على أخطاء.</li>
+<li>التوقيع على رسائل غير مفهومة.</li>
+<li>منح Token Approvals غير مناسبة.</li>
+<li>مخاطر الجسور بين الشبكات.</li>
+<li>مخاطر الأوراكل أو البيانات الخارجية.</li>
+<li>الاعتماد على خدمات RPC أو البنية التحتية المركزية.</li>
+<li>رسوم الشبكة وتقلبها.</li>
+<li>مشكلات الحوكمة أو تركّز الصلاحيات.</li>
+<li>مخاطر تنظيمية وقانونية تختلف حسب الدولة.</li>
+</ul>
+
+<h2>25. Web3 مقابل Blockchain وCrypto وDeFi</h2>
+
+<table>
+<thead>
+<tr>
+<th>المفهوم</th>
+<th>المعنى</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Blockchain</td>
+<td>تقنية أو نظام دفتر موزع يمكن استخدامه لتسجيل البيانات والمعاملات.</td>
+</tr>
+<tr>
+<td>Crypto</td>
+<td>مصطلح واسع يشير إلى الأصول الرقمية والعملات والأنظمة المرتبطة بالتشفير والبلوكشين.</td>
+</tr>
+<tr>
+<td>Web3</td>
+<td>مصطلح واسع لوصف مجموعة من تطبيقات ونماذج الإنترنت التي تعتمد بدرجات مختلفة على البلوكشين والملكية الرقمية والتفاعل المباشر مع الشبكات.</td>
+</tr>
+<tr>
+<td>DeFi</td>
+<td>مجموعة من التطبيقات والخدمات المالية المبنية على البلوكشين والعقود الذكية، ضمن نماذج تختلف في درجة اللامركزية.</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+إذن Web3 أوسع من DeFi، وDeFi جزء من التطبيقات التي يمكن أن تدخل ضمن منظومة Web3.
+</p>
+
+<h2>26. هل كل تطبيق يستخدم Blockchain يعتبر Web3؟</h2>
+
+<p>
+ليس بالضرورة.
+</p>
+
+<p>
+استخدام البلوكشين وحده لا يكفي لوصف نظام كامل بأنه Web3 بالمعنى الواسع.
+</p>
+
+<p>
+يجب النظر إلى طريقة استخدام التقنية، ومن يملك المفاتيح، وأين يتم تنفيذ المنطق، وكيف تتم إدارة البيانات، ومدى اعتماد النظام على الخدمات المركزية.
+</p>
+
+<h2>27. أهم فكرة يجب أن تتذكرها</h2>
+
+<p>
+Web3 ليس تطبيقًا واحدًا ولا تقنية واحدة.
+</p>
+
+<p>
+إنه مجموعة من الطبقات التي يمكن أن تعمل معًا:
+</p>
+
+<p>
+<strong>المستخدم → المحفظة → التوقيع → DApp → Smart Contract → Blockchain → Nodes والبنية التحتية</strong>
+</p>
+
+<p>
+وقد تدخل طبقات إضافية مثل RPC وOracles وIndexers والتخزين بحسب احتياجات التطبيق.
+</p>
+
+<h2>أخطاء شائعة عند فهم طريقة عمل Web3</h2>
+
+<h3>1. المحفظة تخزن العملات داخلها</h3>
+
+<p>
+المحفظة تدير المفاتيح وتساعد المستخدم على التفاعل مع الحسابات والأصول المسجلة على الشبكة؛ وليست بالضرورة مكانًا ماديًا توجد فيه العملات.
+</p>
+
+<h3>2. كل ما يحدث في Web3 يكون على البلوكشين</h3>
+
+<p>
+خطأ. يمكن أن توجد مكونات On-Chain وأخرى Off-Chain.
+</p>
+
+<h3>3. DApp يعني أن كل شيء لامركزي</h3>
+
+<p>
+ليس بالضرورة. قد تكون الواجهة أو RPC أو خدمات الفهرسة أو بعض الصلاحيات مركزية.
+</p>
+
+<h3>4. توقيع أي رسالة آمن</h3>
+
+<p>
+ليس بالضرورة. يجب فهم ما الذي يتم توقيعه وما الصلاحية أو العملية التي قد تنتج عنه.
+</p>
+
+<h3>5. العقد الذكي لا يمكن أن يحتوي على أخطاء</h3>
+
+<p>
+خطأ. العقد الذكي برنامج، والبرامج يمكن أن تحتوي على أخطاء أو ثغرات.
+</p>
+
+<h2>كيف يبدأ المبتدئ في فهم Web3 عمليًا؟</h2>
+
+<ol>
+<li>تعلم أساسيات البلوكشين.</li>
+<li>افهم المحافظ والمفاتيح والتوقيعات.</li>
+<li>تعلم الفرق بين القراءة والكتابة على البلوكشين.</li>
+<li>افهم وظيفة العقود الذكية.</li>
+<li>تعلم كيف تتفاعل DApps مع العقود.</li>
+<li>تعرف على RPC والعقد Nodes.</li>
+<li>تعلم أساسيات أمن المحافظ والتوقيعات.</li>
+<li>بعد ذلك انتقل إلى التطبيقات المتخصصة مثل DeFi وNFTs.</li>
+</ol>
+
+<h2>الخلاصة</h2>
+
+<p>
+يعمل Web3 من خلال مجموعة من المكونات التي تتعاون لتنفيذ تجربة المستخدم، وليس من خلال تقنية واحدة فقط.
+</p>
+
+<p>
+يتفاعل المستخدم عادةً مع واجهة تطبيق، وتتولى المحفظة إدارة المفاتيح والتوقيعات، بينما يمكن للعقد الذكي تنفيذ القواعد على البلوكشين، وتقوم العقد والبنية التحتية بتوفير الاتصال والتحقق والوصول إلى بيانات الشبكة.
+</p>
+
+<p>
+وقد تعتمد التطبيقات أيضًا على RPC وOracles وIndexers والتخزين خارج السلسلة، ولذلك فإن درجة اللامركزية تختلف من مشروع إلى آخر.
+</p>
+
+<p>
+فهم هذه العلاقة بين الطبقات هو الأساس الذي ستحتاج إليه في الدروس القادمة لفهم <strong>DApps</strong> والمحافظ والعقود الذكية وبنية Web3 بشكل أعمق.
+</p>
+
+<hr>
+
+<h2>الأسئلة الشائعة حول كيفية عمل Web3</h2>
+
+<h3>كيف يعمل Web3 باختصار؟</h3>
+<p>
+يعتمد Web3 على تفاعل المستخدم مع المحفظة والتطبيقات والعقود الذكية وشبكات البلوكشين، مع استخدام طبقات بنية تحتية إضافية حسب الحاجة.
+</p>
+
+<h3>ما دور المحفظة في Web3؟</h3>
+<p>
+تساعد المحفظة المستخدم على إدارة المفاتيح والتوقيع على الرسائل والمعاملات والتفاعل مع التطبيقات التي تدعم Web3.
+</p>
+
+<h3>هل المحفظة تخزن العملات فعليًا؟</h3>
+<p>
+الأصول تكون مسجلة على شبكة البلوكشين، بينما تدير المحفظة المفاتيح التي تسمح للمستخدم بالتحكم في الحسابات والأصول المرتبطة بها وفق قواعد الشبكة.
+</p>
+
+<h3>ما هو DApp؟</h3>
+<p>
+DApp هو تطبيق يعتمد بدرجات مختلفة على مكونات لامركزية مثل العقود الذكية والبلوكشين، مع احتمال وجود مكونات مركزية مثل الواجهة أو خدمات البنية التحتية.</p>
+
+<h3>ما هو Smart Contract؟</h3>
+<p>
+هو برنامج يعمل على شبكة بلوكشين تدعم العقود الذكية، ويطبق قواعد محددة وفق بيئة البروتوكول.</p>
+
+<h3>هل كل DApp لامركزي بالكامل؟</h3>
+<p>
+لا. يمكن أن تعتمد بعض أجزاء التطبيق على خدمات مركزية أو بنية تحتية خارج السلسلة.</p>
+
+<h3>ما الفرق بين On-Chain وOff-Chain؟</h3>
+<p>
+On-Chain يشير إلى العمليات أو البيانات المسجلة أو المنفذة على البلوكشين، بينما Off-Chain يشير إلى العمليات أو البيانات التي تتم خارج الشبكة.</p>
+
+<h3>لماذا يحتاج Web3 إلى RPC؟</h3>
+<p>
+تساعد خدمات RPC التطبيقات على التواصل مع عقد البلوكشين وطلب البيانات أو إرسال المعاملات وفق الواجهات التي توفرها الخدمة.</p>
+
+<h3>ما وظيفة Oracle في Web3؟</h3>
+<p>
+يساعد Oracle بعض العقود الذكية على الوصول إلى بيانات خارج البلوكشين، مثل بيانات الأسعار أو معلومات خارجية أخرى وفق تصميم النظام.</p>
+
+<h3>لماذا توجد رسوم عند استخدام Web3؟</h3>
+<p>
+قد تتطلب العمليات التي تغير حالة البلوكشين موارد من الشبكة، ولذلك تفرض بعض الشبكات رسومًا تختلف حسب البروتوكول والازدحام وطبيعة العملية.</p>
+
+<h3>هل Web3 هو نفسه DeFi؟</h3>
+<p>
+لا. Web3 مفهوم أوسع، بينما DeFi يمثل مجموعة من التطبيقات والخدمات المالية المبنية على البلوكشين والعقود الذكية.</p>
+
+<h2>دروس ذات صلة في AQL Crypto Academy</h2>
+
+<ul>
+<li>
+<a href="/academy/blockchain/what-is-blockchain">ما هو Blockchain؟</a>
+</li>
+<li>
+<a href="/academy/blockchain/how-does-blockchain-work">كيف يعمل Blockchain؟</a>
+</li>
+<li>
+<a href="/academy/blockchain/what-is-blockchain-consensus">ما هو إجماع البلوكشين؟</a>
+</li>
+<li>
+<a href="/academy/blockchain/what-are-blockchain-nodes">ما هي عقد البلوكشين؟</a>
+</li>
+<li>
+<a href="/academy/staking/what-is-staking">ما هو Staking؟</a>
+</li>
+<li>
+<a href="/academy/defi/what-is-defi">ما هو DeFi؟</a>
+</li>
+<li>
+<a href="/academy/web3/what-are-dapps">ما هي التطبيقات اللامركزية DApps؟</a>
+</li>
+</ul>
+
+<p>
+<strong>تنبيه تعليمي:</strong> هذا المحتوى تعليمي فقط ولا يُعد نصيحة مالية أو استثمارية. تختلف بنية Web3 وآليات البلوكشين والعقود الذكية والبنية التحتية من مشروع إلى آخر، لذلك يجب مراجعة الوثائق الرسمية وفهم المخاطر قبل استخدام أي تطبيق أو خدمة.
+</p>
+
+</div>
+HTML,
+
+    'content_en' => <<<'HTML'
+<div dir="ltr">
+
+<h2>How Does Web3 Work?</h2>
+
+<p>
+After understanding what Web3 means and how it relates to blockchain technology, digital assets, and user ownership, the next step is understanding what actually happens when someone uses a Web3 application.
+</p>
+
+<p>
+At a simplified level, a Web3 interaction can be represented as:
+</p>
+
+<p>
+<strong>User → Wallet → DApp → Smart Contract → Blockchain</strong>
+</p>
+
+<p>
+However, this model is only the starting point. Real Web3 applications may also depend on blockchain nodes, RPC services, oracles, indexers, decentralized or traditional storage, and frontends that may themselves be hosted using centralized infrastructure.
+</p>
+
+<h2>The Main Components Behind Web3</h2>
+
+<p>
+A typical Web3 system may involve several components:
+</p>
+
+<ul>
+<li>The user.</li>
+<li>A Web3 wallet.</li>
+<li>Private and public keys.</li>
+<li>Digital signatures.</li>
+<li>A decentralized application or DApp.</li>
+<li>Smart contracts.</li>
+<li>A blockchain network.</li>
+<li>Blockchain nodes.</li>
+<li>RPC services.</li>
+<li>Oracles when external data is required.</li>
+<li>Indexing services.</li>
+<li>On-chain and off-chain storage.</li>
+</ul>
+
+<h2>1. The User</h2>
+
+<p>
+The user is normally the starting point of a Web3 interaction. They may want to read blockchain data, connect a wallet, send a transaction, use a decentralized application, or interact with a digital asset.
+</p>
+
+<p>
+Traditional applications often identify users through accounts controlled by the service provider.
+</p>
+
+<p>
+In many Web3 applications, a wallet address can act as a primary identifier, while digital signatures are used to prove control over the corresponding account or key.
+</p>
+
+<p>
+A wallet address does not automatically reveal the user's real-world identity. It may act as a pseudonymous identifier, although external information can sometimes connect an address to a real person.
+</p>
+
+<h2>2. What Does a Web3 Wallet Do?</h2>
+
+<p>
+A Web3 wallet is not simply a container that stores coins.
+</p>
+
+<p>
+It can help users manage keys, sign messages and transactions, and interact with applications.
+</p>
+
+<p>
+Digital assets are generally recorded on the blockchain, while the wallet manages the credentials needed to control accounts associated with those assets.
+</p>
+
+<p>
+This is why losing the private key or recovery phrase can result in losing control over assets associated with the account.
+</p>
+
+<h2>3. Private Keys and Public Keys</h2>
+
+<ul>
+<li><strong>Private Key:</strong> a secret value used to produce signatures and prove control under the network's cryptographic rules.</li>
+<li><strong>Public Key:</strong> a value used within the cryptographic system to verify signatures.</li>
+<li><strong>Wallet Address:</strong> an address used to interact with an account or assets on a blockchain.</li>
+</ul>
+
+<p>
+A private key is not simply an ordinary password. Anyone who gains the ability to use it may be able to authorize transactions from the associated account.
+</p>
+
+<h2>4. What Are Digital Signatures?</h2>
+
+<p>
+When a user wants to authorize an operation, a wallet can use the private key to create a <strong>digital signature</strong>.
+</p>
+
+<p>
+The network or application can then verify that the message or transaction was signed by the key associated with the account without requiring the private key itself to be sent to the blockchain.
+</p>
+
+<p>
+Digital signatures are therefore a fundamental part of how users interact with Web3 systems.
+</p>
+
+<h2>5. What Is a DApp?</h2>
+
+<p>
+<strong>DApp</strong> stands for <strong>Decentralized Application</strong>.
+</p>
+
+<p>
+A Web3 application often includes a user interface combined with smart contracts and blockchain-based components.
+</p>
+
+<p>
+However, not every part of a DApp has to be decentralized.
+</p>
+
+<p>
+For example, the frontend may be hosted on traditional servers while important asset-related logic is implemented in smart contracts.
+</p>
+
+<p>
+Therefore, decentralization should be evaluated component by component rather than assumed from the label DApp alone.
+</p>
+
+<h2>6. What Happens When a User Opens a DApp?</h2>
+
+<ol>
+<li>The browser loads the application's interface.</li>
+<li>The application connects to a source of blockchain data.</li>
+<li>The application may ask the user to connect a wallet.</li>
+<li>The wallet address becomes available to the application after the user approves the connection.</li>
+<li>The application can read public blockchain information.</li>
+<li>When the user requests an on-chain action, the application prepares transaction data.</li>
+<li>The wallet displays the transaction details.</li>
+<li>The user approves and signs the transaction.</li>
+<li>The signed transaction is submitted to the network.</li>
+<li>Network nodes validate it according to protocol rules.</li>
+<li>If accepted, the transaction becomes part of the blockchain's consensus and block-production process.</li>
+</ol>
+
+<h2>7. Reading vs Writing to a Blockchain</h2>
+
+<p>
+This distinction is essential for understanding Web3.
+</p>
+
+<h3>Reading Data</h3>
+
+<p>
+Applications can often read public blockchain data without requiring the user to sign a transaction or pay a network fee.
+</p>
+
+<h3>Writing Data</h3>
+
+<p>
+Changing blockchain state usually requires a transaction that is signed and submitted to the network.
+</p>
+
+<p>
+This is why reading blockchain data may be free from the user's perspective, while changing on-chain state may require a network fee.
+</p>
+
+<h2>8. What Is a Smart Contract?</h2>
+
+<p>
+A <strong>smart contract</strong> is a program deployed on a blockchain that supports smart-contract execution.
+</p>
+
+<p>
+It defines rules and functions that users or applications can interact with according to the blockchain's execution environment.
+</p>
+
+<p>
+A smart contract might manage tokens, execute swaps, record ownership, or implement voting logic, depending on its design.
+</p>
+
+<p>
+A smart contract is not necessarily a legal contract, and being deployed on a blockchain does not mean that the software is free of bugs or risks.
+</p>
+
+<h2>9. How Does a DApp Interact With a Smart Contract?</h2>
+
+<p>
+A simplified flow is:
+</p>
+
+<p>
+<strong>User → DApp Interface → Wallet → Transaction → Smart Contract → Blockchain</strong>
+</p>
+
+<p>
+The interface helps prepare the requested action, the wallet handles signing, and the blockchain executes the transaction according to protocol and contract rules.
+</p>
+
+<h2>10. What Are Blockchain Nodes?</h2>
+
+<p>
+<strong>Nodes</strong> are computers participating in a blockchain network according to roles defined by the protocol.
+</p>
+
+<p>
+Depending on the network and node type, nodes may receive transactions, validate information, store or provide access to blockchain state, and participate in consensus.
+</p>
+
+<p>
+Not every node necessarily performs every function in the same way.
+</p>
+
+<h2>11. What Is RPC?</h2>
+
+<p>
+<strong>RPC</strong> provides a communication method through which applications can request blockchain data or submit transactions through available interfaces.
+</p>
+
+<p>
+A Web3 application does not necessarily connect directly to a node operated by the user.
+</p>
+
+<p>
+Instead, it may use an external RPC provider.
+</p>
+
+<p>
+This is another reason why a Web3 application can contain centralized infrastructure even when its smart contracts are deployed on a public blockchain.
+</p>
+
+<h2>12. Why Does Web3 Use Indexers?</h2>
+
+<p>
+Blockchain data can become large and complex, and applications may need efficient ways to search and organize it.
+</p>
+
+<p>
+<strong>Indexers</strong> can process blockchain data and make certain queries faster and easier for applications.
+</p>
+
+<p>
+However, relying on an indexing service introduces another infrastructure layer and potentially another dependency.
+</p>
+
+<h2>13. What Do Oracles Do?</h2>
+
+<p>
+Blockchains can process information available within their execution environment, but they do not automatically know every piece of information from the outside world.
+</p>
+
+<p>
+<strong>Oracles</strong> can provide external data to smart contracts, such as asset prices or other external information.
+</p>
+
+<p>
+Because smart contracts may rely on this information, oracle design becomes an important part of the application's security model.
+</p>
+
+<h2>14. On-Chain vs Off-Chain</h2>
+
+<p>
+Web3 applications often combine on-chain and off-chain components.
+</p>
+
+<h3>On-Chain</h3>
+
+<p>
+Data or operations recorded or executed on the blockchain.
+</p>
+
+<h3>Off-Chain</h3>
+
+<p>
+Data or operations handled outside the blockchain.
+</p>
+
+<p>
+For example, ownership information may be recorded on-chain while additional metadata or application data is stored elsewhere.
+</p>
+
+<h2>15. How Does a Web3 Transaction Work?</h2>
+
+<ol>
+<li>The user selects an action.</li>
+<li>The application creates the required transaction data.</li>
+<li>The wallet displays the transaction details.</li>
+<li>The user reviews the operation.</li>
+<li>The user signs the transaction.</li>
+<li>The signed transaction is submitted to the network.</li>
+<li>Nodes validate the transaction according to protocol rules.</li>
+<li>The transaction enters the block-production and consensus process.</li>
+<li>The transaction is included in a block if accepted.</li>
+<li>The application reads the updated state and displays the result.</li>
+</ol>
+
+<h2>16. What Are Network Fees?</h2>
+
+<p>
+Blockchain operations that change network state may require transaction fees.
+</p>
+
+<p>
+Fee mechanisms differ between networks and can depend on congestion, transaction complexity, resource usage, and protocol rules.
+</p>
+
+<p>
+As a result, the cost of an operation can vary between networks and over time.
+</p>
+
+<h2>17. Why Does a Wallet Ask You to Sign?</h2>
+
+<p>
+A signature can be used to prove that the holder of the relevant private key authorized a message or transaction.
+</p>
+
+<p>
+Users should carefully review what they are signing because a signature can authorize an actual transaction, grant permissions, or trigger another action depending on the message.
+</p>
+
+<p>
+Users should never approve a signature request simply because a website displays it.
+</p>
+
+<h2>18. What Is Token Approval?</h2>
+
+<p>
+Some token systems allow users to grant a smart contract permission to use a specified amount of a token on their behalf.
+</p>
+
+<p>
+This is commonly known as a <strong>token approval</strong>.
+</p>
+
+<p>
+If a user grants more permission than necessary, the approval can create additional risk if the relevant contract or account later becomes compromised or behaves maliciously.
+</p>
+
+<p>
+Users should understand the permissions they grant and review them when appropriate.
+</p>
+
+<h2>19. Is Web3 Fully Decentralized?</h2>
+
+<p>
+Not necessarily.
+</p>
+
+<p>
+A Web3 application may contain both decentralized and centralized components.
+</p>
+
+<ul>
+<li>The smart contract may be deployed on a blockchain.</li>
+<li>The frontend may be hosted on traditional servers.</li>
+<li>The application may depend on a centralized RPC provider.</li>
+<li>It may use an external indexing service.</li>
+<li>Some data may be stored off-chain.</li>
+<li>Administrative or governance privileges may exist.</li>
+</ul>
+
+<p>
+Therefore, the better question is not simply "Is this a Web3 application?" but rather: <strong>Which parts are decentralized, and which parts depend on centralized infrastructure?</strong>
+</p>
+
+<h2>20. What Is Composability?</h2>
+
+<p>
+<strong>Composability</strong> refers to the ability to build new applications or services using existing blockchain components, smart contracts, protocols, and digital assets where the system allows such interaction.
+</p>
+
+<p>
+This can allow applications to build on top of one another, but it also means that risks can propagate through dependencies.
+</p>
+
+<h2>21. Why Is Composability Important?</h2>
+
+<p>
+Traditional software integrations may require formal partnerships or permission from another company.
+</p>
+
+<p>
+In Web3, developers can sometimes interact directly with publicly available smart contracts or protocols according to their rules.
+</p>
+
+<p>
+This can accelerate experimentation and innovation, but it can also create complex dependency chains. If an important component fails or is exploited, applications that depend on it may also be affected.
+</p>
+
+<h2>22. A Simple Web3 Example</h2>
+
+<p>
+Imagine a user wants to use a decentralized application that supports digital-asset swapping.
+</p>
+
+<ol>
+<li>The user opens the application.</li>
+<li>The user connects a wallet.</li>
+<li>The wallet asks for connection approval.</li>
+<li>The user selects the desired operation.</li>
+<li>The application prepares transaction data.</li>
+<li>The wallet displays the transaction and network fee.</li>
+<li>The user reviews the details.</li>
+<li>The user signs the transaction.</li>
+<li>The transaction is submitted to the blockchain.</li>
+<li>The network validates it.</li>
+<li>The smart contract executes the operation if its conditions are satisfied.</li>
+<li>The application reads the updated state and displays the result.</li>
+</ol>
+
+<p>
+This demonstrates that Web3 is a stack of interacting components rather than one standalone technology.
+</p>
+
+<h2>23. Potential Benefits of This Model</h2>
+
+<ul>
+<li><strong>User control:</strong> self-custody can allow users to directly control certain accounts and assets.</li>
+<li><strong>Verifiability:</strong> many public blockchain transactions and states can be independently inspected.</li>
+<li><strong>Programmability:</strong> smart contracts can execute predefined rules.</li>
+<li><strong>Composability:</strong> developers can sometimes combine existing blockchain components.</li>
+<li><strong>Direct interaction:</strong> some applications allow users to interact with blockchain systems without maintaining a traditional account controlled by one company.</li>
+</ul>
+
+<h2>24. Major Risks</h2>
+
+<ul>
+<li>Private-key or recovery-phrase theft.</li>
+<li>Phishing.</li>
+<li>Fake applications.</li>
+<li>Smart-contract vulnerabilities.</li>
+<li>Signing messages that are not understood.</li>
+<li>Unsafe token approvals.</li>
+<li>Bridge-related risks.</li>
+<li>Oracle and external-data risks.</li>
+<li>Centralized RPC or infrastructure dependencies.</li>
+<li>Network fees and fee volatility.</li>
+<li>Governance or administrative concentration.</li>
+<li>Regulatory and legal risks that vary by jurisdiction.</li>
+</ul>
+
+<h2>25. Web3 vs Blockchain, Crypto and DeFi</h2>
+
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Blockchain</td>
+<td>A distributed system or technology used to record data and transactions according to a protocol.</td>
+</tr>
+<tr>
+<td>Crypto</td>
+<td>A broad term covering digital assets, cryptocurrencies, and related cryptographic and blockchain-based systems.</td>
+</tr>
+<tr>
+<td>Web3</td>
+<td>A broad term describing internet applications and models that use blockchain, digital ownership, and direct interaction with decentralized networks to varying degrees.</td>
+</tr>
+<tr>
+<td>DeFi</td>
+<td>A group of blockchain-based financial applications and services, often using smart contracts and varying in their degree of decentralization.</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Web3 is therefore broader than DeFi, while DeFi represents one category of applications that can exist within the broader Web3 ecosystem.
+</p>
+
+<h2>26. Does Using Blockchain Automatically Make Something Web3?</h2>
+
+<p>
+Not necessarily.
+</p>
+
+<p>
+Simply using blockchain technology does not automatically make an entire system Web3.
+</p>
+
+<p>
+You should consider how the technology is used, who controls the keys, where the application logic runs, how data is managed, and how dependent the system is on centralized services.
+</p>
+
+<h2>27. The Key Idea to Remember</h2>
+
+<p>
+Web3 is not one application or one technology.
+</p>
+
+<p>
+It is a collection of layers that can work together:
+</p>
+
+<p>
+<strong>User → Wallet → Signature → DApp → Smart Contract → Blockchain → Nodes and Infrastructure</strong>
+</p>
+
+<p>
+Additional layers such as RPC services, oracles, indexers, and storage may also be involved.
+</p>
+
+<h2>Common Web3 Misconceptions</h2>
+
+<h3>1. A wallet stores the coins inside it</h3>
+
+<p>
+The blockchain records the assets, while the wallet manages the keys and helps the user control accounts associated with those assets.
+</p>
+
+<h3>2. Everything in Web3 happens on-chain</h3>
+
+<p>
+False. Web3 applications commonly combine on-chain and off-chain components.
+</p>
+
+<h3>3. A DApp means everything is decentralized</h3>
+
+<p>
+Not necessarily. Frontends, RPC services, indexing systems, storage, and administrative privileges can remain centralized.
+</p>
+
+<h3>4. Signing any message is safe</h3>
+
+<p>
+Not necessarily. Users should understand what they are signing and what authority or action it may grant.
+</p>
+
+<h3>5. Smart contracts cannot contain bugs</h3>
+
+<p>
+False. Smart contracts are software, and software can contain bugs and vulnerabilities.
+</p>
+
+<h2>How Should Beginners Learn Web3?</h2>
+
+<ol>
+<li>Learn blockchain fundamentals.</li>
+<li>Understand wallets, keys, and signatures.</li>
+<li>Learn the difference between reading and writing to a blockchain.</li>
+<li>Understand smart contracts.</li>
+<li>Learn how DApps interact with contracts.</li>
+<li>Learn the basics of nodes and RPC.</li>
+<li>Study wallet and transaction security.</li>
+<li>Then explore specialized areas such as DeFi and NFTs.</li>
+</ol>
+
+<h2>Conclusion</h2>
+
+<p>
+Web3 works through multiple components that cooperate to provide the user experience rather than through a single technology.
+</p>
+
+<p>
+The user interacts with an application interface, the wallet manages keys and signatures, smart contracts can execute rules on a blockchain, and nodes and infrastructure provide communication, validation, and access to blockchain data.
+</p>
+
+<p>
+Applications may also depend on RPC providers, oracles, indexers, and off-chain storage, which means that the degree of decentralization can vary significantly between projects.
+</p>
+
+<p>
+Understanding these layers provides the foundation for learning about DApps, Web3 wallets, smart contracts, and Web3 infrastructure in greater depth.
+</p>
+
+<hr>
+
+<h2>Frequently Asked Questions About How Web3 Works</h2>
+
+<h3>How does Web3 work in simple terms?</h3>
+<p>
+Web3 applications combine users, wallets, smart contracts, blockchains, and supporting infrastructure to enable direct interaction with blockchain-based systems.</p>
+
+<h3>What does a Web3 wallet do?</h3>
+<p>
+A wallet helps users manage keys, sign messages and transactions, and interact with Web3 applications.</p>
+
+<h3>Does a wallet actually store cryptocurrency?</h3>
+<p>
+Assets are recorded on the blockchain, while the wallet manages the keys that allow users to control associated accounts and assets.</p>
+
+<h3>What is a DApp?</h3>
+<p>
+A DApp is an application that uses decentralized components such as smart contracts and blockchain networks, although some parts may remain centralized.</p>
+
+<h3>What is a smart contract?</h3>
+<p>
+A smart contract is software deployed on a blockchain that supports smart-contract execution and follows predefined rules.</p>
+
+<h3>Are all DApps fully decentralized?</h3>
+<p>
+No. A DApp may rely on centralized frontends, RPC providers, indexing services, storage, or administrative controls.</p>
+
+<h3>What is the difference between on-chain and off-chain?</h3>
+<p>
+On-chain refers to data or operations recorded or executed on a blockchain, while off-chain refers to data or operations handled outside the blockchain.</p>
+
+<h3>Why does Web3 use RPC?</h3>
+<p>
+RPC services allow applications to communicate with blockchain nodes and request data or submit transactions.</p>
+
+<h3>What does an oracle do?</h3>
+<p>
+An oracle can provide external information to smart contracts when applications need data that does not naturally exist on the blockchain.</p>
+
+<h3>Why are there fees when using Web3?</h3>
+<p>
+Blockchain transactions that change network state can require network resources and therefore may require fees depending on the blockchain's rules.</p>
+
+<h3>Is Web3 the same as DeFi?</h3>
+<p>
+No. Web3 is a broader concept, while DeFi is a category of blockchain-based financial applications and services.</p>
+
+<h2>Related Lessons in AQL Crypto Academy</h2>
+
+<ul>
+<li>
+<a href="/academy/blockchain/what-is-blockchain">What Is Blockchain?</a>
+</li>
+<li>
+<a href="/academy/blockchain/how-does-blockchain-work">How Does Blockchain Work?</a>
+</li>
+<li>
+<a href="/academy/blockchain/what-is-blockchain-consensus">What Is Blockchain Consensus?</a>
+</li>
+<li>
+<a href="/academy/blockchain/what-are-blockchain-nodes">What Are Blockchain Nodes?</a>
+</li>
+<li>
+<a href="/academy/staking/what-is-staking">What Is Staking?</a>
+</li>
+<li>
+<a href="/academy/defi/what-is-defi">What Is DeFi?</a>
+</li>
+<li>
+<a href="/academy/web3/what-are-dapps">What Are DApps?</a>
+</li>
+</ul>
+
+<p>
+<strong>Educational disclaimer:</strong> This content is for educational purposes only and is not financial or investment advice. Web3 architectures, blockchain mechanisms, smart contracts, and infrastructure vary between projects. Review official documentation and understand the risks before using any application or digital-asset service.
+</p>
+
+</div>
+HTML,
+
+    'image' => null,
+
+    'seo_title' => 'How Does Web3 Work? Blockchain, Wallets, Smart Contracts and DApps',
+    'seo_title_ar' => 'كيف يعمل Web3؟ شرح البلوكشين والمحافظ والعقود الذكية وDApps',
+    'seo_title_en' => 'How Does Web3 Work? Blockchain, Wallets, Smart Contracts and DApps',
+
+    'meta_description' => 'Learn how Web3 works through wallets, DApps, smart contracts, blockchain networks, digital signatures, RPC, oracles, and on-chain and off-chain infrastructure.',
+    'meta_description_ar' => 'تعرف على كيفية عمل Web3 من خلال المحافظ وDApps والعقود الذكية والبلوكشين والتوقيعات الرقمية وRPC وOracles والبنية التحتية On-Chain وOff-Chain.',
+    'meta_description_en' => 'Learn how Web3 works through wallets, DApps, smart contracts, blockchain networks, digital signatures, RPC, oracles, and on-chain and off-chain infrastructure.',
+
+    'faq_ar' => [
+        [
+            'question' => 'كيف يعمل Web3 باختصار؟',
+            'answer' => 'يعتمد Web3 على تفاعل المستخدم مع المحفظة والتطبيقات والعقود الذكية وشبكات البلوكشين، مع استخدام طبقات بنية تحتية إضافية حسب الحاجة.'
+        ],
+        [
+            'question' => 'ما دور المحفظة في Web3؟',
+            'answer' => 'تساعد المحفظة المستخدم على إدارة المفاتيح والتوقيع على الرسائل والمعاملات والتفاعل مع التطبيقات التي تدعم Web3.'
+        ],
+        [
+            'question' => 'هل المحفظة تخزن العملات فعليًا؟',
+            'answer' => 'الأصول تكون مسجلة على شبكة البلوكشين، بينما تدير المحفظة المفاتيح التي تسمح للمستخدم بالتحكم في الحسابات والأصول المرتبطة بها.'
+        ],
+        [
+            'question' => 'ما هو DApp؟',
+            'answer' => 'DApp هو تطبيق يعتمد بدرجات مختلفة على مكونات لامركزية مثل العقود الذكية والبلوكشين، مع احتمال وجود مكونات مركزية.'
+        ],
+        [
+            'question' => 'ما هو Smart Contract؟',
+            'answer' => 'هو برنامج يعمل على شبكة بلوكشين تدعم العقود الذكية ويطبق قواعد محددة وفق بيئة البروتوكول.'
+        ],
+        [
+            'question' => 'هل كل DApp لامركزي بالكامل؟',
+            'answer' => 'لا. يمكن أن تعتمد بعض أجزاء التطبيق على خدمات مركزية مثل الواجهة أو RPC أو الفهرسة أو التخزين.'
+        ],
+        [
+            'question' => 'ما الفرق بين On-Chain وOff-Chain؟',
+            'answer' => 'On-Chain يشير إلى البيانات أو العمليات المسجلة أو المنفذة على البلوكشين، بينما Off-Chain يشير إلى البيانات أو العمليات التي تتم خارج الشبكة.'
+        ],
+        [
+            'question' => 'لماذا يحتاج Web3 إلى RPC؟',
+            'answer' => 'تساعد خدمات RPC التطبيقات على التواصل مع عقد البلوكشين وطلب البيانات أو إرسال المعاملات.'
+        ],
+        [
+            'question' => 'ما وظيفة Oracle في Web3؟',
+            'answer' => 'يساعد Oracle بعض العقود الذكية على الوصول إلى بيانات خارج البلوكشين مثل أسعار الأصول أو معلومات خارجية أخرى.'
+        ],
+        [
+            'question' => 'لماذا توجد رسوم عند استخدام Web3؟',
+            'answer' => 'قد تتطلب العمليات التي تغير حالة البلوكشين موارد من الشبكة، ولذلك قد تفرض الشبكة رسومًا وفق قواعدها.'
+        ],
+        [
+            'question' => 'هل Web3 هو نفسه DeFi؟',
+            'answer' => 'لا. Web3 مفهوم أوسع، بينما DeFi يمثل فئة من التطبيقات والخدمات المالية المبنية على البلوكشين.'
+        ],
+    ],
+
+    'faq_en' => [
+        [
+            'question' => 'How does Web3 work in simple terms?',
+            'answer' => 'Web3 applications combine users, wallets, smart contracts, blockchains, and supporting infrastructure to enable direct interaction with blockchain-based systems.'
+        ],
+        [
+            'question' => 'What does a Web3 wallet do?',
+            'answer' => 'A wallet helps users manage keys, sign messages and transactions, and interact with Web3 applications.'
+        ],
+        [
+            'question' => 'Does a wallet actually store cryptocurrency?',
+            'answer' => 'Assets are recorded on the blockchain, while the wallet manages the keys that allow users to control associated accounts and assets.'
+        ],
+        [
+            'question' => 'What is a DApp?',
+            'answer' => 'A DApp is an application that uses decentralized components such as smart contracts and blockchain networks, although some parts may remain centralized.'
+        ],
+        [
+            'question' => 'What is a smart contract?',
+            'answer' => 'A smart contract is software deployed on a blockchain that supports smart-contract execution and follows predefined rules.'
+        ],
+        [
+            'question' => 'Are all DApps fully decentralized?',
+            'answer' => 'No. A DApp may rely on centralized frontends, RPC providers, indexing services, storage, or administrative controls.'
+        ],
+        [
+            'question' => 'What is the difference between on-chain and off-chain?',
+            'answer' => 'On-chain refers to data or operations recorded or executed on a blockchain, while off-chain refers to data or operations handled outside the blockchain.'
+        ],
+        [
+            'question' => 'Why does Web3 use RPC?',
+            'answer' => 'RPC services allow applications to communicate with blockchain nodes and request data or submit transactions.'
+        ],
+        [
+            'question' => 'What does an oracle do?',
+            'answer' => 'An oracle can provide external information to smart contracts when applications need data that does not naturally exist on the blockchain.'
+        ],
+        [
+            'question' => 'Why are there fees when using Web3?',
+            'answer' => 'Blockchain transactions that change network state can require network resources and therefore may require fees depending on the blockchain rules.'
+        ],
+        [
+            'question' => 'Is Web3 the same as DeFi?',
+            'answer' => 'No. Web3 is a broader concept, while DeFi is a category of blockchain-based financial applications and services.'
+        ],
+    ],
+
+    'status' => 'published',
+    'sort_order' => 2,
+    'published_at' => now(),
+],
+
+    [
+        'title' => 'What Are DApps?',
+        'title_ar' => 'ما هي التطبيقات اللامركزية DApps؟ وكيف تعمل؟',
+        'title_en' => 'What Are DApps? How Decentralized Applications Work',
+
+        'slug' => 'what-are-dapps',
+
+        'sort_order' => 3,
+    ],
+
+    [
+        'title' => 'Web3 Wallets and Digital Identity',
+        'title_ar' => 'محافظ Web3 والهوية الرقمية: كيف يتفاعل المستخدم مع Web3؟',
+        'title_en' => 'Web3 Wallets and Digital Identity: How Users Interact with Web3',
+
+        'slug' => 'web3-wallets-and-identity',
+
+        'sort_order' => 4,
+    ],
+
+    [
+        'title' => 'Smart Contracts in Web3',
+        'title_ar' => 'ما دور العقود الذكية في Web3؟ شرح Smart Contracts',
+        'title_en' => 'What Role Do Smart Contracts Play in Web3?',
+
+        'slug' => 'what-are-smart-contracts-in-web3',
+
+        'sort_order' => 5,
+    ],
+
+    [
+        'title' => 'Web3 Infrastructure',
+        'title_ar' => 'بنية Web3 التحتية: Blockchain وRPC وOracles والتخزين اللامركزي',
+        'title_en' => 'Web3 Infrastructure: Blockchains, RPC, Oracles and Decentralized Storage',
+
+        'slug' => 'web3-infrastructure',
+
+        'sort_order' => 6,
+    ],
+
+    [
+        'title' => 'Web3 and DeFi',
+        'title_ar' => 'ما العلاقة بين Web3 وDeFi؟ شرح التمويل اللامركزي داخل Web3',
+        'title_en' => 'Web3 and DeFi: Understanding the Connection',
+
+        'slug' => 'web3-and-defi',
+
+        'sort_order' => 7,
+    ],
+
+    [
+        'title' => 'Web3 and NFTs',
+        'title_ar' => 'ما العلاقة بين Web3 وNFTs؟ شرح الملكية الرقمية',
+        'title_en' => 'Web3 and NFTs: Understanding Digital Ownership',
+
+        'slug' => 'web3-and-nfts',
+
+        'sort_order' => 8,
+    ],
+
+    [
+        'title' => 'Web3 Security and Risks',
+        'title_ar' => 'أمان Web3 ومخاطره: كيف تحمي نفسك أثناء استخدام التطبيقات اللامركزية؟',
+        'title_en' => 'Web3 Security and Risks: How to Protect Yourself',
+
+        'slug' => 'web3-security-and-risks',
+
+        'sort_order' => 9,
+    ],
+
+    [
+        'title' => 'The Future of Web3',
+        'title_ar' => 'مستقبل Web3: الفرص والتحديات وما الذي يجب معرفته',
+        'title_en' => 'The Future of Web3: Opportunities, Challenges and What to Know',
+
+        'slug' => 'future-of-web3',
+
+        'sort_order' => 10,
+    ],
+
+];
+
+
+foreach ($stakingArticles as $article) {
+    AcademyArticle::updateOrCreate(
+        [
+            'topic_id' => $staking->id,
+            'slug' => $article['slug'],
+        ],
+        $article
+    );
+}
+
     }
 }
