@@ -18,6 +18,7 @@ class AcademyArticleSeeder extends Seeder
         $nfts = AcademyTopic::where('slug', 'nfts')->firstOrFail();
         $wallets = AcademyTopic::where('slug', 'wallets')->firstOrFail();
         $tradingBasics = AcademyTopic::where('slug', 'trading-basics')->firstOrFail();
+        
         $security = AcademyTopic::where('slug', 'security')->firstOrFail();
          
 
@@ -44790,6 +44791,808 @@ foreach ($walletArticles as $article) {
 }
 
 
+
+$tradingArticles = [
+   [
+    'title' => 'What Is Crypto Trading?',
+    'title_ar' => 'ما هو تداول العملات الرقمية؟ مدخل شامل لفهم حركة الأسواق والمضاربة',
+    'title_en' => 'What Is Crypto Trading? A Comprehensive Guide to Market Dynamics',
+
+    'slug' => 'what-is-crypto-trading',
+
+    'excerpt' => 'A comprehensive beginner guide to cryptocurrency trading, exploring how market mechanics work, order books, the difference between trading and investing, trading styles, and the risks involved.',
+    'excerpt_ar' => 'دليل شامل للمبتدئين لفهم تداول العملات الرقمية، يشرح كيفية عمل الأسواق ودفاتر الأوامر، الفرق بين التداول والاستثمار، أشهر أساليب المضاربة، وإدارة المخاطر الأساسية.',
+    'excerpt_en' => 'A comprehensive beginner guide to cryptocurrency trading, exploring how market mechanics work, order books, the difference between trading and investing, trading styles, and the risks involved.',
+
+    'content' => null,
+
+    'content_ar' => <<<'HTML'
+<article dir="rtl">
+
+    <h2>ما هو تداول العملات الرقمية؟</h2>
+
+    <p>
+        يُعد تداول العملات الرقمية (Cryptocurrency Trading) أحد أكثر الأنشطة جذبًا للاهتمام في القطاع المالي الحديث.
+        فعندما يدخل شخص جديد إلى هذا المجال، يرى شاشات مليئة بالرسوم البيانية، والشموع الخضراء والحمراء، وأرقام الأسعار
+        التي تتغير في أجزاء من الثانية على مدار الساعة.
+    </p>
+
+    <p>
+        بأبسط تعريف: <strong>تداول العملات الرقمية هو عملية شراء وبيع الأصول الرقمية (مثل Bitcoin وEthereum وغيرها) بهدف
+        تحقيق أرباح ناتجة عن التغيرات في أسعارها السوقية</strong>.
+    </p>
+
+    <p>
+        لكن التداول الحقيقي يتجاوز مجرد التكهن باتجاه السعر صعودًا أو هبوطًا؛ إنه دراسة لقوى العرض والطلب، وفهم لسلوك
+        المشاركين في السوق، وقبل كل شيء: <strong>انضباط صارم في إدارة المخاطر ورأس المال</strong>.
+    </p>
+
+    <h2>كيف يعمل سوق العملات الرقمية؟</h2>
+
+    <p>
+        على عكس الأسواق المالية التقليدية (مثل أسواق الأسهم التي تفتح وتغلق في أوقات محددة وتتوقف في عطلات نهاية الأسبوع)،
+        يعمل سوق العملات الرقمية <strong>على مدار 24 ساعة يوميًا، 7 أيام في الأسبوع، 365 يومًا في السنة</strong> دون توقف.
+    </p>
+
+    <p>
+        تتم المعاملات من خلال منصات تداول متخصصة تجمع بين المشترين والبائعين من جميع أنحاء العالم. وعندما يلتقي طلب شراء
+        مع طلب بيع بسعر متطابق، يتم تنفيذ الصفقة وتحديث سعر السوق فورًا.
+    </p>
+
+    <h2>العوامل التي تحدد حركة الأسعار في الكريبتو</h2>
+
+    <p>
+        تتحرك أسعار العملات الرقمية وفق مبدأ اقتصادي كلاسيكي: <strong>العرض والطلب (Supply and Demand)</strong>:
+    </p>
+
+    <ul>
+        <li><strong>ارتفاع الطلب:</strong> عندما يرغب عدد أكبر من المشترين في شراء عملة ما بأسعار متزايدة مقارنة بعدد المعروض للبيع، يرتفع السعر.</li>
+        <li><strong>زيادة العرض:</strong> عندما يرغب عدد أكبر من البائعين في التخلص من أصولهم بسعر أقل مقارنة بالطلب المتاح، ينخفض السعر.</li>
+    </ul>
+
+    <p>
+        يتأثر هذا التوازن بعدة عوامل خارجية تشمل: الأخبار والتطورات التقنية للمشاريع، التحديثات التنظيمية والقانونية، الحالة الاقتصادية العالمية، والسيولة المتاحة داخل السوق.
+    </p>
+
+    <h2>ما هو دفتر الأوامر (Order Book)؟</h2>
+
+    <p>
+        في منصات التداول المركزية واللامركزية المتقدمة، يُنظم التداول من خلال ما يُعرف بـ <strong>دفتر الأوامر</strong>.
+    </p>
+
+    <p>
+        دفتر الأوامر هو قائمة إلكترونية حية تعرض جميع أوامر الشراء والبيع المعلقة لعملة معينة:
+    </p>
+
+    <ul>
+        <li><strong>أوامر الشراء (Bids):</strong> تظهر الأسعار والكميات التي يرغب المشترون في شرائها، وتكون مرتبة من الأعلى إلى الأدنى.</li>
+        <li><strong>أوامر البيع (Asks):</strong> تظهر الأسعار والكميات التي يرغب البائعون في بيعها، وتكون مرتبة من الأدنى إلى الأعلى.</li>
+        <li><strong>الفارق السعري (Spread):</strong> هو الفجوة بين أعلى سعر يرغب المشتري بدفعه وأدنى سعر يقبله البائع.</li>
+    </ul>
+
+    <h2>الفرق بين التداول والاستثمار</h2>
+
+    <p>
+        يخلط الكثير من المبتدئين بين المفهومين، لكن الفارق جوهري في الأفق الزمني واستراتيجية التعامل:
+    </p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>وجه المقارنة</th>
+                <th>التداول (Trading)</th>
+                <th>الاستثمار (Investing / HODL)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>الأفق الزمني</td>
+                <td>قصير إلى متوسط (دقائق، ساعات، أيام، أسابيع)</td>
+                <td>طويل الأجل (أشهر، سنوات، عقود)</td>
+            </tr>
+            <tr>
+                <td>الهدف الأساسي</td>
+                <td>الاستفادة من تقلبات الأسعار اللحظية والدورية</td>
+                <td>الاستفادة من نمو وتبني المشروع وقيمته الجوهرية</td>
+            </tr>
+            <tr>
+                <td>الأدوات المستخدمة</td>
+                <td>التحليل الفني، الرسوم البيانية، السيولة، المؤشرات</td>
+                <td>التحليل الأساسي، خارطة طريق المشروع، الاقتصاد الرمزي</td>
+            </tr>
+            <tr>
+                <td>مستوى النشاط</td>
+                <td>نشط ومستمر ويتطلب متابعة لصيقة للسوق</td>
+                <td>سلبي نسبيًا ويتطلب صبراً وتجاهل التقلبات المؤقتة</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p>
+        سنخصص الدرس الثاني لمقارنة متعمقة بين النهجين:
+        <a href="/academy/trading-basics/investing-vs-trading">الاستثمار مقابل التداول: ما الفرق وأيهما أنسب لك؟</a>.
+    </p>
+
+    <h2>أشهر أساليب التداول (Trading Styles)</h2>
+
+    <p>
+        يختار المتداولون أساليبهم بناءً على الوقت المتاح لديهم، وقدرتهم على تحمل المخاطر، وسرعة اتخاذ القرار:
+    </p>
+
+    <h3>1. التداول اليومي (Day Trading)</h3>
+    <p>
+        يقوم المتداول بفتح وإغلاق الصفقات خلال نفس اليوم، دون ترك أي مركز مفتوح أثناء النوم لتجنب مخاطر التقلبات الليلية المفاجئة.
+    </p>
+
+    <h3>2. التداول السريع (Scalping)</h3>
+    <p>
+        أسلوب فائق السرعة يعتمد على فتح عشرات الصفقات يوميًا لجني أرباح طفيفة جدًا خلال ثوانٍ أو دقائق معدودة، مستفيدًا من تغيرات الأسعار الصغيرة وفروق السيولة.
+    </p>
+
+    <h3>3. التداول المتأرجح (Swing Trading)</h3>
+    <p>
+        الاحتفاظ بالصفقات لعدة أيام أو أسابيع بهدف التقاط موجة صعودية أو هبوطية أكبر في السوق. يناسب هذا الأسلوب الأشخاص الذين لا يستطيعون مراقبة الشاشات طوال اليوم.
+    </p>
+
+    <h3>4. التداول الموضعي (Position Trading)</h3>
+    <p>
+        الاحتفاظ بالمراكز لعدة أسابيع أو أشهر بناءً على اتجاهات السوق العامة الكبرى، وهو الأسلوب الأقرب إلى الاستثمار قصير الأجل.
+    </p>
+
+    <h2>أنواع الأسواق: التداول الفوري مقابل العقود الآجلة</h2>
+
+    <p>
+        عند دخول منصة التداول، ستجد عادة خيارين رئيسيين:
+    </p>
+
+    <ul>
+        <li><strong>التداول الفوري (Spot Trading):</strong> تشتري فيه العملة الفعلية وتمتلكها بشكل حقيقي، ويمكنك نقلها إلى محفظتك الرقمية الخاصة.</li>
+        <li><strong>تداول المشتقات والعقود الآجلة (Futures & Derivatives):</strong> تتداول فيه عقودًا تتبع سعر الأصل دون امتلاكه، مما يتيح التداول في كلا الاتجاهين (الربح من الصعود أو الهبوط) واستخدام الرافعة المالية (Leverage).</li>
+    </ul>
+
+    <p>
+        سنشرح تفاصيل الفروق والمخاطر لاحقًا في:
+        <a href="/academy/trading-basics/spot-trading-vs-futures-trading">التداول الفوري مقابل العقود الآجلة</a>.
+    </p>
+
+    <h2>أين يتم تداول العملات الرقمية؟</h2>
+
+    <p>
+        هناك نوعان رئيسيان من المنصات التي توفر بيئة التداول:
+    </p>
+
+    <ul>
+        <li><strong>المنصات المركزية (CEX):</strong> مثل Binance أو Coinbase. توفر واجهات متقدمة وسيولة عالية وسرعة تنفيذ فائقة، لكنها منصات وصائية تطلب إيداع أموالك لديها.</li>
+        <li><strong>المنصات اللامركزية (DEX):</strong> مثل Uniswap. تعمل مباشرة عبر العقود الذكية على البلوكشين، حيث تتداول مباشرة من محفظتك الخاصة دون تسليم أصولك لطرف وسيط.</li>
+    </ul>
+
+    <h2>أهم الأدوات التي يحتاجها المتداول</h2>
+
+    <ol>
+        <li><strong>منصة تداول موثوقة:</strong> توفر سيولة كافية ورسوم تنفيذ منخفضة.</li>
+        <li><strong>برامج الرسوم البيانية:</strong> مثل منصة TradingView لتحليل حركة الأسعار والشموع اليابانية.</li>
+        <li><strong>محفظة رقمية آمنة:</strong> لتخزين الأرباح ورأس المال بعيدًا عن المنصات.</li>
+        <li><strong>أدوات إدارة الصفقات:</strong> أوامر وقف الخسارة (Stop-Loss) وجني الأرباح (Take-Profit).</li>
+        <li><strong>سجل التداول (Trading Journal):</strong> لتوثيق الصفقات، ودوافع الدخول، والدروس المستفادة.</li>
+    </ol>
+
+    <h2>مخاطر تداول العملات الرقمية</h2>
+
+    <p>
+        التداول ليس طريقًا مضمونًا للثراء السريع، بل هو نشاط عالي الخطورة تشير الإحصاءات إلى أن غالبية المبتدئين فيه يخسرون جزءًا من أموالهم أو كلها بسبب:
+    </p>
+
+    <ul>
+        <li><strong>التقلبات الحادة:</strong> يمكن لأسعار العملات الرقمية أن تهبط بنسب تتجاوز 20% أو 50% خلال فترات وجيزة.</li>
+        <li><strong>مخاطر الرافعة المالية:</strong> مضاعفة حجم الصفقة عبر الاقتراض قد يؤدي إلى تصفية المركز بالكامل وخسارة رأس المال في دقائق.</li>
+        <li><strong>الضغوط النفسية والعاطفية:</strong> الوقوع في فخ الطمع (FOMO) والخوف من تفويت الفرص أو الذعر عند البيع (Panic Selling).</li>
+        <li><strong>مخاطر السيولة والمنصات:</strong> احتمالية تعطل المنصة أثناء أوقات الذروة أو تجميد السحوبات.</li>
+    </ul>
+
+    <h2>إدارة المخاطر: الركيزة الأساسية للنجاح</h2>
+
+    <p>
+        السر الذي يميز المتداول المحترف عن الهاوي ليس امتلاك استراتيجية تتنبأ بالمستقبل بدقة 100%، بل هو <strong>إدارة المخاطر الصارمة</strong>.
+    </p>
+
+    <p>
+        تتضمن القواعد الأساسية لإدارة المخاطر:
+    </p>
+
+    <ul>
+        <li>عدم المخاطرة بأكثر من 1% إلى 2% من إجمالي رأس المال في صفقة واحدة.</li>
+        <li>تحديد نقطة الخروج (وقف الخسارة) مسبقًا قبل الضغط على زر الشراء.</li>
+        <li>التداول فقط بأموال فائضة يمكنك تحمل خسارتها دون التأثير على حياتك المعيشية.</li>
+    </ul>
+
+    <p>
+        سيخصص الدرس السادس دليلاً مفصلاً حول هذه الممارسات:
+        <a href="/academy/trading-basics/risk-management-and-position-sizing">إدارة المخاطر وتحديد حجم الصفقة في الكريبتو</a>.
+    </p>
+
+    <h2>الخلاصة</h2>
+
+    <p>
+        تداول العملات الرقمية هو نشاط مالي يجمع بين فهم حركة الأسواق، وتطبيق استراتيجيات الدخول والخروج المنضبطة، والتحكم في المشاعر النفسية.
+        إنه مهارة تتطلب وقتًا للتعلم والممارسة ولا تعتمد على الحظ أو التخمين العشوائي.
+    </p>
+
+    <p>
+        الخطوة الأولى في مسارك التعليمي هي تحديد هويتك في السوق: هل أنت متداول يستغل التقلبات اليومية، أم مستثمر يبني مراكز طويلة الأجل؟
+    </p>
+
+    <p>
+        <a href="/academy/trading-basics/investing-vs-trading">
+            انتقل إلى الدرس التالي: الاستثمار مقابل التداول: ما الفرق وأيهما تختار؟
+        </a>
+    </p>
+
+    <hr>
+
+    <h2>الأسئلة الشائعة حول تداول العملات الرقمية</h2>
+
+    <h3>ما هو تداول العملات الرقمية؟</h3>
+    <p>
+        هو عملية شراء وبيع الأصول الرقمية على المنصات بهدف تحقيق أرباح من فروقات وتقلبات الأسعار عبر أطر زمنية متفاوتة.
+    </p>
+
+    <h3>هل تداول العملات الرقمية مضمون الربح؟</h3>
+    <p>
+        لا، ينطوي التداول على مخاطر عالية لخسارة رأس المال بسبب التقلبات السعرية الشديدة وعدم إمكانية التنبؤ الدقيق بحركة السوق.
+    </p>
+
+    <h3>ما الفرق الأساسي بين التداول والاستثمار؟</h3>
+    <p>
+        يركز التداول على تحركات الأسعار قصيرة ومتوسطة الأجل مع إدارة نشطة للصفقات، بينما يركز الاستثمار على القيمة طويلة الأجل ونمو المشروع على مدى سنوات.
+    </p>
+
+    <h3>ما هو رأس المال الأدنى للبدء في التداول؟</h3>
+    <p>
+        تسمح معظم منصات الكريبتو ببدء التداول بمبالغ صغيرة جدًا (مثل 10 دولارات)، لكن يُنصح دائمًا بعدم التداول إلا بالأموال الفائضة التي تستطيع تحمل خسارتها بالكامل.
+    </p>
+
+    <h3>متى يفتح ويغلق سوق العملات الرقمية؟</h3>
+    <p>
+        سوق الكريبتو مفتوح عالميًا على مدار 24 ساعة يوميًا وطوال أيام الأسبوع دون أي عطلات أو أوقات إغلاق رسمية.
+    </p>
+
+    <h3>ما هو دفتر الأوامر (Order Book)؟</h3>
+    <p>
+        هو قائمة حية داخل منصة التداول تسجل جميع عروض الشراء (Bids) وعروض البيع (Asks) المتاحة لأصل معين بأسعار وكميات محددة.
+    </p>
+
+    <h3>ما هي الرافعة المالية (Leverage)؟</h3>
+    <p>
+        هي أداة تتيح للمتداول فتح صفقات بأحجام أكبر من رأس ماله الفعلي عبر اقتراض أموال من المنصة، وهي تضاعف الأرباح المحتملة ولكنها تضاعف الخسائر ومخاطر التصفية بنفس النسبة.
+    </p>
+
+    <h3>ما هو أمر وقف الخسارة (Stop-Loss)؟</h3>
+    <p>
+        هو أمر مسبق يُعطى للمنصة لإغلاق الصفقة تلقائيًا عندما يصل السعر إلى مستوى محدد للحد من الخسائر وحماية رأس المال المتبقي.
+    </p>
+
+    <h2>دروس ذات صلة</h2>
+
+    <ul>
+        <li>
+            <a href="/academy/trading-basics/investing-vs-trading">
+                الاستثمار مقابل التداول: ما الفرق بين الاحتفاظ والمضاربة؟
+            </a>
+        </li>
+        <li>
+            <a href="/academy/trading-basics/understanding-order-types">
+                أنواع أوامر التداول: أوامر السوق، الحد، وإيقاف الخسارة
+            </a>
+        </li>
+        <li>
+            <a href="/academy/trading-basics/technical-vs-fundamental-analysis">
+                التحليل الفني مقابل التحليل الأساسي في الكريبتو
+            </a>
+        </li>
+        <li>
+            <a href="/academy/trading-basics/reading-candlestick-charts">
+                قراءة الشموع اليابانية والرسوم البيانية للمبتدئين
+            </a>
+        </li>
+        <li>
+            <a href="/academy/trading-basics/risk-management-and-position-sizing">
+                إدارة المخاطر وتحديد حجم الصفقة في الكريبتو
+            </a>
+        </li>
+        <li>
+            <a href="/academy/trading-basics/spot-trading-vs-futures-trading">
+                التداول الفوري مقابل العقود الآجلة: الفروق والمخاطر
+            </a>
+        </li>
+        <li>
+            <a href="/academy/wallets/what-is-a-crypto-wallet">
+                ما هي محفظة العملات الرقمية؟
+            </a>
+        </li>
+        <li>
+            <a href="/academy/bitcoin/what-is-bitcoin">
+                ما هو البيتكوين؟
+            </a>
+        </li>
+    </ul>
+
+    <p>
+        <strong>تنبيه تعليمي:</strong>
+        هذا الدرس مقدم لأغراض تعليمية وإرشادية فقط، ولا يمثل توصية تداول أو استشارة مالية أو استثمارية بأي شكل من الأشكال.
+        تداول الأصول المشفرة ينطوي على مخاطر تقلبات عالية وقد يؤدي إلى فقدان رأس المال.
+    </p>
+
+</article>
+HTML,
+
+    'content_en' => <<<'HTML'
+<article>
+
+    <h2>What Is Cryptocurrency Trading?</h2>
+
+    <p>
+        Cryptocurrency trading is one of the most dynamic sectors of modern financial markets.
+        When beginners enter the space, they encounter screens filled with charting indicators, green and red candlesticks,
+        and prices fluctuating every fraction of a second around the clock.
+    </p>
+
+    <p>
+        At its simplest: <strong>Cryptocurrency trading is the process of buying and selling digital assets (such as Bitcoin, Ethereum, and others)
+        with the goal of generating profits from price movements over time</strong>.
+    </p>
+
+    <p>
+        However, genuine trading goes far beyond speculating on whether a line moves up or down. It involves understanding supply and demand,
+        analyzing market psychology, and mastering <strong>rigorous risk and capital management</strong>.
+    </p>
+
+    <h2>How Does the Crypto Market Work?</h2>
+
+    <p>
+        Unlike traditional equity markets that operate within fixed regional hours and close on weekends, the crypto market
+        <strong>runs 24 hours a day, 7 days a week, 365 days a year globally</strong> without interruptions.
+    </p>
+
+    <p>
+        Trading occurs on specialized exchanges that match buyers and sellers worldwide. Whenever a buy order meets a sell order at an agreeable price,
+        the transaction executes instantly and updates the prevailing market rate.
+    </p>
+
+    <h2>What Drives Crypto Prices?</h2>
+
+    <p>
+        Cryptocurrency price dynamics follow standard economic principles of <strong>Supply and Demand</strong>:
+    </p>
+
+    <ul>
+        <li><strong>Rising Demand:</strong> When more buyers compete to purchase an asset relative to available sellers, price increases.</li>
+        <li><strong>Increasing Supply:</strong> When sellers seek to liquidate their holdings faster than buyers absorb them, price decreases.</li>
+    </ul>
+
+    <p>
+        This dynamic is influenced by external catalysts, including technological project upgrades, regulatory news, macroeconomic conditions, and liquidity depth.
+    </p>
+
+    <h2>What Is an Order Book?</h2>
+
+    <p>
+        Modern centralized and decentralized exchanges coordinate trades using an <strong>Order Book</strong>.
+    </p>
+
+    <p>
+        An order book is a real-time ledger displaying all pending buy and sell instructions for a specific trading pair:
+    </p>
+
+    <ul>
+        <li><strong>Bids (Buy Orders):</strong> The prices and volumes buyers are willing to pay, ranked from highest to lowest.</li>
+        <li><strong>Asks (Sell Orders):</strong> The prices and volumes sellers are willing to accept, ranked from lowest to highest.</li>
+        <li><strong>Spread:</strong> The mathematical difference between the highest bid and lowest ask price.</li>
+    </ul>
+
+    <h2>Trading vs. Investing</h2>
+
+    <p>
+        Beginners frequently confuse these two concepts, but their time horizons and strategic goals are fundamentally distinct:
+    </p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Area</th>
+                <th>Trading</th>
+                <th>Investing (HODL)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Time Horizon</td>
+                <td>Short to medium-term (minutes, hours, days, weeks)</td>
+                <td>Long-term (months, years, decades)</td>
+            </tr>
+            <tr>
+                <td>Primary Objective</td>
+                <td>Capitalize on recurring price swings and momentum</td>
+                <td>Participate in long-term fundamental adoption</td>
+            </tr>
+            <tr>
+                <td>Core Methodology</td>
+                <td>Technical analysis, chart patterns, liquidity flow</td>
+                <td>Fundamental analysis, tokenomics, team execution</td>
+            </tr>
+            <tr>
+                <td>Time Commitment</td>
+                <td>Active, requiring constant market monitoring</td>
+                <td>Passive, requiring patience through cyclical drawdowns</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p>
+        The second lesson covers this comparison in depth:
+        <a href="/academy/trading-basics/investing-vs-trading">Investing vs Trading: Differences and Which Suits You</a>.
+    </p>
+
+    <h2>Common Trading Styles</h2>
+
+    <p>
+        Traders select distinct methodologies based on their availability, risk appetite, and execution speed:
+    </p>
+
+    <h3>1. Day Trading</h3>
+    <p>
+        Opening and closing positions within a single 24-hour cycle to avoid overnight market exposure and unexpected gap risk.
+    </p>
+
+    <h3>2. Scalping</h3>
+    <p>
+        High-frequency trading aiming to capture tiny price discrepancies within seconds or minutes across numerous executions daily.
+    </p>
+
+    <h3>3. Swing Trading</h3>
+    <p>
+        Holding positions for days or weeks to capture multi-day market momentum and structural trend legs.
+    </p>
+
+    <h3>4. Position Trading</h3>
+    <p>
+        Holding trades across months based on macroeconomic shifts, representing the closest style to long-term investing.
+    </p>
+
+    <h2>Spot Trading vs. Derivatives</h2>
+
+    <p>
+        Crypto markets offer two primary mechanisms for market exposure:
+    </p>
+
+    <ul>
+        <li><strong>Spot Trading:</strong> Direct acquisition of the underlying coin or token, allowing full ownership and on-chain withdrawal.</li>
+        <li><strong>Futures & Derivatives:</strong> Contractual agreements tracking the price without direct ownership, offering bidirectional trading (Long or Short) and leverage.</li>
+    </ul>
+
+    <p>
+        Learn more about these vehicles in:
+        <a href="/academy/trading-basics/spot-trading-vs-futures-trading">Spot Trading vs Futures Trading</a>.
+    </p>
+
+    <h2>Where Does Crypto Trading Take Place?</h2>
+
+    <ul>
+        <li><strong>Centralized Exchanges (CEX):</strong> High-liquidity custodial platforms offering high throughput matching engines (e.g., Binance, Coinbase).</li>
+        <li><strong>Decentralized Exchanges (DEX):</strong> Non-custodial smart contract protocols where trades execute directly from personal wallets without intermediaries (e.g., Uniswap).</li>
+    </ul>
+
+    <h2>Essential Tools for Traders</h2>
+
+    <ol>
+        <li><strong>Liquid Trading Platforms:</strong> Exchanges offering reliable execution and competitive fee schedules.</li>
+        <li><strong>Charting Software:</strong> Platforms like TradingView for structural technical analysis.</li>
+        <li><strong>Secure Wallets:</strong> Non-custodial storage to secure realised profits away from exchanges.</li>
+        <li><strong>Execution Safeguards:</strong> Stop-Loss and Take-Profit automated triggers.</li>
+        <li><strong>Trading Journal:</strong> A rigorous record of setups, entries, exits, and psychological lessons.</li>
+    </ol>
+
+    <h2>Risks Associated With Crypto Trading</h2>
+
+    <p>
+        Trading carries substantial financial risk. Market statistics indicate the vast majority of active traders lose capital due to:
+    </p>
+
+    <ul>
+        <li><strong>Extreme Volatility:</strong> Cryptocurrencies can experience rapid 20% to 50% drawdowns within short windows.</li>
+        <li><strong>Leverage Hazards:</strong> Borrowed leverage can accelerate liquidation events, eradicating an entire margin deposit in minutes.</li>
+        <li><strong>Psychological Biases:</strong> Experiencing FOMO (Fear of Missing Out) or panic selling at cyclical market bottoms.</li>
+        <li><strong>Operational Risks:</strong> Exchange downtime during periods of volatility or liquidity illiquidity.</li>
+    </ul>
+
+    <h2>Risk Management: The Core Foundation</h2>
+
+    <p>
+        Professional traders differ from novices not through infallible predictions, but through <strong>strict risk control</strong>.
+    </p>
+
+    <ul>
+        <li>Never risk more than 1% to 2% of total trading portfolio equity on any single idea.</li>
+        <li>Pre-determine an invalidation level (Stop-Loss) before entering an order.</li>
+        <li>Only allocate discretionary risk capital that you can afford to lose entirely without lifestyle disruption.</li>
+    </ul>
+
+    <p>
+        Lesson six details risk controls comprehensively:
+        <a href="/academy/trading-basics/risk-management-and-position-sizing">Risk Management and Position Sizing</a>.
+    </p>
+
+    <h2>Conclusion</h2>
+
+    <p>
+        Crypto trading combines market mechanics, disciplined execution frameworks, and emotional control. It is an acquired discipline rather than random speculation.
+    </p>
+
+    <p>
+        The first step in your learning journey is establishing your strategic profile: are you an active momentum trader or a patient long-term investor?
+    </p>
+
+    <p>
+        <a href="/academy/trading-basics/investing-vs-trading">
+            Continue to the next lesson: Investing vs Trading: What Is the Difference?
+        </a>
+    </p>
+
+    <hr>
+
+    <h2>Frequently Asked Questions About Crypto Trading</h2>
+
+    <h3>What is crypto trading?</h3>
+    <p>
+        It is the buying and selling of digital assets on exchange platforms to profit from price fluctuations across various timeframes.
+    </p>
+
+    <h3>Is crypto trading guaranteed to be profitable?</h3>
+    <p>
+        No. Trading carries high risk of capital loss due to market volatility and unpredictable price behaviour.
+    </p>
+
+    <h3>What is the key difference between trading and investing?</h3>
+    <p>
+        Trading focuses on short-to-medium price volatility with active risk management, while investing focuses on multi-year adoption and underlying fundamentals.
+    </p>
+
+    <h3>How much capital do I need to start trading?</h3>
+    <p>
+        Most crypto platforms support micro-orders starting around $10, though users should only trade with surplus discretionary funds.
+    </p>
+
+    <h3>What are crypto market operating hours?</h3>
+    <p>
+        The global crypto market operates 24/7/365 without statutory closing bells or scheduled weekend halts.
+    </p>
+
+    <h3>What is an order book?</h3>
+    <p>
+        It is a live electronic registry displaying all pending bids (buy orders) and asks (sell orders) organized by price level and volume.
+    </p>
+
+    <h3>What is financial leverage?</h3>
+    <p>
+        A facility allowing traders to control larger positions using borrowed capital, magnifying potential gains and liquidation risks equally.
+    </p>
+
+    <h3>What is a Stop-Loss order?</h3>
+    <p>
+        An automated instruction to close an open position once price breaches a predefined threshold to cap downside capital loss.
+    </p>
+
+    <h2>Related Lessons</h2>
+
+    <ul>
+        <li>
+            <a href="/academy/trading-basics/investing-vs-trading">
+                Investing vs Trading: Long-Term Holding vs Active Trading
+            </a>
+        </li>
+        <li>
+            <a href="/academy/trading-basics/understanding-order-types">
+                Understanding Order Types: Market, Limit, and Stop-Loss
+            </a>
+        </li>
+        <li>
+            <a href="/academy/trading-basics/technical-vs-fundamental-analysis">
+                Technical vs Fundamental Analysis in Crypto Markets
+            </a>
+        </li>
+        <li>
+            <a href="/academy/trading-basics/reading-candlestick-charts">
+                How to Read Candlestick Charts and Price Action
+            </a>
+        </li>
+        <li>
+            <a href="/academy/trading-basics/risk-management-and-position-sizing">
+                Risk Management and Position Sizing in Crypto
+            </a>
+        </li>
+        <li>
+            <a href="/academy/trading-basics/spot-trading-vs-futures-trading">
+                Spot Trading vs Futures Trading: Differences and Risks
+            </a>
+        </li>
+        <li>
+            <a href="/academy/wallets/what-is-a-crypto-wallet">
+                What Is a Crypto Wallet?
+            </a>
+        </li>
+        <li>
+            <a href="/academy/bitcoin/what-is-bitcoin">
+                What Is Bitcoin?
+            </a>
+        </li>
+    </ul>
+
+    <p>
+        <strong>Educational disclaimer:</strong>
+        This lesson is provided for educational and illustrative purposes only and does not constitute financial, investment, or trading advice.
+        Trading cryptocurrencies carries significant risk of capital loss.
+    </p>
+
+</article>
+HTML,
+
+    'image' => null,
+
+    'seo_title' => 'What Is Crypto Trading? Complete Beginner Guide | AQL Crypto Academy',
+    'seo_title_ar' => 'ما هو تداول العملات الرقمية؟ دليل شامل للمبتدئين | أكاديمية AQL Crypto',
+    'seo_title_en' => 'What Is Crypto Trading? Complete Beginner Guide | AQL Crypto Academy',
+
+    'meta_description' => 'Learn what crypto trading is, how market mechanics and order books work, the difference between trading and investing, trading styles, and risk management.',
+    'meta_description_ar' => 'تعرف على ما هو تداول العملات الرقمية وكيف تعمل الأسواق ودفاتر الأوامر، والفرق بين التداول والاستثمار، وأشهر أساليب المضاربة وإدارة المخاطر.',
+    'meta_description_en' => 'Learn what crypto trading is, how market mechanics and order books work, the difference between trading and investing, trading styles, and risk management.',
+
+    'faq_ar' => [
+        [
+            'question' => 'ما هو تداول العملات الرقمية؟',
+            'answer' => 'هو عملية شراء وبيع الأصول الرقمية على المنصات بهدف تحقيق أرباح من فروقات وتقلبات الأسعار عبر أطر زمنية متفاوتة.'
+        ],
+        [
+            'question' => 'هل تداول العملات الرقمية مضمون الربح؟',
+            'answer' => 'لا، ينطوي التداول على مخاطر عالية لخسارة رأس المال بسبب التقلبات السعرية الشديدة وعدم إمكانية التنبؤ الدقيق بحركة السوق.'
+        ],
+        [
+            'question' => 'ما الفرق الأساسي بين التداول والاستثمار؟',
+            'answer' => 'يركز التداول على تحركات الأسعار قصيرة ومتوسطة الأجل مع إدارة نشطة للصفقات، بينما يركز الاستثمار على القيمة طويلة الأجل ونمو المشروع على مدى سنوات.'
+        ],
+        [
+            'question' => 'ما هو رأس المال الأدنى للبدء في التداول؟',
+            'answer' => 'تسمح معظم منصات الكريبتو ببدء التداول بمبالغ صغيرة جدًا (مثل 10 دولارات)، لكن يُنصح دائمًا بعدم التداول إلا بالأموال الفائضة التي تستطيع تحمل خسارتها بالكامل.'
+        ],
+        [
+            'question' => 'متى يفتح ويغلق سوق العملات الرقمية؟',
+            'answer' => 'سوق الكريبتو مفتوح عالميًا على مدار 24 ساعة يوميًا وطوال أيام الأسبوع دون أي عطلات أو أوقات إغلاق رسمية.'
+        ],
+        [
+            'question' => 'ما هو دفتر الأوامر (Order Book)؟',
+            'answer' => 'هو قائمة حية داخل منصة التداول تسجل جميع عروض الشراء (Bids) وعروض البيع (Asks) المتاحة لأصل معين بأسعار وكميات محددة.'
+        ],
+        [
+            'question' => 'ما هي الرافعة المالية (Leverage)؟',
+            'answer' => 'هي أداة تتيح للمتداول فتح صفقات بأحجام أكبر من رأس ماله الفعلي عبر اقتراض أموال من المنصة، وهي تضاعف الأرباح المحتملة ولكنها تضاعف الخسائر ومخاطر التصفية بنفس النسبة.'
+        ],
+        [
+            'question' => 'ما هو أمر وقف الخسارة (Stop-Loss)؟',
+            'answer' => 'هو أمر مسبق يُعطى للمنصة لإغلاق الصفقة تلقائيًا عندما يصل السعر إلى مستوى محدد للحد من الخسائر وحماية رأس المال المتبقي.'
+        ],
+    ],
+
+    'faq_en' => [
+        [
+            'question' => 'What is crypto trading?',
+            'answer' => 'It is the buying and selling of digital assets on exchange platforms to profit from price fluctuations across various timeframes.'
+        ],
+        [
+            'question' => 'Is crypto trading guaranteed to be profitable?',
+            'answer' => 'No. Trading carries high risk of capital loss due to market volatility and unpredictable price behaviour.'
+        ],
+        [
+            'question' => 'What is the key difference between trading and investing?',
+            'answer' => 'Trading focuses on short-to-medium price volatility with active risk management, while investing focuses on multi-year adoption and underlying fundamentals.'
+        ],
+        [
+            'question' => 'How much capital do I need to start trading?',
+            'answer' => 'Most crypto platforms support micro-orders starting around $10, though users should only trade with surplus discretionary funds.'
+        ],
+        [
+            'question' => 'What are crypto market operating hours?',
+            'answer' => 'The global crypto market operates 24/7/365 without statutory closing bells or scheduled weekend halts.'
+        ],
+        [
+            'question' => 'What is an order book?',
+            'answer' => 'It is a live electronic registry displaying all pending bids (buy orders) and asks (sell orders) organized by price level and volume.'
+        ],
+        [
+            'question' => 'What is financial leverage?',
+            'answer' => 'A facility allowing traders to control larger positions using borrowed capital, magnifying potential gains and liquidation risks equally.'
+        ],
+        [
+            'question' => 'What is a Stop-Loss order?',
+            'answer' => 'An automated instruction to close an open position once price breaches a predefined threshold to cap downside capital loss.'
+        ],
+    ],
+
+    'status' => 'published',
+    'sort_order' => 1,
+    'published_at' => now(),
+],
+    [
+        'title' => 'Investing vs Trading',
+        'title_ar' => 'الاستثمار مقابل التداول: ما الفرق بين الاحتفاظ والمضاربة؟',
+        'title_en' => 'Investing vs Trading: Long-Term Holding vs Active Trading',
+        'slug' => 'investing-vs-trading',
+        'sort_order' => 2,
+    ],
+    [
+        'title' => 'Understanding Order Types',
+        'title_ar' => 'أنواع أوامر التداول: أوامر السوق، الحد، وإيقاف الخسارة (Stop-Loss)',
+        'title_en' => 'Understanding Order Types: Market, Limit, and Stop-Loss Orders',
+        'slug' => 'understanding-order-types',
+        'sort_order' => 3,
+    ],
+    [
+        'title' => 'Technical vs Fundamental Analysis',
+        'title_ar' => 'التحليل الفني مقابل التحليل الأساسي: كيف تقيّم العملات الرقمية؟',
+        'title_en' => 'Technical vs Fundamental Analysis in Crypto Markets',
+        'slug' => 'technical-vs-fundamental-analysis',
+        'sort_order' => 4,
+    ],
+    [
+        'title' => 'Reading Candlestick Charts',
+        'title_ar' => 'قراءة الشموع اليابانية والرسوم البيانية للمبتدئين',
+        'title_en' => 'How to Read Candlestick Charts and Price Action',
+        'slug' => 'reading-candlestick-charts',
+        'sort_order' => 5,
+    ],
+    [
+        'title' => 'Risk Management and Position Sizing',
+        'title_ar' => 'إدارة المخاطر وتحديد حجم الصفقة: كيف تحمي رأس مالك من الانهيار؟',
+        'title_en' => 'Risk Management and Position Sizing: Protecting Your Capital',
+        'slug' => 'risk-management-and-position-sizing',
+        'sort_order' => 6,
+    ],
+    [
+        'title' => 'Spot Trading vs Futures Trading',
+        'title_ar' => 'التداول الفوري (Spot) مقابل العقود الآجلة (Futures): الفروق والمخاطر',
+        'title_en' => 'Spot Trading vs Futures Trading: Key Differences and Leverage Risks',
+        'slug' => 'spot-trading-vs-futures-trading',
+        'sort_order' => 7,
+    ],
+    [
+        'title' => 'Key Technical Indicators',
+        'title_ar' => 'أهم مؤشرات التداول الفني: RSI، والمتوسطات المتحركة، وMACD',
+        'title_en' => 'Key Technical Indicators: RSI, Moving Averages, and MACD',
+        'slug' => 'key-technical-indicators',
+        'sort_order' => 8,
+    ],
+    [
+        'title' => 'Dollar-Cost Averaging (DCA)',
+        'title_ar' => 'استراتيجية متوسط التكلفة بالدولار (DCA): الاستثمار المنتظم قليل المخاطر',
+        'title_en' => 'Dollar-Cost Averaging (DCA): The Low-Stress Accumulation Strategy',
+        'slug' => 'dollar-cost-averaging-dca',
+        'sort_order' => 9,
+    ],
+    [
+        'title' => 'Trading Psychology: Managing FOMO and FUD',
+        'title_ar' => 'سيكولوجية التداول: كيف تتغلب على مشاعر الخوف والجشع (FOMO & FUD)؟',
+        'title_en' => 'Trading Psychology: Conquering FOMO, FUD, and Emotional Trading',
+        'slug' => 'trading-psychology-fomo-fud',
+        'sort_order' => 10,
+    ],
+];
+
+foreach ($tradingArticles as $article) {
+    AcademyArticle::updateOrCreate(
+        [
+            'topic_id' => $tradingBasics->id,
+            'slug' => $article['slug'],
+        ],
+        $article
+    );
+}
 
     }
 }
